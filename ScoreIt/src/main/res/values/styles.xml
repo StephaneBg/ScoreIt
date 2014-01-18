@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2013 SBG Apps
+  ~ http://baiget.fr
+  ~ stephane@baiget.fr
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <style name="Theme.Scoreit" parent="Theme.HoloAccent.Light">
+        <item name="accentColor">@color/accent_color</item>
+        <item name="accentColorTranslucent">@color/transparent_accent_color</item>
+        <item name="android:windowBackground">@drawable/background_app</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Scoreit</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+    </style>
+
+    <style name="Theme.Lap" parent="Theme.HoloAccent.Light.Dialog">
+        <item name="accentColor">@color/accent_color</item>
+        <item name="accentColorTranslucent">@color/transparent_accent_color</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ActionBar.Scoreit" parent="android:Widget.Holo.ActionBar">
+        <item name="android:titleTextStyle">@style/TitleTextStyle</item>
+    </style>
+
+    <style name="TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="SpinnerStyle">
+        <item name="android:layout_height">@dimen/default_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginTop">@dimen/default_margin</item>
+        <item name="android:layout_marginRight">@dimen/default_double_margin</item>
+        <item name="android:layout_marginLeft">@dimen/default_double_margin</item>
+        <item name="android:spinnerMode">dialog</item>
+    </style>
+
+    <style name="CheckBoxStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginTop">@dimen/default_margin</item>
+        <item name="android:layout_marginRight">@dimen/default_double_margin</item>
+        <item name="android:layout_marginLeft">@dimen/default_double_margin</item>
+    </style>
+
+    <style name="TextStyle" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/darker_gray</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+</resources>

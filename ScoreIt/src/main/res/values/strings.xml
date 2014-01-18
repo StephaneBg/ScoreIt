@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2013 SBG Apps
+  ~ http://baiget.fr
+  ~ stephane@baiget.fr
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <string name="app_name">Score It</string>
+    <string name="score">Score</string>
+    <string name="graph">Graph</string>
+    <string name="belote">Belote</string>
+    <string name="classic">Classic</string>
+    <string name="coinche">Coinche</string>
+    <string name="tarot">Tarot</string>
+    <string name="three_players">Three players</string>
+    <string name="four_players">Four players</string>
+    <string name="five_players">Five players</string>
+    <string name="team">Team</string>
+    <string name="taker">Taker</string>
+    <string name="partner">Partner</string>
+    <string name="us">Us</string>
+    <string name="them">Them</string>
+    <string name="none">None</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="new_game">Clear current game?</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear">Clear</string>
+    <string name="view">View</string>
+    <string name="ok">OK</string>
+    <string name="add">Add</string>
+    <string name="done">Done</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="points">Points</string>
+    <string name="deal">Deal</string>
+    <string name="oudlers">Oudlers</string>
+    <string name="fool">Fool</string>
+    <string name="petit">Petit</string>
+    <string name="twentyone">Twenty one</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="enter_name">Enter name</string>
+    <string name="inside">Inside</string>
+    <string name="capot">Capot</string>
+    <string name="take">Take</string>
+    <string name="guard">Guard</string>
+    <string name="guard_without">Guard without</string>
+    <string name="guard_against">Guard against</string>
+    <string name="click_on">Click on</string>
+    <string name="to_start">to start</string>
+    <string name="more">More</string>
+    <string name="less">Less</string>
+    <string name="undo">Undo</string>
+    <string name="about">About</string>
+    <string name="donate">Donate</string>
+
+</resources>

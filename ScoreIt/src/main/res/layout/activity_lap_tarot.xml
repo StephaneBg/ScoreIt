@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2013 SBG Apps
+  ~ http://baiget.fr
+  ~ stephane@baiget.fr
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/taker"/>
+
+                <Spinner
+                    android:id="@+id/spinner_taker"
+                    style="@style/SpinnerStyle"/>
+
+                <ViewStub
+                    android:id="@+id/viewstub_partner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout="@layout/include_partner"/>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/deal"/>
+
+                <Spinner
+                    android:id="@+id/spinner_deal"
+                    style="@style/SpinnerStyle"/>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/oudlers"/>
+
+                <CheckBox
+                    android:id="@+id/checkbox_petit"
+                    style="@style/CheckBoxStyle"
+                    android:text="@string/petit"/>
+
+                <CheckBox
+                    android:id="@+id/checkbox_twenty_one"
+                    style="@style/CheckBoxStyle"
+                    android:text="@string/twentyone"/>
+
+                <CheckBox
+                    android:id="@+id/checkbox_fool"
+                    style="@style/CheckBoxStyle"
+                    android:text="@string/fool"/>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/points"/>
+
+                <include
+                    layout="@layout/include_points_selector"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <ViewStub
+            android:id="@+id/viewstub_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/stub_cancel_done"/>
+    </LinearLayout>
+</FrameLayout>

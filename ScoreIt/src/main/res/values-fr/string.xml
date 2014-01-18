@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2013 SBG Apps
+  ~ http://baiget.fr
+  ~ stephane@baiget.fr
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <string name="classic">Classique</string>
+    <string name="tarot">Tarot</string>
+    <string name="three_players">Trois joueurs</string>
+    <string name="four_players">Quatre joueurs</string>
+    <string name="five_players">Cinq joueurs</string>
+    <string name="team">Equipe</string>
+    <string name="taker">Preneur</string>
+    <string name="partner">Partenaire</string>
+    <string name="us">Nous</string>
+    <string name="them">Eux</string>
+    <string name="none">Aucune</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="new_game">Effacer le jeu en cours ?</string>
+    <string name="cancel">Annuler</string>
+    <string name="clear">Effacer</string>
+    <string name="view">Vue</string>
+    <string name="ok">OK</string>
+    <string name="add">Ajouter</string>
+    <string name="done">Confirmer</string>
+    <string name="delete">Effacer</string>
+    <string name="edit">Editer</string>
+    <string name="deal">Contrat</string>
+    <string name="oudlers">Bouts</string>
+    <string name="fool">Excuse</string>
+    <string name="petit">Petit</string>
+    <string name="twentyone">Vingt et un</string>
+    <string name="enter_name">Entrer le nom</string>
+    <string name="inside">Dedans</string>
+    <string name="capot">Capot</string>
+    <string name="take">Prise</string>
+    <string name="guard">Guarde</string>
+    <string name="guard_without">Guarde sans</string>
+    <string name="guard_against">Guarde contre</string>
+    <string name="click_on">Cliquez sur</string>
+    <string name="to_start">pour commencer</string>
+    <string name="more">Plus</string>
+    <string name="less">Moins</string>
+    <string name="undo">Annuler</string>
+    <string name="about">A propos</string>
+    <string name="donate">Remercier</string>
+
+</resources>
