@@ -10,7 +10,7 @@ An application to count points to popular French card games:
 Download
 --------
 
-*TODO*: Play Store
+[Google Play](https://play.google.com/store/apps/details?id=com.sbgapps.scoreit)
 
 
 Credits

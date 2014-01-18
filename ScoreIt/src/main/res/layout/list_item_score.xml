@@ -27,14 +27,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:background="@color/accent_color"
+        android:background="@color/lighter_gray"
         style="?android:buttonBarStyle">
 
         <ImageButton
             android:id="@+id/action_discard"
             style="?android:buttonBarButtonStyle"
             android:layout_width="0dp"
-            android:src="@drawable/ic_action_discard"
+            android:src="@drawable/ic_content_discard"
             android:layout_height="match_parent"
             android:text="@string/cancel"
             android:layout_weight="1"/>
@@ -43,7 +43,7 @@
             android:id="@+id/action_edit"
             style="?android:buttonBarButtonStyle"
             android:layout_width="0dp"
-            android:src="@drawable/ic_action_edit"
+            android:src="@drawable/ic_content_edit"
             android:layout_height="match_parent"
             android:text="@string/done"
             android:layout_weight="1"/>

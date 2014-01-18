@@ -50,9 +50,9 @@
     <string name="inside">Dedans</string>
     <string name="capot">Capot</string>
     <string name="take">Prise</string>
-    <string name="guard">Guarde</string>
-    <string name="guard_without">Guarde sans</string>
-    <string name="guard_against">Guarde contre</string>
+    <string name="guard">Garde</string>
+    <string name="guard_without">Garde sans</string>
+    <string name="guard_against">Garde contre</string>
     <string name="click_on">Cliquez sur</string>
     <string name="to_start">pour commencer</string>
     <string name="more">Plus</string>
