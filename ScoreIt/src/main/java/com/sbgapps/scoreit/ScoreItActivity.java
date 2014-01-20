@@ -28,6 +28,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v4.widget.DrawerLayout;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,9 +43,7 @@ import com.sbgapps.scoreit.game.FourPlayerTarotLap;
 import com.sbgapps.scoreit.game.GameData;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.game.ThreePlayerTarotLap;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyUtils;
+import com.sbgapps.scoreit.util.TypefaceSpan;
 
 public class ScoreItActivity extends AccentActivity
         implements NavigationDrawerFragment.NavigationDrawerListener,
@@ -56,9 +56,10 @@ public class ScoreItActivity extends AccentActivity
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_LAP_ACTIVITY = 2;
     public static final float DEFAULT_ALPHA = 0.85f;
+    private TypefaceSpan mTypefaceSpan;
     private GameData mGameData;
     private SharedPreferences mPreferences;
-    private CharSequence mTitle;
+    private SpannableString mTitle;
     private boolean mIsTablet;
     private int mNameViewId;
     private NavigationDrawerFragment mNavigationDrawerFragment;
@@ -72,10 +73,6 @@ public class ScoreItActivity extends AccentActivity
 
         setAccentDecor();
 
-        // Init action bar title
-        int titleId = getResources().getIdentifier("action_bar_title", "id", "android");
-        TextView tv = (TextView) findViewById(titleId);
-        CalligraphyUtils.applyFontToTextView(this, tv, CalligraphyConfig.get(), "fonts/Lobster.otf");
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         final int game = mPreferences.getInt(KEY_SELECTED_GAME, GameData.BELOTE_CLASSIC);
         mGameData = GameData.getInstance();
@@ -120,7 +117,12 @@ public class ScoreItActivity extends AccentActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout), game);
 
+        mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
         setTitle();
+    }
+
+    public TypefaceSpan getTypefaceSpan() {
+        return mTypefaceSpan;
     }
 
     @Override
@@ -322,8 +324,6 @@ public class ScoreItActivity extends AccentActivity
         intent.putExtra(EXTRA_EDIT, edit);
 
         startActivityForResult(intent, REQ_LAP_ACTIVITY);
-        if (!mIsTablet)
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         if (null != mScoreListFragment) mScoreListFragment.getListView().closeOpenedItems();
     }
 
@@ -354,17 +354,18 @@ public class ScoreItActivity extends AccentActivity
         switch (mGameData.getGame()) {
             default:
             case GameData.BELOTE_CLASSIC:
-                mTitle = getResources().getString(R.string.belote);
+                mTitle = new SpannableString(getResources().getString(R.string.belote));
                 break;
             case GameData.BELOTE_COINCHE:
-                mTitle = getResources().getString(R.string.coinche);
+                mTitle = new SpannableString(getResources().getString(R.string.coinche));
                 break;
             case GameData.TAROT_3_PLAYERS:
             case GameData.TAROT_4_PLAYERS:
             case GameData.TAROT_5_PLAYERS:
-                mTitle = getResources().getString(R.string.tarot);
+                mTitle = new SpannableString(getResources().getString(R.string.tarot));
                 break;
         }
+        mTitle.setSpan(mTypefaceSpan, 0, mTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
     @Override

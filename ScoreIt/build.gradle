@@ -38,8 +38,8 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:19.0.+'
     compile 'com.readystatesoftware.systembartint:systembartint:+'
+    compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.+'
     compile project(':HoloGraphLibrary')
     compile project(':swipelistview')
     compile project(':HoloAccent')
-    compile project(':calligraphy')
 }

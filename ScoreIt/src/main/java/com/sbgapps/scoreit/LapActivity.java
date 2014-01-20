@@ -100,28 +100,15 @@ public abstract class LapActivity extends AccentActivity
                 }
                 setResult(RESULT_OK);
                 finish();
-                exitAnimation();
                 break;
 
             case R.id.btn_cancel:
                 finish();
-                exitAnimation();
                 break;
         }
     }
 
     abstract public void updateLap();
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        exitAnimation();
-    }
-
-    private void exitAnimation() {
-        if (!mIsTablet)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-    }
 
     public GameData getGameData() {
         return mGameData;

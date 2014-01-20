@@ -20,36 +20,45 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    style="?android:buttonBarStyle">
 
-    <View
-        android:layout_marginTop="@dimen/default_margin"
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:background="?android:attr/listDivider"/>
+    <FrameLayout
+        style="?android:actionButtonStyle"
+        android:id="@+id/btn_cancel"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="48dip"
-        android:orientation="horizontal"
-        style="?android:buttonBarStyle">
+        <TextView
+            style="?android:actionBarTabTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="20dp"
+            android:drawableLeft="@drawable/ic_action_cancel_light"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/cancel"/>
+    </FrameLayout>
 
-        <Button
-            android:id="@+id/btn_cancel"
-            style="?android:buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="@string/cancel"
-            android:layout_weight="1"/>
+    <FrameLayout
+        style="?android:actionButtonStyle"
+        android:id="@+id/btn_confirm"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-        <Button
-            android:id="@+id/btn_confirm"
-            style="?android:buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="@string/done"
-            android:layout_weight="1"/>
-    </LinearLayout>
+        <TextView
+            style="?android:actionBarTabTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="20dp"
+            android:drawableLeft="@drawable/ic_action_accept_light"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/done"/>
+    </FrameLayout>
 </LinearLayout>
