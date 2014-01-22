@@ -21,44 +21,56 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    style="?android:buttonBarStyle">
+    android:orientation="vertical">
 
-    <FrameLayout
-        style="?android:actionButtonStyle"
-        android:id="@+id/btn_cancel"
-        android:layout_width="0dp"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="?android:listDivider"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:orientation="horizontal"
+        style="?android:buttonBarStyle"
+        android:baselineAligned="false">
 
-        <TextView
-            style="?android:actionBarTabTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingRight="20dp"
-            android:drawableLeft="@drawable/ic_action_cancel_light"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:text="@string/cancel"/>
-    </FrameLayout>
+        <FrameLayout
+            style="?android:actionButtonStyle"
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-    <FrameLayout
-        style="?android:actionButtonStyle"
-        android:id="@+id/btn_confirm"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+            <TextView
+                style="?android:actionBarTabTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingRight="20dp"
+                android:drawableLeft="@drawable/ic_action_cancel_light"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:text="@string/cancel"/>
+        </FrameLayout>
 
-        <TextView
-            style="?android:actionBarTabTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingRight="20dp"
-            android:drawableLeft="@drawable/ic_action_accept_light"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:text="@string/done"/>
-    </FrameLayout>
+        <FrameLayout
+            style="?android:actionButtonStyle"
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                style="?android:actionBarTabTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingRight="20dp"
+                android:drawableLeft="@drawable/ic_action_accept_light"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:text="@string/done"/>
+        </FrameLayout>
+    </LinearLayout>
 </LinearLayout>

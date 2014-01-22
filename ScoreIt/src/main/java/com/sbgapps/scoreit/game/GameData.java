@@ -204,6 +204,23 @@ public class GameData {
                 .commit();
     }
 
+    public int getPlayerColor(int player) {
+        switch (player) {
+            default:
+                return mResources.getColor(R.color.darker_gray);
+            case Lap.PLAYER_1:
+                return mResources.getColor(R.color.color_player1);
+            case Lap.PLAYER_2:
+                return mResources.getColor(R.color.color_player2);
+            case Lap.PLAYER_3:
+                return mResources.getColor(R.color.color_player3);
+            case Lap.PLAYER_4:
+                return mResources.getColor(R.color.color_player4);
+            case Lap.PLAYER_5:
+                return mResources.getColor(R.color.color_player5);
+        }
+    }
+
     private String getNameKey(int player) {
         return "TAROT_" + (mGame + 1) + "_PLAYERS_NAME" + (player + 1);
     }

@@ -44,9 +44,10 @@ import com.sbgapps.scoreit.game.GameData;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.game.ThreePlayerTarotLap;
 import com.sbgapps.scoreit.util.TypefaceSpan;
+import com.sbgapps.scoreit.widget.PlayerInfos;
 
-public class ScoreItActivity extends AccentActivity
-        implements NavigationDrawerFragment.NavigationDrawerListener,
+public class ScoreItActivity extends BaseActivity
+implements NavigationDrawerFragment.NavigationDrawerListener,
         FragmentManager.OnBackStackChangedListener {
 
     public static final String KEY_SELECTED_GAME = "selected_game";
@@ -61,7 +62,7 @@ public class ScoreItActivity extends AccentActivity
     private SharedPreferences mPreferences;
     private SpannableString mTitle;
     private boolean mIsTablet;
-    private int mNameViewId;
+    private TextView mEditedName;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private ScoreListFragment mScoreListFragment;
     private GraphFragment mGraphFragment;
@@ -84,29 +85,27 @@ public class ScoreItActivity extends AccentActivity
         final FragmentManager fm = getFragmentManager();
         fm.addOnBackStackChangedListener(this);
 
-        // Init header
-        mHeaderFragment = (HeaderFragment) fm.findFragmentById(R.id.fragment_header);
-        mHeaderFragment.init();
-
         // Init fragments
         if (null == savedInstanceState) {
+            mHeaderFragment = new HeaderFragment();
             if (mIsTablet) {
                 mScoreListFragment = new ScoreListFragment();
                 mGraphFragment = new GraphFragment();
                 fm.beginTransaction()
+                        .add(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG)
                         .add(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG)
                         .add(R.id.fragment_container_large, mGraphFragment, GraphFragment.TAG)
                         .commit();
-                mHeaderFragment.setColoredPoints(true);
             } else {
                 mScoreListFragment = new ScoreListFragment();
                 fm.beginTransaction()
+                        .add(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG)
                         .add(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG)
                         .commit();
             }
         } else {
+            mHeaderFragment = (HeaderFragment) fm.findFragmentByTag(HeaderFragment.TAG);
             mGraphFragment = (GraphFragment) fm.findFragmentByTag(GraphFragment.TAG);
-            if (null != mGraphFragment) mHeaderFragment.setColoredPoints(true);
             mScoreListFragment = (ScoreListFragment) fm.findFragmentByTag(ScoreListFragment.TAG);
         }
 
@@ -123,6 +122,10 @@ public class ScoreItActivity extends AccentActivity
 
     public TypefaceSpan getTypefaceSpan() {
         return mTypefaceSpan;
+    }
+
+    public boolean isTablet() {
+        return mIsTablet;
     }
 
     @Override
@@ -175,26 +178,7 @@ public class ScoreItActivity extends AccentActivity
                 return true;
 
             case R.id.menu_new:
-                Lap lap;
-                switch (mGameData.getGame()) {
-                    default:
-                    case GameData.BELOTE_CLASSIC:
-                        lap = new ClassicBeloteLap();
-                        break;
-                    case GameData.BELOTE_COINCHE:
-                        lap = new CoincheBeloteLap();
-                        break;
-                    case GameData.TAROT_3_PLAYERS:
-                        lap = new ThreePlayerTarotLap();
-                        break;
-                    case GameData.TAROT_4_PLAYERS:
-                        lap = new FourPlayerTarotLap();
-                        break;
-                    case GameData.TAROT_5_PLAYERS:
-                        lap = new FivePlayerTarotLap();
-                        break;
-                }
-                showLapActivity(lap, false);
+                addLap();
                 return true;
 
             case R.id.menu_view:
@@ -210,20 +194,19 @@ public class ScoreItActivity extends AccentActivity
 
         mPreferences.edit().putInt(KEY_SELECTED_GAME, game).commit();
         mGameData.setGame(game);
-        mHeaderFragment.init();
         setTitle();
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.slide_top_in, R.animator.slide_bottom_out);
+        mHeaderFragment = new HeaderFragment();
+        ft.replace(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG);
         if (mIsTablet) {
             mScoreListFragment = new ScoreListFragment();
             mGraphFragment = new GraphFragment();
-            ft.setCustomAnimations(R.animator.slide_top_in, R.animator.slide_bottom_out);
             ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG);
             ft.replace(R.id.fragment_container_large, mGraphFragment, GraphFragment.TAG);
-            mHeaderFragment.setColoredPoints(true);
         } else {
             mScoreListFragment = new ScoreListFragment();
-            ft.setCustomAnimations(R.animator.slide_top_in, R.animator.slide_bottom_out);
             ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG);
         }
         ft.commit();
@@ -246,27 +229,10 @@ public class ScoreItActivity extends AccentActivity
                 if (cursor.moveToFirst()) {
                     int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                     String name = cursor.getString(columnIndex);
-                    switch (mNameViewId) {
-                        case R.id.player1:
-                            mGameData.setPlayerName(Lap.PLAYER_1, name);
-                            break;
-                        case R.id.player2:
-                            mGameData.setPlayerName(Lap.PLAYER_2, name);
-                            break;
-                        case R.id.player3:
-                            mGameData.setPlayerName(Lap.PLAYER_3, name);
-                            break;
-                        case R.id.player4:
-                            mGameData.setPlayerName(Lap.PLAYER_4, name);
-                            break;
-                        case R.id.player5:
-                            mGameData.setPlayerName(Lap.PLAYER_5, name);
-                            break;
-                    }
-                    TextView textView = (TextView) findViewById(mNameViewId);
-                    textView.setText(name);
+                    int player = ((PlayerInfos) mEditedName.getParent()).getPlayer();
+                    mGameData.setPlayerName(player, name);
+                    mEditedName.setText(name);
                 }
-                mHeaderFragment.updateNames();
                 break;
 
             case REQ_LAP_ACTIVITY:
@@ -274,6 +240,29 @@ public class ScoreItActivity extends AccentActivity
                 invalidateOptionsMenu();
                 break;
         }
+    }
+
+    public void addLap() {
+        Lap lap;
+        switch (mGameData.getGame()) {
+            default:
+            case GameData.BELOTE_CLASSIC:
+                lap = new ClassicBeloteLap();
+                break;
+            case GameData.BELOTE_COINCHE:
+                lap = new CoincheBeloteLap();
+                break;
+            case GameData.TAROT_3_PLAYERS:
+                lap = new ThreePlayerTarotLap();
+                break;
+            case GameData.TAROT_4_PLAYERS:
+                lap = new FourPlayerTarotLap();
+                break;
+            case GameData.TAROT_5_PLAYERS:
+                lap = new FivePlayerTarotLap();
+                break;
+        }
+        showLapActivity(lap, false);
     }
 
     public void editLap(Lap lap) {
@@ -292,9 +281,13 @@ public class ScoreItActivity extends AccentActivity
             return;
         }
 
-        mNameViewId = view.getId();
+        mEditedName = (TextView) view;
         Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         startActivityForResult(intent, REQ_PICK_CONTACT);
+    }
+
+    public void start(View view) {
+        addLap();
     }
 
     private void updateFragments() {

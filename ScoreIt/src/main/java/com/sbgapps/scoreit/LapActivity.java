@@ -30,7 +30,7 @@ import com.sbgapps.scoreit.game.Lap;
 /**
  * Created by sbaiget on 08/01/14.
  */
-public abstract class LapActivity extends AccentActivity
+public abstract class LapActivity extends BaseActivity
         implements View.OnClickListener {
 
     private final GameData mGameData;

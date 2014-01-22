@@ -18,7 +18,6 @@
 
 package com.sbgapps.scoreit;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -27,7 +26,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.negusoft.holoaccent.AccentHelper;
+import com.negusoft.holoaccent.activity.AccentActivity;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -36,10 +35,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by sbaiget on 08/01/14.
  */
-public class AccentActivity extends Activity {
+public class BaseActivity extends AccentActivity {
 
     public static final float DEFAULT_ALPHA = 0.85f;
-    private final AccentHelper mAccentHelper = new AccentHelper();
     private Drawable mAccentBackground;
     private SystemBarTintManager mTintManager;
 
@@ -60,11 +58,6 @@ public class AccentActivity extends Activity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(new CalligraphyContextWrapper(newBase));
-    }
-
-    @Override
-    public Resources getResources() {
-        return mAccentHelper.getResources(this, super.getResources());
     }
 
     public void setAccentDecor() {

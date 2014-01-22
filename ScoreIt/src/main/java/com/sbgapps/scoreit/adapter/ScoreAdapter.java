@@ -28,8 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.fortysevendeg.swipelistview.SwipeListView;
 import com.sbgapps.scoreit.R;
@@ -38,6 +37,7 @@ import com.sbgapps.scoreit.game.BeloteLap;
 import com.sbgapps.scoreit.game.GameData;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.game.TarotLap;
+import com.sbgapps.scoreit.widget.PlayerScore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +62,7 @@ public class ScoreAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final Lap lap = getItem(position);
+        final int cnt = getGameData().getPlayerCount();
         ViewHolder h;
 
         if (null == convertView) {
@@ -69,36 +70,21 @@ public class ScoreAdapter extends BaseAdapter {
                     .inflate(R.layout.list_item_score, parent, false);
             h = new ViewHolder();
 
-            h.view_player1 = convertView.findViewById(R.id.view_player1);
-            h.view_player2 = convertView.findViewById(R.id.view_player2);
-            h.view_player3 = convertView.findViewById(R.id.view_player3);
-            h.view_player4 = convertView.findViewById(R.id.view_player4);
-            h.view_player5 = convertView.findViewById(R.id.view_player5);
+            h.scores = new PlayerScore[cnt];
 
-            h.score_player1 = (TextView) convertView.findViewById(R.id.score_player1);
-            h.score_player2 = (TextView) convertView.findViewById(R.id.score_player2);
-            h.score_player3 = (TextView) convertView.findViewById(R.id.score_player3);
-            h.score_player4 = (TextView) convertView.findViewById(R.id.score_player4);
-            h.score_player5 = (TextView) convertView.findViewById(R.id.score_player5);
-
-            h.img_player1 = (ImageView) convertView.findViewById(R.id.img_player1);
-            h.img_player2 = (ImageView) convertView.findViewById(R.id.img_player2);
-            h.img_player3 = (ImageView) convertView.findViewById(R.id.img_player3);
-            h.img_player4 = (ImageView) convertView.findViewById(R.id.img_player4);
-            h.img_player5 = (ImageView) convertView.findViewById(R.id.img_player5);
-
-            h.delete = (ImageButton) convertView.findViewById(R.id.action_discard);
-            h.edit = (ImageButton) convertView.findViewById(R.id.action_edit);
-
-            switch (getGameData().getGame()) {
-                case GameData.BELOTE_CLASSIC:
-                case GameData.BELOTE_COINCHE:
-                    h.view_player3.setVisibility(View.GONE);
-                case GameData.TAROT_3_PLAYERS:
-                    h.view_player4.setVisibility(View.GONE);
-                case GameData.TAROT_4_PLAYERS:
-                    h.view_player5.setVisibility(View.GONE);
+            LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.score_view);
+            for (int i = 0; i < cnt; i++) {
+                PlayerScore score = new PlayerScore(mActivity, i);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT);
+                lp.weight = 1.0f;
+                score.setLayoutParams(lp);
+                ll.addView(score);
+                h.scores[i] = score;
             }
+            h.discard = (ImageButton) convertView.findViewById(R.id.action_discard);
+            h.edit = (ImageButton) convertView.findViewById(R.id.action_edit);
 
             convertView.setTag(h);
         } else {
@@ -108,74 +94,31 @@ public class ScoreAdapter extends BaseAdapter {
         final View view = convertView;
         ((SwipeListView) parent).recycle(view, position);
 
-        h.score_player1.setText(Integer.toString(lap.getScore(Lap.PLAYER_1)));
-        h.score_player2.setText(Integer.toString(lap.getScore(Lap.PLAYER_2)));
-        h.score_player3.setText(Integer.toString(lap.getScore(Lap.PLAYER_3)));
-        h.score_player4.setText(Integer.toString(lap.getScore(Lap.PLAYER_4)));
-        h.score_player5.setText(Integer.toString(lap.getScore(Lap.PLAYER_5)));
+        for (int i = 0; i < cnt; i++) {
+            h.scores[i].getScore().setText(Integer.toString(lap.getScore(i)));
+            switch (getGameData().getGame()) {
+                case GameData.BELOTE_CLASSIC:
+                case GameData.BELOTE_COINCHE:
+                    if (((BeloteLap) lap).getBelote() == i) {
+                        h.scores[i].getImage().setImageResource(R.drawable.ic_star);
+                    } else {
+                        h.scores[i].getImage().setImageDrawable(null);
+                    }
+                    break;
 
-        switch (getGameData().getGame()) {
-            case GameData.BELOTE_CLASSIC:
-            case GameData.BELOTE_COINCHE:
-                switch (((BeloteLap) lap).getBelote()) {
-                    case Lap.PLAYER_1:
-                        h.img_player1.setImageResource(R.drawable.ic_star);
-                        h.img_player2.setImageDrawable(null);
-                        break;
-                    case Lap.PLAYER_2:
-                        h.img_player1.setImageDrawable(null);
-                        h.img_player2.setImageResource(R.drawable.ic_star);
-                        break;
-                    default:
-                        h.img_player1.setImageDrawable(null);
-                        h.img_player2.setImageDrawable(null);
-                }
-                break;
-
-            case GameData.TAROT_5_PLAYERS:
-            case GameData.TAROT_4_PLAYERS:
-            case GameData.TAROT_3_PLAYERS:
-                switch (((TarotLap) lap).getTaker()) {
-                    case Lap.PLAYER_1:
-                        h.img_player1.setImageResource(R.drawable.ic_taker);
-                        h.img_player2.setImageDrawable(null);
-                        h.img_player3.setImageDrawable(null);
-                        h.img_player4.setImageDrawable(null);
-                        h.img_player5.setImageDrawable(null);
-                        break;
-                    case Lap.PLAYER_2:
-                        h.img_player1.setImageDrawable(null);
-                        h.img_player2.setImageResource(R.drawable.ic_taker);
-                        h.img_player3.setImageDrawable(null);
-                        h.img_player4.setImageDrawable(null);
-                        h.img_player5.setImageDrawable(null);
-                        break;
-                    case Lap.PLAYER_3:
-                        h.img_player1.setImageDrawable(null);
-                        h.img_player2.setImageDrawable(null);
-                        h.img_player3.setImageResource(R.drawable.ic_taker);
-                        h.img_player4.setImageDrawable(null);
-                        h.img_player5.setImageDrawable(null);
-                        break;
-                    case Lap.PLAYER_4:
-                        h.img_player1.setImageDrawable(null);
-                        h.img_player2.setImageDrawable(null);
-                        h.img_player3.setImageDrawable(null);
-                        h.img_player4.setImageResource(R.drawable.ic_taker);
-                        h.img_player5.setImageDrawable(null);
-                        break;
-                    case Lap.PLAYER_5:
-                        h.img_player1.setImageDrawable(null);
-                        h.img_player2.setImageDrawable(null);
-                        h.img_player3.setImageDrawable(null);
-                        h.img_player4.setImageDrawable(null);
-                        h.img_player5.setImageResource(R.drawable.ic_taker);
-                        break;
-                }
-                break;
+                case GameData.TAROT_5_PLAYERS:
+                case GameData.TAROT_4_PLAYERS:
+                case GameData.TAROT_3_PLAYERS:
+                    if (((TarotLap) lap).getTaker() == i) {
+                        h.scores[i].getImage().setImageResource(R.drawable.ic_taker);
+                    } else {
+                        h.scores[i].getImage().setImageDrawable(null);
+                    }
+                    break;
+            }
         }
 
-        h.delete.setOnClickListener(new View.OnClickListener() {
+        h.discard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSwipeListView.closeOpenedItems();
@@ -216,8 +159,8 @@ public class ScoreAdapter extends BaseAdapter {
     }
 
     public void removeAll() {
-        List<View> views = new ArrayList<View>();
-        List<Animator> animators = new ArrayList<Animator>();
+        List<View> views = new ArrayList<>();
+        List<Animator> animators = new ArrayList<>();
 
         for (int i = 0; i < mSwipeListView.getChildCount(); i++) {
             View view = mSwipeListView.getChildAt(i);
@@ -247,22 +190,8 @@ public class ScoreAdapter extends BaseAdapter {
     }
 
     private static class ViewHolder {
-        View view_player1;
-        View view_player2;
-        View view_player3;
-        View view_player4;
-        View view_player5;
-        TextView score_player1;
-        TextView score_player2;
-        TextView score_player3;
-        TextView score_player4;
-        TextView score_player5;
-        ImageView img_player1;
-        ImageView img_player2;
-        ImageView img_player3;
-        ImageView img_player4;
-        ImageView img_player5;
-        ImageButton delete;
+        PlayerScore[] scores;
+        ImageButton discard;
         ImageButton edit;
     }
 }

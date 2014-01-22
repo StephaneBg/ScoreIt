@@ -56,12 +56,10 @@
                     android:background="@drawable/background_card"
                     android:orientation="vertical">
 
-                    <fragment
+                    <FrameLayout
                         android:id="@+id/fragment_header"
-                        android:name="com.sbgapps.scoreit.HeaderFragment"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:layout="@layout/fragment_header"/>
+                        android:layout_height="wrap_content"/>
 
                     <View
                         android:layout_width="match_parent"
