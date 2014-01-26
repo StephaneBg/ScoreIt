@@ -25,7 +25,10 @@
     <string name="belote">Belote</string>
     <string name="classic">Classic</string>
     <string name="coinche">Coinche</string>
+    <string name="surcoinche">Sur-coinche</string>
     <string name="tarot">Tarot</string>
+    <string name="universal">Universal</string>
+    <string name="contrer">Contré</string>
     <string name="three_players">Three players</string>
     <string name="four_players">Four players</string>
     <string name="five_players">Five players</string>
@@ -54,7 +57,6 @@
     <string name="twentyone">Twenty one</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="enter_name">Enter name</string>
     <string name="inside">Inside</string>
     <string name="capot">Capot</string>
     <string name="take">Take</string>

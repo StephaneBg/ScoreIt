@@ -30,7 +30,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.fortysevendeg.swipelistview.SwipeListView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.game.BeloteLap;
@@ -38,6 +37,7 @@ import com.sbgapps.scoreit.game.GameData;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.game.TarotLap;
 import com.sbgapps.scoreit.widget.PlayerScore;
+import com.sbgapps.swipelistview.SwipeListView;
 
 import java.util.ArrayList;
 import java.util.List;

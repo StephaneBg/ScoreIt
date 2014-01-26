@@ -25,6 +25,6 @@
         android:valueFrom="0.0"
         android:valueTo="1.0"
         android:valueType="floatType"
-        android:duration="@integer/animation_time_full"/>
+        android:duration="@android:integer/config_mediumAnimTime"/>
 
 </set>

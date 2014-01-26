@@ -40,6 +40,7 @@ public class GameData {
     public static final int TAROT_3_PLAYERS = 2;
     public static final int TAROT_4_PLAYERS = 3;
     public static final int TAROT_5_PLAYERS = 4;
+    public static final int UNIVERSAL = 5;
     private static GameData sInstance = new GameData();
     private final List<Lap> mLaps = new ArrayList<>();
     private Resources mResources;
@@ -245,8 +246,9 @@ public class GameData {
         switch (mGame) {
             default:
             case BELOTE_CLASSIC:
+                return GameSQLiteHelper.BELOTE_CLASSIC_ALL_COLUMNS;
             case BELOTE_COINCHE:
-                return GameSQLiteHelper.BELOTE_ALL_COLUMNS;
+                return GameSQLiteHelper.BELOTE_COINCHE_ALL_COLUMNS;
             case TAROT_3_PLAYERS:
                 return GameSQLiteHelper.TAROT_3_PLAYERS_ALL_COLUMNS;
             case TAROT_4_PLAYERS:

@@ -44,10 +44,17 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
     public static final int BELOTE_COLUMN_IDX_SCORE_1 = 4;
     public static final String BELOTE_COLUMN_SCORE_2 = "score_player2";
     public static final int BELOTE_COLUMN_IDX_SCORE_2 = 5;
-    public static final String[] BELOTE_ALL_COLUMNS = {
+    public static final String BELOTE_COLUMN_COINCHE = "coinche";
+    public static final int BELOTE_COLUMN_IDX_COINCHE = 6;
+    public static final String[] BELOTE_CLASSIC_ALL_COLUMNS = {
             COLUMN_ID, BELOTE_COLUMN_TAKER,
             BELOTE_COLUMN_POINTS, BELOTE_COLUMN_BELOTE,
             BELOTE_COLUMN_SCORE_1, BELOTE_COLUMN_SCORE_2};
+    public static final String[] BELOTE_COINCHE_ALL_COLUMNS = {
+            COLUMN_ID, BELOTE_COLUMN_TAKER,
+            BELOTE_COLUMN_POINTS, BELOTE_COLUMN_BELOTE,
+            BELOTE_COLUMN_SCORE_1, BELOTE_COLUMN_SCORE_2,
+            BELOTE_COLUMN_COINCHE};
     /*
      * Tarot
      */
@@ -91,7 +98,9 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
             TAROT_COLUMN_SCORE_3, TAROT_COLUMN_SCORE_4,
             TAROT_COLUMN_SCORE_5, TAROT_COLUMN_PARTNER};
     private static final String DATABASE_NAME = "games.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION_1 = 1;
+    private static final int DATABASE_VERSION_2 = 2;
+    private static final int DATABASE_VERSION = DATABASE_VERSION_2;
 
     public GameSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -99,6 +108,22 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        createClassicBeloteTable(db);
+        createCoincheBeloteTable(db);
+        createTarotThreePlayerTable(db);
+        createTarotFourPlayerTable(db);
+        createTarotFivePlayerTable(db);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (DATABASE_VERSION_1 == oldVersion) {
+            db.execSQL("DROP TABLE IF EXISTS " + BELOTE_TABLE_COINCHE);
+            createCoincheBeloteTable(db);
+        }
+    }
+
+    private void createClassicBeloteTable(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + BELOTE_TABLE_CLASSIC
                 + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -108,6 +133,9 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
                 + BELOTE_COLUMN_SCORE_1 + " INTEGER NOT NULL, "
                 + BELOTE_COLUMN_SCORE_2 + " INTEGER NOT NULL"
                 + ");");
+    }
+
+    private void createCoincheBeloteTable(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + BELOTE_TABLE_COINCHE
                 + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -116,7 +144,11 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
                 + BELOTE_COLUMN_BELOTE + " INTEGER NOT NULL, "
                 + BELOTE_COLUMN_SCORE_1 + " INTEGER NOT NULL, "
                 + BELOTE_COLUMN_SCORE_2 + " INTEGER NOT NULL"
+                + BELOTE_COLUMN_COINCHE + " INTEGER NOT NULL"
                 + ");");
+    }
+
+    private void createTarotThreePlayerTable(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TAROT_TABLE_3_PLAYERS
                 + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -128,6 +160,9 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
                 + TAROT_COLUMN_SCORE_2 + " INTEGER NOT NULL, "
                 + TAROT_COLUMN_SCORE_3 + " INTEGER NOT NULL"
                 + ");");
+    }
+
+    private void createTarotFourPlayerTable(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TAROT_TABLE_4_PLAYERS
                 + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -140,6 +175,9 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
                 + TAROT_COLUMN_SCORE_3 + " INTEGER NOT NULL, "
                 + TAROT_COLUMN_SCORE_4 + " INTEGER NOT NULL"
                 + ");");
+    }
+
+    private void createTarotFivePlayerTable(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TAROT_TABLE_5_PLAYERS
                 + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -154,15 +192,5 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
                 + TAROT_COLUMN_SCORE_5 + " INTEGER NOT NULL, "
                 + TAROT_COLUMN_PARTNER + " INTEGER NOT NULL"
                 + ");");
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + BELOTE_TABLE_CLASSIC);
-        db.execSQL("DROP TABLE IF EXISTS " + BELOTE_TABLE_COINCHE);
-        db.execSQL("DROP TABLE IF EXISTS " + TAROT_TABLE_3_PLAYERS);
-        db.execSQL("DROP TABLE IF EXISTS " + TAROT_TABLE_4_PLAYERS);
-        db.execSQL("DROP TABLE IF EXISTS " + TAROT_TABLE_5_PLAYERS);
-        onCreate(db);
     }
 }

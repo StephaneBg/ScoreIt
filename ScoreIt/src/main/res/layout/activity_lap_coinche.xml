@@ -77,6 +77,16 @@
                     style="?android:listSeparatorTextViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/deal"/>
+
+                <com.sbgapps.scoreit.widget.InputPoints
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/points"/>
 
                 <com.sbgapps.scoreit.widget.InputPoints
@@ -115,6 +125,43 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/us"/>
+                </RadioGroup>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/coinche"/>
+
+                <RadioGroup
+                    android:id="@+id/radio_group_coinche"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_double_margin"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/default_margin">
+
+                    <RadioButton
+                        android:id="@+id/rb_no_coinche"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/default_margin"
+                        android:text="@string/none"
+                        android:layout_weight="1"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_coinche"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/coinche"
+                        android:layout_weight="1"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_surcoinche"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/surcoinche"
+                        android:layout_weight="1"/>
                 </RadioGroup>
 
             </LinearLayout>

@@ -70,9 +70,10 @@ public class BaseActivity extends AccentActivity {
             win.setAttributes(winParams);
             mTintManager = new SystemBarTintManager(this);
             mTintManager.setStatusBarTintEnabled(true);
-            mTintManager.setStatusBarTintColor(resources.getColor(R.color.accent_color));
+            int black = resources.getColor(R.color.black);
+            mTintManager.setStatusBarTintColor(black);
             mTintManager.setNavigationBarTintEnabled(true);
-            mTintManager.setNavigationBarTintColor(resources.getColor(R.color.black));
+            mTintManager.setNavigationBarTintColor(black);
         }
 
         // Init action bar background

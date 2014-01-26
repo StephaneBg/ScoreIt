@@ -16,8 +16,7 @@
  * limitations under the License.
  */
 
-include ':ScoreIt', ':swipelistview', ':HoloAccent', ':HoloGraphLibrary'
+include ':ScoreIt', ':SwipeListview', ':HoloAccent', ':HoloGraphLibrary'
 
 project(':HoloGraphLibrary').projectDir = new File(rootDir, '../holograph/HoloGraphLibrary')
-project(':swipelistview').projectDir = new File(rootDir, '../android-swipelistview/swipelistview')
 project(':HoloAccent').projectDir = new File(rootDir, '../holoaccent/HoloAccent')

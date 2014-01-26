@@ -95,8 +95,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/points"/>
 
-                <include
-                    layout="@layout/include_points_selector"
+                <com.sbgapps.scoreit.widget.InputPoints
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

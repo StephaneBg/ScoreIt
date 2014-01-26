@@ -25,22 +25,40 @@ import android.database.Cursor;
  */
 public class CoincheBeloteLap extends BeloteLap {
 
+    public static final int COINCHE_NONE = 0;
+    public static final int COINCHE = 1;
+
+    private boolean mCoinche;
+
     public CoincheBeloteLap(Cursor cursor) {
         super(cursor);
+        mCoinche = (COINCHE == cursor.getInt(GameSQLiteHelper.BELOTE_COLUMN_IDX_COINCHE));
     }
 
     public CoincheBeloteLap() {
         super();
+        mCoinche = false;
+    }
+
+    public boolean isCoinche() {
+        return mCoinche;
+    }
+
+    public void setCoinche(boolean coinche) {
+        mCoinche = coinche;
     }
 
     @Override
     public void setScores() {
+        int points;
         if (0 == mPoints) {
-            mScorePlayer1 = (PLAYER_1 == mTaker) ? 0 : 160;
-            mScorePlayer2 = (PLAYER_2 == mTaker) ? 0 : 160;
+            points = isCoinche() ? 320 : 160;
         } else {
-            mScorePlayer1 = (PLAYER_1 == mTaker) ? mPoints : 0;
-            mScorePlayer2 = (PLAYER_2 == mTaker) ? mPoints : 0;
+            points = isCoinche() ? 320 : 160;
+            mScorePlayer1 = (PLAYER_1 == mTaker) ?
+                    (isCoinche() ? 2 * mPoints : mPoints) : 0;
+            mScorePlayer2 = (PLAYER_2 == mTaker) ?
+                    (isCoinche() ? 2 * mPoints : mPoints) : 0;
         }
         mScorePlayer1 += (PLAYER_1 == mBelote) ? 20 : 0;
         mScorePlayer2 += (PLAYER_2 == mBelote) ? 20 : 0;

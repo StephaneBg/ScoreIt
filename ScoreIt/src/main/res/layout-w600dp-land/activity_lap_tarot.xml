@@ -109,7 +109,7 @@
                     android:text="@string/points"/>
 
                 <include
-                    layout="@layout/include_points_selector"
+                    layout="@layout/input_points"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
