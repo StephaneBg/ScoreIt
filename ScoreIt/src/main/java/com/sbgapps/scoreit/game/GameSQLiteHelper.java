@@ -44,8 +44,10 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
     public static final int BELOTE_COLUMN_IDX_SCORE_1 = 4;
     public static final String BELOTE_COLUMN_SCORE_2 = "score_player2";
     public static final int BELOTE_COLUMN_IDX_SCORE_2 = 5;
+    public static final String BELOTE_COLUMN_DEAL = "deal";
+    public static final int BELOTE_COLUMN_IDX_DEAL = 6;
     public static final String BELOTE_COLUMN_COINCHE = "coinche";
-    public static final int BELOTE_COLUMN_IDX_COINCHE = 6;
+    public static final int BELOTE_COLUMN_IDX_COINCHE = 7;
     public static final String[] BELOTE_CLASSIC_ALL_COLUMNS = {
             COLUMN_ID, BELOTE_COLUMN_TAKER,
             BELOTE_COLUMN_POINTS, BELOTE_COLUMN_BELOTE,
@@ -54,7 +56,7 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
             COLUMN_ID, BELOTE_COLUMN_TAKER,
             BELOTE_COLUMN_POINTS, BELOTE_COLUMN_BELOTE,
             BELOTE_COLUMN_SCORE_1, BELOTE_COLUMN_SCORE_2,
-            BELOTE_COLUMN_COINCHE};
+            BELOTE_COLUMN_DEAL, BELOTE_COLUMN_COINCHE};
     /*
      * Tarot
      */
@@ -143,7 +145,8 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
                 + BELOTE_COLUMN_POINTS + " INTEGER NOT NULL, "
                 + BELOTE_COLUMN_BELOTE + " INTEGER NOT NULL, "
                 + BELOTE_COLUMN_SCORE_1 + " INTEGER NOT NULL, "
-                + BELOTE_COLUMN_SCORE_2 + " INTEGER NOT NULL"
+                + BELOTE_COLUMN_SCORE_2 + " INTEGER NOT NULL,"
+                + BELOTE_COLUMN_DEAL + " INTEGER NOT NULL,"
                 + BELOTE_COLUMN_COINCHE + " INTEGER NOT NULL"
                 + ");");
     }

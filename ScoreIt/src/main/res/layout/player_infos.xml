@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/name"
-        style="@style/TextStyle"
+        style="@style/InfoTextStyle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_height"
         android:clickable="true"
@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/score"
-        style="@style/TextStyle"
+        style="@style/InfoTextStyle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_height"
         android:fontFamily="fonts/Roboto-Bold.ttf"

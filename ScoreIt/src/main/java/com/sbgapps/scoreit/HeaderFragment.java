@@ -74,13 +74,10 @@ public class HeaderFragment extends Fragment {
             player.getScore().setText(Integer.toString(getAccumulatedScore(i)));
             if (getGameData().getGame() != GameData.BELOTE_CLASSIC
                     && getGameData().getGame() != GameData.BELOTE_COINCHE)
-                player.setBackgroundResource(R.drawable.background_selector);
+                player.getName().setBackgroundResource(R.drawable.scoreit_list_selector_score_action);
             mParent.addView(player);
             mPlayers.add(player);
         }
-
-        if (((ScoreItActivity) getActivity()).isTablet())
-            setColoredPoints(true);
 
         ffl.addView(mParent);
         return ffl;

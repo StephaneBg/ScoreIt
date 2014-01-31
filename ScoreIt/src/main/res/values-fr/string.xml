@@ -19,7 +19,7 @@
 
 <resources>
 
-    <string name="coinche">Coinchée</string>
+    <string name="coinche">Coinche</string>
     <string name="classic">Classique</string>
     <string name="three_players">Trois joueurs</string>
     <string name="four_players">Quatre joueurs</string>

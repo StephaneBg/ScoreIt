@@ -49,11 +49,11 @@ public class InputPoints extends FrameLayout {
         return mButtonMore;
     }
 
-    public TextView getTextViewPoints() {
+    public TextView getTextView() {
         return mTextViewPoints;
     }
 
-    public SeekBar getSeekBarPoints() {
+    public SeekBar getSeekBar() {
         return mSeekBarPoints;
     }
 }

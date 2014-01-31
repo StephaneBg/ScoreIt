@@ -18,6 +18,7 @@
 
 package com.sbgapps.scoreit;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -26,7 +27,6 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.negusoft.holoaccent.activity.AccentActivity;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -35,7 +35,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by sbaiget on 08/01/14.
  */
-public class BaseActivity extends AccentActivity {
+public class BaseActivity extends Activity {
 
     public static final float DEFAULT_ALPHA = 0.85f;
     private Drawable mAccentBackground;
@@ -77,7 +77,7 @@ public class BaseActivity extends AccentActivity {
         }
 
         // Init action bar background
-        mAccentBackground = resources.getDrawable(R.drawable.ha__background_accent);
+        mAccentBackground = resources.getDrawable(R.drawable.scoreit_background_accent);
         getActionBar().setBackgroundDrawable(mAccentBackground);
         setDecorAlpha(DEFAULT_ALPHA);
     }

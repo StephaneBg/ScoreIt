@@ -1,8 +1,8 @@
 apply plugin: 'android'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion '19.0.1'
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 14
@@ -41,10 +41,10 @@ dependencies {
     //compile 'com.fortysevendeg.android:swipelistview:1.0-SNAPSHOT'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.+'
     compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.+'
+    //compile 'eu.inmite.android.lib:android-styled-dialogs:1.1.2@aar'
     //compile 'com.doomonafireball.betterpickers:library:1.5.2'
     //compile 'com.etsy.android.grid:library:1.0.+'
     compile project(':HoloGraphLibrary')
     //compile project(':swipelistview')
-    compile project(':HoloAccent')
     compile project(':SwipeListview')
 }

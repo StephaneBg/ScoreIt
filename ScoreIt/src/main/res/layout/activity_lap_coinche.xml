@@ -54,23 +54,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_double_margin"
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/default_margin">
 
                     <RadioButton
                         android:id="@+id/rb_player1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/default_margin"
-                        android:text="@string/them"
-                        android:layout_weight="1"/>
+                        android:text="@string/them"/>
 
                     <RadioButton
                         android:id="@+id/rb_player2"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/us"
-                        android:layout_weight="1"/>
+                        android:text="@string/us"/>
                 </RadioGroup>
 
                 <TextView
@@ -81,7 +78,8 @@
 
                 <com.sbgapps.scoreit.widget.InputPoints
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/input_deal"/>
 
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
@@ -91,7 +89,8 @@
 
                 <com.sbgapps.scoreit.widget.InputPoints
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/input_points"/>
 
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
@@ -138,27 +137,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_double_margin"
-                    android:orientation="vertical"
                     android:layout_marginTop="@dimen/default_margin">
 
                     <RadioButton
                         android:id="@+id/rb_no_coinche"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/default_margin"
-                        android:text="@string/none"
-                        android:layout_weight="1"/>
+                        android:text="@string/none"/>
 
                     <RadioButton
                         android:id="@+id/rb_coinche"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/coinche"
-                        android:layout_weight="1"/>
+                        android:layout_marginBottom="@dimen/default_margin"
+                        android:text="@string/coinche"/>
 
                     <RadioButton
                         android:id="@+id/rb_surcoinche"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/surcoinche"
                         android:layout_weight="1"/>

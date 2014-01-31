@@ -18,6 +18,7 @@
 
 package com.sbgapps.scoreit;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
@@ -35,7 +36,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.negusoft.holoaccent.dialog.AccentAlertDialog;
 import com.sbgapps.scoreit.game.ClassicBeloteLap;
 import com.sbgapps.scoreit.game.CoincheBeloteLap;
 import com.sbgapps.scoreit.game.FivePlayerTarotLap;
@@ -47,7 +47,7 @@ import com.sbgapps.scoreit.util.TypefaceSpan;
 import com.sbgapps.scoreit.widget.PlayerInfos;
 
 public class ScoreItActivity extends BaseActivity
-implements NavigationDrawerFragment.NavigationDrawerListener,
+        implements NavigationDrawerFragment.NavigationDrawerListener,
         FragmentManager.OnBackStackChangedListener {
 
     public static final String KEY_SELECTED_GAME = "selected_game";
@@ -120,6 +120,12 @@ implements NavigationDrawerFragment.NavigationDrawerListener,
         setTitle();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(null != mGraphFragment || isTablet()) mHeaderFragment.setColoredPoints(true);
+    }
+
     public TypefaceSpan getTypefaceSpan() {
         return mTypefaceSpan;
     }
@@ -147,7 +153,7 @@ implements NavigationDrawerFragment.NavigationDrawerListener,
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_clear:
-                new AccentAlertDialog.Builder(this)
+                new AlertDialog.Builder(this)
                         .setMessage(R.string.new_game)
                         .setPositiveButton(
                                 R.string.clear,
@@ -197,15 +203,20 @@ implements NavigationDrawerFragment.NavigationDrawerListener,
         setTitle();
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.animator.slide_top_in, R.animator.slide_bottom_out);
+        ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
         mHeaderFragment = new HeaderFragment();
         ft.replace(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG);
+        ft.commit();
+
+        ft = getFragmentManager().beginTransaction();
         if (mIsTablet) {
+            ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
             mScoreListFragment = new ScoreListFragment();
             mGraphFragment = new GraphFragment();
             ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG);
             ft.replace(R.id.fragment_container_large, mGraphFragment, GraphFragment.TAG);
         } else {
+            ft.setCustomAnimations(R.animator.slide_top_in, R.animator.slide_top_out);
             mScoreListFragment = new ScoreListFragment();
             ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG);
         }
@@ -220,6 +231,7 @@ implements NavigationDrawerFragment.NavigationDrawerListener,
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (null != mScoreListFragment) mScoreListFragment.getListView().closeOpenedItems();
         if (RESULT_OK != resultCode) return;
 
         switch (requestCode) {
@@ -303,8 +315,10 @@ implements NavigationDrawerFragment.NavigationDrawerListener,
         switch (mGameData.getGame()) {
             default:
             case GameData.BELOTE_CLASSIC:
-            case GameData.BELOTE_COINCHE:
                 intent = new Intent(this, BeloteLapActivity.class);
+                break;
+            case GameData.BELOTE_COINCHE:
+                intent = new Intent(this, CoincheLapActivity.class);
                 break;
             case GameData.TAROT_3_PLAYERS:
             case GameData.TAROT_4_PLAYERS:
@@ -317,7 +331,6 @@ implements NavigationDrawerFragment.NavigationDrawerListener,
         intent.putExtra(EXTRA_EDIT, edit);
 
         startActivityForResult(intent, REQ_LAP_ACTIVITY);
-        if (null != mScoreListFragment) mScoreListFragment.getListView().closeOpenedItems();
     }
 
     private void switchScoreViews() {

@@ -104,4 +104,10 @@ public abstract class BeloteLap implements Lap {
         val.put(GameSQLiteHelper.BELOTE_COLUMN_SCORE_2, mScorePlayer2);
         return val;
     }
+
+    public int getCounterPoints(int points) {
+        return (0 == points) ? 160 :
+                (250 == points) ? 0 :
+                        160 - points;
+    }
 }

@@ -26,40 +26,44 @@ import android.database.Cursor;
 public class CoincheBeloteLap extends BeloteLap {
 
     public static final int COINCHE_NONE = 0;
-    public static final int COINCHE = 1;
+    public static final int COINCHE_NORMAL = 1;
+    public static final int COINCHE_DOUBLE = 2;
 
-    private boolean mCoinche;
+    private int mDeal;
+    private int mCoinche;
 
     public CoincheBeloteLap(Cursor cursor) {
         super(cursor);
-        mCoinche = (COINCHE == cursor.getInt(GameSQLiteHelper.BELOTE_COLUMN_IDX_COINCHE));
+        mDeal = cursor.getInt(GameSQLiteHelper.BELOTE_COLUMN_IDX_DEAL);
+        mCoinche = cursor.getInt(GameSQLiteHelper.BELOTE_COLUMN_IDX_COINCHE);
     }
 
     public CoincheBeloteLap() {
         super();
-        mCoinche = false;
+        mDeal = 120;
+        mCoinche = COINCHE_NONE;
     }
 
-    public boolean isCoinche() {
+    public int getDeal() {
+        return mDeal;
+    }
+
+    public void setDeal(int deal) {
+        mDeal = deal;
+    }
+
+    public int getCoinche() {
         return mCoinche;
     }
 
-    public void setCoinche(boolean coinche) {
+    public void setCoinche(int coinche) {
         mCoinche = coinche;
     }
 
     @Override
     public void setScores() {
-        int points;
-        if (0 == mPoints) {
-            points = isCoinche() ? 320 : 160;
-        } else {
-            points = isCoinche() ? 320 : 160;
-            mScorePlayer1 = (PLAYER_1 == mTaker) ?
-                    (isCoinche() ? 2 * mPoints : mPoints) : 0;
-            mScorePlayer2 = (PLAYER_2 == mTaker) ?
-                    (isCoinche() ? 2 * mPoints : mPoints) : 0;
-        }
+        mScorePlayer1 = (PLAYER_1 == mTaker) ? mPoints : getCounterPoints(mPoints);
+        mScorePlayer2 = (PLAYER_2 == mTaker) ? mPoints : getCounterPoints(mPoints);
         mScorePlayer1 += (PLAYER_1 == mBelote) ? 20 : 0;
         mScorePlayer2 += (PLAYER_2 == mBelote) ? 20 : 0;
     }

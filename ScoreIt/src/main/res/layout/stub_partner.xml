@@ -31,7 +31,12 @@
         android:text="@string/partner"/>
 
     <Spinner
-        android:id="@+id/spinner_partner"
-        style="@style/SpinnerStyle"/>
+        android:layout_height="@dimen/default_height"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_double_margin"
+        android:layout_marginLeft="@dimen/default_double_margin"
+        android:spinnerMode="dialog"
+        android:id="@+id/spinner_partner"/>
 
 </LinearLayout>

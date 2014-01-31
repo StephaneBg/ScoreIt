@@ -49,14 +49,19 @@
                     android:text="@string/taker"/>
 
                 <Spinner
-                    android:id="@+id/spinner_taker"
-                    style="@style/SpinnerStyle"/>
+                    android:layout_height="@dimen/default_height"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginRight="@dimen/default_double_margin"
+                    android:layout_marginLeft="@dimen/default_double_margin"
+                    android:spinnerMode="dialog"
+                    android:id="@+id/spinner_taker"/>
 
                 <ViewStub
                     android:id="@+id/viewstub_partner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout="@layout/include_partner"/>
+                    android:layout="@layout/stub_partner"/>
 
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
@@ -65,8 +70,13 @@
                     android:text="@string/deal"/>
 
                 <Spinner
-                    android:id="@+id/spinner_deal"
-                    style="@style/SpinnerStyle"/>
+                    android:layout_height="@dimen/default_height"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginRight="@dimen/default_double_margin"
+                    android:layout_marginLeft="@dimen/default_double_margin"
+                    android:spinnerMode="dialog"
+                    android:id="@+id/spinner_deal"/>
 
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
@@ -76,17 +86,29 @@
 
                 <CheckBox
                     android:id="@+id/checkbox_petit"
-                    style="@style/CheckBoxStyle"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginRight="@dimen/default_double_margin"
+                    android:layout_marginLeft="@dimen/default_double_margin"
                     android:text="@string/petit"/>
 
                 <CheckBox
                     android:id="@+id/checkbox_twenty_one"
-                    style="@style/CheckBoxStyle"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginRight="@dimen/default_double_margin"
+                    android:layout_marginLeft="@dimen/default_double_margin"
                     android:text="@string/twentyone"/>
 
                 <CheckBox
                     android:id="@+id/checkbox_fool"
-                    style="@style/CheckBoxStyle"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginRight="@dimen/default_double_margin"
+                    android:layout_marginLeft="@dimen/default_double_margin"
                     android:text="@string/fool"/>
 
                 <TextView

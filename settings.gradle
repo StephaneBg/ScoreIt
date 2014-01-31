@@ -16,7 +16,6 @@
  * limitations under the License.
  */
 
-include ':ScoreIt', ':SwipeListview', ':HoloAccent', ':HoloGraphLibrary'
+include ':ScoreIt', ':SwipeListview', ':HoloGraphLibrary'
 
 project(':HoloGraphLibrary').projectDir = new File(rootDir, '../holograph/HoloGraphLibrary')
-project(':HoloAccent').projectDir = new File(rootDir, '../holoaccent/HoloAccent')
