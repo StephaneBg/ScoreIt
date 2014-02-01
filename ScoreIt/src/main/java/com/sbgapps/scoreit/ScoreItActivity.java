@@ -47,8 +47,7 @@ import com.sbgapps.scoreit.util.TypefaceSpan;
 import com.sbgapps.scoreit.widget.PlayerInfos;
 
 public class ScoreItActivity extends BaseActivity
-        implements NavigationDrawerFragment.NavigationDrawerListener,
-        FragmentManager.OnBackStackChangedListener {
+        implements NavigationDrawerFragment.NavigationDrawerListener {
 
     public static final String KEY_SELECTED_GAME = "selected_game";
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
@@ -56,7 +55,6 @@ public class ScoreItActivity extends BaseActivity
     public static final String EXTRA_EDIT = "com.sbgapps.scoreit.edit";
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_LAP_ACTIVITY = 2;
-    public static final float DEFAULT_ALPHA = 0.85f;
     private TypefaceSpan mTypefaceSpan;
     private GameData mGameData;
     private SharedPreferences mPreferences;
@@ -83,7 +81,6 @@ public class ScoreItActivity extends BaseActivity
         mIsTablet = (null != findViewById(R.id.fragment_container_large));
 
         final FragmentManager fm = getFragmentManager();
-        fm.addOnBackStackChangedListener(this);
 
         // Init fragments
         if (null == savedInstanceState) {
@@ -120,12 +117,6 @@ public class ScoreItActivity extends BaseActivity
         setTitle();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(null != mGraphFragment || isTablet()) mHeaderFragment.setColoredPoints(true);
-    }
-
     public TypefaceSpan getTypefaceSpan() {
         return mTypefaceSpan;
     }
@@ -140,8 +131,13 @@ public class ScoreItActivity extends BaseActivity
             menu.clear();
             return false;
         } else {
-            if (!mIsTablet && 0 == mGameData.getLaps().size()) {
-                MenuItem item = menu.findItem(R.id.menu_view);
+            if (0 == mGameData.getLaps().size()) {
+                MenuItem item;
+                if (!mIsTablet) {
+                    item = menu.findItem(R.id.menu_view);
+                    item.setVisible(false);
+                }
+                item = menu.findItem(R.id.menu_clear);
                 item.setVisible(false);
             }
             getActionBar().setTitle(mTitle);
@@ -336,7 +332,6 @@ public class ScoreItActivity extends BaseActivity
     private void switchScoreViews() {
         if (null != mGraphFragment && mGraphFragment.isVisible()) {
             getFragmentManager().popBackStack();
-            mHeaderFragment.setColoredPoints(false);
             return;
         }
 
@@ -353,7 +348,6 @@ public class ScoreItActivity extends BaseActivity
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, mGraphFragment, GraphFragment.TAG)
                 .commit();
-        mHeaderFragment.setColoredPoints(true);
     }
 
     private void setTitle() {
@@ -372,12 +366,5 @@ public class ScoreItActivity extends BaseActivity
                 break;
         }
         mTitle.setSpan(mTypefaceSpan, 0, mTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-    }
-
-    @Override
-    public void onBackStackChanged() {
-        if (mIsTablet) return;
-        if (null != mScoreListFragment && mScoreListFragment.isVisible())
-            mHeaderFragment.setColoredPoints(false);
     }
 }

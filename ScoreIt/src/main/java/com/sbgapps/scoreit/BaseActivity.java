@@ -37,7 +37,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class BaseActivity extends Activity {
 
-    public static final float DEFAULT_ALPHA = 0.85f;
+    public static final float DEFAULT_ALPHA = 0.80f;
     private Drawable mAccentBackground;
     private SystemBarTintManager mTintManager;
 

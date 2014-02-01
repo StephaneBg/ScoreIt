@@ -20,7 +20,6 @@ package com.sbgapps.scoreit;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -72,6 +71,7 @@ public class HeaderFragment extends Fragment {
             player.setLayoutParams(lp);
             player.getName().setText(getGameData().getPlayerName(i));
             player.getScore().setText(Integer.toString(getAccumulatedScore(i)));
+            player.getScore().setTextColor(getGameData().getPlayerColor(i));
             if (getGameData().getGame() != GameData.BELOTE_CLASSIC
                     && getGameData().getGame() != GameData.BELOTE_COINCHE)
                 player.getName().setBackgroundResource(R.drawable.scoreit_list_selector_score_action);
@@ -90,20 +90,6 @@ public class HeaderFragment extends Fragment {
     public void updateScores() {
         for (int i = 0; i < getGameData().getPlayerCount(); i++) {
             mPlayers.get(i).getScore().setText(Integer.toString(getAccumulatedScore(i)));
-        }
-    }
-
-    public void setColoredPoints(boolean colored) {
-        final Resources resources = getActivity().getResources();
-        if (colored) {
-            for (int i = 0; i < getGameData().getPlayerCount(); i++) {
-                mPlayers.get(i).getScore().setTextColor(getGameData().getPlayerColor(i));
-            }
-        } else {
-            int color = resources.getColor(R.color.darker_gray);
-            for (int i = 0; i < getGameData().getPlayerCount(); i++) {
-                mPlayers.get(i).getScore().setTextColor(color);
-            }
         }
     }
 
