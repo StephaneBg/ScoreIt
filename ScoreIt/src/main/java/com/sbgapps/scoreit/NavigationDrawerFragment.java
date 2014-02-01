@@ -155,12 +155,6 @@ public class NavigationDrawerFragment extends Fragment {
                 }
                 getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
-
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                super.onDrawerSlide(drawerView, slideOffset);
-                mListener.onNavigationDrawerMove(slideOffset);
-            }
         };
 
         if (!mUserLearnedDrawer) mDrawerLayout.openDrawer(mFragmentContainerView);
@@ -240,7 +234,5 @@ public class NavigationDrawerFragment extends Fragment {
 
     public static interface NavigationDrawerListener {
         void onNavigationDrawerGameSelected(int game);
-
-        void onNavigationDrawerMove(float offset);
     }
 }

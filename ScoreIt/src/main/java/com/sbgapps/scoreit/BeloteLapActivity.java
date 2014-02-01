@@ -20,7 +20,6 @@ package com.sbgapps.scoreit;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
@@ -59,10 +58,8 @@ public class BeloteLapActivity extends LapActivity {
         HOLDER.btn_more = (ImageButton) findViewById(R.id.btn_more);
 
         if (isTablet()) {
-            ViewStub stub = (ViewStub) findViewById(R.id.viewstub_buttons);
-            View view = stub.inflate();
-            view.findViewById(R.id.btn_cancel).setOnClickListener(this);
-            view.findViewById(R.id.btn_confirm).setOnClickListener(this);
+            findViewById(R.id.btn_cancel).setOnClickListener(this);
+            findViewById(R.id.btn_confirm).setOnClickListener(this);
         }
 
         HOLDER.sb_points.setMax(9);

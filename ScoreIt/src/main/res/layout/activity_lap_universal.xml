@@ -51,6 +51,6 @@
             android:id="@+id/viewstub_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout="@layout/stub_cancel_done"/>
+            android:layout="@layout/include_cancel_done"/>
     </LinearLayout>
 </FrameLayout>

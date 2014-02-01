@@ -18,6 +18,7 @@
 
 package com.sbgapps.scoreit.game;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 
 /**
@@ -66,5 +67,13 @@ public class CoincheBeloteLap extends BeloteLap {
         mScorePlayer2 = (PLAYER_2 == mTaker) ? mPoints : getCounterPoints(mPoints);
         mScorePlayer1 += (PLAYER_1 == mBelote) ? 20 : 0;
         mScorePlayer2 += (PLAYER_2 == mBelote) ? 20 : 0;
+    }
+
+    @Override
+    public ContentValues getValues() {
+        ContentValues val = super.getValues();
+        val.put(GameSQLiteHelper.BELOTE_COLUMN_DEAL, mDeal);
+        val.put(GameSQLiteHelper.BELOTE_COLUMN_COINCHE, mCoinche);
+        return val;
     }
 }

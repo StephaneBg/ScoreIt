@@ -121,10 +121,6 @@ public class ScoreItActivity extends BaseActivity
         return mTypefaceSpan;
     }
 
-    public boolean isTablet() {
-        return mIsTablet;
-    }
-
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (mNavigationDrawerFragment.isDrawerOpen()) {
@@ -217,12 +213,6 @@ public class ScoreItActivity extends BaseActivity
             ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG);
         }
         ft.commit();
-    }
-
-    @Override
-    public void onNavigationDrawerMove(float offset) {
-        offset = DEFAULT_ALPHA + (1.0f - DEFAULT_ALPHA) * offset;
-        setDecorAlpha(offset);
     }
 
     @Override

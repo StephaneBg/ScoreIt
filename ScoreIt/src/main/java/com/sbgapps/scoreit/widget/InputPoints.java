@@ -33,7 +33,7 @@ public class InputPoints extends FrameLayout {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.input_points, this, true);
+        inflater.inflate(R.layout.include_input_points, this, true);
 
         mButtonLess = (ImageButton) findViewById(R.id.btn_less);
         mButtonMore = (ImageButton) findViewById(R.id.btn_more);
