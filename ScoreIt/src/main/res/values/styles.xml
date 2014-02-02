@@ -43,7 +43,7 @@
 
     <style name="ActionBar.Scoreit" parent="android:Widget.Holo.ActionBar">
         <item name="android:titleTextStyle">@style/TitleTextStyle</item>
-        <item name="android:background">@color/accent_color</item>
+        <item name="android:background">@drawable/scoreit_background_accent</item>
     </style>
 
     <style name="TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">

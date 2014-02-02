@@ -15,7 +15,7 @@ import com.sbgapps.scoreit.widget.InputPoints;
 public class CoincheLapActivity extends LapActivity {
 
     private static final LapHolder HOLDER = new LapHolder();
-    private static final int[] PROGRESS2POINTS = {80, 90, 100, 110, 120, 130, 140, 150, 160, 250};
+    private static final int[] PROGRESS2POINTS = {80, 90, 100, 110, 120, 130, 140, 150, 250};
 
     @Override
     public CoincheBeloteLap getLap() {
@@ -44,7 +44,7 @@ public class CoincheLapActivity extends LapActivity {
             findViewById(R.id.btn_confirm).setOnClickListener(this);
         }
 
-        HOLDER.input_deal.getSeekBar().setMax(9);
+        HOLDER.input_deal.getSeekBar().setMax(8);
         HOLDER.input_deal.getSeekBar().setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
                     @Override
@@ -79,7 +79,7 @@ public class CoincheLapActivity extends LapActivity {
             }
         });
 
-        HOLDER.input_points.getSeekBar().setMax(9);
+        HOLDER.input_points.getSeekBar().setMax(8);
         HOLDER.input_points.getSeekBar().setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
                     @Override
@@ -123,11 +123,11 @@ public class CoincheLapActivity extends LapActivity {
         }
 
         int progress = getLap().getDeal() / 10 - 8;
-        progress = (17 == progress) ? 9 : progress;
+        progress = (17 == progress) ? 8 : progress;
         HOLDER.input_deal.getSeekBar().setProgress(progress);
 
         progress = getLap().getPoints() / 10 - 8;
-        progress = (17 == progress) ? 9 : progress;
+        progress = (17 == progress) ? 8 : progress;
         HOLDER.input_points.getSeekBar().setProgress(progress);
 
         switch (getLap().getBelote()) {

@@ -20,8 +20,6 @@ package com.sbgapps.scoreit;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
@@ -37,18 +35,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class BaseActivity extends Activity {
 
-    public static final float DEFAULT_ALPHA = 0.80f;
-    private Drawable mAccentBackground;
-    private SystemBarTintManager mTintManager;
-
-    public SystemBarTintManager getTintManager() {
-        return mTintManager;
-    }
-
-    public Drawable getAccentBackground() {
-        return mAccentBackground;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,29 +47,17 @@ public class BaseActivity extends Activity {
     }
 
     public void setAccentDecor() {
-        final Resources resources = getResources();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window win = getWindow();
             WindowManager.LayoutParams winParams = win.getAttributes();
             winParams.flags |= WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
             winParams.flags |= WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
             win.setAttributes(winParams);
-            mTintManager = new SystemBarTintManager(this);
-            mTintManager.setStatusBarTintEnabled(true);
-            int black = resources.getColor(R.color.black);
-            mTintManager.setStatusBarTintColor(black);
-            mTintManager.setNavigationBarTintEnabled(true);
-            mTintManager.setNavigationBarTintColor(black);
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintResource(R.drawable.scoreit_background_accent);
+            tintManager.setNavigationBarTintEnabled(true);
+            tintManager.setNavigationBarTintResource(R.drawable.scoreit_background_black);
         }
-
-        // Init action bar background
-        mAccentBackground = resources.getDrawable(R.drawable.scoreit_background_accent);
-        getActionBar().setBackgroundDrawable(mAccentBackground);
-        setDecorAlpha(DEFAULT_ALPHA);
-    }
-
-    public void setDecorAlpha(float alpha) {
-        if (null != mTintManager) mTintManager.setTintAlpha(alpha);
-        if (null != mAccentBackground) mAccentBackground.setAlpha((int) (255 * alpha));
     }
 }

@@ -63,17 +63,45 @@ public class CoincheBeloteLap extends BeloteLap {
 
     @Override
     public void setScores() {
-        mScorePlayer1 = (PLAYER_1 == mTaker) ? mPoints : getCounterPoints(mPoints);
-        mScorePlayer2 = (PLAYER_2 == mTaker) ? mPoints : getCounterPoints(mPoints);
-        mScorePlayer1 += (PLAYER_1 == mBelote) ? 20 : 0;
-        mScorePlayer2 += (PLAYER_2 == mBelote) ? 20 : 0;
+        int takerPts = mPoints;
+        int counterPts = getCounterPoints(mPoints);
+
+        if (PLAYER_NONE != mBelote) {
+            if (((PLAYER_1 == mTaker) && (PLAYER_1 == mBelote)) ||
+                    ((PLAYER_2 == mTaker) && (PLAYER_2 == mBelote))) {
+                takerPts += 20;
+            } else {
+                counterPts += 20;
+            }
+        }
+
+        if ((mPoints >= mDeal) && (takerPts > counterPts)) {
+            // Deal succeeded
+            takerPts += mDeal;
+            takerPts = (COINCHE_NORMAL == mCoinche) ? takerPts * 2 :
+                    (COINCHE_DOUBLE == mCoinche) ? takerPts * 4 : takerPts;
+        } else {
+            // Deal failed
+            takerPts = 0;
+            counterPts = (250 == mDeal) ? 500 : 160 + mDeal;
+            counterPts = (COINCHE_NORMAL == mCoinche) ? counterPts * 2 :
+                    (COINCHE_DOUBLE == mCoinche) ? counterPts * 4 : counterPts;
+        }
+
+        mScorePlayer1 = (PLAYER_1 == mTaker) ? takerPts : counterPts;
+        mScorePlayer2 = (PLAYER_2 == mTaker) ? takerPts : counterPts;
+    }
+
+    @Override
+    public int getCounterPoints(int points) {
+        return (250 == points) ? 0 : 160 - points;
     }
 
     @Override
     public ContentValues getValues() {
-        ContentValues val = super.getValues();
-        val.put(GameSQLiteHelper.BELOTE_COLUMN_DEAL, mDeal);
-        val.put(GameSQLiteHelper.BELOTE_COLUMN_COINCHE, mCoinche);
-        return val;
+        ContentValues values = super.getValues();
+        values.put(GameSQLiteHelper.BELOTE_COLUMN_DEAL, mDeal);
+        values.put(GameSQLiteHelper.BELOTE_COLUMN_COINCHE, mCoinche);
+        return values;
     }
 }

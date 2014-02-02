@@ -18,6 +18,7 @@
 
 package com.sbgapps.scoreit.game;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 
 /**
@@ -102,6 +103,19 @@ public abstract class TarotLap implements Lap {
     @Override
     public int getScore(int player) {
         return mScore[player];
+    }
+
+    @Override
+    public ContentValues getValues() {
+        ContentValues values = new ContentValues();
+        values.put(GameSQLiteHelper.TAROT_COLUMN_TAKER, mTaker);
+        values.put(GameSQLiteHelper.TAROT_COLUMN_DEAL, mDeal);
+        values.put(GameSQLiteHelper.TAROT_COLUMN_POINTS, mPoints);
+        values.put(GameSQLiteHelper.TAROT_COLUMN_OUDLER, mOudlers);
+        values.put(GameSQLiteHelper.TAROT_COLUMN_SCORE_1, mScore[Lap.PLAYER_1]);
+        values.put(GameSQLiteHelper.TAROT_COLUMN_SCORE_2, mScore[Lap.PLAYER_2]);
+        values.put(GameSQLiteHelper.TAROT_COLUMN_SCORE_3, mScore[Lap.PLAYER_3]);
+        return values;
     }
 
     public int computeScore() {

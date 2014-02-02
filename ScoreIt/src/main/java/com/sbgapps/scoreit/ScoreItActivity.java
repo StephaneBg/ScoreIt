@@ -121,6 +121,10 @@ public class ScoreItActivity extends BaseActivity
         return mTypefaceSpan;
     }
 
+    public boolean isTablet() {
+        return mIsTablet;
+    }
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (mNavigationDrawerFragment.isDrawerOpen()) {
