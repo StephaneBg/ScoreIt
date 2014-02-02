@@ -36,6 +36,7 @@
             android:layout_width="0dp"
             android:src="@drawable/ic_content_discard"
             android:layout_height="match_parent"
+            android:background="@drawable/scoreit_list_selector_score_action"
             android:text="@string/cancel"
             android:layout_weight="1"/>
 
@@ -45,6 +46,7 @@
             android:layout_width="0dp"
             android:src="@drawable/ic_content_edit"
             android:layout_height="match_parent"
+            android:background="@drawable/scoreit_list_selector_score_action"
             android:text="@string/done"
             android:layout_weight="1"/>
     </LinearLayout>
@@ -55,118 +57,5 @@
         android:layout_height="match_parent"
         android:baselineAligned="false"
         android:background="@color/white"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:id="@+id/view_player1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/score_player1"
-                style="@style/TextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
-
-            <ImageView
-                android:id="@+id/img_player1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_toRightOf="@+id/score_player1"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/view_player2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/score_player2"
-                style="@style/TextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
-
-            <ImageView
-                android:id="@+id/img_player2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_toRightOf="@+id/score_player2"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/view_player3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/score_player3"
-                style="@style/TextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
-
-            <ImageView
-                android:id="@+id/img_player3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_toRightOf="@+id/score_player3"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/view_player4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/score_player4"
-                style="@style/TextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
-
-            <ImageView
-                android:id="@+id/img_player4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_toRightOf="@+id/score_player4"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/view_player5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/score_player5"
-                style="@style/TextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
-
-            <ImageView
-                android:id="@+id/img_player5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_toRightOf="@+id/score_player5"/>
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
+        android:orientation="horizontal"/>
 </FrameLayout>

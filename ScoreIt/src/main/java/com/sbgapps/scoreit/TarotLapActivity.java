@@ -62,10 +62,8 @@ public class TarotLapActivity extends LapActivity {
         HOLDER.btn_more = (ImageButton) findViewById(R.id.btn_more);
 
         if (isTablet()) {
-            ViewStub stub = (ViewStub) findViewById(R.id.viewstub_buttons);
-            View view = stub.inflate();
-            view.findViewById(R.id.btn_cancel).setOnClickListener(this);
-            view.findViewById(R.id.btn_confirm).setOnClickListener(this);
+            findViewById(R.id.btn_cancel).setOnClickListener(this);
+            findViewById(R.id.btn_confirm).setOnClickListener(this);
         }
 
         final int game = getGameData().getGame();

@@ -40,6 +40,7 @@ public class GameData {
     public static final int TAROT_3_PLAYERS = 2;
     public static final int TAROT_4_PLAYERS = 3;
     public static final int TAROT_5_PLAYERS = 4;
+    public static final int UNIVERSAL = 5;
     private static GameData sInstance = new GameData();
     private final List<Lap> mLaps = new ArrayList<>();
     private Resources mResources;
@@ -204,6 +205,23 @@ public class GameData {
                 .commit();
     }
 
+    public int getPlayerColor(int player) {
+        switch (player) {
+            default:
+                return mResources.getColor(R.color.darker_gray);
+            case Lap.PLAYER_1:
+                return mResources.getColor(R.color.color_player1);
+            case Lap.PLAYER_2:
+                return mResources.getColor(R.color.color_player2);
+            case Lap.PLAYER_3:
+                return mResources.getColor(R.color.color_player3);
+            case Lap.PLAYER_4:
+                return mResources.getColor(R.color.color_player4);
+            case Lap.PLAYER_5:
+                return mResources.getColor(R.color.color_player5);
+        }
+    }
+
     private String getNameKey(int player) {
         return "TAROT_" + (mGame + 1) + "_PLAYERS_NAME" + (player + 1);
     }
@@ -228,8 +246,9 @@ public class GameData {
         switch (mGame) {
             default:
             case BELOTE_CLASSIC:
+                return GameSQLiteHelper.BELOTE_CLASSIC_ALL_COLUMNS;
             case BELOTE_COINCHE:
-                return GameSQLiteHelper.BELOTE_ALL_COLUMNS;
+                return GameSQLiteHelper.BELOTE_COINCHE_ALL_COLUMNS;
             case TAROT_3_PLAYERS:
                 return GameSQLiteHelper.TAROT_3_PLAYERS_ALL_COLUMNS;
             case TAROT_4_PLAYERS:

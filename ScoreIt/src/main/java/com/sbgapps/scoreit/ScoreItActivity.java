@@ -18,6 +18,7 @@
 
 package com.sbgapps.scoreit;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
@@ -28,12 +29,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v4.widget.DrawerLayout;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.negusoft.holoaccent.dialog.AccentAlertDialog;
 import com.sbgapps.scoreit.game.ClassicBeloteLap;
 import com.sbgapps.scoreit.game.CoincheBeloteLap;
 import com.sbgapps.scoreit.game.FivePlayerTarotLap;
@@ -41,13 +43,11 @@ import com.sbgapps.scoreit.game.FourPlayerTarotLap;
 import com.sbgapps.scoreit.game.GameData;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.game.ThreePlayerTarotLap;
+import com.sbgapps.scoreit.util.TypefaceSpan;
+import com.sbgapps.scoreit.widget.PlayerInfos;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyUtils;
-
-public class ScoreItActivity extends AccentActivity
-        implements NavigationDrawerFragment.NavigationDrawerListener,
-        FragmentManager.OnBackStackChangedListener {
+public class ScoreItActivity extends BaseActivity
+        implements NavigationDrawerFragment.NavigationDrawerListener {
 
     public static final String KEY_SELECTED_GAME = "selected_game";
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
@@ -55,12 +55,12 @@ public class ScoreItActivity extends AccentActivity
     public static final String EXTRA_EDIT = "com.sbgapps.scoreit.edit";
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_LAP_ACTIVITY = 2;
-    public static final float DEFAULT_ALPHA = 0.85f;
+    private TypefaceSpan mTypefaceSpan;
     private GameData mGameData;
     private SharedPreferences mPreferences;
-    private CharSequence mTitle;
+    private SpannableString mTitle;
     private boolean mIsTablet;
-    private int mNameViewId;
+    private TextView mEditedName;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private ScoreListFragment mScoreListFragment;
     private GraphFragment mGraphFragment;
@@ -72,10 +72,6 @@ public class ScoreItActivity extends AccentActivity
 
         setAccentDecor();
 
-        // Init action bar title
-        int titleId = getResources().getIdentifier("action_bar_title", "id", "android");
-        TextView tv = (TextView) findViewById(titleId);
-        CalligraphyUtils.applyFontToTextView(this, tv, CalligraphyConfig.get(), "fonts/Lobster.otf");
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         final int game = mPreferences.getInt(KEY_SELECTED_GAME, GameData.BELOTE_CLASSIC);
         mGameData = GameData.getInstance();
@@ -85,31 +81,28 @@ public class ScoreItActivity extends AccentActivity
         mIsTablet = (null != findViewById(R.id.fragment_container_large));
 
         final FragmentManager fm = getFragmentManager();
-        fm.addOnBackStackChangedListener(this);
-
-        // Init header
-        mHeaderFragment = (HeaderFragment) fm.findFragmentById(R.id.fragment_header);
-        mHeaderFragment.init();
 
         // Init fragments
         if (null == savedInstanceState) {
+            mHeaderFragment = new HeaderFragment();
             if (mIsTablet) {
                 mScoreListFragment = new ScoreListFragment();
                 mGraphFragment = new GraphFragment();
                 fm.beginTransaction()
+                        .add(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG)
                         .add(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG)
                         .add(R.id.fragment_container_large, mGraphFragment, GraphFragment.TAG)
                         .commit();
-                mHeaderFragment.setColoredPoints(true);
             } else {
                 mScoreListFragment = new ScoreListFragment();
                 fm.beginTransaction()
+                        .add(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG)
                         .add(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG)
                         .commit();
             }
         } else {
+            mHeaderFragment = (HeaderFragment) fm.findFragmentByTag(HeaderFragment.TAG);
             mGraphFragment = (GraphFragment) fm.findFragmentByTag(GraphFragment.TAG);
-            if (null != mGraphFragment) mHeaderFragment.setColoredPoints(true);
             mScoreListFragment = (ScoreListFragment) fm.findFragmentByTag(ScoreListFragment.TAG);
         }
 
@@ -120,7 +113,16 @@ public class ScoreItActivity extends AccentActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout), game);
 
+        mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
         setTitle();
+    }
+
+    public TypefaceSpan getTypefaceSpan() {
+        return mTypefaceSpan;
+    }
+
+    public boolean isTablet() {
+        return mIsTablet;
     }
 
     @Override
@@ -129,8 +131,13 @@ public class ScoreItActivity extends AccentActivity
             menu.clear();
             return false;
         } else {
-            if (!mIsTablet && 0 == mGameData.getLaps().size()) {
-                MenuItem item = menu.findItem(R.id.menu_view);
+            if (0 == mGameData.getLaps().size()) {
+                MenuItem item;
+                if (!mIsTablet) {
+                    item = menu.findItem(R.id.menu_view);
+                    item.setVisible(false);
+                }
+                item = menu.findItem(R.id.menu_clear);
                 item.setVisible(false);
             }
             getActionBar().setTitle(mTitle);
@@ -142,7 +149,7 @@ public class ScoreItActivity extends AccentActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_clear:
-                new AccentAlertDialog.Builder(this)
+                new AlertDialog.Builder(this)
                         .setMessage(R.string.new_game)
                         .setPositiveButton(
                                 R.string.clear,
@@ -173,26 +180,7 @@ public class ScoreItActivity extends AccentActivity
                 return true;
 
             case R.id.menu_new:
-                Lap lap;
-                switch (mGameData.getGame()) {
-                    default:
-                    case GameData.BELOTE_CLASSIC:
-                        lap = new ClassicBeloteLap();
-                        break;
-                    case GameData.BELOTE_COINCHE:
-                        lap = new CoincheBeloteLap();
-                        break;
-                    case GameData.TAROT_3_PLAYERS:
-                        lap = new ThreePlayerTarotLap();
-                        break;
-                    case GameData.TAROT_4_PLAYERS:
-                        lap = new FourPlayerTarotLap();
-                        break;
-                    case GameData.TAROT_5_PLAYERS:
-                        lap = new FivePlayerTarotLap();
-                        break;
-                }
-                showLapActivity(lap, false);
+                addLap();
                 return true;
 
             case R.id.menu_view:
@@ -208,33 +196,32 @@ public class ScoreItActivity extends AccentActivity
 
         mPreferences.edit().putInt(KEY_SELECTED_GAME, game).commit();
         mGameData.setGame(game);
-        mHeaderFragment.init();
         setTitle();
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
+        mHeaderFragment = new HeaderFragment();
+        ft.replace(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG);
+        ft.commit();
+
+        ft = getFragmentManager().beginTransaction();
         if (mIsTablet) {
+            ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
             mScoreListFragment = new ScoreListFragment();
             mGraphFragment = new GraphFragment();
-            ft.setCustomAnimations(R.animator.slide_top_in, R.animator.slide_bottom_out);
             ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG);
             ft.replace(R.id.fragment_container_large, mGraphFragment, GraphFragment.TAG);
-            mHeaderFragment.setColoredPoints(true);
         } else {
+            ft.setCustomAnimations(R.animator.slide_top_in, R.animator.slide_top_out);
             mScoreListFragment = new ScoreListFragment();
-            ft.setCustomAnimations(R.animator.slide_top_in, R.animator.slide_bottom_out);
             ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG);
         }
         ft.commit();
     }
 
     @Override
-    public void onNavigationDrawerMove(float offset) {
-        offset = DEFAULT_ALPHA + (1.0f - DEFAULT_ALPHA) * offset;
-        setDecorAlpha(offset);
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (null != mScoreListFragment) mScoreListFragment.getListView().closeOpenedItems();
         if (RESULT_OK != resultCode) return;
 
         switch (requestCode) {
@@ -244,27 +231,10 @@ public class ScoreItActivity extends AccentActivity
                 if (cursor.moveToFirst()) {
                     int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                     String name = cursor.getString(columnIndex);
-                    switch (mNameViewId) {
-                        case R.id.player1:
-                            mGameData.setPlayerName(Lap.PLAYER_1, name);
-                            break;
-                        case R.id.player2:
-                            mGameData.setPlayerName(Lap.PLAYER_2, name);
-                            break;
-                        case R.id.player3:
-                            mGameData.setPlayerName(Lap.PLAYER_3, name);
-                            break;
-                        case R.id.player4:
-                            mGameData.setPlayerName(Lap.PLAYER_4, name);
-                            break;
-                        case R.id.player5:
-                            mGameData.setPlayerName(Lap.PLAYER_5, name);
-                            break;
-                    }
-                    TextView textView = (TextView) findViewById(mNameViewId);
-                    textView.setText(name);
+                    int player = ((PlayerInfos) mEditedName.getParent()).getPlayer();
+                    mGameData.setPlayerName(player, name);
+                    mEditedName.setText(name);
                 }
-                mHeaderFragment.updateNames();
                 break;
 
             case REQ_LAP_ACTIVITY:
@@ -272,6 +242,29 @@ public class ScoreItActivity extends AccentActivity
                 invalidateOptionsMenu();
                 break;
         }
+    }
+
+    public void addLap() {
+        Lap lap;
+        switch (mGameData.getGame()) {
+            default:
+            case GameData.BELOTE_CLASSIC:
+                lap = new ClassicBeloteLap();
+                break;
+            case GameData.BELOTE_COINCHE:
+                lap = new CoincheBeloteLap();
+                break;
+            case GameData.TAROT_3_PLAYERS:
+                lap = new ThreePlayerTarotLap();
+                break;
+            case GameData.TAROT_4_PLAYERS:
+                lap = new FourPlayerTarotLap();
+                break;
+            case GameData.TAROT_5_PLAYERS:
+                lap = new FivePlayerTarotLap();
+                break;
+        }
+        showLapActivity(lap, false);
     }
 
     public void editLap(Lap lap) {
@@ -290,9 +283,13 @@ public class ScoreItActivity extends AccentActivity
             return;
         }
 
-        mNameViewId = view.getId();
+        mEditedName = (TextView) view;
         Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         startActivityForResult(intent, REQ_PICK_CONTACT);
+    }
+
+    public void start(View view) {
+        addLap();
     }
 
     private void updateFragments() {
@@ -308,8 +305,10 @@ public class ScoreItActivity extends AccentActivity
         switch (mGameData.getGame()) {
             default:
             case GameData.BELOTE_CLASSIC:
-            case GameData.BELOTE_COINCHE:
                 intent = new Intent(this, BeloteLapActivity.class);
+                break;
+            case GameData.BELOTE_COINCHE:
+                intent = new Intent(this, CoincheLapActivity.class);
                 break;
             case GameData.TAROT_3_PLAYERS:
             case GameData.TAROT_4_PLAYERS:
@@ -322,15 +321,11 @@ public class ScoreItActivity extends AccentActivity
         intent.putExtra(EXTRA_EDIT, edit);
 
         startActivityForResult(intent, REQ_LAP_ACTIVITY);
-        if (!mIsTablet)
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        if (null != mScoreListFragment) mScoreListFragment.getListView().closeOpenedItems();
     }
 
     private void switchScoreViews() {
         if (null != mGraphFragment && mGraphFragment.isVisible()) {
             getFragmentManager().popBackStack();
-            mHeaderFragment.setColoredPoints(false);
             return;
         }
 
@@ -347,30 +342,23 @@ public class ScoreItActivity extends AccentActivity
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, mGraphFragment, GraphFragment.TAG)
                 .commit();
-        mHeaderFragment.setColoredPoints(true);
     }
 
     private void setTitle() {
         switch (mGameData.getGame()) {
             default:
             case GameData.BELOTE_CLASSIC:
-                mTitle = getResources().getString(R.string.belote);
+                mTitle = new SpannableString(getResources().getString(R.string.belote));
                 break;
             case GameData.BELOTE_COINCHE:
-                mTitle = getResources().getString(R.string.coinche);
+                mTitle = new SpannableString(getResources().getString(R.string.coinche));
                 break;
             case GameData.TAROT_3_PLAYERS:
             case GameData.TAROT_4_PLAYERS:
             case GameData.TAROT_5_PLAYERS:
-                mTitle = getResources().getString(R.string.tarot);
+                mTitle = new SpannableString(getResources().getString(R.string.tarot));
                 break;
         }
-    }
-
-    @Override
-    public void onBackStackChanged() {
-        if (mIsTablet) return;
-        if (null != mScoreListFragment && mScoreListFragment.isVisible())
-            mHeaderFragment.setColoredPoints(false);
+        mTitle.setSpan(mTypefaceSpan, 0, mTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 }

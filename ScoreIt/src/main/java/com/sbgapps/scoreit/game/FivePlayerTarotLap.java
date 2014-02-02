@@ -73,14 +73,7 @@ public class FivePlayerTarotLap extends TarotLap {
 
     @Override
     public ContentValues getValues() {
-        ContentValues values = new ContentValues();
-        values.put(GameSQLiteHelper.TAROT_COLUMN_TAKER, mTaker);
-        values.put(GameSQLiteHelper.TAROT_COLUMN_DEAL, mDeal);
-        values.put(GameSQLiteHelper.TAROT_COLUMN_POINTS, mPoints);
-        values.put(GameSQLiteHelper.TAROT_COLUMN_OUDLER, mOudlers);
-        values.put(GameSQLiteHelper.TAROT_COLUMN_SCORE_1, mScore[Lap.PLAYER_1]);
-        values.put(GameSQLiteHelper.TAROT_COLUMN_SCORE_2, mScore[Lap.PLAYER_2]);
-        values.put(GameSQLiteHelper.TAROT_COLUMN_SCORE_3, mScore[Lap.PLAYER_3]);
+        ContentValues values = super.getValues();
         values.put(GameSQLiteHelper.TAROT_COLUMN_SCORE_4, mScore[Lap.PLAYER_4]);
         values.put(GameSQLiteHelper.TAROT_COLUMN_SCORE_5, mScore[Lap.PLAYER_5]);
         values.put(GameSQLiteHelper.TAROT_COLUMN_PARTNER, mPartner);

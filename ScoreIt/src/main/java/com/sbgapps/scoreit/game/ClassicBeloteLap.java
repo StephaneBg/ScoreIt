@@ -40,10 +40,4 @@ public class ClassicBeloteLap extends BeloteLap {
         mScorePlayer1 += (PLAYER_1 == mBelote) ? 20 : 0;
         mScorePlayer2 += (PLAYER_2 == mBelote) ? 20 : 0;
     }
-
-    private int getCounterPoints(int points) {
-        return (0 == points) ? 160 :
-                (250 == points) ? 0 :
-                        160 - points;
-    }
 }

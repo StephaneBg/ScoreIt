@@ -34,26 +34,16 @@
             android:orientation="vertical">
 
             <FrameLayout
-                android:id="@+id/frameLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/fragment_header"
-                android:layout_alignParentTop="true"
-                android:alpha="0.85"
-                android:background="@color/lighter_gray"/>
-
-            <fragment
                 android:id="@+id/fragment_header"
-                android:name="com.sbgapps.scoreit.HeaderFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_header"/>
+                android:background="@drawable/scoreit_background_transparent_gray"/>
 
             <FrameLayout
                 android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/frameLayout"
+                android:layout_below="@+id/fragment_header"
                 android:background="@color/white"/>
 
         </RelativeLayout>

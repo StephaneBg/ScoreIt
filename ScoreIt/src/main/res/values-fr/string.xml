@@ -19,8 +19,8 @@
 
 <resources>
 
+    <string name="coinche">Coinche</string>
     <string name="classic">Classique</string>
-    <string name="tarot">Tarot</string>
     <string name="three_players">Trois joueurs</string>
     <string name="four_players">Quatre joueurs</string>
     <string name="five_players">Cinq joueurs</string>
@@ -46,7 +46,6 @@
     <string name="fool">Excuse</string>
     <string name="petit">Petit</string>
     <string name="twentyone">Vingt et un</string>
-    <string name="enter_name">Entrer le nom</string>
     <string name="inside">Dedans</string>
     <string name="capot">Capot</string>
     <string name="take">Prise</string>

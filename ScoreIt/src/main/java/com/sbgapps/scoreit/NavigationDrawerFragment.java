@@ -28,6 +28,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,6 +41,7 @@ import android.widget.ListView;
 
 import com.sbgapps.scoreit.adapter.DrawerArrayAdapter;
 import com.sbgapps.scoreit.game.GameData;
+import com.sbgapps.scoreit.util.TypefaceSpan;
 import com.sbgapps.scoreit.view.DrawerEntry;
 import com.sbgapps.scoreit.view.DrawerHeader;
 import com.sbgapps.scoreit.view.DrawerItem;
@@ -152,12 +155,6 @@ public class NavigationDrawerFragment extends Fragment {
                 }
                 getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
-
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                super.onDrawerSlide(drawerView, slideOffset);
-                mListener.onNavigationDrawerMove(slideOffset);
-            }
         };
 
         if (!mUserLearnedDrawer) mDrawerLayout.openDrawer(mFragmentContainerView);
@@ -208,7 +205,11 @@ public class NavigationDrawerFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (mDrawerLayout != null && isDrawerOpen()) {
             menu.clear();
-            getActionBar().setTitle(R.string.app_name);
+            SpannableString title = new SpannableString(getActivity()
+                    .getResources().getString(R.string.app_name));
+            TypefaceSpan ts = ((ScoreItActivity) getActivity()).getTypefaceSpan();
+            title.setSpan(ts, 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            getActionBar().setTitle(title);
         }
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -233,7 +234,5 @@ public class NavigationDrawerFragment extends Fragment {
 
     public static interface NavigationDrawerListener {
         void onNavigationDrawerGameSelected(int game);
-
-        void onNavigationDrawerMove(float offset);
     }
 }

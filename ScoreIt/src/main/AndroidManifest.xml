@@ -42,6 +42,9 @@
             android:name=".BeloteLapActivity"
             android:theme="@style/Theme.Lap"/>
         <activity
+            android:name=".CoincheLapActivity"
+            android:theme="@style/Theme.Lap"/>
+        <activity
             android:name=".TarotLapActivity"
             android:theme="@style/Theme.Lap"/>
     </application>
