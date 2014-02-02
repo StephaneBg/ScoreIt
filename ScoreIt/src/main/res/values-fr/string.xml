@@ -19,8 +19,15 @@
 
 <resources>
 
+    <string name="app_name">Score It</string>
+    <string name="score">Score</string>
+    <string name="graph">Graph</string>
+    <string name="belote">Belote</string>
     <string name="coinche">Coinche</string>
+    <string name="surcoinche">Sur-coinche</string>
     <string name="classic">Classique</string>
+    <string name="tarot">Tarot</string>
+    <string name="universal">Universel</string>
     <string name="three_players">Trois joueurs</string>
     <string name="four_players">Quatre joueurs</string>
     <string name="five_players">Cinq joueurs</string>
@@ -41,6 +48,7 @@
     <string name="done">Confirmer</string>
     <string name="delete">Effacer</string>
     <string name="edit">Editer</string>
+    <string name="points">Points</string>
     <string name="deal">Contrat</string>
     <string name="oudlers">Bouts</string>
     <string name="fool">Excuse</string>
@@ -59,5 +67,7 @@
     <string name="undo">Annuler</string>
     <string name="about">A propos</string>
     <string name="donate">Remercier</string>
+    <string name="navigation_drawer_open">Ouvre la navigation</string>
+    <string name="navigation_drawer_close">Ferme la navigation</string>
 
 </resources>
