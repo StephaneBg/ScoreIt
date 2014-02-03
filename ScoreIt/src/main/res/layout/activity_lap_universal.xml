@@ -23,34 +23,28 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fillViewport="true"
+        android:scrollbars="none">
 
-        <ScrollView
-            android:id="@+id/scrollview"
+        <LinearLayout
+            android:id="@+id/linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none">
+            android:orientation="vertical">
 
-
-            <LinearLayout
+            <include
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/default_margin"
                 android:layout_marginLeft="@dimen/default_margin"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                layout="@layout/include_universal_player"
+                android:layout_gravity="center_horizontal"/>
 
-
-            </LinearLayout>
-        </ScrollView>
-
-        <ViewStub
-            android:id="@+id/viewstub_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout="@layout/include_cancel_done"/>
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

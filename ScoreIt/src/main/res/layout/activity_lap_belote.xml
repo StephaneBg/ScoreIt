@@ -35,22 +35,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
             android:orientation="vertical">
 
             <TextView
                 style="?android:listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/default_margin"
                 android:text="@string/team"/>
 
             <RadioGroup
                 android:id="@+id/radio_group_team"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/default_double_margin"
                 android:orientation="vertical"
+                android:layout_marginLeft="@dimen/default_double_margin"
+                android:layout_marginRight="@dimen/default_double_margin"
                 android:layout_marginTop="@dimen/default_margin">
 
                 <RadioButton
@@ -71,9 +72,13 @@
                 style="?android:listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/default_margin"
                 android:text="@string/points"/>
 
             <com.sbgapps.scoreit.widget.InputPoints
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/default_margin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -81,13 +86,17 @@
                 style="?android:listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/default_margin"
                 android:text="@string/belote"/>
 
             <RadioGroup
                 android:id="@+id/radio_group_belote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginLeft="@dimen/default_double_margin"
+                android:layout_marginRight="@dimen/default_double_margin"
                 android:layout_marginTop="@dimen/default_margin">
 
                 <RadioButton

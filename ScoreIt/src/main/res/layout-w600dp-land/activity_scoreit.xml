@@ -53,7 +53,7 @@
                     android:layout_marginRight="@dimen/default_half_margin"
                     android:layout_marginTop="@dimen/default_margin"
                     android:layout_weight="1"
-                    android:background="@drawable/scoreit_background_card"
+                    android:background="@drawable/background_card"
                     android:orientation="vertical">
 
                     <FrameLayout
@@ -81,7 +81,7 @@
                     android:layout_marginRight="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin"
                     android:layout_weight="1"
-                    android:background="@drawable/scoreit_background_card"/>
+                    android:background="@drawable/background_card"/>
             </LinearLayout>
         </FrameLayout>
 

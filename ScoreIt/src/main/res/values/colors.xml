@@ -27,7 +27,7 @@
     <color name="darker_gray">#FF7D7D7D</color>
     <color name="transparent_gray">#D9E2E5EA</color>
     <color name="accent_color">#FFF97026</color>
-    <color name="select_accent_color">#66F97026</color>
+    <color name="translucent_accent_color">#66F97026</color>
     <color name="transparent_accent_color">#D9F97026</color>
     <color name="color_player1">#FF60B62F</color>
     <color name="color_player2">#FFFEAF39</color>

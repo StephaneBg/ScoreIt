@@ -19,31 +19,23 @@
 
 <resources>
 
-    <style name="Theme.Scoreit" parent="android:Theme.Holo.Light">
-        <item name="android:windowBackground">@drawable/scoreit_background_app</item>
+    <style name="Theme.Scoreit" parent="Theme.HoloAccent.Light">
+        <item name="accentColor">@color/accent_color</item>
+        <item name="accentColorTranslucent">@color/translucent_accent_color</item>
+        <item name="android:windowBackground">@drawable/background_app</item>
         <item name="android:actionBarStyle">@style/ActionBar.Scoreit</item>
         <item name="android:actionMenuTextColor">@color/white</item>
-        <item name="android:listChoiceIndicatorMultiple">@drawable/scoreit_btn_check_holo_light
-        </item>
-        <item name="android:listChoiceIndicatorSingle">@drawable/scoreit_btn_radio_holo_light</item>
-        <item name="android:dropDownSpinnerStyle">@style/SpinnerScoreit</item>
-        <item name="android:seekBarStyle">@style/SeekBarScoreit</item>
-        <item name="android:actionBarItemBackground">@drawable/scoreit_list_selector_holo_light
-        </item>
     </style>
 
-    <style name="Theme.Lap" parent="android:Theme.Holo.Light.Dialog">
+    <style name="Theme.Lap" parent="Theme.HoloAccent.Light.Dialog">
+        <item name="accentColor">@color/accent_color</item>
+        <item name="accentColorTranslucent">@color/translucent_accent_color</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:listChoiceIndicatorMultiple">@drawable/scoreit_btn_check_holo_light
-        </item>
-        <item name="android:listChoiceIndicatorSingle">@drawable/scoreit_btn_radio_holo_light</item>
-        <item name="android:dropDownSpinnerStyle">@style/SpinnerScoreit</item>
-        <item name="android:seekBarStyle">@style/SeekBarScoreit</item>
     </style>
 
     <style name="ActionBar.Scoreit" parent="android:Widget.Holo.ActionBar">
         <item name="android:titleTextStyle">@style/TitleTextStyle</item>
-        <item name="android:background">@drawable/scoreit_background_accent</item>
+        <item name="android:background">@color/transparent_accent_color</item>
     </style>
 
     <style name="TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
@@ -57,18 +49,16 @@
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="SpinnerScoreit" parent="android:Widget.Holo.Light.Spinner">
-        <item name="android:background">@drawable/scoreit_spinner_background_holo_light</item>
-        <item name="android:dropDownSelector">@drawable/scoreit_list_selector_holo_light</item>
-    </style>
-
-    <style name="SeekBarScoreit" parent="android:Widget.Holo.Light.SeekBar">
-        <item name="android:progressDrawable">
-            @drawable/scoreit_scrubber_progress_horizontal_holo_light
-        </item>
-        <item name="android:indeterminateDrawable">
-            @drawable/scoreit_scrubber_progress_horizontal_holo_light
-        </item>
-        <item name="android:thumb">@drawable/scoreit_scrubber_control_selector_holo_light</item>
+    <style name="NumberPicker">
+        <item name="bpDialogBackground">@drawable/dialog_full_holo_light</item>
+        <item name="bpTitleColor">@color/darker_gray</item>
+        <item name="bpTextColor">@color/darker_gray</item>
+        <item name="bpDeleteIcon">@drawable/ic_backspace_light</item>
+        <item name="bpCheckIcon">@drawable/ic_check_light</item>
+        <!--<item name="bpKeyBackground">@drawable/key_background_light</item>-->
+        <!--<item name="bpButtonBackground">@drawable/button_background_light</item>-->
+        <item name="bpTitleDividerColor">@color/translucent_accent_color</item>
+        <item name="bpDividerColor">@color/darker_gray</item>
+        <item name="bpKeyboardIndicatorColor">@color/translucent_accent_color</item>
     </style>
 </resources>

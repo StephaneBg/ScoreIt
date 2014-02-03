@@ -18,13 +18,13 @@
 
 package com.sbgapps.scoreit;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.negusoft.holoaccent.activity.AccentActivity;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -33,7 +33,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by sbaiget on 08/01/14.
  */
-public class BaseActivity extends Activity {
+public class BaseActivity extends AccentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,9 @@ public class BaseActivity extends Activity {
             win.setAttributes(winParams);
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintResource(R.drawable.scoreit_background_accent);
+            tintManager.setStatusBarTintResource(R.color.transparent_accent_color);
             tintManager.setNavigationBarTintEnabled(true);
-            tintManager.setNavigationBarTintResource(R.drawable.scoreit_background_black);
+            tintManager.setNavigationBarTintResource(R.color.transparent_black);
         }
     }
 }

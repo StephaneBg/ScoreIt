@@ -7,7 +7,7 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 3
+        versionCode 4
         versionName "1.1"
     }
 
@@ -38,11 +38,10 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:19.0.1'
     compile 'com.android.support:appcompat-v7:19.0.+'
+    compile 'com.negusoft.holoaccent:library:0.9.1'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.+'
     compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.+'
-    //compile 'eu.inmite.android.lib:android-styled-dialogs:1.1.2@aar'
-    //compile 'com.doomonafireball.betterpickers:library:1.5.2'
-    //compile 'com.etsy.android.grid:library:1.0.+'
     compile project(':HoloGraphLibrary')
     compile project(':SwipeListview')
+    compile project(':NumberPicker')
 }

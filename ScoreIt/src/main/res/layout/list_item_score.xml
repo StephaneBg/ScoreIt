@@ -36,7 +36,6 @@
             android:layout_width="0dp"
             android:src="@drawable/ic_content_discard"
             android:layout_height="match_parent"
-            android:background="@drawable/scoreit_list_selector_score_action"
             android:text="@string/cancel"
             android:layout_weight="1"/>
 
@@ -46,7 +45,6 @@
             android:layout_width="0dp"
             android:src="@drawable/ic_content_edit"
             android:layout_height="match_parent"
-            android:background="@drawable/scoreit_list_selector_score_action"
             android:text="@string/done"
             android:layout_weight="1"/>
     </LinearLayout>

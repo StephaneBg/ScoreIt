@@ -304,6 +304,9 @@ public class ScoreItActivity extends BaseActivity
         Intent intent;
         switch (mGameData.getGame()) {
             default:
+            case GameData.UNIVERSAL:
+                intent = new Intent(this, UniversalLapActivity.class);
+                break;
             case GameData.BELOTE_CLASSIC:
                 intent = new Intent(this, BeloteLapActivity.class);
                 break;
@@ -347,6 +350,9 @@ public class ScoreItActivity extends BaseActivity
     private void setTitle() {
         switch (mGameData.getGame()) {
             default:
+            case GameData.UNIVERSAL:
+                mTitle = new SpannableString(getResources().getString(R.string.universal));
+                break;
             case GameData.BELOTE_CLASSIC:
                 mTitle = new SpannableString(getResources().getString(R.string.belote));
                 break;

@@ -55,7 +55,7 @@ import java.util.List;
 public class NavigationDrawerFragment extends Fragment {
 
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
-    private static final int[] GAME_TO_POSITION = new int[]{1, 2, 4, 5, 6};
+    private static final int[] GAME_TO_POSITION = new int[]{2, 3, 5, 6, 7, 0};
     private NavigationDrawerListener mListener;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -74,7 +74,8 @@ public class NavigationDrawerFragment extends Fragment {
                 .getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
         final Context context = getActivity();
-        final List<DrawerItem> items = new ArrayList<DrawerItem>(7);
+        final List<DrawerItem> items = new ArrayList<DrawerItem>(8);
+        items.add(new DrawerEntry(R.string.universal, GameData.UNIVERSAL));
         items.add(new DrawerHeader(R.string.belote));
         items.add(new DrawerEntry(R.string.classic, GameData.BELOTE_CLASSIC));
         items.add(new DrawerEntry(R.string.coinche, GameData.BELOTE_COINCHE));

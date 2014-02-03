@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/default_margin"
+        android:paddingRight="@dimen/default_margin">
+
+        <ImageButton
+            android:id="@+id/btn_less"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/less"
+            android:src="@drawable/ic_minus"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="@dimen/default_list_item_height"
+            android:id="@+id/edit_points"
+            android:layout_weight="1"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:gravity="center"
+            android:background="@drawable/scoreit_textfield_activated_holo_light"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:id="@+id/btn_more"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/more"
+            android:src="@drawable/ic_plus"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -37,7 +37,7 @@
                 android:id="@+id/fragment_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/scoreit_background_transparent_gray"/>
+                android:background="@drawable/background_transparent_gray"/>
 
             <FrameLayout
                 android:id="@+id/fragment_container"
