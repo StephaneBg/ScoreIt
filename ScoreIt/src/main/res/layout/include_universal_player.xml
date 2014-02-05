@@ -7,6 +7,7 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/player_name"
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -28,7 +29,7 @@
             android:src="@drawable/ic_minus"
             android:layout_weight="1"/>
 
-        <TextView
+        <EditText
             android:layout_width="0dip"
             android:layout_height="@dimen/default_list_item_height"
             android:id="@+id/edit_points"
@@ -36,8 +37,8 @@
             android:text="0"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:gravity="center"
-            android:background="@drawable/scoreit_textfield_activated_holo_light"
-            android:clickable="true"/>
+            android:inputType="none"
+            android:cursorVisible="false"/>
 
         <ImageButton
             android:id="@+id/btn_more"

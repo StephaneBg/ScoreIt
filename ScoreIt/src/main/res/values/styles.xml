@@ -48,17 +48,4 @@
         <item name="android:textColor">@color/darker_gray</item>
         <item name="android:textSize">18sp</item>
     </style>
-
-    <style name="NumberPicker">
-        <item name="bpDialogBackground">@drawable/dialog_full_holo_light</item>
-        <item name="bpTitleColor">@color/darker_gray</item>
-        <item name="bpTextColor">@color/darker_gray</item>
-        <item name="bpDeleteIcon">@drawable/ic_backspace_light</item>
-        <item name="bpCheckIcon">@drawable/ic_check_light</item>
-        <!--<item name="bpKeyBackground">@drawable/key_background_light</item>-->
-        <!--<item name="bpButtonBackground">@drawable/button_background_light</item>-->
-        <item name="bpTitleDividerColor">@color/translucent_accent_color</item>
-        <item name="bpDividerColor">@color/darker_gray</item>
-        <item name="bpKeyboardIndicatorColor">@color/translucent_accent_color</item>
-    </style>
 </resources>

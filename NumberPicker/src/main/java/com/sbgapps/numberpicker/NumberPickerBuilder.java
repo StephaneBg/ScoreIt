@@ -13,7 +13,6 @@ import java.util.Vector;
 public class NumberPickerBuilder {
 
     private FragmentManager manager; // Required
-    private Integer styleResId; // Required
     private Fragment targetFragment;
     private Integer minNumber;
     private Integer maxNumber;
@@ -31,18 +30,6 @@ public class NumberPickerBuilder {
      */
     public NumberPickerBuilder setFragmentManager(FragmentManager manager) {
         this.manager = manager;
-        return this;
-    }
-
-    /**
-     * Attach a style resource ID for theming. This is required for creation of the Fragment. Two stock styles are
-     * provided using R.style.BetterPickersDialogFragment and R.style.BetterPickersDialogFragment.Light
-     *
-     * @param styleResId the style resource ID to use for theming
-     * @return the current Builder object
-     */
-    public NumberPickerBuilder setStyleResId(int styleResId) {
-        this.styleResId = styleResId;
         return this;
     }
 
@@ -159,8 +146,8 @@ public class NumberPickerBuilder {
      * Instantiate and show the Picker
      */
     public void show() {
-        if (manager == null || styleResId == null) {
-            Log.e("NumberPickerBuilder", "setFragmentManager() and setStyleResId() must be called.");
+        if (manager == null) {
+            Log.e("NumberPickerBuilder", "setFragmentManager() must be called.");
             return;
         }
         final FragmentTransaction ft = manager.beginTransaction();
@@ -171,7 +158,7 @@ public class NumberPickerBuilder {
         ft.addToBackStack(null);
 
         final NumberPickerDialogFragment fragment = NumberPickerDialogFragment
-                .newInstance(mReference, styleResId, minNumber, maxNumber, plusMinusVisibility, decimalVisibility,
+                .newInstance(mReference, minNumber, maxNumber, plusMinusVisibility, decimalVisibility,
                         labelText);
         if (targetFragment != null) {
             fragment.setTargetFragment(targetFragment, 0);

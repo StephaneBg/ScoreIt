@@ -53,15 +53,6 @@
                     android:layout_width="wrap_content"/>
 
                 <com.sbgapps.numberpicker.widget.ZeroTopPaddingTextView
-                    android:id="@+id/label"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:singleLine="true"
-                    android:ellipsize="none"
-                    style="@style/label"
-                    android:gravity="top"/>
-
-                <com.sbgapps.numberpicker.widget.ZeroTopPaddingTextView
                     android:id="@+id/minus_label"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
@@ -74,13 +65,13 @@
         </com.sbgapps.numberpicker.widget.AutoScrollHorizontalScrollView>
 
         <ImageButton
+            style="?android:borderlessButtonStyle"
             android:id="@+id/delete"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center"
-            android:src="@drawable/ic_backspace_dark"
-            android:background="@drawable/key_background_dark"
+            android:src="@drawable/ic_backspace_light"
             android:contentDescription="@string/number_delete"
             android:layout_height="match_parent"/>
     </LinearLayout>
@@ -89,14 +80,18 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:layout_below="@id/number_view_container"
-        android:background="@color/default_divider_color_dark"/>
+        android:background="?android:listDivider"
+        android:layout_below="@+id/number_view_container"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/divider"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@+id/divider"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <include
             layout="@layout/three_keys_view"
@@ -122,9 +117,11 @@
         android:paddingRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/divider"
         android:gravity="center_horizontal"
         android:background="#ffff4444"
         android:textColor="#ffffffff"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_below="@+id/divider"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 </RelativeLayout>

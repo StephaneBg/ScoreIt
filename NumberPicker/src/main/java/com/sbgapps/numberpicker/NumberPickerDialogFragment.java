@@ -1,14 +1,14 @@
 package com.sbgapps.numberpicker;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.content.res.ColorStateList;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 
 import java.util.Vector;
@@ -19,24 +19,15 @@ import java.util.Vector;
 public class NumberPickerDialogFragment extends DialogFragment {
 
     private static final String REFERENCE_KEY = "NumberPickerDialogFragment_ReferenceKey";
-    private static final String THEME_RES_ID_KEY = "NumberPickerDialogFragment_ThemeResIdKey";
     private static final String MIN_NUMBER_KEY = "NumberPickerDialogFragment_MinNumberKey";
     private static final String MAX_NUMBER_KEY = "NumberPickerDialogFragment_MaxNumberKey";
     private static final String PLUS_MINUS_VISIBILITY_KEY = "NumberPickerDialogFragment_PlusMinusVisibilityKey";
     private static final String DECIMAL_VISIBILITY_KEY = "NumberPickerDialogFragment_DecimalVisibilityKey";
-    private static final String LABEL_TEXT_KEY = "NumberPickerDialogFragment_LabelTextKey";
 
     private Button mSet, mCancel;
     private NumberPicker mPicker;
 
-    private View mDividerOne, mDividerTwo;
     private int mReference = -1;
-    private int mTheme = -1;
-    private int mDividerColor;
-    private ColorStateList mTextColor;
-    private String mLabelText = "";
-    private int mButtonBackgroundResId;
-    private int mDialogBackgroundResId;
 
     private Integer mMinNumber = null;
     private Integer mMaxNumber = null;
@@ -48,7 +39,6 @@ public class NumberPickerDialogFragment extends DialogFragment {
      * Create an instance of the Picker (used internally)
      *
      * @param reference           an (optional) user-defined reference, helpful when tracking multiple Pickers
-     * @param themeResId          the style resource ID for theming
      * @param minNumber           (optional) the minimum possible number
      * @param maxNumber           (optional) the maximum possible number
      * @param plusMinusVisibility (optional) View.VISIBLE, View.INVISIBLE, or View.GONE
@@ -56,12 +46,11 @@ public class NumberPickerDialogFragment extends DialogFragment {
      * @param labelText           (optional) text to add as a label
      * @return a Picker!
      */
-    public static NumberPickerDialogFragment newInstance(int reference, int themeResId, Integer minNumber,
+    public static NumberPickerDialogFragment newInstance(int reference, Integer minNumber,
                                                          Integer maxNumber, Integer plusMinusVisibility, Integer decimalVisibility, String labelText) {
         final NumberPickerDialogFragment frag = new NumberPickerDialogFragment();
         Bundle args = new Bundle();
         args.putInt(REFERENCE_KEY, reference);
-        args.putInt(THEME_RES_ID_KEY, themeResId);
         if (minNumber != null) {
             args.putInt(MIN_NUMBER_KEY, minNumber);
         }
@@ -73,9 +62,6 @@ public class NumberPickerDialogFragment extends DialogFragment {
         }
         if (decimalVisibility != null) {
             args.putInt(DECIMAL_VISIBILITY_KEY, decimalVisibility);
-        }
-        if (labelText != null) {
-            args.putString(LABEL_TEXT_KEY, labelText);
         }
         frag.setArguments(args);
         return frag;
@@ -94,9 +80,6 @@ public class NumberPickerDialogFragment extends DialogFragment {
         if (args != null && args.containsKey(REFERENCE_KEY)) {
             mReference = args.getInt(REFERENCE_KEY);
         }
-        if (args != null && args.containsKey(THEME_RES_ID_KEY)) {
-            mTheme = args.getInt(THEME_RES_ID_KEY);
-        }
         if (args != null && args.containsKey(PLUS_MINUS_VISIBILITY_KEY)) {
             mPlusMinusVisibility = args.getInt(PLUS_MINUS_VISIBILITY_KEY);
         }
@@ -108,29 +91,6 @@ public class NumberPickerDialogFragment extends DialogFragment {
         }
         if (args != null && args.containsKey(MAX_NUMBER_KEY)) {
             mMaxNumber = args.getInt(MAX_NUMBER_KEY);
-        }
-        if (args != null && args.containsKey(LABEL_TEXT_KEY)) {
-            mLabelText = args.getString(LABEL_TEXT_KEY);
-        }
-
-        setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-
-        // Init defaults
-        mTextColor = getResources().getColorStateList(R.color.dialog_text_color_holo_dark);
-        mButtonBackgroundResId = R.drawable.button_background_dark;
-        mDividerColor = getResources().getColor(R.color.default_divider_color_dark);
-        mDialogBackgroundResId = R.drawable.dialog_full_holo_dark;
-
-        if (mTheme != -1) {
-            TypedArray a = getActivity().getApplicationContext()
-                    .obtainStyledAttributes(mTheme, R.styleable.BetterPickersDialogFragment);
-
-            mTextColor = a.getColorStateList(R.styleable.BetterPickersDialogFragment_bpTextColor);
-            mButtonBackgroundResId = a.getResourceId(R.styleable.BetterPickersDialogFragment_bpButtonBackground,
-                    mButtonBackgroundResId);
-            mDividerColor = a.getColor(R.styleable.BetterPickersDialogFragment_bpDividerColor, mDividerColor);
-            mDialogBackgroundResId = a
-                    .getResourceId(R.styleable.BetterPickersDialogFragment_bpDialogBackground, mDialogBackgroundResId);
         }
     }
 
@@ -189,20 +149,8 @@ public class NumberPickerDialogFragment extends DialogFragment {
             }
         });
 
-        mDividerOne = v.findViewById(R.id.divider_1);
-        mDividerTwo = v.findViewById(R.id.divider_2);
-        mDividerOne.setBackgroundColor(mDividerColor);
-        mDividerTwo.setBackgroundColor(mDividerColor);
-        mSet.setTextColor(mTextColor);
-        mSet.setBackgroundResource(mButtonBackgroundResId);
-        mCancel.setTextColor(mTextColor);
-        mCancel.setBackgroundResource(mButtonBackgroundResId);
-        mPicker.setTheme(mTheme);
-        getDialog().getWindow().setBackgroundDrawableResource(mDialogBackgroundResId);
-
         mPicker.setDecimalVisibility(mDecimalVisibility);
         mPicker.setPlusMinusVisibility(mPlusMinusVisibility);
-        mPicker.setLabelText(mLabelText);
         if (mMinNumber != null) {
             mPicker.setMin(mMinNumber);
         }
@@ -211,6 +159,13 @@ public class NumberPickerDialogFragment extends DialogFragment {
         }
 
         return v;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
     }
 
     /**
