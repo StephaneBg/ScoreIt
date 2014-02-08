@@ -14,7 +14,8 @@
         android:clickable="true"
         android:fontFamily="fonts/Roboto-Bold.ttf"
         android:onClick="editName"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@drawable/background_names"/>
 
     <TextView
         android:id="@+id/score"

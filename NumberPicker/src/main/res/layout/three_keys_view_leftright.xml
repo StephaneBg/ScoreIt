@@ -12,7 +12,7 @@
         android:layout_weight="1"
         android:textSize="@dimen/dialpad_font_size"
         style="?android:borderlessButtonStyle"
-        android:fontFamily="AndroidClockMono-Thin.ttf"
+        android:fontFamily="Roboto-Thin.ttf"
         android:layout_height="match_parent"/>
 
     <Button
@@ -21,7 +21,7 @@
         android:layout_weight="1"
         android:textSize="@dimen/dialpad_font_size"
         style="?android:borderlessButtonStyle"
-        android:fontFamily="AndroidClockMono-Thin.ttf"
+        android:fontFamily="Roboto-Thin.ttf"
         android:layout_height="match_parent"/>
 
     <Button
@@ -30,6 +30,6 @@
         android:layout_width="0dip"
         android:textSize="@dimen/dialpad_font_size"
         style="?android:borderlessButtonStyle"
-        android:fontFamily="AndroidClockMono-Thin.ttf"
+        android:fontFamily="Roboto-Thin.ttf"
         android:layout_height="match_parent"/>
 </LinearLayout>

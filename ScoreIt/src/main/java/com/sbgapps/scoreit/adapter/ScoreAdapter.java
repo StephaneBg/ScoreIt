@@ -74,7 +74,8 @@ public class ScoreAdapter extends BaseAdapter {
 
             LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.score_view);
             for (int i = 0; i < cnt; i++) {
-                PlayerScore score = new PlayerScore(mActivity, i);
+                PlayerScore score = new PlayerScore(mActivity);
+                score.setPlayer(i);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);

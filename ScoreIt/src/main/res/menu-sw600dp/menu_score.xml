@@ -23,6 +23,11 @@
         android:showAsAction="always"
         android:title="@string/add"/>
     <item
+        android:id="@+id/menu_count"
+        android:showAsAction="always"
+        android:icon="@drawable/ic_action_settings"
+        android:title="@string/settings"/>
+    <item
         android:id="@+id/menu_clear"
         android:icon="@drawable/ic_action_clear"
         android:showAsAction="always"

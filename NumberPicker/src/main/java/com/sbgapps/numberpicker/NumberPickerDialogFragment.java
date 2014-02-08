@@ -43,11 +43,10 @@ public class NumberPickerDialogFragment extends DialogFragment {
      * @param maxNumber           (optional) the maximum possible number
      * @param plusMinusVisibility (optional) View.VISIBLE, View.INVISIBLE, or View.GONE
      * @param decimalVisibility   (optional) View.VISIBLE, View.INVISIBLE, or View.GONE
-     * @param labelText           (optional) text to add as a label
      * @return a Picker!
      */
     public static NumberPickerDialogFragment newInstance(int reference, Integer minNumber,
-                                                         Integer maxNumber, Integer plusMinusVisibility, Integer decimalVisibility, String labelText) {
+                                                         Integer maxNumber, Integer plusMinusVisibility, Integer decimalVisibility) {
         final NumberPickerDialogFragment frag = new NumberPickerDialogFragment();
         Bundle args = new Bundle();
         args.putInt(REFERENCE_KEY, reference);
@@ -151,13 +150,6 @@ public class NumberPickerDialogFragment extends DialogFragment {
 
         mPicker.setDecimalVisibility(mDecimalVisibility);
         mPicker.setPlusMinusVisibility(mPlusMinusVisibility);
-        if (mMinNumber != null) {
-            mPicker.setMin(mMinNumber);
-        }
-        if (mMaxNumber != null) {
-            mPicker.setMax(mMaxNumber);
-        }
-
         return v;
     }
 

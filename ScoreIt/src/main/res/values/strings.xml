@@ -48,7 +48,7 @@
     <string name="done">Done</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
-    <string name="points">Points</string>
+    <string name="progress">Points</string>
     <string name="deal">Deal</string>
     <string name="oudlers">Oudlers</string>
     <string name="fool">Fool</string>
@@ -63,11 +63,15 @@
     <string name="guard_without">Guard without</string>
     <string name="guard_against">Guard against</string>
     <string name="click_on">Click on</string>
-    <string name="to_start">to start</string>
+    <string name="to_add">to add</string>
     <string name="more">More</string>
     <string name="less">Less</string>
     <string name="undo">Undo</string>
     <string name="about">About</string>
     <string name="donate">Donate</string>
+    <string name="settings">Settings</string>
+    <string name="player_number">Number of players</string>
+    <string name="edit_name">Edit name</string>
+    <string name="enter_name">Enter name</string>
 
 </resources>

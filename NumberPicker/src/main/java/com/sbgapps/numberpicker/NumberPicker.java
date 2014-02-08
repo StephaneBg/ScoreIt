@@ -1,9 +1,7 @@
 package com.sbgapps.numberpicker;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -13,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.math.BigDecimal;
 
@@ -36,9 +33,6 @@ public class NumberPicker extends LinearLayout implements Button.OnClickListener
 
     private static final int SIGN_POSITIVE = 0;
     private static final int SIGN_NEGATIVE = 1;
-
-    private Integer mMinNumber = null;
-    private Integer mMaxNumber = null;
 
     /**
      * Instantiates a NumberPicker object
@@ -136,24 +130,6 @@ public class NumberPicker extends LinearLayout implements Button.OnClickListener
         if (mRight != null) {
             mRight.setVisibility(visiblity);
         }
-    }
-
-    /**
-     * Set a minimum required number
-     *
-     * @param min the minimum required number
-     */
-    public void setMin(int min) {
-        mMinNumber = min;
-    }
-
-    /**
-     * Set a maximum required number
-     *
-     * @param max the maximum required number
-     */
-    public void setMax(int max) {
-        mMaxNumber = max;
     }
 
     /**

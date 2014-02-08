@@ -40,13 +40,12 @@ public class ZeroTopPaddingTextView extends TextView {
     // pre-ICS (Droid Sans) has weird empty space on the bottom
     private static final float PRE_ICS_BOTTOM_PADDING_RATIO = 0.233f;
 
-    private static final Typeface SAN_SERIF_BOLD = Typeface.create("san-serif", Typeface.BOLD);
-    private static final Typeface SAN_SERIF_CONDENSED_BOLD = Typeface.create("sans-serif-condensed", Typeface.BOLD);
+    private static final Typeface SANS_SERIF_BOLD = Typeface.create("sans-serif", Typeface.BOLD);
+    private static final Typeface SANS_SERIF_CONDENSED_BOLD = Typeface.create("sans-serif-condensed", Typeface.BOLD);
 
     private int mPaddingRight = 0;
 
     private String decimalSeperator = "";
-    private String timeSeperator = "";
 
     public ZeroTopPaddingTextView(Context context) {
         this(context, null);
@@ -65,7 +64,6 @@ public class ZeroTopPaddingTextView extends TextView {
 
     private void init() {
         decimalSeperator = getResources().getString(R.string.number_picker_seperator);
-        timeSeperator = getResources().getString(R.string.time_picker_time_seperator);
     }
 
     public void updatePadding() {
@@ -75,18 +73,17 @@ public class ZeroTopPaddingTextView extends TextView {
             paddingRatio = BOLD_FONT_PADDING_RATIO;
             bottomPaddingRatio = BOLD_FONT_BOTTOM_PADDING_RATIO;
         }
-        if (getTypeface() != null && getTypeface().equals(SAN_SERIF_BOLD)) {
+        if (getTypeface() != null && getTypeface().equals(SANS_SERIF_BOLD)) {
             paddingRatio = BOLD_FONT_PADDING_RATIO;
             bottomPaddingRatio = BOLD_FONT_BOTTOM_PADDING_RATIO;
         }
-        if (getTypeface() != null && getTypeface().equals(SAN_SERIF_CONDENSED_BOLD)) {
+        if (getTypeface() != null && getTypeface().equals(SANS_SERIF_CONDENSED_BOLD)) {
             paddingRatio = BOLD_FONT_PADDING_RATIO;
             bottomPaddingRatio = BOLD_FONT_BOTTOM_PADDING_RATIO;
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH &&
                 getText() != null &&
-                (getText().toString().equals(decimalSeperator) ||
-                        getText().toString().equals(timeSeperator))) {
+                (getText().toString().equals(decimalSeperator))) {
             bottomPaddingRatio = PRE_ICS_BOTTOM_PADDING_RATIO;
         }
         // no need to scale by display density because getTextSize() already returns the font

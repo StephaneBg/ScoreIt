@@ -43,12 +43,15 @@
             android:theme="@style/Theme.Lap"/>
         <activity
             android:name=".BeloteLapActivity"
-            android:theme="@style/Theme.Lap"/>
+            android:theme="@style/Theme.Lap.NoTitle"/>
         <activity
             android:name=".CoincheLapActivity"
-            android:theme="@style/Theme.Lap"/>
+            android:theme="@style/Theme.Lap.NoTitle"/>
         <activity
             android:name=".TarotLapActivity"
+            android:theme="@style/Theme.Lap.NoTitle"/>
+        <activity
+            android:name=".EditNameActivity"
             android:theme="@style/Theme.Lap"/>
     </application>
 

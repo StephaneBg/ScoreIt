@@ -23,6 +23,11 @@
         android:icon="@drawable/ic_action_new"
         android:title="@string/add"/>
     <item
+        android:id="@+id/menu_count"
+        android:showAsAction="always"
+        android:icon="@drawable/ic_action_settings"
+        android:title="@string/settings"/>
+    <item
         android:id="@+id/menu_view"
         android:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_view"

@@ -14,22 +14,20 @@ import com.sbgapps.scoreit.R;
  */
 public class PlayerScore extends FrameLayout {
 
-    private final int mPlayer;
+    private int mPlayer;
     private final TextView mScore;
     private final ImageView mImage;
 
-    public PlayerScore(Context context, int player) {
-        this(context, null, player);
+    public PlayerScore(Context context) {
+        this(context, null);
     }
 
-    public PlayerScore(Context context, AttributeSet attrs, int player) {
-        this(context, attrs, 0, player);
+    public PlayerScore(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
     }
 
-    public PlayerScore(Context context, AttributeSet attrs, int defStyle, int player) {
+    public PlayerScore(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
-        mPlayer = player;
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -37,6 +35,10 @@ public class PlayerScore extends FrameLayout {
 
         mScore = (TextView) findViewById(R.id.score);
         mImage = (ImageView) findViewById(R.id.image);
+    }
+
+    public void setPlayer(int player) {
+        mPlayer = player;
     }
 
     public int getPlayer() {

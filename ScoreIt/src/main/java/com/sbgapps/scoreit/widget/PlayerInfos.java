@@ -13,22 +13,20 @@ import com.sbgapps.scoreit.R;
  */
 public class PlayerInfos extends FrameLayout {
 
-    private final int mPlayer;
     private final TextView mName;
     private final TextView mScore;
+    private int mPlayer;
 
-    public PlayerInfos(Context context, int player) {
-        this(context, null, player);
+    public PlayerInfos(Context context) {
+        this(context, null);
     }
 
-    public PlayerInfos(Context context, AttributeSet attrs, int player) {
-        this(context, attrs, 0, player);
+    public PlayerInfos(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
     }
 
-    public PlayerInfos(Context context, AttributeSet attrs, int defStyleAttr, int player) {
+    public PlayerInfos(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
-        mPlayer = player;
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -42,11 +40,23 @@ public class PlayerInfos extends FrameLayout {
         return mPlayer;
     }
 
-    public TextView getScore() {
-        return mScore;
+    public void setPlayer(int player) {
+        mPlayer = player;
     }
 
-    public TextView getName() {
-        return mName;
+    public void setName(String name) {
+        mName.setText(name);
+    }
+
+    public void setNameEditable(boolean editable) {
+        mName.setClickable(editable);
+    }
+
+    public void setScore(int score) {
+        mScore.setText(Integer.toString(score));
+    }
+
+    public void setScoreColor(int color) {
+        mScore.setTextColor(color);
     }
 }

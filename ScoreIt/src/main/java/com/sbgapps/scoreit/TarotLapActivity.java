@@ -24,15 +24,13 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.sbgapps.scoreit.game.FivePlayerTarotLap;
 import com.sbgapps.scoreit.game.GameData;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.game.TarotLap;
+import com.sbgapps.scoreit.widget.SeekbarInputPoints;
 
 /**
  * Created by sbaiget on 07/12/13.
@@ -56,10 +54,7 @@ public class TarotLapActivity extends LapActivity {
         HOLDER.petit = (CheckBox) findViewById(R.id.checkbox_petit);
         HOLDER.twenty_one = (CheckBox) findViewById(R.id.checkbox_twenty_one);
         HOLDER.fool = (CheckBox) findViewById(R.id.checkbox_fool);
-        HOLDER.tv_points = (TextView) findViewById(R.id.textview_points);
-        HOLDER.sb_points = (SeekBar) findViewById(R.id.seekbar_points);
-        HOLDER.btn_less = (ImageButton) findViewById(R.id.btn_less);
-        HOLDER.btn_more = (ImageButton) findViewById(R.id.btn_more);
+        HOLDER.input_points = (SeekbarInputPoints) findViewById(R.id.input_points);
 
         if (isTablet()) {
             findViewById(R.id.btn_cancel).setOnClickListener(this);
@@ -108,41 +103,7 @@ public class TarotLapActivity extends LapActivity {
         dealItemArrayAdapter.add(new DealItem(TarotLap.DEAL_AGAINST));
         HOLDER.deal.setAdapter(dealItemArrayAdapter);
 
-        HOLDER.sb_points.setMax(91);
-        HOLDER.sb_points.setProgress(41);
-        HOLDER.sb_points.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                HOLDER.tv_points.setText(Integer.toString(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        HOLDER.tv_points.setText("41");
-
-        HOLDER.btn_less.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int points = HOLDER.sb_points.getProgress();
-                HOLDER.sb_points.setProgress(points - 1);
-            }
-        });
-        HOLDER.btn_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int points = HOLDER.sb_points.getProgress();
-                HOLDER.sb_points.setProgress(points + 1);
-            }
-        });
+        HOLDER.input_points.setMax(91);
 
         if (isEdited()) {
             HOLDER.taker.setSelection(getLap().getTaker());
@@ -155,7 +116,9 @@ public class TarotLapActivity extends LapActivity {
                     == TarotLap.OUDLER_FOOL_MSK);
             HOLDER.twenty_one.setChecked((getLap().getOudlers() & TarotLap.OUDLER_21_MSK)
                     == TarotLap.OUDLER_21_MSK);
-            HOLDER.sb_points.setProgress(getLap().getPoints());
+            HOLDER.input_points.setPoints(getLap().getPoints());
+        } else {
+            HOLDER.input_points.setPoints(41);
         }
     }
 
@@ -164,12 +127,22 @@ public class TarotLapActivity extends LapActivity {
         TarotLap lap = getLap();
         lap.setTaker(((PlayerItem) HOLDER.taker.getSelectedItem()).getPlayer());
         lap.setDeal(((DealItem) HOLDER.deal.getSelectedItem()).getDeal());
-        lap.setPoints(HOLDER.sb_points.getProgress());
+        lap.setPoints(HOLDER.input_points.getPoints());
         lap.setOudlers(getOudlers());
         if (GameData.TAROT_5_PLAYERS == getGameData().getGame())
             ((FivePlayerTarotLap) lap).setPartner(
                     ((PlayerItem) HOLDER.partner.getSelectedItem()).getPlayer());
         lap.setScores();
+    }
+
+    @Override
+    public int progressToPoints(int progress) {
+        return progress;
+    }
+
+    @Override
+    public int pointsToProgress(int points) {
+        return points;
     }
 
     private int getOudlers() {
@@ -185,10 +158,7 @@ public class TarotLapActivity extends LapActivity {
         CheckBox petit;
         CheckBox twenty_one;
         CheckBox fool;
-        TextView tv_points;
-        SeekBar sb_points;
-        ImageButton btn_less;
-        ImageButton btn_more;
+        SeekbarInputPoints input_points;
     }
 
     class DealItem {

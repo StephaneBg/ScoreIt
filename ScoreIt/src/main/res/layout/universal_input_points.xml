@@ -4,7 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginRight="@dimen/default_margin"
+    android:layout_marginLeft="@dimen/default_margin">
 
     <TextView
         android:id="@+id/player_name"
@@ -29,16 +31,14 @@
             android:src="@drawable/ic_minus"
             android:layout_weight="1"/>
 
-        <EditText
+        <TextView
             android:layout_width="0dip"
             android:layout_height="@dimen/default_list_item_height"
             android:id="@+id/edit_points"
             android:layout_weight="1"
-            android:text="0"
+            android:background="@drawable/background_textfield"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:gravity="center"
-            android:inputType="none"
-            android:cursorVisible="false"/>
+            android:gravity="center"/>
 
         <ImageButton
             android:id="@+id/btn_more"

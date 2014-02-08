@@ -108,9 +108,13 @@ public abstract class LapActivity extends BaseActivity
         }
     }
 
-    abstract public void updateLap();
-
     public GameData getGameData() {
         return mGameData;
     }
+
+    abstract public void updateLap();
+
+    abstract public int progressToPoints(int progress);
+
+    abstract public int pointsToProgress(int points);
 }

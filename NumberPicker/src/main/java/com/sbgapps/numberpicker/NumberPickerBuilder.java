@@ -18,7 +18,6 @@ public class NumberPickerBuilder {
     private Integer maxNumber;
     private Integer plusMinusVisibility;
     private Integer decimalVisibility;
-    private String labelText;
     private int mReference;
     private Vector<NumberPickerDialogFragment.NumberPickerDialogHandler> mNumberPickerDialogHandlers = new Vector<NumberPickerDialogFragment.NumberPickerDialogHandler>();
 
@@ -106,19 +105,6 @@ public class NumberPickerBuilder {
     }
 
     /**
-     * Set the (optional) text shown as a label. This is useful if wanting to identify data with the number being
-     * selected.
-     *
-     * @param labelText the String text to be shown
-     * @return the current Builder object
-     */
-    public NumberPickerBuilder setLabelText(String labelText) {
-        this.labelText = labelText;
-        return this;
-    }
-
-
-    /**
      * Attach universal objects as additional handlers for notification when the Picker is set. For most use cases, this
      * method is not necessary as attachment to an Activity or Fragment is done automatically.  If, however, you would
      * like additional objects to subscribe to this Picker being set, attach Handlers here.
@@ -158,8 +144,7 @@ public class NumberPickerBuilder {
         ft.addToBackStack(null);
 
         final NumberPickerDialogFragment fragment = NumberPickerDialogFragment
-                .newInstance(mReference, minNumber, maxNumber, plusMinusVisibility, decimalVisibility,
-                        labelText);
+                .newInstance(mReference, minNumber, maxNumber, plusMinusVisibility, decimalVisibility);
         if (targetFragment != null) {
             fragment.setTargetFragment(targetFragment, 0);
         }

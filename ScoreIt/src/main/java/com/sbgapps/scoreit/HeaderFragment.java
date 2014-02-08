@@ -62,21 +62,22 @@ public class HeaderFragment extends Fragment {
         FractionFrameLayout ffl = new FractionFrameLayout(context);
         mParent = new LinearLayout(context);
 
-        for (int i = 0; i < getGameData().getPlayerCount(); i++) {
-            PlayerInfos player = new PlayerInfos(context, i);
+        for (int player = 0; player < getGameData().getPlayerCount(); player++) {
+            PlayerInfos pi = new PlayerInfos(context);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT);
             lp.weight = 1.0f;
-            player.setLayoutParams(lp);
-            player.getName().setText(getGameData().getPlayerName(i));
-            player.getScore().setText(Integer.toString(getAccumulatedScore(i)));
-            player.getScore().setTextColor(getGameData().getPlayerColor(i));
-//            if (getGameData().getGame() != GameData.BELOTE_CLASSIC
-//                    && getGameData().getGame() != GameData.BELOTE_COINCHE)
-//                player.getName().setBackgroundResource(R.drawable.scoreit_list_selector_action);
-            mParent.addView(player);
-            mPlayers.add(player);
+
+            pi.setPlayer(player);
+            pi.setLayoutParams(lp);
+            pi.setName(getGameData().getPlayerName(player));
+            pi.setScore(getAccumulatedScore(player));
+            pi.setScoreColor(getGameData().getPlayerColor(player));
+            pi.setNameEditable(getGameData().getGame() != GameData.BELOTE_CLASSIC
+                    && getGameData().getGame() != GameData.BELOTE_COINCHE);
+            mParent.addView(pi);
+            mPlayers.add(pi);
         }
 
         ffl.addView(mParent);
@@ -88,8 +89,8 @@ public class HeaderFragment extends Fragment {
     }
 
     public void updateScores() {
-        for (int i = 0; i < getGameData().getPlayerCount(); i++) {
-            mPlayers.get(i).getScore().setText(Integer.toString(getAccumulatedScore(i)));
+        for (int player = 0; player < getGameData().getPlayerCount(); player++) {
+            mPlayers.get(player).setScore(getAccumulatedScore(player));
         }
     }
 

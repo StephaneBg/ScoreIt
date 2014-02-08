@@ -30,6 +30,24 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID = "_id";
     public static final int COLUMN_IDX_ID = 0;
     /*
+     * Universal
+     */
+    public static final String UNIVERSAL_TABLE = "UNIVERSAL_TABLE";
+    public static final String UNIVERSAL_COLUMN_SCORE_1 = "score_player1";
+    public static final int UNIVERSAL_COLUMN_IDX_SCORE_1 = 1;
+    public static final String UNIVERSAL_COLUMN_SCORE_2 = "score_player2";
+    public static final int UNIVERSAL_COLUMN_IDX_SCORE_2 = 2;
+    public static final String UNIVERSAL_COLUMN_SCORE_3 = "score_player3";
+    public static final int UNIVERSAL_COLUMN_IDX_SCORE_3 = 3;
+    public static final String UNIVERSAL_COLUMN_SCORE_4 = "score_player4";
+    public static final int UNIVERSAL_COLUMN_IDX_SCORE_4 = 4;
+    public static final String UNIVERSAL_COLUMN_SCORE_5 = "score_player5";
+    public static final int UNIVERSAL_COLUMN_IDX_SCORE_5 = 5;
+    public static final String[] UNIVERSAL_ALL_COLUMNS = {
+            COLUMN_ID, UNIVERSAL_COLUMN_SCORE_1,
+            UNIVERSAL_COLUMN_SCORE_2, UNIVERSAL_COLUMN_SCORE_3,
+            UNIVERSAL_COLUMN_SCORE_4, UNIVERSAL_COLUMN_SCORE_5};
+    /*
      * Belote
      */
     public static final String BELOTE_TABLE_CLASSIC = "BELOTE_TABLE_CLASSIC";
@@ -102,7 +120,8 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "games.db";
     private static final int DATABASE_VERSION_1 = 1;
     private static final int DATABASE_VERSION_2 = 2;
-    private static final int DATABASE_VERSION = DATABASE_VERSION_2;
+    private static final int DATABASE_VERSION_3 = 3;
+    private static final int DATABASE_VERSION = DATABASE_VERSION_3;
 
     public GameSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -110,6 +129,7 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        createUniversalTable(db);
         createClassicBeloteTable(db);
         createCoincheBeloteTable(db);
         createTarotThreePlayerTable(db);
@@ -123,6 +143,21 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + BELOTE_TABLE_COINCHE);
             createCoincheBeloteTable(db);
         }
+        if (oldVersion < DATABASE_VERSION_3) {
+            createUniversalTable(db);
+        }
+    }
+
+    private void createUniversalTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + UNIVERSAL_TABLE
+                + "("
+                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + UNIVERSAL_COLUMN_SCORE_1 + " INTEGER NOT NULL, "
+                + UNIVERSAL_COLUMN_SCORE_2 + " INTEGER NOT NULL, "
+                + UNIVERSAL_COLUMN_SCORE_3 + " INTEGER NOT NULL, "
+                + UNIVERSAL_COLUMN_SCORE_4 + " INTEGER NOT NULL, "
+                + UNIVERSAL_COLUMN_SCORE_5 + " INTEGER NOT NULL"
+                + ");");
     }
 
     private void createClassicBeloteTable(SQLiteDatabase db) {

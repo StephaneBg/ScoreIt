@@ -1,13 +1,11 @@
 package com.sbgapps.scoreit;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.RadioButton;
-import android.widget.SeekBar;
 
 import com.sbgapps.scoreit.game.CoincheBeloteLap;
 import com.sbgapps.scoreit.game.Lap;
-import com.sbgapps.scoreit.widget.InputPoints;
+import com.sbgapps.scoreit.widget.SeekbarInputPoints;
 
 /**
  * Created by sbaiget on 29/01/14.
@@ -36,99 +34,29 @@ public class CoincheLapActivity extends LapActivity {
         HOLDER.rb_coinche_none = (RadioButton) findViewById(R.id.rb_no_coinche);
         HOLDER.rb_coinche = (RadioButton) findViewById(R.id.rb_coinche);
         HOLDER.rb_surcoinche = (RadioButton) findViewById(R.id.rb_surcoinche);
-        HOLDER.input_deal = (InputPoints) findViewById(R.id.input_deal);
-        HOLDER.input_points = (InputPoints) findViewById(R.id.input_points);
+        HOLDER.input_deal = (SeekbarInputPoints) findViewById(R.id.input_deal);
+        HOLDER.input_points = (SeekbarInputPoints) findViewById(R.id.input_points);
 
         if (isTablet()) {
             findViewById(R.id.btn_cancel).setOnClickListener(this);
             findViewById(R.id.btn_confirm).setOnClickListener(this);
         }
 
-        HOLDER.input_deal.getSeekBar().setMax(8);
-        HOLDER.input_deal.getSeekBar().setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        HOLDER.input_deal.getTextView()
-                                .setText(Integer.toString(PROGRESS2POINTS[progress]));
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-
-                    }
-                });
-
-        HOLDER.input_deal.getButtonLess().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int points = HOLDER.input_deal.getSeekBar().getProgress();
-                HOLDER.input_deal.getSeekBar().setProgress(points - 1);
-            }
-        });
-        HOLDER.input_deal.getButtonMore().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int points = HOLDER.input_deal.getSeekBar().getProgress();
-                HOLDER.input_deal.getSeekBar().setProgress(points + 1);
-            }
-        });
-
-        HOLDER.input_points.getSeekBar().setMax(8);
-        HOLDER.input_points.getSeekBar().setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        HOLDER.input_points.getTextView()
-                                .setText(Integer.toString(PROGRESS2POINTS[progress]));
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-
-                    }
-                });
-
-        HOLDER.input_points.getButtonLess().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int points = HOLDER.input_points.getSeekBar().getProgress();
-                HOLDER.input_points.getSeekBar().setProgress(points - 1);
-            }
-        });
-        HOLDER.input_points.getButtonMore().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int points = HOLDER.input_points.getSeekBar().getProgress();
-                HOLDER.input_points.getSeekBar().setProgress(points + 1);
-            }
-        });
-
-        if (Lap.PLAYER_1 == getLap().getTaker()) {
-            HOLDER.rb_player1.setChecked(true);
-        } else if (Lap.PLAYER_2 == getLap().getTaker()) {
-            HOLDER.rb_player2.setChecked(true);
-        } else {
-            // Not possible
+        switch (getLap().getTaker()) {
+            default:
+            case Lap.PLAYER_1:
+                HOLDER.rb_player1.setChecked(true);
+                break;
+            case Lap.PLAYER_2:
+                HOLDER.rb_player2.setChecked(true);
+                break;
         }
 
-        int progress = getLap().getDeal() / 10 - 8;
-        progress = (17 == progress) ? 8 : progress;
-        HOLDER.input_deal.getSeekBar().setProgress(progress);
+        HOLDER.input_deal.setMax(8);
+        HOLDER.input_deal.setPoints(getLap().getDeal());
 
-        progress = getLap().getPoints() / 10 - 8;
-        progress = (17 == progress) ? 8 : progress;
-        HOLDER.input_points.getSeekBar().setProgress(progress);
+        HOLDER.input_points.setMax(8);
+        HOLDER.input_points.setPoints(getLap().getPoints());
 
         switch (getLap().getBelote()) {
             case Lap.PLAYER_1:
@@ -161,14 +89,26 @@ public class CoincheLapActivity extends LapActivity {
     public void updateLap() {
         CoincheBeloteLap lap = getLap();
         lap.setTaker(HOLDER.rb_player1.isChecked() ? Lap.PLAYER_1 : Lap.PLAYER_2);
-        lap.setDeal(PROGRESS2POINTS[HOLDER.input_deal.getSeekBar().getProgress()]);
-        lap.setPoints(PROGRESS2POINTS[HOLDER.input_points.getSeekBar().getProgress()]);
+        lap.setDeal(HOLDER.input_deal.getPoints());
+        lap.setPoints(HOLDER.input_points.getPoints());
         lap.setBelote(HOLDER.rb_belote_none.isChecked() ? Lap.PLAYER_NONE :
                 HOLDER.rb_belote_player1.isChecked() ? Lap.PLAYER_1 : Lap.PLAYER_2);
         lap.setCoinche(HOLDER.rb_coinche_none.isChecked() ? CoincheBeloteLap.COINCHE_NONE :
                 HOLDER.rb_coinche.isChecked() ? CoincheBeloteLap.COINCHE_NORMAL
                         : CoincheBeloteLap.COINCHE_DOUBLE);
         lap.setScores();
+    }
+
+    @Override
+    public int progressToPoints(int progress) {
+        return PROGRESS2POINTS[progress];
+    }
+
+    @Override
+    public int pointsToProgress(int points) {
+        int progress = points / 10 - 8;
+        progress = (17 == progress) ? 8 : progress;
+        return progress;
     }
 
     static class LapHolder {
@@ -180,7 +120,7 @@ public class CoincheLapActivity extends LapActivity {
         RadioButton rb_coinche_none;
         RadioButton rb_coinche;
         RadioButton rb_surcoinche;
-        InputPoints input_deal;
-        InputPoints input_points;
+        SeekbarInputPoints input_deal;
+        SeekbarInputPoints input_points;
     }
 }

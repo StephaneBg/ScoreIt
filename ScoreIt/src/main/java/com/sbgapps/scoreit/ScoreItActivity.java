@@ -19,6 +19,7 @@
 package com.sbgapps.scoreit;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
@@ -34,7 +35,6 @@ import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.sbgapps.scoreit.game.ClassicBeloteLap;
 import com.sbgapps.scoreit.game.CoincheBeloteLap;
@@ -43,6 +43,7 @@ import com.sbgapps.scoreit.game.FourPlayerTarotLap;
 import com.sbgapps.scoreit.game.GameData;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.game.ThreePlayerTarotLap;
+import com.sbgapps.scoreit.game.UniversalLap;
 import com.sbgapps.scoreit.util.TypefaceSpan;
 import com.sbgapps.scoreit.widget.PlayerInfos;
 
@@ -50,17 +51,20 @@ public class ScoreItActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerListener {
 
     public static final String KEY_SELECTED_GAME = "selected_game";
+    public static final String KEY_UNIVERSAL_PLAYER_CNT = "player_count";
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
     public static final String EXTRA_TABLET = "com.sbgapps.scoreit.tablet";
     public static final String EXTRA_EDIT = "com.sbgapps.scoreit.edit";
+    public static final String EXTRA_NAME = "com.sbgapps.scoreit.name";
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_LAP_ACTIVITY = 2;
+    private static final int REQ_EDIT_NAME_ACTIVITY = 3;
     private TypefaceSpan mTypefaceSpan;
     private GameData mGameData;
     private SharedPreferences mPreferences;
     private SpannableString mTitle;
     private boolean mIsTablet;
-    private TextView mEditedName;
+    private PlayerInfos mEditedName;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private ScoreListFragment mScoreListFragment;
     private GraphFragment mGraphFragment;
@@ -131,8 +135,8 @@ public class ScoreItActivity extends BaseActivity
             menu.clear();
             return false;
         } else {
+            MenuItem item;
             if (0 == mGameData.getLaps().size()) {
-                MenuItem item;
                 if (!mIsTablet) {
                     item = menu.findItem(R.id.menu_view);
                     item.setVisible(false);
@@ -140,6 +144,8 @@ public class ScoreItActivity extends BaseActivity
                 item = menu.findItem(R.id.menu_clear);
                 item.setVisible(false);
             }
+            item = menu.findItem(R.id.menu_count);
+            item.setVisible(GameData.UNIVERSAL == mGameData.getGame());
             getActionBar().setTitle(mTitle);
             return true;
         }
@@ -149,34 +155,7 @@ public class ScoreItActivity extends BaseActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_clear:
-                new AlertDialog.Builder(this)
-                        .setMessage(R.string.new_game)
-                        .setPositiveButton(
-                                R.string.clear,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        mGameData.deleteAll();
-                                        mHeaderFragment.updateScores();
-                                        if (null != mScoreListFragment && mScoreListFragment.isVisible())
-                                            mScoreListFragment.getListAdapter().removeAll();
-                                        if (null != mGraphFragment && mGraphFragment.isVisible()) {
-                                            mGraphFragment.traceGraph();
-                                            if (!mIsTablet) getFragmentManager().popBackStack();
-                                        }
-                                        invalidateOptionsMenu();
-                                    }
-                                })
-                        .setNegativeButton(
-                                R.string.cancel,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        // Nothing to do!
-                                    }
-                                })
-                        .create()
-                        .show();
+                showClearDialog();
                 return true;
 
             case R.id.menu_new:
@@ -185,6 +164,10 @@ public class ScoreItActivity extends BaseActivity
 
             case R.id.menu_view:
                 switchScoreViews();
+                return true;
+
+            case R.id.menu_count:
+                showPlayerCountDialog();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -198,29 +181,12 @@ public class ScoreItActivity extends BaseActivity
         mGameData.setGame(game);
         setTitle();
 
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
-        mHeaderFragment = new HeaderFragment();
-        ft.replace(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG);
-        ft.commit();
-
-        ft = getFragmentManager().beginTransaction();
-        if (mIsTablet) {
-            ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
-            mScoreListFragment = new ScoreListFragment();
-            mGraphFragment = new GraphFragment();
-            ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG);
-            ft.replace(R.id.fragment_container_large, mGraphFragment, GraphFragment.TAG);
-        } else {
-            ft.setCustomAnimations(R.animator.slide_top_in, R.animator.slide_top_out);
-            mScoreListFragment = new ScoreListFragment();
-            ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG);
-        }
-        ft.commit();
+        reloadFragments();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String name;
         if (null != mScoreListFragment) mScoreListFragment.getListView().closeOpenedItems();
         if (RESULT_OK != resultCode) return;
 
@@ -230,16 +196,19 @@ public class ScoreItActivity extends BaseActivity
                         new String[]{ContactsContract.Contacts.DISPLAY_NAME}, null, null, null);
                 if (cursor.moveToFirst()) {
                     int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-                    String name = cursor.getString(columnIndex);
-                    int player = ((PlayerInfos) mEditedName.getParent()).getPlayer();
-                    mGameData.setPlayerName(player, name);
-                    mEditedName.setText(name);
+                    name = cursor.getString(columnIndex);
+                    nameEdited(name);
                 }
                 break;
 
             case REQ_LAP_ACTIVITY:
                 updateFragments();
                 invalidateOptionsMenu();
+                break;
+
+            case REQ_EDIT_NAME_ACTIVITY:
+                name = data.getStringExtra(EXTRA_NAME);
+                nameEdited(name);
                 break;
         }
     }
@@ -248,6 +217,9 @@ public class ScoreItActivity extends BaseActivity
         Lap lap;
         switch (mGameData.getGame()) {
             default:
+            case GameData.UNIVERSAL:
+                lap = new UniversalLap();
+                break;
             case GameData.BELOTE_CLASSIC:
                 lap = new ClassicBeloteLap();
                 break;
@@ -277,19 +249,34 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void editName(View view) {
-        if (GameData.BELOTE_CLASSIC == mGameData.getGame()
-                || GameData.BELOTE_COINCHE == mGameData.getGame()) {
-            // Do not edit names!
-            return;
-        }
-
-        mEditedName = (TextView) view;
-        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        startActivityForResult(intent, REQ_PICK_CONTACT);
+        mEditedName = (PlayerInfos) view.getParent().getParent();
+        showEditNameActionChoices();
     }
 
     public void start(View view) {
         addLap();
+    }
+
+    private void reloadFragments() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
+        mHeaderFragment = new HeaderFragment();
+        ft.replace(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG);
+        ft.commit();
+
+        ft = getFragmentManager().beginTransaction();
+        if (mIsTablet) {
+            ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
+            mScoreListFragment = new ScoreListFragment();
+            mGraphFragment = new GraphFragment();
+            ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG);
+            ft.replace(R.id.fragment_container_large, mGraphFragment, GraphFragment.TAG);
+        } else {
+            ft.setCustomAnimations(R.animator.slide_top_in, R.animator.slide_top_out);
+            mScoreListFragment = new ScoreListFragment();
+            ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG);
+        }
+        ft.commit();
     }
 
     private void updateFragments() {
@@ -366,5 +353,87 @@ public class ScoreItActivity extends BaseActivity
                 break;
         }
         mTitle.setSpan(mTypefaceSpan, 0, mTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    private void nameEdited(String name) {
+        mGameData.setPlayerName(mEditedName.getPlayer(), name);
+        mEditedName.setName(name);
+    }
+
+    private void showClearDialog() {
+        new AlertDialog.Builder(this)
+                .setMessage(R.string.new_game)
+                .setPositiveButton(
+                        R.string.clear,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mGameData.deleteAll();
+                                mHeaderFragment.updateScores();
+                                if (null != mScoreListFragment && mScoreListFragment.isVisible())
+                                    mScoreListFragment.getListAdapter().removeAll();
+                                if (null != mGraphFragment && mGraphFragment.isVisible()) {
+                                    mGraphFragment.traceGraph();
+                                    if (!mIsTablet) getFragmentManager().popBackStack();
+                                }
+                                invalidateOptionsMenu();
+                            }
+                        })
+                .setNegativeButton(
+                        R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Nothing to do!
+                            }
+                        })
+                .create()
+                .show();
+    }
+
+    private void showPlayerCountDialog() {
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.player_number)
+                .setItems(R.array.player_count,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mPreferences
+                                        .edit()
+                                        .putInt(KEY_UNIVERSAL_PLAYER_CNT, which + 2)
+                                        .commit();
+                                reloadFragments();
+                            }
+                        })
+                .create();
+        dialog.show();
+        getAccentHelper().prepareDialog(this, dialog.getWindow());
+    }
+
+    private void showEditNameActionChoices() {
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.edit_name)
+                .setItems(R.array.edit_name_action,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent;
+                                switch (which) {
+                                    default:
+                                    case 0:
+                                        intent = new Intent(Intent.ACTION_PICK,
+                                                ContactsContract.Contacts.CONTENT_URI);
+                                        startActivityForResult(intent, REQ_PICK_CONTACT);
+                                        break;
+                                    case 1:
+                                        intent = new Intent(ScoreItActivity.this, EditNameActivity.class);
+                                        startActivityForResult(intent, REQ_EDIT_NAME_ACTIVITY);
+                                        break;
+                                }
+                            }
+                        })
+                .create();
+        dialog.show();
+        getAccentHelper().prepareDialog(this, dialog.getWindow());
     }
 }

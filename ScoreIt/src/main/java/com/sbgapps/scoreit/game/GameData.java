@@ -19,13 +19,14 @@
 package com.sbgapps.scoreit.game;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.preference.PreferenceManager;
 
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.ScoreItActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,7 @@ public class GameData {
         mResources = activity.getResources();
         GameSQLiteHelper helper = new GameSQLiteHelper(activity);
         mDatabase = helper.getWritableDatabase();
-        mPreferences = activity.getPreferences(Context.MODE_PRIVATE);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         setGame(game);
     }
 
@@ -75,6 +76,8 @@ public class GameData {
     public int getPlayerCount() {
         switch (mGame) {
             default:
+            case UNIVERSAL:
+                return mPreferences.getInt(ScoreItActivity.KEY_UNIVERSAL_PLAYER_CNT, 4);
             case BELOTE_CLASSIC:
             case BELOTE_COINCHE:
                 return 2;
@@ -98,6 +101,9 @@ public class GameData {
         while (!cursor.isAfterLast()) {
             switch (mGame) {
                 default:
+                case UNIVERSAL:
+                    lap = new UniversalLap(cursor);
+                    break;
                 case BELOTE_CLASSIC:
                     lap = new ClassicBeloteLap(cursor);
                     break;
@@ -163,17 +169,7 @@ public class GameData {
     public String getPlayerName(int player) {
         switch (mGame) {
             default:
-            case BELOTE_CLASSIC:
-            case BELOTE_COINCHE:
-                switch (player) {
-                    default:
-                        return mResources.getString(R.string.none);
-                    case Lap.PLAYER_1:
-                        return mResources.getString(R.string.them);
-                    case Lap.PLAYER_2:
-                        return mResources.getString(R.string.us);
-                }
-
+            case UNIVERSAL:
             case TAROT_3_PLAYERS:
             case TAROT_4_PLAYERS:
             case TAROT_5_PLAYERS:
@@ -195,6 +191,17 @@ public class GameData {
                     case Lap.PLAYER_5:
                         return mPreferences
                                 .getString(getNameKey(player), "Titi");
+                }
+
+            case BELOTE_CLASSIC:
+            case BELOTE_COINCHE:
+                switch (player) {
+                    default:
+                        return mResources.getString(R.string.none);
+                    case Lap.PLAYER_1:
+                        return mResources.getString(R.string.them);
+                    case Lap.PLAYER_2:
+                        return mResources.getString(R.string.us);
                 }
         }
     }
@@ -229,6 +236,8 @@ public class GameData {
     private String getTable() {
         switch (mGame) {
             default:
+            case UNIVERSAL:
+                return GameSQLiteHelper.UNIVERSAL_TABLE;
             case BELOTE_CLASSIC:
                 return GameSQLiteHelper.BELOTE_TABLE_CLASSIC;
             case BELOTE_COINCHE:
@@ -245,6 +254,8 @@ public class GameData {
     private String[] getColumns() {
         switch (mGame) {
             default:
+            case UNIVERSAL:
+                return GameSQLiteHelper.UNIVERSAL_ALL_COLUMNS;
             case BELOTE_CLASSIC:
                 return GameSQLiteHelper.BELOTE_CLASSIC_ALL_COLUMNS;
             case BELOTE_COINCHE:

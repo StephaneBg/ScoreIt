@@ -48,7 +48,7 @@
     <string name="done">Confirmer</string>
     <string name="delete">Effacer</string>
     <string name="edit">Editer</string>
-    <string name="points">Points</string>
+    <string name="progress">Points</string>
     <string name="deal">Contrat</string>
     <string name="oudlers">Bouts</string>
     <string name="fool">Excuse</string>
@@ -61,7 +61,7 @@
     <string name="guard_without">Garde sans</string>
     <string name="guard_against">Garde contre</string>
     <string name="click_on">Cliquez sur</string>
-    <string name="to_start">pour commencer</string>
+    <string name="to_add">pour ajouter</string>
     <string name="more">Plus</string>
     <string name="less">Moins</string>
     <string name="undo">Annuler</string>
