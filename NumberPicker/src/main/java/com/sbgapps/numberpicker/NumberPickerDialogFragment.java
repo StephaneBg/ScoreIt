@@ -3,15 +3,12 @@ package com.sbgapps.numberpicker;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-
-import java.util.Vector;
 
 /**
  * Dialog to set alarm time.
@@ -21,6 +18,7 @@ public class NumberPickerDialogFragment extends DialogFragment {
     private static final String REFERENCE_KEY = "NumberPickerDialogFragment_ReferenceKey";
     private static final String MIN_NUMBER_KEY = "NumberPickerDialogFragment_MinNumberKey";
     private static final String MAX_NUMBER_KEY = "NumberPickerDialogFragment_MaxNumberKey";
+    private static final String PLAYER_KEY = "NumberPickerDialogFragment_Player";
     private static final String PLUS_MINUS_VISIBILITY_KEY = "NumberPickerDialogFragment_PlusMinusVisibilityKey";
     private static final String DECIMAL_VISIBILITY_KEY = "NumberPickerDialogFragment_DecimalVisibilityKey";
 
@@ -33,7 +31,8 @@ public class NumberPickerDialogFragment extends DialogFragment {
     private Integer mMaxNumber = null;
     private int mPlusMinusVisibility = View.VISIBLE;
     private int mDecimalVisibility = View.VISIBLE;
-    private Vector<NumberPickerDialogHandler> mNumberPickerDialogHandlers = new Vector<NumberPickerDialogHandler>();
+    private int mPlayer;
+    private NumberPickerDialogListener mListener;
 
     /**
      * Create an instance of the Picker (used internally)
@@ -45,8 +44,12 @@ public class NumberPickerDialogFragment extends DialogFragment {
      * @param decimalVisibility   (optional) View.VISIBLE, View.INVISIBLE, or View.GONE
      * @return a Picker!
      */
-    public static NumberPickerDialogFragment newInstance(int reference, Integer minNumber,
-                                                         Integer maxNumber, Integer plusMinusVisibility, Integer decimalVisibility) {
+    public static NumberPickerDialogFragment newInstance(int reference,
+                                                         Integer minNumber,
+                                                         Integer maxNumber,
+                                                         Integer plusMinusVisibility,
+                                                         Integer decimalVisibility,
+                                                         Integer player) {
         final NumberPickerDialogFragment frag = new NumberPickerDialogFragment();
         Bundle args = new Bundle();
         args.putInt(REFERENCE_KEY, reference);
@@ -62,13 +65,11 @@ public class NumberPickerDialogFragment extends DialogFragment {
         if (decimalVisibility != null) {
             args.putInt(DECIMAL_VISIBILITY_KEY, decimalVisibility);
         }
+        if (player != null) {
+            args.putInt(PLAYER_KEY, player);
+        }
         frag.setArguments(args);
         return frag;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -90,6 +91,9 @@ public class NumberPickerDialogFragment extends DialogFragment {
         }
         if (args != null && args.containsKey(MAX_NUMBER_KEY)) {
             mMaxNumber = args.getInt(MAX_NUMBER_KEY);
+        }
+        if (args != null && args.containsKey(PLAYER_KEY)) {
+            mPlayer = args.getInt(PLAYER_KEY);
         }
     }
 
@@ -128,22 +132,8 @@ public class NumberPickerDialogFragment extends DialogFragment {
                     mPicker.getErrorView().show();
                     return;
                 }
-                for (NumberPickerDialogHandler handler : mNumberPickerDialogHandlers) {
-                    handler.onDialogNumberSet(mReference, mPicker.getNumber(), mPicker.getDecimal(),
-                            mPicker.getIsNegative(), number);
-                }
-                final Activity activity = getActivity();
-                final Fragment fragment = getTargetFragment();
-                if (activity instanceof NumberPickerDialogHandler) {
-                    final NumberPickerDialogHandler act =
-                            (NumberPickerDialogHandler) activity;
-                    act.onDialogNumberSet(mReference, mPicker.getNumber(), mPicker.getDecimal(),
-                            mPicker.getIsNegative(), number);
-                } else if (fragment instanceof NumberPickerDialogHandler) {
-                    final NumberPickerDialogHandler frag = (NumberPickerDialogHandler) fragment;
-                    frag.onDialogNumberSet(mReference, mPicker.getNumber(), mPicker.getDecimal(),
-                            mPicker.getIsNegative(), number);
-                }
+                mListener.onDialogNumberSet(mReference, mPicker.getNumber(),
+                        mPicker.getDecimal(), mPicker.getIsNegative(), number, mPlayer);
                 dismiss();
             }
         });
@@ -151,6 +141,22 @@ public class NumberPickerDialogFragment extends DialogFragment {
         mPicker.setDecimalVisibility(mDecimalVisibility);
         mPicker.setPlusMinusVisibility(mPlusMinusVisibility);
         return v;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (NumberPickerDialogListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Activity must implement NavigationDrawerListener.");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     @Override
@@ -163,17 +169,9 @@ public class NumberPickerDialogFragment extends DialogFragment {
     /**
      * This interface allows objects to register for the Picker's set action.
      */
-    public interface NumberPickerDialogHandler {
+    public interface NumberPickerDialogListener {
 
-        void onDialogNumberSet(int reference, int number, double decimal, boolean isNegative, double fullNumber);
-    }
-
-    /**
-     * Attach a Vector of handlers to be notified in addition to the Fragment's Activity and target Fragment.
-     *
-     * @param handlers a Vector of handlers
-     */
-    public void setNumberPickerDialogHandlers(Vector<NumberPickerDialogHandler> handlers) {
-        mNumberPickerDialogHandlers = handlers;
+        void onDialogNumberSet(int reference, int number, double decimal,
+                               boolean isNegative, double fullNumber, int player);
     }
 }

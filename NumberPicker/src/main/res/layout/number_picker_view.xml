@@ -27,7 +27,7 @@
                 android:baselineAligned="false"
                 android:gravity="top">
 
-                <com.sbgapps.numberpicker.widget.ZeroTopPaddingTextView
+                <TextView
                     android:id="@+id/minus_label"
                     android:layout_height="match_parent"
                     android:layout_width="wrap_content"
@@ -37,16 +37,15 @@
                     android:gravity="center_vertical"
                     android:text="@string/number_picker_minus_label"/>
 
-                <com.sbgapps.numberpicker.widget.ZeroTopPaddingTextView
+                <TextView
                     android:id="@+id/number"
                     android:singleLine="true"
                     android:ellipsize="none"
                     android:textSize="@dimen/medium_font_size"
-                    android:text="58"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"/>
 
-                <com.sbgapps.numberpicker.widget.ZeroTopPaddingTextView
+                <TextView
                     android:id="@+id/decimal_separator"
                     android:singleLine="true"
                     android:ellipsize="none"
@@ -55,11 +54,10 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"/>
 
-                <com.sbgapps.numberpicker.widget.ZeroTopPaddingTextView
+                <TextView
                     android:id="@+id/decimal"
                     android:singleLine="true"
                     android:ellipsize="none"
-                    android:text="6"
                     android:textSize="@dimen/medium_font_size"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"/>

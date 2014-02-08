@@ -39,7 +39,8 @@
     <string name="none">None</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="new_game">Clear current game?</string>
+    <string name="clear_game">Erase scores</string>
+    <string name="sure">Are you sure?</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
     <string name="view">View</string>

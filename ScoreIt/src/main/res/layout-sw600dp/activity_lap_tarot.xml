@@ -23,108 +23,99 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ScrollView
-        android:id="@+id/scrollview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:scrollbars="none"
-        android:layout_weight="100">
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:orientation="vertical">
+            android:text="@string/taker"/>
 
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/taker"/>
+        <Spinner
+            android:layout_height="@dimen/default_height"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_double_margin"
+            android:layout_marginLeft="@dimen/default_double_margin"
+            android:spinnerMode="dialog"
+            android:id="@+id/spinner_taker"/>
 
-            <Spinner
-                android:layout_height="@dimen/default_height"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_double_margin"
-                android:layout_marginLeft="@dimen/default_double_margin"
-                android:spinnerMode="dialog"
-                android:id="@+id/spinner_taker"/>
+        <ViewStub
+            android:id="@+id/viewstub_partner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/stub_partner"/>
 
-            <ViewStub
-                android:id="@+id/viewstub_partner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout="@layout/stub_partner"/>
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deal"/>
 
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/deal"/>
+        <Spinner
+            android:layout_height="@dimen/default_height"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_double_margin"
+            android:layout_marginLeft="@dimen/default_double_margin"
+            android:spinnerMode="dialog"
+            android:id="@+id/spinner_deal"/>
 
-            <Spinner
-                android:layout_height="@dimen/default_height"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_double_margin"
-                android:layout_marginLeft="@dimen/default_double_margin"
-                android:spinnerMode="dialog"
-                android:id="@+id/spinner_deal"/>
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/oudlers"/>
 
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/oudlers"/>
+        <CheckBox
+            android:id="@+id/checkbox_petit"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_double_margin"
+            android:layout_marginLeft="@dimen/default_double_margin"
+            android:text="@string/petit"/>
 
-            <CheckBox
-                android:id="@+id/checkbox_petit"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_double_margin"
-                android:layout_marginLeft="@dimen/default_double_margin"
-                android:text="@string/petit"/>
+        <CheckBox
+            android:id="@+id/checkbox_twenty_one"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_double_margin"
+            android:layout_marginLeft="@dimen/default_double_margin"
+            android:text="@string/twentyone"/>
 
-            <CheckBox
-                android:id="@+id/checkbox_twenty_one"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_double_margin"
-                android:layout_marginLeft="@dimen/default_double_margin"
-                android:text="@string/twentyone"/>
+        <CheckBox
+            android:id="@+id/checkbox_fool"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_double_margin"
+            android:layout_marginLeft="@dimen/default_double_margin"
+            android:text="@string/fool"/>
 
-            <CheckBox
-                android:id="@+id/checkbox_fool"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_double_margin"
-                android:layout_marginLeft="@dimen/default_double_margin"
-                android:text="@string/fool"/>
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/progress"/>
 
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/progress"/>
+        <com.sbgapps.scoreit.widget.SeekbarInputPoints
+            android:id="@+id/input_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"/>
 
-            <com.sbgapps.scoreit.widget.SeekbarInputPoints
-                android:id="@+id/input_points"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_margin"/>
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
     <include
         android:layout_width="wrap_content"
-        android:layout_height="0dip"
-        layout="@layout/include_cancel_done"
-        android:layout_weight="1"/>
+        android:layout_height="wrap_content"
+        layout="@layout/include_cancel_done"/>
 
 </LinearLayout>

@@ -40,7 +40,7 @@
         </activity>
         <activity
             android:name=".UniversalLapActivity"
-            android:theme="@style/Theme.Lap"/>
+            android:theme="@style/Theme.Lap.NoTitle"/>
         <activity
             android:name=".BeloteLapActivity"
             android:theme="@style/Theme.Lap.NoTitle"/>

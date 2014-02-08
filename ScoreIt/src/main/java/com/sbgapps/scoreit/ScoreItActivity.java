@@ -361,10 +361,11 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void showClearDialog() {
-        new AlertDialog.Builder(this)
-                .setMessage(R.string.new_game)
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.clear_game)
+                .setMessage(R.string.sure)
                 .setPositiveButton(
-                        R.string.clear,
+                        R.string.yes,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -380,15 +381,16 @@ public class ScoreItActivity extends BaseActivity
                             }
                         })
                 .setNegativeButton(
-                        R.string.cancel,
+                        R.string.no,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // Nothing to do!
                             }
                         })
-                .create()
-                .show();
+                .create();
+        dialog.show();
+        getAccentHelper().prepareDialog(this, dialog.getWindow());
     }
 
     private void showPlayerCountDialog() {

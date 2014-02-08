@@ -9,7 +9,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.sbgapps.numberpicker.NumberPickerBuilder;
-import com.sbgapps.numberpicker.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.UniversalLapActivity;
 
@@ -21,6 +20,7 @@ public class UniversalInputPoints extends FrameLayout {
     private final UniversalLapActivity mContext;
     private final TextView mTextViewPoints;
     private int mPoints;
+    private int mPlayer;
 
     public UniversalInputPoints(Context context) {
         this(context, null);
@@ -69,19 +69,14 @@ public class UniversalInputPoints extends FrameLayout {
                 new NumberPickerBuilder()
                         .setFragmentManager(mContext.getFragmentManager())
                         .setDecimalVisibility(View.INVISIBLE)
-                        .addNumberPickerDialogHandler(new NumberPickerDialogFragment.NumberPickerDialogHandler() {
-                            @Override
-                            public void onDialogNumberSet(int reference, int number, double decimal, boolean isNegative, double fullNumber) {
-                                mPoints = number;
-                                displayPoints();
-                            }
-                        })
+                        .setPlayer(mPlayer)
                         .show();
             }
         });
     }
 
     public void setPlayer(int player) {
+        mPlayer = player;
         TextView name = (TextView) findViewById(R.id.player_name);
         name.setText(mContext.getGameData().getPlayerName(player));
     }

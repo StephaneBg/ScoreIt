@@ -39,7 +39,8 @@
     <string name="none">Aucune</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
-    <string name="new_game">Effacer le jeu en cours ?</string>
+    <string name="clear_game">Effacer les scores</string>
+    <string name="sure">Etes-vous sûr ?</string>
     <string name="cancel">Annuler</string>
     <string name="clear">Effacer</string>
     <string name="view">Vue</string>
@@ -69,5 +70,9 @@
     <string name="donate">Remercier</string>
     <string name="navigation_drawer_open">Ouvre la navigation</string>
     <string name="navigation_drawer_close">Ferme la navigation</string>
+    <string name="settings">Paramètres</string>
+    <string name="player_number">Nombre de joueurs</string>
+    <string name="edit_name">Editer le nom</string>
+    <string name="enter_name">Entrer le nom</string>
 
 </resources>

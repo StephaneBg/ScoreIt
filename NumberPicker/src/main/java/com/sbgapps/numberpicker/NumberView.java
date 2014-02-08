@@ -5,14 +5,13 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import com.sbgapps.numberpicker.widget.ZeroTopPaddingTextView;
+import android.widget.TextView;
 
 public class NumberView extends LinearLayout {
 
-    private ZeroTopPaddingTextView mNumber, mDecimal;
-    private ZeroTopPaddingTextView mDecimalSeperator;
-    private ZeroTopPaddingTextView mMinusLabel;
+    private TextView mNumber, mDecimal;
+    private TextView mDecimalSeperator;
+    private TextView mMinusLabel;
     private Typeface mOriginalNumberTypeface;
 
     /**
@@ -38,19 +37,12 @@ public class NumberView extends LinearLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        mNumber = (ZeroTopPaddingTextView) findViewById(R.id.number);
-        mDecimal = (ZeroTopPaddingTextView) findViewById(R.id.decimal);
-        mDecimalSeperator = (ZeroTopPaddingTextView) findViewById(R.id.decimal_separator);
-        mMinusLabel = (ZeroTopPaddingTextView) findViewById(R.id.minus_label);
+        mNumber = (TextView) findViewById(R.id.number);
+        mDecimal = (TextView) findViewById(R.id.decimal);
+        mDecimalSeperator = (TextView) findViewById(R.id.decimal_separator);
+        mMinusLabel = (TextView) findViewById(R.id.minus_label);
         if (mNumber != null) {
             mOriginalNumberTypeface = mNumber.getTypeface();
-        }
-        // Set the lowest time unit with thin font
-        if (mNumber != null) {
-            mNumber.updatePadding();
-        }
-        if (mDecimal != null) {
-            mDecimal.updatePadding();
         }
     }
 
@@ -70,20 +62,17 @@ public class NumberView extends LinearLayout {
                 // Set to -
                 mNumber.setText("-");
                 mNumber.setEnabled(false);
-                mNumber.updatePadding();
                 mNumber.setVisibility(View.VISIBLE);
             } else if (showDecimal) {
                 // Set to bold
                 mNumber.setText(numbersDigit);
                 mNumber.setTypeface(mOriginalNumberTypeface);
                 mNumber.setEnabled(true);
-                mNumber.updatePaddingForBoldDate();
                 mNumber.setVisibility(View.VISIBLE);
             } else {
                 // Set to thin
                 mNumber.setText(numbersDigit);
                 mNumber.setEnabled(true);
-                mNumber.updatePadding();
                 mNumber.setVisibility(View.VISIBLE);
             }
         }
@@ -94,7 +83,6 @@ public class NumberView extends LinearLayout {
             } else {
                 mDecimal.setText(decimalDigit);
                 mDecimal.setEnabled(true);
-                mDecimal.updatePadding();
                 mDecimal.setVisibility(View.VISIBLE);
             }
         }
