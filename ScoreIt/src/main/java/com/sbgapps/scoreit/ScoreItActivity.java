@@ -187,7 +187,6 @@ public class ScoreItActivity extends BaseActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String name;
-        if (null != mScoreListFragment) mScoreListFragment.getListView().closeOpenedItems();
         if (RESULT_OK != resultCode) return;
 
         switch (requestCode) {
@@ -289,6 +288,8 @@ public class ScoreItActivity extends BaseActivity
 
     private void showLapActivity(Lap lap, boolean edit) {
         Intent intent;
+        if (null != mScoreListFragment) mScoreListFragment.getListView().closeOpenedItems();
+
         switch (mGameData.getGame()) {
             default:
             case GameData.UNIVERSAL:

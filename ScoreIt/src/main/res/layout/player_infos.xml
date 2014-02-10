@@ -11,7 +11,6 @@
         style="@style/InfoTextStyle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_height"
-        android:clickable="true"
         android:fontFamily="fonts/Roboto-Bold.ttf"
         android:onClick="editName"
         android:layout_weight="1"

@@ -36,11 +36,10 @@ public class UniversalLapActivity extends LapActivity
             findViewById(R.id.btn_confirm).setOnClickListener(this);
         }
 
-        int[] points;
-        if (null == savedInstanceState) {
-            points = new int[Lap.PLAYER_COUNT_MAX];
-        } else {
-            points = savedInstanceState.getIntArray(KEY_SCORES);
+        if (null != savedInstanceState) {
+            for (int player = 0; player < getGameData().getPlayerCount(); player++) {
+                getLap().setScore(player, savedInstanceState.getIntArray(KEY_SCORES)[player]);
+            }
         }
 
         final LinearLayout ll = (LinearLayout) findViewById(R.id.container);
@@ -51,7 +50,7 @@ public class UniversalLapActivity extends LapActivity
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             uip.setLayoutParams(lp);
             uip.setPlayer(player);
-            uip.setPoints(points[player]);
+            uip.setPoints(getLap().getScore(player));
             ll.addView(uip);
             mPoints.add(uip);
         }
