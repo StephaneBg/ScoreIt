@@ -21,6 +21,7 @@ package com.sbgapps.scoreit;
 import android.os.Bundle;
 import android.widget.RadioButton;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.sbgapps.scoreit.game.BeloteLap;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.widget.SeekbarInputPoints;
@@ -51,7 +52,7 @@ public class BeloteLapActivity extends LapActivity {
         HOLDER.rb_belote_player2 = (RadioButton) findViewById(R.id.rb_belote_player2);
         HOLDER.input_points = (SeekbarInputPoints) findViewById(R.id.input_points);
 
-        if (isTablet()) {
+        if (isDialog()) {
             findViewById(R.id.btn_cancel).setOnClickListener(this);
             findViewById(R.id.btn_confirm).setOnClickListener(this);
         }
@@ -81,6 +82,18 @@ public class BeloteLapActivity extends LapActivity {
                 HOLDER.rb_belote_none.setChecked(true);
                 break;
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);
     }
 
     @Override

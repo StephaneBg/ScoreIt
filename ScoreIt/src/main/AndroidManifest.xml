@@ -22,15 +22,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/Theme.Scoreit">
+        android:label="@string/app_name">
         <activity
             android:name=".ScoreItActivity"
-            android:theme="@style/Theme.Scoreit"
+            android:theme="@style/Theme.App.Scoreit"
             android:logo="@drawable/ic_launcher_flat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -40,19 +41,19 @@
         </activity>
         <activity
             android:name=".UniversalLapActivity"
-            android:theme="@style/Theme.Lap.NoTitle"/>
+            android:theme="@style/Theme.App.Lap"/>
         <activity
             android:name=".BeloteLapActivity"
-            android:theme="@style/Theme.Lap.NoTitle"/>
+            android:theme="@style/Theme.App.Lap"/>
         <activity
             android:name=".CoincheLapActivity"
-            android:theme="@style/Theme.Lap.NoTitle"/>
+            android:theme="@style/Theme.App.Lap"/>
         <activity
             android:name=".TarotLapActivity"
-            android:theme="@style/Theme.Lap.NoTitle"/>
+            android:theme="@style/Theme.App.Lap"/>
         <activity
             android:name=".EditNameActivity"
-            android:theme="@style/Theme.Lap"/>
+            android:theme="@style/Theme.App.NoTitle"/>
     </application>
 
 </manifest>

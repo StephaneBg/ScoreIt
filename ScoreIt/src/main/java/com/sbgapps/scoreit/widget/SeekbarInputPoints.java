@@ -20,6 +20,8 @@ public class SeekbarInputPoints extends FrameLayout {
     private final LapActivity mContext;
     private final TextView mTextViewPoints;
     private final SeekBar mSeekBarPoints;
+    private final ImageButton mButtonPlus;
+    private final ImageButton mButtonMinus;
     private int mProgress;
 
     public SeekbarInputPoints(Context context) {
@@ -41,26 +43,29 @@ public class SeekbarInputPoints extends FrameLayout {
 
         mTextViewPoints = (TextView) findViewById(R.id.textview_points);
         mSeekBarPoints = (SeekBar) findViewById(R.id.seekbar_points);
-
+        mButtonMinus = (ImageButton) findViewById(R.id.btn_less);
+        mButtonPlus = (ImageButton) findViewById(R.id.btn_more);
         init();
     }
 
     private void init() {
-        ImageButton button = (ImageButton) findViewById(R.id.btn_less);
-        button.setOnClickListener(new OnClickListener() {
+        mButtonMinus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgress--;
-                displayPoints();
+                if (mProgress > 0) {
+                    mProgress--;
+                    displayPoints();
+                }
             }
         });
 
-        button = (ImageButton) findViewById(R.id.btn_more);
-        button.setOnClickListener(new OnClickListener() {
+        mButtonPlus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgress++;
-                displayPoints();
+                if (mProgress < mSeekBarPoints.getMax()) {
+                    mProgress++;
+                    displayPoints();
+                }
             }
         });
 
@@ -102,5 +107,7 @@ public class SeekbarInputPoints extends FrameLayout {
         int points = mContext.progressToPoints(mProgress);
         mTextViewPoints.setText(Integer.toString(points));
         mSeekBarPoints.setProgress(mProgress);
+        mButtonMinus.setEnabled(mProgress > 0);
+        mButtonPlus.setEnabled(mProgress < mSeekBarPoints.getMax());
     }
 }

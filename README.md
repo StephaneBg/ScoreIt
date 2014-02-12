@@ -1,9 +1,11 @@
 ScoreIt Application
 =======================
 
-An application to count points to popular French card games:
-- Belote
+An application to count points for card games:
+- Universal counter
 - Tarot
+- Belote
+- Coinche
 
 ![screenshot](https://raw.github.com/StephaneBg/ScoreItProject/master/screenshot.png "screenshot")
 
@@ -16,7 +18,7 @@ Download
 Credits
 -------
 
-Author: [Stéphane Baiget](https://github.com/StephaneBg)
+Author: [StÃ©phane Baiget](https://github.com/StephaneBg)
 
 
 License

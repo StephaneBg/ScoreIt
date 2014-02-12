@@ -10,13 +10,13 @@
         android:layout_height="wrap_content"
         android:gravity="center">
 
-        <com.sbgapps.numberpicker.widget.AutoScrollHorizontalScrollView
+        <com.sbgapps.lib.numberpicker.widget.AutoScrollHorizontalScrollView
             android:id="@+id/horizontal_scroll_view"
             android:layout_width="0dip"
             android:layout_weight="2"
             android:layout_height="wrap_content">
 
-            <com.sbgapps.numberpicker.NumberView
+            <com.sbgapps.lib.numberpicker.NumberView
                 android:id="@+id/number_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,8 +61,8 @@
                     android:textSize="@dimen/medium_font_size"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"/>
-            </com.sbgapps.numberpicker.NumberView>
-        </com.sbgapps.numberpicker.widget.AutoScrollHorizontalScrollView>
+            </com.sbgapps.lib.numberpicker.NumberView>
+        </com.sbgapps.lib.numberpicker.widget.AutoScrollHorizontalScrollView>
 
         <ImageButton
             style="?android:borderlessButtonStyle"
@@ -71,7 +71,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center"
-            android:src="@drawable/ic_action_backspace"
+            android:src="@drawable/ic_backspace"
             android:contentDescription="@string/number_delete"
             android:layout_height="match_parent"/>
     </LinearLayout>
@@ -110,7 +110,7 @@
             android:id="@+id/fourth"/>
     </LinearLayout>
 
-    <com.sbgapps.numberpicker.NumberPickerErrorTextView
+    <com.sbgapps.lib.numberpicker.NumberPickerErrorTextView
         android:id="@+id/error"
         android:visibility="invisible"
         android:paddingLeft="20dp"

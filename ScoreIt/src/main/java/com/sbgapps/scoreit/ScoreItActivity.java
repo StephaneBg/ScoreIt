@@ -36,6 +36,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.sbgapps.scoreit.game.ClassicBeloteLap;
 import com.sbgapps.scoreit.game.CoincheBeloteLap;
 import com.sbgapps.scoreit.game.FivePlayerTarotLap;
@@ -45,7 +46,8 @@ import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.game.ThreePlayerTarotLap;
 import com.sbgapps.scoreit.game.UniversalLap;
 import com.sbgapps.scoreit.util.TypefaceSpan;
-import com.sbgapps.scoreit.widget.PlayerInfos;
+import com.sbgapps.scoreit.widget.PlayerInfo;
+import com.sbgapps.lib.swipelistview.SwipeListView;
 
 public class ScoreItActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerListener {
@@ -53,7 +55,6 @@ public class ScoreItActivity extends BaseActivity
     public static final String KEY_SELECTED_GAME = "selected_game";
     public static final String KEY_UNIVERSAL_PLAYER_CNT = "player_count";
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
-    public static final String EXTRA_TABLET = "com.sbgapps.scoreit.tablet";
     public static final String EXTRA_EDIT = "com.sbgapps.scoreit.edit";
     public static final String EXTRA_NAME = "com.sbgapps.scoreit.name";
     private static final int REQ_PICK_CONTACT = 1;
@@ -64,7 +65,7 @@ public class ScoreItActivity extends BaseActivity
     private SharedPreferences mPreferences;
     private SpannableString mTitle;
     private boolean mIsTablet;
-    private PlayerInfos mEditedName;
+    private PlayerInfo mEditedName;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private ScoreListFragment mScoreListFragment;
     private GraphFragment mGraphFragment;
@@ -77,7 +78,7 @@ public class ScoreItActivity extends BaseActivity
         setAccentDecor();
 
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        final int game = mPreferences.getInt(KEY_SELECTED_GAME, GameData.BELOTE_CLASSIC);
+        final int game = mPreferences.getInt(KEY_SELECTED_GAME, GameData.UNIVERSAL);
         mGameData = GameData.getInstance();
         mGameData.init(this, game);
 
@@ -125,8 +126,25 @@ public class ScoreItActivity extends BaseActivity
         return mTypefaceSpan;
     }
 
-    public boolean isTablet() {
-        return mIsTablet;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (null != mScoreListFragment) {
+            SwipeListView slv = mScoreListFragment.getListView();
+            if (null != slv) slv.closeOpenedItems();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);
     }
 
     @Override
@@ -169,6 +187,11 @@ public class ScoreItActivity extends BaseActivity
             case R.id.menu_count:
                 showPlayerCountDialog();
                 return true;
+
+//            case R.id.menu_about:
+//                Intent intent = new Intent(this, AboutActivity.class);
+//                startActivity(intent);
+//                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -248,7 +271,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void editName(View view) {
-        mEditedName = (PlayerInfos) view.getParent().getParent();
+        mEditedName = (PlayerInfo) view.getParent().getParent();
         showEditNameActionChoices();
     }
 
@@ -288,8 +311,6 @@ public class ScoreItActivity extends BaseActivity
 
     private void showLapActivity(Lap lap, boolean edit) {
         Intent intent;
-        if (null != mScoreListFragment) mScoreListFragment.getListView().closeOpenedItems();
-
         switch (mGameData.getGame()) {
             default:
             case GameData.UNIVERSAL:
@@ -308,7 +329,6 @@ public class ScoreItActivity extends BaseActivity
                 break;
         }
         intent.putExtra(EXTRA_LAP, lap);
-        intent.putExtra(EXTRA_TABLET, mIsTablet);
         intent.putExtra(EXTRA_EDIT, edit);
 
         startActivityForResult(intent, REQ_LAP_ACTIVITY);

@@ -25,8 +25,8 @@
     <item
         android:id="@+id/menu_count"
         android:showAsAction="always"
-        android:icon="@drawable/ic_action_settings"
-        android:title="@string/settings"/>
+        android:icon="@drawable/ic_action_group"
+        android:title="@string/player_number"/>
     <item
         android:id="@+id/menu_view"
         android:showAsAction="ifRoom"
@@ -37,4 +37,8 @@
         android:icon="@drawable/ic_action_clear"
         android:showAsAction="ifRoom"
         android:title="@string/clear"/>
+    <!--<item-->
+        <!--android:id="@+id/menu_about"-->
+        <!--android:showAsAction="never"-->
+        <!--android:title="@string/about"/>-->
 </menu>

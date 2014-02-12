@@ -31,7 +31,7 @@ import android.widget.LinearLayout;
 import com.sbgapps.scoreit.game.GameData;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.widget.FractionFrameLayout;
-import com.sbgapps.scoreit.widget.PlayerInfos;
+import com.sbgapps.scoreit.widget.PlayerInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ import java.util.List;
 public class HeaderFragment extends Fragment {
 
     public static final String TAG = HeaderFragment.class.getName();
-    private final List<PlayerInfos> mPlayers = new ArrayList<>(2);
+    private final List<PlayerInfo> mPlayers = new ArrayList<>(2);
     private LinearLayout mParent;
 
     @Override
@@ -63,7 +63,7 @@ public class HeaderFragment extends Fragment {
         mParent = new LinearLayout(context);
 
         for (int player = 0; player < getGameData().getPlayerCount(); player++) {
-            PlayerInfos pi = new PlayerInfos(context);
+            PlayerInfo pi = new PlayerInfo(context);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT);

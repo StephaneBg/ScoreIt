@@ -28,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/less"
-            android:src="@drawable/ic_minus"
+            android:src="@drawable/ic_minus_enabled"
             android:layout_weight="1"/>
 
         <TextView
@@ -46,7 +46,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/more"
-            android:src="@drawable/ic_plus"
+            android:src="@drawable/ic_plus_enabled"
             android:layout_weight="1"/>
     </LinearLayout>
 

@@ -55,14 +55,14 @@
 
                 <RadioButton
                     android:id="@+id/rb_player1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/default_margin"
                     android:text="@string/them"/>
 
                 <RadioButton
                     android:id="@+id/rb_player2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/us"/>
             </RadioGroup>
@@ -114,21 +114,21 @@
 
                 <RadioButton
                     android:id="@+id/rb_belote_none"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/default_margin"
                     android:text="@string/none"/>
 
                 <RadioButton
                     android:id="@+id/rb_belote_player1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/default_margin"
                     android:text="@string/them"/>
 
                 <RadioButton
                     android:id="@+id/rb_belote_player2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/us"/>
             </RadioGroup>
@@ -150,21 +150,21 @@
 
                 <RadioButton
                     android:id="@+id/rb_no_coinche"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/default_margin"
                     android:text="@string/none"/>
 
                 <RadioButton
                     android:id="@+id/rb_coinche"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/default_margin"
                     android:text="@string/coinche"/>
 
                 <RadioButton
                     android:id="@+id/rb_surcoinche"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/surcoinche"
                     android:layout_weight="1"/>

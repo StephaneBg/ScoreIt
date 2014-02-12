@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.sbgapps.numberpicker.NumberPickerDialogFragment;
+import com.google.analytics.tracking.android.EasyTracker;
+import com.sbgapps.lib.numberpicker.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.game.UniversalLap;
-import com.sbgapps.scoreit.widget.UniversalInputPoints;
+import com.sbgapps.scoreit.widget.PickerInputPoints;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class UniversalLapActivity extends LapActivity
         implements NumberPickerDialogFragment.NumberPickerDialogListener {
 
     private static final String KEY_SCORES = "scores";
-    private final ArrayList<UniversalInputPoints> mPoints = new ArrayList<>(2);
+    private final ArrayList<PickerInputPoints> mPoints = new ArrayList<>(2);
 
     @Override
     public UniversalLap getLap() {
@@ -31,7 +32,7 @@ public class UniversalLapActivity extends LapActivity
 
         setContentView(R.layout.activity_lap_universal);
 
-        if (isTablet()) {
+        if (isDialog()) {
             findViewById(R.id.btn_cancel).setOnClickListener(this);
             findViewById(R.id.btn_confirm).setOnClickListener(this);
         }
@@ -44,7 +45,7 @@ public class UniversalLapActivity extends LapActivity
 
         final LinearLayout ll = (LinearLayout) findViewById(R.id.container);
         for (int player = 0; player < getGameData().getPlayerCount(); player++) {
-            UniversalInputPoints uip = new UniversalInputPoints(this);
+            PickerInputPoints uip = new PickerInputPoints(this);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -54,6 +55,18 @@ public class UniversalLapActivity extends LapActivity
             ll.addView(uip);
             mPoints.add(uip);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);
     }
 
     @Override

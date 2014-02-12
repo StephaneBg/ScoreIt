@@ -19,21 +19,25 @@
 
 <resources>
 
-    <style name="Theme.Scoreit" parent="Theme.HoloAccent.Light">
+    <style name="Theme.App" parent="Theme.HoloAccent.Light">
         <item name="accentColor">@color/accent_color</item>
         <item name="accentColorTranslucent">@color/translucent_accent_color</item>
+    </style>
+
+    <style name="Theme.App.Scoreit">
         <item name="android:windowBackground">@drawable/background_app</item>
         <item name="android:actionBarStyle">@style/ActionBar.Scoreit</item>
         <item name="android:actionMenuTextColor">@color/white</item>
         <item name="android:actionOverflowButtonStyle">@style/ButtonOverflow</item>
     </style>
 
-    <style name="Theme.Lap" parent="Theme.HoloAccent.Light.Dialog">
-        <item name="accentColor">@color/accent_color</item>
-        <item name="accentColorTranslucent">@color/translucent_accent_color</item>
+    <style name="Theme.App.Lap">
+        <item name="android:windowBackground">@drawable/background_app</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Scoreit</item>
+        <item name="isDialog">false</item>
     </style>
 
-    <style name="Theme.Lap.NoTitle">
+    <style name="Theme.App.NoTitle">
         <item name="android:windowNoTitle">true</item>
     </style>
 

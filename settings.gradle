@@ -16,6 +16,6 @@
  * limitations under the License.
  */
 
-include ':ScoreIt', ':SwipeListview', ':HoloGraphLibrary', ':NumberPicker'
+include ':ScoreIt', ':SwipeListview', ':HoloGraphLibrary', ':NumberPicker', ':Billing'
 
 project(':HoloGraphLibrary').projectDir = new File(rootDir, '../holograph/HoloGraphLibrary')

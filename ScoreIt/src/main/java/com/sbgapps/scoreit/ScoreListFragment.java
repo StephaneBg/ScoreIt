@@ -25,7 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sbgapps.scoreit.adapter.ScoreAdapter;
-import com.sbgapps.swipelistview.SwipeListView;
+import com.sbgapps.lib.swipelistview.SwipeListView;
 
 /**
  * Created by sbaiget on 11/11/13.

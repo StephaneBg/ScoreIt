@@ -29,4 +29,6 @@
     <dimen name="navigation_drawer_margin">20dip</dimen>
     <dimen name="navigation_drawer_width">240dip</dimen>
     <dimen name="navigation_drawer_header_height">32dip</dimen>
+
+    <dimen name="header_text_size">32sp</dimen>
 </resources>

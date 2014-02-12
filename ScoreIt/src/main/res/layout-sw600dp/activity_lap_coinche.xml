@@ -17,143 +17,153 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/default_margin"
-        android:layout_marginLeft="@dimen/default_margin"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:scrollbars="none"
+        android:layout_above="@+id/include">
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/team"/>
+            android:layout_marginRight="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:orientation="vertical">
 
-        <RadioGroup
-            android:id="@+id/radio_group_team"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_double_margin"
-            android:layout_marginTop="@dimen/default_margin">
-
-            <RadioButton
-                android:id="@+id/rb_player1"
-                android:layout_width="wrap_content"
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_margin"
-                android:text="@string/them"/>
+                android:text="@string/team"/>
 
-            <RadioButton
-                android:id="@+id/rb_player2"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/radio_group_team"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/us"/>
-        </RadioGroup>
+                android:layout_marginLeft="@dimen/default_double_margin"
+                android:layout_marginTop="@dimen/default_margin">
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/deal"/>
+                <RadioButton
+                    android:id="@+id/rb_player1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:text="@string/them"/>
 
-        <com.sbgapps.scoreit.widget.SeekbarInputPoints
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_deal"/>
+                <RadioButton
+                    android:id="@+id/rb_player2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/us"/>
+            </RadioGroup>
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/progress"/>
-
-        <com.sbgapps.scoreit.widget.SeekbarInputPoints
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_points"/>
-
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/belote"/>
-
-        <RadioGroup
-            android:id="@+id/radio_group_belote"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_double_margin"
-            android:layout_marginTop="@dimen/default_margin">
-
-            <RadioButton
-                android:id="@+id/rb_belote_none"
-                android:layout_width="wrap_content"
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_margin"
-                android:text="@string/none"/>
+                android:text="@string/deal"/>
 
-            <RadioButton
-                android:id="@+id/rb_belote_player1"
-                android:layout_width="wrap_content"
+            <com.sbgapps.scoreit.widget.SeekbarInputPoints
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_margin"
-                android:text="@string/them"/>
+                android:id="@+id/input_deal"/>
 
-            <RadioButton
-                android:id="@+id/rb_belote_player2"
-                android:layout_width="wrap_content"
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/us"/>
-        </RadioGroup>
+                android:text="@string/progress"/>
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/coinche"/>
-
-        <RadioGroup
-            android:id="@+id/radio_group_coinche"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_double_margin"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginBottom="@dimen/default_margin">
-
-            <RadioButton
-                android:id="@+id/rb_no_coinche"
-                android:layout_width="wrap_content"
+            <com.sbgapps.scoreit.widget.SeekbarInputPoints
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_margin"
-                android:text="@string/none"/>
+                android:id="@+id/input_points"/>
 
-            <RadioButton
-                android:id="@+id/rb_coinche"
-                android:layout_width="wrap_content"
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_margin"
+                android:text="@string/belote"/>
+
+            <RadioGroup
+                android:id="@+id/radio_group_belote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_double_margin"
+                android:layout_marginTop="@dimen/default_margin">
+
+                <RadioButton
+                    android:id="@+id/rb_belote_none"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:text="@string/none"/>
+
+                <RadioButton
+                    android:id="@+id/rb_belote_player1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:text="@string/them"/>
+
+                <RadioButton
+                    android:id="@+id/rb_belote_player2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/us"/>
+            </RadioGroup>
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/coinche"/>
 
-            <RadioButton
-                android:id="@+id/rb_surcoinche"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/radio_group_coinche"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/surcoinche"
-                android:layout_weight="1"/>
-        </RadioGroup>
+                android:layout_marginLeft="@dimen/default_double_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin">
 
-    </LinearLayout>
+                <RadioButton
+                    android:id="@+id/rb_no_coinche"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:text="@string/none"/>
+
+                <RadioButton
+                    android:id="@+id/rb_coinche"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:text="@string/coinche"/>
+
+                <RadioButton
+                    android:id="@+id/rb_surcoinche"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/surcoinche"
+                    android:layout_weight="1"/>
+            </RadioGroup>
+
+        </LinearLayout>
+    </ScrollView>
 
     <include
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        layout="@layout/include_cancel_done"/>
+        android:layout_alignParentBottom="true"
+        layout="@layout/include_cancel_done"
+        android:id="@+id/include"/>
 
-</LinearLayout>
+</RelativeLayout>

@@ -17,105 +17,115 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/default_margin"
-        android:layout_marginLeft="@dimen/default_margin"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:scrollbars="none"
+        android:layout_above="@+id/include">
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/taker"/>
+            android:layout_marginRight="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:orientation="vertical">
 
-        <Spinner
-            android:layout_height="@dimen/default_height"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_double_margin"
-            android:layout_marginLeft="@dimen/default_double_margin"
-            android:spinnerMode="dialog"
-            android:id="@+id/spinner_taker"/>
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/taker"/>
 
-        <ViewStub
-            android:id="@+id/viewstub_partner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout="@layout/stub_partner"/>
+            <Spinner
+                android:layout_height="@dimen/default_height"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_double_margin"
+                android:layout_marginLeft="@dimen/default_double_margin"
+                android:spinnerMode="dialog"
+                android:id="@+id/spinner_taker"/>
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/deal"/>
+            <ViewStub
+                android:id="@+id/viewstub_partner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout="@layout/stub_partner"/>
 
-        <Spinner
-            android:layout_height="@dimen/default_height"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_double_margin"
-            android:layout_marginLeft="@dimen/default_double_margin"
-            android:spinnerMode="dialog"
-            android:id="@+id/spinner_deal"/>
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/deal"/>
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/oudlers"/>
+            <Spinner
+                android:layout_height="@dimen/default_height"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_double_margin"
+                android:layout_marginLeft="@dimen/default_double_margin"
+                android:spinnerMode="dialog"
+                android:id="@+id/spinner_deal"/>
 
-        <CheckBox
-            android:id="@+id/checkbox_petit"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_double_margin"
-            android:layout_marginLeft="@dimen/default_double_margin"
-            android:text="@string/petit"/>
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/oudlers"/>
 
-        <CheckBox
-            android:id="@+id/checkbox_twenty_one"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_double_margin"
-            android:layout_marginLeft="@dimen/default_double_margin"
-            android:text="@string/twentyone"/>
+            <CheckBox
+                android:id="@+id/checkbox_petit"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_double_margin"
+                android:layout_marginLeft="@dimen/default_double_margin"
+                android:text="@string/petit"/>
 
-        <CheckBox
-            android:id="@+id/checkbox_fool"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_double_margin"
-            android:layout_marginLeft="@dimen/default_double_margin"
-            android:text="@string/fool"/>
+            <CheckBox
+                android:id="@+id/checkbox_twenty_one"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_double_margin"
+                android:layout_marginLeft="@dimen/default_double_margin"
+                android:text="@string/twentyone"/>
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/progress"/>
+            <CheckBox
+                android:id="@+id/checkbox_fool"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_double_margin"
+                android:layout_marginLeft="@dimen/default_double_margin"
+                android:text="@string/fool"/>
 
-        <com.sbgapps.scoreit.widget.SeekbarInputPoints
-            android:id="@+id/input_points"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"/>
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/progress"/>
 
-    </LinearLayout>
+            <com.sbgapps.scoreit.widget.SeekbarInputPoints
+                android:id="@+id/input_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_margin"/>
+
+        </LinearLayout>
+    </ScrollView>
 
     <include
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        layout="@layout/include_cancel_done"/>
+        android:layout_alignParentBottom="true"
+        layout="@layout/include_cancel_done"
+        android:id="@+id/include"/>
 
-</LinearLayout>
+</RelativeLayout>

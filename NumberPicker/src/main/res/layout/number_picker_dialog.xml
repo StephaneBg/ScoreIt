@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.sbgapps.numberpicker.NumberPicker
+    <com.sbgapps.lib.numberpicker.NumberPicker
         android:id="@+id/number_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
