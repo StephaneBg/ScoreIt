@@ -31,7 +31,7 @@
         <item name="android:actionOverflowButtonStyle">@style/ButtonOverflow</item>
     </style>
 
-    <style name="Theme.App.Lap">
+    <style name="Theme.App.Adaptive">
         <item name="android:windowBackground">@drawable/background_app</item>
         <item name="android:actionBarStyle">@style/ActionBar.Scoreit</item>
         <item name="isDialog">false</item>
@@ -60,4 +60,5 @@
         <item name="android:textColor">@color/darker_gray</item>
         <item name="android:textSize">18sp</item>
     </style>
+
 </resources>

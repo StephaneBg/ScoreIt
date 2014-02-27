@@ -36,7 +36,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.analytics.tracking.android.EasyTracker;
 import com.sbgapps.scoreit.game.ClassicBeloteLap;
 import com.sbgapps.scoreit.game.CoincheBeloteLap;
 import com.sbgapps.scoreit.game.FivePlayerTarotLap;
@@ -46,8 +45,8 @@ import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.game.ThreePlayerTarotLap;
 import com.sbgapps.scoreit.game.UniversalLap;
 import com.sbgapps.scoreit.util.TypefaceSpan;
+import com.sbgapps.scoreit.view.SwipeListView;
 import com.sbgapps.scoreit.widget.PlayerInfo;
-import com.sbgapps.lib.swipelistview.SwipeListView;
 
 public class ScoreItActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerListener {
@@ -127,24 +126,12 @@ public class ScoreItActivity extends BaseActivity
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        EasyTracker.getInstance(this).activityStart(this);
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
         if (null != mScoreListFragment) {
             SwipeListView slv = mScoreListFragment.getListView();
             if (null != slv) slv.closeOpenedItems();
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EasyTracker.getInstance(this).activityStop(this);
     }
 
     @Override
@@ -188,10 +175,10 @@ public class ScoreItActivity extends BaseActivity
                 showPlayerCountDialog();
                 return true;
 
-//            case R.id.menu_about:
-//                Intent intent = new Intent(this, AboutActivity.class);
-//                startActivity(intent);
-//                return true;
+            case R.id.menu_about:
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

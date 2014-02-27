@@ -3,7 +3,6 @@ package com.sbgapps.scoreit;
 import android.os.Bundle;
 import android.widget.RadioButton;
 
-import com.google.analytics.tracking.android.EasyTracker;
 import com.sbgapps.scoreit.game.CoincheBeloteLap;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.widget.SeekbarInputPoints;
@@ -84,18 +83,6 @@ public class CoincheLapActivity extends LapActivity {
                 HOLDER.rb_surcoinche.setChecked(true);
                 break;
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EasyTracker.getInstance(this).activityStart(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EasyTracker.getInstance(this).activityStop(this);
     }
 
     @Override

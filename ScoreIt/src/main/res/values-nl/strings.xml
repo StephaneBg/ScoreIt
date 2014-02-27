@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Score It</string>
     <string name="score">Score</string>
     <string name="graph">Grafiek</string>
@@ -55,4 +56,33 @@
     <string name="player_number">Aantal spelers</string>
     <string name="edit_name">Naam wijzigen</string>
     <string name="enter_name">Naam invoeren</string>
+    <string name="number_picker_minus_label">—</string>
+    <string name="number_picker_seperator">.</string>
+    <string name="number_picker_plus_minus">+/-</string>
+    <string name="min_error">Vul a.u.b. een getal in groter dan of gelijk aan %1$d</string>
+    <string name="max_error">Vul a.u.b. een getal in kleiner dan of gelijk aan %1$d</string>
+    <string name="min_max_error">Vul a.u.b. een getal in tussen %1$d en %2$d</string>
+
+    <string-array name="player_count">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="edit_name_action">
+        <item>Pick contact</item>
+        <item>Voer de naam</item>
+    </string-array>
+
+    <string-array name="translators">
+        <!-- English -->
+        <item>Stéphane Baiget</item>
+        <!-- French -->
+        <item>Stéphane Baiget</item>
+        <!-- Dutch -->
+        <item>Frank Barten</item>
+        <!-- Russian -->
+        <item>Danila Lepikhin</item>
+    </string-array>
+
 </resources>

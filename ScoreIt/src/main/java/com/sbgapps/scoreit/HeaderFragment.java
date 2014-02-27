@@ -30,7 +30,6 @@ import android.widget.LinearLayout;
 
 import com.sbgapps.scoreit.game.GameData;
 import com.sbgapps.scoreit.game.Lap;
-import com.sbgapps.scoreit.widget.FractionFrameLayout;
 import com.sbgapps.scoreit.widget.PlayerInfo;
 
 import java.util.ArrayList;
@@ -43,7 +42,6 @@ public class HeaderFragment extends Fragment {
 
     public static final String TAG = HeaderFragment.class.getName();
     private final List<PlayerInfo> mPlayers = new ArrayList<>(2);
-    private LinearLayout mParent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,14 +51,13 @@ public class HeaderFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_score, menu);
+        inflater.inflate(R.menu.main, menu);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Context context = getActivity();
-        FractionFrameLayout ffl = new FractionFrameLayout(context);
-        mParent = new LinearLayout(context);
+        LinearLayout root = new LinearLayout(context);
 
         for (int player = 0; player < getGameData().getPlayerCount(); player++) {
             PlayerInfo pi = new PlayerInfo(context);
@@ -76,12 +73,10 @@ public class HeaderFragment extends Fragment {
             pi.setScoreColor(getGameData().getPlayerColor(player));
             pi.setNameEditable(getGameData().getGame() != GameData.BELOTE_CLASSIC
                     && getGameData().getGame() != GameData.BELOTE_COINCHE);
-            mParent.addView(pi);
+            root.addView(pi);
             mPlayers.add(pi);
         }
-
-        ffl.addView(mParent);
-        return ffl;
+        return root;
     }
 
     public GameData getGameData() {

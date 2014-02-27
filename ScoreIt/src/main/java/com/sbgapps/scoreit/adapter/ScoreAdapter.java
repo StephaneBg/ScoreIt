@@ -36,8 +36,8 @@ import com.sbgapps.scoreit.game.BeloteLap;
 import com.sbgapps.scoreit.game.GameData;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.game.TarotLap;
+import com.sbgapps.scoreit.view.SwipeListView;
 import com.sbgapps.scoreit.widget.PlayerScore;
-import com.sbgapps.lib.swipelistview.SwipeListView;
 
 import java.util.ArrayList;
 import java.util.List;

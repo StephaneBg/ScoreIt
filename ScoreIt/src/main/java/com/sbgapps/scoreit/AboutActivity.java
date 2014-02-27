@@ -1,137 +1,155 @@
 package com.sbgapps.scoreit;
 
-import android.content.Intent;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.ListFragment;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
-import com.google.analytics.tracking.android.EasyTracker;
-import com.sbgapps.lib.billing.IabHelper;
-import com.sbgapps.lib.billing.IabKey;
-import com.sbgapps.lib.billing.IabResult;
-import com.sbgapps.lib.billing.Inventory;
-import com.sbgapps.lib.billing.Purchase;
+import com.sbgapps.scoreit.util.TypefaceSpan;
+import com.sbgapps.scoreit.view.SlidingTabLayout;
 
-/**
- * Created by sbaiget on 10/02/14.
- */
-public class AboutActivity extends BaseActivity
-        implements IabKey {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
-    static final boolean DEBUG = true;
-    static final String TAG = "AboutActivity";
-    static final String SKU_PREMIUM = "premium";
-    static final int RC_REQUEST = 10001;
-    boolean mIsPremium = false;
-    IabHelper mHelper;
+public class AboutActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setAccentDecor();
         setContentView(R.layout.activity_about);
 
-        debug("Creating IAB helper.");
-        mHelper = new IabHelper(this, base64EncodedPublicKey);
-        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-            public void onIabSetupFinished(IabResult result) {
-                debug("Setup finished.");
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
-                if (!result.isSuccess()) {
-                    // Oh noes, there was a problem.
-                    debug("Problem setting up in-app billing: " + result);
-                    // TODO: catch service billing unavailable
-                    return;
-                }
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(sectionsPagerAdapter);
 
-                // Hooray, IAB is fully set up. Now, let's get an inventory of stuff we own.
-                debug("Setup successful. Querying inventory.");
-                mHelper.queryInventoryAsync(mGotInventoryListener);
+        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        slidingTabLayout.setViewPager(viewPager);
+
+        TypefaceSpan typefaceSpan = new TypefaceSpan(this, "Lobster.otf");
+        SpannableString title = new SpannableString(getTitle());
+        title.setSpan(typefaceSpan, 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        setTitle(title);
+    }
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            Fragment fragment = null;
+            switch (position) {
+                case 0:
+                    fragment = Fragment.instantiate(AboutActivity.this,
+                            DonateFragment.class.getName());
+                    break;
+                case 1:
+                    fragment = Fragment.instantiate(AboutActivity.this,
+                            TranslationsFragment.class.getName());
+                    break;
+                case 2:
+                    fragment = Fragment.instantiate(AboutActivity.this,
+                            LicensesFragment.class.getName());
+                    break;
             }
-        });
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            Locale l = Locale.getDefault();
+            switch (position) {
+                case 0:
+                    return getString(R.string.donate).toUpperCase(l);
+                case 1:
+                    return getString(R.string.translations).toUpperCase(l);
+                case 2:
+                    return getString(R.string.licenses).toUpperCase(l);
+            }
+            return null;
+        }
     }
 
     public void onDonate(View view) {
-        if (!mHelper.subscriptionsSupported()) {
-            debug("Subscriptions not supported!");
-            return;
-        }
-        debug("Launching purchase flow for premium.");
-        mHelper.launchPurchaseFlow(this,
-                SKU_PREMIUM, IabHelper.ITEM_TYPE_INAPP,
-                RC_REQUEST, mPurchaseFinishedListener, "");
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        EasyTracker.getInstance(this).activityStart(this);
-    }
+    public static class DonateFragment extends Fragment {
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        EasyTracker.getInstance(this).activityStop(this);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mHelper != null) mHelper.dispose();
-        mHelper = null;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        debug("onActivityResult(" + requestCode + "," + resultCode + "," + data);
-
-        // Pass on the activity result to the helper for handling
-        if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
-            super.onActivityResult(requestCode, resultCode, data);
-        } else {
-            debug("onActivityResult handled by IABUtil.");
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            return inflater.inflate(R.layout.fragment_donate, container, false);
         }
     }
 
-    IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
-        public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-            debug("Query inventory finished.");
-            if (result.isFailure()) {
-                debug("Failed to query inventory: " + result);
-                return;
+    public static class TranslationsFragment extends Fragment {
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.fragment_translations, container, false);
+            ListView listView = (ListView) view.findViewById(R.id.list_view);
+
+            String[] from = new String[]{"language", "translator"};
+            int[] to = new int[]{R.id.language, R.id.translator};
+
+            List<HashMap<String, String>> data = new ArrayList<>();
+            HashMap<String, String> map;
+            String[] l = getResources().getStringArray(R.array.languages);
+            String[] t = getResources().getStringArray(R.array.translators);
+            for (int i = 0; i < l.length; i++) {
+                map = new HashMap<>();
+                map.put("language", l[i]);
+                map.put("translator", t[i]);
+                data.add(map);
             }
-            debug("Query inventory was successful.");
-            // Do we have the premium upgrade?
-            Purchase premiumPurchase = inventory.getPurchase(SKU_PREMIUM);
-            mIsPremium = (premiumPurchase != null);
-            updateUi();
-            debug("User is " + (mIsPremium ? "PREMIUM" : "NOT PREMIUM"));
-            debug("Initial inventory query finished; enabling main UI.");
-        }
-    };
 
-    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
-        public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
-            debug("Purchase finished: " + result + ", purchase: " + purchase);
-            if (result.isFailure()) {
-                debug("Error purchasing: " + result);
-                return;
-            }
-            debug("Purchase successful.");
-            if (purchase.getSku().equals(SKU_PREMIUM)) {
-                // Bought the premium upgrade!
-                debug("Purchase is premium upgrade. Congratulating user.");
-                mIsPremium = true;
-                updateUi();
-            }
+            listView.setAdapter(new SimpleAdapter(getActivity(),
+                    data, R.layout.list_item_translation, from, to));
+            return view;
         }
-    };
-
-    public void updateUi() {
-        //if (mIsPremium);
     }
 
-    private void debug(String msg) {
-        if (DEBUG) Log.d(TAG, msg);
+    public static class LicensesFragment extends ListFragment {
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            String[] from = new String[]{"library", "license"};
+            int[] to = new int[]{R.id.library, R.id.license_text};
+
+            List<HashMap<String, String>> data = new ArrayList<>();
+            HashMap<String, String> map;
+            String[] lib = getResources().getStringArray(R.array.libraries);
+            String[] lic = getResources().getStringArray(R.array.licenses);
+            for (int i = 0; i < lib.length; i++) {
+                map = new HashMap<>();
+                map.put("library", lib[i]);
+                map.put("license", lic[i]);
+                data.add(map);
+            }
+
+            setListAdapter(new SimpleAdapter(getActivity(),
+                    data, R.layout.list_item_license, from, to));
+        }
     }
 }

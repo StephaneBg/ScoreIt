@@ -82,9 +82,9 @@ public abstract class LapActivity extends BaseActivity
             DisplayMetrics dm = getResources().getDisplayMetrics();
 
             WindowManager.LayoutParams params = getWindow().getAttributes();
-            params.width = getResources().getDimensionPixelSize(R.dimen.lap_dialog_width);
+            params.width = getResources().getDimensionPixelSize(R.dimen.dialog_width);
             params.height = Math.min(
-                    getResources().getDimensionPixelSize(R.dimen.lap_dialog_max_height),
+                    getResources().getDimensionPixelSize(R.dimen.dialog_max_height),
                     dm.heightPixels * 3 / 4);
             params.alpha = 1.0f;
             params.dimAmount = 0.5f;
@@ -111,7 +111,7 @@ public abstract class LapActivity extends BaseActivity
                         ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
-        @Override
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_confirm:

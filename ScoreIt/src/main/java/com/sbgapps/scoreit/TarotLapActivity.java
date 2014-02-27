@@ -26,7 +26,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 
-import com.google.analytics.tracking.android.EasyTracker;
 import com.sbgapps.scoreit.game.FivePlayerTarotLap;
 import com.sbgapps.scoreit.game.GameData;
 import com.sbgapps.scoreit.game.Lap;
@@ -121,18 +120,6 @@ public class TarotLapActivity extends LapActivity {
         } else {
             HOLDER.input_points.setPoints(41);
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EasyTracker.getInstance(this).activityStart(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EasyTracker.getInstance(this).activityStop(this);
     }
 
     @Override

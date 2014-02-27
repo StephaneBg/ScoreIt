@@ -15,9 +15,9 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
-
+-->
 <resources>
+
     <dimen name="default_margin">12dip</dimen>
     <dimen name="default_half_margin">6dip</dimen>
     <dimen name="default_double_margin">24dip</dimen>
@@ -25,10 +25,16 @@
     <dimen name="default_height">44dip</dimen>
     <dimen name="default_list_item_height">52dip</dimen>
     <dimen name="default_column_width">280dip</dimen>
-
     <dimen name="navigation_drawer_margin">20dip</dimen>
     <dimen name="navigation_drawer_width">240dip</dimen>
     <dimen name="navigation_drawer_header_height">32dip</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="number_picker_font_size">48sp</dimen>
+    <dimen name="about_font_size">24sp</dimen>
+    <dimen name="minus_font_size">24sp</dimen>
+    <dimen name="dialpad_font_size">48sp</dimen>
+    <dimen name="numberview_padding">12dp</dimen>
+    <dimen name="numberview_padding_left">16dip</dimen>
 
-    <dimen name="header_text_size">32sp</dimen>
 </resources>

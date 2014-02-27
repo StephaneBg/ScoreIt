@@ -17,32 +17,21 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ScrollView
-        android:id="@+id/scrollview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:scrollbars="none"
-        android:layout_above="@+id/include">
-
-        <LinearLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/default_half_margin"/>
-    </ScrollView>
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <include
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        layout="@layout/include_cancel_done"
-        android:id="@+id/include"/>
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        layout="@layout/lap_include_universal"/>
 
-</RelativeLayout>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/lap_include_cancel_done"/>
+
+</LinearLayout>

@@ -74,5 +74,42 @@
     <string name="player_number">Nombre de joueurs</string>
     <string name="edit_name">Editer le nom</string>
     <string name="enter_name">Entrer le nom</string>
+    <string name="number_picker_minus_label">—</string>
+    <string name="number_picker_seperator">.</string>
+    <string name="number_delete">Supprimer</string>
+    <string name="number_picker_plus_minus">+/-</string>
+    <string name="min_error">Veuillez entrer un nombre plus grand ou égal à %1$d</string>
+    <string name="max_error">Veuillez entrer un nombre plus petit ou égal à %1$d</string>
+    <string name="min_max_error">Veuillez entrer un nombre entre %1$d et %2$d</string>
+    <string name="help">Aidez à traduire !</string>
+    <string name="translations">Traductions</string>
+    <string name="licenses">Licences</string>
+
+    <string-array name="player_count">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="edit_name_action">
+        <item>Choisir un contact</item>
+        <item>Entrer le nom</item>
+    </string-array>
+    <string-array name="languages">
+        <item>Anglais</item>
+        <item>Français</item>
+        <item>Hollandais</item>
+        <item>Russe</item>
+    </string-array>
+    <string-array name="translators">
+        <!-- English -->
+        <item>Stéphane Baiget</item>
+        <!-- French -->
+        <item>Stéphane Baiget</item>
+        <!-- Dutch -->
+        <item>Frank Barten</item>
+        <!-- Russian -->
+        <item>Danila Lepikhin</item>
+    </string-array>
 
 </resources>

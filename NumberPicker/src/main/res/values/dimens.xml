@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="medium_font_size">48sp</dimen>
-    <dimen name="minus_font_size">24sp</dimen>
-    <dimen name="dialpad_font_size">48sp</dimen>
-    <dimen name="numberview_padding">12dp</dimen>
-    <dimen name="numberview_padding_left">16dip</dimen>
-</resources>

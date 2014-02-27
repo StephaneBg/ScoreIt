@@ -4,10 +4,9 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.google.analytics.tracking.android.EasyTracker;
-import com.sbgapps.lib.numberpicker.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.game.Lap;
 import com.sbgapps.scoreit.game.UniversalLap;
+import com.sbgapps.scoreit.widget.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.widget.PickerInputPoints;
 
 import java.util.ArrayList;
@@ -55,18 +54,6 @@ public class UniversalLapActivity extends LapActivity
             ll.addView(uip);
             mPoints.add(uip);
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EasyTracker.getInstance(this).activityStart(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EasyTracker.getInstance(this).activityStop(this);
     }
 
     @Override

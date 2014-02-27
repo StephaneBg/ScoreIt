@@ -23,109 +23,15 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <ScrollView
-        android:id="@+id/scrollview"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:fillViewport="true"
-        android:scrollbars="none">
+        android:background="@color/white">
 
-        <LinearLayout
+        <include
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            layout="@layout/lap_include_tarot"/>
+    </FrameLayout>
 
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/default_margin"
-                android:layout_marginLeft="@dimen/default_margin"
-                android:text="@string/taker"/>
-
-            <Spinner
-                android:layout_height="@dimen/default_height"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_double_margin"
-                android:layout_marginLeft="@dimen/default_double_margin"
-                android:spinnerMode="dialog"
-                android:id="@+id/spinner_taker"/>
-
-            <ViewStub
-                android:id="@+id/viewstub_partner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout="@layout/stub_partner"/>
-
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/default_margin"
-                android:layout_marginLeft="@dimen/default_margin"
-                android:text="@string/deal"/>
-
-            <Spinner
-                android:layout_height="@dimen/default_height"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_double_margin"
-                android:layout_marginLeft="@dimen/default_double_margin"
-                android:spinnerMode="dialog"
-                android:id="@+id/spinner_deal"/>
-
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/default_margin"
-                android:layout_marginLeft="@dimen/default_margin"
-                android:text="@string/oudlers"/>
-
-            <CheckBox
-                android:id="@+id/checkbox_petit"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_double_margin"
-                android:layout_marginLeft="@dimen/default_double_margin"
-                android:text="@string/petit"/>
-
-            <CheckBox
-                android:id="@+id/checkbox_twenty_one"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_double_margin"
-                android:layout_marginLeft="@dimen/default_double_margin"
-                android:text="@string/twentyone"/>
-
-            <CheckBox
-                android:id="@+id/checkbox_fool"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_double_margin"
-                android:layout_marginLeft="@dimen/default_double_margin"
-                android:text="@string/fool"/>
-
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/default_margin"
-                android:layout_marginLeft="@dimen/default_margin"
-                android:text="@string/progress"/>
-
-            <com.sbgapps.scoreit.widget.SeekbarInputPoints
-                android:id="@+id/input_points"
-                android:layout_marginRight="@dimen/default_margin"
-                android:layout_marginLeft="@dimen/default_margin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-    </ScrollView>
 </FrameLayout>

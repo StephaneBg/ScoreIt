@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:textSize="@dimen/about_font_size"
+        android:text="@string/help"/>
+
+    <TextView
+        tools:ignore="HardcodedText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="http://www.getlocalization.com/ScoreIt/"
+        android:autoLink="web"
+        android:textColorLink="@color/accent_color"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dip"
+        android:background="?android:listDivider"/>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/language"
+            android:layout_weight="1"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/translator"
+            android:layout_weight="1"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="?android:listDivider"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list_view"/>
+</LinearLayout>
