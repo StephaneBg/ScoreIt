@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.sbgapps.scoreit.widget.NumberPicker
+        android:id="@+id/number_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="?android:listDivider"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            style="?android:buttonBarStyle"
+            android:baselineAligned="false">
+
+            <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:text="@string/cancel"
+                style="?android:borderlessButtonStyle"
+                android:layout_height="match_parent"/>
+
+            <Button
+                android:id="@+id/set_button"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:text="@string/done"
+                style="?android:borderlessButtonStyle"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

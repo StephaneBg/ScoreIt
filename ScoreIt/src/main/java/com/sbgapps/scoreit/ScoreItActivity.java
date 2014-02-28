@@ -174,17 +174,19 @@ public class ScoreItActivity extends BaseActivity
             case R.id.menu_count:
                 showPlayerCountDialog();
                 return true;
-
-            case R.id.menu_about:
-                Intent intent = new Intent(this, AboutActivity.class);
-                startActivity(intent);
-                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onNavigationDrawerGameSelected(int game) {
+        if (-1 == game) {
+            // About
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+            return;
+        }
+
         getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
         mPreferences.edit().putInt(KEY_SELECTED_GAME, game).commit();

@@ -45,6 +45,7 @@ import com.sbgapps.scoreit.util.TypefaceSpan;
 import com.sbgapps.scoreit.view.DrawerEntry;
 import com.sbgapps.scoreit.view.DrawerHeader;
 import com.sbgapps.scoreit.view.DrawerItem;
+import com.sbgapps.scoreit.view.DrawerOption;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +84,7 @@ public class NavigationDrawerFragment extends Fragment {
         items.add(new DrawerEntry(R.string.three_players, GameData.TAROT_3_PLAYERS));
         items.add(new DrawerEntry(R.string.four_players, GameData.TAROT_4_PLAYERS));
         items.add(new DrawerEntry(R.string.five_players, GameData.TAROT_5_PLAYERS));
+        items.add(new DrawerOption(R.string.about, R.drawable.ic_action_about));
         mAdapter = new DrawerArrayAdapter(context, items);
 
         setHasOptionsMenu(true);

@@ -27,7 +27,7 @@ import com.sbgapps.scoreit.adapter.DrawerArrayAdapter;
 
 public class DrawerHeader implements DrawerItem {
 
-    final int mResId;
+    private final int mResId;
 
     public DrawerHeader(int resId) {
         mResId = resId;
@@ -48,7 +48,7 @@ public class DrawerHeader implements DrawerItem {
         View view;
         if (null == convertView) {
             view = inflater.inflate(R.layout.list_item_drawer_header, null);
-            TextView tv = (TextView) view.findViewById(R.id.drawer_header);
+            TextView tv = (TextView) view.findViewById(R.id.drawer_entry);
             tv.setText(mResId);
         } else {
             view = convertView;

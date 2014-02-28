@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/key_left"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:textSize="@dimen/dialpad_font_size"
+        style="?android:borderlessButtonStyle"
+        android:fontFamily="Roboto-Thin.ttf"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:id="@+id/key_middle"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:textSize="@dimen/dialpad_font_size"
+        style="?android:borderlessButtonStyle"
+        android:fontFamily="Roboto-Thin.ttf"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:id="@+id/key_right"
+        android:layout_weight="1"
+        android:layout_width="0dip"
+        android:textSize="@dimen/dialpad_font_size"
+        style="?android:borderlessButtonStyle"
+        android:fontFamily="Roboto-Thin.ttf"
+        android:layout_height="match_parent"/>
+</LinearLayout>

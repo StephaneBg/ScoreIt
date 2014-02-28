@@ -31,10 +31,10 @@ import java.util.List;
 public class DrawerArrayAdapter extends ArrayAdapter<DrawerItem> {
 
     public enum RowType {
-        ENTRY_ITEM, HEADER_ITEM
+        ENTRY_ITEM, HEADER_ITEM, OPTION_ITEM
     }
 
-    LayoutInflater mInflater;
+    final LayoutInflater mInflater;
 
     public DrawerArrayAdapter(Context context, List<DrawerItem> items) {
         super(context, 0, items);
@@ -59,7 +59,7 @@ public class DrawerArrayAdapter extends ArrayAdapter<DrawerItem> {
 
     @Override
     public boolean isEnabled(int position) {
-        return getItem(position).getViewType() == RowType.ENTRY_ITEM.ordinal();
+        return getItem(position).getViewType() != RowType.HEADER_ITEM.ordinal();
     }
 
     @Override
