@@ -40,7 +40,7 @@ public class AboutActivity extends BaseActivity {
         slidingTabLayout.setViewPager(viewPager);
 
         TypefaceSpan typefaceSpan = new TypefaceSpan(this, "Lobster.otf");
-        SpannableString title = new SpannableString(getTitle());
+        SpannableString title = new SpannableString(getResources().getString(R.string.about));
         title.setSpan(typefaceSpan, 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         setTitle(title);
     }
@@ -140,7 +140,7 @@ public class AboutActivity extends BaseActivity {
             List<HashMap<String, String>> data = new ArrayList<>();
             HashMap<String, String> map;
             String[] lib = getResources().getStringArray(R.array.libraries);
-            String[] lic = getResources().getStringArray(R.array.licenses);
+            String[] lic = getResources().getStringArray(R.array.lib_licenses);
             for (int i = 0; i < lib.length; i++) {
                 map = new HashMap<>();
                 map.put("library", lib[i]);

@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2013 SBG Apps
+  ~ http://baiget.fr
+  ~ stephane@baiget.fr
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
 <resources>
 
     <string name="app_name">Score It</string>
@@ -62,27 +79,21 @@
     <string name="min_error">Vul a.u.b. een getal in groter dan of gelijk aan %1$d</string>
     <string name="max_error">Vul a.u.b. een getal in kleiner dan of gelijk aan %1$d</string>
     <string name="min_max_error">Vul a.u.b. een getal in tussen %1$d en %2$d</string>
+    <string name="help">Help mee met vertalen!</string>
+    <string name="translations">Vertalingen</string>
+    <string name="translator">Vertaler</string>
+    <string name="language">Taal</string>
+    <string name="licenses">Licenties</string>
 
-    <string-array name="player_count">
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
     <string-array name="edit_name_action">
         <item>Pick contact</item>
         <item>Voer de naam</item>
     </string-array>
-
-    <string-array name="translators">
-        <!-- English -->
-        <item>Stéphane Baiget</item>
-        <!-- French -->
-        <item>Stéphane Baiget</item>
-        <!-- Dutch -->
-        <item>Frank Barten</item>
-        <!-- Russian -->
-        <item>Danila Lepikhin</item>
+    <string-array name="languages">
+        <item>Engels</item>
+        <item>Frans</item>
+        <item>Nederlands</item>
+        <item>Russisch</item>
     </string-array>
 
 </resources>

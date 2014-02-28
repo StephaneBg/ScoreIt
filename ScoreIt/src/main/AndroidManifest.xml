@@ -20,6 +20,7 @@
           package="com.sbgapps.scoreit">
 
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="com.android.vending.BILLING"/>
 
     <application
         android:allowBackup="true"
@@ -39,6 +40,11 @@
             android:name="com.sbgapps.scoreit.UniversalLapActivity"
             android:theme="@style/Theme.App.Adaptive"/>
         <activity
+            android:name="com.sbgapps.scoreit.AboutActivity"
+            android:theme="@style/Theme.App.Adaptive"
+            android:logo="@drawable/ic_launcher_flat"
+            android:parentActivityName=".ScoreItActivity"/>
+        <activity
             android:name="com.sbgapps.scoreit.BeloteLapActivity"
             android:theme="@style/Theme.App.Adaptive"/>
         <activity
@@ -47,12 +53,6 @@
         <activity
             android:name="com.sbgapps.scoreit.TarotLapActivity"
             android:theme="@style/Theme.App.Adaptive"/>
-        <activity
-            android:name="com.sbgapps.scoreit.AboutActivity"
-            android:theme="@style/Theme.App.Adaptive"
-            android:logo="@drawable/ic_launcher_flat"
-            android:parentActivityName=".ScoreItActivity"
-            android:label="@string/about"/>
         <activity
             android:name="com.sbgapps.scoreit.EditNameActivity"
             android:theme="@style/Theme.App.NoTitle"/>

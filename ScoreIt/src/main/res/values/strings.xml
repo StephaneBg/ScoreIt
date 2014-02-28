@@ -85,12 +85,6 @@
     <string name="language">Language</string>
     <string name="licenses">Licenses</string>
 
-    <string-array name="player_count">
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
     <string-array name="edit_name_action">
         <item>Pick contact</item>
         <item>Enter name</item>
@@ -100,16 +94,6 @@
         <item>French</item>
         <item>Dutch</item>
         <item>Russian</item>
-    </string-array>
-    <string-array name="translators">
-        <!-- English -->
-        <item>Stéphane Baiget</item>
-        <!-- French -->
-        <item>Stéphane Baiget</item>
-        <!-- Dutch -->
-        <item>Frank Barten</item>
-        <!-- Russian -->
-        <item>Danila Lepikhin</item>
     </string-array>
 
 </resources>
