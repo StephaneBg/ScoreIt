@@ -2,62 +2,56 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:divider="?android:listDivider"
+    android:orientation="vertical"
+    android:showDividers="middle">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_margin"
         android:layout_marginLeft="@dimen/default_margin"
-        android:textSize="@dimen/about_font_size"
-        android:text="@string/help"/>
+        android:layout_marginTop="@dimen/default_margin"
+        android:text="@string/translations"
+        android:textSize="@dimen/about_font_size"/>
 
-    <TextView
-        tools:ignore="HardcodedText"
+    <Button
+        android:id="@+id/btn_translate"
+        style="?android:actionButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="http://www.getlocalization.com/ScoreIt/"
-        android:autoLink="web"
-        android:textColorLink="@color/accent_color"
-        android:layout_marginLeft="@dimen/default_margin"
-        android:layout_marginBottom="@dimen/default_margin"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dip"
-        android:background="?android:listDivider"/>
+        android:drawableLeft="@drawable/ic_translate"
+        android:gravity="center_vertical"
+        android:text="@string/help_translate"/>
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_height">
+        android:layout_height="@dimen/default_height"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="@string/language"
             android:layout_weight="1"
-            android:gravity="center"/>
+            android:fontFamily="fonts/Roboto-Bold.ttf"
+            android:gravity="center"
+            android:text="@string/language"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="fonts/Roboto-Bold.ttf"
+            android:gravity="center"
             android:text="@string/translator"
-            android:layout_weight="1"
-            android:gravity="center"/>
+            android:textStyle="bold"/>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:background="?android:listDivider"/>
-
     <ListView
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/list_view"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>

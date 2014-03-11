@@ -3,6 +3,8 @@ package com.sbgapps.scoreit;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ListFragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,9 +13,11 @@ import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
 import com.sbgapps.scoreit.util.TypefaceSpan;
 import com.sbgapps.scoreit.view.SlidingTabLayout;
 
@@ -23,6 +27,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class AboutActivity extends BaseActivity {
+
+    private BillingProcessor mBillingProcessor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,63 +49,24 @@ public class AboutActivity extends BaseActivity {
         SpannableString title = new SpannableString(getResources().getString(R.string.about));
         title.setSpan(typefaceSpan, 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         setTitle(title);
+
+        mBillingProcessor = new BillingProcessor(this);
     }
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            Fragment fragment = null;
-            switch (position) {
-                case 0:
-                    fragment = Fragment.instantiate(AboutActivity.this,
-                            DonateFragment.class.getName());
-                    break;
-                case 1:
-                    fragment = Fragment.instantiate(AboutActivity.this,
-                            TranslationsFragment.class.getName());
-                    break;
-                case 2:
-                    fragment = Fragment.instantiate(AboutActivity.this,
-                            LicensesFragment.class.getName());
-                    break;
-            }
-            return fragment;
-        }
-
-        @Override
-        public int getCount() {
-            return 3;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            Locale l = Locale.getDefault();
-            switch (position) {
-                case 0:
-                    return getString(R.string.donate).toUpperCase(l);
-                case 1:
-                    return getString(R.string.translations).toUpperCase(l);
-                case 2:
-                    return getString(R.string.licenses).toUpperCase(l);
-            }
-            return null;
-        }
+    public BillingProcessor getBillingProcessor() {
+        return mBillingProcessor;
     }
 
-    public void onDonate(View view) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!mBillingProcessor.handleActivityResult(requestCode, resultCode, data))
+            super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public static class DonateFragment extends Fragment {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_donate, container, false);
-        }
+    @Override
+    public void onDestroy() {
+        if (null != mBillingProcessor) mBillingProcessor.release();
+        super.onDestroy();
     }
 
     public static class TranslationsFragment extends Fragment {
@@ -125,6 +92,17 @@ public class AboutActivity extends BaseActivity {
 
             listView.setAdapter(new SimpleAdapter(getActivity(),
                     data, R.layout.list_item_translation, from, to));
+
+            Button btn = (Button) view.findViewById(R.id.btn_translate);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://www.getlocalization.com/ScoreIt/"));
+                    startActivity(intent);
+                }
+            });
+
             return view;
         }
     }
@@ -150,6 +128,52 @@ public class AboutActivity extends BaseActivity {
 
             setListAdapter(new SimpleAdapter(getActivity(),
                     data, R.layout.list_item_license, from, to));
+        }
+    }
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            Fragment fragment = null;
+            switch (position) {
+                case 0:
+                    fragment = Fragment.instantiate(AboutActivity.this,
+                            InfoFragment.class.getName());
+                    break;
+                case 1:
+                    fragment = Fragment.instantiate(AboutActivity.this,
+                            TranslationsFragment.class.getName());
+                    break;
+                case 2:
+                    fragment = Fragment.instantiate(AboutActivity.this,
+                            LicensesFragment.class.getName());
+                    break;
+            }
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            Locale l = Locale.getDefault();
+            switch (position) {
+                case 0:
+                    return getString(R.string.application).toUpperCase(l);
+                case 1:
+                    return getString(R.string.translations).toUpperCase(l);
+                case 2:
+                    return getString(R.string.licenses).toUpperCase(l);
+            }
+            return null;
         }
     }
 }

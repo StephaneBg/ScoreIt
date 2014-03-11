@@ -18,7 +18,6 @@
 -->
 <resources>
 
-    <string name="app_name">Score It</string>
     <string name="score">Score</string>
     <string name="graph">Grafiek</string>
     <string name="belote">Klaverjassen</string>
@@ -62,7 +61,7 @@
     <string name="guard">Guard</string>
     <string name="guard_without">Guard zonder</string>
     <string name="guard_against">Guard tegen</string>
-    <string name="click_on">Klik op</string>
+    <string name="click_to_add">Klik op</string>
     <string name="to_add">om toe te voegen</string>
     <string name="more">Meer</string>
     <string name="less">Minder</string>
@@ -79,11 +78,12 @@
     <string name="min_error">Vul a.u.b. een getal in groter dan of gelijk aan %1$d</string>
     <string name="max_error">Vul a.u.b. een getal in kleiner dan of gelijk aan %1$d</string>
     <string name="min_max_error">Vul a.u.b. een getal in tussen %1$d en %2$d</string>
-    <string name="help">Help mee met vertalen!</string>
+    <string name="help_translate">Help mee met vertalen</string>
     <string name="translations">Vertalingen</string>
     <string name="translator">Vertaler</string>
     <string name="language">Taal</string>
     <string name="licenses">Licenties</string>
+    <string name="thanks">Dank u</string>
 
     <string-array name="edit_name_action">
         <item>Pick contact</item>

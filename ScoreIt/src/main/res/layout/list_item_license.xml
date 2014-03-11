@@ -2,27 +2,28 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/library"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_margin"
-        android:textSize="@dimen/about_font_size"
-        android:id="@+id/library"/>
+        android:layout_marginTop="@dimen/default_margin"
+        android:textSize="@dimen/about_font_size"/>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/default_margin"
-        android:padding="@dimen/default_margin"
-        android:background="@color/lighter_gray">
+        android:background="@color/lighter_gray"
+        android:padding="@dimen/default_margin">
 
         <TextView
+            android:id="@+id/license_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/license_text"/>
+            android:layout_height="match_parent"/>
     </FrameLayout>
 </LinearLayout>

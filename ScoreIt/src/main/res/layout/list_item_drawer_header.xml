@@ -25,11 +25,11 @@
     <TextView
         android:id="@+id/drawer_entry"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/navigation_drawer_header_height"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_margin"
+        android:clickable="false"
+        android:fontFamily="fonts/Lobster.otf"
         android:gravity="bottom"
         android:textColor="@color/accent_color"
-        android:clickable="false"
-        android:textSize="24sp"
-        android:fontFamily="fonts/Lobster.otf"/>
+        android:textSize="24sp"/>
 </FrameLayout>

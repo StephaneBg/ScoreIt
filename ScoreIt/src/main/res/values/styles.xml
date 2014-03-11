@@ -37,8 +37,13 @@
         <item name="isDialog">false</item>
     </style>
 
-    <style name="Theme.App.NoTitle">
-        <item name="android:windowNoTitle">true</item>
+    <style name="Theme.App.Dialog" parent="Theme.HoloAccent.Light.Dialog">
+        <item name="accentColor">@color/accent_color</item>
+        <item name="accentColorTranslucent">@color/translucent_accent_color</item>
+    </style>
+
+    <style name="Theme.App.Dialog.NoTitle">
+    <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="ActionBar.Scoreit" parent="android:Widget.Holo.ActionBar">

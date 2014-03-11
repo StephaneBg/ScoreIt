@@ -2,11 +2,9 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginRight="@dimen/default_margin"
-    android:layout_marginLeft="@dimen/default_margin">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/player_name"
@@ -27,27 +25,27 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:contentDescription="@string/less"
-            android:src="@drawable/ic_minus_enabled"
-            android:layout_weight="1"/>
+            android:src="@drawable/ic_minus_enabled"/>
 
         <TextView
+            android:id="@+id/edit_points"
             android:layout_width="0dip"
             android:layout_height="@dimen/default_list_item_height"
-            android:id="@+id/edit_points"
             android:layout_weight="1"
             android:background="@drawable/background_textfield"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <ImageButton
             android:id="@+id/btn_more"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:contentDescription="@string/more"
-            android:src="@drawable/ic_plus_enabled"
-            android:layout_weight="1"/>
+            android:src="@drawable/ic_plus_enabled"/>
     </LinearLayout>
 
 </LinearLayout>

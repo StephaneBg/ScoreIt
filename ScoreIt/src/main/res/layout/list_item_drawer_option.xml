@@ -26,10 +26,11 @@
         android:id="@+id/drawer_entry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/default_padding"
-        android:paddingBottom="@dimen/default_padding"
-        android:textColor="@color/darker_gray"
+        android:fontFamily="fonts/RobotoCondensed-Regular.ttf"
         android:gravity="center_vertical"
+        android:paddingBottom="@dimen/default_padding"
+        android:paddingTop="@dimen/default_padding"
         android:textAllCaps="true"
+        android:textColor="@color/darker_gray"
         android:textSize="16sp"/>
 </FrameLayout>

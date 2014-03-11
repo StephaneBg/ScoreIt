@@ -179,8 +179,8 @@ public class ScoreItActivity extends BaseActivity
     }
 
     @Override
-    public void onNavigationDrawerGameSelected(int game) {
-        if (-1 == game) {
+    public void onNavigationDrawerGameSelected(int position) {
+        if (-1 == position) {
             // About
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
@@ -189,8 +189,8 @@ public class ScoreItActivity extends BaseActivity
 
         getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-        mPreferences.edit().putInt(KEY_SELECTED_GAME, game).commit();
-        mGameData.setGame(game);
+        mPreferences.edit().putInt(KEY_SELECTED_GAME, position).commit();
+        mGameData.setGame(position);
         setTitle();
 
         reloadFragments();
@@ -389,7 +389,8 @@ public class ScoreItActivity extends BaseActivity
                                 }
                                 invalidateOptionsMenu();
                             }
-                        })
+                        }
+                )
                 .setNegativeButton(
                         R.string.no,
                         new DialogInterface.OnClickListener() {
@@ -397,7 +398,8 @@ public class ScoreItActivity extends BaseActivity
                             public void onClick(DialogInterface dialog, int which) {
                                 // Nothing to do!
                             }
-                        })
+                        }
+                )
                 .create();
         dialog.show();
         getAccentHelper().prepareDialog(this, dialog.getWindow());
@@ -416,7 +418,8 @@ public class ScoreItActivity extends BaseActivity
                                         .commit();
                                 reloadFragments();
                             }
-                        })
+                        }
+                )
                 .create();
         dialog.show();
         getAccentHelper().prepareDialog(this, dialog.getWindow());
@@ -443,7 +446,8 @@ public class ScoreItActivity extends BaseActivity
                                         break;
                                 }
                             }
-                        })
+                        }
+                )
                 .create();
         dialog.show();
         getAccentHelper().prepareDialog(this, dialog.getWindow());

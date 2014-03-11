@@ -18,30 +18,16 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="horizontal"
     android:onClick="start">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/click_on"
-        android:textSize="18sp"
-        android:textColor="@color/darker_gray"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_plus_enabled"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/to_add"
-        android:textSize="18sp"
-        android:textColor="@color/darker_gray"/>
-</LinearLayout>
+        android:layout_gravity="center"
+        android:contentDescription="@string/click_to_add"
+        android:src="@drawable/ic_action_new_big"/>
+</FrameLayout>

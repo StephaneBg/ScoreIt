@@ -3,12 +3,12 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
         android:orientation="vertical">
 
         <TextView
@@ -18,11 +18,11 @@
             android:text="@string/taker"/>
 
         <Spinner
-            android:layout_height="@dimen/default_height"
+            android:id="@+id/spinner_taker"
             android:layout_width="match_parent"
+            android:layout_height="@dimen/default_height"
             android:layout_marginTop="@dimen/default_margin"
-            android:spinnerMode="dialog"
-            android:id="@+id/spinner_taker"/>
+            android:spinnerMode="dialog"/>
 
         <ViewStub
             android:id="@+id/viewstub_partner"
@@ -37,11 +37,11 @@
             android:text="@string/deal"/>
 
         <Spinner
-            android:layout_height="@dimen/default_height"
+            android:id="@+id/spinner_deal"
             android:layout_width="match_parent"
+            android:layout_height="@dimen/default_height"
             android:layout_marginTop="@dimen/default_margin"
-            android:spinnerMode="dialog"
-            android:id="@+id/spinner_deal"/>
+            android:spinnerMode="dialog"/>
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
@@ -51,26 +51,26 @@
 
         <CheckBox
             android:id="@+id/checkbox_petit"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/default_margin"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
             android:text="@string/petit"/>
 
         <CheckBox
             android:id="@+id/checkbox_twenty_one"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/default_margin"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
             android:text="@string/twentyone"/>
 
         <CheckBox
             android:id="@+id/checkbox_fool"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/default_margin"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
             android:text="@string/fool"/>
 
         <TextView

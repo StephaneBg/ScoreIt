@@ -20,25 +20,21 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/default_margin"
-        android:layout_marginLeft="@dimen/default_margin"
         android:text="@string/partner"/>
 
     <Spinner
-        android:layout_height="@dimen/default_height"
+        android:id="@+id/spinner_partner"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height"
         android:layout_marginTop="@dimen/default_margin"
-        android:layout_marginRight="@dimen/default_double_margin"
-        android:layout_marginLeft="@dimen/default_double_margin"
-        android:spinnerMode="dialog"
-        android:id="@+id/spinner_partner"/>
+        android:spinnerMode="dialog"/>
 
 </LinearLayout>

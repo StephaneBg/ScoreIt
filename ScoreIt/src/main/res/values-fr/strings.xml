@@ -19,7 +19,6 @@
 
 <resources>
 
-    <string name="app_name">Score It</string>
     <string name="score">Score</string>
     <string name="graph">Graph</string>
     <string name="belote">Belote</string>
@@ -61,7 +60,7 @@
     <string name="guard">Garde</string>
     <string name="guard_without">Garde sans</string>
     <string name="guard_against">Garde contre</string>
-    <string name="click_on">Cliquez sur</string>
+    <string name="click_to_add">Cliquez sur</string>
     <string name="to_add">pour ajouter</string>
     <string name="more">Plus</string>
     <string name="less">Moins</string>
@@ -80,11 +79,12 @@
     <string name="min_error">Veuillez entrer un nombre plus grand ou égal à %1$d</string>
     <string name="max_error">Veuillez entrer un nombre plus petit ou égal à %1$d</string>
     <string name="min_max_error">Veuillez entrer un nombre entre %1$d et %2$d</string>
-    <string name="help">Aidez à traduire !</string>
+    <string name="help_translate">Aidez à traduire</string>
     <string name="translations">Traductions</string>
     <string name="translator">Traducteur</string>
     <string name="language">Langue</string>
     <string name="licenses">Licences</string>
+    <string name="thanks">Merci</string>
 
     <string-array name="edit_name_action">
         <item>Choisir un contact</item>

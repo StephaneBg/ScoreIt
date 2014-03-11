@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fillViewport="true">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
         android:orientation="vertical">
 
         <TextView
@@ -22,9 +22,9 @@
             android:id="@+id/radio_group_team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin">
+            android:layout_marginTop="@dimen/default_margin"
+            android:orientation="vertical">
 
             <RadioButton
                 android:id="@+id/rb_player1"
@@ -47,9 +47,9 @@
             android:text="@string/deal"/>
 
         <com.sbgapps.scoreit.widget.SeekbarInputPoints
+            android:id="@+id/input_deal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_deal"/>
+            android:layout_height="wrap_content"/>
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
@@ -58,9 +58,9 @@
             android:text="@string/progress"/>
 
         <com.sbgapps.scoreit.widget.SeekbarInputPoints
+            android:id="@+id/input_points"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_points"/>
+            android:layout_height="wrap_content"/>
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
@@ -72,9 +72,9 @@
             android:id="@+id/radio_group_belote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin">
+            android:layout_marginTop="@dimen/default_margin"
+            android:orientation="vertical">
 
             <RadioButton
                 android:id="@+id/rb_belote_none"
@@ -107,6 +107,7 @@
             android:id="@+id/radio_group_coinche"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin">
 
@@ -128,8 +129,8 @@
                 android:id="@+id/rb_surcoinche"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/surcoinche"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="@string/surcoinche"/>
         </RadioGroup>
 
     </LinearLayout>

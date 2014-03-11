@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">Score It</string>
     <string-array name="player_count" translatable="false">
         <item translatable="false">2</item>
         <item translatable="false">3</item>

@@ -43,7 +43,7 @@ dependencies {
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.+'
     compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.+'
     compile 'com.nineoldandroids:library:2.4.+'
+    compile 'com.anjlab.android.iab.v3:library:1.0.+@aar'
     // Local repositories
     compile 'com.echo.holographlibrary:HoloGraphLibrary:1.0@aar'
-    compile 'com.anjlab.android.iab.v3:library:1.0@aar'
 }

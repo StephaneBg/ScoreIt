@@ -1,0 +1,95 @@
+<ScrollView
+    android:id="@+id/scrollview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="?android:listDivider"
+        android:orientation="vertical"
+        android:showDividers="middle|end">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="@dimen/about_font_size"/>
+
+            <TextView
+                android:id="@+id/version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dip"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:text="© SBG Apps - Stéphane Baiget"
+                tools:ignore="HardcodedText"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_rate"
+            style="?android:actionButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_rating"
+            android:gravity="center_vertical"
+            android:text="@string/rate_app"/>
+
+        <Button
+            android:id="@+id/btn_share"
+            style="?android:actionButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_social_share"
+            android:gravity="center_vertical"
+            android:text="@string/share_app"/>
+
+        <Button
+            android:id="@+id/btn_contact"
+            style="?android:actionButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_content_email"
+            android:gravity="center_vertical"
+            android:text="@string/contact_developer"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="bottom"
+            android:text="@string/donate"
+            android:textSize="@dimen/about_font_size"/>
+
+        <Button
+            android:id="@+id/btn_donate_coffee"
+            style="?android:actionButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_donate_coffee"
+            android:gravity="center_vertical"
+            android:text="@string/donate_coffee"/>
+
+        <Button
+            android:id="@+id/btn_donate_beer"
+            style="?android:actionButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_donate_beer"
+            android:gravity="center_vertical"
+            android:text="@string/donate_beer"/>
+
+    </LinearLayout>
+</ScrollView>
