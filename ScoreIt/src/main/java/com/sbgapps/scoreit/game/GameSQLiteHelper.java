@@ -1,19 +1,17 @@
 /*
- * Copyright (C) 2013 SBG Apps
- * http://baiget.fr
- * stephane@baiget.fr
+ * Copyright 2013 SBG Apps
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
  */
 
 package com.sbgapps.scoreit.game;
@@ -42,11 +40,11 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
     public static final String UNIVERSAL_COLUMN_SCORE_4 = "score_player4";
     public static final int UNIVERSAL_COLUMN_IDX_SCORE_4 = 4;
     public static final String UNIVERSAL_COLUMN_SCORE_5 = "score_player5";
-    public static final int UNIVERSAL_COLUMN_IDX_SCORE_5 = 5;
     public static final String[] UNIVERSAL_ALL_COLUMNS = {
             COLUMN_ID, UNIVERSAL_COLUMN_SCORE_1,
             UNIVERSAL_COLUMN_SCORE_2, UNIVERSAL_COLUMN_SCORE_3,
             UNIVERSAL_COLUMN_SCORE_4, UNIVERSAL_COLUMN_SCORE_5};
+    public static final int UNIVERSAL_COLUMN_IDX_SCORE_5 = 5;
     /*
      * Belote
      */
@@ -61,20 +59,20 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
     public static final String BELOTE_COLUMN_SCORE_1 = "score_player1";
     public static final int BELOTE_COLUMN_IDX_SCORE_1 = 4;
     public static final String BELOTE_COLUMN_SCORE_2 = "score_player2";
-    public static final int BELOTE_COLUMN_IDX_SCORE_2 = 5;
-    public static final String BELOTE_COLUMN_DEAL = "deal";
-    public static final int BELOTE_COLUMN_IDX_DEAL = 6;
-    public static final String BELOTE_COLUMN_COINCHE = "coinche";
-    public static final int BELOTE_COLUMN_IDX_COINCHE = 7;
     public static final String[] BELOTE_CLASSIC_ALL_COLUMNS = {
             COLUMN_ID, BELOTE_COLUMN_TAKER,
             BELOTE_COLUMN_POINTS, BELOTE_COLUMN_BELOTE,
             BELOTE_COLUMN_SCORE_1, BELOTE_COLUMN_SCORE_2};
+    public static final int BELOTE_COLUMN_IDX_SCORE_2 = 5;
+    public static final String BELOTE_COLUMN_DEAL = "deal";
+    public static final int BELOTE_COLUMN_IDX_DEAL = 6;
+    public static final String BELOTE_COLUMN_COINCHE = "coinche";
     public static final String[] BELOTE_COINCHE_ALL_COLUMNS = {
             COLUMN_ID, BELOTE_COLUMN_TAKER,
             BELOTE_COLUMN_POINTS, BELOTE_COLUMN_BELOTE,
             BELOTE_COLUMN_SCORE_1, BELOTE_COLUMN_SCORE_2,
             BELOTE_COLUMN_DEAL, BELOTE_COLUMN_COINCHE};
+    public static final int BELOTE_COLUMN_IDX_COINCHE = 7;
     /*
      * Tarot
      */
@@ -94,29 +92,29 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
     public static final String TAROT_COLUMN_SCORE_2 = "score_player2";
     public static final int TAROT_COLUMN_IDX_SCORE_2 = 6;
     public static final String TAROT_COLUMN_SCORE_3 = "score_player3";
-    public static final int TAROT_COLUMN_IDX_SCORE_3 = 7;
-    public static final String TAROT_COLUMN_SCORE_4 = "score_player4";
-    public static final int TAROT_COLUMN_IDX_SCORE_4 = 8;
-    public static final String TAROT_COLUMN_SCORE_5 = "score_player5";
-    public static final int TAROT_COLUMN_IDX_SCORE_5 = 9;
-    public static final String TAROT_COLUMN_PARTNER = "partner";
-    public static final int TAROT_COLUMN_IDX_PARTNER = 10;
     public static final String[] TAROT_3_PLAYERS_ALL_COLUMNS = {
             COLUMN_ID, TAROT_COLUMN_TAKER, TAROT_COLUMN_DEAL,
             TAROT_COLUMN_POINTS, TAROT_COLUMN_OUDLER,
             TAROT_COLUMN_SCORE_1, TAROT_COLUMN_SCORE_2,
             TAROT_COLUMN_SCORE_3};
+    public static final int TAROT_COLUMN_IDX_SCORE_3 = 7;
+    public static final String TAROT_COLUMN_SCORE_4 = "score_player4";
     public static final String[] TAROT_4_PLAYERS_ALL_COLUMNS = {
             COLUMN_ID, TAROT_COLUMN_TAKER, TAROT_COLUMN_DEAL,
             TAROT_COLUMN_POINTS, TAROT_COLUMN_OUDLER,
             TAROT_COLUMN_SCORE_1, TAROT_COLUMN_SCORE_2,
             TAROT_COLUMN_SCORE_3, TAROT_COLUMN_SCORE_4};
+    public static final int TAROT_COLUMN_IDX_SCORE_4 = 8;
+    public static final String TAROT_COLUMN_SCORE_5 = "score_player5";
+    public static final int TAROT_COLUMN_IDX_SCORE_5 = 9;
+    public static final String TAROT_COLUMN_PARTNER = "partner";
     public static final String[] TAROT_5_PLAYERS_ALL_COLUMNS = {
             COLUMN_ID, TAROT_COLUMN_TAKER, TAROT_COLUMN_DEAL,
             TAROT_COLUMN_POINTS, TAROT_COLUMN_OUDLER,
             TAROT_COLUMN_SCORE_1, TAROT_COLUMN_SCORE_2,
             TAROT_COLUMN_SCORE_3, TAROT_COLUMN_SCORE_4,
             TAROT_COLUMN_SCORE_5, TAROT_COLUMN_PARTNER};
+    public static final int TAROT_COLUMN_IDX_PARTNER = 10;
     private static final String DATABASE_NAME = "games.db";
     private static final int DATABASE_VERSION_1 = 1;
     private static final int DATABASE_VERSION_2 = 2;

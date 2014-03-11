@@ -1,19 +1,17 @@
 /*
- * Copyright (C) 2013 SBG Apps
- * http://baiget.fr
- * stephane@baiget.fr
+ * Copyright 2013 SBG Apps
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
  */
 
 package com.sbgapps.scoreit;
@@ -21,6 +19,8 @@ package com.sbgapps.scoreit;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -34,6 +34,12 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by sbaiget on 08/01/14.
  */
 public class BaseActivity extends AccentActivity {
+
+    private boolean mIsDialog = false;
+
+    public boolean isDialog() {
+        return mIsDialog;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,25 @@ public class BaseActivity extends AccentActivity {
             tintManager.setStatusBarTintResource(R.color.transparent_accent_color);
             tintManager.setNavigationBarTintEnabled(true);
             tintManager.setNavigationBarTintResource(R.color.transparent_black);
+        }
+    }
+
+    public void setupFauxDialog() {
+        TypedValue tv = new TypedValue();
+        if (!getTheme().resolveAttribute(R.attr.isDialog, tv, true) || tv.data == 0) {
+            setAccentDecor();
+        } else {
+            mIsDialog = true;
+            DisplayMetrics dm = getResources().getDisplayMetrics();
+
+            WindowManager.LayoutParams params = getWindow().getAttributes();
+            params.width = getResources().getDimensionPixelSize(R.dimen.dialog_width);
+            params.height = Math.min(
+                    getResources().getDimensionPixelSize(R.dimen.dialog_max_height),
+                    dm.heightPixels * 3 / 4);
+            params.alpha = 1.0f;
+            params.dimAmount = 0.5f;
+            getWindow().setAttributes(params);
         }
     }
 }

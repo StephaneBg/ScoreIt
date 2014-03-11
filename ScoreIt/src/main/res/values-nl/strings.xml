@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
-  ~ Copyright (C) 2013 SBG Apps
-  ~ http://baiget.fr
-  ~ stephane@baiget.fr
+  ~ Copyright 2013 SBG Apps
   ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~     Licensed under the Apache License, Version 2.0 (the "License");
+  ~     you may not use this file except in compliance with the License.
+  ~     You may obtain a copy of the License at
   ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~        http://www.apache.org/licenses/LICENSE-2.0
   ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
--->
+  ~     Unless required by applicable law or agreed to in writing, software
+  ~     distributed under the License is distributed on an "AS IS" BASIS,
+  ~     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~     See the License for the specific language governing permissions and
+  ~     limitations under the License.
+  -->
 <resources>
 
     <string name="score">Score</string>
@@ -61,8 +60,7 @@
     <string name="guard">Guard</string>
     <string name="guard_without">Guard zonder</string>
     <string name="guard_against">Guard tegen</string>
-    <string name="click_to_add">Klik op</string>
-    <string name="to_add">om toe te voegen</string>
+    <string name="click_to_add">Klik om toe te voegen</string>
     <string name="more">Meer</string>
     <string name="less">Minder</string>
     <string name="undo">Ongedaan maken</string>
@@ -78,12 +76,20 @@
     <string name="min_error">Vul a.u.b. een getal in groter dan of gelijk aan %1$d</string>
     <string name="max_error">Vul a.u.b. een getal in kleiner dan of gelijk aan %1$d</string>
     <string name="min_max_error">Vul a.u.b. een getal in tussen %1$d en %2$d</string>
-    <string name="help_translate">Help mee met vertalen</string>
+    <string name="application">App</string>
     <string name="translations">Vertalingen</string>
+    <string name="help_translate">Help mee met vertalen!</string>
     <string name="translator">Vertaler</string>
     <string name="language">Taal</string>
     <string name="licenses">Licenties</string>
-    <string name="thanks">Dank u</string>
+    <string name="contact_developer">Contact ontwikkelaar</string>
+    <string name="rate_app">Beoordeel deze applicatie</string>
+    <string name="share">Aandel</string>
+    <string name="share_app">Aandel deze applicatie</string>
+    <string name="donate_coffee">Koop me een kopje koffie</string>
+    <string name="bought_coffee">Je kocht me een kopje koffie. Bedankt!</string>
+    <string name="donate_beer">Koop me een bier</string>
+    <string name="bought_beer">Je kocht me een biertje. Bedankt!</string>
 
     <string-array name="edit_name_action">
         <item>Pick contact</item>

@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2013 SBG Apps
+  ~
+  ~     Licensed under the Apache License, Version 2.0 (the "License");
+  ~     you may not use this file except in compliance with the License.
+  ~     You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~     Unless required by applicable law or agreed to in writing, software
+  ~     distributed under the License is distributed on an "AS IS" BASIS,
+  ~     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~     See the License for the specific language governing permissions and
+  ~     limitations under the License.
+  -->
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -13,115 +29,115 @@
         <HorizontalScrollView
             android:id="@+id/horizontal_scroll_view"
             android:layout_width="0dip"
-            android:layout_weight="2"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
 
             <com.sbgapps.scoreit.widget.NumberView
                 android:id="@+id/number_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/numberview_padding"
-                android:paddingBottom="@dimen/numberview_padding"
-                android:paddingLeft="@dimen/numberview_padding_left"
                 android:layout_gravity="left"
                 android:baselineAligned="false"
-                android:gravity="top">
+                android:gravity="top"
+                android:paddingBottom="@dimen/numberview_padding"
+                android:paddingLeft="@dimen/numberview_padding_left"
+                android:paddingTop="@dimen/numberview_padding">
 
                 <TextView
                     android:id="@+id/minus_label"
-                    android:layout_height="match_parent"
                     android:layout_width="wrap_content"
-                    android:singleLine="true"
+                    android:layout_height="match_parent"
                     android:ellipsize="none"
-                    android:textSize="@dimen/minus_font_size"
                     android:gravity="center_vertical"
-                    android:text="@string/number_picker_minus_label"/>
+                    android:singleLine="true"
+                    android:text="@string/number_picker_minus_label"
+                    android:textSize="@dimen/medium_font_size"/>
 
                 <TextView
                     android:id="@+id/number"
-                    android:singleLine="true"
-                    android:ellipsize="none"
-                    android:textSize="@dimen/number_picker_font_size"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"/>
+                    android:ellipsize="none"
+                    android:singleLine="true"
+                    android:textSize="@dimen/big_font_size"/>
 
                 <TextView
                     android:id="@+id/decimal_separator"
-                    android:singleLine="true"
-                    android:ellipsize="none"
-                    android:textSize="@dimen/number_picker_font_size"
-                    android:text="@string/number_picker_seperator"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"/>
+                    android:ellipsize="none"
+                    android:singleLine="true"
+                    android:text="@string/number_picker_seperator"
+                    android:textSize="@dimen/big_font_size"/>
 
                 <TextView
                     android:id="@+id/decimal"
-                    android:singleLine="true"
-                    android:ellipsize="none"
-                    android:textSize="@dimen/number_picker_font_size"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"/>
+                    android:ellipsize="none"
+                    android:singleLine="true"
+                    android:textSize="@dimen/big_font_size"/>
             </com.sbgapps.scoreit.widget.NumberView>
         </HorizontalScrollView>
 
         <ImageButton
-            style="?android:borderlessButtonStyle"
             android:id="@+id/delete"
+            style="?android:borderlessButtonStyle"
             android:layout_width="0dip"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:src="@drawable/ic_backspace"
+            android:layout_weight="1"
             android:contentDescription="@string/delete"
-            android:layout_height="match_parent"/>
+            android:gravity="center"
+            android:src="@drawable/ic_backspace"/>
     </LinearLayout>
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:background="?android:listDivider"
-        android:layout_below="@+id/number_view_container"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/number_view_container"
+        android:background="?android:listDivider"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/divider"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/divider"
+        android:orientation="vertical">
 
         <include
-            layout="@layout/three_keys_view"
-            android:id="@+id/first"/>
+            android:id="@+id/first"
+            layout="@layout/three_keys_view"/>
 
         <include
-            layout="@layout/three_keys_view"
-            android:id="@+id/second"/>
+            android:id="@+id/second"
+            layout="@layout/three_keys_view"/>
 
         <include
-            layout="@layout/three_keys_view"
-            android:id="@+id/third"/>
+            android:id="@+id/third"
+            layout="@layout/three_keys_view"/>
 
         <include
-            layout="@layout/three_keys_view_leftright"
-            android:id="@+id/fourth"/>
+            android:id="@+id/fourth"
+            layout="@layout/three_keys_view_leftright"/>
     </LinearLayout>
 
     <com.sbgapps.scoreit.widget.NumberPickerErrorTextView
         android:id="@+id/error"
-        android:visibility="invisible"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/divider"
         android:background="@android:color/holo_red_light"
+        android:gravity="center_horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:layout_below="@+id/divider"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:visibility="invisible"/>
 </RelativeLayout>

@@ -1,31 +1,26 @@
 /*
- * Copyright (C) 2013 SBG Apps
- * http://baiget.fr
- * stephane@baiget.fr
+ * Copyright 2013 SBG Apps
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
  */
 
 package com.sbgapps.scoreit;
 
 import android.app.ActionBar;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.sbgapps.scoreit.game.GameData;
 import com.sbgapps.scoreit.game.Lap;
@@ -38,7 +33,6 @@ public abstract class LapActivity extends BaseActivity
 
     private final GameData mGameData;
     private Lap mLap;
-    private boolean mIsDialog = false;
     private boolean mIsEdited;
 
     public LapActivity() {
@@ -57,39 +51,16 @@ public abstract class LapActivity extends BaseActivity
         return mIsEdited;
     }
 
-    public boolean isDialog() {
-        return mIsDialog;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setupFauxDialog();
+        if (!isDialog()) setupActionBar();
 
         Bundle b = getIntent().getExtras();
         mLap = (Lap) b.getSerializable(ScoreItActivity.EXTRA_LAP);
         mIsEdited = b.getBoolean(ScoreItActivity.EXTRA_EDIT);
-    }
-
-    private void setupFauxDialog() {
-        TypedValue tv = new TypedValue();
-        if (!getTheme().resolveAttribute(R.attr.isDialog, tv, true) || tv.data == 0) {
-            setupActionBar();
-            setAccentDecor();
-        } else {
-            mIsDialog = true;
-            DisplayMetrics dm = getResources().getDisplayMetrics();
-
-            WindowManager.LayoutParams params = getWindow().getAttributes();
-            params.width = getResources().getDimensionPixelSize(R.dimen.dialog_width);
-            params.height = Math.min(
-                    getResources().getDimensionPixelSize(R.dimen.dialog_max_height),
-                    dm.heightPixels * 3 / 4);
-            params.alpha = 1.0f;
-            params.dimAmount = 0.5f;
-            getWindow().setAttributes(params);
-        }
     }
 
     private void setupActionBar() {
@@ -104,11 +75,13 @@ public abstract class LapActivity extends BaseActivity
                 ActionBar.DISPLAY_SHOW_CUSTOM,
                 ActionBar.DISPLAY_SHOW_CUSTOM
                         | ActionBar.DISPLAY_SHOW_HOME
-                        | ActionBar.DISPLAY_SHOW_TITLE);
+                        | ActionBar.DISPLAY_SHOW_TITLE
+        );
         actionBar.setCustomView(customActionBarView,
                 new ActionBar.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT));
+                        ViewGroup.LayoutParams.MATCH_PARENT)
+        );
     }
 
     @Override

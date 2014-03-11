@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
-  ~ Copyright (C) 2013 SBG Apps
-  ~ http://baiget.fr
-  ~ stephane@baiget.fr
+  ~ Copyright 2013 SBG Apps
   ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~     Licensed under the Apache License, Version 2.0 (the "License");
+  ~     you may not use this file except in compliance with the License.
+  ~     You may obtain a copy of the License at
   ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~        http://www.apache.org/licenses/LICENSE-2.0
   ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
--->
+  ~     Unless required by applicable law or agreed to in writing, software
+  ~     distributed under the License is distributed on an "AS IS" BASIS,
+  ~     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~     See the License for the specific language governing permissions and
+  ~     limitations under the License.
+  -->
 <manifest
     package="com.sbgapps.scoreit"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -30,7 +29,7 @@
         <activity
             android:name="com.sbgapps.scoreit.ScoreItActivity"
             android:logo="@drawable/ic_launcher_flat"
-            android:theme="@style/Theme.App.Scoreit">
+            android:theme="@style/Theme.ScoreIt">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -41,22 +40,22 @@
             android:name="com.sbgapps.scoreit.AboutActivity"
             android:logo="@drawable/ic_launcher_flat"
             android:parentActivityName=".ScoreItActivity"
-            android:theme="@style/Theme.App.Adaptive"/>
+            android:theme="@style/Theme.Adaptive"/>
         <activity
             android:name="com.sbgapps.scoreit.UniversalLapActivity"
-            android:theme="@style/Theme.App.Adaptive"/>
+            android:theme="@style/Theme.Adaptive"/>
         <activity
             android:name="com.sbgapps.scoreit.BeloteLapActivity"
-            android:theme="@style/Theme.App.Adaptive"/>
+            android:theme="@style/Theme.Adaptive"/>
         <activity
             android:name="com.sbgapps.scoreit.CoincheLapActivity"
-            android:theme="@style/Theme.App.Adaptive"/>
+            android:theme="@style/Theme.Adaptive"/>
         <activity
             android:name="com.sbgapps.scoreit.TarotLapActivity"
-            android:theme="@style/Theme.App.Adaptive"/>
+            android:theme="@style/Theme.Adaptive"/>
         <activity
             android:name="com.sbgapps.scoreit.EditNameActivity"
-            android:theme="@style/Theme.App.Dialog.NoTitle"/>
+            android:theme="@style/Theme.Dialog"/>
     </application>
 
 </manifest>

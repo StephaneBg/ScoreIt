@@ -1,3 +1,19 @@
+/*
+ * Copyright 2013 SBG Apps
+ *
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
+ */
+
 package com.sbgapps.scoreit.widget;
 
 import android.content.Context;
@@ -19,22 +35,20 @@ import java.math.BigDecimal;
 public class NumberPicker extends LinearLayout
         implements Button.OnClickListener, Button.OnLongClickListener {
 
-    protected int mInputSize = 20;
+    private static final int CLICKED_DECIMAL = 10;
+    private static final int SIGN_POSITIVE = 0;
+    private static final int SIGN_NEGATIVE = 1;
     protected final Button mNumbers[] = new Button[10];
+    protected final Context mContext;
+    protected int mInputSize = 20;
     protected int mInput[] = new int[mInputSize];
     protected int mInputPointer = -1;
     protected Button mLeft, mRight;
     protected ImageButton mDelete;
     protected NumberView mEnteredNumber;
-    protected final Context mContext;
-
     private NumberPickerErrorTextView mError;
     private int mSign;
     private Button mSetButton;
-    private static final int CLICKED_DECIMAL = 10;
-
-    private static final int SIGN_POSITIVE = 0;
-    private static final int SIGN_NEGATIVE = 1;
 
     /**
      * Instantiates a NumberPicker object
@@ -431,6 +445,16 @@ public class NumberPicker extends LinearLayout
 
     private static class SavedState extends BaseSavedState {
 
+        public static final Creator<SavedState> CREATOR
+                = new Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
         int mInputPointer;
         int[] mInput;
         int mSign;
@@ -453,16 +477,5 @@ public class NumberPicker extends LinearLayout
             dest.writeIntArray(mInput);
             dest.writeInt(mSign);
         }
-
-        public static final Creator<SavedState> CREATOR
-                = new Creator<SavedState>() {
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
-
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
     }
 }

@@ -1,21 +1,17 @@
 /*
- * Copyright (C) 2013 47 Degrees, LLC
- * http://47deg.com
- * hello@47deg.com
+ * Copyright 2013 SBG Apps
  *
- * Copyright 2012 Roman Nurik
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
  */
 
 package com.sbgapps.scoreit.view;
@@ -945,25 +941,6 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     }
 
     /**
-     * Class that saves pending dismiss data
-     */
-    class PendingDismissData implements Comparable<PendingDismissData> {
-        public int position;
-        public View view;
-
-        public PendingDismissData(int position, View view) {
-            this.position = position;
-            this.view = view;
-        }
-
-        @Override
-        public int compareTo(PendingDismissData other) {
-            // Sort by descending position
-            return other.position - position;
-        }
-    }
-
-    /**
      * Perform dismiss action
      *
      * @param dismissView     View
@@ -1038,6 +1015,25 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
 
         resetPendingDismisses();
 
+    }
+
+    /**
+     * Class that saves pending dismiss data
+     */
+    class PendingDismissData implements Comparable<PendingDismissData> {
+        public int position;
+        public View view;
+
+        public PendingDismissData(int position, View view) {
+            this.position = position;
+            this.view = view;
+        }
+
+        @Override
+        public int compareTo(PendingDismissData other) {
+            // Sort by descending position
+            return other.position - position;
+        }
     }
 
 }

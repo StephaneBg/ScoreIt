@@ -1,19 +1,17 @@
 /*
- * Copyright (C) 2013 47 Degrees, LLC
- * http://47deg.com
- * hello@47deg.com
+ * Copyright 2013 SBG Apps
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
  */
 
 package com.sbgapps.scoreit.view;
@@ -98,26 +96,20 @@ public class SwipeListView extends ListView {
      * Indicates no movement
      */
     private final static int TOUCH_STATE_REST = 0;
-
+    private int touchState = TOUCH_STATE_REST;
     /**
      * State scrolling x position
      */
     private final static int TOUCH_STATE_SCROLLING_X = 1;
-
     /**
      * State scrolling y position
      */
     private final static int TOUCH_STATE_SCROLLING_Y = 2;
-
-    private int touchState = TOUCH_STATE_REST;
-
+    int swipeFrontView = 0;
+    int swipeBackView = 0;
     private float lastMotionX;
     private float lastMotionY;
     private int touchSlop;
-
-    int swipeFrontView = 0;
-    int swipeBackView = 0;
-
     /**
      * Internal listener for common swipe events
      */

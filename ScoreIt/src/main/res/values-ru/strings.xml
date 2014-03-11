@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
-  ~ Copyright (C) 2013 SBG Apps
-  ~ http://baiget.fr
-  ~ stephane@baiget.fr
+  ~ Copyright 2013 SBG Apps
   ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~     Licensed under the Apache License, Version 2.0 (the "License");
+  ~     you may not use this file except in compliance with the License.
+  ~     You may obtain a copy of the License at
   ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~        http://www.apache.org/licenses/LICENSE-2.0
   ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
--->
+  ~     Unless required by applicable law or agreed to in writing, software
+  ~     distributed under the License is distributed on an "AS IS" BASIS,
+  ~     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~     See the License for the specific language governing permissions and
+  ~     limitations under the License.
+  -->
 <resources>
 
     <string name="score">Счет</string>
@@ -61,8 +60,7 @@
     <string name="guard">Охрана</string>
     <string name="guard_without">Без защиты</string>
     <string name="guard_against">Защищаться</string>
-    <string name="click_to_add">Нажмите на</string>
-    <string name="to_add">Добавить</string>
+    <string name="click_to_add">Нажмите, чтобы добавить</string>
     <string name="more">Еще</string>
     <string name="less">Меньше</string>
     <string name="undo">Отменить</string>
@@ -78,12 +76,20 @@
     <string name="min_error">Пожалуйста, введите число большее или равное %1$d</string>
     <string name="max_error">Пожалуйста, введите число меньшее или равное %1$d</string>
     <string name="min_max_error">Пожалуйста, введите число между %1$d и  %2$d</string>
-    <string name="help_translate">Помочь перевести</string>
+    <string name="application">Aпп</string>
     <string name="translations">Переводы</string>
+    <string name="help_translate">Помочь перевести!</string>
     <string name="translator">Переводчик</string>
     <string name="language">Язык</string>
     <string name="licenses">Лицензии</string>
-    <string name="thanks">Спасибо</string>
+    <string name="contact_developer">Связаться с разработчиком</string>
+    <string name="rate_app">Оценить это приложение</string>
+    <string name="share">Делить</string>
+    <string name="share_app">Дайте это приложение</string>
+    <string name="donate_coffee">Купи мне кофе</string>
+    <string name="bought_coffee">Вы купили мне кофе. Спасибо!</string>
+    <string name="donate_beer">Купи мне пива</string>
+    <string name="bought_beer">Вы купили мне пива. Спасибо!</string>
 
     <string-array name="edit_name_action">
         <item>Выберите контакт</item>
