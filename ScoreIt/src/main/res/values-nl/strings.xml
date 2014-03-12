@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright 2013 SBG Apps
   ~
@@ -84,8 +83,8 @@
     <string name="licenses">Licenties</string>
     <string name="contact_developer">Contact ontwikkelaar</string>
     <string name="rate_app">Beoordeel deze applicatie</string>
-    <string name="share">Aandel</string>
-    <string name="share_app">Aandel deze applicatie</string>
+    <string name="share">Delen</string>
+    <string name="share_app">Deel deze applicatie</string>
     <string name="donate_coffee">Koop me een kopje koffie</string>
     <string name="bought_coffee">Je kocht me een kopje koffie. Bedankt!</string>
     <string name="donate_beer">Koop me een bier</string>

@@ -1,0 +1,49 @@
+/*
+ * Copyright 2013 SBG Apps
+ *
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
+ */
+
+package com.sbgapps.scoreit;
+
+import android.app.Activity;
+import android.app.Fragment;
+
+/**
+ * Created by sbaiget on 12/03/14.
+ */
+public abstract class ContractFragment<T> extends Fragment {
+    private T mContract;
+
+    @Override
+    public void onAttach(Activity activity) {
+        try {
+            mContract = (T) activity;
+        } catch (ClassCastException e) {
+            throw new IllegalStateException(activity.getClass().getSimpleName()
+                    + " does not implement " + getClass().getSimpleName() + "'s contract interface.", e);
+        }
+        super.onAttach(activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mContract = null;
+    }
+
+    public final T getContract() {
+        return mContract;
+    }
+}
+

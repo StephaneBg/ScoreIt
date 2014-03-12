@@ -16,13 +16,13 @@
 
 package com.sbgapps.scoreit;
 
-import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +35,10 @@ import com.anjlab.android.iab.v3.IBillingHandler;
 /**
  * Created by sbaiget on 03/03/14.
  */
-public class InfoFragment extends Fragment
+public class InfoFragment extends ContractFragment<InfoFragment.Contract>
         implements IBillingHandler, IabKey {
+
+    static final String LOG_TAG = "billing";
 
     private static final String VERSION_UNAVAILABLE = "N/A";
     private static final String PRODUCT_DONATE_COFFEE = "com.sbgapps.scoreit.coffee";
@@ -111,8 +113,7 @@ public class InfoFragment extends Fragment
         mCoffeeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mReadyToPurchase) return;
-                mBillingProcessor.purchase(PRODUCT_DONATE_COFFEE);
+                if (mReadyToPurchase) mBillingProcessor.purchase(PRODUCT_DONATE_COFFEE);
             }
         });
 
@@ -120,56 +121,57 @@ public class InfoFragment extends Fragment
         mBeerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mReadyToPurchase) return;
-                mBillingProcessor.purchase(PRODUCT_DONATE_BEER);
+                if (mReadyToPurchase) mBillingProcessor.purchase(PRODUCT_DONATE_BEER);
             }
         });
         return view;
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mBillingProcessor = ((AboutActivity) getActivity()).getBillingProcessor();
-        mBillingProcessor.verifyPurchasesWithLicenseKey(INAPP_KEY);
+    public void onResume() {
+        super.onResume();
+        mBillingProcessor = getContract().getBillingProcessor();
+        //mBillingProcessor.verifyPurchasesWithLicenseKey(INAPP_KEY);
         mBillingProcessor.setBillingHandler(this);
     }
 
     @Override
     public void onProductPurchased(String sku) {
-        manageDonations(sku);
+        manageDonations();
     }
 
     @Override
     public void onPurchaseHistoryRestored() {
+        Log.i(LOG_TAG, "onPurchaseHistoryRestored");
         for (String sku : mBillingProcessor.listOwnedProducts()) {
-            manageDonations(sku);
+            Log.d(LOG_TAG, "Owned Managed Product: " + sku);
+            manageDonations();
         }
     }
 
-    private void manageDonations(String sku) {
-        switch (sku) {
-            default:
-                break;
-
-            case PRODUCT_DONATE_COFFEE:
-                mCoffeeBtn.setText(getString(R.string.bought_coffee));
-                mCoffeeBtn.setClickable(false);
-                break;
-
-            case PRODUCT_DONATE_BEER:
-                mBeerBtn.setText(getString(R.string.bought_beer));
-                mBeerBtn.setClickable(false);
-                break;
+    private void manageDonations() {
+        if (mBillingProcessor.isPurchased(PRODUCT_DONATE_COFFEE)) {
+            mCoffeeBtn.setText(getString(R.string.bought_coffee));
+            mCoffeeBtn.setClickable(false);
+        }
+        if (mBillingProcessor.isPurchased(PRODUCT_DONATE_BEER)) {
+            mBeerBtn.setText(getString(R.string.bought_beer));
+            mBeerBtn.setClickable(false);
         }
     }
 
     @Override
-    public void onBillingError(int i, Throwable throwable) {
+    public void onBillingError(int errorCode, Throwable throwable) {
+        Log.e(LOG_TAG, "onBillingError: " + Integer.toString(errorCode));
     }
 
     @Override
     public void onBillingInitialized() {
         mReadyToPurchase = true;
+        manageDonations();
+    }
+
+    public interface Contract {
+        public BillingProcessor getBillingProcessor();
     }
 }

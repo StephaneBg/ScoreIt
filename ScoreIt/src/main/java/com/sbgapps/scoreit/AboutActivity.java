@@ -42,7 +42,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends BaseActivity
+        implements InfoFragment.Contract {
 
     private BillingProcessor mBillingProcessor;
 
