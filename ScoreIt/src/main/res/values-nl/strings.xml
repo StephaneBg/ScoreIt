@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
   ~ Copyright 2013 SBG Apps
   ~
@@ -14,6 +15,7 @@
   ~     See the License for the specific language governing permissions and
   ~     limitations under the License.
   -->
+
 <resources>
 
     <string name="score">Score</string>
@@ -99,6 +101,7 @@
         <item>Frans</item>
         <item>Nederlands</item>
         <item>Russisch</item>
+        <item>Duits</item>
     </string-array>
 
 </resources>

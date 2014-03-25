@@ -15,6 +15,7 @@
   ~     See the License for the specific language governing permissions and
   ~     limitations under the License.
   -->
+
 <resources>
 
     <string name="score">Счет</string>
@@ -57,14 +58,14 @@
     <string name="inside">Внутри</string>
     <string name="capot">Крышка</string>
     <string name="take">Брать</string>
-    <string name="guard">Охрана</string>
+    <string name="guard">Защита</string>
     <string name="guard_without">Без защиты</string>
     <string name="guard_against">Защищаться</string>
     <string name="click_to_add">Нажмите, чтобы добавить</string>
     <string name="more">Еще</string>
     <string name="less">Меньше</string>
     <string name="undo">Отменить</string>
-    <string name="about">О Программе</string>
+    <string name="about">О программе</string>
     <string name="donate">Поддержать</string>
     <string name="settings">Настройки</string>
     <string name="player_number">Количество игроков</string>
@@ -85,10 +86,10 @@
     <string name="contact_developer">Связаться с разработчиком</string>
     <string name="rate_app">Оценить это приложение</string>
     <string name="share">Делить</string>
-    <string name="share_app">Дайте это приложение</string>
-    <string name="donate_coffee">Купи мне кофе</string>
+    <string name="share_app">Поделиться с друзьями</string>
+    <string name="donate_coffee">Угостите меня кофе</string>
     <string name="bought_coffee">Вы купили мне кофе. Спасибо!</string>
-    <string name="donate_beer">Купи мне пива</string>
+    <string name="donate_beer">Угостите меня пивом</string>
     <string name="bought_beer">Вы купили мне пива. Спасибо!</string>
 
     <string-array name="edit_name_action">
@@ -100,6 +101,7 @@
         <item>Французский</item>
         <item>Голландский</item>
         <item>Русский</item>
+        <item>Германский</item>
     </string-array>
 
 </resources>

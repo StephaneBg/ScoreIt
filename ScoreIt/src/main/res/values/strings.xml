@@ -15,6 +15,7 @@
   ~     See the License for the specific language governing permissions and
   ~     limitations under the License.
   -->
+
 <resources>
 
     <string name="score">Score</string>
@@ -100,6 +101,7 @@
         <item>French</item>
         <item>Dutch</item>
         <item>Russian</item>
+        <item>German</item>
     </string-array>
 
 </resources>

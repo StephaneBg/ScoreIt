@@ -15,7 +15,6 @@
   -->
 
 <ScrollView
-    android:id="@+id/scrollview"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -50,6 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_margin"
+                android:singleLine="true"
                 android:text="© SBG Apps - Stéphane Baiget"
                 tools:ignore="HardcodedText"/>
         </LinearLayout>

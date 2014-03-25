@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright 2013 SBG Apps
+  ~
+  ~     Licensed under the Apache License, Version 2.0 (the "License");
+  ~     you may not use this file except in compliance with the License.
+  ~     You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~     Unless required by applicable law or agreed to in writing, software
+  ~     distributed under the License is distributed on an "AS IS" BASIS,
+  ~     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~     See the License for the specific language governing permissions and
+  ~     limitations under the License.
+  -->
+
+<resources>
+
+    <string name="score">Score</string>
+    <string name="graph">Diagramm</string>
+    <string name="belote">Belote</string>
+    <string name="classic">Klassisch</string>
+    <string name="coinche">Coinche</string>
+    <string name="surcoinche">Sur-Coinche</string>
+    <string name="tarot">Tarot</string>
+    <string name="universal">Universell</string>
+    <string name="three_players">Drei Spieler</string>
+    <string name="four_players">Vier Spieler</string>
+    <string name="five_players">Fünf Spieler</string>
+    <string name="team">Team</string>
+    <string name="taker">Abnehmer</string>
+    <string name="partner">Partner</string>
+    <string name="us">Wir</string>
+    <string name="them">Gegner</string>
+    <string name="none">Keiner</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="clear_game">Lösche Score</string>
+    <string name="sure">Bist du sicher?</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="clear">Leeren</string>
+    <string name="view">Anzeigen</string>
+    <string name="ok">OK</string>
+    <string name="add">Hinzufügen</string>
+    <string name="done">Erledigt</string>
+    <string name="delete">Löschen</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="progress">Punkte</string>
+    <string name="deal">Aktion</string>
+    <string name="oudlers">Oudlers</string>
+    <string name="fool">Idiot</string>
+    <string name="petit">Petit</string>
+    <string name="twentyone">Einundzwanzig</string>
+    <string name="navigation_drawer_open">Öffne Navigation</string>
+    <string name="navigation_drawer_close">Schließe Navigation</string>
+    <string name="inside">Innerhalb</string>
+    <string name="capot">Capot</string>
+    <string name="take">Nimm</string>
+    <string name="guard">Guard</string>
+    <string name="guard_without">Guard mit</string>
+    <string name="guard_against">Guard gegen</string>
+    <string name="click_to_add">Klicken um hinzuzufügen</string>
+    <string name="more">Mehr</string>
+    <string name="less">Weniger</string>
+    <string name="undo">Rückgängig</string>
+    <string name="about">Über</string>
+    <string name="donate">Spenden</string>
+    <string name="settings">Einstellungen</string>
+    <string name="player_number">Spieleranzahl</string>
+    <string name="edit_name">Bearbeite Name</string>
+    <string name="enter_name">Namen eingeben</string>
+    <string name="number_picker_minus_label">—</string>
+    <string name="number_picker_seperator">.</string>
+    <string name="number_picker_plus_minus">+/-</string>
+    <string name="min_error">Bitte gebe eine Nummer größer oder gleich %1$d ein.</string>
+    <string name="max_error">Bitte gebe eine Nummer kleiner oder gleich %1$d ein.</string>
+    <string name="min_max_error">Bitte gib eine Nummer zwischen %1$d und %2$d ein.</string>
+    <string name="application">App</string>
+    <string name="translations">Übersetzungen</string>
+    <string name="help_translate">Hilf uns zu übersetzen</string>
+    <string name="translator">Übersetzer</string>
+    <string name="language">Sprache</string>
+    <string name="licenses">Lizenzen</string>
+    <string name="contact_developer">Kontaktiere den Entwickler</string>
+    <string name="rate_app">Bewerte die App</string>
+    <string name="share">Teilen</string>
+    <string name="share_app">Teile die App</string>
+    <string name="donate_coffee">Spendiere mir einen Kaffee</string>
+    <string name="bought_coffee">Danke für den Kaffee!</string>
+    <string name="donate_beer">Spendiere mir ein Bier</string>
+    <string name="bought_beer">Danke für das Bier!</string>
+
+    <string-array name="edit_name_action">
+        <item>Wähle einen Kontakt</item>
+        <item>Gib den Namen ein</item>
+    </string-array>
+    <string-array name="languages">
+        <item>Englisch</item>
+        <item>Französisch</item>
+        <item>Dänisch</item>
+        <item>Russisch</item>
+        <item>Deutsch</item>
+    </string-array>
+
+</resources>

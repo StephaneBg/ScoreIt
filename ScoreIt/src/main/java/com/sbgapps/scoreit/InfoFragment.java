@@ -74,7 +74,10 @@ public class InfoFragment extends ContractFragment<InfoFragment.Contract>
                 intent.setType("message/rfc822");
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"stephane@baiget.fr"});
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Score It");
-                startActivity(intent);
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                }
             }
         });
 
@@ -131,7 +134,7 @@ public class InfoFragment extends ContractFragment<InfoFragment.Contract>
     public void onResume() {
         super.onResume();
         mBillingProcessor = getContract().getBillingProcessor();
-        //mBillingProcessor.verifyPurchasesWithLicenseKey(INAPP_KEY);
+        mBillingProcessor.verifyPurchasesWithLicenseKey(INAPP_KEY);
         mBillingProcessor.setBillingHandler(this);
     }
 

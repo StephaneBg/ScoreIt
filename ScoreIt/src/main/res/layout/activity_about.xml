@@ -26,13 +26,14 @@
     <com.sbgapps.scoreit.view.SlidingTabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_height"
+        android:layout_height="wrap_content"
         android:background="@color/transparent_gray"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
         android:background="@color/white"/>
 
 </LinearLayout>
