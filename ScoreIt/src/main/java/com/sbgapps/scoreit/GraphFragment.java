@@ -32,13 +32,13 @@ import com.sbgapps.scoreit.game.Lap;
 
 public class GraphFragment extends Fragment {
 
-    public static final String COLOR = "#FF7D7D7D";
     public static final String TAG = GraphFragment.class.getName();
     private final int[] mColors = new int[Lap.PLAYER_COUNT_MAX];
     private final Line[] mLines = new Line[Lap.PLAYER_COUNT_MAX];
     private LineGraph mGraph;
     private int[] mScores;
     private int mX;
+    private int mPointColor;
 
     @Override
     public void onAttach(Activity activity) {
@@ -49,6 +49,7 @@ public class GraphFragment extends Fragment {
         mColors[Lap.PLAYER_3] = r.getColor(R.color.color_player3);
         mColors[Lap.PLAYER_4] = r.getColor(R.color.color_player4);
         mColors[Lap.PLAYER_5] = r.getColor(R.color.color_player5);
+        mPointColor = r.getColor(R.color.darker_gray);
     }
 
     public GameData getGameData() {
@@ -77,7 +78,7 @@ public class GraphFragment extends Fragment {
         }
 
         LinePoint p = new LinePoint(mX = 0, 0);
-        p.setColor(COLOR);
+        p.setColor(mPointColor);
         for (int player = 0; player < playerCnt; player++) {
             mGraph.addPointToLine(player, p);
         }
@@ -95,7 +96,7 @@ public class GraphFragment extends Fragment {
         for (int player = 0; player < playerCnt; player++) {
             mScores[player] += lap.getScore(player);
             LinePoint p = new LinePoint(mX, mScores[player]);
-            p.setColor(COLOR);
+            p.setColor(mPointColor);
             mGraph.addPointToLine(player, p);
         }
     }

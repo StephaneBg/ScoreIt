@@ -33,7 +33,7 @@
         <!-- Russian -->
         <item translatable="false">Danila Lepikhin</item>
         <!-- German -->
-        <item translatable="false">Eicluca</item>
+        <item translatable="false">Luca Eichler</item>
     </string-array>
     <string-array name="libraries" translatable="false">
         <item translatable="false">ScoreIt</item>
