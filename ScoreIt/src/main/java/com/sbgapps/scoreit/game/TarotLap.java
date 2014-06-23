@@ -129,9 +129,9 @@ public abstract class TarotLap implements Lap {
                 return 1;
             case DEAL_GUARD:
                 return 2;
-            case DEAL_AGAINST:
-                return 4;
             case DEAL_WITHOUT:
+                return 4;
+            case DEAL_AGAINST:
                 return 6;
         }
     }

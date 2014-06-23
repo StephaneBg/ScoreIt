@@ -19,7 +19,6 @@
 
     <style name="Theme.ScoreIt" parent="Theme.HoloAccent.Light">
         <item name="accentColor">@color/accent_color</item>
-        <item name="accentColorTranslucent">@color/translucent_accent_color</item>
         <item name="android:windowBackground">@drawable/background_app</item>
         <item name="android:actionBarStyle">@style/ActionBar.Scoreit</item>
         <item name="android:actionMenuTextColor">@color/white</item>
@@ -28,7 +27,6 @@
 
     <style name="Theme.Adaptive" parent="Theme.HoloAccent.Light">
         <item name="accentColor">@color/accent_color</item>
-        <item name="accentColorTranslucent">@color/translucent_accent_color</item>
         <item name="android:windowBackground">@drawable/background_app</item>
         <item name="android:actionBarStyle">@style/ActionBar.Scoreit</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_home_up</item>
@@ -37,7 +35,6 @@
 
     <style name="Theme.Dialog" parent="Theme.HoloAccent.Light.Dialog">
         <item name="accentColor">@color/accent_color</item>
-        <item name="accentColorTranslucent">@color/translucent_accent_color</item>
     </style>
 
     <style name="ActionBar.Scoreit" parent="android:Widget.Holo.ActionBar">

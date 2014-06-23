@@ -19,7 +19,6 @@
 
     <style name="Theme.Adaptive" parent="Theme.HoloAccent.Light.Dialog">
         <item name="accentColor">@color/accent_color</item>
-        <item name="accentColorTranslucent">@color/translucent_accent_color</item>
         <item name="isDialog">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
