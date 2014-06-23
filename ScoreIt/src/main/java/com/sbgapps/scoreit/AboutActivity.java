@@ -33,7 +33,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.anjlab.android.iab.v3.BillingProcessor;
 import com.sbgapps.scoreit.util.TypefaceSpan;
 import com.sbgapps.scoreit.view.SlidingTabLayout;
 
@@ -42,10 +41,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class AboutActivity extends BaseActivity
-        implements InfoFragment.Contract {
+public class AboutActivity extends BaseActivity {
 
-    private BillingProcessor mBillingProcessor;
+    private InfoFragment mInfoFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,24 +64,12 @@ public class AboutActivity extends BaseActivity
         SpannableString title = new SpannableString(getResources().getString(R.string.about));
         title.setSpan(typefaceSpan, 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         setTitle(title);
-
-        mBillingProcessor = new BillingProcessor(this);
-    }
-
-    public BillingProcessor getBillingProcessor() {
-        return mBillingProcessor;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!mBillingProcessor.handleActivityResult(requestCode, resultCode, data))
+        if (!mInfoFragment.getBillingProcessor().handleActivityResult(requestCode, resultCode, data))
             super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onDestroy() {
-        if (null != mBillingProcessor) mBillingProcessor.release();
-        super.onDestroy();
     }
 
     public static class TranslationsFragment extends Fragment {
@@ -159,8 +145,9 @@ public class AboutActivity extends BaseActivity
             Fragment fragment = null;
             switch (position) {
                 case 0:
-                    fragment = Fragment.instantiate(AboutActivity.this,
+                    mInfoFragment = (InfoFragment) Fragment.instantiate(AboutActivity.this,
                             InfoFragment.class.getName());
+                    fragment = mInfoFragment;
                     break;
                 case 1:
                     fragment = Fragment.instantiate(AboutActivity.this,

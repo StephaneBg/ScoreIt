@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit;
 
+import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -30,13 +31,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.IBillingHandler;
 
 /**
  * Created by sbaiget on 03/03/14.
  */
-public class InfoFragment extends ContractFragment<InfoFragment.Contract>
-        implements IBillingHandler, IabKey {
+public class InfoFragment extends Fragment
+        implements BillingProcessor.IBillingHandler, IabKey {
 
     static final String LOG_TAG = "billing";
 
@@ -47,6 +47,16 @@ public class InfoFragment extends ContractFragment<InfoFragment.Contract>
     private boolean mReadyToPurchase = false;
     private Button mCoffeeBtn;
     private Button mBeerBtn;
+
+    public BillingProcessor getBillingProcessor() {
+        return mBillingProcessor;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mBillingProcessor = new BillingProcessor(getActivity(), INAPP_KEY, this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -131,11 +141,9 @@ public class InfoFragment extends ContractFragment<InfoFragment.Contract>
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mBillingProcessor = getContract().getBillingProcessor();
-        mBillingProcessor.verifyPurchasesWithLicenseKey(INAPP_KEY);
-        mBillingProcessor.setBillingHandler(this);
+    public void onDestroy() {
+        if (null != mBillingProcessor) mBillingProcessor.release();
+        super.onDestroy();
     }
 
     @Override
@@ -172,9 +180,5 @@ public class InfoFragment extends ContractFragment<InfoFragment.Contract>
     public void onBillingInitialized() {
         mReadyToPurchase = true;
         manageDonations();
-    }
-
-    public interface Contract {
-        public BillingProcessor getBillingProcessor();
     }
 }

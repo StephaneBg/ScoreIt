@@ -55,9 +55,11 @@ dependencies {
     compile 'com.android.support:support-v4:+'
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:support-v13:+'
+    compile 'com.google.code.gson:gson:+'
     compile 'com.negusoft.holoaccent:library:+'
     compile 'com.readystatesoftware.systembartint:systembartint:+'
     compile 'uk.co.chrisjenx.calligraphy:calligraphy:+'
     compile 'com.nineoldandroids:library:+'
     compile 'com.anjlab.android.iab.v3:library:+@aar'
+    compile project(':HoloGraphLibrary')
 }
