@@ -111,14 +111,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
-            android:orientation="vertical"/>
+            android:divider="?android:listDivider"
+            android:orientation="vertical"
+            android:showDividers="middle"/>
 
         <Button
             android:id="@+id/btn_add_announce"
+            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
-            android:text="@string/add"/>
+            android:text="@string/add"
+            android:textAllCaps="true"/>
     </LinearLayout>
+
 </ScrollView>

@@ -413,7 +413,7 @@ public class ScoreItActivity extends BaseActivity
                                 mPreferences
                                         .edit()
                                         .putInt(KEY_UNIVERSAL_PLAYER_CNT, which + 2)
-                                        .commit();
+                                        .apply();
                                 reloadFragments();
                             }
                         }

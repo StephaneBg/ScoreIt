@@ -31,6 +31,9 @@ import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.games.tarot.TarotLap;
 import com.sbgapps.scoreit.widget.SeekbarInputPoints;
+import com.sbgapps.scoreit.widget.TarotAnnounceWidget;
+
+import java.util.List;
 
 /**
  * Created by sbaiget on 07/12/13.
@@ -38,6 +41,7 @@ import com.sbgapps.scoreit.widget.SeekbarInputPoints;
 public class TarotLapActivity extends LapActivity {
 
     private static final LapHolder HOLDER = new LapHolder();
+    private List<Spinner> mSpinners;
 
     @Override
     public TarotLap getLap() {
@@ -110,7 +114,7 @@ public class TarotLapActivity extends LapActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getLayoutInflater().inflate(R.layout.lap_include_announce, HOLDER.mAnnounces);
+                HOLDER.mAnnounces.addView(new TarotAnnounceWidget(TarotLapActivity.this));
             }
         });
 
@@ -172,6 +176,7 @@ public class TarotLapActivity extends LapActivity {
     }
 
     class DealItem {
+
         final int mDeal;
 
         DealItem(int deal) {
