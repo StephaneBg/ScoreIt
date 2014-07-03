@@ -1,17 +1,17 @@
 /*
- * Copyright 2013 SBG Apps
+ * Copyright (c) 2014 SBG Apps
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.sbgapps.scoreit;
@@ -19,8 +19,8 @@ package com.sbgapps.scoreit;
 import android.os.Bundle;
 import android.widget.RadioButton;
 
-import com.sbgapps.scoreit.game.CoincheBeloteLap;
-import com.sbgapps.scoreit.game.Lap;
+import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.belote.BeloteCoincheLap;
 import com.sbgapps.scoreit.widget.SeekbarInputPoints;
 
 /**
@@ -32,8 +32,8 @@ public class CoincheLapActivity extends LapActivity {
     private static final int[] PROGRESS2POINTS = {80, 90, 100, 110, 120, 130, 140, 150, 250};
 
     @Override
-    public CoincheBeloteLap getLap() {
-        return (CoincheBeloteLap) super.getLap();
+    public BeloteCoincheLap getLap() {
+        return (BeloteCoincheLap) super.getLap();
     }
 
     @Override
@@ -89,13 +89,13 @@ public class CoincheLapActivity extends LapActivity {
 
         switch (getLap().getCoinche()) {
             default:
-            case CoincheBeloteLap.COINCHE_NONE:
+            case BeloteCoincheLap.COINCHE_NONE:
                 HOLDER.rb_coinche_none.setChecked(true);
                 break;
-            case CoincheBeloteLap.COINCHE_NORMAL:
+            case BeloteCoincheLap.COINCHE_NORMAL:
                 HOLDER.rb_coinche.setChecked(true);
                 break;
-            case CoincheBeloteLap.COINCHE_DOUBLE:
+            case BeloteCoincheLap.COINCHE_DOUBLE:
                 HOLDER.rb_surcoinche.setChecked(true);
                 break;
         }
@@ -103,15 +103,15 @@ public class CoincheLapActivity extends LapActivity {
 
     @Override
     public void updateLap() {
-        CoincheBeloteLap lap = getLap();
+        BeloteCoincheLap lap = getLap();
         lap.setTaker(HOLDER.rb_player1.isChecked() ? Lap.PLAYER_1 : Lap.PLAYER_2);
         lap.setDeal(HOLDER.input_deal.getPoints());
         lap.setPoints(HOLDER.input_points.getPoints());
         lap.setBelote(HOLDER.rb_belote_none.isChecked() ? Lap.PLAYER_NONE :
                 HOLDER.rb_belote_player1.isChecked() ? Lap.PLAYER_1 : Lap.PLAYER_2);
-        lap.setCoinche(HOLDER.rb_coinche_none.isChecked() ? CoincheBeloteLap.COINCHE_NONE :
-                HOLDER.rb_coinche.isChecked() ? CoincheBeloteLap.COINCHE_NORMAL
-                        : CoincheBeloteLap.COINCHE_DOUBLE);
+        lap.setCoinche(HOLDER.rb_coinche_none.isChecked() ? BeloteCoincheLap.COINCHE_NONE :
+                HOLDER.rb_coinche.isChecked() ? BeloteCoincheLap.COINCHE_NORMAL
+                        : BeloteCoincheLap.COINCHE_DOUBLE);
         lap.setScores();
     }
 

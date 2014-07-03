@@ -1,17 +1,17 @@
 /*
- * Copyright 2013 SBG Apps
+ * Copyright (c) 2014 SBG Apps
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.sbgapps.scoreit.adapter;
@@ -30,10 +30,10 @@ import android.widget.LinearLayout;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
-import com.sbgapps.scoreit.game.BeloteLap;
-import com.sbgapps.scoreit.game.GameData;
-import com.sbgapps.scoreit.game.Lap;
-import com.sbgapps.scoreit.game.TarotLap;
+import com.sbgapps.scoreit.games.GameHelper;
+import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.belote.BeloteLap;
+import com.sbgapps.scoreit.games.tarot.TarotLap;
 import com.sbgapps.scoreit.view.SwipeListView;
 import com.sbgapps.scoreit.widget.PlayerScore;
 
@@ -95,9 +95,9 @@ public class ScoreAdapter extends BaseAdapter {
 
         for (int i = 0; i < cnt; i++) {
             h.scores[i].getScore().setText(Integer.toString(lap.getScore(i)));
-            switch (getGameData().getGame()) {
-                case GameData.BELOTE_CLASSIC:
-                case GameData.BELOTE_COINCHE:
+            switch (getGameData().getPlayedGame()) {
+                case GameHelper.BELOTE_CLASSIC:
+                case GameHelper.BELOTE_COINCHE:
                     if (((BeloteLap) lap).getBelote() == i) {
                         h.scores[i].getImage().setImageResource(R.drawable.ic_star);
                     } else {
@@ -105,9 +105,9 @@ public class ScoreAdapter extends BaseAdapter {
                     }
                     break;
 
-                case GameData.TAROT_5_PLAYERS:
-                case GameData.TAROT_4_PLAYERS:
-                case GameData.TAROT_3_PLAYERS:
+                case GameHelper.TAROT_5_PLAYERS:
+                case GameHelper.TAROT_4_PLAYERS:
+                case GameHelper.TAROT_3_PLAYERS:
                     if (((TarotLap) lap).getTaker() == i) {
                         h.scores[i].getImage().setImageResource(R.drawable.ic_taker);
                     } else {
@@ -184,8 +184,8 @@ public class ScoreAdapter extends BaseAdapter {
         return animator;
     }
 
-    public GameData getGameData() {
-        return GameData.getInstance();
+    public GameHelper getGameData() {
+        return GameHelper.getInstance();
     }
 
     private static class ViewHolder {

@@ -1,17 +1,17 @@
 /*
- * Copyright 2013 SBG Apps
+ * Copyright (c) 2014 SBG Apps
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.sbgapps.scoreit;
@@ -21,13 +21,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import com.sbgapps.scoreit.game.FivePlayerTarotLap;
-import com.sbgapps.scoreit.game.GameData;
-import com.sbgapps.scoreit.game.Lap;
-import com.sbgapps.scoreit.game.TarotLap;
+import com.sbgapps.scoreit.games.GameHelper;
+import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
+import com.sbgapps.scoreit.games.tarot.TarotLap;
 import com.sbgapps.scoreit.widget.SeekbarInputPoints;
 
 /**
@@ -53,13 +55,14 @@ public class TarotLapActivity extends LapActivity {
         HOLDER.twenty_one = (CheckBox) findViewById(R.id.checkbox_twenty_one);
         HOLDER.fool = (CheckBox) findViewById(R.id.checkbox_fool);
         HOLDER.input_points = (SeekbarInputPoints) findViewById(R.id.input_points);
+        HOLDER.mAnnounces = (LinearLayout) findViewById(R.id.ll_announces);
 
         if (isDialog()) {
             findViewById(R.id.btn_cancel).setOnClickListener(this);
             findViewById(R.id.btn_confirm).setOnClickListener(this);
         }
 
-        final int game = getGameData().getGame();
+        final int game = getGameHelper().getPlayedGame();
         final ArrayAdapter<PlayerItem> playerItemArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item);
         playerItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -67,17 +70,17 @@ public class TarotLapActivity extends LapActivity {
         playerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_2));
         playerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_3));
         switch (game) {
-            case GameData.TAROT_4_PLAYERS:
+            case GameHelper.TAROT_4_PLAYERS:
                 playerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_4));
                 break;
-            case GameData.TAROT_5_PLAYERS:
+            case GameHelper.TAROT_5_PLAYERS:
                 playerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_4));
                 playerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_5));
                 break;
         }
         HOLDER.taker.setAdapter(playerItemArrayAdapter);
 
-        if (GameData.TAROT_5_PLAYERS == game) {
+        if (GameHelper.TAROT_5_PLAYERS == game) {
             ViewStub stub = (ViewStub) findViewById(R.id.viewstub_partner);
             View view = stub.inflate();
             final ArrayAdapter<PlayerItem> partnerItemArrayAdapter = new ArrayAdapter<>(this,
@@ -103,10 +106,18 @@ public class TarotLapActivity extends LapActivity {
 
         HOLDER.input_points.setMax(91);
 
+        Button button = (Button) findViewById(R.id.btn_add_announce);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLayoutInflater().inflate(R.layout.lap_include_announce, HOLDER.mAnnounces);
+            }
+        });
+
         if (isEdited()) {
             HOLDER.taker.setSelection(getLap().getTaker());
-            if (GameData.TAROT_5_PLAYERS == game)
-                HOLDER.partner.setSelection(((FivePlayerTarotLap) getLap()).getPartner());
+            if (GameHelper.TAROT_5_PLAYERS == game)
+                HOLDER.partner.setSelection(((TarotFiveLap) getLap()).getPartner());
             HOLDER.deal.setSelection(getLap().getDeal());
             HOLDER.petit.setChecked((getLap().getOudlers() & TarotLap.OUDLER_PETIT_MSK)
                     == TarotLap.OUDLER_PETIT_MSK);
@@ -127,8 +138,8 @@ public class TarotLapActivity extends LapActivity {
         lap.setDeal(((DealItem) HOLDER.deal.getSelectedItem()).getDeal());
         lap.setPoints(HOLDER.input_points.getPoints());
         lap.setOudlers(getOudlers());
-        if (GameData.TAROT_5_PLAYERS == getGameData().getGame())
-            ((FivePlayerTarotLap) lap).setPartner(
+        if (GameHelper.TAROT_5_PLAYERS == getGameHelper().getPlayedGame())
+            ((TarotFiveLap) lap).setPartner(
                     ((PlayerItem) HOLDER.partner.getSelectedItem()).getPlayer());
         lap.setScores();
     }
@@ -157,6 +168,7 @@ public class TarotLapActivity extends LapActivity {
         CheckBox twenty_one;
         CheckBox fool;
         SeekbarInputPoints input_points;
+        LinearLayout mAnnounces;
     }
 
     class DealItem {
@@ -201,7 +213,7 @@ public class TarotLapActivity extends LapActivity {
 
         @Override
         public String toString() {
-            return getGameData().getPlayerName(mPlayer);
+            return getGameHelper().getPlayerName(mPlayer);
         }
     }
 }

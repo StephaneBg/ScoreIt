@@ -1,17 +1,17 @@
 /*
- * Copyright 2013 SBG Apps
+ * Copyright (c) 2014 SBG Apps
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.sbgapps.scoreit;
@@ -34,14 +34,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.sbgapps.scoreit.game.ClassicBeloteLap;
-import com.sbgapps.scoreit.game.CoincheBeloteLap;
-import com.sbgapps.scoreit.game.FivePlayerTarotLap;
-import com.sbgapps.scoreit.game.FourPlayerTarotLap;
-import com.sbgapps.scoreit.game.GameData;
-import com.sbgapps.scoreit.game.Lap;
-import com.sbgapps.scoreit.game.ThreePlayerTarotLap;
-import com.sbgapps.scoreit.game.UniversalLap;
+import com.sbgapps.scoreit.games.GameHelper;
+import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.belote.BeloteClassicLap;
+import com.sbgapps.scoreit.games.belote.BeloteCoincheLap;
+import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
+import com.sbgapps.scoreit.games.tarot.TarotFourLap;
+import com.sbgapps.scoreit.games.tarot.TarotThreeLap;
+import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.util.TypefaceSpan;
 import com.sbgapps.scoreit.view.SwipeListView;
 import com.sbgapps.scoreit.widget.PlayerInfo;
@@ -58,7 +58,7 @@ public class ScoreItActivity extends BaseActivity
     private static final int REQ_LAP_ACTIVITY = 2;
     private static final int REQ_EDIT_NAME_ACTIVITY = 3;
     private TypefaceSpan mTypefaceSpan;
-    private GameData mGameData;
+    private GameHelper mGameData;
     private SharedPreferences mPreferences;
     private SpannableString mTitle;
     private boolean mIsTablet;
@@ -75,8 +75,8 @@ public class ScoreItActivity extends BaseActivity
         setAccentDecor();
 
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        final int game = mPreferences.getInt(KEY_SELECTED_GAME, GameData.UNIVERSAL);
-        mGameData = GameData.getInstance();
+        final int game = mPreferences.getInt(KEY_SELECTED_GAME, GameHelper.UNIVERSAL);
+        mGameData = GameHelper.getInstance();
         mGameData.init(this, game);
 
         setContentView(R.layout.activity_scoreit);
@@ -148,7 +148,7 @@ public class ScoreItActivity extends BaseActivity
                 item.setVisible(false);
             }
             item = menu.findItem(R.id.menu_count);
-            item.setVisible(GameData.UNIVERSAL == mGameData.getGame());
+            item.setVisible(GameHelper.UNIVERSAL == mGameData.getPlayedGame());
             getActionBar().setTitle(mTitle);
             return true;
         }
@@ -188,7 +188,7 @@ public class ScoreItActivity extends BaseActivity
         getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
         mPreferences.edit().putInt(KEY_SELECTED_GAME, position).commit();
-        mGameData.setGame(position);
+        mGameData.setPlayedGame(position);
         setTitle();
 
         reloadFragments();
@@ -224,25 +224,25 @@ public class ScoreItActivity extends BaseActivity
 
     public void addLap() {
         Lap lap;
-        switch (mGameData.getGame()) {
+        switch (mGameData.getPlayedGame()) {
             default:
-            case GameData.UNIVERSAL:
+            case GameHelper.UNIVERSAL:
                 lap = new UniversalLap();
                 break;
-            case GameData.BELOTE_CLASSIC:
-                lap = new ClassicBeloteLap();
+            case GameHelper.BELOTE_CLASSIC:
+                lap = new BeloteClassicLap();
                 break;
-            case GameData.BELOTE_COINCHE:
-                lap = new CoincheBeloteLap();
+            case GameHelper.BELOTE_COINCHE:
+                lap = new BeloteCoincheLap();
                 break;
-            case GameData.TAROT_3_PLAYERS:
-                lap = new ThreePlayerTarotLap();
+            case GameHelper.TAROT_3_PLAYERS:
+                lap = new TarotThreeLap();
                 break;
-            case GameData.TAROT_4_PLAYERS:
-                lap = new FourPlayerTarotLap();
+            case GameHelper.TAROT_4_PLAYERS:
+                lap = new TarotFourLap();
                 break;
-            case GameData.TAROT_5_PLAYERS:
-                lap = new FivePlayerTarotLap();
+            case GameHelper.TAROT_5_PLAYERS:
+                lap = new TarotFiveLap();
                 break;
         }
         showLapActivity(lap, false);
@@ -298,20 +298,20 @@ public class ScoreItActivity extends BaseActivity
 
     private void showLapActivity(Lap lap, boolean edit) {
         Intent intent;
-        switch (mGameData.getGame()) {
+        switch (mGameData.getPlayedGame()) {
             default:
-            case GameData.UNIVERSAL:
+            case GameHelper.UNIVERSAL:
                 intent = new Intent(this, UniversalLapActivity.class);
                 break;
-            case GameData.BELOTE_CLASSIC:
+            case GameHelper.BELOTE_CLASSIC:
                 intent = new Intent(this, BeloteLapActivity.class);
                 break;
-            case GameData.BELOTE_COINCHE:
+            case GameHelper.BELOTE_COINCHE:
                 intent = new Intent(this, CoincheLapActivity.class);
                 break;
-            case GameData.TAROT_3_PLAYERS:
-            case GameData.TAROT_4_PLAYERS:
-            case GameData.TAROT_5_PLAYERS:
+            case GameHelper.TAROT_3_PLAYERS:
+            case GameHelper.TAROT_4_PLAYERS:
+            case GameHelper.TAROT_5_PLAYERS:
                 intent = new Intent(this, TarotLapActivity.class);
                 break;
         }
@@ -343,20 +343,20 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void setTitle() {
-        switch (mGameData.getGame()) {
+        switch (mGameData.getPlayedGame()) {
             default:
-            case GameData.UNIVERSAL:
+            case GameHelper.UNIVERSAL:
                 mTitle = new SpannableString(getResources().getString(R.string.universal));
                 break;
-            case GameData.BELOTE_CLASSIC:
+            case GameHelper.BELOTE_CLASSIC:
                 mTitle = new SpannableString(getResources().getString(R.string.belote));
                 break;
-            case GameData.BELOTE_COINCHE:
+            case GameHelper.BELOTE_COINCHE:
                 mTitle = new SpannableString(getResources().getString(R.string.coinche));
                 break;
-            case GameData.TAROT_3_PLAYERS:
-            case GameData.TAROT_4_PLAYERS:
-            case GameData.TAROT_5_PLAYERS:
+            case GameHelper.TAROT_3_PLAYERS:
+            case GameHelper.TAROT_4_PLAYERS:
+            case GameHelper.TAROT_5_PLAYERS:
                 mTitle = new SpannableString(getResources().getString(R.string.tarot));
                 break;
         }

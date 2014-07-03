@@ -1,17 +1,17 @@
 /*
- * Copyright 2013 SBG Apps
+ * Copyright (c) 2014 SBG Apps
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.sbgapps.scoreit;
@@ -20,8 +20,8 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.sbgapps.scoreit.game.Lap;
-import com.sbgapps.scoreit.game.UniversalLap;
+import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.widget.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.widget.PickerInputPoints;
 
@@ -53,13 +53,13 @@ public class UniversalLapActivity extends LapActivity
         }
 
         if (null != savedInstanceState) {
-            for (int player = 0; player < getGameData().getPlayerCount(); player++) {
+            for (int player = 0; player < getGameHelper().getPlayerCount(); player++) {
                 getLap().setScore(player, savedInstanceState.getIntArray(KEY_SCORES)[player]);
             }
         }
 
         final LinearLayout ll = (LinearLayout) findViewById(R.id.container);
-        for (int player = 0; player < getGameData().getPlayerCount(); player++) {
+        for (int player = 0; player < getGameHelper().getPlayerCount(); player++) {
             PickerInputPoints uip = new PickerInputPoints(this);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -76,7 +76,7 @@ public class UniversalLapActivity extends LapActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         int[] points = new int[Lap.PLAYER_COUNT_MAX];
-        for (int player = 0; player < getGameData().getPlayerCount(); player++) {
+        for (int player = 0; player < getGameHelper().getPlayerCount(); player++) {
             points[player] = mPoints.get(player).getPoints();
         }
         outState.putIntArray(KEY_SCORES, points);
@@ -85,7 +85,7 @@ public class UniversalLapActivity extends LapActivity
     @Override
     public void updateLap() {
         UniversalLap lap = getLap();
-        for (int player = 0; player < getGameData().getPlayerCount(); player++) {
+        for (int player = 0; player < getGameHelper().getPlayerCount(); player++) {
             lap.setScore(player, mPoints.get(player).getPoints());
         }
     }

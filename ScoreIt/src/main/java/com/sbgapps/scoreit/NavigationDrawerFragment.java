@@ -1,17 +1,17 @@
 /*
- * Copyright 2013 SBG Apps
+ * Copyright (c) 2014 SBG Apps
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.sbgapps.scoreit;
@@ -38,7 +38,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.sbgapps.scoreit.adapter.DrawerArrayAdapter;
-import com.sbgapps.scoreit.game.GameData;
+import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.util.TypefaceSpan;
 import com.sbgapps.scoreit.view.DrawerEntry;
 import com.sbgapps.scoreit.view.DrawerHeader;
@@ -74,14 +74,14 @@ public class NavigationDrawerFragment extends Fragment {
 
         final Context context = getActivity();
         final List<DrawerItem> items = new ArrayList<DrawerItem>(8);
-        items.add(new DrawerEntry(R.string.universal, GameData.UNIVERSAL));
+        items.add(new DrawerEntry(R.string.universal, GameHelper.UNIVERSAL));
         items.add(new DrawerHeader(R.string.belote));
-        items.add(new DrawerEntry(R.string.classic, GameData.BELOTE_CLASSIC));
-        items.add(new DrawerEntry(R.string.coinche, GameData.BELOTE_COINCHE));
+        items.add(new DrawerEntry(R.string.classic, GameHelper.BELOTE_CLASSIC));
+        items.add(new DrawerEntry(R.string.coinche, GameHelper.BELOTE_COINCHE));
         items.add(new DrawerHeader(R.string.tarot));
-        items.add(new DrawerEntry(R.string.three_players, GameData.TAROT_3_PLAYERS));
-        items.add(new DrawerEntry(R.string.four_players, GameData.TAROT_4_PLAYERS));
-        items.add(new DrawerEntry(R.string.five_players, GameData.TAROT_5_PLAYERS));
+        items.add(new DrawerEntry(R.string.three_players, GameHelper.TAROT_3_PLAYERS));
+        items.add(new DrawerEntry(R.string.four_players, GameHelper.TAROT_4_PLAYERS));
+        items.add(new DrawerEntry(R.string.five_players, GameHelper.TAROT_5_PLAYERS));
         items.add(new DrawerOption(R.string.about, R.drawable.ic_action_about));
         mAdapter = new DrawerArrayAdapter(context, items);
 
@@ -175,7 +175,7 @@ public class NavigationDrawerFragment extends Fragment {
     private void selectItem(int position) {
         DrawerItem item = mAdapter.getItem(position);
         final int game = item.getGame();
-        if (game <= GameData.TAROT_5_PLAYERS)
+        if (game <= GameHelper.TAROT_5_PLAYERS)
             mDrawerListView.setItemChecked(position, true);
         if (mDrawerLayout != null) mDrawerLayout.closeDrawer(mFragmentContainerView);
         if (mListener != null) mListener.onNavigationDrawerGameSelected(game);
