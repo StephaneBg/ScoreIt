@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+    android:layout_marginBottom="@dimen/default_margin">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_height"
+            android:layout_marginTop="@dimen/default_margin"
+            android:id="@+id/spinner_announce"
+            android:spinnerMode="dialog"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_height"
+            android:layout_marginTop="@dimen/default_margin"
+            android:id="@+id/spinner_player"
+            android:spinnerMode="dialog"/>
+    </LinearLayout>
+
+    <ImageButton
+        style="?android:borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/default_margin"
+        android:src="@drawable/ic_content_discard"
+        android:id="@+id/btn_remove_announce"/>
+
+</LinearLayout>
