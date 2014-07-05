@@ -19,19 +19,22 @@ package com.sbgapps.scoreit;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
-import com.sbgapps.scoreit.games.GameHelper;
-import com.sbgapps.scoreit.games.Lap;
+import com.linearlistview.LinearListView;
+import com.sbgapps.scoreit.games.Game;
+import com.sbgapps.scoreit.games.Player;
+import com.sbgapps.scoreit.games.tarot.TarotAnnounce;
 import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.games.tarot.TarotLap;
 import com.sbgapps.scoreit.widget.SeekbarInputPoints;
-import com.sbgapps.scoreit.widget.TarotAnnounceWidget;
 
 import java.util.List;
 
@@ -41,7 +44,7 @@ import java.util.List;
 public class TarotLapActivity extends LapActivity {
 
     private static final LapHolder HOLDER = new LapHolder();
-    private List<Spinner> mSpinners;
+    private AnnounceAdapter mAdapter;
 
     @Override
     public TarotLap getLap() {
@@ -59,7 +62,14 @@ public class TarotLapActivity extends LapActivity {
         HOLDER.twenty_one = (CheckBox) findViewById(R.id.checkbox_twenty_one);
         HOLDER.fool = (CheckBox) findViewById(R.id.checkbox_fool);
         HOLDER.input_points = (SeekbarInputPoints) findViewById(R.id.input_points);
-        HOLDER.mAnnounces = (LinearLayout) findViewById(R.id.ll_announces);
+
+        LinearListView lv = (LinearListView) findViewById(R.id.lv_announces);
+        mAdapter = new AnnounceAdapter();
+        List<TarotAnnounce> l = getLap().getAnnounces();
+        l.add(new TarotAnnounce(TarotAnnounce.TYPE_MISERE_ATOUT, Player.PLAYER_1));
+        l.add(new TarotAnnounce(TarotAnnounce.TYPE_MISERE_ATOUT, Player.PLAYER_3));
+        l.add(new TarotAnnounce(TarotAnnounce.TYPE_MISERE_ATOUT, Player.PLAYER_2));
+        lv.setAdapter(mAdapter);
 
         if (isDialog()) {
             findViewById(R.id.btn_cancel).setOnClickListener(this);
@@ -70,31 +80,31 @@ public class TarotLapActivity extends LapActivity {
         final ArrayAdapter<PlayerItem> playerItemArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item);
         playerItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        playerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_1));
-        playerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_2));
-        playerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_3));
+        playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_1));
+        playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_2));
+        playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_3));
         switch (game) {
-            case GameHelper.TAROT_4_PLAYERS:
-                playerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_4));
+            case Game.TAROT_4_PLAYERS:
+                playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_4));
                 break;
-            case GameHelper.TAROT_5_PLAYERS:
-                playerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_4));
-                playerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_5));
+            case Game.TAROT_5_PLAYERS:
+                playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_4));
+                playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_5));
                 break;
         }
         HOLDER.taker.setAdapter(playerItemArrayAdapter);
 
-        if (GameHelper.TAROT_5_PLAYERS == game) {
+        if (Game.TAROT_5_PLAYERS == game) {
             ViewStub stub = (ViewStub) findViewById(R.id.viewstub_partner);
             View view = stub.inflate();
             final ArrayAdapter<PlayerItem> partnerItemArrayAdapter = new ArrayAdapter<>(this,
                     android.R.layout.simple_spinner_item);
             partnerItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            partnerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_1));
-            partnerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_2));
-            partnerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_3));
-            partnerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_4));
-            partnerItemArrayAdapter.add(new PlayerItem(Lap.PLAYER_5));
+            partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_1));
+            partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_2));
+            partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_3));
+            partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_4));
+            partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_5));
             HOLDER.partner = (Spinner) view.findViewById(R.id.spinner_partner);
             HOLDER.partner.setAdapter(partnerItemArrayAdapter);
         }
@@ -114,13 +124,16 @@ public class TarotLapActivity extends LapActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HOLDER.mAnnounces.addView(new TarotAnnounceWidget(TarotLapActivity.this));
+                TarotAnnounce ta = new TarotAnnounce();
+                getLap().getAnnounces().add(ta);
+                mAdapter.notifyDataSetChanged();
+
             }
         });
 
         if (isEdited()) {
             HOLDER.taker.setSelection(getLap().getTaker());
-            if (GameHelper.TAROT_5_PLAYERS == game)
+            if (Game.TAROT_5_PLAYERS == game)
                 HOLDER.partner.setSelection(((TarotFiveLap) getLap()).getPartner());
             HOLDER.deal.setSelection(getLap().getDeal());
             HOLDER.petit.setChecked((getLap().getOudlers() & TarotLap.OUDLER_PETIT_MSK)
@@ -142,7 +155,7 @@ public class TarotLapActivity extends LapActivity {
         lap.setDeal(((DealItem) HOLDER.deal.getSelectedItem()).getDeal());
         lap.setPoints(HOLDER.input_points.getPoints());
         lap.setOudlers(getOudlers());
-        if (GameHelper.TAROT_5_PLAYERS == getGameHelper().getPlayedGame())
+        if (Game.TAROT_5_PLAYERS == getGameHelper().getPlayedGame())
             ((TarotFiveLap) lap).setPartner(
                     ((PlayerItem) HOLDER.partner.getSelectedItem()).getPlayer());
         lap.setScores();
@@ -172,7 +185,6 @@ public class TarotLapActivity extends LapActivity {
         CheckBox twenty_one;
         CheckBox fool;
         SeekbarInputPoints input_points;
-        LinearLayout mAnnounces;
     }
 
     class DealItem {
@@ -204,7 +216,7 @@ public class TarotLapActivity extends LapActivity {
         }
     }
 
-    public class PlayerItem {
+    class PlayerItem {
 
         final int mPlayer;
 
@@ -219,6 +231,53 @@ public class TarotLapActivity extends LapActivity {
         @Override
         public String toString() {
             return getGameHelper().getPlayerName(mPlayer);
+        }
+    }
+
+    class AnnounceAdapter extends BaseAdapter {
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder vh;
+
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.list_item_announce, parent, false);
+                vh = new ViewHolder();
+                vh.button = (ImageButton) convertView.findViewById(R.id.btn_remove_announce);
+                convertView.setTag(vh);
+            } else {
+                vh = (ViewHolder) convertView.getTag();
+            }
+
+            final TarotAnnounce ta = getItem(position);
+            vh.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getLap().getAnnounces().remove(ta);
+                    notifyDataSetChanged();
+                }
+            });
+
+            return convertView;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public TarotAnnounce getItem(int position) {
+            return getLap().getAnnounces().get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return getLap().getAnnounces().size();
+        }
+
+        class ViewHolder {
+            ImageButton button;
         }
     }
 }

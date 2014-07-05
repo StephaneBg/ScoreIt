@@ -19,7 +19,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -106,24 +106,20 @@
             android:layout_height="wrap_content"
             android:text="@string/announces"/>
 
-        <LinearLayout
-            android:id="@+id/ll_announces"
+        <com.linearlistview.LinearListView
+            android:id="@+id/lv_announces"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
-            android:divider="?android:listDivider"
-            android:orientation="vertical"
-            android:showDividers="middle"/>
+            android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/btn_add_announce"
             style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
+            android:layout_margin="@dimen/default_margin"
             android:text="@string/add"
             android:textAllCaps="true"/>
+
     </LinearLayout>
 
 </ScrollView>

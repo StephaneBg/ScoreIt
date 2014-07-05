@@ -20,7 +20,7 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.widget.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.widget.PickerInputPoints;
@@ -75,7 +75,7 @@ public class UniversalLapActivity extends LapActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        int[] points = new int[Lap.PLAYER_COUNT_MAX];
+        int[] points = new int[Player.PLAYER_COUNT_MAX];
         for (int player = 0; player < getGameHelper().getPlayerCount(); player++) {
             points[player] = mPoints.get(player).getPoints();
         }

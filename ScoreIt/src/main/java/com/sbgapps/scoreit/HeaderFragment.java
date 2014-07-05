@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.widget.PlayerInfo;
@@ -69,8 +70,8 @@ public class HeaderFragment extends Fragment {
             pi.setName(getGame().getPlayerName(player));
             pi.setScore(getAccumulatedScore(player));
             pi.setScoreColor(getGame().getPlayerColor(player));
-            pi.setNameEditable(getGame().getPlayedGame() != GameHelper.BELOTE_CLASSIC
-                    && getGame().getPlayedGame() != GameHelper.BELOTE_COINCHE);
+            pi.setNameEditable(getGame().getPlayedGame() != Game.BELOTE_CLASSIC
+                    && getGame().getPlayedGame() != Game.BELOTE_COINCHE);
             root.addView(pi);
             mPlayers.add(pi);
         }

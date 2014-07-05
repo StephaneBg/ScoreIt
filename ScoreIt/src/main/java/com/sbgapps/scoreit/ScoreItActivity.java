@@ -34,6 +34,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.belote.BeloteClassicLap;
@@ -58,7 +59,7 @@ public class ScoreItActivity extends BaseActivity
     private static final int REQ_LAP_ACTIVITY = 2;
     private static final int REQ_EDIT_NAME_ACTIVITY = 3;
     private TypefaceSpan mTypefaceSpan;
-    private GameHelper mGameData;
+    private GameHelper mGameHelper;
     private SharedPreferences mPreferences;
     private SpannableString mTitle;
     private boolean mIsTablet;
@@ -75,9 +76,9 @@ public class ScoreItActivity extends BaseActivity
         setAccentDecor();
 
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        final int game = mPreferences.getInt(KEY_SELECTED_GAME, GameHelper.UNIVERSAL);
-        mGameData = GameHelper.getInstance();
-        mGameData.init(this, game);
+        final int game = mPreferences.getInt(KEY_SELECTED_GAME, Game.UNIVERSAL);
+        mGameHelper = GameHelper.getInstance();
+        mGameHelper.init(this, game);
 
         setContentView(R.layout.activity_scoreit);
         mIsTablet = (null != findViewById(R.id.fragment_container_large));
@@ -130,6 +131,7 @@ public class ScoreItActivity extends BaseActivity
             SwipeListView slv = mScoreListFragment.getListView();
             if (null != slv) slv.closeOpenedItems();
         }
+        mGameHelper.saveGame();
     }
 
     @Override
@@ -139,7 +141,7 @@ public class ScoreItActivity extends BaseActivity
             return false;
         } else {
             MenuItem item;
-            if (0 == mGameData.getLaps().size()) {
+            if (0 == mGameHelper.getLaps().size()) {
                 if (!mIsTablet) {
                     item = menu.findItem(R.id.menu_view);
                     item.setVisible(false);
@@ -148,7 +150,7 @@ public class ScoreItActivity extends BaseActivity
                 item.setVisible(false);
             }
             item = menu.findItem(R.id.menu_count);
-            item.setVisible(GameHelper.UNIVERSAL == mGameData.getPlayedGame());
+            item.setVisible(Game.UNIVERSAL == mGameHelper.getPlayedGame());
             getActionBar().setTitle(mTitle);
             return true;
         }
@@ -188,7 +190,7 @@ public class ScoreItActivity extends BaseActivity
         getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
         mPreferences.edit().putInt(KEY_SELECTED_GAME, position).commit();
-        mGameData.setPlayedGame(position);
+        mGameHelper.setPlayedGame(position);
         setTitle();
 
         reloadFragments();
@@ -224,24 +226,24 @@ public class ScoreItActivity extends BaseActivity
 
     public void addLap() {
         Lap lap;
-        switch (mGameData.getPlayedGame()) {
+        switch (mGameHelper.getPlayedGame()) {
             default:
-            case GameHelper.UNIVERSAL:
+            case Game.UNIVERSAL:
                 lap = new UniversalLap();
                 break;
-            case GameHelper.BELOTE_CLASSIC:
+            case Game.BELOTE_CLASSIC:
                 lap = new BeloteClassicLap();
                 break;
-            case GameHelper.BELOTE_COINCHE:
+            case Game.BELOTE_COINCHE:
                 lap = new BeloteCoincheLap();
                 break;
-            case GameHelper.TAROT_3_PLAYERS:
+            case Game.TAROT_3_PLAYERS:
                 lap = new TarotThreeLap();
                 break;
-            case GameHelper.TAROT_4_PLAYERS:
+            case Game.TAROT_4_PLAYERS:
                 lap = new TarotFourLap();
                 break;
-            case GameHelper.TAROT_5_PLAYERS:
+            case Game.TAROT_5_PLAYERS:
                 lap = new TarotFiveLap();
                 break;
         }
@@ -253,7 +255,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void removeLap(Lap lap) {
-        mGameData.removeLap(lap);
+        mGameHelper.removeLap(lap);
         updateFragments();
     }
 
@@ -298,20 +300,20 @@ public class ScoreItActivity extends BaseActivity
 
     private void showLapActivity(Lap lap, boolean edit) {
         Intent intent;
-        switch (mGameData.getPlayedGame()) {
+        switch (mGameHelper.getPlayedGame()) {
             default:
-            case GameHelper.UNIVERSAL:
+            case Game.UNIVERSAL:
                 intent = new Intent(this, UniversalLapActivity.class);
                 break;
-            case GameHelper.BELOTE_CLASSIC:
+            case Game.BELOTE_CLASSIC:
                 intent = new Intent(this, BeloteLapActivity.class);
                 break;
-            case GameHelper.BELOTE_COINCHE:
+            case Game.BELOTE_COINCHE:
                 intent = new Intent(this, CoincheLapActivity.class);
                 break;
-            case GameHelper.TAROT_3_PLAYERS:
-            case GameHelper.TAROT_4_PLAYERS:
-            case GameHelper.TAROT_5_PLAYERS:
+            case Game.TAROT_3_PLAYERS:
+            case Game.TAROT_4_PLAYERS:
+            case Game.TAROT_5_PLAYERS:
                 intent = new Intent(this, TarotLapActivity.class);
                 break;
         }
@@ -343,20 +345,20 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void setTitle() {
-        switch (mGameData.getPlayedGame()) {
+        switch (mGameHelper.getPlayedGame()) {
             default:
-            case GameHelper.UNIVERSAL:
+            case Game.UNIVERSAL:
                 mTitle = new SpannableString(getResources().getString(R.string.universal));
                 break;
-            case GameHelper.BELOTE_CLASSIC:
+            case Game.BELOTE_CLASSIC:
                 mTitle = new SpannableString(getResources().getString(R.string.belote));
                 break;
-            case GameHelper.BELOTE_COINCHE:
+            case Game.BELOTE_COINCHE:
                 mTitle = new SpannableString(getResources().getString(R.string.coinche));
                 break;
-            case GameHelper.TAROT_3_PLAYERS:
-            case GameHelper.TAROT_4_PLAYERS:
-            case GameHelper.TAROT_5_PLAYERS:
+            case Game.TAROT_3_PLAYERS:
+            case Game.TAROT_4_PLAYERS:
+            case Game.TAROT_5_PLAYERS:
                 mTitle = new SpannableString(getResources().getString(R.string.tarot));
                 break;
         }
@@ -364,7 +366,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void nameEdited(String name) {
-        mGameData.setPlayerName(mEditedName.getPlayer(), name);
+        mGameHelper.setPlayerName(mEditedName.getPlayer(), name);
         mEditedName.setName(name);
     }
 
@@ -377,7 +379,7 @@ public class ScoreItActivity extends BaseActivity
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mGameData.deleteAll();
+                                mGameHelper.deleteAll();
                                 mHeaderFragment.updateScores();
                                 if (null != mScoreListFragment && mScoreListFragment.isVisible())
                                     mScoreListFragment.getListAdapter().removeAll();

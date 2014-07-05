@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.belote.BeloteLap;
@@ -96,8 +97,8 @@ public class ScoreAdapter extends BaseAdapter {
         for (int i = 0; i < cnt; i++) {
             h.scores[i].getScore().setText(Integer.toString(lap.getScore(i)));
             switch (getGameData().getPlayedGame()) {
-                case GameHelper.BELOTE_CLASSIC:
-                case GameHelper.BELOTE_COINCHE:
+                case Game.BELOTE_CLASSIC:
+                case Game.BELOTE_COINCHE:
                     if (((BeloteLap) lap).getBelote() == i) {
                         h.scores[i].getImage().setImageResource(R.drawable.ic_star);
                     } else {
@@ -105,9 +106,9 @@ public class ScoreAdapter extends BaseAdapter {
                     }
                     break;
 
-                case GameHelper.TAROT_5_PLAYERS:
-                case GameHelper.TAROT_4_PLAYERS:
-                case GameHelper.TAROT_3_PLAYERS:
+                case Game.TAROT_5_PLAYERS:
+                case Game.TAROT_4_PLAYERS:
+                case Game.TAROT_3_PLAYERS:
                     if (((TarotLap) lap).getTaker() == i) {
                         h.scores[i].getImage().setImageResource(R.drawable.ic_taker);
                     } else {

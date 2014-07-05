@@ -19,7 +19,7 @@ package com.sbgapps.scoreit;
 import android.os.Bundle;
 import android.widget.RadioButton;
 
-import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.BeloteCoincheLap;
 import com.sbgapps.scoreit.widget.SeekbarInputPoints;
 
@@ -60,10 +60,10 @@ public class CoincheLapActivity extends LapActivity {
 
         switch (getLap().getTaker()) {
             default:
-            case Lap.PLAYER_1:
+            case Player.PLAYER_1:
                 HOLDER.rb_player1.setChecked(true);
                 break;
-            case Lap.PLAYER_2:
+            case Player.PLAYER_2:
                 HOLDER.rb_player2.setChecked(true);
                 break;
         }
@@ -75,14 +75,14 @@ public class CoincheLapActivity extends LapActivity {
         HOLDER.input_points.setPoints(getLap().getPoints());
 
         switch (getLap().getBelote()) {
-            case Lap.PLAYER_1:
+            case Player.PLAYER_1:
                 HOLDER.rb_belote_player1.setChecked(true);
                 break;
-            case Lap.PLAYER_2:
+            case Player.PLAYER_2:
                 HOLDER.rb_belote_player2.setChecked(true);
                 break;
             default:
-            case Lap.PLAYER_NONE:
+            case Player.PLAYER_NONE:
                 HOLDER.rb_belote_none.setChecked(true);
                 break;
         }
@@ -104,11 +104,11 @@ public class CoincheLapActivity extends LapActivity {
     @Override
     public void updateLap() {
         BeloteCoincheLap lap = getLap();
-        lap.setTaker(HOLDER.rb_player1.isChecked() ? Lap.PLAYER_1 : Lap.PLAYER_2);
+        lap.setTaker(HOLDER.rb_player1.isChecked() ? Player.PLAYER_1 : Player.PLAYER_2);
         lap.setDeal(HOLDER.input_deal.getPoints());
         lap.setPoints(HOLDER.input_points.getPoints());
-        lap.setBelote(HOLDER.rb_belote_none.isChecked() ? Lap.PLAYER_NONE :
-                HOLDER.rb_belote_player1.isChecked() ? Lap.PLAYER_1 : Lap.PLAYER_2);
+        lap.setBelote(HOLDER.rb_belote_none.isChecked() ? Player.PLAYER_NONE :
+                HOLDER.rb_belote_player1.isChecked() ? Player.PLAYER_1 : Player.PLAYER_2);
         lap.setCoinche(HOLDER.rb_coinche_none.isChecked() ? BeloteCoincheLap.COINCHE_NONE :
                 HOLDER.rb_coinche.isChecked() ? BeloteCoincheLap.COINCHE_NORMAL
                         : BeloteCoincheLap.COINCHE_DOUBLE);

@@ -29,12 +29,13 @@ import com.echo.holographlibrary.LineGraph;
 import com.echo.holographlibrary.LinePoint;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.Player;
 
 public class GraphFragment extends Fragment {
 
     public static final String TAG = GraphFragment.class.getName();
-    private final int[] mColors = new int[Lap.PLAYER_COUNT_MAX];
-    private final Line[] mLines = new Line[Lap.PLAYER_COUNT_MAX];
+    private final int[] mColors = new int[Player.PLAYER_COUNT_MAX];
+    private final Line[] mLines = new Line[Player.PLAYER_COUNT_MAX];
     private LineGraph mGraph;
     private int[] mScores;
     private int mX;
@@ -44,11 +45,11 @@ public class GraphFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         Resources r = activity.getResources();
-        mColors[Lap.PLAYER_1] = r.getColor(R.color.color_player1);
-        mColors[Lap.PLAYER_2] = r.getColor(R.color.color_player2);
-        mColors[Lap.PLAYER_3] = r.getColor(R.color.color_player3);
-        mColors[Lap.PLAYER_4] = r.getColor(R.color.color_player4);
-        mColors[Lap.PLAYER_5] = r.getColor(R.color.color_player5);
+        mColors[Player.PLAYER_1] = r.getColor(R.color.color_player1);
+        mColors[Player.PLAYER_2] = r.getColor(R.color.color_player2);
+        mColors[Player.PLAYER_3] = r.getColor(R.color.color_player3);
+        mColors[Player.PLAYER_4] = r.getColor(R.color.color_player4);
+        mColors[Player.PLAYER_5] = r.getColor(R.color.color_player5);
         mPointColor = r.getColor(R.color.darker_gray);
     }
 
@@ -83,7 +84,7 @@ public class GraphFragment extends Fragment {
             mGraph.addPointToLine(player, p);
         }
 
-        mScores = new int[Lap.PLAYER_COUNT_MAX];
+        mScores = new int[Player.PLAYER_COUNT_MAX];
         for (int i = 0; i < lapCnt; i++) {
             Lap lap = getGameData().getLaps().get(i);
             addLap(lap);
