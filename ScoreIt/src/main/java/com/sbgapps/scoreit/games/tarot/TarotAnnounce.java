@@ -15,10 +15,14 @@ public class TarotAnnounce implements Serializable {
     public static final int TYPE_POIGNEE_DOUBLE = 2;
     public static final int TYPE_MISERE_ATOUT = 3;
     public static final int TYPE_MISERE_TETE = 4;
+    public static final int TYPE_PETIT_CHELEM = 5;
+    public static final int TYPE_CHELEM_NON_ANNONCE = 6;
+    public static final int TYPE_CHELEM_ANNONCE = 7;
+
     @SerializedName("announce")
-    private final int mAnnounce;
+    private int mAnnounce;
     @SerializedName("player")
-    private final int mPlayer;
+    private int mPlayer;
 
 
     public TarotAnnounce() {
@@ -34,12 +38,15 @@ public class TarotAnnounce implements Serializable {
         return mAnnounce;
     }
 
+    public void setAnnounce(int announce) {
+        mAnnounce = announce;
+    }
+
     public int getPlayer() {
         return mPlayer;
     }
 
-    @Override
-    public String toString() {
-        return "Player " + mPlayer;
+    public void setPlayer(int player) {
+        mPlayer = player;
     }
 }

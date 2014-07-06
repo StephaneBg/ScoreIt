@@ -35,6 +35,7 @@ import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.belote.BeloteLap;
 import com.sbgapps.scoreit.games.tarot.TarotLap;
+import com.sbgapps.scoreit.util.Constants;
 import com.sbgapps.scoreit.view.SwipeListView;
 import com.sbgapps.scoreit.widget.PlayerScore;
 
@@ -46,10 +47,6 @@ import java.util.List;
  */
 public class ScoreAdapter extends BaseAdapter {
 
-    private static final int ANIM_DURATION = 240;
-    private static final int ANIM_OFFSET = 60;
-    private static final float ALPHA_MAX = 1.0f;
-    private static final float ALPHA_MIN = 0.0f;
     private final SwipeListView mSwipeListView;
     private final ScoreItActivity mActivity;
 
@@ -122,15 +119,16 @@ public class ScoreAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 mSwipeListView.closeOpenedItems();
-                ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", ALPHA_MAX, ALPHA_MIN);
+                ObjectAnimator animator =
+                        ObjectAnimator.ofFloat(view, "alpha", Constants.ALPHA_MAX, Constants.ALPHA_MIN);
                 animator.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        view.setAlpha(ALPHA_MAX);
+                        view.setAlpha(Constants.ALPHA_MAX);
                         mActivity.removeLap(lap);
                     }
                 });
-                animator.setDuration(ANIM_DURATION).start();
+                animator.setDuration(Constants.ANIM_DURATION).start();
             }
         });
         h.edit.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +179,7 @@ public class ScoreAdapter extends BaseAdapter {
 
     private Animator createAnimatorForView(View view, int idx) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(view, "x", 0, view.getWidth());
-        animator.setDuration(ANIM_DURATION).setStartDelay(ANIM_OFFSET * idx);
+        animator.setDuration(Constants.ANIM_DURATION).setStartDelay(Constants.ANIM_OFFSET * idx);
         return animator;
     }
 

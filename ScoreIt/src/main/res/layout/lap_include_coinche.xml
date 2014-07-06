@@ -16,9 +16,8 @@
   ~     limitations under the License.
   -->
 
-<ScrollView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollview"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -32,7 +31,7 @@
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/team"/>
+            android:text="@string/team" />
 
         <RadioGroup
             android:id="@+id/radio_group_team"
@@ -47,42 +46,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/default_margin"
-                android:text="@string/them"/>
+                android:text="@string/them" />
 
             <RadioButton
                 android:id="@+id/rb_player2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/us"/>
+                android:text="@string/us" />
         </RadioGroup>
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/deal"/>
+            android:text="@string/bidding" />
 
         <com.sbgapps.scoreit.widget.SeekbarInputPoints
             android:id="@+id/input_deal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/progress"/>
+            android:text="@string/progress" />
 
         <com.sbgapps.scoreit.widget.SeekbarInputPoints
             android:id="@+id/input_points"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/belote"/>
+            android:text="@string/belote" />
 
         <RadioGroup
             android:id="@+id/radio_group_belote"
@@ -97,27 +96,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/default_margin"
-                android:text="@string/none"/>
+                android:text="@string/none" />
 
             <RadioButton
                 android:id="@+id/rb_belote_player1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/default_margin"
-                android:text="@string/them"/>
+                android:text="@string/them" />
 
             <RadioButton
                 android:id="@+id/rb_belote_player2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/us"/>
+                android:text="@string/us" />
         </RadioGroup>
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/coinche"/>
+            android:text="@string/coinche" />
 
         <RadioGroup
             android:id="@+id/radio_group_coinche"
@@ -132,21 +131,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/default_margin"
-                android:text="@string/none"/>
+                android:text="@string/none" />
 
             <RadioButton
                 android:id="@+id/rb_coinche"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/default_margin"
-                android:text="@string/coinche"/>
+                android:text="@string/coinche" />
 
             <RadioButton
                 android:id="@+id/rb_surcoinche"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/surcoinche"/>
+                android:text="@string/surcoinche" />
         </RadioGroup>
 
     </LinearLayout>

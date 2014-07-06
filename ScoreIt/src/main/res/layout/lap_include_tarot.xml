@@ -16,8 +16,7 @@
   ~ limitations under the License.
   -->
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -31,39 +30,39 @@
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/taker"/>
+            android:text="@string/taker" />
 
         <Spinner
             android:id="@+id/spinner_taker"
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_height"
             android:layout_marginTop="@dimen/default_margin"
-            android:spinnerMode="dialog"/>
+            android:spinnerMode="dialog" />
 
         <ViewStub
             android:id="@+id/viewstub_partner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout="@layout/stub_partner"/>
+            android:layout="@layout/stub_partner" />
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/deal"/>
+            android:text="@string/bidding" />
 
         <Spinner
             android:id="@+id/spinner_deal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_height"
             android:layout_marginTop="@dimen/default_margin"
-            android:spinnerMode="dialog"/>
+            android:spinnerMode="dialog" />
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/oudlers"/>
+            android:text="@string/oudlers" />
 
         <CheckBox
             android:id="@+id/checkbox_petit"
@@ -71,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
-            android:text="@string/petit"/>
+            android:text="@string/petit" />
 
         <CheckBox
             android:id="@+id/checkbox_twenty_one"
@@ -79,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
-            android:text="@string/twentyone"/>
+            android:text="@string/twentyone" />
 
         <CheckBox
             android:id="@+id/checkbox_fool"
@@ -87,29 +86,30 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
-            android:text="@string/fool"/>
+            android:text="@string/fool" />
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/progress"/>
+            android:text="@string/progress" />
 
         <com.sbgapps.scoreit.widget.SeekbarInputPoints
             android:id="@+id/input_points"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/announces"/>
+            android:text="@string/announces" />
 
-        <com.linearlistview.LinearListView
-            android:id="@+id/lv_announces"
+        <LinearLayout
+            android:id="@+id/ll_announces"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
 
         <Button
             android:id="@+id/btn_add_announce"
@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:text="@string/add"
-            android:textAllCaps="true"/>
+            android:textAllCaps="true" />
 
     </LinearLayout>
 
