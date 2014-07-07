@@ -1,23 +1,26 @@
 /*
- * Copyright 2013 SBG Apps
+ * Copyright (c) 2014 SBG Apps
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.sbgapps.scoreit.games.tarot;
 
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.games.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sbaiget on 07/12/13.
@@ -27,14 +30,15 @@ public class TarotFiveLap extends TarotLap {
     @SerializedName("partner")
     private int mPartner;
 
-    public TarotFiveLap(int taker, int deal, int points, int oudlers, int partner) {
-        super(taker, deal, points, oudlers);
+    public TarotFiveLap(int taker, int deal, int points, int oudlers, List<TarotBonus> bonuses,
+                        int partner) {
+        super(taker, deal, points, oudlers, bonuses);
         mPartner = partner;
         setScores();
     }
 
     public TarotFiveLap() {
-        this(Player.PLAYER_1, DEAL_TAKE, 41, 0, Player.PLAYER_1);
+        this(Player.PLAYER_1, BID_PRISE, 41, 0, new ArrayList<TarotBonus>(), Player.PLAYER_1);
     }
 
     public int getPartner() {
@@ -46,9 +50,14 @@ public class TarotFiveLap extends TarotLap {
     }
 
     @Override
+    public int getPlayerCount() {
+        return 5;
+    }
+
+    @Override
     public void setScores() {
         super.setScores();
-        final int score = computeScore();
+        final int score = getResult();
         if (mTaker != mPartner) {
             mScores[Player.PLAYER_1] = (Player.PLAYER_1 == mTaker) ? 2 * score :
                     (Player.PLAYER_1 == mPartner) ? score : -score;
@@ -67,5 +76,17 @@ public class TarotFiveLap extends TarotLap {
             mScores[Player.PLAYER_4] = (Player.PLAYER_4 == mTaker) ? 4 * score : -score;
             mScores[Player.PLAYER_5] = (Player.PLAYER_5 == mTaker) ? 4 * score : -score;
         }
+    }
+
+    @Override
+    public int getPetitBonus() {
+        for (TarotBonus bonus : getBonuses()) {
+            switch (bonus.getBonus()) {
+                case TarotBonus.BONUS_PETIT_AU_BOUT:
+                    return (mTaker == bonus.getPlayer() || mPartner == bonus.getPlayer())
+                            ? 10 : -10;
+            }
+        }
+        return 0;
     }
 }

@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
-            android:text="@string/fool" />
+            android:text="@string/excuse" />
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
@@ -103,22 +103,27 @@
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/announces" />
+            android:text="@string/bonuses" />
 
         <LinearLayout
-            android:id="@+id/ll_announces"
+            android:id="@+id/ll_bonuses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:animateLayoutChanges="true"
+            android:divider="?android:listDivider"
+            android:orientation="vertical"
+            android:showDividers="middle">
 
-        <Button
-            android:id="@+id/btn_add_announce"
-            style="?android:borderlessButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:text="@string/add"
-            android:textAllCaps="true" />
+            <Button
+                android:id="@+id/btn_add_bonus"
+                style="?android:borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:text="@string/add"
+                android:textAllCaps="true" />
+        </LinearLayout>
+
 
     </LinearLayout>
 

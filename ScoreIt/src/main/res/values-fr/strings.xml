@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ Copyright 2013 SBG Apps
+  ~ Copyright (c) 2014 SBG Apps
   ~
-  ~     Licensed under the Apache License, Version 2.0 (the "License");
-  ~     you may not use this file except in compliance with the License.
-  ~     You may obtain a copy of the License at
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
   ~
-  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~    http://www.apache.org/licenses/LICENSE-2.0
   ~
-  ~     Unless required by applicable law or agreed to in writing, software
-  ~     distributed under the License is distributed on an "AS IS" BASIS,
-  ~     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~     See the License for the specific language governing permissions and
-  ~     limitations under the License.
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
   -->
 
 <resources>
@@ -50,9 +50,16 @@
     <string name="progress">Points</string>
     <string name="bidding">Contrat</string>
     <string name="oudlers">Bouts</string>
-    <string name="fool">Excuse</string>
+    <string name="excuse">Excuse</string>
     <string name="petit">Petit</string>
     <string name="twentyone">Vingt et un</string>
+    <string name="bonuses">Primes</string>
+    <string name="poignee_simple">Poignée simple</string>
+    <string name="poignee_double">Poignée double</string>
+    <string name="poignee_triple">Poignée triple</string>
+    <string name="petit_au_bout">Petit au bout</string>
+    <string name="chelem_non_annonce">Chelem non annoncé</string>
+    <string name="chelem_annonce">Chelem annoncé</string>
     <string name="navigation_drawer_open">Ouvre la navigation</string>
     <string name="navigation_drawer_close">Ferme la navigation</string>
     <string name="inside">Dedans</string>
