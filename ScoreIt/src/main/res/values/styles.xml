@@ -17,12 +17,19 @@
 
 <resources>
 
-    <style name="AppBase" parent="Theme.HoloAccent.Light">
-        <item name="accentColor">@color/accent_color</item>
-        <item name="android:windowBackground">@drawable/background_app</item>
+    <style name="AppBase" parent="android:Theme.Holo.Light">
+        <item name="android:windowBackground">@color/white</item>
         <item name="android:actionBarStyle">@style/ActionBar.Scoreit</item>
         <item name="android:actionMenuTextColor">@color/white</item>
         <item name="android:actionOverflowButtonStyle">@style/ButtonOverflow</item>
+        <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/apptheme_btn_check_holo_light
+        </item>
+        <item name="android:listChoiceIndicatorSingle">@drawable/apptheme_btn_radio_holo_light
+        </item>
+        <item name="android:dropDownSpinnerStyle">@style/SpinnerAppTheme</item>
+        <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
+        <item name="android:editTextStyle">@drawable/apptheme_edit_text_holo_light</item>
     </style>
 
     <style name="Theme.ScoreIt" parent="AppBase">
@@ -33,13 +40,12 @@
         <item name="isDialog">false</item>
     </style>
 
-    <style name="Theme.Dialog" parent="Theme.HoloAccent.Light.Dialog">
-        <item name="accentColor">@color/accent_color</item>
+    <style name="Theme.Dialog" parent="android:Theme.Holo.Light.Dialog">
     </style>
 
     <style name="ActionBar.Scoreit" parent="android:Widget.Holo.ActionBar">
         <item name="android:titleTextStyle">@style/TitleTextStyle</item>
-        <item name="android:background">@color/transparent_accent_color</item>
+        <item name="android:background">@color/accent_color</item>
     </style>
 
     <style name="TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
@@ -50,11 +56,19 @@
         <item name="android:src">@drawable/ic_action_overflow</item>
     </style>
 
-    <style name="InfoTextStyle" parent="android:Widget.Holo.Light.TextView">
-        <item name="android:gravity">center</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textColor">@color/darker_gray</item>
-        <item name="android:textSize">18sp</item>
+    <style name="SpinnerAppTheme" parent="android:Widget.Holo.Light.Spinner">
+        <item name="android:background">@drawable/apptheme_spinner_background_holo_light</item>
+        <item name="android:dropDownSelector">@drawable/apptheme_list_selector_holo_light</item>
+    </style>
+
+    <style name="SeekBarAppTheme" parent="android:Widget.Holo.Light.SeekBar">
+        <item name="android:progressDrawable">
+            @drawable/apptheme_scrubber_progress_horizontal_holo_light
+        </item>
+        <item name="android:indeterminateDrawable">
+            @drawable/apptheme_scrubber_progress_horizontal_holo_light
+        </item>
+        <item name="android:thumb">@drawable/apptheme_scrubber_control_selector_holo_light</item>
     </style>
 
 </resources>

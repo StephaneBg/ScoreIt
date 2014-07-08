@@ -35,7 +35,6 @@ public class EditNameActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getAccentHelper().prepareDialog(this, getWindow());
 
         setContentView(R.layout.activity_edit_name);
         mEditText = (EditText) findViewById(R.id.edit_name);

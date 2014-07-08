@@ -16,14 +16,15 @@
 
 package com.sbgapps.scoreit;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Window;
 import android.view.WindowManager;
 
-import com.negusoft.holoaccent.activity.AccentActivity;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -32,7 +33,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by sbaiget on 08/01/14.
  */
-public class BaseActivity extends AccentActivity {
+public class BaseActivity extends Activity {
 
     private boolean mIsDialog = false;
 
@@ -53,11 +54,14 @@ public class BaseActivity extends AccentActivity {
 
     public void setAccentDecor() {
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            Window win = getWindow();
+            WindowManager.LayoutParams winParams = win.getAttributes();
+            final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+            winParams.flags |= bits;
+            win.setAttributes(winParams);
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintResource(R.color.dark_accent_color);
-            tintManager.setNavigationBarTintEnabled(true);
-            tintManager.setNavigationBarTintResource(R.color.transparent_black);
+            tintManager.setStatusBarTintResource(R.color.accent_color_dark);
         }
     }
 

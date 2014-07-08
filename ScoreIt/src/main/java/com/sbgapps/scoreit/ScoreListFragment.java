@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit;
 
+import android.app.Activity;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -160,7 +160,7 @@ public class TarotLapActivity extends LapActivity {
         final TarotBonus bonus = tarotBonus;
 
         final View view = getLayoutInflater()
-                .inflate(R.layout.list_item_announce, HOLDER.ll_bonuses, false);
+                .inflate(R.layout.list_item_bonus, HOLDER.ll_bonuses, false);
         ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_announce);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

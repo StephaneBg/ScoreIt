@@ -33,11 +33,4 @@
         swipe:swipeFrontView="@+id/score_view"
         swipe:swipeMode="both"/>
 
-    <ViewStub
-        android:id="@android:id/empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout="@layout/empty_list"/>
-
 </com.sbgapps.scoreit.widget.FractionFrameLayout>

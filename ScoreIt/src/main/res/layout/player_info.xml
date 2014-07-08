@@ -19,25 +19,31 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
     android:orientation="vertical">
 
     <TextView
+        style="?android:borderlessButtonStyle"
         android:id="@+id/name"
-        style="@style/InfoTextStyle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_height"
-        android:layout_weight="1"
-        android:background="@drawable/background_names"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/darker_gray"
+        android:textSize="18sp"
         android:fontFamily="fonts/Roboto-Bold.ttf"
         android:onClick="editName"/>
 
     <TextView
         android:id="@+id/score"
-        style="@style/InfoTextStyle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_height"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/darker_gray"
+        android:paddingTop="8dp"
+        android:textSize="18sp"
         android:fontFamily="fonts/Roboto-Bold.ttf"/>
 
 </LinearLayout>

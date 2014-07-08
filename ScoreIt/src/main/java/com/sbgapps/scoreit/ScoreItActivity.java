@@ -163,10 +163,6 @@ public class ScoreItActivity extends BaseActivity
                 showClearDialog();
                 return true;
 
-            case R.id.menu_new:
-                addLap();
-                return true;
-
             case R.id.menu_view:
                 switchScoreViews();
                 return true;
@@ -189,7 +185,7 @@ public class ScoreItActivity extends BaseActivity
 
         getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-        mPreferences.edit().putInt(KEY_SELECTED_GAME, position).commit();
+        mPreferences.edit().putInt(KEY_SELECTED_GAME, position).apply();
         mGameHelper.setPlayedGame(position);
         setTitle();
 
@@ -222,6 +218,10 @@ public class ScoreItActivity extends BaseActivity
                 nameEdited(name);
                 break;
         }
+    }
+
+    public void addLap(View view) {
+        addLap();
     }
 
     public void addLap() {
@@ -402,7 +402,6 @@ public class ScoreItActivity extends BaseActivity
                 )
                 .create();
         dialog.show();
-        getAccentHelper().prepareDialog(this, dialog.getWindow());
     }
 
     private void showPlayerCountDialog() {
@@ -422,7 +421,6 @@ public class ScoreItActivity extends BaseActivity
                 )
                 .create();
         dialog.show();
-        getAccentHelper().prepareDialog(this, dialog.getWindow());
     }
 
     private void showEditNameActionChoices() {
@@ -450,6 +448,5 @@ public class ScoreItActivity extends BaseActivity
                 )
                 .create();
         dialog.show();
-        getAccentHelper().prepareDialog(this, dialog.getWindow());
     }
 }

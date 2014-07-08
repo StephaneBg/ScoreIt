@@ -51,7 +51,7 @@
             android:layout_width="0dip"
             android:layout_height="@dimen/default_list_item_height"
             android:layout_weight="1"
-            android:background="@drawable/background_textfield"
+            android:background="@drawable/apptheme_edit_text_holo_light"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
