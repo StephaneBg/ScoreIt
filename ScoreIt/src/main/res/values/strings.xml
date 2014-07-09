@@ -59,7 +59,8 @@
     <string name="poignee_triple">Poignée triple</string>
     <string name="petit_au_bout">Petit au bout</string>
     <string name="chelem_non_annonce">Chelem non annoncé</string>
-    <string name="chelem_annonce">Chelem annoncé</string>
+    <string name="chelem_annonce_realise">Chelem annoncé réalisé</string>
+    <string name="chelem_annonce_non_realise">Chelem annoncé non réalisé</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="inside">Inside</string>

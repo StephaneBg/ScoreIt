@@ -19,6 +19,7 @@
 
     <style name="AppBase" parent="android:Theme.Holo.Light">
         <item name="android:windowBackground">@color/white</item>
+        <item name="android:logo">@drawable/ic_logo</item>
         <item name="android:actionBarStyle">@style/ActionBar.Scoreit</item>
         <item name="android:actionMenuTextColor">@color/white</item>
         <item name="android:actionOverflowButtonStyle">@style/ButtonOverflow</item>

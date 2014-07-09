@@ -55,12 +55,15 @@ public abstract class LapActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setupFauxDialog();
+        setTranslucentStatusBar();
         if (!isDialog()) setupActionBar();
 
         Bundle b = getIntent().getExtras();
-        mLap = (Lap) b.getSerializable(ScoreItActivity.EXTRA_LAP);
         mIsEdited = b.getBoolean(ScoreItActivity.EXTRA_EDIT);
+        if (mIsEdited) {
+            int i = b.getInt(ScoreItActivity.EXTRA_LAP, -1);
+            mLap = getGameHelper().getLaps().get(i);
+        }
     }
 
     private void setupActionBar() {
@@ -89,9 +92,7 @@ public abstract class LapActivity extends BaseActivity
         switch (v.getId()) {
             case R.id.btn_confirm:
                 updateLap();
-                if (isEdited()) {
-                    mGameData.editLap(mLap);
-                } else {
+                if (!isEdited()) {
                     mGameData.addLap(mLap);
                 }
                 setResult(RESULT_OK);

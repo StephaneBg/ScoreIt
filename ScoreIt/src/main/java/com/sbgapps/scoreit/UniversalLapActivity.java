@@ -45,6 +45,10 @@ public class UniversalLapActivity extends LapActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (!isEdited()) {
+            setLap(new UniversalLap());
+        }
+
         setContentView(R.layout.activity_lap_universal);
 
         if (isDialog()) {

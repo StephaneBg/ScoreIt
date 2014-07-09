@@ -1,17 +1,17 @@
 /*
- * Copyright 2013 SBG Apps
+ * Copyright (c) 2014 SBG Apps
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.sbgapps.scoreit.games;
@@ -22,7 +22,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
-import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.games.belote.BeloteClassicGame;
 import com.sbgapps.scoreit.games.belote.BeloteCoincheGame;
 import com.sbgapps.scoreit.games.tarot.TarotFiveGame;
@@ -41,6 +40,9 @@ import java.util.List;
  */
 public class GameHelper {
 
+    public static final String KEY_SELECTED_GAME = "selected_game";
+    public static final String KEY_UNIVERSAL_PLAYER_CNT = "player_count";
+
     private static GameHelper sInstance = new GameHelper();
     private Game mGame;
     private Context mContext;
@@ -54,11 +56,12 @@ public class GameHelper {
         return sInstance;
     }
 
-    public void init(Activity activity, int game) {
+    public GameHelper init(Activity activity) {
         mContext = activity;
         mPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
-        mPlayedGame = game;
+        mPlayedGame = mPreferences.getInt(KEY_SELECTED_GAME, Game.UNIVERSAL);
         loadLaps();
+        return this;
     }
 
     public int getPlayedGame() {
@@ -72,29 +75,8 @@ public class GameHelper {
     }
 
     public void saveGame() {
-        String f;
-        switch (mPlayedGame) {
-            default:
-            case Game.UNIVERSAL:
-                f = "universal.game";
-                break;
-            case Game.BELOTE_CLASSIC:
-                f = "belote.game";
-                break;
-            case Game.BELOTE_COINCHE:
-                f = "coinche.game";
-                break;
-            case Game.TAROT_3_PLAYERS:
-                f = "tarot_3.game";
-                break;
-            case Game.TAROT_4_PLAYERS:
-                f = "tarot_4.game";
-                break;
-            case Game.TAROT_5_PLAYERS:
-                f = "tarot_5.game";
-                break;
-        }
-        save(f, mGame);
+        String file = getDefaultFileName();
+        save(file, mGame);
     }
 
     public int getPlayerCount() {
@@ -102,45 +84,61 @@ public class GameHelper {
             default:
                 return mGame.getPlayers().size();
             case Game.UNIVERSAL:
-                return mPreferences.getInt(ScoreItActivity.KEY_UNIVERSAL_PLAYER_CNT, 5);
+                return mPreferences.getInt(KEY_UNIVERSAL_PLAYER_CNT, 5);
+        }
+    }
+
+    public void setPlayerCount(int count) {
+        switch (mPlayedGame) {
+            default:
+                break;
+            case Game.UNIVERSAL:
+                saveGame();
+                mPreferences
+                        .edit()
+                        .putInt(KEY_UNIVERSAL_PLAYER_CNT, count)
+                        .apply();
+                loadLaps();
+                break;
         }
     }
 
     private void loadLaps() {
+        String file = getDefaultFileName();
         switch (mPlayedGame) {
             default:
             case Game.UNIVERSAL:
-                mGame = load("universal.game", UniversalGame.class);
+                mGame = load(file, UniversalGame.class);
                 if (null == mGame) {
                     mGame = new UniversalGame(mContext);
                 }
                 break;
             case Game.BELOTE_CLASSIC:
-                mGame = load("belote.game", BeloteClassicGame.class);
+                mGame = load(file, BeloteClassicGame.class);
                 if (null == mGame) {
                     mGame = new BeloteClassicGame(mContext);
                 }
                 break;
             case Game.BELOTE_COINCHE:
-                mGame = load("coinche.game", BeloteCoincheGame.class);
+                mGame = load(file, BeloteCoincheGame.class);
                 if (null == mGame) {
                     mGame = new BeloteCoincheGame(mContext);
                 }
                 break;
             case Game.TAROT_3_PLAYERS:
-                mGame = load("tarot_3.game", TarotThreeGame.class);
+                mGame = load(file, TarotThreeGame.class);
                 if (null == mGame) {
                     mGame = new TarotThreeGame(mContext);
                 }
                 break;
             case Game.TAROT_4_PLAYERS:
-                mGame = load("tarot_4.game", TarotFourGame.class);
+                mGame = load(file, TarotFourGame.class);
                 if (null == mGame) {
                     mGame = new TarotFourGame(mContext);
                 }
                 break;
             case Game.TAROT_5_PLAYERS:
-                mGame = load("tarot_5.game", TarotFiveGame.class);
+                mGame = load(file, TarotFiveGame.class);
                 if (null == mGame) {
                     mGame = new TarotFiveGame(mContext);
                 }
@@ -154,10 +152,6 @@ public class GameHelper {
 
     public void removeLap(Lap lap) {
         mGame.getLaps().remove(lap);
-    }
-
-    public void editLap(Lap lap) {
-        // TODO
     }
 
     public void deleteAll() {
@@ -178,6 +172,47 @@ public class GameHelper {
 
     public int getPlayerColor(int player) {
         return ((Player) mGame.getPlayers().get(player)).getColor();
+    }
+
+
+    private String getDefaultFileName() {
+        String file;
+        switch (mPlayedGame) {
+            default:
+            case Game.UNIVERSAL:
+                switch (getPlayerCount()) {
+                    case 2:
+                        file = "universal_2_default.game";
+                        break;
+                    case 3:
+                        file = "universal_3_default.game";
+                        break;
+                    case 4:
+                        file = "universal_4_default.game";
+                        break;
+                    default:
+                    case 5:
+                        file = "universal_5_default.game";
+                        break;
+                }
+                break;
+            case Game.BELOTE_CLASSIC:
+                file = "belote_default.game";
+                break;
+            case Game.BELOTE_COINCHE:
+                file = "coinche_default.game";
+                break;
+            case Game.TAROT_3_PLAYERS:
+                file = "tarot_3_default.game";
+                break;
+            case Game.TAROT_4_PLAYERS:
+                file = "tarot_4_default.game";
+                break;
+            case Game.TAROT_5_PLAYERS:
+                file = "tarot_5_default.game";
+                break;
+        }
+        return file;
     }
 
     private <T> T load(final String file, final Class<T> clazz) {

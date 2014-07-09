@@ -22,10 +22,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v4.widget.DrawerLayout;
 import android.text.Spannable;
@@ -34,15 +32,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.faizmalkani.floatingactionbutton.FloatingActionButton;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
-import com.sbgapps.scoreit.games.belote.BeloteClassicLap;
-import com.sbgapps.scoreit.games.belote.BeloteCoincheLap;
-import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
-import com.sbgapps.scoreit.games.tarot.TarotFourLap;
-import com.sbgapps.scoreit.games.tarot.TarotThreeLap;
-import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.util.TypefaceSpan;
 import com.sbgapps.scoreit.view.SwipeListView;
 import com.sbgapps.scoreit.widget.PlayerInfo;
@@ -50,8 +43,6 @@ import com.sbgapps.scoreit.widget.PlayerInfo;
 public class ScoreItActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerListener {
 
-    public static final String KEY_SELECTED_GAME = "selected_game";
-    public static final String KEY_UNIVERSAL_PLAYER_CNT = "player_count";
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
     public static final String EXTRA_EDIT = "com.sbgapps.scoreit.edit";
     public static final String EXTRA_NAME = "com.sbgapps.scoreit.name";
@@ -60,7 +51,6 @@ public class ScoreItActivity extends BaseActivity
     private static final int REQ_EDIT_NAME_ACTIVITY = 3;
     private TypefaceSpan mTypefaceSpan;
     private GameHelper mGameHelper;
-    private SharedPreferences mPreferences;
     private SpannableString mTitle;
     private boolean mIsTablet;
     private PlayerInfo mEditedName;
@@ -68,20 +58,18 @@ public class ScoreItActivity extends BaseActivity
     private ScoreListFragment mScoreListFragment;
     private GraphFragment mGraphFragment;
     private HeaderFragment mHeaderFragment;
+    private FloatingActionButton mFloatingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setAccentDecor();
-
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        final int game = mPreferences.getInt(KEY_SELECTED_GAME, Game.UNIVERSAL);
-        mGameHelper = GameHelper.getInstance();
-        mGameHelper.init(this, game);
+        setTranslucentStatusBar();
+        mGameHelper = GameHelper.getInstance().init(this);
 
         setContentView(R.layout.activity_scoreit);
         mIsTablet = (null != findViewById(R.id.fragment_container_large));
+        mFloatingButton = (FloatingActionButton) findViewById(R.id.fab);
 
         final FragmentManager fm = getFragmentManager();
 
@@ -114,7 +102,7 @@ public class ScoreItActivity extends BaseActivity
                 fm.findFragmentById(R.id.navigation_drawer);
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout), game);
+                (DrawerLayout) findViewById(R.id.drawer_layout), mGameHelper.getPlayedGame());
 
         mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
         setTitle();
@@ -185,7 +173,6 @@ public class ScoreItActivity extends BaseActivity
 
         getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-        mPreferences.edit().putInt(KEY_SELECTED_GAME, position).apply();
         mGameHelper.setPlayedGame(position);
         setTitle();
 
@@ -220,38 +207,20 @@ public class ScoreItActivity extends BaseActivity
         }
     }
 
+    public void hideFloatingButton(boolean hide) {
+        if (!mIsTablet) mFloatingButton.hide(hide);
+    }
+
     public void addLap(View view) {
         addLap();
     }
 
     public void addLap() {
-        Lap lap;
-        switch (mGameHelper.getPlayedGame()) {
-            default:
-            case Game.UNIVERSAL:
-                lap = new UniversalLap();
-                break;
-            case Game.BELOTE_CLASSIC:
-                lap = new BeloteClassicLap();
-                break;
-            case Game.BELOTE_COINCHE:
-                lap = new BeloteCoincheLap();
-                break;
-            case Game.TAROT_3_PLAYERS:
-                lap = new TarotThreeLap();
-                break;
-            case Game.TAROT_4_PLAYERS:
-                lap = new TarotFourLap();
-                break;
-            case Game.TAROT_5_PLAYERS:
-                lap = new TarotFiveLap();
-                break;
-        }
-        showLapActivity(lap, false);
+        showLapActivity(null);
     }
 
     public void editLap(Lap lap) {
-        showLapActivity(lap, true);
+        showLapActivity(lap);
     }
 
     public void removeLap(Lap lap) {
@@ -298,7 +267,7 @@ public class ScoreItActivity extends BaseActivity
             mGraphFragment.traceGraph();
     }
 
-    private void showLapActivity(Lap lap, boolean edit) {
+    private void showLapActivity(Lap lap) {
         Intent intent;
         switch (mGameHelper.getPlayedGame()) {
             default:
@@ -317,8 +286,15 @@ public class ScoreItActivity extends BaseActivity
                 intent = new Intent(this, TarotLapActivity.class);
                 break;
         }
-        intent.putExtra(EXTRA_LAP, lap);
-        intent.putExtra(EXTRA_EDIT, edit);
+        if (null == lap) {
+            // New lap
+            intent.putExtra(EXTRA_EDIT, false);
+        } else {
+            // Edit lap
+            int i = mGameHelper.getLaps().indexOf(lap);
+            intent.putExtra(EXTRA_LAP, i);
+            intent.putExtra(EXTRA_EDIT, true);
+        }
 
         startActivityForResult(intent, REQ_LAP_ACTIVITY);
     }
@@ -411,10 +387,7 @@ public class ScoreItActivity extends BaseActivity
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mPreferences
-                                        .edit()
-                                        .putInt(KEY_UNIVERSAL_PLAYER_CNT, which + 2)
-                                        .apply();
+                                mGameHelper.setPlayerCount(which + 2);
                                 reloadFragments();
                             }
                         }

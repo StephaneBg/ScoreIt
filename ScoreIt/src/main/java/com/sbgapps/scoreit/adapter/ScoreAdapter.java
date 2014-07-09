@@ -20,7 +20,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,9 +49,9 @@ public class ScoreAdapter extends BaseAdapter {
     private final SwipeListView mSwipeListView;
     private final ScoreItActivity mActivity;
 
-    public ScoreAdapter(Activity activity, SwipeListView listView) {
+    public ScoreAdapter(ScoreItActivity activity, SwipeListView listView) {
         mSwipeListView = listView;
-        mActivity = (ScoreItActivity) activity;
+        mActivity = activity;
     }
 
     @Override

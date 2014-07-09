@@ -40,6 +40,9 @@ public class CoincheLapActivity extends LapActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (!isEdited()) {
+            setLap(new BeloteCoincheLap());
+        }
         setContentView(R.layout.activity_lap_coinche);
 
         HOLDER.rb_player1 = (RadioButton) findViewById(R.id.rb_player1);

@@ -184,11 +184,14 @@ public abstract class TarotLap implements Lap {
         int chelem = 0;
         for (TarotBonus bonus : getBonuses()) {
             switch (bonus.getBonus()) {
-                case TarotBonus.BONUS_CHELEM_ANNONCE:
-                    chelem = done ? 400 : -200;
-                    break;
                 case TarotBonus.BONUS_CHELEM_NON_ANNONCE:
                     chelem = 200;
+                    break;
+                case TarotBonus.BONUS_CHELEM_ANNONCE_REALISE:
+                    chelem = 400;
+                    break;
+                case TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE:
+                    chelem = -200;
                     break;
             }
         }

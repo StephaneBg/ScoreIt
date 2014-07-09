@@ -31,7 +31,8 @@ public class TarotBonus implements Serializable {
     public static final int BONUS_POIGNEE_DOUBLE = 2;
     public static final int BONUS_POIGNEE_TRIPLE = 3;
     public static final int BONUS_CHELEM_NON_ANNONCE = 4;
-    public static final int BONUS_CHELEM_ANNONCE = 5;
+    public static final int BONUS_CHELEM_ANNONCE_REALISE = 5;
+    public static final int BONUS_CHELEM_ANNONCE_NON_REALISE = 6;
 
     @SerializedName("bonus")
     private int mBonus;

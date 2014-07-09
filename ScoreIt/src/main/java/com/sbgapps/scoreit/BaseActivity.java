@@ -45,6 +45,7 @@ public class BaseActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CalligraphyConfig.initDefault("fonts/Roboto-Light.ttf");
+        setupActivity();
     }
 
     @Override
@@ -52,24 +53,24 @@ public class BaseActivity extends Activity {
         super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 
-    public void setAccentDecor() {
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+    public void setTranslucentStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window win = getWindow();
             WindowManager.LayoutParams winParams = win.getAttributes();
             final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
             winParams.flags |= bits;
             win.setAttributes(winParams);
+        }
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintResource(R.color.accent_color_dark);
         }
     }
 
-    public void setupFauxDialog() {
+    private void setupActivity() {
         TypedValue tv = new TypedValue();
-        if (!getTheme().resolveAttribute(R.attr.isDialog, tv, true) || tv.data == 0) {
-            setAccentDecor();
-        } else {
+        if (getTheme().resolveAttribute(R.attr.isDialog, tv, true) && tv.data != 0) {
             mIsDialog = true;
             DisplayMetrics dm = getResources().getDisplayMetrics();
 

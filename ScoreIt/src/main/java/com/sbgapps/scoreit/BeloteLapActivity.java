@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.widget.RadioButton;
 
 import com.sbgapps.scoreit.games.Player;
+import com.sbgapps.scoreit.games.belote.BeloteClassicLap;
 import com.sbgapps.scoreit.games.belote.BeloteLap;
 import com.sbgapps.scoreit.widget.SeekbarInputPoints;
 
@@ -39,6 +40,10 @@ public class BeloteLapActivity extends LapActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!isEdited()) {
+            setLap(new BeloteClassicLap());
+        }
 
         setContentView(R.layout.activity_lap_belote);
 

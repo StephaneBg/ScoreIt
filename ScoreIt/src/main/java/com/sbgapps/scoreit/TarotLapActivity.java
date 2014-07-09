@@ -32,7 +32,9 @@ import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.tarot.TarotBonus;
 import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
+import com.sbgapps.scoreit.games.tarot.TarotFourLap;
 import com.sbgapps.scoreit.games.tarot.TarotLap;
+import com.sbgapps.scoreit.games.tarot.TarotThreeLap;
 import com.sbgapps.scoreit.widget.SeekbarInputPoints;
 
 /**
@@ -51,6 +53,23 @@ public class TarotLapActivity extends LapActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mGame = getGameHelper().getPlayedGame();
+        if (!isEdited()) {
+            switch (mGame) {
+                default:
+                case Game.TAROT_3_PLAYERS:
+                    setLap(new TarotThreeLap());
+                    break;
+                case Game.TAROT_4_PLAYERS:
+                    setLap(new TarotFourLap());
+                    break;
+                case Game.TAROT_5_PLAYERS:
+                    setLap(new TarotFiveLap());
+                    break;
+            }
+        }
+
         setContentView(R.layout.activity_lap_tarot);
 
         HOLDER.taker = (Spinner) findViewById(R.id.spinner_taker);
@@ -66,7 +85,6 @@ public class TarotLapActivity extends LapActivity {
             findViewById(R.id.btn_confirm).setOnClickListener(this);
         }
 
-        mGame = getGameHelper().getPlayedGame();
         HOLDER.taker.setAdapter(getPlayerArrayAdapter());
 
         if (Game.TAROT_5_PLAYERS == mGame) {
@@ -235,7 +253,8 @@ public class TarotLapActivity extends LapActivity {
         announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_POIGNEE_DOUBLE));
         announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_POIGNEE_TRIPLE));
         announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_CHELEM_NON_ANNONCE));
-        announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_CHELEM_ANNONCE));
+        announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE));
+        announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE));
         return announceItemArrayAdapter;
     }
 
@@ -323,8 +342,10 @@ public class TarotLapActivity extends LapActivity {
                     return r.getString(R.string.poignee_double);
                 case TarotBonus.BONUS_CHELEM_NON_ANNONCE:
                     return r.getString(R.string.chelem_non_annonce);
-                case TarotBonus.BONUS_CHELEM_ANNONCE:
-                    return r.getString(R.string.chelem_annonce);
+                case TarotBonus.BONUS_CHELEM_ANNONCE_REALISE:
+                    return r.getString(R.string.chelem_annonce_realise);
+                case TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE:
+                    return r.getString(R.string.chelem_annonce_non_realise);
             }
             return null;
         }

@@ -1,24 +1,26 @@
 <!--
-  ~ Copyright 2013 SBG Apps
+  ~ Copyright (c) 2014 SBG Apps
   ~
-  ~     Licensed under the Apache License, Version 2.0 (the "License");
-  ~     you may not use this file except in compliance with the License.
-  ~     You may obtain a copy of the License at
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
   ~
-  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~    http://www.apache.org/licenses/LICENSE-2.0
   ~
-  ~     Unless required by applicable law or agreed to in writing, software
-  ~     distributed under the License is distributed on an "AS IS" BASIS,
-  ~     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~     See the License for the specific language governing permissions and
-  ~     limitations under the License.
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
   -->
 
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_triangles"
     android:fitsSystemWindows="true">
 
     <android.support.v4.widget.DrawerLayout
@@ -26,61 +28,50 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.85"
-                android:background="@color/white"/>
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/default_margin"
-                    android:layout_marginLeft="@dimen/default_margin"
-                    android:layout_marginRight="@dimen/default_half_margin"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_card"
-                    android:orientation="vertical">
-
-                    <FrameLayout
-                        android:id="@+id/fragment_header"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dip"
-                        android:background="?android:listDivider"/>
-
-                    <FrameLayout
-                        android:id="@+id/fragment_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
+                android:layout_marginBottom="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_half_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_weight="1"
+                android:background="@drawable/background_card"
+                android:orientation="vertical">
 
                 <FrameLayout
-                    android:id="@+id/fragment_container_large"
-                    android:layout_width="0dip"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/default_margin"
-                    android:layout_marginLeft="@dimen/default_half_margin"
-                    android:layout_marginRight="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_card"/>
+                    android:id="@+id/fragment_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dip"
+                    android:background="?android:listDivider"/>
+
+                <FrameLayout
+                    android:id="@+id/fragment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
             </LinearLayout>
-        </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fragment_container_large"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/default_half_margin"
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_weight="1"
+                android:background="@drawable/background_card"/>
+        </LinearLayout>
 
         <fragment
             android:id="@+id/navigation_drawer"
@@ -91,4 +82,16 @@
             tools:layout="@layout/fragment_navigation_drawer"/>
 
     </android.support.v4.widget.DrawerLayout>
+
+    <com.faizmalkani.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:onClick="addLap"
+        app:color="@color/accent_color"
+        app:drawable="@drawable/ic_action_new"/>
+
 </FrameLayout>
