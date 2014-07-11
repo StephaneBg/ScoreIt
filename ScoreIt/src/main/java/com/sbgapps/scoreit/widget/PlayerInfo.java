@@ -64,6 +64,10 @@ public class PlayerInfo extends FrameLayout {
         mName.setText(name);
     }
 
+    public String getName() {
+        return mName.getText().toString();
+    }
+
     public void setNameEditable(boolean editable) {
         mName.setClickable(editable);
     }

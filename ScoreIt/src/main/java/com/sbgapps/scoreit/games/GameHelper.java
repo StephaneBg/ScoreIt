@@ -64,6 +64,14 @@ public class GameHelper {
         return this;
     }
 
+    public SharedPreferences getPreferences() {
+        return mPreferences;
+    }
+
+    public Context getContext() {
+        return mContext;
+    }
+
     public int getPlayedGame() {
         return mPlayedGame;
     }
@@ -71,11 +79,15 @@ public class GameHelper {
     public void setPlayedGame(int playedGame) {
         saveGame();
         mPlayedGame = playedGame;
+        mPreferences
+                .edit()
+                .putInt(KEY_SELECTED_GAME, playedGame)
+                .apply();
         loadLaps();
     }
 
     public void saveGame() {
-        String file = getDefaultFileName();
+        String file = FileSaveUtil.getLastSavedFile(this);
         save(file, mGame);
     }
 
@@ -104,7 +116,7 @@ public class GameHelper {
     }
 
     private void loadLaps() {
-        String file = getDefaultFileName();
+        String file = FileSaveUtil.getLastSavedFile(this);
         switch (mPlayedGame) {
             default:
             case Game.UNIVERSAL:
@@ -175,46 +187,6 @@ public class GameHelper {
     }
 
 
-    private String getDefaultFileName() {
-        String file;
-        switch (mPlayedGame) {
-            default:
-            case Game.UNIVERSAL:
-                switch (getPlayerCount()) {
-                    case 2:
-                        file = "universal_2_default.game";
-                        break;
-                    case 3:
-                        file = "universal_3_default.game";
-                        break;
-                    case 4:
-                        file = "universal_4_default.game";
-                        break;
-                    default:
-                    case 5:
-                        file = "universal_5_default.game";
-                        break;
-                }
-                break;
-            case Game.BELOTE_CLASSIC:
-                file = "belote_default.game";
-                break;
-            case Game.BELOTE_COINCHE:
-                file = "coinche_default.game";
-                break;
-            case Game.TAROT_3_PLAYERS:
-                file = "tarot_3_default.game";
-                break;
-            case Game.TAROT_4_PLAYERS:
-                file = "tarot_4_default.game";
-                break;
-            case Game.TAROT_5_PLAYERS:
-                file = "tarot_5_default.game";
-                break;
-        }
-        return file;
-    }
-
     private <T> T load(final String file, final Class<T> clazz) {
         try {
             final Gson g = new Gson();
@@ -235,7 +207,6 @@ public class GameHelper {
             os.write(g.toJson(laps).getBytes());
             os.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

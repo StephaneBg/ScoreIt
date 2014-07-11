@@ -21,9 +21,11 @@
     <color name="lighter_gray">#FFE2E5EA</color>
     <color name="darker_gray">#FF7D7D7D</color>
     <color name="transparent_gray">#D9E2E5EA</color>
-    <color name="accent_color">#FFDF4D38</color>
-    <color name="accent_color_dark">#FFC74432</color>
+    <color name="primary_accent">#ff9800</color>
+    <color name="primary_hue_1">#e65100</color>
     <color name="accent_color_selected">#FFF5CAC4</color>
+    <color name="accent_color_transparent">#99df4d38</color>
+    <color name="secondary_accent">#259b24</color>
     <color name="color_player1">#FF60B62F</color>
     <color name="color_player2">#FFFEAF39</color>
     <color name="color_player3">#FF0099E6</color>

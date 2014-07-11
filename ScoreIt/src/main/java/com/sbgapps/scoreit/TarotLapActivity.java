@@ -113,8 +113,8 @@ public class TarotLapActivity extends LapActivity {
 
         HOLDER.input_points.setMax(91);
 
-        Button button = (Button) findViewById(R.id.btn_add_bonus);
-        button.setOnClickListener(new View.OnClickListener() {
+        HOLDER.btn_bonus = (Button) findViewById(R.id.btn_add_bonus);
+        HOLDER.btn_bonus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addBonus(null);
@@ -171,9 +171,12 @@ public class TarotLapActivity extends LapActivity {
     }
 
     private void addBonus(TarotBonus tarotBonus) {
+        ArrayAdapter<BonusItem> adapter = getBonusArrayAdapter();
+
         if (null == tarotBonus) {
             tarotBonus = new TarotBonus();
             getLap().getBonuses().add(tarotBonus);
+            HOLDER.btn_bonus.setEnabled(getLap().getBonuses().size() < 3);
         }
         final TarotBonus bonus = tarotBonus;
 
@@ -184,18 +187,19 @@ public class TarotLapActivity extends LapActivity {
             @Override
             public void onClick(View v) {
                 getLap().getBonuses().remove(bonus);
+                HOLDER.btn_bonus.setEnabled(getLap().getBonuses().size() < 3);
                 HOLDER.ll_bonuses.removeView(view);
             }
         });
 
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner_announce);
-        spinner.setAdapter(getAnnounceArrayAdapter());
+        spinner.setAdapter(adapter);
         spinner.setSelection(bonus.getBonus());
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                AnnounceItem ai = (AnnounceItem) parent.getAdapter().getItem(position);
-                bonus.setBonus(ai.getAnnouce());
+                BonusItem ai = (BonusItem) parent.getAdapter().getItem(position);
+                bonus.setBonus(ai.getBonus());
             }
 
             @Override
@@ -244,18 +248,39 @@ public class TarotLapActivity extends LapActivity {
         return playerItemArrayAdapter;
     }
 
-    private ArrayAdapter<AnnounceItem> getAnnounceArrayAdapter() {
-        final ArrayAdapter<AnnounceItem> announceItemArrayAdapter = new ArrayAdapter<>(this,
+    private ArrayAdapter<BonusItem> getBonusArrayAdapter() {
+        final ArrayAdapter<BonusItem> announceItemArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item);
         announceItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_PETIT_AU_BOUT));
-        announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_POIGNEE_SIMPLE));
-        announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_POIGNEE_DOUBLE));
-        announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_POIGNEE_TRIPLE));
-        announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_CHELEM_NON_ANNONCE));
-        announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE));
-        announceItemArrayAdapter.add(new AnnounceItem(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE));
+        if (!isBonusAlreadySet(TarotBonus.BONUS_PETIT_AU_BOUT)) {
+            announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_PETIT_AU_BOUT));
+        }
+
+        if (!isBonusAlreadySet(TarotBonus.BONUS_POIGNEE_SIMPLE) &&
+                !isBonusAlreadySet(TarotBonus.BONUS_POIGNEE_DOUBLE) &&
+                !isBonusAlreadySet(TarotBonus.BONUS_POIGNEE_TRIPLE)) {
+            announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_POIGNEE_SIMPLE));
+            announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_POIGNEE_DOUBLE));
+            announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_POIGNEE_TRIPLE));
+        }
+
+        if (!isBonusAlreadySet(TarotBonus.BONUS_CHELEM_NON_ANNONCE) &&
+                !isBonusAlreadySet(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE) &&
+                !isBonusAlreadySet(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE)) {
+            announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_CHELEM_NON_ANNONCE));
+            announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE));
+            announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE));
+        }
         return announceItemArrayAdapter;
+    }
+
+    private boolean isBonusAlreadySet(int bonus) {
+        for (TarotBonus b : getLap().getBonuses()) {
+            if (b.getBonus() == bonus) {
+                return true;
+            }
+        }
+        return false;
     }
 
     static class LapHolder {
@@ -267,6 +292,7 @@ public class TarotLapActivity extends LapActivity {
         CheckBox fool;
         SeekbarInputPoints input_points;
         LinearLayout ll_bonuses;
+        Button btn_bonus;
     }
 
     class DealItem {
@@ -316,22 +342,22 @@ public class TarotLapActivity extends LapActivity {
         }
     }
 
-    class AnnounceItem {
+    class BonusItem {
 
-        final int mAnnouce;
+        final int mBonus;
 
-        AnnounceItem(int annouce) {
-            mAnnouce = annouce;
+        BonusItem(int bonus) {
+            mBonus = bonus;
         }
 
-        public int getAnnouce() {
-            return mAnnouce;
+        public int getBonus() {
+            return mBonus;
         }
 
         @Override
         public String toString() {
             Resources r = getResources();
-            switch (mAnnouce) {
+            switch (mBonus) {
                 case TarotBonus.BONUS_PETIT_AU_BOUT:
                     return r.getString(R.string.petit_au_bout);
                 case TarotBonus.BONUS_POIGNEE_SIMPLE:

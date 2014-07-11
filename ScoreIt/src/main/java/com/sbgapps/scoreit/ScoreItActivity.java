@@ -31,12 +31,15 @@ import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.EditText;
 
 import com.faizmalkani.floatingactionbutton.FloatingActionButton;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.util.TypefaceSpan;
+import com.sbgapps.scoreit.util.Utils;
 import com.sbgapps.scoreit.view.SwipeListView;
 import com.sbgapps.scoreit.widget.PlayerInfo;
 
@@ -48,7 +51,6 @@ public class ScoreItActivity extends BaseActivity
     public static final String EXTRA_NAME = "com.sbgapps.scoreit.name";
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_LAP_ACTIVITY = 2;
-    private static final int REQ_EDIT_NAME_ACTIVITY = 3;
     private TypefaceSpan mTypefaceSpan;
     private GameHelper mGameHelper;
     private SpannableString mTitle;
@@ -140,6 +142,7 @@ public class ScoreItActivity extends BaseActivity
             item = menu.findItem(R.id.menu_count);
             item.setVisible(Game.UNIVERSAL == mGameHelper.getPlayedGame());
             getActionBar().setTitle(mTitle);
+            mFloatingButton.hide(false);
             return true;
         }
     }
@@ -180,6 +183,11 @@ public class ScoreItActivity extends BaseActivity
     }
 
     @Override
+    public void onNavigationDrawerOpened(boolean opened) {
+        mFloatingButton.hide(opened);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String name;
         if (RESULT_OK != resultCode) return;
@@ -199,16 +207,7 @@ public class ScoreItActivity extends BaseActivity
                 updateFragments();
                 invalidateOptionsMenu();
                 break;
-
-            case REQ_EDIT_NAME_ACTIVITY:
-                name = data.getStringExtra(EXTRA_NAME);
-                nameEdited(name);
-                break;
         }
-    }
-
-    public void hideFloatingButton(boolean hide) {
-        if (!mIsTablet) mFloatingButton.hide(hide);
     }
 
     public void addLap(View view) {
@@ -231,10 +230,6 @@ public class ScoreItActivity extends BaseActivity
     public void editName(View view) {
         mEditedName = (PlayerInfo) view.getParent().getParent();
         showEditNameActionChoices();
-    }
-
-    public void start(View view) {
-        addLap();
     }
 
     private void reloadFragments() {
@@ -378,6 +373,7 @@ public class ScoreItActivity extends BaseActivity
                 )
                 .create();
         dialog.show();
+        Utils.colorizeDialog(dialog);
     }
 
     private void showPlayerCountDialog() {
@@ -394,6 +390,7 @@ public class ScoreItActivity extends BaseActivity
                 )
                 .create();
         dialog.show();
+        Utils.colorizeDialog(dialog);
     }
 
     private void showEditNameActionChoices() {
@@ -412,8 +409,7 @@ public class ScoreItActivity extends BaseActivity
                                         startActivityForResult(intent, REQ_PICK_CONTACT);
                                         break;
                                     case 1:
-                                        intent = new Intent(ScoreItActivity.this, EditNameActivity.class);
-                                        startActivityForResult(intent, REQ_EDIT_NAME_ACTIVITY);
+                                        showEditNameDialog();
                                         break;
                                 }
                             }
@@ -421,5 +417,35 @@ public class ScoreItActivity extends BaseActivity
                 )
                 .create();
         dialog.show();
+        Utils.colorizeDialog(dialog);
+    }
+
+    private void showEditNameDialog() {
+        View view = getLayoutInflater().inflate(R.layout.dialog_edit_name, null);
+        final EditText editText = (EditText) view.findViewById(R.id.edit_name);
+        editText.setText(mEditedName.getName());
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.edit_name)
+                .setView(view)
+                .setPositiveButton(R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String name = editText.getText().toString();
+                                nameEdited(name);
+                            }
+                        }
+                )
+                .setNegativeButton(R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Nothing to do!
+                            }
+                        }
+                )
+                .create();
+        dialog.show();
+        Utils.colorizeDialog(dialog);
     }
 }

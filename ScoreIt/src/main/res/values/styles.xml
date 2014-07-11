@@ -19,7 +19,8 @@
 
     <style name="AppBase" parent="android:Theme.Holo.Light">
         <item name="android:windowBackground">@color/white</item>
-        <item name="android:logo">@drawable/ic_logo</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:icon">@android:color/transparent</item>
         <item name="android:actionBarStyle">@style/ActionBar.Scoreit</item>
         <item name="android:actionMenuTextColor">@color/white</item>
         <item name="android:actionOverflowButtonStyle">@style/ButtonOverflow</item>
@@ -30,7 +31,11 @@
         </item>
         <item name="android:dropDownSpinnerStyle">@style/SpinnerAppTheme</item>
         <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
-        <item name="android:editTextStyle">@drawable/apptheme_edit_text_holo_light</item>
+        <item name="android:textColorHighlight">@color/accent_color_transparent</item>
+        <item name="android:textSelectHandleLeft">@drawable/apptheme_text_select_handle_left</item>
+        <item name="android:textSelectHandleRight">@drawable/apptheme_text_select_handle_right
+        </item>
+        <item name="android:textSelectHandle">@drawable/apptheme_text_select_handle_middle</item>
     </style>
 
     <style name="Theme.ScoreIt" parent="AppBase">
@@ -41,12 +46,9 @@
         <item name="isDialog">false</item>
     </style>
 
-    <style name="Theme.Dialog" parent="android:Theme.Holo.Light.Dialog">
-    </style>
-
     <style name="ActionBar.Scoreit" parent="android:Widget.Holo.ActionBar">
         <item name="android:titleTextStyle">@style/TitleTextStyle</item>
-        <item name="android:background">@color/accent_color</item>
+        <item name="android:background">@color/primary_accent</item>
     </style>
 
     <style name="TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">

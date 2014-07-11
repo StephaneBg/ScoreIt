@@ -64,7 +64,7 @@ public class BaseActivity extends Activity {
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintResource(R.color.accent_color_dark);
+            tintManager.setStatusBarTintResource(R.color.primary_hue_1);
         }
     }
 

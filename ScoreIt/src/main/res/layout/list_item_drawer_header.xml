@@ -28,6 +28,6 @@
         android:clickable="false"
         android:fontFamily="fonts/Lobster.otf"
         android:gravity="bottom"
-        android:textColor="@color/accent_color"
+        android:textColor="@color/primary_accent"
         android:textSize="24sp"/>
 </FrameLayout>
