@@ -29,7 +29,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:fontFamily="Roboto-Thin.ttf"
-        android:textSize="@dimen/big_font_size"/>
+        android:textSize="@dimen/font_display_2"/>
 
     <Button
         android:id="@+id/key_middle"
@@ -38,7 +38,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:fontFamily="Roboto-Thin.ttf"
-        android:textSize="@dimen/big_font_size"/>
+        android:textSize="@dimen/font_display_2"/>
 
     <Button
         android:id="@+id/key_right"
@@ -47,5 +47,5 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:fontFamily="Roboto-Thin.ttf"
-        android:textSize="@dimen/big_font_size"/>
+        android:textSize="@dimen/font_display_2"/>
 </LinearLayout>

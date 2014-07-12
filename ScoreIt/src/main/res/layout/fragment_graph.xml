@@ -25,6 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/include_scores"
-        android:layout_margin="@dimen/default_margin"/>
+        android:layout_margin="@dimen/margin_default"/>
 
 </com.sbgapps.scoreit.widget.FractionFrameLayout>

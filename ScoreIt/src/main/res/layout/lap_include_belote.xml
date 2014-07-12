@@ -19,6 +19,8 @@
 <ScrollView
     android:id="@+id/scrollview"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ScoreItActivity"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -26,7 +28,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_margin="@dimen/margin_default"
         android:orientation="vertical">
 
         <TextView
@@ -39,15 +41,15 @@
             android:id="@+id/radio_group_team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
             android:orientation="vertical">
 
             <RadioButton
                 android:id="@+id/rb_player1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/margin_default"
                 android:text="@string/them"/>
 
             <RadioButton
@@ -78,23 +80,23 @@
             android:id="@+id/radio_group_belote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
             android:orientation="vertical">
 
             <RadioButton
                 android:id="@+id/rb_belote_none"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/margin_default"
                 android:text="@string/none"/>
 
             <RadioButton
                 android:id="@+id/rb_belote_player1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/margin_default"
                 android:text="@string/them"/>
 
             <RadioButton

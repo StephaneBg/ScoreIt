@@ -20,78 +20,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_triangles"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".ScoreItActivity">
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
+            android:background="@color/lighter_gray">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/default_margin"
-                android:layout_marginLeft="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_half_margin"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_weight="1"
-                android:background="@drawable/background_card"
                 android:orientation="vertical">
 
                 <FrameLayout
                     android:id="@+id/fragment_header"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="@dimen/height_header"
+                    android:background="@color/primary_accent"/>
 
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="2dip"
-                    android:background="?android:listDivider"/>
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                <FrameLayout
-                    android:id="@+id/fragment_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    <FrameLayout
+                        android:id="@+id/fragment_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/margin_default"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:layout_marginRight="@dimen/margin_default"
+                        android:layout_marginTop="@dimen/margin_default_half"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_card"/>
+
+                    <FrameLayout
+                        android:id="@+id/fragment_container_large"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/margin_default"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:layout_marginRight="@dimen/margin_default"
+                        android:layout_marginTop="@dimen/margin_default_half"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_card"/>
+                </LinearLayout>
             </LinearLayout>
 
-            <FrameLayout
-                android:id="@+id/fragment_container_large"
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/default_margin"
-                android:layout_marginLeft="@dimen/default_half_margin"
-                android:layout_marginRight="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_weight="1"
-                android:background="@drawable/background_card"/>
-        </LinearLayout>
+            <com.faizmalkani.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="top|right"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="108dp"
+                android:onClick="addLap"
+                app:color="@color/secondary_accent"
+                app:drawable="@drawable/ic_action_new"/>
+        </FrameLayout>
 
         <fragment
             android:id="@+id/navigation_drawer"
             android:name="com.sbgapps.scoreit.NavigationDrawerFragment"
-            android:layout_width="@dimen/navigation_drawer_width"
+            android:layout_width="@dimen/width_drawer"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             tools:layout="@layout/fragment_navigation_drawer"/>
 
     </android.support.v4.widget.DrawerLayout>
-
-    <com.faizmalkani.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:onClick="addLap"
-        app:color="@color/primary_accent"
-        app:drawable="@drawable/ic_action_new"/>
 
 </FrameLayout>

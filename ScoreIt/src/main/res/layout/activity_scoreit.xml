@@ -18,6 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ScoreItActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -39,7 +40,8 @@
                 <FrameLayout
                     android:id="@+id/fragment_header"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/header_height"
+                    android:layout_height="@dimen/height_header"
+                    android:layout_gravity="top"
                     android:background="@color/primary_accent"/>
 
                 <FrameLayout
@@ -53,9 +55,9 @@
                 android:id="@+id/fab"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                android:layout_gravity="top|right"
-                android:layout_marginTop="108dp"
-                android:layout_marginRight="16dp"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="@dimen/margin_activity"
+                android:layout_marginRight="@dimen/margin_activity"
                 android:onClick="addLap"
                 app:color="@color/secondary_accent"
                 app:drawable="@drawable/ic_action_new"/>
@@ -65,7 +67,7 @@
         <fragment
             android:id="@+id/navigation_drawer"
             android:name="com.sbgapps.scoreit.NavigationDrawerFragment"
-            android:layout_width="@dimen/navigation_drawer_width"
+            android:layout_width="@dimen/width_drawer"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             tools:layout="@layout/fragment_navigation_drawer"/>

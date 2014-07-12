@@ -24,7 +24,7 @@
         android:id="@+id/drawer_entry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/margin_default"
         android:clickable="false"
         android:fontFamily="fonts/Lobster.otf"
         android:gravity="bottom"

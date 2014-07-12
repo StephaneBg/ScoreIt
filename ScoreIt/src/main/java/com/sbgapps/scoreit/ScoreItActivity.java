@@ -31,7 +31,6 @@ import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.faizmalkani.floatingactionbutton.FloatingActionButton;
@@ -43,12 +42,13 @@ import com.sbgapps.scoreit.util.Utils;
 import com.sbgapps.scoreit.view.SwipeListView;
 import com.sbgapps.scoreit.widget.PlayerInfo;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyUtils;
+
 public class ScoreItActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerListener {
 
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
     public static final String EXTRA_EDIT = "com.sbgapps.scoreit.edit";
-    public static final String EXTRA_NAME = "com.sbgapps.scoreit.name";
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_LAP_ACTIVITY = 2;
     private TypefaceSpan mTypefaceSpan;
@@ -142,7 +142,6 @@ public class ScoreItActivity extends BaseActivity
             item = menu.findItem(R.id.menu_count);
             item.setVisible(Game.UNIVERSAL == mGameHelper.getPlayedGame());
             getActionBar().setTitle(mTitle);
-            mFloatingButton.hide(false);
             return true;
         }
     }
@@ -180,11 +179,6 @@ public class ScoreItActivity extends BaseActivity
         setTitle();
 
         reloadFragments();
-    }
-
-    @Override
-    public void onNavigationDrawerOpened(boolean opened) {
-        mFloatingButton.hide(opened);
     }
 
     @Override

@@ -19,13 +19,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/default_padding">
+    android:padding="@dimen/padding_default">
 
     <EditText
         android:id="@+id/edit_name"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_height"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_height="@dimen/height_default"
+        android:layout_margin="@dimen/margin_default"
         android:imeOptions="actionDone"
         android:inputType="textCapSentences"/>
 </FrameLayout>

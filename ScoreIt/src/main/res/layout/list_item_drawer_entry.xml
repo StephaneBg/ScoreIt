@@ -25,8 +25,7 @@
         android:id="@+id/drawer_entry"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/listPreferredItemHeight"
-        android:layout_marginLeft="@dimen/default_double_margin"
-        android:fontFamily="fonts/Roboto-Thin.ttf"
+        android:layout_marginLeft="@dimen/margin_default_double"
         android:gravity="center_vertical"
         android:textSize="18sp">
     </TextView>

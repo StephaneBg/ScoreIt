@@ -39,9 +39,9 @@
                 android:layout_gravity="left"
                 android:baselineAligned="false"
                 android:gravity="top"
-                android:paddingBottom="@dimen/numberview_padding"
-                android:paddingLeft="@dimen/numberview_padding_left"
-                android:paddingTop="@dimen/numberview_padding">
+                android:paddingBottom="@dimen/padding_numberview"
+                android:paddingLeft="@dimen/padding_left_numberview"
+                android:paddingTop="@dimen/padding_numberview">
 
                 <TextView
                     android:id="@+id/minus_label"
@@ -51,7 +51,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="@string/number_picker_minus_label"
-                    android:textSize="@dimen/medium_font_size"/>
+                    android:textSize="@dimen/font_headline"/>
 
                 <TextView
                     android:id="@+id/number"
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="none"
                     android:singleLine="true"
-                    android:textSize="@dimen/big_font_size"/>
+                    android:textSize="@dimen/font_display_2"/>
 
                 <TextView
                     android:id="@+id/decimal_separator"
@@ -68,7 +68,7 @@
                     android:ellipsize="none"
                     android:singleLine="true"
                     android:text="@string/number_picker_seperator"
-                    android:textSize="@dimen/big_font_size"/>
+                    android:textSize="@dimen/font_display_2"/>
 
                 <TextView
                     android:id="@+id/decimal"
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="none"
                     android:singleLine="true"
-                    android:textSize="@dimen/big_font_size"/>
+                    android:textSize="@dimen/font_display_2"/>
             </com.sbgapps.scoreit.widget.NumberView>
         </HorizontalScrollView>
 

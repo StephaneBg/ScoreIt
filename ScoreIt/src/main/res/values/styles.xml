@@ -31,11 +31,12 @@
         </item>
         <item name="android:dropDownSpinnerStyle">@style/SpinnerAppTheme</item>
         <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
-        <item name="android:textColorHighlight">@color/accent_color_transparent</item>
+        <item name="android:textColorHighlight">@color/primary_accent</item>
         <item name="android:textSelectHandleLeft">@drawable/apptheme_text_select_handle_left</item>
         <item name="android:textSelectHandleRight">@drawable/apptheme_text_select_handle_right
         </item>
         <item name="android:textSelectHandle">@drawable/apptheme_text_select_handle_middle</item>
+        <item name="android:textColor">@color/darker_black</item>
     </style>
 
     <style name="Theme.ScoreIt" parent="AppBase">
@@ -49,6 +50,11 @@
     <style name="ActionBar.Scoreit" parent="android:Widget.Holo.ActionBar">
         <item name="android:titleTextStyle">@style/TitleTextStyle</item>
         <item name="android:background">@color/primary_accent</item>
+    </style>
+
+    <style name="SubHead">
+        <item name="android:textSize">@dimen/font_subhead</item>
+
     </style>
 
     <style name="TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">

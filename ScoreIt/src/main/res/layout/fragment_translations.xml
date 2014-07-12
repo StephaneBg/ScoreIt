@@ -27,11 +27,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/default_margin"
-        android:layout_marginLeft="@dimen/default_margin"
-        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/margin_default"
+        android:layout_marginTop="@dimen/margin_default"
         android:text="@string/translations"
-        android:textSize="@dimen/medium_font_size"/>
+        android:textSize="@dimen/font_headline"/>
 
     <Button
         android:id="@+id/btn_translate"
@@ -45,14 +45,14 @@
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_height"
+        android:layout_height="@dimen/height_default"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="fonts/Roboto-Bold.ttf"
+            android:fontFamily="fonts/Roboto-Medium.ttf"
             android:gravity="center"
             android:text="@string/language"/>
 
@@ -60,7 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="fonts/Roboto-Bold.ttf"
+            android:fontFamily="fonts/Roboto-Medium.ttf"
             android:gravity="center"
             android:text="@string/translator"
             android:textStyle="bold"/>

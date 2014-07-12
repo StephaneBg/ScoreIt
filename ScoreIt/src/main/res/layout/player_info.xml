@@ -18,32 +18,31 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="ScoreItActivity">
 
     <TextView
-        style="?android:borderlessButtonStyle"
         android:id="@+id/name"
+        style="?android:borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="fonts/Roboto-Medium.ttf"
         android:gravity="center"
+        android:onClick="editName"
         android:singleLine="true"
-        android:textColor="@color/darker_gray"
-        android:textSize="18sp"
-        android:fontFamily="fonts/Roboto-Bold.ttf"
-        android:onClick="editName"/>
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_headline"/>
 
     <TextView
         android:id="@+id/score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="fonts/Roboto-Medium.ttf"
         android:gravity="center"
         android:singleLine="true"
-        android:textColor="@color/darker_gray"
-        android:paddingTop="8dp"
-        android:textSize="18sp"
-        android:fontFamily="fonts/Roboto-Bold.ttf"/>
+        android:textSize="@dimen/font_headline"/>
 
 </LinearLayout>

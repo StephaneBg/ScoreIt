@@ -44,7 +44,7 @@ public class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CalligraphyConfig.initDefault("fonts/Roboto-Light.ttf");
+        CalligraphyConfig.initDefault("fonts/Roboto-Regular.ttf");
         setupActivity();
     }
 
