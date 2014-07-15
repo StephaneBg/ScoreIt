@@ -55,20 +55,25 @@ public class FileSaveUtil {
                         break;
                 }
                 break;
-            case Game.BELOTE_CLASSIC:
+            case Game.BELOTE:
                 fileName = preferences.getString(KEY_LAST_BELOTE, "belote_default");
                 break;
-            case Game.BELOTE_COINCHE:
+            case Game.COINCHE:
                 fileName = preferences.getString(KEY_LAST_COINCHE, "coinche_default");
                 break;
-            case Game.TAROT_3_PLAYERS:
-                fileName = preferences.getString(KEY_LAST_TAROT_3, "tarot_3_default");
-                break;
-            case Game.TAROT_4_PLAYERS:
-                fileName = preferences.getString(KEY_LAST_TAROT_4, "tarot_4_default");
-                break;
-            case Game.TAROT_5_PLAYERS:
-                fileName = preferences.getString(KEY_LAST_TAROT_5, "tarot_5_default");
+            case Game.TAROT:
+                switch (game.getPlayerCount()) {
+                    case 3:
+                        fileName = preferences.getString(KEY_LAST_TAROT_3, "tarot_3_default");
+                        break;
+                    case 4:
+                        fileName = preferences.getString(KEY_LAST_TAROT_4, "tarot_4_default");
+                        break;
+                    default:
+                    case 5:
+                        fileName = preferences.getString(KEY_LAST_TAROT_5, "tarot_5_default");
+                        break;
+                }
                 break;
         }
         return fileName;

@@ -20,8 +20,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -45,12 +43,6 @@ public class HeaderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main, menu);
     }
 
     @Override
@@ -70,8 +62,8 @@ public class HeaderFragment extends Fragment {
             pi.setName(getGame().getPlayerName(player));
             pi.setScore(getAccumulatedScore(player));
             pi.setScoreColor(getGame().getPlayerColor(player));
-            pi.setNameEditable(getGame().getPlayedGame() != Game.BELOTE_CLASSIC
-                    && getGame().getPlayedGame() != Game.BELOTE_COINCHE);
+            pi.setNameEditable(getGame().getPlayedGame() != Game.BELOTE
+                    && getGame().getPlayedGame() != Game.COINCHE);
             root.addView(pi);
             mPlayers.add(pi);
         }

@@ -18,8 +18,7 @@
 <resources>
 
     <style name="AppBase" parent="android:Theme.Holo.Light">
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@drawable/background_triangles</item>
         <item name="android:icon">@android:color/transparent</item>
         <item name="android:actionBarStyle">@style/ActionBar.Scoreit</item>
         <item name="android:actionMenuTextColor">@color/white</item>
@@ -52,11 +51,6 @@
         <item name="android:background">@color/primary_accent</item>
     </style>
 
-    <style name="SubHead">
-        <item name="android:textSize">@dimen/font_subhead</item>
-
-    </style>
-
     <style name="TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">@color/white</item>
     </style>
@@ -78,6 +72,25 @@
             @drawable/apptheme_scrubber_progress_horizontal_holo_light
         </item>
         <item name="android:thumb">@drawable/apptheme_scrubber_control_selector_holo_light</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginBottom">@dimen/margin_default</item>
+        <item name="android:layout_marginTop">@dimen/margin_default</item>
+        <item name="android:background">@color/lighter_gray</item>
+    </style>
+
+    <style name="SubHeader">
+        <item name="android:layout_height">@dimen/height_default</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">@dimen/margin_activity</item>
+        <item name="android:layout_marginRight">@dimen/margin_activity</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/secondary_accent</item>
+        <item name="android:textSize">@dimen/font_subhead</item>
+        <item name="android:fontFamily">fonts/Roboto-Medium.ttf</item>
     </style>
 
 </resources>

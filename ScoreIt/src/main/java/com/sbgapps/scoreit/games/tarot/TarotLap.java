@@ -33,6 +33,7 @@ public abstract class TarotLap implements Lap {
     public static final int BID_GARDE = 1;
     public static final int BID_GARDE_SANS = 2;
     public static final int BID_GARDE_CONTRE = 3;
+
     protected transient int[] mScores;
     @SerializedName("taker")
     protected int mTaker;
@@ -95,7 +96,7 @@ public abstract class TarotLap implements Lap {
     }
 
     @Override
-    public void setScores() {
+    public void computeScores() {
         if (null == mScores) {
             mScores = new int[getPlayerCount()];
         }

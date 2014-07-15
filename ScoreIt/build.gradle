@@ -63,6 +63,8 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:0.7.2'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.anjlab.android.iab.v3:library:1.0.8@aar'
+    compile 'com.github.frankiesardo:linearlistview:1.0.1'
     compile project(':HoloGraphLibrary')
     compile project(':FloatingActionButton')
+    compile project(':GoogleNavigationDrawerMenuLibrary')
 }

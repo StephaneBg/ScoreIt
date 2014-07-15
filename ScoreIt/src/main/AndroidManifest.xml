@@ -41,16 +41,16 @@
             android:parentActivityName=".ScoreItActivity"
             android:theme="@style/Theme.Adaptive"/>
         <activity
-            android:name="com.sbgapps.scoreit.UniversalLapActivity"
+            android:name=".games.universal.UniversalLapActivity"
             android:theme="@style/Theme.Adaptive"/>
         <activity
-            android:name="com.sbgapps.scoreit.BeloteLapActivity"
+            android:name=".games.belote.BeloteLapActivity"
             android:theme="@style/Theme.Adaptive"/>
         <activity
-            android:name="com.sbgapps.scoreit.CoincheLapActivity"
+            android:name=".games.coinche.CoincheLapActivity"
             android:theme="@style/Theme.Adaptive"/>
         <activity
-            android:name="com.sbgapps.scoreit.TarotLapActivity"
+            android:name=".games.tarot.TarotLapActivity"
             android:theme="@style/Theme.Adaptive"/>
     </application>
 

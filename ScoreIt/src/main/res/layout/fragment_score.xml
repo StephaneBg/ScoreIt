@@ -18,8 +18,10 @@
 <com.sbgapps.scoreit.widget.FractionFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:swipe="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="ScoreItActivity">
 
     <com.sbgapps.scoreit.view.SwipeListView
         android:id="@android:id/list"

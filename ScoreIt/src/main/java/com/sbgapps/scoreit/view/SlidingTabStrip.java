@@ -1,17 +1,17 @@
 /*
- * Copyright 2013 SBG Apps
+ * Copyright (c) 2014 SBG Apps
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.sbgapps.scoreit.view;
@@ -31,7 +31,6 @@ class SlidingTabStrip extends LinearLayout {
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 2;
     private static final byte DEFAULT_BOTTOM_BORDER_COLOR_ALPHA = 0x26;
     private static final int SELECTED_INDICATOR_THICKNESS_DIPS = 8;
-    private static final int DEFAULT_SELECTED_INDICATOR_COLOR = 0xFFDF4D38;
 
     private static final int DEFAULT_DIVIDER_THICKNESS_DIPS = 1;
     private static final byte DEFAULT_DIVIDER_COLOR_ALPHA = 0x20;
@@ -68,7 +67,8 @@ class SlidingTabStrip extends LinearLayout {
                 DEFAULT_BOTTOM_BORDER_COLOR_ALPHA);
 
         mDefaultTabColorizer = new SimpleTabColorizer();
-        mDefaultTabColorizer.setIndicatorColors(DEFAULT_SELECTED_INDICATOR_COLOR);
+        mDefaultTabColorizer.setIndicatorColors(
+                context.getResources().getColor(com.sbgapps.scoreit.R.color.secondary_accent));
         mDefaultTabColorizer.setDividerColors(setColorAlpha(themeForegroundColor,
                 DEFAULT_DIVIDER_COLOR_ALPHA));
 

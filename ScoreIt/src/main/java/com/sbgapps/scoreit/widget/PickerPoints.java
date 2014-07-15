@@ -25,27 +25,27 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.UniversalLapActivity;
+import com.sbgapps.scoreit.games.universal.UniversalLapActivity;
 
 /**
  * Created by sbaiget on 06/02/14.
  */
-public class PickerInputPoints extends FrameLayout {
+public class PickerPoints extends FrameLayout {
 
     private final UniversalLapActivity mContext;
     private final TextView mTextViewPoints;
     private int mPoints;
     private int mPlayer;
 
-    public PickerInputPoints(Context context) {
+    public PickerPoints(Context context) {
         this(context, null);
     }
 
-    public PickerInputPoints(Context context, AttributeSet attrs) {
+    public PickerPoints(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public PickerInputPoints(Context context, AttributeSet attrs, int defStyle) {
+    public PickerPoints(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         mContext = (UniversalLapActivity) context;

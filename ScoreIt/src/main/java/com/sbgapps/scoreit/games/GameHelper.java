@@ -22,8 +22,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
-import com.sbgapps.scoreit.games.belote.BeloteClassicGame;
-import com.sbgapps.scoreit.games.belote.BeloteCoincheGame;
+import com.sbgapps.scoreit.games.belote.BeloteGame;
+import com.sbgapps.scoreit.games.coinche.CoincheGame;
 import com.sbgapps.scoreit.games.tarot.TarotFiveGame;
 import com.sbgapps.scoreit.games.tarot.TarotFourGame;
 import com.sbgapps.scoreit.games.tarot.TarotThreeGame;
@@ -41,7 +41,8 @@ import java.util.List;
 public class GameHelper {
 
     public static final String KEY_SELECTED_GAME = "selected_game";
-    public static final String KEY_UNIVERSAL_PLAYER_CNT = "player_count";
+    public static final String KEY_UNIVERSAL_PLAYER_CNT = "universal_player_count";
+    public static final String KEY_TAROT_PLAYER_CNT = "tarot_player_count";
 
     private static GameHelper sInstance = new GameHelper();
     private Game mGame;
@@ -94,9 +95,12 @@ public class GameHelper {
     public int getPlayerCount() {
         switch (mPlayedGame) {
             default:
-                return mGame.getPlayers().size();
+                // Belote and Coinche
+                return 2;
             case Game.UNIVERSAL:
                 return mPreferences.getInt(KEY_UNIVERSAL_PLAYER_CNT, 5);
+            case Game.TAROT:
+                return mPreferences.getInt(KEY_TAROT_PLAYER_CNT, 5);
         }
     }
 
@@ -108,7 +112,15 @@ public class GameHelper {
                 saveGame();
                 mPreferences
                         .edit()
-                        .putInt(KEY_UNIVERSAL_PLAYER_CNT, count)
+                        .putInt(KEY_UNIVERSAL_PLAYER_CNT, count + 2)
+                        .apply();
+                loadLaps();
+                break;
+            case Game.TAROT:
+                saveGame();
+                mPreferences
+                        .edit()
+                        .putInt(KEY_TAROT_PLAYER_CNT, count + 3)
                         .apply();
                 loadLaps();
                 break;
@@ -125,34 +137,38 @@ public class GameHelper {
                     mGame = new UniversalGame(mContext);
                 }
                 break;
-            case Game.BELOTE_CLASSIC:
-                mGame = load(file, BeloteClassicGame.class);
+            case Game.BELOTE:
+                mGame = load(file, BeloteGame.class);
                 if (null == mGame) {
-                    mGame = new BeloteClassicGame(mContext);
+                    mGame = new BeloteGame(mContext);
                 }
                 break;
-            case Game.BELOTE_COINCHE:
-                mGame = load(file, BeloteCoincheGame.class);
+            case Game.COINCHE:
+                mGame = load(file, CoincheGame.class);
                 if (null == mGame) {
-                    mGame = new BeloteCoincheGame(mContext);
+                    mGame = new CoincheGame(mContext);
                 }
                 break;
-            case Game.TAROT_3_PLAYERS:
-                mGame = load(file, TarotThreeGame.class);
-                if (null == mGame) {
-                    mGame = new TarotThreeGame(mContext);
-                }
-                break;
-            case Game.TAROT_4_PLAYERS:
-                mGame = load(file, TarotFourGame.class);
-                if (null == mGame) {
-                    mGame = new TarotFourGame(mContext);
-                }
-                break;
-            case Game.TAROT_5_PLAYERS:
-                mGame = load(file, TarotFiveGame.class);
-                if (null == mGame) {
-                    mGame = new TarotFiveGame(mContext);
+            case Game.TAROT:
+                switch (getPlayerCount()) {
+                    case 3:
+                        mGame = load(file, TarotThreeGame.class);
+                        if (null == mGame) {
+                            mGame = new TarotThreeGame(mContext);
+                        }
+                        break;
+                    case 4:
+                        mGame = load(file, TarotFourGame.class);
+                        if (null == mGame) {
+                            mGame = new TarotFourGame(mContext);
+                        }
+                        break;
+                    case 5:
+                        mGame = load(file, TarotFiveGame.class);
+                        if (null == mGame) {
+                            mGame = new TarotFiveGame(mContext);
+                        }
+                        break;
                 }
                 break;
         }

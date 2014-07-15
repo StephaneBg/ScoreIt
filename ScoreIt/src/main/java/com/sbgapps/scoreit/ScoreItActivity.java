@@ -25,7 +25,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.v4.widget.DrawerLayout;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Menu;
@@ -37,15 +37,19 @@ import com.faizmalkani.floatingactionbutton.FloatingActionButton;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.belote.BeloteLapActivity;
+import com.sbgapps.scoreit.games.coinche.CoincheLapActivity;
+import com.sbgapps.scoreit.games.tarot.TarotLapActivity;
+import com.sbgapps.scoreit.games.universal.UniversalLapActivity;
 import com.sbgapps.scoreit.util.TypefaceSpan;
 import com.sbgapps.scoreit.util.Utils;
 import com.sbgapps.scoreit.view.SwipeListView;
 import com.sbgapps.scoreit.widget.PlayerInfo;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyUtils;
+import org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer;
 
 public class ScoreItActivity extends BaseActivity
-        implements NavigationDrawerFragment.NavigationDrawerListener {
+        implements GoogleNavigationDrawer.OnNavigationSectionSelected {
 
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
     public static final String EXTRA_EDIT = "com.sbgapps.scoreit.edit";
@@ -56,7 +60,8 @@ public class ScoreItActivity extends BaseActivity
     private SpannableString mTitle;
     private boolean mIsTablet;
     private PlayerInfo mEditedName;
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private GoogleNavigationDrawer mDrawer;
     private ScoreListFragment mScoreListFragment;
     private GraphFragment mGraphFragment;
     private HeaderFragment mHeaderFragment;
@@ -100,18 +105,24 @@ public class ScoreItActivity extends BaseActivity
         }
 
         // Init drawer
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                fm.findFragmentById(R.id.navigation_drawer);
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout), mGameHelper.getPlayedGame());
+        mDrawer = (GoogleNavigationDrawer)
+                findViewById(R.id.navigation_drawer_container);
+        mDrawerToggle = new ActionBarDrawerToggle(this,
+                mDrawer,
+                R.drawable.ic_navigation_drawer,
+                R.string.app_name,
+                R.string.app_name);
+        mDrawer.setDrawerListener(mDrawerToggle);
+        mDrawer.setOnNavigationSectionSelected(this);
 
         mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
         setTitle();
     }
 
-    public TypefaceSpan getTypefaceSpan() {
-        return mTypefaceSpan;
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
     }
 
     @Override
@@ -125,25 +136,27 @@ public class ScoreItActivity extends BaseActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (mNavigationDrawerFragment.isDrawerOpen()) {
-            menu.clear();
-            return false;
-        } else {
-            MenuItem item;
-            if (0 == mGameHelper.getLaps().size()) {
-                if (!mIsTablet) {
-                    item = menu.findItem(R.id.menu_view);
-                    item.setVisible(false);
-                }
-                item = menu.findItem(R.id.menu_clear);
+        MenuItem item;
+        if (0 == mGameHelper.getLaps().size()) {
+            if (!mIsTablet) {
+                item = menu.findItem(R.id.menu_view);
                 item.setVisible(false);
             }
-            item = menu.findItem(R.id.menu_count);
-            item.setVisible(Game.UNIVERSAL == mGameHelper.getPlayedGame());
-            getActionBar().setTitle(mTitle);
-            return true;
+            item = menu.findItem(R.id.menu_clear);
+            item.setVisible(false);
         }
+        item = menu.findItem(R.id.menu_count);
+        boolean show = Game.UNIVERSAL == mGameHelper.getPlayedGame() ||
+                Game.TAROT == mGameHelper.getPlayedGame();
+        item.setVisible(show);
+        return true;
     }
 
     @Override
@@ -165,19 +178,28 @@ public class ScoreItActivity extends BaseActivity
     }
 
     @Override
-    public void onNavigationDrawerGameSelected(int position) {
-        if (-1 == position) {
-            // About
-            Intent intent = new Intent(this, AboutActivity.class);
-            startActivity(intent);
-            return;
+    public void onSectionSelected(View view, int i, long l) {
+        switch (i) {
+            case 0:
+                mGameHelper.setPlayedGame(Game.UNIVERSAL);
+                break;
+            case 1:
+                mGameHelper.setPlayedGame(Game.TAROT);
+                break;
+            case 2:
+                mGameHelper.setPlayedGame(Game.BELOTE);
+                break;
+            case 3:
+                mGameHelper.setPlayedGame(Game.COINCHE);
+                break;
+            case 4:
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return;
         }
-
         getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
-        mGameHelper.setPlayedGame(position);
+        invalidateOptionsMenu();
         setTitle();
-
         reloadFragments();
     }
 
@@ -263,15 +285,13 @@ public class ScoreItActivity extends BaseActivity
             case Game.UNIVERSAL:
                 intent = new Intent(this, UniversalLapActivity.class);
                 break;
-            case Game.BELOTE_CLASSIC:
+            case Game.BELOTE:
                 intent = new Intent(this, BeloteLapActivity.class);
                 break;
-            case Game.BELOTE_COINCHE:
+            case Game.COINCHE:
                 intent = new Intent(this, CoincheLapActivity.class);
                 break;
-            case Game.TAROT_3_PLAYERS:
-            case Game.TAROT_4_PLAYERS:
-            case Game.TAROT_5_PLAYERS:
+            case Game.TAROT:
                 intent = new Intent(this, TarotLapActivity.class);
                 break;
         }
@@ -315,19 +335,18 @@ public class ScoreItActivity extends BaseActivity
             case Game.UNIVERSAL:
                 mTitle = new SpannableString(getResources().getString(R.string.universal));
                 break;
-            case Game.BELOTE_CLASSIC:
+            case Game.BELOTE:
                 mTitle = new SpannableString(getResources().getString(R.string.belote));
                 break;
-            case Game.BELOTE_COINCHE:
+            case Game.COINCHE:
                 mTitle = new SpannableString(getResources().getString(R.string.coinche));
                 break;
-            case Game.TAROT_3_PLAYERS:
-            case Game.TAROT_4_PLAYERS:
-            case Game.TAROT_5_PLAYERS:
+            case Game.TAROT:
                 mTitle = new SpannableString(getResources().getString(R.string.tarot));
                 break;
         }
         mTitle.setSpan(mTypefaceSpan, 0, mTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        getActionBar().setTitle(mTitle);
     }
 
     private void nameEdited(String name) {
@@ -371,13 +390,22 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void showPlayerCountDialog() {
+        String[] players;
+        switch (mGameHelper.getPlayedGame()) {
+            default:
+                players = new String[]{"2", "3", "4", "5"};
+                break;
+            case Game.TAROT:
+                players = new String[]{"3", "4", "5"};
+                break;
+        }
         Dialog dialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.player_number)
-                .setItems(R.array.player_count,
+                .setItems(players,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mGameHelper.setPlayerCount(which + 2);
+                                mGameHelper.setPlayerCount(which);
                                 reloadFragments();
                             }
                         }

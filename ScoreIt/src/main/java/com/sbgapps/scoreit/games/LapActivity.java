@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit;
+package com.sbgapps.scoreit.games;
 
 import android.app.ActionBar;
 import android.os.Bundle;
@@ -22,18 +22,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sbgapps.scoreit.games.GameHelper;
-import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.BaseActivity;
+import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.ScoreItActivity;
 
 /**
  * Created by sbaiget on 08/01/14.
  */
-public abstract class LapActivity extends BaseActivity
+public class LapActivity extends BaseActivity
         implements View.OnClickListener {
 
     private final GameHelper mGameData;
-    private Lap mLap;
-    private boolean mIsEdited;
+    public int mPosition;
+    public Lap mLap;
 
     public LapActivity() {
         mGameData = GameHelper.getInstance();
@@ -43,14 +44,6 @@ public abstract class LapActivity extends BaseActivity
         return mLap;
     }
 
-    public void setLap(Lap lap) {
-        mLap = lap;
-    }
-
-    public boolean isEdited() {
-        return mIsEdited;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,12 +51,20 @@ public abstract class LapActivity extends BaseActivity
         setTranslucentStatusBar();
         if (!isDialog()) setupActionBar();
 
-        Bundle b = getIntent().getExtras();
-        mIsEdited = b.getBoolean(ScoreItActivity.EXTRA_EDIT);
-        if (mIsEdited) {
-            int i = b.getInt(ScoreItActivity.EXTRA_LAP, -1);
-            mLap = getGameHelper().getLaps().get(i);
+        if (null == savedInstanceState) {
+            Bundle b = getIntent().getExtras();
+            mPosition = b.getInt(ScoreItActivity.EXTRA_LAP, -1);
+        } else {
+            mLap = (Lap) savedInstanceState.getSerializable("lap");
+            mPosition = savedInstanceState.getInt("position");
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("lap", mLap);
+        outState.putInt("position", mPosition);
     }
 
     private void setupActionBar() {
@@ -91,9 +92,11 @@ public abstract class LapActivity extends BaseActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_confirm:
-                updateLap();
-                if (!isEdited()) {
+                mLap.computeScores();
+                if (-1 == mPosition) {
                     mGameData.addLap(mLap);
+                } else {
+                    // Edited lap
                 }
                 setResult(RESULT_OK);
                 finish();
@@ -108,10 +111,4 @@ public abstract class LapActivity extends BaseActivity
     public GameHelper getGameHelper() {
         return mGameData;
     }
-
-    abstract public void updateLap();
-
-    abstract public int progressToPoints(int progress);
-
-    abstract public int pointsToProgress(int points);
 }

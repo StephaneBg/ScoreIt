@@ -100,16 +100,4 @@
     <string name="donate_beer">Buy me a beer</string>
     <string name="bought_beer">You bought me a beer. Thanks!</string>
 
-    <string-array name="edit_name_action">
-        <item>Pick contact</item>
-        <item>Enter name</item>
-    </string-array>
-    <string-array name="languages">
-        <item>English</item>
-        <item>French</item>
-        <item>Dutch</item>
-        <item>Russian</item>
-        <item>German</item>
-    </string-array>
-
 </resources>

@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ Copyright 2013 SBG Apps
+  ~ Copyright (c) 2014 SBG Apps
   ~
-  ~     Licensed under the Apache License, Version 2.0 (the "License");
-  ~     you may not use this file except in compliance with the License.
-  ~     You may obtain a copy of the License at
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
   ~
-  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~    http://www.apache.org/licenses/LICENSE-2.0
   ~
-  ~     Unless required by applicable law or agreed to in writing, software
-  ~     distributed under the License is distributed on an "AS IS" BASIS,
-  ~     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~     See the License for the specific language governing permissions and
-  ~     limitations under the License.
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
   -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     android:id="@+id/scrollview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="ScoreItActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_default"
         android:orientation="vertical">
 
         <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/team" />
+            style="@style/SubHeader"
+            android:text="@string/team"/>
 
         <RadioGroup
-            android:id="@+id/radio_group_team"
+            android:id="@+id/radio_group_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_default"
-            android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"
             android:orientation="vertical">
 
             <RadioButton
@@ -46,49 +47,56 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/them" />
+                android:text="@string/them"/>
 
             <RadioButton
                 android:id="@+id/rb_player2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/us" />
+                android:layout_marginBottom="@dimen/margin_default"
+                android:text="@string/us"/>
         </RadioGroup>
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/bidding" />
+        <View style="@style/Divider"/>
 
-        <com.sbgapps.scoreit.widget.SeekbarInputPoints
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/bidding"/>
+
+        <com.sbgapps.scoreit.widget.SeekbarPoints
             android:id="@+id/input_deal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"/>
+
+        <View style="@style/Divider"/>
 
         <TextView
-            style="?android:listSeparatorTextViewStyle"
+            style="@style/SubHeader"
+            android:text="@string/progress"/>
+
+        <com.sbgapps.scoreit.widget.SeekbarPoints
+            android:id="@+id/sb_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/progress" />
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"/>
 
-        <com.sbgapps.scoreit.widget.SeekbarInputPoints
-            android:id="@+id/input_points"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <View style="@style/Divider"/>
 
         <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/belote" />
+            style="@style/SubHeader"
+            android:text="@string/belote"/>
 
         <RadioGroup
             android:id="@+id/radio_group_belote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_default"
-            android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"
             android:orientation="vertical">
 
             <RadioButton
@@ -96,57 +104,59 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/none" />
+                android:text="@string/none"/>
 
             <RadioButton
                 android:id="@+id/rb_belote_player1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/them" />
+                android:text="@string/them"/>
 
             <RadioButton
                 android:id="@+id/rb_belote_player2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/us" />
+                android:layout_marginBottom="@dimen/margin_default"
+                android:text="@string/us"/>
         </RadioGroup>
 
+        <View style="@style/Divider"/>
+
         <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/coinche" />
+            style="@style/SubHeader"
+            android:text="@string/coinche"/>
 
         <RadioGroup
             android:id="@+id/radio_group_coinche"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_default"
-            android:layout_marginTop="@dimen/margin_default">
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity">
 
             <RadioButton
                 android:id="@+id/rb_no_coinche"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/none" />
+                android:text="@string/none"/>
 
             <RadioButton
                 android:id="@+id/rb_coinche"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/coinche" />
+                android:text="@string/coinche"/>
 
             <RadioButton
                 android:id="@+id/rb_surcoinche"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
                 android:layout_weight="1"
-                android:text="@string/surcoinche" />
+                android:text="@string/surcoinche"/>
         </RadioGroup>
 
     </LinearLayout>
+
 </ScrollView>

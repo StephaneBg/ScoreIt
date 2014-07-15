@@ -34,11 +34,11 @@ public class TarotFiveLap extends TarotLap {
                         int partner) {
         super(taker, deal, points, oudlers, bonuses);
         mPartner = partner;
-        setScores();
+        computeScores();
     }
 
     public TarotFiveLap() {
-        this(Player.PLAYER_1, BID_PRISE, 41, 0, new ArrayList<TarotBonus>(), Player.PLAYER_1);
+        this(Player.PLAYER_1, BID_PRISE, 42, 0, new ArrayList<TarotBonus>(), Player.PLAYER_2);
     }
 
     public int getPartner() {
@@ -55,8 +55,8 @@ public class TarotFiveLap extends TarotLap {
     }
 
     @Override
-    public void setScores() {
-        super.setScores();
+    public void computeScores() {
+        super.computeScores();
         final int score = getResult();
         if (mTaker != mPartner) {
             mScores[Player.PLAYER_1] = (Player.PLAYER_1 == mTaker) ? 2 * score :

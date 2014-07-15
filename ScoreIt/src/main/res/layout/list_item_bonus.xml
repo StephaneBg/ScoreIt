@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+  ~ Copyright (c) 2014 SBG Apps
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/margin_default"
     android:gravity="center_horizontal"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:context="ScoreItActivity">
 
     <Spinner
         android:id="@+id/spinner_announce"
@@ -13,7 +32,7 @@
         android:layout_height="@dimen/height_default"
         android:layout_marginTop="@dimen/margin_default"
         android:layout_toLeftOf="@+id/btn_remove_announce"
-        android:spinnerMode="dialog" />
+        android:spinnerMode="dialog"/>
 
     <Spinner
         android:id="@+id/spinner_player"
@@ -23,7 +42,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/spinner_announce"
         android:layout_toLeftOf="@+id/btn_remove_announce"
-        android:spinnerMode="dialog" />
+        android:spinnerMode="dialog"/>
 
     <ImageButton
         android:id="@+id/btn_remove_announce"
@@ -34,6 +53,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/spinner_announce"
-        android:src="@drawable/ic_action_cancel_light" />
+        android:src="@drawable/ic_action_cancel_light"/>
 
 </RelativeLayout>

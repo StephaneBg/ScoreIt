@@ -1,17 +1,17 @@
 /*
- * Copyright 2013 SBG Apps
+ * Copyright (c) 2014 SBG Apps
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.sbgapps.scoreit.games.belote;
@@ -25,7 +25,7 @@ public class BeloteClassicLap extends BeloteLap {
 
     public BeloteClassicLap(int taker, int points, int belote) {
         super(taker, points, belote);
-        setScores();
+        computeScores();
     }
 
     public BeloteClassicLap() {
@@ -33,8 +33,8 @@ public class BeloteClassicLap extends BeloteLap {
     }
 
     @Override
-    public void setScores() {
-        super.setScores();
+    public void computeScores() {
+        super.computeScores();
         mScores[Player.PLAYER_1] = (Player.PLAYER_1 == mTaker) ? mPoints : getCounterPoints(mPoints);
         mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mTaker) ? mPoints : getCounterPoints(mPoints);
         mScores[Player.PLAYER_1] += (Player.PLAYER_1 == mBelote) ? 20 : 0;

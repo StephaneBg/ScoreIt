@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit;
+package com.sbgapps.scoreit.games.universal;
 
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.games.LapActivity;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.widget.NumberPickerDialogFragment;
-import com.sbgapps.scoreit.widget.PickerInputPoints;
+import com.sbgapps.scoreit.widget.PickerPoints;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,7 @@ public class UniversalLapActivity extends LapActivity
         implements NumberPickerDialogFragment.NumberPickerDialogListener {
 
     private static final String KEY_SCORES = "scores";
-    private final ArrayList<PickerInputPoints> mPoints = new ArrayList<>(2);
+    private final ArrayList<PickerPoints> mPoints = new ArrayList<>(2);
 
     @Override
     public UniversalLap getLap() {
@@ -45,26 +46,18 @@ public class UniversalLapActivity extends LapActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!isEdited()) {
-            setLap(new UniversalLap());
-        }
-
-        setContentView(R.layout.activity_lap_universal);
-
-        if (isDialog()) {
-            findViewById(R.id.btn_cancel).setOnClickListener(this);
-            findViewById(R.id.btn_confirm).setOnClickListener(this);
-        }
-
-        if (null != savedInstanceState) {
-            for (int player = 0; player < getGameHelper().getPlayerCount(); player++) {
-                getLap().setScore(player, savedInstanceState.getIntArray(KEY_SCORES)[player]);
+        if (null == savedInstanceState) {
+            if (-1 == mPosition) { // New lap
+                mLap = new UniversalLap();
+            } else { // Edited lap
+                mLap = getGameHelper().getLaps().get(mPosition);
             }
         }
+        setContentView(R.layout.activity_lap_universal);
 
         final LinearLayout ll = (LinearLayout) findViewById(R.id.container);
         for (int player = 0; player < getGameHelper().getPlayerCount(); player++) {
-            PickerInputPoints uip = new PickerInputPoints(this);
+            PickerPoints uip = new PickerPoints(this);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -73,6 +66,11 @@ public class UniversalLapActivity extends LapActivity
             uip.setPoints(getLap().getScore(player));
             ll.addView(uip);
             mPoints.add(uip);
+        }
+
+        if (isDialog()) {
+            findViewById(R.id.btn_cancel).setOnClickListener(this);
+            findViewById(R.id.btn_confirm).setOnClickListener(this);
         }
     }
 
@@ -84,24 +82,6 @@ public class UniversalLapActivity extends LapActivity
             points[player] = mPoints.get(player).getPoints();
         }
         outState.putIntArray(KEY_SCORES, points);
-    }
-
-    @Override
-    public void updateLap() {
-        UniversalLap lap = getLap();
-        for (int player = 0; player < getGameHelper().getPlayerCount(); player++) {
-            lap.setScore(player, mPoints.get(player).getPoints());
-        }
-    }
-
-    @Override
-    public int progressToPoints(int progress) {
-        return progress;
-    }
-
-    @Override
-    public int pointsToProgress(int points) {
-        return points;
     }
 
     @Override

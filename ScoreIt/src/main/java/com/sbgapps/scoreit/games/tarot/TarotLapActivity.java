@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit;
+package com.sbgapps.scoreit.games.tarot;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -24,26 +24,31 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import com.sbgapps.scoreit.games.Game;
+import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.games.LapActivity;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.tarot.TarotBonus;
-import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
-import com.sbgapps.scoreit.games.tarot.TarotFourLap;
-import com.sbgapps.scoreit.games.tarot.TarotLap;
-import com.sbgapps.scoreit.games.tarot.TarotThreeLap;
-import com.sbgapps.scoreit.widget.SeekbarInputPoints;
+import com.sbgapps.scoreit.widget.SeekbarPoints;
 
 /**
  * Created by sbaiget on 07/12/13.
  */
-public class TarotLapActivity extends LapActivity {
+public class TarotLapActivity extends LapActivity
+        implements SeekbarPoints.OnPointsChangedListener {
 
-    private static final LapHolder HOLDER = new LapHolder();
-    private int mGame;
+    private Spinner mTaker;
+    private Spinner mBid;
+    private Spinner mPartner;
+    private CheckBox mPetit;
+    private CheckBox mTwentyOne;
+    private CheckBox mExcuse;
+    private SeekbarPoints mPoints;
+    private LinearLayout mBonuses;
+    private Button mButtonBonus;
 
     @Override
     public TarotLap getLap() {
@@ -54,40 +59,49 @@ public class TarotLapActivity extends LapActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mGame = getGameHelper().getPlayedGame();
-        if (!isEdited()) {
-            switch (mGame) {
-                default:
-                case Game.TAROT_3_PLAYERS:
-                    setLap(new TarotThreeLap());
-                    break;
-                case Game.TAROT_4_PLAYERS:
-                    setLap(new TarotFourLap());
-                    break;
-                case Game.TAROT_5_PLAYERS:
-                    setLap(new TarotFiveLap());
-                    break;
+        if (null == savedInstanceState) {
+            if (-1 == mPosition) { // New lap
+                switch (getGameHelper().getPlayerCount()) {
+                    default:
+                    case 3:
+                        mLap = new TarotThreeLap();
+                        break;
+                    case 4:
+                        mLap = new TarotFourLap();
+                        break;
+                    case 5:
+                        mLap = new TarotFiveLap();
+                        break;
+                }
+            } else { // Edited lap
+                mLap = getGameHelper().getLaps().get(mPosition);
             }
         }
-
         setContentView(R.layout.activity_lap_tarot);
 
-        HOLDER.taker = (Spinner) findViewById(R.id.spinner_taker);
-        HOLDER.deal = (Spinner) findViewById(R.id.spinner_deal);
-        HOLDER.petit = (CheckBox) findViewById(R.id.checkbox_petit);
-        HOLDER.twenty_one = (CheckBox) findViewById(R.id.checkbox_twenty_one);
-        HOLDER.fool = (CheckBox) findViewById(R.id.checkbox_fool);
-        HOLDER.input_points = (SeekbarInputPoints) findViewById(R.id.input_points);
-        HOLDER.ll_bonuses = (LinearLayout) findViewById(R.id.ll_bonuses);
+        mTaker = (Spinner) findViewById(R.id.spinner_taker);
+        mBid = (Spinner) findViewById(R.id.spinner_deal);
+        mPetit = (CheckBox) findViewById(R.id.checkbox_petit);
+        mTwentyOne = (CheckBox) findViewById(R.id.checkbox_twenty_one);
+        mExcuse = (CheckBox) findViewById(R.id.checkbox_fool);
+        mPoints = (SeekbarPoints) findViewById(R.id.sb_points);
+        mBonuses = (LinearLayout) findViewById(R.id.ll_bonuses);
 
-        if (isDialog()) {
-            findViewById(R.id.btn_cancel).setOnClickListener(this);
-            findViewById(R.id.btn_confirm).setOnClickListener(this);
-        }
+        mTaker.setAdapter(getPlayerArrayAdapter());
+        mTaker.setSelection(getLap().getTaker());
+        mTaker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getLap().setTaker(position);
+            }
 
-        HOLDER.taker.setAdapter(getPlayerArrayAdapter());
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        if (Game.TAROT_5_PLAYERS == mGame) {
+            }
+        });
+
+        if (getGameHelper().getPlayerCount() == 5) {
             ViewStub stub = (ViewStub) findViewById(R.id.viewstub_partner);
             View view = stub.inflate();
             final ArrayAdapter<PlayerItem> partnerItemArrayAdapter = new ArrayAdapter<>(this,
@@ -98,76 +112,101 @@ public class TarotLapActivity extends LapActivity {
             partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_3));
             partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_4));
             partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_5));
-            HOLDER.partner = (Spinner) view.findViewById(R.id.spinner_partner);
-            HOLDER.partner.setAdapter(partnerItemArrayAdapter);
+            mPartner = (Spinner) view.findViewById(R.id.spinner_partner);
+            mPartner.setAdapter(partnerItemArrayAdapter);
+            mPartner.setSelection(((TarotFiveLap) getLap()).getPartner());
+            mPartner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    ((TarotFiveLap) getLap()).setPartner(position);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }
 
-        final ArrayAdapter<DealItem> dealItemArrayAdapter = new ArrayAdapter<>(this,
+        final ArrayAdapter<BidItem> dealItemArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item);
         dealItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dealItemArrayAdapter.add(new DealItem(TarotLap.BID_PRISE));
-        dealItemArrayAdapter.add(new DealItem(TarotLap.BID_GARDE));
-        dealItemArrayAdapter.add(new DealItem(TarotLap.BID_GARDE_SANS));
-        dealItemArrayAdapter.add(new DealItem(TarotLap.BID_GARDE_CONTRE));
-        HOLDER.deal.setAdapter(dealItemArrayAdapter);
+        dealItemArrayAdapter.add(new BidItem(TarotLap.BID_PRISE));
+        dealItemArrayAdapter.add(new BidItem(TarotLap.BID_GARDE));
+        dealItemArrayAdapter.add(new BidItem(TarotLap.BID_GARDE_SANS));
+        dealItemArrayAdapter.add(new BidItem(TarotLap.BID_GARDE_CONTRE));
+        mBid.setAdapter(dealItemArrayAdapter);
+        mBid.setSelection(getLap().getBid());
+        mBid.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getLap().setBid(position);
+            }
 
-        HOLDER.input_points.setMax(91);
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        HOLDER.btn_bonus = (Button) findViewById(R.id.btn_add_bonus);
-        HOLDER.btn_bonus.setOnClickListener(new View.OnClickListener() {
+            }
+        });
+
+        mPoints.init(getLap().getPoints(), 91, getLap().getPoints());
+        mPoints.setOnPointsChangedListener(this, "points");
+
+        mPetit.setChecked((getLap().getOudlers() & TarotLap.OUDLER_PETIT_MSK)
+                == TarotLap.OUDLER_PETIT_MSK);
+        mPetit.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int oudlers = getLap().getOudlers();
+                if (isChecked) {
+                    getLap().setOudlers(oudlers | TarotLap.OUDLER_PETIT_MSK);
+                } else {
+                    getLap().setOudlers(oudlers & ~TarotLap.OUDLER_PETIT_MSK);
+                }
+            }
+        });
+        mExcuse.setChecked((getLap().getOudlers() & TarotLap.OUDLER_EXCUSE_MSK)
+                == TarotLap.OUDLER_EXCUSE_MSK);
+        mExcuse.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int oudlers = getLap().getOudlers();
+                if (isChecked) {
+                    getLap().setOudlers(oudlers | TarotLap.OUDLER_EXCUSE_MSK);
+                } else {
+                    getLap().setOudlers(oudlers & ~TarotLap.OUDLER_EXCUSE_MSK);
+                }
+            }
+        });
+        mTwentyOne.setChecked((getLap().getOudlers() & TarotLap.OUDLER_21_MSK)
+                == TarotLap.OUDLER_21_MSK);
+        mTwentyOne.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int oudlers = getLap().getOudlers();
+                if (isChecked) {
+                    getLap().setOudlers(oudlers | TarotLap.OUDLER_21_MSK);
+                } else {
+                    getLap().setOudlers(oudlers & ~TarotLap.OUDLER_21_MSK);
+                }
+            }
+        });
+
+        mButtonBonus = (Button) findViewById(R.id.btn_add_bonus);
+        mButtonBonus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addBonus(null);
             }
         });
-
-        if (isEdited()) {
-            HOLDER.taker.setSelection(getLap().getTaker());
-            if (Game.TAROT_5_PLAYERS == mGame)
-                HOLDER.partner.setSelection(((TarotFiveLap) getLap()).getPartner());
-            HOLDER.deal.setSelection(getLap().getBid());
-            HOLDER.petit.setChecked((getLap().getOudlers() & TarotLap.OUDLER_PETIT_MSK)
-                    == TarotLap.OUDLER_PETIT_MSK);
-            HOLDER.fool.setChecked((getLap().getOudlers() & TarotLap.OUDLER_EXCUSE_MSK)
-                    == TarotLap.OUDLER_EXCUSE_MSK);
-            HOLDER.twenty_one.setChecked((getLap().getOudlers() & TarotLap.OUDLER_21_MSK)
-                    == TarotLap.OUDLER_21_MSK);
-            HOLDER.input_points.setPoints(getLap().getPoints());
-            for (TarotBonus bonus : getLap().getBonuses()) {
-                addBonus(bonus);
-            }
-        } else {
-            HOLDER.input_points.setPoints(41);
+        for (TarotBonus bonus : getLap().getBonuses()) {
+            addBonus(bonus);
         }
-    }
 
-    @Override
-    public void updateLap() {
-        TarotLap lap = getLap();
-        lap.setTaker(((PlayerItem) HOLDER.taker.getSelectedItem()).getPlayer());
-        lap.setBid(((DealItem) HOLDER.deal.getSelectedItem()).getDeal());
-        lap.setPoints(HOLDER.input_points.getPoints());
-        lap.setOudlers(getOudlers());
-        if (Game.TAROT_5_PLAYERS == getGameHelper().getPlayedGame())
-            ((TarotFiveLap) lap).setPartner(
-                    ((PlayerItem) HOLDER.partner.getSelectedItem()).getPlayer());
-        lap.setScores();
-    }
-
-    @Override
-    public int progressToPoints(int progress) {
-        return progress;
-    }
-
-    @Override
-    public int pointsToProgress(int points) {
-        return points;
-    }
-
-    private int getOudlers() {
-        return (HOLDER.petit.isChecked() ? TarotLap.OUDLER_PETIT_MSK : 0x00)
-                | (HOLDER.fool.isChecked() ? TarotLap.OUDLER_EXCUSE_MSK : 0x00)
-                | (HOLDER.twenty_one.isChecked() ? TarotLap.OUDLER_21_MSK : 0x00);
+        if (isDialog()) {
+            findViewById(R.id.btn_cancel).setOnClickListener(this);
+            findViewById(R.id.btn_confirm).setOnClickListener(this);
+        }
     }
 
     private void addBonus(TarotBonus tarotBonus) {
@@ -176,19 +215,19 @@ public class TarotLapActivity extends LapActivity {
         if (null == tarotBonus) {
             tarotBonus = new TarotBonus();
             getLap().getBonuses().add(tarotBonus);
-            HOLDER.btn_bonus.setEnabled(getLap().getBonuses().size() < 3);
+            mButtonBonus.setEnabled(getLap().getBonuses().size() < 3);
         }
         final TarotBonus bonus = tarotBonus;
 
         final View view = getLayoutInflater()
-                .inflate(R.layout.list_item_bonus, HOLDER.ll_bonuses, false);
+                .inflate(R.layout.list_item_bonus, mBonuses, false);
         ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_announce);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().getBonuses().remove(bonus);
-                HOLDER.btn_bonus.setEnabled(getLap().getBonuses().size() < 3);
-                HOLDER.ll_bonuses.removeView(view);
+                mButtonBonus.setEnabled(getLap().getBonuses().size() < 3);
+                mBonuses.removeView(view);
             }
         });
 
@@ -198,8 +237,7 @@ public class TarotLapActivity extends LapActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                BonusItem ai = (BonusItem) parent.getAdapter().getItem(position);
-                bonus.setBonus(ai.getBonus());
+                bonus.setBonus(position);
             }
 
             @Override
@@ -215,8 +253,7 @@ public class TarotLapActivity extends LapActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                PlayerItem pi = (PlayerItem) parent.getAdapter().getItem(position);
-                bonus.setPlayer(pi.getPlayer());
+                bonus.setPlayer(position);
             }
 
             @Override
@@ -225,8 +262,8 @@ public class TarotLapActivity extends LapActivity {
             }
         });
 
-        int pos = HOLDER.ll_bonuses.getChildCount() - 1;
-        HOLDER.ll_bonuses.addView(view, pos);
+        int pos = mBonuses.getChildCount() - 1;
+        mBonuses.addView(view, pos);
     }
 
     private ArrayAdapter<PlayerItem> getPlayerArrayAdapter() {
@@ -236,11 +273,11 @@ public class TarotLapActivity extends LapActivity {
         playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_1));
         playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_2));
         playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_3));
-        switch (mGame) {
-            case Game.TAROT_4_PLAYERS:
+        switch (getGameHelper().getPlayerCount()) {
+            case 4:
                 playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_4));
                 break;
-            case Game.TAROT_5_PLAYERS:
+            case 5:
                 playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_4));
                 playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_5));
                 break;
@@ -283,34 +320,24 @@ public class TarotLapActivity extends LapActivity {
         return false;
     }
 
-    static class LapHolder {
-        Spinner taker;
-        Spinner deal;
-        Spinner partner;
-        CheckBox petit;
-        CheckBox twenty_one;
-        CheckBox fool;
-        SeekbarInputPoints input_points;
-        LinearLayout ll_bonuses;
-        Button btn_bonus;
+    @Override
+    public int onPointsChanged(int progress, String tag) {
+        getLap().setPoints(progress);
+        return progress;
     }
 
-    class DealItem {
+    class BidItem {
 
-        final int mDeal;
+        final int mBid;
 
-        DealItem(int deal) {
-            mDeal = deal;
-        }
-
-        public int getDeal() {
-            return mDeal;
+        BidItem(int bid) {
+            mBid = bid;
         }
 
         @Override
         public String toString() {
             Resources r = getResources();
-            switch (mDeal) {
+            switch (mBid) {
                 case TarotLap.BID_PRISE:
                     return r.getString(R.string.take);
                 case TarotLap.BID_GARDE:
@@ -332,10 +359,6 @@ public class TarotLapActivity extends LapActivity {
             mPlayer = player;
         }
 
-        public int getPlayer() {
-            return mPlayer;
-        }
-
         @Override
         public String toString() {
             return getGameHelper().getPlayerName(mPlayer);
@@ -348,10 +371,6 @@ public class TarotLapActivity extends LapActivity {
 
         BonusItem(int bonus) {
             mBonus = bonus;
-        }
-
-        public int getBonus() {
-            return mBonus;
         }
 
         @Override

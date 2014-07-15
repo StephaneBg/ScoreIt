@@ -28,11 +28,11 @@ public class TarotFourLap extends TarotLap {
 
     public TarotFourLap(int taker, int deal, int points, int oudlers, List<TarotBonus> bonuses) {
         super(taker, deal, points, oudlers, bonuses);
-        setScores();
+        computeScores();
     }
 
     public TarotFourLap() {
-        this(Player.PLAYER_1, BID_PRISE, 41, 0, new ArrayList<TarotBonus>());
+        this(Player.PLAYER_1, BID_PRISE, 42, 0, new ArrayList<TarotBonus>());
     }
 
     @Override
@@ -41,8 +41,8 @@ public class TarotFourLap extends TarotLap {
     }
 
     @Override
-    public void setScores() {
-        super.setScores();
+    public void computeScores() {
+        super.computeScores();
         final int result = getResult();
         mScores[Player.PLAYER_1] = (Player.PLAYER_1 == mTaker) ? 3 * result : -result;
         mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mTaker) ? 3 * result : -result;

@@ -24,9 +24,9 @@
     <color name="primary_accent">#3f51b5</color>
     <color name="primary_hue_1">#283593</color>
     <color name="secondary_accent">#ff9800</color>
-    <color name="color_player1">#009688</color>
-    <color name="color_player2">#ff9800</color>
-    <color name="color_player3">#00bcd4</color>
-    <color name="color_player4">#e91e63</color>
-    <color name="color_player5">#d500f9</color>
+    <color name="color_player1">#FF60B62F</color>
+    <color name="color_player2">#FFFEAF39</color>
+    <color name="color_player3">#FF0099E6</color>
+    <color name="color_player4">#FFFF3E61</color>
+    <color name="color_player5">#FF816FA1</color>
 </resources>

@@ -25,37 +25,31 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.sbgapps.scoreit.LapActivity;
 import com.sbgapps.scoreit.R;
 
 /**
  * Created by sbaiget on 26/01/14.
  */
-public class SeekbarInputPoints extends FrameLayout {
+public class SeekbarPoints extends FrameLayout {
 
-    private final LapActivity mContext;
     private final TextView mTextViewPoints;
     private final SeekBar mSeekBarPoints;
     private final ImageButton mButtonPlus;
     private final ImageButton mButtonMinus;
+    private OnPointsChangedListener mListener;
     private int mProgress;
+    private String mTag;
 
-    public SeekbarInputPoints(Context context) {
+    public SeekbarPoints(Context context) {
         this(context, null);
     }
 
-    public SeekbarInputPoints(Context context, AttributeSet attrs) {
+    public SeekbarPoints(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SeekbarInputPoints(Context context, AttributeSet attrs, int defStyle) {
+    public SeekbarPoints(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
-        if (isInEditMode()) {
-            mContext = null;
-        } else {
-            mContext = (LapActivity) context;
-        }
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -65,16 +59,23 @@ public class SeekbarInputPoints extends FrameLayout {
         mSeekBarPoints = (SeekBar) findViewById(R.id.seekbar_points);
         mButtonMinus = (ImageButton) findViewById(R.id.btn_less);
         mButtonPlus = (ImageButton) findViewById(R.id.btn_more);
-        init();
     }
 
-    private void init() {
+    public void setOnPointsChangedListener(OnPointsChangedListener listener, String tag) {
+        mListener = listener;
+        mTag = tag;
+    }
+
+    public void init(int progress, int max, int points) {
+        mProgress = progress;
+        mTextViewPoints.setText(Integer.toString(points));
+
         mButtonMinus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mProgress > 0) {
                     mProgress--;
-                    displayPoints();
+                    managePoints();
                 }
             }
         });
@@ -84,17 +85,19 @@ public class SeekbarInputPoints extends FrameLayout {
             public void onClick(View v) {
                 if (mProgress < mSeekBarPoints.getMax()) {
                     mProgress++;
-                    displayPoints();
+                    managePoints();
                 }
             }
         });
 
+        mSeekBarPoints.setProgress(progress);
+        mSeekBarPoints.setMax(max);
         mSeekBarPoints.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
                     mProgress = progress;
-                    displayPoints();
+                    managePoints();
                 }
             }
 
@@ -110,24 +113,16 @@ public class SeekbarInputPoints extends FrameLayout {
         });
     }
 
-    public void setMax(int max) {
-        mSeekBarPoints.setMax(max);
-    }
-
-    public int getPoints() {
-        return mContext.progressToPoints(mProgress);
-    }
-
-    public void setPoints(int points) {
-        mProgress = mContext.pointsToProgress(points);
-        displayPoints();
-    }
-
-    public void displayPoints() {
-        int points = mContext.progressToPoints(mProgress);
+    public void managePoints() {
+        int points = mListener.onPointsChanged(mProgress, mTag);
         mTextViewPoints.setText(Integer.toString(points));
         mSeekBarPoints.setProgress(mProgress);
         mButtonMinus.setEnabled(mProgress > 0);
         mButtonPlus.setEnabled(mProgress < mSeekBarPoints.getMax());
+    }
+
+    public interface OnPointsChangedListener {
+
+        public int onPointsChanged(int progress, String tag);
     }
 }
