@@ -16,21 +16,20 @@
 
 package com.sbgapps.scoreit;
 
-import android.app.Fragment;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 
-import com.sbgapps.scoreit.games.Game;
-import com.sbgapps.scoreit.games.GameHelper;
-import com.sbgapps.scoreit.games.Lap;
-import com.sbgapps.scoreit.widget.PlayerInfo;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.linearlistview.LinearListView;
+import com.sbgapps.scoreit.adapter.HeaderAdapter;
 
 /**
  * Created by sbaiget on 24/12/13.
@@ -38,7 +37,8 @@ import java.util.List;
 public class HeaderFragment extends Fragment {
 
     public static final String TAG = HeaderFragment.class.getName();
-    private final List<PlayerInfo> mPlayers = new ArrayList<>(2);
+
+    private HeaderAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,44 +47,29 @@ public class HeaderFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Context context = getActivity();
-        LinearLayout root = new LinearLayout(context);
+        View view = inflater.inflate(R.layout.fragment_header, null);
 
-        for (int player = 0; player < getGame().getPlayerCount(); player++) {
-            PlayerInfo pi = new PlayerInfo(context);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT);
-            lp.weight = 1.0f;
-
-            pi.setPlayer(player);
-            pi.setLayoutParams(lp);
-            pi.setName(getGame().getPlayerName(player));
-            pi.setScore(getAccumulatedScore(player));
-            pi.setScoreColor(getGame().getPlayerColor(player));
-            pi.setNameEditable(getGame().getPlayedGame() != Game.BELOTE
-                    && getGame().getPlayedGame() != Game.COINCHE);
-            root.addView(pi);
-            mPlayers.add(pi);
+        WindowManager mWindowManager = (WindowManager)
+                getActivity().getSystemService(Context.WINDOW_SERVICE);
+        Display display = mWindowManager.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int orientation = getActivity().getResources().getConfiguration().orientation;
+        if (Configuration.ORIENTATION_PORTRAIT == orientation) {
+            orientation = size.x * 9 / 32;
+        } else {
+            orientation = size.x / 3;
         }
-        return root;
+        view.setLayoutParams(
+                new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, orientation));
+
+        LinearListView listView = (LinearListView) view.findViewById(R.id.list_header);
+        mAdapter = new HeaderAdapter(getActivity());
+        listView.setAdapter(mAdapter);
+        return view;
     }
 
-    public GameHelper getGame() {
-        return GameHelper.getInstance();
-    }
-
-    public void updateScores() {
-        for (int player = 0; player < getGame().getPlayerCount(); player++) {
-            mPlayers.get(player).setScore(getAccumulatedScore(player));
-        }
-    }
-
-    private int getAccumulatedScore(int player) {
-        int score = 0;
-        for (Lap lap : getGame().getLaps()) {
-            score += lap.getScore(player);
-        }
-        return score;
+    public void update() {
+        mAdapter.notifyDataSetChanged();
     }
 }

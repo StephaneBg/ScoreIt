@@ -28,5 +28,3 @@ gen/
 # Gradle
 build/
 .gradle
-
-art/

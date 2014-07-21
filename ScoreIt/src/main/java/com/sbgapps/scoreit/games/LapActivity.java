@@ -16,99 +16,32 @@
 
 package com.sbgapps.scoreit.games;
 
-import android.app.ActionBar;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.sbgapps.scoreit.BaseActivity;
-import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.ScoreItActivity;
+import android.support.v7.app.ActionBarActivity;
 
 /**
  * Created by sbaiget on 08/01/14.
  */
-public class LapActivity extends BaseActivity
-        implements View.OnClickListener {
+public class LapActivity extends ActionBarActivity {
 
-    private final GameHelper mGameData;
-    public int mPosition;
+    public int mPosition = -1;
     public Lap mLap;
+    private GameHelper mGameHelper;
 
     public LapActivity() {
-        mGameData = GameHelper.getInstance();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mGameHelper = new GameHelper(this);
     }
 
     public Lap getLap() {
         return mLap;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTranslucentStatusBar();
-        if (!isDialog()) setupActionBar();
-
-        if (null == savedInstanceState) {
-            Bundle b = getIntent().getExtras();
-            mPosition = b.getInt(ScoreItActivity.EXTRA_LAP, -1);
-        } else {
-            mLap = (Lap) savedInstanceState.getSerializable("lap");
-            mPosition = savedInstanceState.getInt("position");
-        }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("lap", mLap);
-        outState.putInt("position", mPosition);
-    }
-
-    private void setupActionBar() {
-        LayoutInflater inflater = (LayoutInflater) getActionBar().getThemedContext()
-                .getSystemService(LAYOUT_INFLATER_SERVICE);
-        View customActionBarView = inflater.inflate(R.layout.ab_cancel_done, null);
-        customActionBarView.findViewById(R.id.btn_cancel).setOnClickListener(this);
-        customActionBarView.findViewById(R.id.btn_confirm).setOnClickListener(this);
-
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayOptions(
-                ActionBar.DISPLAY_SHOW_CUSTOM,
-                ActionBar.DISPLAY_SHOW_CUSTOM
-                        | ActionBar.DISPLAY_SHOW_HOME
-                        | ActionBar.DISPLAY_SHOW_TITLE
-        );
-        actionBar.setCustomView(customActionBarView,
-                new ActionBar.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT)
-        );
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_confirm:
-                mLap.computeScores();
-                if (-1 == mPosition) {
-                    mGameData.addLap(mLap);
-                } else {
-                    // Edited lap
-                }
-                setResult(RESULT_OK);
-                finish();
-                break;
-
-            case R.id.btn_cancel:
-                finish();
-                break;
-        }
-    }
-
     public GameHelper getGameHelper() {
-        return mGameData;
+        return mGameHelper;
     }
 }

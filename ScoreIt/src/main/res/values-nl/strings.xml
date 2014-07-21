@@ -48,9 +48,9 @@
     <string name="delete">Verwijderen</string>
     <string name="edit">Bewerken</string>
     <string name="progress">Punten</string>
-    <string name="bidding">Deal</string>
+    <string name="deal">Deal</string>
     <string name="oudlers">Oudlers</string>
-    <string name="excuse">Dwaas</string>
+    <string name="fool">Dwaas</string>
     <string name="petit">Petit</string>
     <string name="twentyone">Blackjack</string>
     <string name="navigation_drawer_open">Open navigatiebalk</string>

@@ -20,11 +20,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="ScoreItActivity">
 
-    <include
-        layout="@layout/lap_include_universal"
+    <ListView
+        android:id="@+id/list_universal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

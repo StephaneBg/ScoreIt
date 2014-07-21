@@ -19,28 +19,29 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
     android:orientation="vertical"
     tools:context="ScoreItActivity">
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_ab"
-        android:fontFamily="fonts/Roboto-Medium.ttf"
-        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal|bottom"
         android:onClick="editName"
         android:singleLine="true"
-        android:textColor="@color/darker_gray"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/font_headline"/>
 
     <TextView
         android:id="@+id/score"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_ab"
-        android:fontFamily="fonts/Roboto-Medium.ttf"
-        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal|top"
         android:singleLine="true"
         android:textSize="@dimen/font_headline"/>
 

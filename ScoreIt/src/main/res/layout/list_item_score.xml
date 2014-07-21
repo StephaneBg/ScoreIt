@@ -17,10 +17,8 @@
 
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ScoreItActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/action_view"
@@ -32,7 +30,7 @@
 
         <ImageButton
             android:id="@+id/action_discard"
-            style="?android:borderlessButtonStyle"
+            style="?android:buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -41,7 +39,7 @@
 
         <ImageButton
             android:id="@+id/action_edit"
-            style="?android:borderlessButtonStyle"
+            style="?android:buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -53,8 +51,7 @@
         android:id="@+id/score_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@android:color/white"
         android:baselineAligned="false"
         android:orientation="horizontal"/>
-
 </FrameLayout>

@@ -16,63 +16,34 @@
 
 package com.sbgapps.scoreit.games.belote;
 
-import com.google.gson.annotations.SerializedName;
-import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.Player;
 
 /**
- * Created by sbaiget on 11/10/13.
+ * Created by sbaiget on 11/11/13.
  */
-public abstract class BeloteLap implements Lap {
-
-    public static final int[] PROGRESS2POINTS = {80, 90, 100, 110, 120, 130, 140, 150, 160, 250};
-
-    protected transient int[] mScores;
-    @SerializedName("taker")
-    protected int mTaker;
-    @SerializedName("points")
-    protected int mPoints;
-    @SerializedName("belote")
-    protected int mBelote;
+public class BeloteLap extends GenericBeloteLap {
 
     public BeloteLap(int taker, int points, int belote) {
-        mTaker = taker;
-        mPoints = points;
-        mBelote = belote;
+        super(taker, points, belote);
+        computeScores();
     }
 
-    public int getTaker() {
-        return mTaker;
-    }
-
-    public void setTaker(int taker) {
-        mTaker = taker;
-    }
-
-    public int getPoints() {
-        return mPoints;
-    }
-
-    public void setPoints(int points) {
-        mPoints = points;
-    }
-
-    public int getBelote() {
-        return mBelote;
-    }
-
-    public void setBelote(int belote) {
-        mBelote = belote;
-    }
-
-    @Override
-    public int getScore(int player) {
-        return mScores[player];
+    public BeloteLap() {
+        this(Player.PLAYER_1, 120, Player.PLAYER_NONE);
     }
 
     @Override
     public void computeScores() {
-        if (null == mScores) {
-            mScores = new int[2];
-        }
+        super.computeScores();
+        mScores[Player.PLAYER_1] = (Player.PLAYER_1 == mTaker) ? mPoints : getCounterPoints(mPoints);
+        mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mTaker) ? mPoints : getCounterPoints(mPoints);
+        mScores[Player.PLAYER_1] += (Player.PLAYER_1 == mBelote) ? 20 : 0;
+        mScores[Player.PLAYER_2] += (Player.PLAYER_2 == mBelote) ? 20 : 0;
+    }
+
+    private int getCounterPoints(int points) {
+        return (0 == points) ? 160 :
+                (250 == points) ? 0 :
+                        160 - points;
     }
 }

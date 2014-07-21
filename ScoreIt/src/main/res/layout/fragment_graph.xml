@@ -17,16 +17,14 @@
 
 <com.sbgapps.scoreit.widget.FractionFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ScoreItActivity">
+    android:layout_height="match_parent">
 
     <com.echo.holographlibrary.LineGraph
         android:id="@+id/line_graph"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/include_scores"
-        android:layout_margin="@dimen/margin_default"/>
+        android:layout_margin="@dimen/default_margin"/>
 
 </com.sbgapps.scoreit.widget.FractionFrameLayout>

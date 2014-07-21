@@ -56,27 +56,8 @@ public class TarotLapActivity extends LapActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (null == savedInstanceState) {
-            if (-1 == mPosition) { // New lap
-                switch (getGameHelper().getPlayerCount()) {
-                    default:
-                    case 3:
-                        mLap = new TarotThreeLap();
-                        break;
-                    case 4:
-                        mLap = new TarotFourLap();
-                        break;
-                    case 5:
-                        mLap = new TarotFiveLap();
-                        break;
-                }
-            } else { // Edited lap
-                mLap = getGameHelper().getLaps().get(mPosition);
-            }
-        }
         setContentView(R.layout.activity_lap_tarot);
 
         mTaker = (Spinner) findViewById(R.id.spinner_taker);
@@ -103,7 +84,7 @@ public class TarotLapActivity extends LapActivity
 
         if (getGameHelper().getPlayerCount() == 5) {
             ViewStub stub = (ViewStub) findViewById(R.id.viewstub_partner);
-            View view = stub.inflate();
+            View v = stub.inflate();
             final ArrayAdapter<PlayerItem> partnerItemArrayAdapter = new ArrayAdapter<>(this,
                     android.R.layout.simple_spinner_item);
             partnerItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -112,7 +93,7 @@ public class TarotLapActivity extends LapActivity
             partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_3));
             partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_4));
             partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_5));
-            mPartner = (Spinner) view.findViewById(R.id.spinner_partner);
+            mPartner = (Spinner) v.findViewById(R.id.spinner_partner);
             mPartner.setAdapter(partnerItemArrayAdapter);
             mPartner.setSelection(((TarotFiveLap) getLap()).getPartner());
             mPartner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -202,11 +183,6 @@ public class TarotLapActivity extends LapActivity
         for (TarotBonus bonus : getLap().getBonuses()) {
             addBonus(bonus);
         }
-
-        if (isDialog()) {
-            findViewById(R.id.btn_cancel).setOnClickListener(this);
-            findViewById(R.id.btn_confirm).setOnClickListener(this);
-        }
     }
 
     private void addBonus(TarotBonus tarotBonus) {
@@ -221,7 +197,7 @@ public class TarotLapActivity extends LapActivity
 
         final View view = getLayoutInflater()
                 .inflate(R.layout.list_item_bonus, mBonuses, false);
-        ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_announce);
+        ImageButton btn = (ImageButton) findViewById(R.id.btn_remove_announce);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,7 +207,7 @@ public class TarotLapActivity extends LapActivity
             }
         });
 
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinner_announce);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_announce);
         spinner.setAdapter(adapter);
         spinner.setSelection(bonus.getBonus());
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -246,7 +222,7 @@ public class TarotLapActivity extends LapActivity
             }
         });
 
-        spinner = (Spinner) view.findViewById(R.id.spinner_player);
+        spinner = (Spinner) findViewById(R.id.spinner_player);
         ArrayAdapter<PlayerItem> aa = getPlayerArrayAdapter();
         spinner.setAdapter(aa);
         spinner.setSelection(bonus.getPlayer());
@@ -361,7 +337,7 @@ public class TarotLapActivity extends LapActivity
 
         @Override
         public String toString() {
-            return getGameHelper().getPlayerName(mPlayer);
+            return getGameHelper().getPlayer(mPlayer).getName();
         }
     }
 

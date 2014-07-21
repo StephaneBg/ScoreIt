@@ -16,14 +16,15 @@
 
 package com.sbgapps.scoreit;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.ListFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -33,7 +34,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.sbgapps.scoreit.util.TypefaceSpan;
+import com.sbgapps.scoreit.utils.TypefaceSpan;
 import com.sbgapps.scoreit.view.SlidingTabLayout;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends ActionBarActivity {
 
     private InfoFragment mInfoFragment;
 
@@ -49,10 +50,9 @@ public class AboutActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTranslucentStatusBar();
         setContentView(R.layout.activity_about);
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -101,7 +101,7 @@ public class AboutActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://www.getlocalization.com/ScoreIt/"));
+                            Uri.parse("https://crowdin.net/project/score-it"));
                     startActivity(intent);
                 }
             });

@@ -18,8 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context="ScoreItActivity">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,25 +30,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
+            android:layout_margin="@dimen/default_margin"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:textSize="@dimen/font_headline"/>
+                android:textSize="@dimen/medium_font_size"/>
 
             <TextView
                 android:id="@+id/version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_default"/>
+                android:layout_marginLeft="@dimen/default_margin"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_default"
+                android:layout_marginLeft="@dimen/default_margin"
                 android:singleLine="true"
                 android:text="© SBG Apps - Stéphane Baiget"
                 tools:ignore="HardcodedText"/>
@@ -60,7 +59,7 @@
             style="?android:actionButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_rating_important"
+            android:drawableLeft="@drawable/ic_rating"
             android:gravity="center_vertical"
             android:text="@string/rate_app"/>
 
@@ -85,10 +84,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
+            android:layout_margin="@dimen/default_margin"
             android:gravity="bottom"
             android:text="@string/donate"
-            android:textSize="@dimen/font_headline"/>
+            android:textSize="@dimen/medium_font_size"/>
 
         <Button
             android:id="@+id/btn_donate_coffee"

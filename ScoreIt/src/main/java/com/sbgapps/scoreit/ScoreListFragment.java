@@ -16,8 +16,8 @@
 
 package com.sbgapps.scoreit;
 
-import android.app.ListFragment;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +48,7 @@ public class ScoreListFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_score, null);
 
         mListView = (SwipeListView) view.findViewById(android.R.id.list);
-        ScoreAdapter adapter = new ScoreAdapter((ScoreItActivity) getActivity(), mListView);
+        ScoreAdapter adapter = new ScoreAdapter(getActivity(), mListView);
         setListAdapter(adapter);
 
         return view;

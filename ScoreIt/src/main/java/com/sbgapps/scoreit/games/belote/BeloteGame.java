@@ -28,7 +28,7 @@ import java.util.ArrayList;
 /**
  * Created by sbaiget on 24/06/2014.
  */
-public class BeloteGame extends Game<BeloteClassicLap> {
+public class BeloteGame extends Game<BeloteLap> {
 
     public BeloteGame(Context context) {
         mLaps = new ArrayList<>();

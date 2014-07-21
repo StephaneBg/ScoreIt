@@ -17,10 +17,8 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ScoreItActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/number_view_container"
@@ -41,9 +39,9 @@
                 android:layout_gravity="left"
                 android:baselineAligned="false"
                 android:gravity="top"
-                android:paddingBottom="@dimen/padding_numberview"
-                android:paddingLeft="@dimen/padding_left_numberview"
-                android:paddingTop="@dimen/padding_numberview">
+                android:paddingBottom="@dimen/numberview_padding"
+                android:paddingLeft="@dimen/numberview_padding_left"
+                android:paddingTop="@dimen/numberview_padding">
 
                 <TextView
                     android:id="@+id/minus_label"
@@ -53,7 +51,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="@string/number_picker_minus_label"
-                    android:textSize="@dimen/font_headline"/>
+                    android:textSize="@dimen/medium_font_size"/>
 
                 <TextView
                     android:id="@+id/number"
@@ -61,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="none"
                     android:singleLine="true"
-                    android:textSize="@dimen/font_display_2"/>
+                    android:textSize="@dimen/big_font_size"/>
 
                 <TextView
                     android:id="@+id/decimal_separator"
@@ -70,7 +68,7 @@
                     android:ellipsize="none"
                     android:singleLine="true"
                     android:text="@string/number_picker_seperator"
-                    android:textSize="@dimen/font_display_2"/>
+                    android:textSize="@dimen/big_font_size"/>
 
                 <TextView
                     android:id="@+id/decimal"
@@ -78,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="none"
                     android:singleLine="true"
-                    android:textSize="@dimen/font_display_2"/>
+                    android:textSize="@dimen/big_font_size"/>
             </com.sbgapps.scoreit.widget.NumberView>
         </HorizontalScrollView>
 
@@ -142,5 +140,4 @@
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:visibility="invisible"/>
-
 </RelativeLayout>

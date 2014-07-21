@@ -17,61 +17,10 @@
 
 <resources>
 
-    <style name="AppBase" parent="android:Theme.Holo.Light">
-        <item name="android:windowBackground">@drawable/background_triangles</item>
-        <item name="android:icon">@android:color/transparent</item>
-        <item name="android:actionBarStyle">@style/ActionBar.Scoreit</item>
-        <item name="android:actionMenuTextColor">@color/white</item>
-        <item name="android:actionOverflowButtonStyle">@style/ButtonOverflow</item>
-        <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
-        <item name="android:listChoiceIndicatorMultiple">@drawable/apptheme_btn_check_holo_light
-        </item>
-        <item name="android:listChoiceIndicatorSingle">@drawable/apptheme_btn_radio_holo_light
-        </item>
-        <item name="android:dropDownSpinnerStyle">@style/SpinnerAppTheme</item>
-        <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
-        <item name="android:textColorHighlight">@color/primary_accent</item>
-        <item name="android:textSelectHandleLeft">@drawable/apptheme_text_select_handle_left</item>
-        <item name="android:textSelectHandleRight">@drawable/apptheme_text_select_handle_right
-        </item>
-        <item name="android:textSelectHandle">@drawable/apptheme_text_select_handle_middle</item>
-        <item name="android:textColor">@color/darker_black</item>
-    </style>
-
-    <style name="Theme.ScoreIt" parent="AppBase">
-    </style>
-
-    <style name="Theme.Adaptive" parent="AppBase">
-        <item name="android:homeAsUpIndicator">@drawable/ic_home_up</item>
-        <item name="isDialog">false</item>
-    </style>
-
-    <style name="ActionBar.Scoreit" parent="android:Widget.Holo.ActionBar">
-        <item name="android:titleTextStyle">@style/TitleTextStyle</item>
-        <item name="android:background">@color/primary_accent</item>
-    </style>
-
-    <style name="TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="ButtonOverflow" parent="android:style/Widget.Holo.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_action_overflow</item>
-    </style>
-
     <style name="SpinnerAppTheme" parent="android:Widget.Holo.Light.Spinner">
-        <item name="android:background">@drawable/apptheme_spinner_background_holo_light</item>
-        <item name="android:dropDownSelector">@drawable/apptheme_list_selector_holo_light</item>
     </style>
 
     <style name="SeekBarAppTheme" parent="android:Widget.Holo.Light.SeekBar">
-        <item name="android:progressDrawable">
-            @drawable/apptheme_scrubber_progress_horizontal_holo_light
-        </item>
-        <item name="android:indeterminateDrawable">
-            @drawable/apptheme_scrubber_progress_horizontal_holo_light
-        </item>
-        <item name="android:thumb">@drawable/apptheme_scrubber_control_selector_holo_light</item>
     </style>
 
     <style name="Divider">
@@ -90,7 +39,6 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/secondary_accent</item>
         <item name="android:textSize">@dimen/font_subhead</item>
-        <item name="android:fontFamily">fonts/Roboto-Medium.ttf</item>
     </style>
 
 </resources>

@@ -28,3 +28,8 @@ allprojects {
         mavenCentral()
     }
 }
+
+ext {
+    compileSdkVersion = 19
+    buildToolsVersion = "20.0.0"
+}

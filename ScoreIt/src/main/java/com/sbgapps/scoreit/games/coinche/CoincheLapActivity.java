@@ -22,7 +22,7 @@ import android.widget.RadioGroup;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.LapActivity;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.belote.BeloteLap;
+import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
 import com.sbgapps.scoreit.widget.SeekbarPoints;
 
 /**
@@ -43,16 +43,8 @@ public class CoincheLapActivity extends LapActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (null == savedInstanceState) {
-            if (-1 == mPosition) { // New lap
-                mLap = new CoincheLap();
-            } else { // Edited lap
-                mLap = getGameHelper().getLaps().get(mPosition);
-            }
-        }
         setContentView(R.layout.activity_lap_coinche);
 
         mRadioGroupPlayer = (RadioGroup) findViewById(R.id.radio_group_player);
@@ -150,15 +142,10 @@ public class CoincheLapActivity extends LapActivity
                 }
             }
         });
-
-        if (isDialog()) {
-            findViewById(R.id.btn_cancel).setOnClickListener(this);
-            findViewById(R.id.btn_confirm).setOnClickListener(this);
-        }
     }
 
     private int progressToPoints(int progress) {
-        return BeloteLap.PROGRESS2POINTS[progress];
+        return GenericBeloteLap.PROGRESS2POINTS[progress];
     }
 
     private int pointsToProgress(int points) {

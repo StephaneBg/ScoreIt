@@ -19,12 +19,10 @@
 <LinearLayout
     style="?android:buttonBarStyle"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
-    android:orientation="horizontal"
-    tools:context="ScoreItActivity">
+    android:orientation="horizontal">
 
     <FrameLayout
         android:id="@+id/btn_cancel"
@@ -43,7 +41,7 @@
             android:gravity="center_vertical"
             android:paddingRight="20dp"
             android:text="@string/cancel"
-            android:textColor="@color/white"/>
+            android:textColor="@android:color/white"/>
     </FrameLayout>
 
     <FrameLayout
@@ -63,6 +61,6 @@
             android:gravity="center_vertical"
             android:paddingRight="20dp"
             android:text="@string/done"
-            android:textColor="@color/white"/>
+            android:textColor="@android:color/white"/>
     </FrameLayout>
 </LinearLayout>

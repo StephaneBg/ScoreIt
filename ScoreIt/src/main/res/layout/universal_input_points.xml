@@ -18,24 +18,23 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/margin_default"
-    android:orientation="vertical"
-    tools:context="ScoreItActivity">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/player_name"
-        style="@style/SubHeader"/>
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_default"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/margin_activity"
-        android:layout_marginRight="@dimen/margin_activity"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/default_margin"
+        android:paddingRight="@dimen/default_margin">
 
         <ImageButton
             android:id="@+id/btn_less"
@@ -49,9 +48,9 @@
         <TextView
             android:id="@+id/edit_points"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/default_list_item_height"
             android:layout_weight="1"
-            android:background="@drawable/apptheme_textfield_default_holo_light"
+            android:background="@drawable/background_textfield"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
@@ -63,7 +62,6 @@
             android:layout_weight="1"
             android:contentDescription="@string/more"
             android:src="@drawable/ic_plus_enabled"/>
-
     </LinearLayout>
 
 </LinearLayout>

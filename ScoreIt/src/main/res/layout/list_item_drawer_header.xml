@@ -17,20 +17,17 @@
 
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ScoreItActivity">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/drawer_entry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/default_margin"
         android:clickable="false"
         android:fontFamily="fonts/Lobster.otf"
         android:gravity="bottom"
-        android:textColor="@color/secondary_accent"
+        android:textColor="@color/primary_accent"
         android:textSize="24sp"/>
-
 </FrameLayout>

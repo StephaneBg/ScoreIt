@@ -20,6 +20,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +33,9 @@ import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
-import com.sbgapps.scoreit.games.belote.BeloteLap;
+import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
 import com.sbgapps.scoreit.games.tarot.TarotLap;
-import com.sbgapps.scoreit.util.Constants;
+import com.sbgapps.scoreit.utils.Constants;
 import com.sbgapps.scoreit.view.SwipeListView;
 import com.sbgapps.scoreit.widget.PlayerScore;
 
@@ -47,9 +48,9 @@ import java.util.List;
 public class ScoreAdapter extends BaseAdapter {
 
     private final SwipeListView mSwipeListView;
-    private final ScoreItActivity mActivity;
+    private final Activity mActivity;
 
-    public ScoreAdapter(ScoreItActivity activity, SwipeListView listView) {
+    public ScoreAdapter(Activity activity, SwipeListView listView) {
         mSwipeListView = listView;
         mActivity = activity;
     }
@@ -57,7 +58,7 @@ public class ScoreAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final Lap lap = getItem(position);
-        final int cnt = getGameData().getPlayerCount();
+        final int cnt = getGameHelper().getPlayerCount();
         ViewHolder h;
 
         if (null == convertView) {
@@ -92,10 +93,10 @@ public class ScoreAdapter extends BaseAdapter {
 
         for (int i = 0; i < cnt; i++) {
             h.scores[i].getScore().setText(Integer.toString(lap.getScore(i)));
-            switch (getGameData().getPlayedGame()) {
+            switch (getGameHelper().getPlayedGame()) {
                 case Game.BELOTE:
                 case Game.COINCHE:
-                    if (((BeloteLap) lap).getBelote() == i) {
+                    if (((GenericBeloteLap) lap).getBelote() == i) {
                         h.scores[i].getImage().setImageResource(R.drawable.ic_star);
                     } else {
                         h.scores[i].getImage().setImageDrawable(null);
@@ -122,7 +123,7 @@ public class ScoreAdapter extends BaseAdapter {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         view.setAlpha(Constants.ALPHA_MAX);
-                        mActivity.removeLap(lap);
+                        ((ScoreItActivity) mActivity).removeLap(lap);
                     }
                 });
                 animator.setDuration(Constants.ANIM_DURATION).start();
@@ -131,7 +132,7 @@ public class ScoreAdapter extends BaseAdapter {
         h.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActivity.editLap(lap);
+                ((ScoreItActivity) mActivity).editLap(lap);
             }
         });
 
@@ -140,12 +141,12 @@ public class ScoreAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return getGameData().getLaps().size();
+        return getGameHelper().getLaps().size();
     }
 
     @Override
     public Lap getItem(int position) {
-        return getGameData().getLaps().get(position);
+        return getGameHelper().getLaps().get(position);
     }
 
     @Override
@@ -180,8 +181,8 @@ public class ScoreAdapter extends BaseAdapter {
         return animator;
     }
 
-    public GameHelper getGameData() {
-        return GameHelper.getInstance();
+    public GameHelper getGameHelper() {
+        return ((ScoreItActivity) mActivity).getGameHelper();
     }
 
     private static class ViewHolder {

@@ -17,12 +17,10 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:gravity="center"
-    tools:context="ScoreItActivity">
+    android:gravity="center">
 
     <Button
         android:id="@+id/key_left"
@@ -30,7 +28,8 @@
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:textSize="@dimen/font_display_2"/>
+        android:fontFamily="Roboto-Thin.ttf"
+        android:textSize="@dimen/big_font_size"/>
 
     <Button
         android:id="@+id/key_middle"
@@ -38,7 +37,8 @@
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:textSize="@dimen/font_display_2"/>
+        android:fontFamily="Roboto-Thin.ttf"
+        android:textSize="@dimen/big_font_size"/>
 
     <Button
         android:id="@+id/key_right"
@@ -46,6 +46,6 @@
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:textSize="@dimen/font_display_2"/>
-
+        android:fontFamily="Roboto-Thin.ttf"
+        android:textSize="@dimen/big_font_size"/>
 </LinearLayout>

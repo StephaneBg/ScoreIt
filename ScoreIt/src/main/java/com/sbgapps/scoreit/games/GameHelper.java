@@ -44,25 +44,16 @@ public class GameHelper {
     public static final String KEY_UNIVERSAL_PLAYER_CNT = "universal_player_count";
     public static final String KEY_TAROT_PLAYER_CNT = "tarot_player_count";
 
-    private static GameHelper sInstance = new GameHelper();
     private Game mGame;
     private Context mContext;
     private int mPlayedGame;
     private SharedPreferences mPreferences;
 
-    private GameHelper() {
-    }
-
-    public static GameHelper getInstance() {
-        return sInstance;
-    }
-
-    public GameHelper init(Activity activity) {
+    public GameHelper(Activity activity) {
         mContext = activity;
         mPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         mPlayedGame = mPreferences.getInt(KEY_SELECTED_GAME, Game.UNIVERSAL);
         loadLaps();
-        return this;
     }
 
     public SharedPreferences getPreferences() {
@@ -190,18 +181,9 @@ public class GameHelper {
         return mGame.getLaps();
     }
 
-    public String getPlayerName(int player) {
-        return ((Player) mGame.getPlayers().get(player)).getName();
+    public Player getPlayer(int player) {
+        return (Player) mGame.getPlayers().get(player);
     }
-
-    public void setPlayerName(int player, String name) {
-        ((Player) mGame.getPlayers().get(player)).setName(name);
-    }
-
-    public int getPlayerColor(int player) {
-        return ((Player) mGame.getPlayers().get(player)).getColor();
-    }
-
 
     private <T> T load(final String file, final Class<T> clazz) {
         try {

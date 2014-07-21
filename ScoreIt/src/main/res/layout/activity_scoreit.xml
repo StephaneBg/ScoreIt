@@ -16,57 +16,28 @@
 
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="ScoreItActivity">
+    android:fitsSystemWindows="true">
 
-    <org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer
-        android:id="@+id/navigation_drawer_container"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:drawer_gravity="start"
-        app:list_mainSectionsDrawables="@array/navigation_main_drawable"
-        app:list_mainSectionsEntries="@array/navigation_main_sections"
-        app:list_secondarySectionsDrawables="@array/navigation_secondary_drawable"
-        app:list_secondarySectionsEntries="@array/navigation_secondary_sections">
+        android:layout_height="match_parent">
 
-        <FrameLayout
+        <include
+            layout="@layout/include_activity_scoreit"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        <fragment
+            android:id="@+id/navigation_drawer"
+            android:name="com.sbgapps.scoreit.NavigationDrawerFragment"
+            android:layout_width="@dimen/navigation_drawer_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            tools:layout="@layout/fragment_navigation_drawer"/>
 
-                <FrameLayout
-                    android:id="@+id/fragment_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <FrameLayout
-                    android:id="@+id/fragment_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"/>
-
-            </LinearLayout>
-
-            <com.faizmalkani.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_gravity="bottom|right"
-                android:layout_marginBottom="@dimen/margin_activity"
-                android:layout_marginRight="@dimen/margin_activity"
-                android:onClick="addLap"
-                app:color="@color/secondary_accent"
-                app:drawable="@drawable/ic_action_new"/>
-
-        </FrameLayout>
-
-    </org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer>
+    </android.support.v4.widget.DrawerLayout>
 </FrameLayout>

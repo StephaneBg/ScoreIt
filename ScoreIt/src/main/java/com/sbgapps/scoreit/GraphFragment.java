@@ -17,9 +17,9 @@
 package com.sbgapps.scoreit;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +36,7 @@ public class GraphFragment extends Fragment {
     public static final String TAG = GraphFragment.class.getName();
     private final int[] mColors = new int[Player.PLAYER_COUNT_MAX];
     private final Line[] mLines = new Line[Player.PLAYER_COUNT_MAX];
+    private GameHelper mGameHelper;
     private LineGraph mGraph;
     private int[] mScores;
     private int mX;
@@ -44,6 +45,7 @@ public class GraphFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        mGameHelper = ((ScoreItActivity) activity).getGameHelper();
         Resources r = activity.getResources();
         mColors[Player.PLAYER_1] = r.getColor(R.color.color_player1);
         mColors[Player.PLAYER_2] = r.getColor(R.color.color_player2);
@@ -51,10 +53,6 @@ public class GraphFragment extends Fragment {
         mColors[Player.PLAYER_4] = r.getColor(R.color.color_player4);
         mColors[Player.PLAYER_5] = r.getColor(R.color.color_player5);
         mPointColor = r.getColor(R.color.darker_gray);
-    }
-
-    public GameHelper getGameData() {
-        return GameHelper.getInstance();
     }
 
     @Override
@@ -67,11 +65,11 @@ public class GraphFragment extends Fragment {
 
     public void traceGraph() {
         mGraph.removeAllLines();
-        final int lapCnt = getGameData().getLaps().size();
+        final int lapCnt = mGameHelper.getLaps().size();
         mGraph.setVisibility((0 == lapCnt) ? View.INVISIBLE : View.VISIBLE);
         if (0 == lapCnt) return;
 
-        final int playerCnt = getGameData().getPlayerCount();
+        final int playerCnt = mGameHelper.getPlayerCount();
         for (int i = 0; i < playerCnt; i++) {
             mLines[i] = new Line();
             mLines[i].setColor(mColors[i]);
@@ -86,14 +84,14 @@ public class GraphFragment extends Fragment {
 
         mScores = new int[Player.PLAYER_COUNT_MAX];
         for (int i = 0; i < lapCnt; i++) {
-            Lap lap = getGameData().getLaps().get(i);
+            Lap lap = mGameHelper.getLaps().get(i);
             addLap(lap);
         }
     }
 
     public void addLap(Lap lap) {
         mX++;
-        final int playerCnt = getGameData().getPlayerCount();
+        final int playerCnt = mGameHelper.getPlayerCount();
         for (int player = 0; player < playerCnt; player++) {
             mScores[player] += lap.getScore(player);
             LinePoint p = new LinePoint(mX, mScores[player]);

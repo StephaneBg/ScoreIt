@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -25,32 +26,32 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.universal.UniversalLapActivity;
+import com.sbgapps.scoreit.ScoreItActivity;
 
 /**
  * Created by sbaiget on 06/02/14.
  */
 public class PickerPoints extends FrameLayout {
 
-    private final UniversalLapActivity mContext;
+    private final Activity mActivity;
     private final TextView mTextViewPoints;
     private int mPoints;
     private int mPlayer;
 
-    public PickerPoints(Context context) {
-        this(context, null);
+    public PickerPoints(Activity activity) {
+        this(activity, null);
     }
 
-    public PickerPoints(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+    public PickerPoints(Activity activity, AttributeSet attrs) {
+        this(activity, attrs, 0);
     }
 
-    public PickerPoints(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+    public PickerPoints(Activity activity, AttributeSet attrs, int defStyle) {
+        super(activity, attrs, defStyle);
 
-        mContext = (UniversalLapActivity) context;
+        mActivity = activity;
 
-        LayoutInflater inflater = (LayoutInflater) context
+        LayoutInflater inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.universal_input_points, this, true);
 
@@ -82,7 +83,7 @@ public class PickerPoints extends FrameLayout {
             @Override
             public void onClick(View v) {
                 new NumberPickerBuilder()
-                        .setFragmentManager(mContext.getFragmentManager())
+                        .setFragmentManager(mActivity.getFragmentManager())
                         .setDecimalVisibility(View.INVISIBLE)
                         .setPlayer(mPlayer)
                         .show();
@@ -93,7 +94,7 @@ public class PickerPoints extends FrameLayout {
     public void setPlayer(int player) {
         mPlayer = player;
         TextView name = (TextView) findViewById(R.id.player_name);
-        name.setText(mContext.getGameHelper().getPlayerName(player));
+        name.setText(((ScoreItActivity) mActivity).getGameHelper().getPlayer(player).getName());
     }
 
     public int getPoints() {

@@ -18,12 +18,12 @@ package com.sbgapps.scoreit.games.coinche;
 
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.belote.BeloteLap;
+import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
 
 /**
  * Created by sbaiget on 11/11/13.
  */
-public class CoincheLap extends BeloteLap {
+public class CoincheLap extends GenericBeloteLap {
 
     public static final int COINCHE_NONE = 0;
     public static final int COINCHE_NORMAL = 1;
