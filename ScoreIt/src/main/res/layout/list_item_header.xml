@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="center_horizontal|bottom"
+        android:gravity="center"
         android:onClick="editName"
         android:singleLine="true"
         android:textColor="@android:color/white"
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="center_horizontal|top"
+        android:gravity="center"
         android:singleLine="true"
         android:textSize="@dimen/font_headline"/>
 

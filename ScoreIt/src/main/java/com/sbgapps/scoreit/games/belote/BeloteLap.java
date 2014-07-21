@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit.games.belote;
 
+import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.Player;
 
 /**
@@ -25,7 +26,6 @@ public class BeloteLap extends GenericBeloteLap {
 
     public BeloteLap(int taker, int points, int belote) {
         super(taker, points, belote);
-        computeScores();
     }
 
     public BeloteLap() {
@@ -39,6 +39,12 @@ public class BeloteLap extends GenericBeloteLap {
         mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mTaker) ? mPoints : getCounterPoints(mPoints);
         mScores[Player.PLAYER_1] += (Player.PLAYER_1 == mBelote) ? 20 : 0;
         mScores[Player.PLAYER_2] += (Player.PLAYER_2 == mBelote) ? 20 : 0;
+    }
+
+    @Override
+    public void set(Lap lap) {
+        super.set(lap);
+        computeScores();
     }
 
     private int getCounterPoints(int points) {

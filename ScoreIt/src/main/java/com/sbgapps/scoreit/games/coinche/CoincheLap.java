@@ -17,6 +17,7 @@
 package com.sbgapps.scoreit.games.coinche;
 
 import com.google.gson.annotations.SerializedName;
+import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
 
@@ -30,15 +31,14 @@ public class CoincheLap extends GenericBeloteLap {
     public static final int COINCHE_DOUBLE = 2;
 
     @SerializedName("bid")
-    private int mDeal;
+    private int mBid;
     @SerializedName("coinche")
     private int mCoinche;
 
-    public CoincheLap(int taker, int points, int belote, int deal, int coinche) {
+    public CoincheLap(int taker, int points, int belote, int bid, int coinche) {
         super(taker, points, belote);
-        mDeal = deal;
+        mBid = bid;
         mCoinche = coinche;
-        computeScores();
     }
 
     public CoincheLap() {
@@ -46,11 +46,11 @@ public class CoincheLap extends GenericBeloteLap {
     }
 
     public int getBid() {
-        return mDeal;
+        return mBid;
     }
 
-    public void setBid(int deal) {
-        mDeal = deal;
+    public void setBid(int bid) {
+        mBid = bid;
     }
 
     public int getCoinche() {
@@ -59,6 +59,14 @@ public class CoincheLap extends GenericBeloteLap {
 
     public void setCoinche(int coinche) {
         mCoinche = coinche;
+    }
+
+    @Override
+    public void set(Lap lap) {
+        super.set(lap);
+        mBid = ((CoincheLap) lap).getBid();
+        mCoinche = ((CoincheLap) lap).getCoinche();
+        computeScores();
     }
 
     @Override
@@ -77,15 +85,15 @@ public class CoincheLap extends GenericBeloteLap {
             }
         }
 
-        if ((mPoints >= mDeal) && (takerPts > counterPts)) {
+        if ((mPoints >= mBid) && (takerPts > counterPts)) {
             // Deal succeeded
-            takerPts += mDeal;
+            takerPts += mBid;
             takerPts = (COINCHE_NORMAL == mCoinche) ? takerPts * 2 :
                     (COINCHE_DOUBLE == mCoinche) ? takerPts * 4 : takerPts;
         } else {
             // Deal failed
             takerPts = 0;
-            counterPts = (250 == mDeal) ? 500 : 160 + mDeal;
+            counterPts = (250 == mBid) ? 500 : 160 + mBid;
             counterPts = (COINCHE_NORMAL == mCoinche) ? counterPts * 2 :
                     (COINCHE_DOUBLE == mCoinche) ? counterPts * 4 : counterPts;
         }

@@ -50,6 +50,7 @@ public class HeaderFragment extends Fragment {
     }
 
     public void update() {
-        mAdapter.notifyDataSetChanged();
+        if (null != mAdapter)
+            mAdapter.notifyDataSetChanged();
     }
 }

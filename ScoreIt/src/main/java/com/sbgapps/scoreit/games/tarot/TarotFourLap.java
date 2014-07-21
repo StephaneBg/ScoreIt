@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit.games.tarot;
 
+import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.Player;
 
 import java.util.ArrayList;
@@ -28,11 +29,16 @@ public class TarotFourLap extends TarotLap {
 
     public TarotFourLap(int taker, int deal, int points, int oudlers, List<TarotBonus> bonuses) {
         super(taker, deal, points, oudlers, bonuses);
-        computeScores();
     }
 
     public TarotFourLap() {
         this(Player.PLAYER_1, BID_PRISE, 42, 0, new ArrayList<TarotBonus>());
+    }
+
+    @Override
+    public void set(Lap lap) {
+        super.set(lap);
+        computeScores();
     }
 
     @Override

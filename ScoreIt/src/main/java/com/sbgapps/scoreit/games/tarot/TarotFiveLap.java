@@ -17,6 +17,7 @@
 package com.sbgapps.scoreit.games.tarot;
 
 import com.google.gson.annotations.SerializedName;
+import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.Player;
 
 import java.util.ArrayList;
@@ -34,7 +35,6 @@ public class TarotFiveLap extends TarotLap {
                         int partner) {
         super(taker, deal, points, oudlers, bonuses);
         mPartner = partner;
-        computeScores();
     }
 
     public TarotFiveLap() {
@@ -47,6 +47,13 @@ public class TarotFiveLap extends TarotLap {
 
     public void setPartner(int partner) {
         mPartner = partner;
+    }
+
+    @Override
+    public void set(Lap lap) {
+        super.set(lap);
+        mPartner = ((TarotFiveLap) lap).getPartner();
+        computeScores();
     }
 
     @Override

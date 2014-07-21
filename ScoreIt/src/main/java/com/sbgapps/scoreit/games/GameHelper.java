@@ -53,7 +53,6 @@ public class GameHelper {
         mContext = activity;
         mPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         mPlayedGame = mPreferences.getInt(KEY_SELECTED_GAME, Game.UNIVERSAL);
-        loadLaps();
     }
 
     public SharedPreferences getPreferences() {
@@ -118,7 +117,7 @@ public class GameHelper {
         }
     }
 
-    private void loadLaps() {
+    public void loadLaps() {
         String file = FileSaveUtil.getLastSavedFile(this);
         switch (mPlayedGame) {
             default:
@@ -163,6 +162,7 @@ public class GameHelper {
                 }
                 break;
         }
+        mGame.initScores();
     }
 
     public void addLap(Lap lap) {

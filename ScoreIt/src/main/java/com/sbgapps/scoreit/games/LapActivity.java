@@ -22,9 +22,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.sbgapps.scoreit.R;
@@ -33,8 +31,7 @@ import com.sbgapps.scoreit.ScoreItActivity;
 /**
  * Created by sbaiget on 08/01/14.
  */
-public class LapActivity extends ActionBarActivity
-        implements View.OnClickListener {
+public class LapActivity extends ActionBarActivity {
 
     public int mPosition = -1;
     public Lap mLap;
@@ -57,9 +54,9 @@ public class LapActivity extends ActionBarActivity
             mPosition = intent.getIntExtra(ScoreItActivity.EXTRA_POSITION, -1);
         }
         mGameHelper = new GameHelper(this);
+        mGameHelper.loadLaps();
 
         setupFauxDialog();
-        if (!isDialog()) setupActionBar();
     }
 
     public Lap getLap() {
@@ -70,41 +67,11 @@ public class LapActivity extends ActionBarActivity
         return mGameHelper;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_confirm:
-                Intent intent = new Intent();
-                intent.putExtra(ScoreItActivity.EXTRA_LAP, mLap);
-                setResult(RESULT_OK, intent);
-                finish();
-                break;
-
-            case R.id.btn_cancel:
-                finish();
-                break;
-        }
-    }
-
-    private void setupActionBar() {
-        LayoutInflater inflater = (LayoutInflater) getSupportActionBar().getThemedContext()
-                .getSystemService(LAYOUT_INFLATER_SERVICE);
-        View customActionBarView = inflater.inflate(R.layout.ab_cancel_done, null);
-        customActionBarView.findViewById(R.id.btn_cancel).setOnClickListener(this);
-        customActionBarView.findViewById(R.id.btn_confirm).setOnClickListener(this);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayOptions(
-                ActionBar.DISPLAY_SHOW_CUSTOM,
-                ActionBar.DISPLAY_SHOW_CUSTOM
-                        | ActionBar.DISPLAY_SHOW_HOME
-                        | ActionBar.DISPLAY_SHOW_TITLE
-        );
-        actionBar.setCustomView(customActionBarView,
-                new ActionBar.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT)
-        );
+    public void onFloatingActionButtonClicked(View view) {
+        Intent intent = new Intent();
+        intent.putExtra(ScoreItActivity.EXTRA_LAP, mLap);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     private void setupFauxDialog() {
@@ -121,6 +88,10 @@ public class LapActivity extends ActionBarActivity
             params.alpha = 1.0f;
             params.dimAmount = 0.5f;
             getWindow().setAttributes(params);
+        } else {
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
         }
     }
 }

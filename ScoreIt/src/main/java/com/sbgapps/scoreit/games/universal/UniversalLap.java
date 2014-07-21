@@ -18,6 +18,7 @@ package com.sbgapps.scoreit.games.universal;
 
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.Player;
 
 /**
  * Created by sbaiget on 06/02/14.
@@ -25,9 +26,16 @@ import com.sbgapps.scoreit.games.Lap;
 public class UniversalLap implements Lap {
 
     @SerializedName("scores")
-    private final int[] mScores = new int[5];
+    private final int[] mScores = new int[Player.PLAYER_COUNT_MAX];
 
     public UniversalLap() {
+    }
+
+    @Override
+    public void set(Lap lap) {
+        for (int i = 0; i < Player.PLAYER_COUNT_MAX; i++) {
+            mScores[i] = lap.getScore(i);
+        }
     }
 
     @Override

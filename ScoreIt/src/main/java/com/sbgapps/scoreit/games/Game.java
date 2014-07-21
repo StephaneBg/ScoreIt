@@ -42,4 +42,10 @@ public abstract class Game<T extends Lap> {
     public List<Player> getPlayers() {
         return mPlayers;
     }
+
+    public void initScores() {
+        for (Lap lap : mLaps) {
+            lap.computeScores();
+        }
+    }
 }

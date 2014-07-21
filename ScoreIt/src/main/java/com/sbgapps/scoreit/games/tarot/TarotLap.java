@@ -43,7 +43,7 @@ public abstract class TarotLap implements Lap {
     protected int mPoints;
     @SerializedName("oudlers")
     protected int mOudlers;
-    @SerializedName("announces")
+    @SerializedName("bonuses")
     protected List<TarotBonus> mBonuses;
 
     protected TarotLap(int taker, int bid, int points, int oudlers, List<TarotBonus> bonuses) {
@@ -88,6 +88,15 @@ public abstract class TarotLap implements Lap {
 
     public List<TarotBonus> getBonuses() {
         return mBonuses;
+    }
+
+    @Override
+    public void set(Lap lap) {
+        mTaker = ((TarotLap) lap).getTaker();
+        mBid = ((TarotLap) lap).getBid();
+        mPoints = ((TarotLap) lap).getPoints();
+        mOudlers = ((TarotLap) lap).getOudlers();
+        mBonuses = ((TarotLap) lap).getBonuses();
     }
 
     @Override

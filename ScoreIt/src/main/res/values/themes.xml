@@ -22,7 +22,7 @@
 
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
-        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowBackground">@drawable/background_triangles</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:actionMenuTextColor">@android:color/white</item>
         <item name="android:dropDownSpinnerStyle">@style/SpinnerAppTheme</item>
@@ -36,7 +36,7 @@
     </style>
 
     <style name="ActionBar.Solid.Apptheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/primary_accent</item>
+        <item name="android:background">@drawable/background_actionbar</item>
     </style>
 
 </resources>

@@ -17,6 +17,7 @@
 
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,12 +25,24 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
         <include
             layout="@layout/lap_include_tarot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </ScrollView>
+
+    <com.faizmalkani.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginRight="@dimen/margin_default"
+        android:onClick="onFloatingActionButtonClicked"
+        app:color="@color/secondary_accent"
+        app:drawable="@drawable/ic_action_accept_dark"/>
 
 </FrameLayout>

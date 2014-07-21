@@ -33,10 +33,6 @@ public class ScoreListFragment extends ListFragment {
     public static final String TAG = ScoreListFragment.class.getName();
     private SwipeListView mListView;
 
-    public SwipeListView getListView() {
-        return mListView;
-    }
-
     @Override
     public ScoreAdapter getListAdapter() {
         return (ScoreAdapter) super.getListAdapter();
@@ -52,5 +48,13 @@ public class ScoreListFragment extends ListFragment {
         setListAdapter(adapter);
 
         return view;
+    }
+
+    public void update() {
+        getListAdapter().notifyDataSetChanged();
+    }
+
+    public void closeOpenedItems() {
+        mListView.closeOpenedItems();
     }
 }

@@ -83,7 +83,7 @@ public class CoincheLapActivity extends LapActivity
         });
 
         mBids.init(
-                pointsToProgress(getLap().getPoints()),
+                pointsToProgress(getLap().getBid()),
                 pointsToProgress(250),
                 getLap().getPoints());
         mBids.setOnPointsChangedListener(this, "bid");

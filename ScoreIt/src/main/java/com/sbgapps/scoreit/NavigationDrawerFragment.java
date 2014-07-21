@@ -151,7 +151,10 @@ public class NavigationDrawerFragment extends Fragment {
         });
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        selectItem(position);
+        mCurrentSelectedPosition = position;
+        if (mDrawerListView != null) {
+            mDrawerListView.setItemChecked(position, true);
+        }
     }
 
     private void selectItem(int position) {

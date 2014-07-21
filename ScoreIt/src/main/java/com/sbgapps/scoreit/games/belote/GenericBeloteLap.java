@@ -70,6 +70,13 @@ public abstract class GenericBeloteLap implements Lap {
     }
 
     @Override
+    public void set(Lap lap) {
+        mTaker = ((GenericBeloteLap) lap).getTaker();
+        mPoints = ((GenericBeloteLap) lap).getPoints();
+        mBelote = ((GenericBeloteLap) lap).getBelote();
+    }
+
+    @Override
     public void computeScores() {
         if (null == mScores) {
             mScores = new int[2];

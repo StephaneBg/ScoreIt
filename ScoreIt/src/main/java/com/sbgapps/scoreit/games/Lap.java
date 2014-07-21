@@ -26,4 +26,6 @@ public interface Lap extends Serializable {
     public int getScore(int player);
 
     public void computeScores();
+
+    public void set(Lap lap);
 }
