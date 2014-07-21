@@ -21,4 +21,9 @@
         <item name="android:actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
     </style>
 
+    <style name="Theme.Adaptive" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
+        <item name="isDialog">false</item>
+    </style>
+
 </resources>

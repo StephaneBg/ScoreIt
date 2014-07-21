@@ -16,17 +16,11 @@
 
 package com.sbgapps.scoreit;
 
-import android.content.Context;
-import android.content.res.Configuration;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 
 import com.linearlistview.LinearListView;
 import com.sbgapps.scoreit.adapter.HeaderAdapter;
@@ -48,20 +42,6 @@ public class HeaderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_header, null);
-
-        WindowManager mWindowManager = (WindowManager)
-                getActivity().getSystemService(Context.WINDOW_SERVICE);
-        Display display = mWindowManager.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int orientation = getActivity().getResources().getConfiguration().orientation;
-        if (Configuration.ORIENTATION_PORTRAIT == orientation) {
-            orientation = size.x * 9 / 32;
-        } else {
-            orientation = size.x / 3;
-        }
-        view.setLayoutParams(
-                new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, orientation));
 
         LinearListView listView = (LinearListView) view.findViewById(R.id.list_header);
         mAdapter = new HeaderAdapter(getActivity());

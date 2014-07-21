@@ -35,7 +35,6 @@
         <item name="isDialog">false</item>
     </style>
 
-
     <style name="ActionBar.Solid.Apptheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/primary_accent</item>
     </style>

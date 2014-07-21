@@ -41,6 +41,13 @@ public class UniversalLapActivity extends LapActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (-1 != mPosition) {
+            mLap = getGameHelper().getLaps().get(mPosition);
+        } else {
+            mLap = new UniversalLap();
+        }
+
         setContentView(R.layout.activity_lap_universal);
     }
 

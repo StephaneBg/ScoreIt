@@ -35,13 +35,20 @@ public class BeloteLapActivity extends LapActivity
     private SeekbarPoints mPoints;
 
     @Override
-    public GenericBeloteLap getLap() {
-        return (GenericBeloteLap) mLap;
+    public BeloteLap getLap() {
+        return (BeloteLap) mLap;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (-1 != mPosition) {
+            mLap = getGameHelper().getLaps().get(mPosition);
+        } else {
+            mLap = new BeloteLap();
+        }
+
         setContentView(R.layout.activity_lap_belote);
 
         mRadioGroupPlayer = (RadioGroup) findViewById(R.id.radio_group_player);

@@ -58,6 +58,23 @@ public class TarotLapActivity extends LapActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (-1 != mPosition) {
+            mLap = getGameHelper().getLaps().get(mPosition);
+        } else {
+            switch (getGameHelper().getPlayerCount()) {
+                case 3:
+                    mLap = new TarotThreeLap();
+                    break;
+                case 4:
+                    mLap = new TarotFourLap();
+                    break;
+                case 5:
+                    mLap = new TarotFiveLap();
+                    break;
+            }
+        }
+
         setContentView(R.layout.activity_lap_tarot);
 
         mTaker = (Spinner) findViewById(R.id.spinner_taker);
@@ -197,7 +214,7 @@ public class TarotLapActivity extends LapActivity
 
         final View view = getLayoutInflater()
                 .inflate(R.layout.list_item_bonus, mBonuses, false);
-        ImageButton btn = (ImageButton) findViewById(R.id.btn_remove_announce);
+        ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_announce);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,7 +224,7 @@ public class TarotLapActivity extends LapActivity
             }
         });
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_announce);
+        Spinner spinner = (Spinner) view.findViewById(R.id.spinner_announce);
         spinner.setAdapter(adapter);
         spinner.setSelection(bonus.getBonus());
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -222,7 +239,7 @@ public class TarotLapActivity extends LapActivity
             }
         });
 
-        spinner = (Spinner) findViewById(R.id.spinner_player);
+        spinner = (Spinner) view.findViewById(R.id.spinner_player);
         ArrayAdapter<PlayerItem> aa = getPlayerArrayAdapter();
         spinner.setAdapter(aa);
         spinner.setSelection(bonus.getPlayer());

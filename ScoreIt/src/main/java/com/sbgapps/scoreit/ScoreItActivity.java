@@ -34,16 +34,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.faizmalkani.floatingactionbutton.FloatingActionButton;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
-import com.sbgapps.scoreit.games.belote.BeloteLap;
 import com.sbgapps.scoreit.games.belote.BeloteLapActivity;
-import com.sbgapps.scoreit.games.coinche.CoincheLap;
 import com.sbgapps.scoreit.games.coinche.CoincheLapActivity;
-import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.games.tarot.TarotLapActivity;
-import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.games.universal.UniversalLapActivity;
 import com.sbgapps.scoreit.utils.TypefaceSpan;
 import com.sbgapps.scoreit.utils.Utils;
@@ -54,11 +51,9 @@ public class ScoreItActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerListener {
 
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
-    public static final String EXTRA_EDIT = "com.sbgapps.scoreit.edit";
-    public static final String EXTRA_NAME = "com.sbgapps.scoreit.name";
+    public static final String EXTRA_POSITION = "com.sbgapps.scoreit.position";
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_LAP_ACTIVITY = 2;
-    private static final int REQ_EDIT_NAME_ACTIVITY = 3;
 
     private TypefaceSpan mTypefaceSpan;
     private GameHelper mGameHelper;
@@ -69,6 +64,7 @@ public class ScoreItActivity extends ActionBarActivity
     private ScoreListFragment mScoreListFragment;
     private GraphFragment mGraphFragment;
     private HeaderFragment mHeaderFragment;
+    private int mEditedLap = -1;
 
     public GameHelper getGameHelper() {
         return mGameHelper;
@@ -98,6 +94,15 @@ public class ScoreItActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 (DrawerLayout) findViewById(R.id.drawer_layout),
                 mGameHelper.getPlayedGame());
+
+        // Floating ACtion Button
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLapActivity();
+            }
+        });
 
         mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
         setTitle();
@@ -207,39 +212,25 @@ public class ScoreItActivity extends ActionBarActivity
                 break;
 
             case REQ_LAP_ACTIVITY:
+                if (-1 == mEditedLap) {
+                    Lap lap = (Lap) data.getSerializableExtra(EXTRA_LAP);
+                    lap.computeScores();
+                    mGameHelper.addLap(lap);
+                } else {
+                    Lap lap = mGameHelper.getLaps().get(mEditedLap);
+                    // TODO
+                    lap.computeScores();
+                    mEditedLap = -1;
+                }
                 update();
                 invalidateOptionsMenu();
                 break;
-
-            case REQ_EDIT_NAME_ACTIVITY:
-                name = data.getStringExtra(EXTRA_NAME);
-                nameEdited(name);
-                break;
         }
-    }
-
-    public void addLap() {
-        Lap lap;
-        switch (mGameHelper.getPlayedGame()) {
-            default:
-            case Game.UNIVERSAL:
-                lap = new UniversalLap();
-                break;
-            case Game.BELOTE:
-                lap = new BeloteLap();
-                break;
-            case Game.COINCHE:
-                lap = new CoincheLap();
-                break;
-            case Game.TAROT:
-                lap = new TarotFiveLap();
-                break;
-        }
-        showLapActivity(lap, false);
     }
 
     public void editLap(Lap lap) {
-        showLapActivity(lap, true);
+        mEditedLap = mGameHelper.getLaps().indexOf(lap);
+        showLapActivity();
     }
 
     public void removeLap(Lap lap) {
@@ -250,10 +241,6 @@ public class ScoreItActivity extends ActionBarActivity
     public void editName(View view) {
         mEditedName = (PlayerInfo) view.getParent().getParent();
         showEditNameActionChoices();
-    }
-
-    public void start(View view) {
-        addLap();
     }
 
     private void reload() {
@@ -285,7 +272,7 @@ public class ScoreItActivity extends ActionBarActivity
             mGraphFragment.traceGraph();
     }
 
-    private void showLapActivity(Lap lap, boolean edit) {
+    private void showLapActivity() {
         Intent intent;
         switch (mGameHelper.getPlayedGame()) {
             default:
@@ -302,9 +289,7 @@ public class ScoreItActivity extends ActionBarActivity
                 intent = new Intent(this, TarotLapActivity.class);
                 break;
         }
-        intent.putExtra(EXTRA_LAP, lap);
-        intent.putExtra(EXTRA_EDIT, edit);
-
+        intent.putExtra(EXTRA_POSITION, mEditedLap);
         startActivityForResult(intent, REQ_LAP_ACTIVITY);
     }
 
@@ -469,5 +454,9 @@ public class ScoreItActivity extends ActionBarActivity
                 .create();
         dialog.show();
         Utils.colorizeDialog(dialog);
+    }
+
+    private void onFloatingActionButtonClicked() {
+
     }
 }

@@ -45,6 +45,13 @@ public class CoincheLapActivity extends LapActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (-1 != mPosition) {
+            mLap = getGameHelper().getLaps().get(mPosition);
+        } else {
+            mLap = new CoincheLap();
+        }
+
         setContentView(R.layout.activity_lap_coinche);
 
         mRadioGroupPlayer = (RadioGroup) findViewById(R.id.radio_group_player);
