@@ -44,10 +44,13 @@ public class ScoreListFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_score, null);
 
         mListView = (SwipeListView) view.findViewById(android.R.id.list);
+        setAdapter();
+        return view;
+    }
+
+    public void setAdapter() {
         ScoreAdapter adapter = new ScoreAdapter(getActivity(), mListView);
         setListAdapter(adapter);
-
-        return view;
     }
 
     public void update() {

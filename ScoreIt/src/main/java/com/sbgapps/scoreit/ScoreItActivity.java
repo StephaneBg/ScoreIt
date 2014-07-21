@@ -23,8 +23,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -45,8 +45,10 @@ import com.sbgapps.scoreit.utils.TypefaceSpan;
 import com.sbgapps.scoreit.utils.Utils;
 import com.sbgapps.scoreit.widget.PlayerInfo;
 
+import org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer;
+
 public class ScoreItActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerListener {
+        implements GoogleNavigationDrawer.OnNavigationSectionSelected {
 
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
     public static final String EXTRA_POSITION = "com.sbgapps.scoreit.position";
@@ -58,7 +60,8 @@ public class ScoreItActivity extends ActionBarActivity
     private SpannableString mTitle;
     private boolean mIsTablet;
     private PlayerInfo mEditedName;
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private GoogleNavigationDrawer mDrawer;
     private ScoreListFragment mScoreListFragment;
     private GraphFragment mGraphFragment;
     private HeaderFragment mHeaderFragment;
@@ -97,11 +100,17 @@ public class ScoreItActivity extends ActionBarActivity
         }
 
         // Init drawer
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                fragmentManager.findFragmentById(R.id.navigation_drawer);
-        mNavigationDrawerFragment.setUp(
-                (DrawerLayout) findViewById(R.id.drawer_layout),
-                mGameHelper.getPlayedGame());
+        mDrawer = (GoogleNavigationDrawer) findViewById(R.id.navigation_drawer_container);
+        mDrawer.check(mGameHelper.getPlayedGame());
+        mDrawerToggle = new ActionBarDrawerToggle(this,
+                mDrawer,
+                R.drawable.ic_navigation_drawer,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+        mDrawer.setDrawerListener(mDrawerToggle);
+        mDrawer.setOnNavigationSectionSelected(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         // Floating Action Button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -116,8 +125,10 @@ public class ScoreItActivity extends ActionBarActivity
         setTitle();
     }
 
-    public TypefaceSpan getTypefaceSpan() {
-        return mTypefaceSpan;
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
     }
 
     @Override
@@ -125,12 +136,6 @@ public class ScoreItActivity extends ActionBarActivity
         super.onPause();
         mGameHelper.saveGame();
     }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        mGameHelper.loadLaps();
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -140,10 +145,11 @@ public class ScoreItActivity extends ActionBarActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (mNavigationDrawerFragment.isDrawerOpen()) {
-            menu.clear();
-            return false;
-        } else {
+//        if (mDrawer.isDrawerOpen()) {
+//            menu.clear();
+//            return false;
+//        } else
+        {
             MenuItem item;
             if (0 == mGameHelper.getLaps().size()) {
                 if (!mIsTablet) {
@@ -180,8 +186,8 @@ public class ScoreItActivity extends ActionBarActivity
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        switch (position) {
+    public void onSectionSelected(View v, int i, long l) {
+        switch (i) {
             case 0:
                 mGameHelper.setPlayedGame(Game.UNIVERSAL);
                 break;
@@ -202,6 +208,7 @@ public class ScoreItActivity extends ActionBarActivity
         getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         supportInvalidateOptionsMenu();
         setTitle();
+        mScoreListFragment.setAdapter();
         update();
     }
 

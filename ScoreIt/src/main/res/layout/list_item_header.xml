@@ -43,6 +43,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:singleLine="true"
-        android:textSize="@dimen/font_headline"/>
+        android:textSize="@dimen/font_headline"
+        android:textStyle="bold"/>
 
 </LinearLayout>

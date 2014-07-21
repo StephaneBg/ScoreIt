@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-include ':ScoreIt', ':HoloGraphLibrary', ':FloatingActionButton'
+
+
+include ':ScoreIt', ':HoloGraphLibrary', ':FloatingActionButton', ':GoogleNavigationDrawerMenuLibrary'
 
 project(':HoloGraphLibrary').projectDir = new File(rootDir, '../HoloGraphLibrary/HoloGraphLibrary')
 project(':FloatingActionButton').projectDir = new File(rootDir, '../FloatingActionButton/FloatingActionButton')
+project(':GoogleNavigationDrawerMenuLibrary').projectDir = new File(rootDir, '../GoogleNavigationDrawerMenu/GoogleNavigationDrawerMenuLibrary')
