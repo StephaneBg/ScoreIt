@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
   ~ Copyright (c) 2014 SBG Apps
   ~
@@ -15,15 +16,10 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout
+<alpha
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.echo.holographlibrary.LineGraph
-        android:id="@+id/line_graph"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/default_margin"/>
-
-</FrameLayout>
+    android:duration="@android:integer/config_mediumAnimTime"
+    android:fromAlpha="0.0"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+    android:startOffset="@android:integer/config_mediumAnimTime"
+    android:toAlpha="1.0"/>

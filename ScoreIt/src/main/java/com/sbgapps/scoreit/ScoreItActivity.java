@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -71,14 +72,7 @@ public class ScoreItActivity extends BaseActivity
 
         // Init fragments
         if (null == savedInstanceState) {
-            mHeaderFragment = new HeaderFragment();
-            mScoreListFragment = new ScoreListFragment();
-
-            fragmentManager
-                    .beginTransaction()
-                    .add(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG)
-                    .add(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG)
-                    .commit();
+            loadFragments(false);
         } else {
             mHeaderFragment = (HeaderFragment) fragmentManager.findFragmentByTag(HeaderFragment.TAG);
             mGraphFragment = (GraphFragment) fragmentManager.findFragmentByTag(GraphFragment.TAG);
@@ -153,6 +147,16 @@ public class ScoreItActivity extends BaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                if (mDrawer != null) {
+                    if (mDrawer.isDrawerMenuOpen()) {
+                        mDrawer.closeDrawerMenu();
+                    } else {
+                        mDrawer.openDrawerMenu();
+                    }
+                }
+                return true;
+
             case R.id.menu_clear:
                 showClearDialog();
                 return true;
@@ -191,8 +195,7 @@ public class ScoreItActivity extends BaseActivity
         getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         supportInvalidateOptionsMenu();
         setTitle();
-        mScoreListFragment.setAdapter();
-        update();
+        loadFragments(true);
     }
 
     @Override
@@ -221,7 +224,7 @@ public class ScoreItActivity extends BaseActivity
                     edited.set(lap);
                     mEditedLap = -1;
                 }
-                update();
+                updateFragments();
                 invalidateOptionsMenu();
                 break;
         }
@@ -236,7 +239,7 @@ public class ScoreItActivity extends BaseActivity
     public void removeLap(Lap lap) {
         mGameHelper.removeLap(lap);
         mScoreListFragment.closeOpenedItems();
-        update();
+        updateFragments();
     }
 
     public void editName(View view) {
@@ -244,13 +247,30 @@ public class ScoreItActivity extends BaseActivity
         showEditNameActionChoices();
     }
 
-    private void update() {
+    private void updateFragments() {
         if (null != mHeaderFragment)
             mHeaderFragment.update();
         if (null != mScoreListFragment && mScoreListFragment.isVisible())
             mScoreListFragment.update();
         if (null != mGraphFragment && mGraphFragment.isVisible())
             mGraphFragment.traceGraph();
+    }
+
+    private void loadFragments(boolean anim) {
+        mHeaderFragment = new HeaderFragment();
+        mScoreListFragment = new ScoreListFragment();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (anim)
+            ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        ft.replace(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG)
+                .commit();
+
+        ft = getSupportFragmentManager().beginTransaction();
+        if (anim)
+            ft.setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_up);
+        ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG)
+                .commit();
     }
 
     private void showLapActivity() {
@@ -285,11 +305,11 @@ public class ScoreItActivity extends BaseActivity
 
         getSupportFragmentManager()
                 .beginTransaction()
-//                .setCustomAnimations(
-//                        R.animator.slide_bottom_in,
-//                        R.animator.slide_top_out,
-//                        R.animator.slide_top_in,
-//                        R.animator.slide_bottom_out)
+                .setCustomAnimations(
+                        R.anim.slide_in_down,
+                        R.anim.slide_out_up,
+                        R.anim.slide_in_up,
+                        R.anim.slide_out_down)
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, mGraphFragment, GraphFragment.TAG)
                 .commit();
@@ -380,7 +400,7 @@ public class ScoreItActivity extends BaseActivity
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 mGameHelper.setPlayerCount(which);
-                                update();
+                                loadFragments(true);
                             }
                         }
                 )
