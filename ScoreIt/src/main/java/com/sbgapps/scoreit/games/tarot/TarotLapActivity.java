@@ -59,19 +59,21 @@ public class TarotLapActivity extends LapActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (-1 != mPosition) {
-            mLap = getGameHelper().getLaps().get(mPosition);
-        } else {
-            switch (getGameHelper().getPlayerCount()) {
-                case 3:
-                    mLap = new TarotThreeLap();
-                    break;
-                case 4:
-                    mLap = new TarotFourLap();
-                    break;
-                case 5:
-                    mLap = new TarotFiveLap();
-                    break;
+        if (null == savedInstanceState) {
+            if (-1 != mPosition) {
+                mLap = getGameHelper().getLaps().get(mPosition);
+            } else {
+                switch (getGameHelper().getPlayerCount()) {
+                    case 3:
+                        mLap = new TarotThreeLap();
+                        break;
+                    case 4:
+                        mLap = new TarotFourLap();
+                        break;
+                    case 5:
+                        mLap = new TarotFiveLap();
+                        break;
+                }
             }
         }
 

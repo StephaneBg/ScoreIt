@@ -46,10 +46,12 @@ public class CoincheLapActivity extends LapActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (-1 != mPosition) {
-            mLap = getGameHelper().getLaps().get(mPosition);
-        } else {
-            mLap = new CoincheLap();
+        if (null == savedInstanceState) {
+            if (-1 != mPosition) {
+                mLap = getGameHelper().getLaps().get(mPosition);
+            } else {
+                mLap = new CoincheLap();
+            }
         }
 
         setContentView(R.layout.activity_lap_coinche);

@@ -21,7 +21,9 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.text.style.MetricAffectingSpan;
-import android.util.LruCache;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Style a {@link android.text.Spannable} with a custom {@link Typeface}.
@@ -32,8 +34,7 @@ public class TypefaceSpan extends MetricAffectingSpan {
     /**
      * An <code>LruCache</code> for previously loaded typefaces.
      */
-    private static LruCache<String, Typeface> sTypefaceCache =
-            new LruCache<String, Typeface>(12);
+    private static Map<String, Typeface> sTypefaceCache = new HashMap<>();
 
     private Typeface mTypeface;
 

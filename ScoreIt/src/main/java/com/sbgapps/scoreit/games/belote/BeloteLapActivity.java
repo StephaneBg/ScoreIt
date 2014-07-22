@@ -43,10 +43,12 @@ public class BeloteLapActivity extends LapActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (-1 != mPosition) {
-            mLap = getGameHelper().getLaps().get(mPosition);
-        } else {
-            mLap = new BeloteLap();
+        if (null == savedInstanceState) {
+            if (-1 != mPosition) {
+                mLap = getGameHelper().getLaps().get(mPosition);
+            } else {
+                mLap = new BeloteLap();
+            }
         }
 
         setContentView(R.layout.activity_lap_belote);

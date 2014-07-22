@@ -25,9 +25,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,19 +32,17 @@ import android.widget.EditText;
 
 import com.faizmalkani.floatingactionbutton.FloatingActionButton;
 import com.sbgapps.scoreit.games.Game;
-import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.belote.BeloteLapActivity;
 import com.sbgapps.scoreit.games.coinche.CoincheLapActivity;
 import com.sbgapps.scoreit.games.tarot.TarotLapActivity;
 import com.sbgapps.scoreit.games.universal.UniversalLapActivity;
-import com.sbgapps.scoreit.utils.TypefaceSpan;
 import com.sbgapps.scoreit.utils.Utils;
 import com.sbgapps.scoreit.widget.PlayerInfo;
 
 import org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer;
 
-public class ScoreItActivity extends ActionBarActivity
+public class ScoreItActivity extends BaseActivity
         implements GoogleNavigationDrawer.OnNavigationSectionSelected {
 
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
@@ -55,9 +50,6 @@ public class ScoreItActivity extends ActionBarActivity
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_LAP_ACTIVITY = 2;
 
-    private TypefaceSpan mTypefaceSpan;
-    private GameHelper mGameHelper;
-    private SpannableString mTitle;
     private boolean mIsTablet;
     private PlayerInfo mEditedName;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -67,18 +59,12 @@ public class ScoreItActivity extends ActionBarActivity
     private HeaderFragment mHeaderFragment;
     private int mEditedLap = -1;
 
-    public GameHelper getGameHelper() {
-        return mGameHelper;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mGameHelper = new GameHelper(this);
-        mGameHelper.loadLaps();
-
         setContentView(R.layout.activity_scoreit);
+        setAccentDecor();
         //mIsTablet = (null != findViewById(R.id.fragment_container_large));
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
@@ -120,8 +106,6 @@ public class ScoreItActivity extends ActionBarActivity
                 showLapActivity();
             }
         });
-
-        mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
         setTitle();
     }
 
@@ -162,7 +146,6 @@ public class ScoreItActivity extends ActionBarActivity
             item = menu.findItem(R.id.menu_count);
             item.setVisible(Game.UNIVERSAL == mGameHelper.getPlayedGame() ||
                     Game.TAROT == mGameHelper.getPlayedGame());
-            getSupportActionBar().setTitle(mTitle);
             return true;
         }
     }
@@ -310,25 +293,6 @@ public class ScoreItActivity extends ActionBarActivity
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, mGraphFragment, GraphFragment.TAG)
                 .commit();
-    }
-
-    private void setTitle() {
-        switch (mGameHelper.getPlayedGame()) {
-            default:
-            case Game.UNIVERSAL:
-                mTitle = new SpannableString(getResources().getString(R.string.universal));
-                break;
-            case Game.BELOTE:
-                mTitle = new SpannableString(getResources().getString(R.string.belote));
-                break;
-            case Game.COINCHE:
-                mTitle = new SpannableString(getResources().getString(R.string.coinche));
-                break;
-            case Game.TAROT:
-                mTitle = new SpannableString(getResources().getString(R.string.tarot));
-                break;
-        }
-        mTitle.setSpan(mTypefaceSpan, 0, mTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
     private void nameEdited(String name) {

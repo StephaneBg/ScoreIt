@@ -19,23 +19,22 @@ package com.sbgapps.scoreit.games;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.sbgapps.scoreit.BaseActivity;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 
 /**
  * Created by sbaiget on 08/01/14.
  */
-public class LapActivity extends ActionBarActivity {
+public class LapActivity extends BaseActivity {
 
     public int mPosition = -1;
     public Lap mLap;
-    private GameHelper mGameHelper;
     private boolean mIsDialog = false;
 
     public LapActivity() {
@@ -49,22 +48,29 @@ public class LapActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setAccentDecor();
+
+        if (null != savedInstanceState) {
+            mLap = (Lap) savedInstanceState.getSerializable(ScoreItActivity.EXTRA_LAP);
+        }
+
         Intent intent = getIntent();
         if (null != intent) {
             mPosition = intent.getIntExtra(ScoreItActivity.EXTRA_POSITION, -1);
         }
-        mGameHelper = new GameHelper(this);
-        mGameHelper.loadLaps();
 
         setupFauxDialog();
+        setTitle();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(ScoreItActivity.EXTRA_LAP, mLap);
     }
 
     public Lap getLap() {
         return mLap;
-    }
-
-    public GameHelper getGameHelper() {
-        return mGameHelper;
     }
 
     public void onFloatingActionButtonClicked(View view) {

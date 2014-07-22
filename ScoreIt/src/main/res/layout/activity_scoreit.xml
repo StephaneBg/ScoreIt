@@ -14,21 +14,28 @@
   ~ limitations under the License.
   -->
 
-<org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer
-    android:id="@+id/navigation_drawer_container"
+
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:drawer="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    drawer:drawer_gravity="start"
-    drawer:list_mainSectionsDrawables="@array/navigation_main_drawable"
-    drawer:list_mainSectionsEntries="@array/navigation_main_sections"
-    drawer:list_secondarySectionsDrawables="@array/navigation_secondary_drawable"
-    drawer:list_secondarySectionsEntries="@array/navigation_secondary_sections">
+    android:fitsSystemWindows="true">
 
-    <include
-        layout="@layout/include_activity_scoreit"
+    <org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer
+        android:id="@+id/navigation_drawer_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:drawer_gravity="start"
+        app:list_mainSectionsDrawables="@array/navigation_main_drawable"
+        app:list_mainSectionsEntries="@array/navigation_main_sections"
+        app:list_secondarySectionsDrawables="@array/navigation_secondary_drawable"
+        app:list_secondarySectionsEntries="@array/navigation_secondary_sections">
 
-</org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer>
+        <include
+            layout="@layout/include_activity_scoreit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer>
+</FrameLayout>
