@@ -18,21 +18,25 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="ScoreItActivity">
+
+    <View style="@style/Divider"/>
 
     <TextView
-        style="?android:listSeparatorTextViewStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/SubHeader"
         android:text="@string/partner"/>
 
     <Spinner
         android:id="@+id/spinner_partner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_height"
-        android:layout_marginTop="@dimen/default_margin"
+        android:layout_height="@dimen/height_default"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/margin_activity"
+        android:layout_marginRight="@dimen/margin_activity"
         android:spinnerMode="dialog"/>
 
 </LinearLayout>

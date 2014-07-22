@@ -24,9 +24,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +31,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.sbgapps.scoreit.utils.TypefaceSpan;
 import com.sbgapps.scoreit.view.SlidingTabLayout;
 
 import java.util.ArrayList;
@@ -42,7 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class AboutActivity extends ActionBarActivity {
+public class AboutActivity extends BaseActivity {
 
     private InfoFragment mInfoFragment;
 
@@ -50,6 +46,7 @@ public class AboutActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setAccentDecor();
         setContentView(R.layout.activity_about);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -60,10 +57,7 @@ public class AboutActivity extends ActionBarActivity {
         SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         slidingTabLayout.setViewPager(viewPager);
 
-        TypefaceSpan typefaceSpan = new TypefaceSpan(this, "Lobster.otf");
-        SpannableString title = new SpannableString(getResources().getString(R.string.about));
-        title.setSpan(typefaceSpan, 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        setTitle(title);
+        setTitle(-1);
     }
 
     @Override

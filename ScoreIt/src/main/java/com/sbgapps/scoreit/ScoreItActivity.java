@@ -33,6 +33,7 @@ import android.widget.EditText;
 
 import com.faizmalkani.floatingactionbutton.FloatingActionButton;
 import com.sbgapps.scoreit.games.Game;
+import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.belote.BeloteLapActivity;
 import com.sbgapps.scoreit.games.coinche.CoincheLapActivity;
@@ -51,6 +52,7 @@ public class ScoreItActivity extends BaseActivity
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_LAP_ACTIVITY = 2;
 
+    private GameHelper mGameHelper;
     private boolean mIsTablet;
     private PlayerInfo mEditedName;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -60,9 +62,16 @@ public class ScoreItActivity extends BaseActivity
     private HeaderFragment mHeaderFragment;
     private int mEditedLap = -1;
 
+    public GameHelper getGameHelper() {
+        return mGameHelper;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mGameHelper = new GameHelper(this);
+        mGameHelper.loadLaps();
 
         setContentView(R.layout.activity_scoreit);
         setAccentDecor();
@@ -74,6 +83,8 @@ public class ScoreItActivity extends BaseActivity
         if (null == savedInstanceState) {
             loadFragments(false);
         } else {
+            mEditedLap = savedInstanceState.getInt(EXTRA_POSITION);
+
             mHeaderFragment = (HeaderFragment) fragmentManager.findFragmentByTag(HeaderFragment.TAG);
             mGraphFragment = (GraphFragment) fragmentManager.findFragmentByTag(GraphFragment.TAG);
             mScoreListFragment = (ScoreListFragment) fragmentManager.findFragmentByTag(ScoreListFragment.TAG);
@@ -97,10 +108,11 @@ public class ScoreItActivity extends BaseActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mEditedLap = -1;
                 showLapActivity();
             }
         });
-        setTitle();
+        setTitle(mGameHelper.getPlayedGame());
     }
 
     @Override
@@ -113,6 +125,12 @@ public class ScoreItActivity extends BaseActivity
     protected void onPause() {
         super.onPause();
         mGameHelper.saveGame();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(EXTRA_POSITION, mEditedLap);
     }
 
     @Override
@@ -194,7 +212,7 @@ public class ScoreItActivity extends BaseActivity
         }
         getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         supportInvalidateOptionsMenu();
-        setTitle();
+        setTitle(i);
         loadFragments(true);
     }
 
@@ -222,7 +240,6 @@ public class ScoreItActivity extends BaseActivity
                 } else {
                     Lap edited = mGameHelper.getLaps().get(mEditedLap);
                     edited.set(lap);
-                    mEditedLap = -1;
                 }
                 updateFragments();
                 invalidateOptionsMenu();

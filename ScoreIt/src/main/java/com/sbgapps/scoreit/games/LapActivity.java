@@ -35,6 +35,7 @@ public class LapActivity extends BaseActivity {
 
     public int mPosition = -1;
     public Lap mLap;
+    private GameHelper mGameHelper;
     private boolean mIsDialog = false;
 
     public LapActivity() {
@@ -44,10 +45,16 @@ public class LapActivity extends BaseActivity {
         return mIsDialog;
     }
 
+    public GameHelper getGameHelper() {
+        return mGameHelper;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mGameHelper = new GameHelper(this);
+        mGameHelper.loadLaps();
         setAccentDecor();
 
         if (null != savedInstanceState) {
@@ -60,7 +67,7 @@ public class LapActivity extends BaseActivity {
         }
 
         setupFauxDialog();
-        setTitle();
+        setTitle(mGameHelper.getPlayedGame());
     }
 
     @Override

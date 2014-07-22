@@ -26,7 +26,6 @@ import android.view.WindowManager;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.sbgapps.scoreit.games.Game;
-import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.utils.TypefaceSpan;
 
 /**
@@ -34,27 +33,21 @@ import com.sbgapps.scoreit.utils.TypefaceSpan;
  */
 public class BaseActivity extends ActionBarActivity {
 
-    protected GameHelper mGameHelper;
     private TypefaceSpan mTypefaceSpan;
     private SpannableString mTitle;
-
-    public GameHelper getGameHelper() {
-        return mGameHelper;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mGameHelper = new GameHelper(this);
-        mGameHelper.loadLaps();
-
         mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
     }
 
-    public void setTitle() {
-        switch (mGameHelper.getPlayedGame()) {
+    @Override
+    public void setTitle(int position) {
+        switch (position) {
             default:
+                mTitle = new SpannableString(getTitle());
+                break;
             case Game.UNIVERSAL:
                 mTitle = new SpannableString(getResources().getString(R.string.universal));
                 break;
