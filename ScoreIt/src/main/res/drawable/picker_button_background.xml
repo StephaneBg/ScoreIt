@@ -16,21 +16,21 @@
   ~ limitations under the License.
   -->
 
-<ScrollView
-    android:id="@+id/scrollview"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context="ScoreItActivity">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@color/lighter_gray"
+        android:state_focused="true"
+        android:state_pressed="true"/>
 
-    <LinearLayout
-        android:id="@+id/ll_universal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="?android:listDivider"
-        android:orientation="vertical"
-        android:showDividers="middle|end"/>
+    <item
+        android:drawable="@color/lighter_gray"
+        android:state_focused="false"
+        android:state_pressed="true"/>
 
-</ScrollView>
+    <item
+        android:drawable="@color/lighter_gray"
+        android:state_focused="true"/>
+
+    <item
+        android:drawable="@android:color/transparent"/>
+</selector>

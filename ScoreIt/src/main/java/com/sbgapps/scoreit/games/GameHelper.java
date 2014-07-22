@@ -124,7 +124,7 @@ public class GameHelper {
             case Game.UNIVERSAL:
                 mGame = load(file, UniversalGame.class);
                 if (null == mGame) {
-                    mGame = new UniversalGame(mContext);
+                    mGame = new UniversalGame(mContext, getPlayerCount());
                 }
                 break;
             case Game.BELOTE:
@@ -181,8 +181,12 @@ public class GameHelper {
         return mGame.getLaps();
     }
 
+    public List<Player> getPlayers() {
+        return mGame.getPlayers();
+    }
+
     public Player getPlayer(int player) {
-        return (Player) mGame.getPlayers().get(player);
+        return getPlayers().get(player);
     }
 
     private <T> T load(final String file, final Class<T> clazz) {

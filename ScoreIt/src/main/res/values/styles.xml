@@ -41,4 +41,12 @@
         <item name="android:textSize">@dimen/font_subhead</item>
     </style>
 
+    <style name="BetterPickerTheme" parent="BetterPickersDialogFragment.Light">
+        <item name="bpTitleColor">@color/secondary_accent</item>
+        <item name="bpDeleteIcon">@drawable/ic_backspace</item>
+        <item name="bpDividerColor">@color/lighter_gray</item>
+        <item name="bpKeyBackground">@drawable/picker_button_background</item>
+        <item name="bpButtonBackground">@drawable/picker_button_background</item>
+    </style>
+
 </resources>

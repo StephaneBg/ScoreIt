@@ -17,21 +17,16 @@
 package com.sbgapps.scoreit.games.universal;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.LapActivity;
-import com.sbgapps.scoreit.widget.NumberPickerDialogFragment;
-import com.sbgapps.scoreit.widget.PickerPoints;
-
-import java.util.ArrayList;
+import com.sbgapps.scoreit.games.Player;
 
 /**
  * Created by sbaiget on 02/02/14.
  */
-public class UniversalLapActivity extends LapActivity
-        implements NumberPickerDialogFragment.NumberPickerDialogListener {
-
-    private final ArrayList<PickerPoints> mPoints = new ArrayList<>(2);
+public class UniversalLapActivity extends LapActivity {
 
     @Override
     public UniversalLap getLap() {
@@ -42,20 +37,25 @@ public class UniversalLapActivity extends LapActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_lap_universal);
+
         if (null == savedInstanceState) {
             if (-1 != mPosition) {
                 mLap = getGameHelper().getLaps().get(mPosition);
             } else {
-                mLap = new UniversalLap();
+                mLap = new UniversalLap(getGameHelper().getPlayerCount());
+            }
+
+            final FragmentManager fragmentManager = getSupportFragmentManager();
+            int i = 0;
+            for (Player player : getGameHelper().getPlayers()) {
+                UniversalInputFragment fragment = UniversalInputFragment.newInstance(i);
+                fragmentManager
+                        .beginTransaction()
+                        .add(R.id.ll_universal, fragment, UniversalInputFragment.TAG + i)
+                        .commit();
+                i++;
             }
         }
-
-        setContentView(R.layout.activity_lap_universal);
-    }
-
-    @Override
-    public void onDialogNumberSet(int reference, int number, double decimal,
-                                  boolean isNegative, double fullNumber, int player) {
-        mPoints.get(player).setPoints(number);
     }
 }

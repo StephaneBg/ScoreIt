@@ -40,7 +40,6 @@ import com.sbgapps.scoreit.games.coinche.CoincheLapActivity;
 import com.sbgapps.scoreit.games.tarot.TarotLapActivity;
 import com.sbgapps.scoreit.games.universal.UniversalLapActivity;
 import com.sbgapps.scoreit.utils.Utils;
-import com.sbgapps.scoreit.widget.PlayerInfo;
 
 import org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer;
 
@@ -54,7 +53,6 @@ public class ScoreItActivity extends BaseActivity
 
     private GameHelper mGameHelper;
     private boolean mIsTablet;
-    private PlayerInfo mEditedName;
     private ActionBarDrawerToggle mDrawerToggle;
     private GoogleNavigationDrawer mDrawer;
     private ScoreListFragment mScoreListFragment;
@@ -260,7 +258,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void editName(View view) {
-        mEditedName = (PlayerInfo) view.getParent().getParent();
+        // TODO
         showEditNameActionChoices();
     }
 
@@ -334,8 +332,6 @@ public class ScoreItActivity extends BaseActivity
 
     private void nameEdited(String name) {
         // TODO
-        //mGameHelper.setPlayerName(mEditedName.getPlayer(), name);
-        mEditedName.setName(name);
     }
 
     private void showClearDialog() {

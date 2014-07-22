@@ -20,6 +20,8 @@
 
 
 
+
+
 apply plugin: 'com.android.application'
 
 android {
@@ -67,6 +69,9 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.anjlab.android.iab.v3:library:1.0.8@aar'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.4'
+    compile("com.doomonafireball.betterpickers:library:1.5.2") {
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
     compile project(':HoloGraphLibrary')
     compile project(':FloatingActionButton')
     compile project(':GoogleNavigationDrawerMenuLibrary')
