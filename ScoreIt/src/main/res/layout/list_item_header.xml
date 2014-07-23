@@ -30,8 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@drawable/background_action"
         android:gravity="center"
-        android:onClick="editName"
         android:singleLine="true"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font_headline"/>

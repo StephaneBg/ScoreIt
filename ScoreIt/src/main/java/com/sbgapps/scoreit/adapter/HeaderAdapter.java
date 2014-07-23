@@ -34,12 +34,14 @@ import com.sbgapps.scoreit.games.Player;
  */
 public class HeaderAdapter extends BaseAdapter {
 
+    private final ScoreItActivity mActivity;
     private final LayoutInflater mInflater;
     private final GameHelper mGameHelper;
 
     public HeaderAdapter(Activity activity) {
-        mInflater = LayoutInflater.from(activity);
-        mGameHelper = ((ScoreItActivity) activity).getGameHelper();
+        mActivity = (ScoreItActivity) activity;
+        mInflater = LayoutInflater.from(mActivity);
+        mGameHelper = mActivity.getGameHelper();
     }
 
     @Override
@@ -75,6 +77,14 @@ public class HeaderAdapter extends BaseAdapter {
         }
 
         final Info info = getItem(position);
+
+        holder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActivity.editName(info.mPlayer);
+            }
+        });
+
         holder.name.setText(info.mPlayer.getName());
         holder.score.setText(Integer.toString(info.mScore));
         holder.score.setTextColor(info.mPlayer.getColor());

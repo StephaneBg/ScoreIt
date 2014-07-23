@@ -35,6 +35,7 @@ import com.faizmalkani.floatingactionbutton.FloatingActionButton;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.BeloteLapActivity;
 import com.sbgapps.scoreit.games.coinche.CoincheLapActivity;
 import com.sbgapps.scoreit.games.tarot.TarotLapActivity;
@@ -58,6 +59,7 @@ public class ScoreItActivity extends BaseActivity
     private ScoreListFragment mScoreListFragment;
     private GraphFragment mGraphFragment;
     private HeaderFragment mHeaderFragment;
+    private Player mEditedPlayer;
     private int mEditedLap = -1;
 
     public GameHelper getGameHelper() {
@@ -226,7 +228,8 @@ public class ScoreItActivity extends BaseActivity
                 if (cursor.moveToFirst()) {
                     int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                     name = cursor.getString(columnIndex);
-                    nameEdited(name);
+                    mEditedPlayer.setName(name);
+                    mHeaderFragment.update();
                 }
                 break;
 
@@ -257,8 +260,8 @@ public class ScoreItActivity extends BaseActivity
         updateFragments();
     }
 
-    public void editName(View view) {
-        // TODO
+    public void editName(Player player) {
+        mEditedPlayer = player;
         showEditNameActionChoices();
     }
 
@@ -328,10 +331,6 @@ public class ScoreItActivity extends BaseActivity
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, mGraphFragment, GraphFragment.TAG)
                 .commit();
-    }
-
-    private void nameEdited(String name) {
-        // TODO
     }
 
     private void showClearDialog() {
@@ -434,7 +433,8 @@ public class ScoreItActivity extends BaseActivity
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String name = editText.getText().toString();
-                                nameEdited(name);
+                                mEditedPlayer.setName(name);
+                                mHeaderFragment.update();
                             }
                         }
                 )
