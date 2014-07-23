@@ -17,8 +17,9 @@
 package com.sbgapps.scoreit.games.universal;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+import android.widget.LinearLayout;
 
+import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.LapActivity;
 import com.sbgapps.scoreit.games.Player;
@@ -26,7 +27,10 @@ import com.sbgapps.scoreit.games.Player;
 /**
  * Created by sbaiget on 02/02/14.
  */
-public class UniversalLapActivity extends LapActivity {
+public class UniversalLapActivity extends LapActivity
+        implements NumberPickerDialogFragment.NumberPickerDialogHandler {
+
+    private LinearLayout mLinearLayout;
 
     @Override
     public UniversalLap getLap() {
@@ -45,17 +49,22 @@ public class UniversalLapActivity extends LapActivity {
             } else {
                 mLap = new UniversalLap(getGameHelper().getPlayerCount());
             }
-
-            final FragmentManager fragmentManager = getSupportFragmentManager();
-            int i = 0;
-            for (Player player : getGameHelper().getPlayers()) {
-                UniversalInputFragment fragment = UniversalInputFragment.newInstance(i);
-                fragmentManager
-                        .beginTransaction()
-                        .add(R.id.ll_universal, fragment, UniversalInputFragment.TAG + i)
-                        .commit();
-                i++;
-            }
         }
+
+        mLinearLayout = (LinearLayout) findViewById(R.id.ll_universal);
+
+        int i = 0;
+        for (Player player : getGameHelper().getPlayers()) {
+            UniversalInput input = new UniversalInput(this, i);
+            mLinearLayout.addView(input);
+            i++;
+        }
+    }
+
+    @Override
+    public void onDialogNumberSet(int reference, int number, double decimal,
+                                  boolean isNegative, double fullNumber) {
+        UniversalInput input = (UniversalInput) mLinearLayout.getChildAt(reference);
+        input.updateScore(number);
     }
 }

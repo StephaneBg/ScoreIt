@@ -36,8 +36,8 @@ import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
 import com.sbgapps.scoreit.games.tarot.TarotLap;
 import com.sbgapps.scoreit.utils.Constants;
+import com.sbgapps.scoreit.view.PlayerScore;
 import com.sbgapps.scoreit.view.SwipeListView;
-import com.sbgapps.scoreit.widget.PlayerScore;
 
 import java.util.ArrayList;
 import java.util.List;

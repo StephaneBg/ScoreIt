@@ -23,7 +23,7 @@ import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.LapActivity;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
-import com.sbgapps.scoreit.widget.SeekbarPoints;
+import com.sbgapps.scoreit.view.SeekbarPoints;
 
 /**
  * Created by sbaiget on 29/01/14.

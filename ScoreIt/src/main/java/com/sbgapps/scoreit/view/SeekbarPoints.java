@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.widget;
+package com.sbgapps.scoreit.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
