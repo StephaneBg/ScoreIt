@@ -22,7 +22,7 @@
 
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
-        <item name="android:windowBackground">@drawable/background_triangles</item>
+        <item name="android:windowBackground">@drawable/background_window</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:actionMenuTextColor">@android:color/white</item>
         <item name="android:textColorHighlight">@color/secondary_accent</item>

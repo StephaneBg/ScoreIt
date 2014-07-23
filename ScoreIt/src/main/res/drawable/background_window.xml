@@ -16,24 +16,7 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<bitmap
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
-
-    <com.sbgapps.scoreit.view.SlidingTabLayout
-        android:id="@+id/sliding_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"/>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:background="@android:color/white"/>
-
-</LinearLayout>
+    android:src="@drawable/grey_variations"
+    android:tileMode="repeat"/>
