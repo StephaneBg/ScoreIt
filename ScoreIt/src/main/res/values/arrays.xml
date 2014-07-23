@@ -29,10 +29,10 @@
     </string-array>
 
     <array name="navigation_main_drawable">
-        <item>@drawable/ic_star</item>
-        <item>@drawable/ic_star</item>
-        <item>@drawable/ic_star</item>
-        <item>@drawable/ic_star</item>
+        <item>@drawable/ic_clubs</item>
+        <item>@drawable/ic_hearts</item>
+        <item>@drawable/ic_spades</item>
+        <item>@drawable/ic_diamonds</item>
     </array>
 
     <array name="navigation_secondary_drawable">

@@ -19,7 +19,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_count"
-        android:icon="@drawable/ic_action_group"
+        android:icon="@drawable/ic_action_social_group"
         android:title="@string/player_number"
         app:showAsAction="always"/>
     <item

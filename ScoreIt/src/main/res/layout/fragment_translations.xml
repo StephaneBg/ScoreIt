@@ -38,7 +38,7 @@
         style="?android:actionButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_translate"
+        android:drawableLeft="@drawable/ic_location_web_site"
         android:gravity="center_vertical"
         android:text="@string/help_translate"/>
 
@@ -52,15 +52,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="fonts/Roboto-Bold.ttf"
             android:gravity="center"
-            android:text="@string/language"/>
+            android:text="@string/language"
+            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="fonts/Roboto-Bold.ttf"
             android:gravity="center"
             android:text="@string/translator"
             android:textStyle="bold"/>
