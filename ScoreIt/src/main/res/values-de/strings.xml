@@ -47,7 +47,7 @@
     <string name="done">Erledigt</string>
     <string name="delete">Löschen</string>
     <string name="edit">Bearbeiten</string>
-    <string name="progress">Punkte</string>
+    <string name="points">Punkte</string>
     <string name="bid">Aktion</string>
     <string name="oudlers">Oudlers</string>
     <string name="fool">Idiot</string>
@@ -61,7 +61,6 @@
     <string name="guard">Guard</string>
     <string name="guard_without">Guard mit</string>
     <string name="guard_against">Guard gegen</string>
-    <string name="click_to_add">Klicken um hinzuzufügen</string>
     <string name="more">Mehr</string>
     <string name="less">Weniger</string>
     <string name="undo">Rückgängig</string>
@@ -71,12 +70,7 @@
     <string name="player_number">Spieleranzahl</string>
     <string name="edit_name">Bearbeite Name</string>
     <string name="enter_name">Namen eingeben</string>
-    <string name="number_picker_minus_label">—</string>
-    <string name="number_picker_seperator">.</string>
-    <string name="number_picker_plus_minus">+/-</string>
-    <string name="min_error">Bitte gebe eine Nummer größer oder gleich %1$d ein.</string>
-    <string name="max_error">Bitte gebe eine Nummer kleiner oder gleich %1$d ein.</string>
-    <string name="min_max_error">Bitte gib eine Nummer zwischen %1$d und %2$d ein.</string>
+    <string name="pick_contact">Wähle einen Kontakt</string>
     <string name="application">App</string>
     <string name="translations">Übersetzungen</string>
     <string name="help_translate">Hilf uns zu übersetzen</string>
@@ -91,17 +85,10 @@
     <string name="bought_coffee">Danke für den Kaffee!</string>
     <string name="donate_beer">Spendiere mir ein Bier</string>
     <string name="bought_beer">Danke für das Bier!</string>
-
-    <string-array name="edit_name_action">
-        <item>Wähle einen Kontakt</item>
-        <item>Gib den Namen ein</item>
-    </string-array>
-    <string-array name="languages">
-        <item>Englisch</item>
-        <item>Französisch</item>
-        <item>Dänisch</item>
-        <item>Russisch</item>
-        <item>Deutsch</item>
-    </string-array>
+    <string name="language_english">Englisch</string>
+    <string name="language_french">Französisch</string>
+    <string name="language_dutch">Dänisch</string>
+    <string name="language_russian">Russisch</string>
+    <string name="language_german">Deutsch</string>
 
 </resources>

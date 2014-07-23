@@ -284,7 +284,7 @@ public class ScoreItActivity extends BaseActivity
         if (null != mScoreListFragment && mScoreListFragment.isVisible())
             mScoreListFragment.update();
         if (null != mGraphFragment && mGraphFragment.isVisible())
-            mGraphFragment.traceGraph();
+            mGraphFragment.update();
     }
 
     private void loadFragments(boolean anim) {
@@ -360,7 +360,7 @@ public class ScoreItActivity extends BaseActivity
                                 if (null != mScoreListFragment && mScoreListFragment.isVisible())
                                     mScoreListFragment.getListAdapter().removeAll();
                                 if (null != mGraphFragment && mGraphFragment.isVisible()) {
-                                    mGraphFragment.traceGraph();
+                                    mGraphFragment.update();
                                     if (!mIsTablet) getFragmentManager().popBackStack();
                                 }
                                 supportInvalidateOptionsMenu();
@@ -466,6 +466,7 @@ public class ScoreItActivity extends BaseActivity
     private void showColorPickerDialog() {
         View view = getLayoutInflater().inflate(R.layout.dialog_color_picker, null);
         final ColorPicker picker = (ColorPicker) view.findViewById(R.id.picker);
+        picker.setColor(mEditedPlayer.getColor());
         Dialog dialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.edit_color)
                 .setView(view)
@@ -477,7 +478,7 @@ public class ScoreItActivity extends BaseActivity
                                 mEditedPlayer.setColor(color);
                                 mHeaderFragment.update();
                                 if (null != mGraphFragment)
-                                    mGraphFragment.traceGraph();
+                                    mGraphFragment.update();
                             }
                         }
                 )

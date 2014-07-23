@@ -47,7 +47,7 @@
     <string name="done">Confirmer</string>
     <string name="delete">Effacer</string>
     <string name="edit">Editer</string>
-    <string name="progress">Points</string>
+    <string name="points">Points</string>
     <string name="bidding">Contrat</string>
     <string name="oudlers">Bouts</string>
     <string name="excuse">Excuse</string>
@@ -78,12 +78,7 @@
     <string name="player_number">Nombre de joueurs</string>
     <string name="edit_name">Editer le nom</string>
     <string name="enter_name">Entrer le nom</string>
-    <string name="number_picker_minus_label">—</string>
-    <string name="number_picker_seperator">.</string>
-    <string name="number_picker_plus_minus">+/-</string>
-    <string name="min_error">Veuillez entrer un nombre plus grand ou égal à %1$d</string>
-    <string name="max_error">Veuillez entrer un nombre plus petit ou égal à %1$d</string>
-    <string name="min_max_error">Veuillez entrer un nombre entre %1$d et %2$d</string>
+    <string name="pick_contact">Choisir un contact</string>
     <string name="application">App</string>
     <string name="translations">Traductions</string>
     <string name="help_translate">Aidez à traduire !</string>
@@ -98,17 +93,10 @@
     <string name="bought_coffee">Vous m\'avez offert un café. Merci !</string>
     <string name="donate_beer">Offrez moi une bière</string>
     <string name="bought_beer">Vous m\'avez offert une bière. Merci !</string>
-
-    <string-array name="edit_name_action">
-        <item>Choisir un contact</item>
-        <item>Entrer le nom</item>
-    </string-array>
-    <string-array name="languages">
-        <item>Anglais</item>
-        <item>Français</item>
-        <item>Hollandais</item>
-        <item>Russe</item>
-        <item>Allemand</item>
-    </string-array>
+    <string name="language_english">Anglais</string>
+    <string name="language_french">Français</string>
+    <string name="language_dutch">Hollandais</string>
+    <string name="language_russian">Russe</string>
+    <string name="language_german">Allemand</string>
 
 </resources>

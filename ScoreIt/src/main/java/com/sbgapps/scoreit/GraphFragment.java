@@ -49,7 +49,7 @@ public class GraphFragment extends Fragment {
         return view;
     }
 
-    public void traceGraph() {
+    public void update() {
         final GameHelper gameHelper = getGameHelper();
         final int lapCnt = gameHelper.getLaps().size();
         mGraph.removeAllLines();
@@ -87,6 +87,6 @@ public class GraphFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        traceGraph();
+        update();
     }
 }

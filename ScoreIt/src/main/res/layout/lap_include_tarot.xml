@@ -99,7 +99,7 @@
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/progress"/>
+            android:text="@string/points"/>
 
         <com.sbgapps.scoreit.view.SeekbarPoints
             android:id="@+id/sb_points"

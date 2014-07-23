@@ -47,7 +47,7 @@
     <string name="done">Готово</string>
     <string name="delete">Удалить</string>
     <string name="edit">Изменить</string>
-    <string name="progress">Очки</string>
+    <string name="points">Очки</string>
     <string name="bid">Раздать</string>
     <string name="oudlers">Удле</string>
     <string name="fool">Полный</string>
@@ -71,12 +71,7 @@
     <string name="player_number">Количество игроков</string>
     <string name="edit_name">Изменить имя</string>
     <string name="enter_name">Введите имя</string>
-    <string name="number_picker_minus_label">---</string>
-    <string name="number_picker_seperator">.</string>
-    <string name="number_picker_plus_minus">+/-</string>
-    <string name="min_error">Пожалуйста, введите число большее или равное %1$d</string>
-    <string name="max_error">Пожалуйста, введите число меньшее или равное %1$d</string>
-    <string name="min_max_error">Пожалуйста, введите число между %1$d и  %2$d</string>
+    <string name="pick_contact">Выберите контакт</string>
     <string name="application">Aпп</string>
     <string name="translations">Переводы</string>
     <string name="help_translate">Помочь перевести!</string>
@@ -91,17 +86,10 @@
     <string name="bought_coffee">Вы купили мне кофе. Спасибо!</string>
     <string name="donate_beer">Угостите меня пивом</string>
     <string name="bought_beer">Вы купили мне пива. Спасибо!</string>
-
-    <string-array name="edit_name_action">
-        <item>Выберите контакт</item>
-        <item>Введите имя</item>
-    </string-array>
-    <string-array name="languages">
-        <item>Английский</item>
-        <item>Французский</item>
-        <item>Голландский</item>
-        <item>Русский</item>
-        <item>Германский</item>
-    </string-array>
+    <string name="language_english">Английский</string>
+    <string name="language_french">Французский</string>
+    <string name="language_dutch">Голландский</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_german">Германский</string>
 
 </resources>

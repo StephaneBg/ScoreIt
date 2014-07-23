@@ -40,16 +40,16 @@
     </array>
 
     <string-array name="edit_name_action">
-        <item>Pick contact</item>
-        <item>Enter name</item>
+        <item>@string/pick_contact</item>
+        <item>@string/enter_name</item>
     </string-array>
 
     <string-array name="languages">
-        <item>English</item>
-        <item>French</item>
-        <item>Dutch</item>
-        <item>Russian</item>
-        <item>German</item>
+        <item>@string/language_english</item>
+        <item>@string/language_french</item>
+        <item>@string/language_dutch</item>
+        <item>@string/language_russian</item>
+        <item>@string/language_german</item>
     </string-array>
 
 </resources>

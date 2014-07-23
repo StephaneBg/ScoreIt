@@ -47,7 +47,7 @@
     <string name="done">Done</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
-    <string name="progress">Points</string>
+    <string name="points">Points</string>
     <string name="bidding">Bidding</string>
     <string name="oudlers">Oudlers</string>
     <string name="excuse">Excuse</string>
@@ -69,7 +69,6 @@
     <string name="guard">Guard</string>
     <string name="guard_without">Guard without the kitty</string>
     <string name="guard_against">Guard against the kitty</string>
-    <string name="click_to_add">Click to add</string>
     <string name="more">More</string>
     <string name="less">Less</string>
     <string name="undo">Undo</string>
@@ -80,12 +79,7 @@
     <string name="edit_name">Edit name</string>
     <string name="edit_color">Edit color</string>
     <string name="enter_name">Enter name</string>
-    <string name="number_picker_minus_label">—</string>
-    <string name="number_picker_seperator">.</string>
-    <string name="number_picker_plus_minus">+/-</string>
-    <string name="min_error">Please input a number greater than or equal to %1$d</string>
-    <string name="max_error">Please input a number less than or equal to %1$d</string>
-    <string name="min_max_error">Please input a number between %1$d and %2$d</string>
+    <string name="pick_contact">Pick contact</string>
     <string name="application">App</string>
     <string name="translations">Translations</string>
     <string name="help_translate">Help to translate</string>
@@ -100,5 +94,10 @@
     <string name="bought_coffee">You bought me a coffee. Thanks!</string>
     <string name="donate_beer">Buy me a beer</string>
     <string name="bought_beer">You bought me a beer. Thanks!</string>
+    <string name="language_english">English</string>
+    <string name="language_french">French</string>
+    <string name="language_dutch">Dutch</string>
+    <string name="language_russian">Russian</string>
+    <string name="language_german">German</string>
 
 </resources>

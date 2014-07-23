@@ -47,7 +47,7 @@
     <string name="done">Gereed</string>
     <string name="delete">Verwijderen</string>
     <string name="edit">Bewerken</string>
-    <string name="progress">Punten</string>
+    <string name="points">Punten</string>
     <string name="bid">Deal</string>
     <string name="oudlers">Oudlers</string>
     <string name="fool">Dwaas</string>
@@ -71,12 +71,7 @@
     <string name="player_number">Aantal spelers</string>
     <string name="edit_name">Naam wijzigen</string>
     <string name="enter_name">Naam invoeren</string>
-    <string name="number_picker_minus_label">—</string>
-    <string name="number_picker_seperator">.</string>
-    <string name="number_picker_plus_minus">+/-</string>
-    <string name="min_error">Vul a.u.b. een getal in groter dan of gelijk aan %1$d</string>
-    <string name="max_error">Vul a.u.b. een getal in kleiner dan of gelijk aan %1$d</string>
-    <string name="min_max_error">Vul a.u.b. een getal in tussen %1$d en %2$d</string>
+    <string name="pick_contact">Pick contact</string>
     <string name="application">App</string>
     <string name="translations">Vertalingen</string>
     <string name="help_translate">Help mee met vertalen!</string>
@@ -91,17 +86,10 @@
     <string name="bought_coffee">Je kocht me een kopje koffie. Bedankt!</string>
     <string name="donate_beer">Koop me een bier</string>
     <string name="bought_beer">Je kocht me een biertje. Bedankt!</string>
-
-    <string-array name="edit_name_action">
-        <item>Pick contact</item>
-        <item>Voer de naam</item>
-    </string-array>
-    <string-array name="languages">
-        <item>Engels</item>
-        <item>Frans</item>
-        <item>Nederlands</item>
-        <item>Russisch</item>
-        <item>Duits</item>
-    </string-array>
+    <string name="language_english">Engels</string>
+    <string name="language_french">Frans</string>
+    <string name="language_dutch">Nederlands</string>
+    <string name="language_russian">Russisch</string>
+    <string name="language_german">Duits</string>
 
 </resources>
