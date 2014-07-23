@@ -31,7 +31,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.sbgapps.scoreit.view.SlidingTabLayout;
+import com.astuetz.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +54,7 @@ public class AboutActivity extends BaseActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(sectionsPagerAdapter);
 
-        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        PagerSlidingTabStrip slidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
         slidingTabLayout.setViewPager(viewPager);
 
         setTitle(-1);

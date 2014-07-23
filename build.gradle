@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
+
+
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.12.+'
@@ -25,11 +27,7 @@ buildscript {
 
 allprojects {
     repositories {
-        mavenCentral()
+        jcenter()
+        maven { url 'http://clinker.47deg.com/nexus/content/groups/public' }
     }
-}
-
-ext {
-    compileSdkVersion = 19
-    buildToolsVersion = "20.0.0"
 }
