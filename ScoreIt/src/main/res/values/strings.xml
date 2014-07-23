@@ -78,6 +78,7 @@
     <string name="settings">Settings</string>
     <string name="player_number">Number of players</string>
     <string name="edit_name">Edit name</string>
+    <string name="edit_color">Edit color</string>
     <string name="enter_name">Enter name</string>
     <string name="number_picker_minus_label">—</string>
     <string name="number_picker_seperator">.</string>

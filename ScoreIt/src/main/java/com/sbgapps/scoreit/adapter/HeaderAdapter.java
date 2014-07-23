@@ -85,6 +85,13 @@ public class HeaderAdapter extends BaseAdapter {
             }
         });
 
+        holder.score.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActivity.editColor(info.mPlayer);
+            }
+        });
+
         holder.name.setText(info.mPlayer.getName());
         holder.score.setText(Integer.toString(info.mScore));
         holder.score.setTextColor(info.mPlayer.getColor());

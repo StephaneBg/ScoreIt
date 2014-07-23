@@ -32,6 +32,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.faizmalkani.floatingactionbutton.FloatingActionButton;
+import com.larswerkman.holocolorpicker.ColorPicker;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
@@ -127,6 +128,13 @@ public class ScoreItActivity extends BaseActivity
         mGameHelper.saveGame();
     }
 
+    //    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        mGameHelper = new GameHelper(this);
+//        mGameHelper.loadLaps();
+//    }
+//
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -263,6 +271,11 @@ public class ScoreItActivity extends BaseActivity
     public void editName(Player player) {
         mEditedPlayer = player;
         showEditNameActionChoices();
+    }
+
+    public void editColor(Player player) {
+        mEditedPlayer = player;
+        showColorPickerDialog();
     }
 
     private void updateFragments() {
@@ -424,7 +437,6 @@ public class ScoreItActivity extends BaseActivity
     private void showEditNameDialog() {
         View view = getLayoutInflater().inflate(R.layout.dialog_edit_name, null);
         final EditText editText = (EditText) view.findViewById(R.id.edit_name);
-        //editText.setText(mEditedName.getName());
         Dialog dialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.edit_name)
                 .setView(view)
@@ -435,6 +447,37 @@ public class ScoreItActivity extends BaseActivity
                                 String name = editText.getText().toString();
                                 mEditedPlayer.setName(name);
                                 mHeaderFragment.update();
+                            }
+                        }
+                )
+                .setNegativeButton(R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Nothing to do!
+                            }
+                        }
+                )
+                .create();
+        dialog.show();
+        Utils.colorizeDialog(dialog);
+    }
+
+    private void showColorPickerDialog() {
+        View view = getLayoutInflater().inflate(R.layout.dialog_color_picker, null);
+        final ColorPicker picker = (ColorPicker) view.findViewById(R.id.picker);
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.edit_color)
+                .setView(view)
+                .setPositiveButton(R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int color = picker.getColor();
+                                mEditedPlayer.setColor(color);
+                                mHeaderFragment.update();
+                                if (null != mGraphFragment)
+                                    mGraphFragment.traceGraph();
                             }
                         }
                 )
