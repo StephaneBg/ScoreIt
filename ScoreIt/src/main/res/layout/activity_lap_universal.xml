@@ -44,6 +44,6 @@
         android:layout_marginRight="@dimen/margin_default"
         android:onClick="onFloatingActionButtonClicked"
         app:color="@color/secondary_accent"
-        app:drawable="@drawable/ic_action_accept_dark"/>
+        app:drawable="@drawable/ic_action_accept"/>
 
 </FrameLayout>

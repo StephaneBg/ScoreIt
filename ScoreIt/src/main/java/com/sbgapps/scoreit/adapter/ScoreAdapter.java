@@ -31,11 +31,8 @@ import android.widget.LinearLayout;
 import com.fortysevendeg.swipelistview.SwipeListView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
-import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
-import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
-import com.sbgapps.scoreit.games.tarot.TarotLap;
 import com.sbgapps.scoreit.utils.Constants;
 import com.sbgapps.scoreit.view.PlayerScore;
 
@@ -93,24 +90,6 @@ public class ScoreAdapter extends BaseAdapter {
 
         for (int i = 0; i < cnt; i++) {
             h.scores[i].getScore().setText(Integer.toString(lap.getScore(i)));
-            switch (getGameHelper().getPlayedGame()) {
-                case Game.BELOTE:
-                case Game.COINCHE:
-                    if (((GenericBeloteLap) lap).getBelote() == i) {
-                        h.scores[i].getImage().setImageResource(R.drawable.ic_star);
-                    } else {
-                        h.scores[i].getImage().setImageDrawable(null);
-                    }
-                    break;
-
-                case Game.TAROT:
-                    if (((TarotLap) lap).getTaker() == i) {
-                        h.scores[i].getImage().setImageResource(R.drawable.ic_taker);
-                    } else {
-                        h.scores[i].getImage().setImageDrawable(null);
-                    }
-                    break;
-            }
         }
 
         h.discard.setOnClickListener(new View.OnClickListener() {

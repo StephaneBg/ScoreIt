@@ -53,6 +53,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/spinner_announce"
-        android:src="@drawable/ic_action_cancel_light"/>
+        android:src="@drawable/ic_action_cancel"/>
 
 </RelativeLayout>

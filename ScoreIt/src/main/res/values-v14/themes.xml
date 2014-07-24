@@ -19,6 +19,7 @@
 
     <style name="Theme.ScoreIt" parent="AppTheme">
         <item name="android:actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
+        <item name="android:actionOverflowButtonStyle">@style/ButtonOverflow</item>
     </style>
 
     <style name="Theme.Adaptive" parent="AppTheme">

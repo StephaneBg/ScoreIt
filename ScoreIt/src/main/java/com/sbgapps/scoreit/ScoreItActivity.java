@@ -94,14 +94,14 @@ public class ScoreItActivity extends BaseActivity
         // Init drawer
         mDrawer = (GoogleNavigationDrawer) findViewById(R.id.navigation_drawer_container);
         mDrawer.check(mGameHelper.getPlayedGame());
-        mDrawerToggle = new ActionBarDrawerToggle(this,
-                mDrawer,
-                R.drawable.ic_navigation_drawer,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-        mDrawer.setDrawerListener(mDrawerToggle);
+//        mDrawerToggle = new ActionBarDrawerToggle(this,
+//                mDrawer,
+//                R.drawable.ic_navigation_drawer,
+//                R.string.navigation_drawer_open,
+//                R.string.navigation_drawer_close);
+//        mDrawer.setDrawerListener(mDrawerToggle);
         mDrawer.setOnNavigationSectionSelected(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         // Floating Action Button
@@ -119,7 +119,7 @@ public class ScoreItActivity extends BaseActivity
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
+        //mDrawerToggle.syncState();
     }
 
     @Override
