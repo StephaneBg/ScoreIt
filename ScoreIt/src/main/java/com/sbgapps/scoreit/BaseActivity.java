@@ -17,51 +17,39 @@
 package com.sbgapps.scoreit;
 
 import android.os.Build;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.sbgapps.scoreit.games.Game;
-import com.sbgapps.scoreit.utils.TypefaceSpan;
 
 /**
  * Created by Stéphane on 22/07/2014.
  */
 public class BaseActivity extends ActionBarActivity {
 
-    private TypefaceSpan mTypefaceSpan;
-    private SpannableString mTitle;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
-    }
+    private CharSequence mTitle;
 
     @Override
     public void setTitle(int position) {
         switch (position) {
             default:
-                mTitle = new SpannableString(getTitle());
+                mTitle = getTitle();
                 break;
             case Game.UNIVERSAL:
-                mTitle = new SpannableString(getResources().getString(R.string.universal));
+                mTitle = getResources().getString(R.string.universal);
                 break;
             case Game.BELOTE:
-                mTitle = new SpannableString(getResources().getString(R.string.belote));
+                mTitle = getResources().getString(R.string.belote);
                 break;
             case Game.COINCHE:
-                mTitle = new SpannableString(getResources().getString(R.string.coinche));
+                mTitle = getResources().getString(R.string.coinche);
                 break;
             case Game.TAROT:
-                mTitle = new SpannableString(getResources().getString(R.string.tarot));
+                mTitle = getResources().getString(R.string.tarot);
                 break;
         }
-        mTitle.setSpan(mTypefaceSpan, 0, mTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(mTitle);
     }
 
@@ -75,7 +63,7 @@ public class BaseActivity extends ActionBarActivity {
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(getResources().getColor(android.R.color.black));
-            tintManager.setStatusBarAlpha(0.5f);
+            tintManager.setStatusBarAlpha(0.25f);
         }
     }
 }

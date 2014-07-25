@@ -24,6 +24,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.faizmalkani.floatingactionbutton.FloatingActionButton;
 import com.sbgapps.scoreit.BaseActivity;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
@@ -85,6 +86,13 @@ public class LapActivity extends BaseActivity {
         intent.putExtra(ScoreItActivity.EXTRA_LAP, mLap);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    public void setUpFloatingActionButton() {
+        if (-1 != mPosition) {
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setDrawable(getResources().getDrawable(R.drawable.ic_content_edit_dark));
+        }
     }
 
     private void setupFauxDialog() {

@@ -55,6 +55,7 @@ public class CoincheLapActivity extends LapActivity
         }
 
         setContentView(R.layout.activity_lap_coinche);
+        setUpFloatingActionButton();
 
         mRadioGroupPlayer = (RadioGroup) findViewById(R.id.radio_group_player);
         mRadioGroupBelote = (RadioGroup) findViewById(R.id.radio_group_belote);

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright (c) 2014 SBG Apps
   ~
@@ -16,16 +15,11 @@
   ~ limitations under the License.
   -->
 
-<layer-list
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape>
-            <solid android:color="#070534"/>
-        </shape>
-    </item>
-    <item>
-        <bitmap
-            android:gravity="top|center_horizontal"
-            android:src="@drawable/pattern_wallpaper"/>
-    </item>
-</layer-list>
+<resources>
+
+    <style name="Theme.ScoreIt" parent="AppTheme">
+        <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
+        <item name="android:dropDownSpinnerStyle">@style/SpinnerAppTheme</item>
+    </style>
+
+</resources>

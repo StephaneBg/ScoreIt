@@ -78,6 +78,7 @@ public class TarotLapActivity extends LapActivity
         }
 
         setContentView(R.layout.activity_lap_tarot);
+        setUpFloatingActionButton();
 
         mTaker = (Spinner) findViewById(R.id.spinner_taker);
         mBid = (Spinner) findViewById(R.id.spinner_deal);

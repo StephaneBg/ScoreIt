@@ -42,6 +42,7 @@ public class UniversalLapActivity extends LapActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_lap_universal);
+        setUpFloatingActionButton();
 
         if (null == savedInstanceState) {
             if (-1 != mPosition) {

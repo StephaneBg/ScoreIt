@@ -44,7 +44,6 @@
         android:background="@drawable/background_action"
         android:gravity="center"
         android:singleLine="true"
-        android:textSize="@dimen/font_headline"
-        android:textStyle="bold"/>
+        android:textSize="@dimen/font_headline"/>
 
 </LinearLayout>

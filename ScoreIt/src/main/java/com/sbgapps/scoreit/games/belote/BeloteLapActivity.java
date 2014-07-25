@@ -52,6 +52,7 @@ public class BeloteLapActivity extends LapActivity
         }
 
         setContentView(R.layout.activity_lap_belote);
+        setUpFloatingActionButton();
 
         mRadioGroupPlayer = (RadioGroup) findViewById(R.id.radio_group_player);
         mRadioGroupBelote = (RadioGroup) findViewById(R.id.radio_group_belote);

@@ -22,18 +22,19 @@
 
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
         <item name="actionOverflowButtonStyle">@style/ButtonOverflow</item>
-        <item name="android:windowBackground">@color/primary_accent</item>
+        <item name="android:spinnerStyle">@style/SpinnerAppTheme</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemAppTheme</item>
+        <item name="android:editTextStyle">@style/EditTextAppTheme</item>
+        <item name="android:windowBackground">@drawable/background_window</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:actionMenuTextColor">@android:color/white</item>
         <item name="android:textColorHighlight">@color/secondary_accent</item>
         <item name="android:textColor">@color/darker_black</item>
-        <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/apptheme_btn_check_holo_light
         </item>
         <item name="android:listChoiceIndicatorSingle">@drawable/apptheme_btn_radio_holo_light
         </item>
-        <item name="android:dropDownSpinnerStyle">@style/SpinnerAppTheme</item>
         <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
     </style>
 
@@ -43,15 +44,10 @@
 
     <style name="ActionBar.Solid.Apptheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@android:color/transparent</item>
-        <!--<item name="android:titleTextStyle">@style/ActionBar.TitleTextStyle</item>-->
     </style>
 
     <style name="ButtonOverflow" parent="android:style/Widget.Holo.ActionButton.Overflow">
         <item name="android:src">@drawable/ic_action_overflow</item>
-    </style>
-
-    <style name="ActionBar.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/darker_gray</item>
     </style>
 
 </resources>

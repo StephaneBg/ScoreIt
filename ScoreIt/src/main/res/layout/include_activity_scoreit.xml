@@ -32,13 +32,14 @@
         <FrameLayout
             android:id="@+id/fragment_header"
             android:layout_width="match_parent"
-            android:layout_height="112dp"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:background="@android:color/white"/>
     </LinearLayout>
 

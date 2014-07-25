@@ -251,7 +251,7 @@ public class ScoreItActivity extends BaseActivity
                     edited.set(lap);
                 }
                 updateFragments();
-                invalidateOptionsMenu();
+                supportInvalidateOptionsMenu();
                 break;
         }
     }
@@ -361,7 +361,7 @@ public class ScoreItActivity extends BaseActivity
                                     mScoreListFragment.getListAdapter().removeAll();
                                 if (null != mGraphFragment && mGraphFragment.isVisible()) {
                                     mGraphFragment.update();
-                                    if (!mIsTablet) getFragmentManager().popBackStack();
+                                    if (!mIsTablet) getSupportFragmentManager().popBackStack();
                                 }
                                 supportInvalidateOptionsMenu();
                             }
