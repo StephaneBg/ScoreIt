@@ -18,6 +18,8 @@
 
 
 
+
+
 apply plugin: 'com.android.application'
 
 android {
@@ -57,9 +59,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.0'
-    compile 'com.android.support:appcompat-v7:19.1.0'
-    compile 'com.android.support:support-v13:19.1.0'
+    compile 'com.android.support:appcompat-v7:20.+'
+    compile 'com.android.support:support-v4:20.+'
+
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.github.frankiesardo:linearlistview:1.0.1'
     compile 'com.anjlab.android.iab.v3:library:1.0.8@aar'
@@ -72,6 +74,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
     }
     compile 'com.larswerkman:HoloColorPicker:1.4'
+
     compile project(':HoloGraphLibrary')
     compile project(':FloatingActionButton')
     compile project(':GoogleNavigationDrawerMenuLibrary')
