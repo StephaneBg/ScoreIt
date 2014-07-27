@@ -16,21 +16,14 @@
   ~ limitations under the License.
   -->
 
-<ScrollView
-    android:id="@+id/scrollview"
+<LinearLayout
+    android:id="@+id/ll_universal"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context="ScoreItActivity">
+    android:layout_height="wrap_content"
+    android:divider="?android:listDivider"
+    android:orientation="vertical"
+    android:showDividers="middle|end"
+    tools:context="ScoreItActivity"/>
 
-    <LinearLayout
-        android:id="@+id/ll_universal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="?android:listDivider"
-        android:orientation="vertical"
-        android:showDividers="middle|end"/>
-
-</ScrollView>

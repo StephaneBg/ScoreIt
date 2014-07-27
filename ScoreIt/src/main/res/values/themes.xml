@@ -22,12 +22,13 @@
 
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
-        <item name="actionMenuTextColor">@android:color/white</item>
+        <item name="actionBarSize">56dp</item>
+        <item name="actionMenuTextColor">@color/white</item>
         <item name="actionOverflowButtonStyle">@style/ButtonOverflow</item>
         <item name="android:spinnerStyle">@style/SpinnerAppTheme</item>
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemAppTheme</item>
         <item name="android:editTextStyle">@style/EditTextAppTheme</item>
-        <item name="android:windowBackground">@drawable/background_window</item>
+        <item name="android:windowBackground">@color/bkgd_gray</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:textColorHighlight">@color/secondary_accent</item>
         <item name="android:textColor">@color/darker_black</item>
@@ -43,7 +44,7 @@
     </style>
 
     <style name="ActionBar.Solid.Apptheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@android:color/transparent</item>
+        <item name="android:background">@color/primary_accent</item>
     </style>
 
     <style name="ButtonOverflow" parent="android:style/Widget.Holo.ActionButton.Overflow">

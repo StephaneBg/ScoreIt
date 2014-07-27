@@ -94,12 +94,24 @@ public class ScoreItActivity extends BaseActivity
         // Init drawer
         mDrawer = (GoogleNavigationDrawer) findViewById(R.id.navigation_drawer_container);
         mDrawer.check(mGameHelper.getPlayedGame());
-//        mDrawerToggle = new ActionBarDrawerToggle(this,
-//                mDrawer,
-//                R.drawable.ic_navigation_drawer,
-//                R.string.navigation_drawer_open,
-//                R.string.navigation_drawer_close);
-//        mDrawer.setDrawerListener(mDrawerToggle);
+        mDrawerToggle = new ActionBarDrawerToggle(this,
+                mDrawer,
+                R.drawable.ic_logo,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                supportInvalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                supportInvalidateOptionsMenu();
+            }
+        };
+        mDrawer.setDrawerListener(mDrawerToggle);
         mDrawer.setOnNavigationSectionSelected(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -119,7 +131,7 @@ public class ScoreItActivity extends BaseActivity
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        //mDrawerToggle.syncState();
+        mDrawerToggle.syncState();
     }
 
     @Override
@@ -128,13 +140,6 @@ public class ScoreItActivity extends BaseActivity
         mGameHelper.saveGame();
     }
 
-    //    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        mGameHelper = new GameHelper(this);
-//        mGameHelper.loadLaps();
-//    }
-//
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -149,10 +154,10 @@ public class ScoreItActivity extends BaseActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-//        if (mDrawer.isDrawerOpen()) {
-//            menu.clear();
-//            return false;
-//        } else
+        if (mDrawer.isDrawerMenuOpen()) {
+            menu.clear();
+            return false;
+        } else
         {
             MenuItem item;
             if (0 == mGameHelper.getLaps().size()) {

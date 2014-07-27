@@ -19,6 +19,7 @@
 
     <style name="Theme.ScoreIt" parent="AppTheme">
         <item name="android:actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
+        <item name="android:actionBarSize">56dp</item>
         <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
         <item name="android:actionMenuTextColor">@android:color/white</item>
         <item name="android:actionOverflowButtonStyle">@style/ButtonOverflow</item>

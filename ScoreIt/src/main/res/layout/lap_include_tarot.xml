@@ -16,126 +16,120 @@
   ~ limitations under the License.
   -->
 
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context="ScoreItActivity">
 
-    <LinearLayout
+    <TextView
+        style="@style/SubHeader"
+        android:text="@string/taker"/>
+
+    <Spinner
+        android:id="@+id/spinner_taker"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_default"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/margin_activity"
+        android:layout_marginRight="@dimen/margin_activity"
+        android:spinnerMode="dialog"/>
+
+    <ViewStub
+        android:id="@+id/viewstub_partner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout="@layout/stub_partner"/>
 
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/taker"/>
+    <View style="@style/Divider"/>
 
-        <Spinner
-            android:id="@+id/spinner_taker"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_default"
-            android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
-            android:spinnerMode="dialog"/>
+    <TextView
+        style="@style/SubHeader"
+        android:text="@string/bidding"/>
 
-        <ViewStub
-            android:id="@+id/viewstub_partner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout="@layout/stub_partner"/>
+    <Spinner
+        android:id="@+id/spinner_deal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_default"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/margin_activity"
+        android:layout_marginRight="@dimen/margin_activity"
+        android:spinnerMode="dialog"/>
 
-        <View style="@style/Divider"/>
+    <View style="@style/Divider"/>
 
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/bidding"/>
+    <TextView
+        style="@style/SubHeader"
+        android:text="@string/oudlers"/>
 
-        <Spinner
-            android:id="@+id/spinner_deal"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_default"
-            android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
-            android:spinnerMode="dialog"/>
+    <CheckBox
+        android:id="@+id/checkbox_petit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/margin_activity"
+        android:layout_marginRight="@dimen/margin_activity"
+        android:text="@string/petit"/>
 
-        <View style="@style/Divider"/>
+    <CheckBox
+        android:id="@+id/checkbox_twenty_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/margin_activity"
+        android:layout_marginRight="@dimen/margin_activity"
+        android:text="@string/twentyone"/>
 
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/oudlers"/>
+    <CheckBox
+        android:id="@+id/checkbox_fool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/margin_activity"
+        android:layout_marginRight="@dimen/margin_activity"
+        android:text="@string/excuse"/>
 
-        <CheckBox
-            android:id="@+id/checkbox_petit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
-            android:text="@string/petit"/>
+    <View style="@style/Divider"/>
 
-        <CheckBox
-            android:id="@+id/checkbox_twenty_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
-            android:text="@string/twentyone"/>
+    <TextView
+        style="@style/SubHeader"
+        android:text="@string/points"/>
 
-        <CheckBox
-            android:id="@+id/checkbox_fool"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
-            android:text="@string/excuse"/>
+    <com.sbgapps.scoreit.view.SeekbarPoints
+        android:id="@+id/sb_points"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/margin_activity"
+        android:layout_marginRight="@dimen/margin_activity"/>
 
-        <View style="@style/Divider"/>
+    <View style="@style/Divider"/>
 
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/points"/>
+    <TextView
+        style="@style/SubHeader"
+        android:text="@string/bonuses"/>
 
-        <com.sbgapps.scoreit.view.SeekbarPoints
-            android:id="@+id/sb_points"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"/>
+    <LinearLayout
+        android:id="@+id/ll_bonuses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_activity"
+        android:layout_marginRight="@dimen/margin_activity"
+        android:animateLayoutChanges="true"
+        android:divider="?android:listDivider"
+        android:orientation="vertical"
+        android:showDividers="middle|end">
 
-        <View style="@style/Divider"/>
-
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/bonuses"/>
-
-        <LinearLayout
-            android:id="@+id/ll_bonuses"
+        <Button
+            android:id="@+id/btn_add_bonus"
+            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
-            android:animateLayoutChanges="true"
-            android:divider="?android:listDivider"
-            android:orientation="vertical"
-            android:showDividers="middle|end">
-
-            <Button
-                android:id="@+id/btn_add_bonus"
-                style="?android:borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:text="@string/add"
-                android:textAllCaps="true"/>
-        </LinearLayout>
-
+            android:layout_margin="@dimen/margin_default"
+            android:text="@string/add"
+            android:textAllCaps="true"/>
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

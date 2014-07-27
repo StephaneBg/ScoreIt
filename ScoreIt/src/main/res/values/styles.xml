@@ -65,8 +65,6 @@
     <style name="SubHeader">
         <item name="android:layout_height">@dimen/height_default</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_marginLeft">@dimen/margin_activity</item>
-        <item name="android:layout_marginRight">@dimen/margin_activity</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/secondary_accent</item>
         <item name="android:textSize">@dimen/font_subhead</item>
