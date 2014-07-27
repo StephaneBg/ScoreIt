@@ -28,7 +28,7 @@
         <item name="android:spinnerStyle">@style/SpinnerAppTheme</item>
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemAppTheme</item>
         <item name="android:editTextStyle">@style/EditTextAppTheme</item>
-        <item name="android:windowBackground">@color/bkgd_gray</item>
+        <item name="android:windowBackground">@drawable/background_pattern</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:textColorHighlight">@color/secondary_accent</item>
         <item name="android:textColor">@color/darker_black</item>

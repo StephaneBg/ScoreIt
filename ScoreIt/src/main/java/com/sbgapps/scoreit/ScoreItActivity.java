@@ -93,7 +93,6 @@ public class ScoreItActivity extends BaseActivity
 
         // Init drawer
         mDrawer = (GoogleNavigationDrawer) findViewById(R.id.navigation_drawer_container);
-        mDrawer.check(mGameHelper.getPlayedGame());
         mDrawerToggle = new ActionBarDrawerToggle(this,
                 mDrawer,
                 R.drawable.ic_logo,
@@ -111,6 +110,7 @@ public class ScoreItActivity extends BaseActivity
                 supportInvalidateOptionsMenu();
             }
         };
+        mDrawer.check(mGameHelper.getPlayedGame());
         mDrawer.setDrawerListener(mDrawerToggle);
         mDrawer.setOnNavigationSectionSelected(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -157,8 +157,7 @@ public class ScoreItActivity extends BaseActivity
         if (mDrawer.isDrawerMenuOpen()) {
             menu.clear();
             return false;
-        } else
-        {
+        } else {
             MenuItem item;
             if (0 == mGameHelper.getLaps().size()) {
                 if (!mIsTablet) {

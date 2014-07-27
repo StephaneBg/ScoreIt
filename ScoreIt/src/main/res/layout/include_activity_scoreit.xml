@@ -48,7 +48,7 @@
         android:layout_gravity="bottom|right"
         android:layout_marginBottom="@dimen/margin_default"
         android:layout_marginRight="@dimen/margin_default"
-        app:color="@color/primary_accent"
+        app:color="@color/secondary_accent"
         app:drawable="@drawable/ic_action_new"/>
 
 </FrameLayout>

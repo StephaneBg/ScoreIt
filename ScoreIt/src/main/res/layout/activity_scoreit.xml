@@ -19,14 +19,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer
         android:id="@+id/navigation_drawer_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:drawer_gravity="start"
-        app:list_mainSectionsDrawables="@array/navigation_main_drawable"
         app:list_mainSectionsEntries="@array/navigation_main_sections"
         app:list_secondarySectionsDrawables="@array/navigation_secondary_drawable"
         app:list_secondarySectionsEntries="@array/navigation_secondary_sections">

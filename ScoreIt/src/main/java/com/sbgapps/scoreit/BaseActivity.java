@@ -16,7 +16,10 @@
 
 package com.sbgapps.scoreit;
 
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.sbgapps.scoreit.games.Game;
@@ -52,8 +55,17 @@ public class BaseActivity extends ActionBarActivity {
 
 
     public void setAccentDecor() {
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        tintManager.setStatusBarTintEnabled(true);
-        tintManager.setStatusBarTintResource(R.drawable.background_status_bar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window win = getWindow();
+            WindowManager.LayoutParams winParams = win.getAttributes();
+            final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+            winParams.flags |= bits;
+            win.setAttributes(winParams);
+        }
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintResource(R.drawable.background_status_bar);
+        }
     }
 }
