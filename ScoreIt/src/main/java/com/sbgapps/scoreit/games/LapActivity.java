@@ -29,6 +29,8 @@ import com.faizmalkani.floatingactionbutton.FloatingActionButton;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 
+import butterknife.InjectView;
+
 /**
  * Created by sbaiget on 08/01/14.
  */
@@ -36,6 +38,8 @@ public class LapActivity extends ActionBarActivity {
 
     public int mPosition = -1;
     public Lap mLap;
+    @InjectView(R.id.fab)
+    FloatingActionButton mFloatingActionButton;
     private GameHelper mGameHelper;
     private boolean mIsDialog = false;
 
@@ -67,7 +71,6 @@ public class LapActivity extends ActionBarActivity {
         }
 
         setupFauxDialog();
-        setTitle(mGameHelper.getPlayedGame());
     }
 
     @Override
@@ -89,8 +92,8 @@ public class LapActivity extends ActionBarActivity {
 
     public void setUpFloatingActionButton() {
         if (-1 != mPosition) {
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setDrawable(getResources().getDrawable(R.drawable.ic_content_edit_dark));
+            mFloatingActionButton.setDrawable(
+                    getResources().getDrawable(R.drawable.ic_content_edit_dark));
         }
     }
 

@@ -27,15 +27,23 @@ import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by sbaiget on 26/01/14.
  */
 public class SeekbarPoints extends FrameLayout {
 
-    private final TextView mTextViewPoints;
-    private final SeekBar mSeekBarPoints;
-    private final ImageButton mButtonPlus;
-    private final ImageButton mButtonMinus;
+    @InjectView(R.id.textview_points)
+    TextView mTextViewPoints;
+    @InjectView(R.id.seekbar_points)
+    SeekBar mSeekBarPoints;
+    @InjectView(R.id.btn_minus)
+    ImageButton mButtonMinus;
+    @InjectView(R.id.btn_plus)
+    ImageButton mButtonPlus;
+
     private OnPointsChangedListener mListener;
     private int mProgress;
     private String mTag;
@@ -54,11 +62,7 @@ public class SeekbarPoints extends FrameLayout {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.seekbar_input_points, this, true);
-
-        mTextViewPoints = (TextView) findViewById(R.id.textview_points);
-        mSeekBarPoints = (SeekBar) findViewById(R.id.seekbar_points);
-        mButtonMinus = (ImageButton) findViewById(R.id.btn_less);
-        mButtonPlus = (ImageButton) findViewById(R.id.btn_more);
+        ButterKnife.inject(this);
     }
 
     public void setOnPointsChangedListener(OnPointsChangedListener listener, String tag) {
@@ -75,7 +79,7 @@ public class SeekbarPoints extends FrameLayout {
             public void onClick(View v) {
                 if (mProgress > 0) {
                     mProgress--;
-                    managePoints();
+                    manageProgress();
                 }
             }
         });
@@ -85,7 +89,7 @@ public class SeekbarPoints extends FrameLayout {
             public void onClick(View v) {
                 if (mProgress < mSeekBarPoints.getMax()) {
                     mProgress++;
-                    managePoints();
+                    manageProgress();
                 }
             }
         });
@@ -97,7 +101,7 @@ public class SeekbarPoints extends FrameLayout {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
                     mProgress = progress;
-                    managePoints();
+                    manageProgress();
                 }
             }
 
@@ -113,7 +117,7 @@ public class SeekbarPoints extends FrameLayout {
         });
     }
 
-    public void managePoints() {
+    public void manageProgress() {
         int points = mListener.onPointsChanged(mProgress, mTag);
         mTextViewPoints.setText(Integer.toString(points));
         mSeekBarPoints.setProgress(mProgress);

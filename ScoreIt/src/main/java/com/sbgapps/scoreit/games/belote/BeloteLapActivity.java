@@ -24,15 +24,21 @@ import com.sbgapps.scoreit.games.LapActivity;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.view.SeekbarPoints;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by sbaiget on 01/11/13.
  */
 public class BeloteLapActivity extends LapActivity
         implements SeekbarPoints.OnPointsChangedListener {
 
-    private RadioGroup mRadioGroupPlayer;
-    private RadioGroup mRadioGroupBelote;
-    private SeekbarPoints mPoints;
+    @InjectView(R.id.radio_group_player)
+    RadioGroup mRadioGroupPlayer;
+    @InjectView(R.id.radio_group_belote)
+    RadioGroup mRadioGroupBelote;
+    @InjectView(R.id.input_points)
+    SeekbarPoints mPoints;
 
     @Override
     public BeloteLap getLap() {
@@ -52,11 +58,8 @@ public class BeloteLapActivity extends LapActivity
         }
 
         setContentView(R.layout.activity_lap_belote);
+        ButterKnife.inject(this);
         setUpFloatingActionButton();
-
-        mRadioGroupPlayer = (RadioGroup) findViewById(R.id.radio_group_player);
-        mRadioGroupBelote = (RadioGroup) findViewById(R.id.radio_group_belote);
-        mPoints = (SeekbarPoints) findViewById(R.id.sb_points);
 
         switch (getLap().getTaker()) {
             case Player.PLAYER_1:

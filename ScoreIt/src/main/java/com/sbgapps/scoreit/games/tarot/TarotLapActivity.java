@@ -34,21 +34,32 @@ import com.sbgapps.scoreit.games.LapActivity;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.view.SeekbarPoints;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by sbaiget on 07/12/13.
  */
 public class TarotLapActivity extends LapActivity
         implements SeekbarPoints.OnPointsChangedListener {
 
-    private Spinner mTaker;
-    private Spinner mBid;
-    private Spinner mPartner;
-    private CheckBox mPetit;
-    private CheckBox mTwentyOne;
-    private CheckBox mExcuse;
-    private SeekbarPoints mPoints;
-    private LinearLayout mBonuses;
-    private Button mButtonBonus;
+    @InjectView(R.id.spinner_taker)
+    Spinner mTaker;
+    @InjectView(R.id.spinner_bid)
+    Spinner mBid;
+    @InjectView(R.id.checkbox_petit)
+    CheckBox mPetit;
+    @InjectView(R.id.checkbox_twenty_one)
+    CheckBox mTwentyOne;
+    @InjectView(R.id.checkbox_excuse)
+    CheckBox mExcuse;
+    @InjectView(R.id.input_points)
+    SeekbarPoints mPoints;
+    @InjectView(R.id.ll_bonuses)
+    LinearLayout mBonuses;
+    @InjectView(R.id.btn_add_bonus)
+    Button mButtonBonus;
+    Spinner mPartner;
 
     @Override
     public TarotLap getLap() {
@@ -78,15 +89,8 @@ public class TarotLapActivity extends LapActivity
         }
 
         setContentView(R.layout.activity_lap_tarot);
+        ButterKnife.inject(this);
         setUpFloatingActionButton();
-
-        mTaker = (Spinner) findViewById(R.id.spinner_taker);
-        mBid = (Spinner) findViewById(R.id.spinner_deal);
-        mPetit = (CheckBox) findViewById(R.id.checkbox_petit);
-        mTwentyOne = (CheckBox) findViewById(R.id.checkbox_twenty_one);
-        mExcuse = (CheckBox) findViewById(R.id.checkbox_fool);
-        mPoints = (SeekbarPoints) findViewById(R.id.sb_points);
-        mBonuses = (LinearLayout) findViewById(R.id.ll_bonuses);
 
         mTaker.setAdapter(getPlayerArrayAdapter());
         mTaker.setSelection(getLap().getTaker());
@@ -193,7 +197,6 @@ public class TarotLapActivity extends LapActivity
             }
         });
 
-        mButtonBonus = (Button) findViewById(R.id.btn_add_bonus);
         mButtonBonus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -54,7 +54,7 @@ public class UniversalInput extends FrameLayout {
         mScore = mActivity.getLap().getScore(mPlayer);
         mTextViewPoints.setText(Integer.toString(mScore));
 
-        ImageButton button = (ImageButton) findViewById(R.id.btn_less);
+        ImageButton button = (ImageButton) findViewById(R.id.btn_minus);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +63,7 @@ public class UniversalInput extends FrameLayout {
             }
         });
 
-        button = (ImageButton) findViewById(R.id.btn_more);
+        button = (ImageButton) findViewById(R.id.btn_plus);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

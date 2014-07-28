@@ -36,7 +36,7 @@
         android:paddingRight="@dimen/default_margin">
 
         <ImageButton
-            android:id="@+id/btn_less"
+            android:id="@+id/btn_minus"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -54,7 +54,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <ImageButton
-            android:id="@+id/btn_more"
+            android:id="@+id/btn_plus"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"

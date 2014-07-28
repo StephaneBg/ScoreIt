@@ -25,17 +25,25 @@ import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
 import com.sbgapps.scoreit.view.SeekbarPoints;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by sbaiget on 29/01/14.
  */
 public class CoincheLapActivity extends LapActivity
         implements SeekbarPoints.OnPointsChangedListener {
 
-    private RadioGroup mRadioGroupPlayer;
-    private RadioGroup mRadioGroupBelote;
-    private RadioGroup mRadioGroupCoinche;
-    private SeekbarPoints mPoints;
-    private SeekbarPoints mBids;
+    @InjectView(R.id.radio_group_player)
+    RadioGroup mRadioGroupPlayer;
+    @InjectView(R.id.radio_group_belote)
+    RadioGroup mRadioGroupBelote;
+    @InjectView(R.id.radio_group_coinche)
+    RadioGroup mRadioGroupCoinche;
+    @InjectView(R.id.input_points)
+    SeekbarPoints mPoints;
+    @InjectView(R.id.input_bid)
+    SeekbarPoints mBids;
 
     @Override
     public CoincheLap getLap() {
@@ -55,13 +63,8 @@ public class CoincheLapActivity extends LapActivity
         }
 
         setContentView(R.layout.activity_lap_coinche);
+        ButterKnife.inject(this);
         setUpFloatingActionButton();
-
-        mRadioGroupPlayer = (RadioGroup) findViewById(R.id.radio_group_player);
-        mRadioGroupBelote = (RadioGroup) findViewById(R.id.radio_group_belote);
-        mRadioGroupCoinche = (RadioGroup) findViewById(R.id.radio_group_coinche);
-        mBids = (SeekbarPoints) findViewById(R.id.input_deal);
-        mPoints = (SeekbarPoints) findViewById(R.id.sb_points);
 
         switch (getLap().getTaker()) {
             case Player.PLAYER_1:
