@@ -15,6 +15,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
+
 <resources>
 
     <dimen name="default_margin">12dip</dimen>
@@ -44,8 +45,7 @@
 
     <!-- Padding -->
     <dimen name="padding_default">4dp</dimen>
-    <dimen name="padding_numberview">12dp</dimen>
-    <dimen name="padding_left_numberview">16dp</dimen>
+    <dimen name="default_small_padding">8dp</dimen>
 
     <!-- Fonts -->
     <dimen name="font_display_1">34sp</dimen>

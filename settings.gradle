@@ -16,8 +16,8 @@
 
 
 
-include ':ScoreIt', ':HoloGraphLibrary', ':FloatingActionButton', ':GoogleNavigationDrawerMenuLibrary'
+include ':ScoreIt', ':HoloGraphLibrary', ':FloatingActionButton'
 
 project(':HoloGraphLibrary').projectDir = new File(rootDir, '../HoloGraphLibrary/HoloGraphLibrary')
 project(':FloatingActionButton').projectDir = new File(rootDir, '../FloatingActionButton/FloatingActionButton')
-project(':GoogleNavigationDrawerMenuLibrary').projectDir = new File(rootDir, '../GoogleNavigationDrawerMenu/GoogleNavigationDrawerMenuLibrary')
+

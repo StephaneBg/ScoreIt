@@ -21,18 +21,25 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.faizmalkani.floatingactionbutton.FloatingActionButton;
 import com.larswerkman.holocolorpicker.ColorPicker;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
@@ -41,27 +48,42 @@ import com.sbgapps.scoreit.games.belote.BeloteLapActivity;
 import com.sbgapps.scoreit.games.coinche.CoincheLapActivity;
 import com.sbgapps.scoreit.games.tarot.TarotLapActivity;
 import com.sbgapps.scoreit.games.universal.UniversalLapActivity;
+import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
+import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerView;
 import com.sbgapps.scoreit.utils.Utils;
 
-import org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ScoreItActivity extends BaseActivity
-        implements GoogleNavigationDrawer.OnNavigationSectionSelected {
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnItemClick;
+
+public class ScoreItActivity extends ActionBarActivity {
 
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
     public static final String EXTRA_POSITION = "com.sbgapps.scoreit.position";
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_LAP_ACTIVITY = 2;
 
-    private GameHelper mGameHelper;
-    private boolean mIsTablet;
+    @InjectView(R.id.navigation_drawer)
+    NavigationDrawerView mNavigationDrawer;
+    @InjectView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+    @InjectView(R.id.drawer_list_view)
+    ListView mDrawerListView;
+
+    private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
-    private GoogleNavigationDrawer mDrawer;
+    private CharSequence mTitle;
+    private int mSelectedPosition = 0;
+    private int mEditedLap = -1;
+    private boolean mIsTablet;
+    private GameHelper mGameHelper;
     private ScoreListFragment mScoreListFragment;
     private GraphFragment mGraphFragment;
     private HeaderFragment mHeaderFragment;
     private Player mEditedPlayer;
-    private int mEditedLap = -1;
 
     public GameHelper getGameHelper() {
         return mGameHelper;
@@ -75,7 +97,7 @@ public class ScoreItActivity extends BaseActivity
         mGameHelper.loadLaps();
 
         setContentView(R.layout.activity_scoreit);
-        setAccentDecor();
+        ButterKnife.inject(this);
         //mIsTablet = (null != findViewById(R.id.fragment_container_large));
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
@@ -92,29 +114,38 @@ public class ScoreItActivity extends BaseActivity
         }
 
         // Init drawer
-        mDrawer = (GoogleNavigationDrawer) findViewById(R.id.navigation_drawer_container);
-        mDrawerToggle = new ActionBarDrawerToggle(this,
-                mDrawer,
-                R.drawable.ic_logo,
-                R.string.navigation_drawer_open,
+        mTitle = getTitle();
+        mNavigationItems = new ArrayList<>();
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.universal), true));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.tarot), true));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.belote), true));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.coinche), true));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about),
+                R.drawable.ic_action_about, false));
+        mNavigationDrawer.replaceWith(mNavigationItems);
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.drawable.ic_navigation_drawer, R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close) {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getSupportActionBar()
+                        .setTitle(mNavigationItems.get(mSelectedPosition).getItemName());
                 supportInvalidateOptionsMenu();
             }
 
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle(getTitle());
                 supportInvalidateOptionsMenu();
             }
         };
-        mDrawer.check(mGameHelper.getPlayedGame());
-        mDrawer.setDrawerListener(mDrawerToggle);
-        mDrawer.setOnNavigationSectionSelected(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        mSelectedPosition = mGameHelper.getPlayedGame();
+        selectItem(mSelectedPosition);
 
         // Floating Action Button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -125,13 +156,6 @@ public class ScoreItActivity extends BaseActivity
                 showLapActivity();
             }
         });
-        setTitle(mGameHelper.getPlayedGame());
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
     }
 
     @Override
@@ -147,46 +171,47 @@ public class ScoreItActivity extends BaseActivity
     }
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        if (!mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
+            getMenuInflater().inflate(R.menu.main, menu);
+            return true;
+        }
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (mDrawer.isDrawerMenuOpen()) {
-            menu.clear();
+        if (mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
             return false;
-        } else {
-            MenuItem item;
-            if (0 == mGameHelper.getLaps().size()) {
-                if (!mIsTablet) {
-                    item = menu.findItem(R.id.menu_view);
-                    item.setVisible(false);
-                }
-                item = menu.findItem(R.id.menu_clear);
+        }
+        MenuItem item;
+        if (0 == mGameHelper.getLaps().size()) {
+            if (!mIsTablet) {
+                item = menu.findItem(R.id.menu_view);
                 item.setVisible(false);
             }
-            item = menu.findItem(R.id.menu_count);
-            item.setVisible(Game.UNIVERSAL == mGameHelper.getPlayedGame() ||
-                    Game.TAROT == mGameHelper.getPlayedGame());
-            return true;
+            item = menu.findItem(R.id.menu_clear);
+            item.setVisible(false);
         }
+        item = menu.findItem(R.id.menu_count);
+        item.setVisible(Game.UNIVERSAL == mGameHelper.getPlayedGame() ||
+                Game.TAROT == mGameHelper.getPlayedGame());
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if (mDrawer != null) {
-                    if (mDrawer.isDrawerMenuOpen()) {
-                        mDrawer.closeDrawerMenu();
-                    } else {
-                        mDrawer.openDrawerMenu();
-                    }
-                }
-                return true;
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
 
+        switch (item.getItemId()) {
             case R.id.menu_clear:
                 showClearDialog();
                 return true;
@@ -202,9 +227,31 @@ public class ScoreItActivity extends BaseActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onSectionSelected(View v, int i, long l) {
-        switch (i) {
+    @OnItemClick(R.id.drawer_list_view)
+    public void OnItemClick(int position, long id) {
+        if (mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
+            mDrawerLayout.closeDrawer(mNavigationDrawer);
+            onNavigationDrawerItemSelected(position);
+            selectItem(position);
+        }
+    }
+
+    private void selectItem(int position) {
+        if (mDrawerListView != null) {
+            mDrawerListView.setItemChecked(position, true);
+
+            mNavigationItems.get(mSelectedPosition).setSelected(false);
+            mNavigationItems.get(position).setSelected(true);
+
+            mSelectedPosition = position;
+            getSupportActionBar()
+                    .setTitle(mNavigationItems.get(mSelectedPosition).getItemName());
+        }
+        mDrawerLayout.closeDrawer(mNavigationDrawer);
+    }
+
+    private void onNavigationDrawerItemSelected(int position) {
+        switch (position) {
             case 0:
                 mGameHelper.setPlayedGame(Game.UNIVERSAL);
                 break;
@@ -224,7 +271,7 @@ public class ScoreItActivity extends BaseActivity
         }
         getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         supportInvalidateOptionsMenu();
-        setTitle(i);
+        //setTitle(position);
         loadFragments(true);
     }
 
@@ -348,6 +395,21 @@ public class ScoreItActivity extends BaseActivity
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, mGraphFragment, GraphFragment.TAG)
                 .commit();
+    }
+
+    private void setAccentDecor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window win = getWindow();
+            WindowManager.LayoutParams winParams = win.getAttributes();
+            final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+            winParams.flags |= bits;
+            win.setAttributes(winParams);
+        }
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintResource(R.drawable.background_status_bar);
+        }
     }
 
     private void showClearDialog() {

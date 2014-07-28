@@ -29,7 +29,6 @@
         android:label="@string/app_name">
         <activity
             android:name="com.sbgapps.scoreit.ScoreItActivity"
-            android:logo="@drawable/ic_navigation_drawer"
             android:theme="@style/Theme.ScoreIt">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
