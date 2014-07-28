@@ -30,7 +30,7 @@ public class Utils {
 
     public static void colorizeDialog(Dialog dialog) {
         final Resources r = dialog.getContext().getResources();
-        final int color = r.getColor(R.color.secondary_accent);
+        final int color = r.getColor(R.color.primary_accent);
         int id = r.getIdentifier("android:id/titleDivider", null, null);
         View divider = dialog.findViewById(id);
         if (null != divider)

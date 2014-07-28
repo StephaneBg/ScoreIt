@@ -26,7 +26,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -79,10 +78,8 @@ public class ScoreItActivity extends ActionBarActivity {
     private int mSelectedPosition = 0;
     private int mEditedLap = -1;
     private boolean mIsTablet;
+    private ScoreFragment mScoreFragment;
     private GameHelper mGameHelper;
-    private ScoreListFragment mScoreListFragment;
-    private GraphFragment mGraphFragment;
-    private HeaderFragment mHeaderFragment;
     private Player mEditedPlayer;
 
     public GameHelper getGameHelper() {
@@ -104,13 +101,14 @@ public class ScoreItActivity extends ActionBarActivity {
 
         // Init fragments
         if (null == savedInstanceState) {
-            loadFragments(false);
+            mScoreFragment = new ScoreFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.main_container, mScoreFragment, ScoreFragment.TAG)
+                    .commit();
         } else {
             mEditedLap = savedInstanceState.getInt(EXTRA_POSITION);
-
-            mHeaderFragment = (HeaderFragment) fragmentManager.findFragmentByTag(HeaderFragment.TAG);
-            mGraphFragment = (GraphFragment) fragmentManager.findFragmentByTag(GraphFragment.TAG);
-            mScoreListFragment = (ScoreListFragment) fragmentManager.findFragmentByTag(ScoreListFragment.TAG);
+            mScoreFragment = (ScoreFragment) fragmentManager.findFragmentByTag(ScoreFragment.TAG);
         }
 
         // Init drawer
@@ -217,7 +215,7 @@ public class ScoreItActivity extends ActionBarActivity {
                 return true;
 
             case R.id.menu_view:
-                switchScoreViews();
+                mScoreFragment.switchScoreViews();
                 return true;
 
             case R.id.menu_count:
@@ -274,7 +272,7 @@ public class ScoreItActivity extends ActionBarActivity {
         }
         getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         supportInvalidateOptionsMenu();
-        loadFragments(true);
+        mScoreFragment.loadFragments();
     }
 
     @Override
@@ -290,7 +288,7 @@ public class ScoreItActivity extends ActionBarActivity {
                     int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                     name = cursor.getString(columnIndex);
                     mEditedPlayer.setName(name);
-                    mHeaderFragment.update();
+                    mScoreFragment.getHeaderFragment().update();
                 }
                 break;
 
@@ -303,7 +301,7 @@ public class ScoreItActivity extends ActionBarActivity {
                     Lap edited = mGameHelper.getLaps().get(mEditedLap);
                     edited.set(lap);
                 }
-                updateFragments();
+                mScoreFragment.update();
                 supportInvalidateOptionsMenu();
                 break;
         }
@@ -311,14 +309,14 @@ public class ScoreItActivity extends ActionBarActivity {
 
     public void editLap(Lap lap) {
         mEditedLap = mGameHelper.getLaps().indexOf(lap);
-        mScoreListFragment.closeOpenedItems();
+        mScoreFragment.closeOpenedItems();
         showLapActivity();
     }
 
     public void removeLap(Lap lap) {
         mGameHelper.removeLap(lap);
-        mScoreListFragment.closeOpenedItems();
-        updateFragments();
+        mScoreFragment.closeOpenedItems();
+        mScoreFragment.update();
     }
 
     public void editName(Player player) {
@@ -329,32 +327,6 @@ public class ScoreItActivity extends ActionBarActivity {
     public void editColor(Player player) {
         mEditedPlayer = player;
         showColorPickerDialog();
-    }
-
-    private void updateFragments() {
-        if (null != mHeaderFragment)
-            mHeaderFragment.update();
-        if (null != mScoreListFragment && mScoreListFragment.isVisible())
-            mScoreListFragment.update();
-        if (null != mGraphFragment && mGraphFragment.isVisible())
-            mGraphFragment.update();
-    }
-
-    private void loadFragments(boolean anim) {
-        mHeaderFragment = new HeaderFragment();
-        mScoreListFragment = new ScoreListFragment();
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        if (anim)
-            ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        ft.replace(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG)
-                .commit();
-
-        ft = getSupportFragmentManager().beginTransaction();
-        if (anim)
-            ft.setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_up);
-        ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG)
-                .commit();
     }
 
     private void showLapActivity() {
@@ -376,27 +348,6 @@ public class ScoreItActivity extends ActionBarActivity {
         }
         intent.putExtra(EXTRA_POSITION, mEditedLap);
         startActivityForResult(intent, REQ_LAP_ACTIVITY);
-    }
-
-    private void switchScoreViews() {
-        if (null != mGraphFragment && mGraphFragment.isVisible()) {
-            getSupportFragmentManager().popBackStack();
-            return;
-        }
-
-        if (null == mGraphFragment)
-            mGraphFragment = new GraphFragment();
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(
-                        R.anim.slide_in_down,
-                        R.anim.slide_out_up,
-                        R.anim.slide_in_up,
-                        R.anim.slide_out_down)
-                .addToBackStack(null)
-                .replace(R.id.fragment_container, mGraphFragment, GraphFragment.TAG)
-                .commit();
     }
 
     private void setAccentDecor() {
@@ -424,11 +375,13 @@ public class ScoreItActivity extends ActionBarActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 mGameHelper.deleteAll();
-                                mHeaderFragment.update();
-                                if (null != mScoreListFragment && mScoreListFragment.isVisible())
-                                    mScoreListFragment.getListAdapter().removeAll();
-                                if (null != mGraphFragment && mGraphFragment.isVisible()) {
-                                    mGraphFragment.update();
+                                mScoreFragment.getHeaderFragment().update();
+                                ScoreListFragment list = mScoreFragment.getScoreListFragment();
+                                if (null != list && list.isVisible())
+                                    list.getListAdapter().removeAll();
+                                ScoreGraphFragment graph = mScoreFragment.getScoreGraphFragment();
+                                if (null != graph && graph.isVisible()) {
+                                    graph.update();
                                     if (!mIsTablet) getSupportFragmentManager().popBackStack();
                                 }
                                 supportInvalidateOptionsMenu();
@@ -493,7 +446,7 @@ public class ScoreItActivity extends ActionBarActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 mGameHelper.setPlayerCount(which);
-                                loadFragments(true);
+                                mScoreFragment.loadFragments();
                             }
                         }
                 )
@@ -514,7 +467,7 @@ public class ScoreItActivity extends ActionBarActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 String name = editText.getText().toString();
                                 mEditedPlayer.setName(name);
-                                mHeaderFragment.update();
+                                mScoreFragment.getHeaderFragment().update();
                             }
                         }
                 )
@@ -544,9 +497,7 @@ public class ScoreItActivity extends ActionBarActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 int color = picker.getColor();
                                 mEditedPlayer.setColor(color);
-                                mHeaderFragment.update();
-                                if (null != mGraphFragment)
-                                    mGraphFragment.update();
+                                mScoreFragment.update();
                             }
                         }
                 )

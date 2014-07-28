@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright (c) 2014 SBG Apps
   ~
@@ -16,28 +15,16 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout
+<com.fortysevendeg.swipelistview.SwipeListView
+    android:id="@android:id/list"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ScoreItActivity">
-
-    <FrameLayout
-        android:id="@+id/main_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="@dimen/margin_default"
-        android:layout_marginRight="@dimen/margin_default"
-        android:src="@drawable/ic_action_new_fab"
-        app:fab_colorNormal="@color/secondary_accent"
-        app:fab_colorPressed="#437F21"/>
-
-</FrameLayout>
+    android:choiceMode="singleChoice"
+    android:listSelector="#00000000"
+    android:transcriptMode="alwaysScroll"
+    app:swipeBackView="@+id/action_view"
+    app:swipeCloseAllItemsWhenMoveList="true"
+    app:swipeFrontView="@+id/score_view"
+    app:swipeMode="both"/>

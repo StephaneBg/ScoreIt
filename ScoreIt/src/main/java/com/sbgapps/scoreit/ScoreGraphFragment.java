@@ -29,9 +29,9 @@ import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.Player;
 
-public class GraphFragment extends Fragment {
+public class ScoreGraphFragment extends Fragment {
 
-    public static final String TAG = GraphFragment.class.getName();
+    public static final String TAG = ScoreGraphFragment.class.getName();
 
     private LineGraph mGraph;
     private int[] mScores;
@@ -44,7 +44,7 @@ public class GraphFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_graph, null);
+        View view = inflater.inflate(R.layout.fragment_score_graph, null);
         mGraph = (LineGraph) view.findViewById(R.id.line_graph);
         return view;
     }

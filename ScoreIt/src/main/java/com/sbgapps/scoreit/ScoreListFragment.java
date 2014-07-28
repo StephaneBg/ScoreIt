@@ -41,7 +41,7 @@ public class ScoreListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_score, null);
+        View view = inflater.inflate(R.layout.fragment_score_list, null);
 
         mListView = (SwipeListView) view.findViewById(android.R.id.list);
         ScoreAdapter adapter = new ScoreAdapter(getActivity(), mListView);
