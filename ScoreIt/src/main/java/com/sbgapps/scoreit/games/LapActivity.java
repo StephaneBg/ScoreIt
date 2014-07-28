@@ -25,7 +25,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.faizmalkani.floatingactionbutton.FloatingActionButton;
+import com.melnykov.fab.FloatingActionButton;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 
@@ -92,7 +92,7 @@ public class LapActivity extends ActionBarActivity {
 
     public void setUpFloatingActionButton() {
         if (-1 != mPosition) {
-            mFloatingActionButton.setDrawable(
+            mFloatingActionButton.setImageDrawable(
                     getResources().getDrawable(R.drawable.ic_content_edit_dark));
         }
     }

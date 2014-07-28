@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"/>
     </ScrollView>
 
-    <com.faizmalkani.floatingactionbutton.FloatingActionButton
+    <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="72dp"
         android:layout_height="72dp"
@@ -43,7 +43,8 @@
         android:layout_marginBottom="@dimen/margin_default"
         android:layout_marginRight="@dimen/margin_default"
         android:onClick="onFloatingActionButtonClicked"
-        app:color="@color/secondary_accent"
-        app:drawable="@drawable/ic_action_accept"/>
+        android:src="@drawable/ic_action_accept"
+        app:fab_colorNormal="@color/primary_accent"
+        app:fab_colorPressed="@color/secondary_accent"/>
 
 </FrameLayout>

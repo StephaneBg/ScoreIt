@@ -51,7 +51,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@drawable/shadow"/>
+        android:background="@drawable/top_shadow"/>
 
     <LinearLayout
         android:id="@+id/score_view"

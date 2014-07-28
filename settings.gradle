@@ -19,5 +19,5 @@
 include ':ScoreIt', ':HoloGraphLibrary', ':FloatingActionButton'
 
 project(':HoloGraphLibrary').projectDir = new File(rootDir, '../HoloGraphLibrary/HoloGraphLibrary')
-project(':FloatingActionButton').projectDir = new File(rootDir, '../FloatingActionButton/FloatingActionButton')
+project(':FloatingActionButton').projectDir = new File(rootDir, '../FloatingActionButton-1/library')
 
