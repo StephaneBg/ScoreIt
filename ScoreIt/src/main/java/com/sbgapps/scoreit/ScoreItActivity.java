@@ -65,9 +65,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 
-public class ScoreItActivity extends ActionBarActivity {
+public class ScoreItActivity extends ActionBarActivity
+        implements FragmentManager.OnBackStackChangedListener {
 
-    public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
     private static final int REQ_PICK_CONTACT = 1;
 
     @InjectView(R.id.navigation_drawer)
@@ -76,6 +76,8 @@ public class ScoreItActivity extends ActionBarActivity {
     DrawerLayout mDrawerLayout;
     @InjectView(R.id.drawer_list_view)
     ListView mDrawerListView;
+    @InjectView(R.id.fab)
+    FloatingActionButton mActionButton;
 
     private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -83,9 +85,11 @@ public class ScoreItActivity extends ActionBarActivity {
     private int mSelectedPosition = 0;
     private boolean mIsTablet;
     private ScoreFragment mScoreFragment;
+    private LapFragment mLapFragment;
     private GameHelper mGameHelper;
     private Player mEditedPlayer;
     private Lap mLap;
+    private boolean mIsEdited = false;
 
     public GameHelper getGameHelper() {
         return mGameHelper;
@@ -107,6 +111,7 @@ public class ScoreItActivity extends ActionBarActivity {
         //mIsTablet = (null != findViewById(R.id.fragment_container_large));
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.addOnBackStackChangedListener(this);
 
         // Init fragments
         if (null == savedInstanceState) {
@@ -116,7 +121,8 @@ public class ScoreItActivity extends ActionBarActivity {
                     .add(R.id.main_container, mScoreFragment, ScoreFragment.TAG)
                     .commit();
         } else {
-            // TODO : restore lap
+            mLap = (Lap) savedInstanceState.getSerializable("lap");
+            mIsEdited = savedInstanceState.getBoolean("edited");
             mScoreFragment = (ScoreFragment) fragmentManager.findFragmentByTag(ScoreFragment.TAG);
         }
 
@@ -155,14 +161,27 @@ public class ScoreItActivity extends ActionBarActivity {
         selectItem(mSelectedPosition);
 
         // Floating Action Button
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null == mLap) {
+                    mActionButton.setImageDrawable(
+                            getResources().getDrawable(R.drawable.ic_action_accept_fab));
                     addLap();
                 } else {
-                    // TODO
+                    mActionButton.setImageDrawable(
+                            getResources().getDrawable(R.drawable.ic_action_new_fab));
+                    mLap.computeScores();
+                    if (mIsEdited) {
+                        mIsEdited = false;
+                    } else {
+                        mGameHelper.addLap(mLap);
+                    }
+                    getSupportFragmentManager()
+                            .popBackStack(LapFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    supportInvalidateOptionsMenu();
+                    mScoreFragment.update();
+                    mLap = null;
                 }
             }
         });
@@ -177,7 +196,10 @@ public class ScoreItActivity extends ActionBarActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        // TODO: save lap
+        if (null != mLap) {
+            outState.putSerializable("lap", mLap);
+            outState.putSerializable("edited", mIsEdited);
+        }
     }
 
     @Override
@@ -188,11 +210,12 @@ public class ScoreItActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
-            getMenuInflater().inflate(R.menu.main, menu);
-            return true;
+        if (mDrawerLayout.isDrawerOpen(mNavigationDrawer) ||
+                (null != mScoreFragment && !mScoreFragment.isVisible())) {
+            return false;
         }
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
     @Override
@@ -303,19 +326,6 @@ public class ScoreItActivity extends ActionBarActivity {
                     mScoreFragment.getHeaderFragment().update();
                 }
                 break;
-
-//            case REQ_LAP_ACTIVITY:
-//                Lap lap = (Lap) data.getSerializableExtra(EXTRA_LAP);
-//                if (-1 == mEditedLap) {
-//                    lap.computeScores();
-//                    mGameHelper.addLap(lap);
-//                } else {
-//                    Lap edited = mGameHelper.getLaps().get(mEditedLap);
-//                    edited.set(lap);
-//                }
-//                mScoreFragment.update();
-//                supportInvalidateOptionsMenu();
-//                break;
         }
     }
 
@@ -349,8 +359,11 @@ public class ScoreItActivity extends ActionBarActivity {
     }
 
     public void editLap(Lap lap) {
+        mIsEdited = true;
         mLap = lap;
         mScoreFragment.closeOpenedItems();
+        mActionButton.setImageDrawable(
+                getResources().getDrawable(R.drawable.ic_content_edit_fab));
         showLapFragment();
     }
 
@@ -371,27 +384,26 @@ public class ScoreItActivity extends ActionBarActivity {
     }
 
     private void showLapFragment() {
-        LapFragment fragment;
         switch (mGameHelper.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
-                fragment = new UniversalLapFragment();
+                mLapFragment = new UniversalLapFragment();
                 break;
             case Game.BELOTE:
-                fragment = new BeloteLapFragment();
+                mLapFragment = new BeloteLapFragment();
                 break;
             case Game.COINCHE:
-                fragment = new CoincheLapFragment();
+                mLapFragment = new CoincheLapFragment();
                 break;
             case Game.TAROT:
-                fragment = new TarotLapFragment();
+                mLapFragment = new TarotLapFragment();
                 break;
         }
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.main_container, fragment)
-                .addToBackStack(null)
+                .replace(R.id.main_container, mLapFragment)
+                .addToBackStack(LapFragment.TAG)
                 .commit();
     }
 
@@ -557,5 +569,17 @@ public class ScoreItActivity extends ActionBarActivity {
                 .create();
         dialog.show();
         Utils.colorizeDialog(dialog);
+    }
+
+    @Override
+    public void onBackStackChanged() {
+        if (null != mLapFragment && mLapFragment.isVisible()) {
+            return;
+        }
+        mLap = null;
+        mIsEdited = false;
+        mActionButton.setImageDrawable(
+                getResources().getDrawable(R.drawable.ic_action_new_fab));
+        supportInvalidateOptionsMenu();
     }
 }

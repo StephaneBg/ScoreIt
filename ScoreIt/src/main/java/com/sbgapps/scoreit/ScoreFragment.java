@@ -34,20 +34,35 @@ public class ScoreFragment extends Fragment {
     private ScoreGraphFragment mScoreGraphFragment;
     private HeaderFragment mHeaderFragment;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score, null);
 
-        mHeaderFragment = new HeaderFragment();
-        getChildFragmentManager()
-                .beginTransaction()
-                .add(R.id.header_container, mHeaderFragment)
-                .commit();
+        if (null == savedInstanceState) {
+            mHeaderFragment = new HeaderFragment();
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.header_container, mHeaderFragment, HeaderFragment.TAG)
+                    .commit();
 
-        mScoreListFragment = new ScoreListFragment();
-        getChildFragmentManager()
-                .beginTransaction()
-                .add(R.id.score_container, mScoreListFragment)
-                .commit();
+            mScoreListFragment = new ScoreListFragment();
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.score_container, mScoreListFragment, ScoreListFragment.TAG)
+                    .commit();
+        } else {
+            mHeaderFragment = (HeaderFragment) getChildFragmentManager()
+                    .findFragmentByTag(HeaderFragment.TAG);
+            mScoreListFragment = (ScoreListFragment) getChildFragmentManager()
+                    .findFragmentByTag(ScoreListFragment.TAG);
+            mScoreGraphFragment = (ScoreGraphFragment) getChildFragmentManager()
+                    .findFragmentByTag(ScoreGraphFragment.TAG);
+        }
 
         return view;
     }
@@ -81,23 +96,26 @@ public class ScoreFragment extends Fragment {
 
 
     public void switchScoreViews() {
-        if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
-            getChildFragmentManager().popBackStack();
-            return;
-        }
+        Fragment fragment;
+        String tag;
 
-        if (null == mScoreGraphFragment)
-            mScoreGraphFragment = new ScoreGraphFragment();
+        if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
+            fragment = mScoreListFragment;
+            tag = ScoreListFragment.TAG;
+        } else if (null == mScoreGraphFragment) {
+            fragment = mScoreGraphFragment = new ScoreGraphFragment();
+            tag = ScoreGraphFragment.TAG;
+        } else {
+            fragment = mScoreGraphFragment;
+            tag = ScoreGraphFragment.TAG;
+        }
 
         getChildFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
                         R.anim.slide_in_down,
-                        R.anim.slide_out_up,
-                        R.anim.slide_in_up,
-                        R.anim.slide_out_down)
-                .addToBackStack(null)
-                .replace(R.id.score_container, mScoreGraphFragment, ScoreGraphFragment.TAG)
+                        R.anim.slide_out_up)
+                .replace(R.id.score_container, fragment, tag)
                 .commit();
     }
 

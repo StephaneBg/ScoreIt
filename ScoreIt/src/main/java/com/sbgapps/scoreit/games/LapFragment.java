@@ -25,6 +25,8 @@ import com.sbgapps.scoreit.ScoreItActivity;
  */
 public class LapFragment extends Fragment {
 
+    public static final String TAG = LapFragment.class.getName();
+
     public GameHelper getGameHelper() {
         return ((ScoreItActivity) getActivity()).getGameHelper();
     }

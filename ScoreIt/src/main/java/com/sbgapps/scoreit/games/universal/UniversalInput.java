@@ -79,6 +79,7 @@ public class UniversalInput extends FrameLayout {
                         .setFragmentManager(mLapFragment.getChildFragmentManager())
                         .setStyleResId(R.style.BetterPickerTheme)
                         .setDecimalVisibility(View.INVISIBLE)
+                        .setTargetFragment(mLapFragment)
                         .setReference(mPlayer)
                         .show();
             }
