@@ -21,6 +21,7 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.adapter.NavigationDrawerAdapter;
 import com.sbgapps.scoreit.utils.BetterViewAnimator;
 
 import java.util.List;

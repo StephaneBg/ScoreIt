@@ -228,9 +228,12 @@ public class ScoreItActivity extends ActionBarActivity {
     }
 
     @OnItemClick(R.id.drawer_list_view)
-    public void OnItemClick(int position, long id) {
+    public void onItemClick(int position, long id) {
         if (mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
             mDrawerLayout.closeDrawer(mNavigationDrawer);
+            if (mSelectedPosition == position) {
+                return;
+            }
             onNavigationDrawerItemSelected(position);
             selectItem(position);
         }
@@ -271,7 +274,6 @@ public class ScoreItActivity extends ActionBarActivity {
         }
         getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         supportInvalidateOptionsMenu();
-        //setTitle(position);
         loadFragments(true);
     }
 

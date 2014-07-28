@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.navigationdrawer;
+package com.sbgapps.scoreit.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -22,6 +22,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
+import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItemView;
 import com.sbgapps.scoreit.utils.BindableAdapter;
 
 import java.util.ArrayList;

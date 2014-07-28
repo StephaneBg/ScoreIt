@@ -24,6 +24,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends ActionBarActivity {
 
     private InfoFragment mInfoFragment;
 
@@ -46,7 +47,6 @@ public class AboutActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setAccentDecor();
         setContentView(R.layout.activity_about);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -56,8 +56,6 @@ public class AboutActivity extends BaseActivity {
 
         PagerSlidingTabStrip slidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
         slidingTabLayout.setViewPager(viewPager);
-
-        setTitle(-1);
     }
 
     @Override

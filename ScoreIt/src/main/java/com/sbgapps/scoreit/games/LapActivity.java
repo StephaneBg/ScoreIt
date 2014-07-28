@@ -19,20 +19,20 @@ package com.sbgapps.scoreit.games;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 
 import com.faizmalkani.floatingactionbutton.FloatingActionButton;
-import com.sbgapps.scoreit.BaseActivity;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 
 /**
  * Created by sbaiget on 08/01/14.
  */
-public class LapActivity extends BaseActivity {
+public class LapActivity extends ActionBarActivity {
 
     public int mPosition = -1;
     public Lap mLap;
@@ -56,7 +56,6 @@ public class LapActivity extends BaseActivity {
 
         mGameHelper = new GameHelper(this);
         mGameHelper.loadLaps();
-        setAccentDecor();
 
         if (null != savedInstanceState) {
             mLap = (Lap) savedInstanceState.getSerializable(ScoreItActivity.EXTRA_LAP);

@@ -44,7 +44,7 @@
     </style>
 
     <style name="ActionBar.Solid.Apptheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/primary_accent</item>
+        <item name="android:background">@drawable/background_action_bar</item>
     </style>
 
     <style name="ButtonOverflow" parent="android:style/Widget.Holo.ActionButton.Overflow">

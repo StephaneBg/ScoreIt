@@ -19,15 +19,14 @@ package com.sbgapps.scoreit.navigationdrawer;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
+import com.devspark.robototextview.widget.RobotoTextView;
 import com.sbgapps.scoreit.R;
 
 import butterknife.ButterKnife;
@@ -42,7 +41,7 @@ public class NavigationDrawerItemView extends RelativeLayout {
     @InjectView(R.id.itemRR)
     RelativeLayout rr;
     @InjectView(R.id.navigationDrawerItemTitleTV)
-    TextView itemTitleTV;
+    RobotoTextView itemTitleTV;
     @InjectView(R.id.navigationDrawerItemIconIV)
     ImageView itemIconIV;
 
@@ -89,9 +88,9 @@ public class NavigationDrawerItemView extends RelativeLayout {
         }
 
         if (item.isSelected()) {
-            itemTitleTV.setTypeface(null, Typeface.BOLD);
+            itemTitleTV.setTextColor(res.getColor(R.color.primary_accent));
         } else {
-            itemTitleTV.setTypeface(null, Typeface.NORMAL);
+            itemTitleTV.setTextColor(res.getColor(R.color.darker_black));
         }
 
     }

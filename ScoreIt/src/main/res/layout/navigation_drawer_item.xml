@@ -19,6 +19,8 @@
 <com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItemView
     android:id="@+id/itemRR"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:background="@drawable/navigation_drawer_list_item_bg"
@@ -33,15 +35,16 @@
         android:layout_marginLeft="@dimen/default_small_padding"
         android:visibility="gone"/>
 
-    <TextView
+    <com.devspark.robototextview.widget.RobotoTextView
         android:id="@+id/navigationDrawerItemTitleTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="12dp"
         android:layout_toRightOf="@+id/navigationDrawerItemIconIV"
-        android:text="@string/app_name"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/font_headline"
-        android:textStyle="normal"/>
+        android:textColor="@color/darker_black"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:typeface="roboto_medium"
+        tools:text="@string/app_name"/>
 </com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItemView>
