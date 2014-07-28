@@ -49,9 +49,8 @@
         android:layout_gravity="bottom|right"
         android:layout_marginBottom="@dimen/margin_default"
         android:layout_marginRight="@dimen/margin_default"
-        android:src="@drawable/ic_action_new"
+        android:src="@drawable/ic_action_new_fab"
         app:fab_colorNormal="@color/primary_accent"
-        app:fab_colorPressed="@color/secondary_accent"
-        app:type="mini"/>
+        app:fab_colorPressed="@color/secondary_accent"/>
 
 </FrameLayout>

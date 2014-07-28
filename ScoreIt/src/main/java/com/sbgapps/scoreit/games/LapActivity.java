@@ -93,7 +93,7 @@ public class LapActivity extends ActionBarActivity {
     public void setUpFloatingActionButton() {
         if (-1 != mPosition) {
             mFloatingActionButton.setImageDrawable(
-                    getResources().getDrawable(R.drawable.ic_content_edit_dark));
+                    getResources().getDrawable(R.drawable.ic_content_edit_fab));
         }
     }
 
