@@ -42,11 +42,18 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.belote.BeloteLapActivity;
-import com.sbgapps.scoreit.games.coinche.CoincheLapActivity;
-import com.sbgapps.scoreit.games.tarot.TarotLapActivity;
-import com.sbgapps.scoreit.games.universal.UniversalLapActivity;
+import com.sbgapps.scoreit.games.belote.BeloteLap;
+import com.sbgapps.scoreit.games.belote.BeloteLapFragment;
+import com.sbgapps.scoreit.games.coinche.CoincheLap;
+import com.sbgapps.scoreit.games.coinche.CoincheLapFragment;
+import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
+import com.sbgapps.scoreit.games.tarot.TarotFourLap;
+import com.sbgapps.scoreit.games.tarot.TarotLapFragment;
+import com.sbgapps.scoreit.games.tarot.TarotThreeLap;
+import com.sbgapps.scoreit.games.universal.UniversalLap;
+import com.sbgapps.scoreit.games.universal.UniversalLapFragment;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerView;
 import com.sbgapps.scoreit.utils.Utils;
@@ -61,9 +68,7 @@ import butterknife.OnItemClick;
 public class ScoreItActivity extends ActionBarActivity {
 
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
-    public static final String EXTRA_POSITION = "com.sbgapps.scoreit.position";
     private static final int REQ_PICK_CONTACT = 1;
-    private static final int REQ_LAP_ACTIVITY = 2;
 
     @InjectView(R.id.navigation_drawer)
     NavigationDrawerView mNavigationDrawer;
@@ -76,14 +81,18 @@ public class ScoreItActivity extends ActionBarActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mTitle;
     private int mSelectedPosition = 0;
-    private int mEditedLap = -1;
     private boolean mIsTablet;
     private ScoreFragment mScoreFragment;
     private GameHelper mGameHelper;
     private Player mEditedPlayer;
+    private Lap mLap;
 
     public GameHelper getGameHelper() {
         return mGameHelper;
+    }
+
+    public Lap getLap() {
+        return mLap;
     }
 
     @Override
@@ -107,7 +116,7 @@ public class ScoreItActivity extends ActionBarActivity {
                     .add(R.id.main_container, mScoreFragment, ScoreFragment.TAG)
                     .commit();
         } else {
-            mEditedLap = savedInstanceState.getInt(EXTRA_POSITION);
+            // TODO : restore lap
             mScoreFragment = (ScoreFragment) fragmentManager.findFragmentByTag(ScoreFragment.TAG);
         }
 
@@ -150,8 +159,11 @@ public class ScoreItActivity extends ActionBarActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mEditedLap = -1;
-                showLapActivity();
+                if (null == mLap) {
+                    addLap();
+                } else {
+                    // TODO
+                }
             }
         });
     }
@@ -165,7 +177,7 @@ public class ScoreItActivity extends ActionBarActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(EXTRA_POSITION, mEditedLap);
+        // TODO: save lap
     }
 
     @Override
@@ -292,25 +304,54 @@ public class ScoreItActivity extends ActionBarActivity {
                 }
                 break;
 
-            case REQ_LAP_ACTIVITY:
-                Lap lap = (Lap) data.getSerializableExtra(EXTRA_LAP);
-                if (-1 == mEditedLap) {
-                    lap.computeScores();
-                    mGameHelper.addLap(lap);
-                } else {
-                    Lap edited = mGameHelper.getLaps().get(mEditedLap);
-                    edited.set(lap);
-                }
-                mScoreFragment.update();
-                supportInvalidateOptionsMenu();
-                break;
+//            case REQ_LAP_ACTIVITY:
+//                Lap lap = (Lap) data.getSerializableExtra(EXTRA_LAP);
+//                if (-1 == mEditedLap) {
+//                    lap.computeScores();
+//                    mGameHelper.addLap(lap);
+//                } else {
+//                    Lap edited = mGameHelper.getLaps().get(mEditedLap);
+//                    edited.set(lap);
+//                }
+//                mScoreFragment.update();
+//                supportInvalidateOptionsMenu();
+//                break;
         }
     }
 
+    public void addLap() {
+        switch (mGameHelper.getPlayedGame()) {
+            default:
+            case Game.UNIVERSAL:
+                mLap = new UniversalLap(mGameHelper.getPlayerCount());
+                break;
+            case Game.BELOTE:
+                mLap = new BeloteLap();
+                break;
+            case Game.COINCHE:
+                mLap = new CoincheLap();
+                break;
+            case Game.TAROT:
+                switch (mGameHelper.getPlayerCount()) {
+                    case 3:
+                        mLap = new TarotThreeLap();
+                        break;
+                    case 4:
+                        mLap = new TarotFourLap();
+                        break;
+                    case 5:
+                        mLap = new TarotFiveLap();
+                        break;
+                }
+                break;
+        }
+        showLapFragment();
+    }
+
     public void editLap(Lap lap) {
-        mEditedLap = mGameHelper.getLaps().indexOf(lap);
+        mLap = lap;
         mScoreFragment.closeOpenedItems();
-        showLapActivity();
+        showLapFragment();
     }
 
     public void removeLap(Lap lap) {
@@ -329,25 +370,29 @@ public class ScoreItActivity extends ActionBarActivity {
         showColorPickerDialog();
     }
 
-    private void showLapActivity() {
-        Intent intent;
+    private void showLapFragment() {
+        LapFragment fragment;
         switch (mGameHelper.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
-                intent = new Intent(this, UniversalLapActivity.class);
+                fragment = new UniversalLapFragment();
                 break;
             case Game.BELOTE:
-                intent = new Intent(this, BeloteLapActivity.class);
+                fragment = new BeloteLapFragment();
                 break;
             case Game.COINCHE:
-                intent = new Intent(this, CoincheLapActivity.class);
+                fragment = new CoincheLapFragment();
                 break;
             case Game.TAROT:
-                intent = new Intent(this, TarotLapActivity.class);
+                fragment = new TarotLapFragment();
                 break;
         }
-        intent.putExtra(EXTRA_POSITION, mEditedLap);
-        startActivityForResult(intent, REQ_LAP_ACTIVITY);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void setAccentDecor() {

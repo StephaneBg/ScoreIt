@@ -17,17 +17,20 @@
 package com.sbgapps.scoreit.games.universal;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.LapActivity;
+import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
 
 /**
  * Created by sbaiget on 02/02/14.
  */
-public class UniversalLapActivity extends LapActivity
+public class UniversalLapFragment extends LapFragment
         implements NumberPickerDialogFragment.NumberPickerDialogHandler {
 
     private LinearLayout mLinearLayout;
@@ -38,21 +41,9 @@ public class UniversalLapActivity extends LapActivity
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_lap_universal);
-        setUpFloatingActionButton();
-
-        if (null == savedInstanceState) {
-            if (-1 != mPosition) {
-                mLap = getGameHelper().getLaps().get(mPosition);
-            } else {
-                mLap = new UniversalLap(getGameHelper().getPlayerCount());
-            }
-        }
-
-        mLinearLayout = (LinearLayout) findViewById(R.id.ll_universal);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_lap_universal, null);
+        mLinearLayout = (LinearLayout) view.findViewById(R.id.ll_universal);
 
         int i = 0;
         for (Player player : getGameHelper().getPlayers()) {
@@ -60,6 +51,7 @@ public class UniversalLapActivity extends LapActivity
             mLinearLayout.addView(input);
             i++;
         }
+        return view;
     }
 
     @Override

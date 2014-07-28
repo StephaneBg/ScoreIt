@@ -45,42 +45,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ScoreItActivity"/>
         </activity>
-        <activity
-            android:name="com.sbgapps.scoreit.games.universal.UniversalLapActivity"
-            android:logo="@drawable/ic_logo"
-            android:parentActivityName=".ScoreItActivity"
-            android:theme="@style/Theme.Adaptive">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScoreItActivity"/>
-        </activity>
-        <activity
-            android:name="com.sbgapps.scoreit.games.belote.BeloteLapActivity"
-            android:logo="@drawable/ic_logo"
-            android:parentActivityName=".ScoreItActivity"
-            android:theme="@style/Theme.Adaptive">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScoreItActivity"/>
-        </activity>
-        <activity
-            android:name="com.sbgapps.scoreit.games.coinche.CoincheLapActivity"
-            android:logo="@drawable/ic_logo"
-            android:parentActivityName=".ScoreItActivity"
-            android:theme="@style/Theme.Adaptive">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScoreItActivity"/>
-        </activity>
-        <activity
-            android:name="com.sbgapps.scoreit.games.tarot.TarotLapActivity"
-            android:logo="@drawable/ic_logo"
-            android:parentActivityName=".ScoreItActivity"
-            android:theme="@style/Theme.Adaptive">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScoreItActivity"/>
-        </activity>
     </application>
 
 </manifest>

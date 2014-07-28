@@ -17,10 +17,13 @@
 package com.sbgapps.scoreit.games.coinche;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.LapActivity;
+import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
 import com.sbgapps.scoreit.view.SeekbarPoints;
@@ -31,7 +34,7 @@ import butterknife.InjectView;
 /**
  * Created by sbaiget on 29/01/14.
  */
-public class CoincheLapActivity extends LapActivity
+public class CoincheLapFragment extends LapFragment
         implements SeekbarPoints.OnPointsChangedListener {
 
     @InjectView(R.id.radio_group_player)
@@ -51,20 +54,9 @@ public class CoincheLapActivity extends LapActivity
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (null == savedInstanceState) {
-            if (-1 != mPosition) {
-                mLap = getGameHelper().getLaps().get(mPosition);
-            } else {
-                mLap = new CoincheLap();
-            }
-        }
-
-        setContentView(R.layout.activity_lap_coinche);
-        ButterKnife.inject(this);
-        setUpFloatingActionButton();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_lap_coinche, null);
+        ButterKnife.inject(this, view);
 
         switch (getLap().getTaker()) {
             case Player.PLAYER_1:
@@ -155,6 +147,7 @@ public class CoincheLapActivity extends LapActivity
                 }
             }
         });
+        return view;
     }
 
     private int progressToPoints(int progress) {

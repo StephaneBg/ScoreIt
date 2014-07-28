@@ -18,7 +18,9 @@ package com.sbgapps.scoreit.games.tarot;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.LapActivity;
+import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.view.SeekbarPoints;
 
@@ -40,7 +42,7 @@ import butterknife.InjectView;
 /**
  * Created by sbaiget on 07/12/13.
  */
-public class TarotLapActivity extends LapActivity
+public class TarotLapFragment extends LapFragment
         implements SeekbarPoints.OnPointsChangedListener {
 
     @InjectView(R.id.spinner_taker)
@@ -67,30 +69,9 @@ public class TarotLapActivity extends LapActivity
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (null == savedInstanceState) {
-            if (-1 != mPosition) {
-                mLap = getGameHelper().getLaps().get(mPosition);
-            } else {
-                switch (getGameHelper().getPlayerCount()) {
-                    case 3:
-                        mLap = new TarotThreeLap();
-                        break;
-                    case 4:
-                        mLap = new TarotFourLap();
-                        break;
-                    case 5:
-                        mLap = new TarotFiveLap();
-                        break;
-                }
-            }
-        }
-
-        setContentView(R.layout.activity_lap_tarot);
-        ButterKnife.inject(this);
-        setUpFloatingActionButton();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_lap_tarot, null);
+        ButterKnife.inject(this, view);
 
         mTaker.setAdapter(getPlayerArrayAdapter());
         mTaker.setSelection(getLap().getTaker());
@@ -107,9 +88,9 @@ public class TarotLapActivity extends LapActivity
         });
 
         if (getGameHelper().getPlayerCount() == 5) {
-            ViewStub stub = (ViewStub) findViewById(R.id.viewstub_partner);
+            ViewStub stub = (ViewStub) view.findViewById(R.id.viewstub_partner);
             View v = stub.inflate();
-            final ArrayAdapter<PlayerItem> partnerItemArrayAdapter = new ArrayAdapter<>(this,
+            final ArrayAdapter<PlayerItem> partnerItemArrayAdapter = new ArrayAdapter<>(getActivity(),
                     android.R.layout.simple_spinner_item);
             partnerItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_1));
@@ -133,7 +114,7 @@ public class TarotLapActivity extends LapActivity
             });
         }
 
-        final ArrayAdapter<BidItem> dealItemArrayAdapter = new ArrayAdapter<>(this,
+        final ArrayAdapter<BidItem> dealItemArrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
         dealItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dealItemArrayAdapter.add(new BidItem(TarotLap.BID_PRISE));
@@ -206,6 +187,7 @@ public class TarotLapActivity extends LapActivity
         for (TarotBonus bonus : getLap().getBonuses()) {
             addBonus(bonus);
         }
+        return view;
     }
 
     private void addBonus(TarotBonus tarotBonus) {
@@ -218,7 +200,7 @@ public class TarotLapActivity extends LapActivity
         }
         final TarotBonus bonus = tarotBonus;
 
-        final View view = getLayoutInflater()
+        final View view = getActivity().getLayoutInflater()
                 .inflate(R.layout.list_item_bonus, mBonuses, false);
         ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_announce);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -266,7 +248,7 @@ public class TarotLapActivity extends LapActivity
     }
 
     private ArrayAdapter<PlayerItem> getPlayerArrayAdapter() {
-        ArrayAdapter<PlayerItem> playerItemArrayAdapter = new ArrayAdapter<>(this,
+        ArrayAdapter<PlayerItem> playerItemArrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
         playerItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_1));
@@ -285,7 +267,7 @@ public class TarotLapActivity extends LapActivity
     }
 
     private ArrayAdapter<BonusItem> getBonusArrayAdapter() {
-        final ArrayAdapter<BonusItem> announceItemArrayAdapter = new ArrayAdapter<>(this,
+        final ArrayAdapter<BonusItem> announceItemArrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
         announceItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         if (!isBonusAlreadySet(TarotBonus.BONUS_PETIT_AU_BOUT)) {

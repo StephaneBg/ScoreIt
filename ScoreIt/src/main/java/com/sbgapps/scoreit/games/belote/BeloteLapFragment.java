@@ -17,10 +17,13 @@
 package com.sbgapps.scoreit.games.belote;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.LapActivity;
+import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.view.SeekbarPoints;
 
@@ -30,7 +33,7 @@ import butterknife.InjectView;
 /**
  * Created by sbaiget on 01/11/13.
  */
-public class BeloteLapActivity extends LapActivity
+public class BeloteLapFragment extends LapFragment
         implements SeekbarPoints.OnPointsChangedListener {
 
     @InjectView(R.id.radio_group_player)
@@ -42,24 +45,13 @@ public class BeloteLapActivity extends LapActivity
 
     @Override
     public BeloteLap getLap() {
-        return (BeloteLap) mLap;
+        return (BeloteLap) super.getLap();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (null == savedInstanceState) {
-            if (-1 != mPosition) {
-                mLap = getGameHelper().getLaps().get(mPosition);
-            } else {
-                mLap = new BeloteLap();
-            }
-        }
-
-        setContentView(R.layout.activity_lap_belote);
-        ButterKnife.inject(this);
-        setUpFloatingActionButton();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_lap_belote, null);
+        ButterKnife.inject(this, view);
 
         switch (getLap().getTaker()) {
             case Player.PLAYER_1:
@@ -116,6 +108,7 @@ public class BeloteLapActivity extends LapActivity
                 }
             }
         });
+        return view;
     }
 
     private int progressToPoints(int progress) {

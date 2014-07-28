@@ -31,27 +31,27 @@ import com.sbgapps.scoreit.R;
  */
 public class UniversalInput extends FrameLayout {
 
-    private final UniversalLapActivity mActivity;
+    private final UniversalLapFragment mLapFragment;
     private final int mPlayer;
     private TextView mTextViewPoints;
     private int mScore;
 
-    public UniversalInput(UniversalLapActivity activity, int player) {
-        super(activity);
+    public UniversalInput(UniversalLapFragment fragment, int player) {
+        super(fragment.getActivity());
 
-        mActivity = activity;
+        mLapFragment = fragment;
         mPlayer = player;
 
-        LayoutInflater inflater = (LayoutInflater) mActivity
+        LayoutInflater inflater = (LayoutInflater) mLapFragment.getActivity()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.universal_input, this, true);
 
         TextView textView = (TextView) findViewById(R.id.player_name);
-        final String name = mActivity.getGameHelper().getPlayer(mPlayer).getName();
+        final String name = mLapFragment.getGameHelper().getPlayer(mPlayer).getName();
         textView.setText(name);
 
         mTextViewPoints = (TextView) findViewById(R.id.edit_points);
-        mScore = mActivity.getLap().getScore(mPlayer);
+        mScore = mLapFragment.getLap().getScore(mPlayer);
         mTextViewPoints.setText(Integer.toString(mScore));
 
         ImageButton button = (ImageButton) findViewById(R.id.btn_minus);
@@ -76,7 +76,7 @@ public class UniversalInput extends FrameLayout {
             @Override
             public void onClick(View v) {
                 new NumberPickerBuilder()
-                        .setFragmentManager(mActivity.getSupportFragmentManager())
+                        .setFragmentManager(mLapFragment.getChildFragmentManager())
                         .setStyleResId(R.style.BetterPickerTheme)
                         .setDecimalVisibility(View.INVISIBLE)
                         .setReference(mPlayer)
@@ -86,7 +86,7 @@ public class UniversalInput extends FrameLayout {
     }
 
     public void updateScore(int score) {
-        mActivity.getLap().setScore(mPlayer, score);
+        mLapFragment.getLap().setScore(mPlayer, score);
         mTextViewPoints.setText(Integer.toString(score));
     }
 }
