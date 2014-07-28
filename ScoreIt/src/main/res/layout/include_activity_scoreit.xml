@@ -38,6 +38,6 @@
         android:layout_marginRight="@dimen/margin_default"
         android:src="@drawable/ic_action_new_fab"
         app:fab_colorNormal="@color/secondary_accent"
-        app:fab_colorPressed="#437F21"/>
+        app:fab_colorPressed="@color/secondary_accent_700"/>
 
 </FrameLayout>
