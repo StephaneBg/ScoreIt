@@ -26,9 +26,6 @@ buildscript {
 }
 
 allprojects {
-    version = VERSION_NAME
-    group = GROUP
-
     repositories {
         jcenter()
         maven { url 'http://clinker.47deg.com/nexus/content/groups/public' }
