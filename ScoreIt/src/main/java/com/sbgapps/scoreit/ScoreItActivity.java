@@ -16,11 +16,8 @@
 
 package com.sbgapps.scoreit;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -28,7 +25,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,7 +59,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 
-public class ScoreItActivity extends Activity {
+public class ScoreItActivity extends ActionBarActivity {
 
     public static final String EXTRA_LAP = "com.sbgapps.scoreit.lap";
     public static final String EXTRA_POSITION = "com.sbgapps.scoreit.position";
@@ -100,7 +100,7 @@ public class ScoreItActivity extends Activity {
         ButterKnife.inject(this);
         //mIsTablet = (null != findViewById(R.id.fragment_container_large));
 
-        final FragmentManager fragmentManager = getFragmentManager();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
 
         // Init fragments
         if (null == savedInstanceState) {
@@ -129,20 +129,20 @@ public class ScoreItActivity extends Activity {
                 R.string.navigation_drawer_close) {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getActionBar()
+                getSupportActionBar()
                         .setTitle(mNavigationItems.get(mSelectedPosition).getItemName());
-                invalidateOptionsMenu();
+                supportInvalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getActionBar().setTitle(getTitle());
-                invalidateOptionsMenu();
+                getSupportActionBar().setTitle(getTitle());
+                supportInvalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         mSelectedPosition = mGameHelper.getPlayedGame();
         selectItem(mSelectedPosition);
@@ -247,7 +247,8 @@ public class ScoreItActivity extends Activity {
             mNavigationItems.get(position).setSelected(true);
 
             mSelectedPosition = position;
-            getActionBar().setTitle(mNavigationItems.get(mSelectedPosition).getItemName());
+            getSupportActionBar()
+                    .setTitle(mNavigationItems.get(mSelectedPosition).getItemName());
         }
         mDrawerLayout.closeDrawer(mNavigationDrawer);
     }
@@ -271,8 +272,8 @@ public class ScoreItActivity extends Activity {
                 startActivity(intent);
                 return;
         }
-        getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        invalidateOptionsMenu();
+        getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        supportInvalidateOptionsMenu();
         loadFragments(true);
     }
 
@@ -303,7 +304,7 @@ public class ScoreItActivity extends Activity {
                     edited.set(lap);
                 }
                 updateFragments();
-                invalidateOptionsMenu();
+                supportInvalidateOptionsMenu();
                 break;
         }
     }
@@ -343,15 +344,15 @@ public class ScoreItActivity extends Activity {
         mHeaderFragment = new HeaderFragment();
         mScoreListFragment = new ScoreListFragment();
 
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim)
-            ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
+            ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         ft.replace(R.id.fragment_header, mHeaderFragment, HeaderFragment.TAG)
                 .commit();
 
-        ft = getFragmentManager().beginTransaction();
+        ft = getSupportFragmentManager().beginTransaction();
         if (anim)
-            ft.setCustomAnimations(R.animator.slide_bottom_in, R.animator.slide_top_out);
+            ft.setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_up);
         ft.replace(R.id.fragment_container, mScoreListFragment, ScoreListFragment.TAG)
                 .commit();
     }
@@ -379,20 +380,20 @@ public class ScoreItActivity extends Activity {
 
     private void switchScoreViews() {
         if (null != mGraphFragment && mGraphFragment.isVisible()) {
-            getFragmentManager().popBackStack();
+            getSupportFragmentManager().popBackStack();
             return;
         }
 
         if (null == mGraphFragment)
             mGraphFragment = new GraphFragment();
 
-        getFragmentManager()
+        getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
-                        R.animator.slide_bottom_in,
-                        R.animator.slide_top_out,
-                        R.animator.slide_top_in,
-                        R.animator.slide_bottom_out)
+                        R.anim.slide_in_down,
+                        R.anim.slide_out_up,
+                        R.anim.slide_in_up,
+                        R.anim.slide_out_down)
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, mGraphFragment, GraphFragment.TAG)
                 .commit();
@@ -428,9 +429,9 @@ public class ScoreItActivity extends Activity {
                                     mScoreListFragment.getListAdapter().removeAll();
                                 if (null != mGraphFragment && mGraphFragment.isVisible()) {
                                     mGraphFragment.update();
-                                    if (!mIsTablet) getFragmentManager().popBackStack();
+                                    if (!mIsTablet) getSupportFragmentManager().popBackStack();
                                 }
-                                invalidateOptionsMenu();
+                                supportInvalidateOptionsMenu();
                             }
                         }
                 )

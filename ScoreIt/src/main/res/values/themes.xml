@@ -20,13 +20,11 @@
     <style name="Theme.ScoreIt" parent="AppTheme">
     </style>
 
-    <style name="AppTheme" parent="@android:Theme.Holo.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
-        <item name="android:actionBarSize">56dp</item>
-        <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
-        <item name="android:actionMenuTextColor">@android:color/white</item>
-        <item name="android:actionOverflowButtonStyle">@style/ButtonOverflow</item>
-        <item name="android:dropDownSpinnerStyle">@style/SpinnerAppTheme</item>
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
+        <item name="actionBarSize">56dp</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="actionOverflowButtonStyle">@style/ButtonOverflow</item>
         <item name="android:spinnerStyle">@style/SpinnerAppTheme</item>
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemAppTheme</item>
         <item name="android:editTextStyle">@style/EditTextAppTheme</item>
@@ -45,7 +43,7 @@
         <item name="isDialog">false</item>
     </style>
 
-    <style name="ActionBar.Solid.Apptheme" parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse">
+    <style name="ActionBar.Solid.Apptheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/primary_accent</item>
     </style>
 

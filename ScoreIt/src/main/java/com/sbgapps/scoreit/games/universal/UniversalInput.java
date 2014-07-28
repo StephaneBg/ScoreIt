@@ -23,6 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.sbgapps.scoreit.R;
 
 /**
@@ -74,12 +75,12 @@ public class UniversalInput extends FrameLayout {
         mTextViewPoints.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                new NumberPickerBuilder()
-//                        .setFragmentManager(mActivity.getFragmentManager())
-//                        .setStyleResId(R.style.BetterPickerTheme)
-//                        .setDecimalVisibility(View.INVISIBLE)
-//                        .setReference(mPlayer)
-//                        .show();
+                new NumberPickerBuilder()
+                        .setFragmentManager(mActivity.getSupportFragmentManager())
+                        .setStyleResId(R.style.BetterPickerTheme)
+                        .setDecimalVisibility(View.INVISIBLE)
+                        .setReference(mPlayer)
+                        .show();
             }
         });
     }
