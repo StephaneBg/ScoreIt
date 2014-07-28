@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -69,6 +70,7 @@ public class NavigationDrawerItemView extends RelativeLayout {
         ButterKnife.inject(this);
     }
 
+    @SuppressWarnings("NewApi")
     public void bindTo(NavigationDrawerItem item) {
         requestLayout();
         if (item.isMainItem()) {
@@ -78,7 +80,9 @@ public class NavigationDrawerItemView extends RelativeLayout {
         } else {
             itemTitleTV.setText(item.getItemName());
             itemTitleTV.setTextSize(14);
-            itemTitleTV.setAllCaps(true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                itemTitleTV.setAllCaps(true);
+            }
             itemIconIV.setImageDrawable(getIcon(item.getItemIcon()));
             itemIconIV.setVisibility(View.VISIBLE);
             rr.setBackgroundColor(res.getColor(R.color.gray_background));
