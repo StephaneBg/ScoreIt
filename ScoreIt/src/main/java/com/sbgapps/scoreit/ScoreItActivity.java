@@ -121,9 +121,15 @@ public class ScoreItActivity extends ActionBarActivity
                     .add(R.id.main_container, mScoreFragment, ScoreFragment.TAG)
                     .commit();
         } else {
-            mLap = (Lap) savedInstanceState.getSerializable("lap");
             mIsEdited = savedInstanceState.getBoolean("edited");
             mScoreFragment = (ScoreFragment) fragmentManager.findFragmentByTag(ScoreFragment.TAG);
+            mLapFragment = (LapFragment) fragmentManager.findFragmentByTag(LapFragment.TAG);
+            if (mIsEdited) {
+                int position = savedInstanceState.getInt("lap");
+                mLap = mGameHelper.getLaps().get(position);
+                mActionButton.setImageDrawable(
+                        getResources().getDrawable(R.drawable.ic_content_edit_fab));
+            }
         }
 
         // Init drawer
@@ -179,7 +185,6 @@ public class ScoreItActivity extends ActionBarActivity
                     }
                     getSupportFragmentManager()
                             .popBackStack(LapFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    supportInvalidateOptionsMenu();
                     mScoreFragment.update();
                     mLap = null;
                 }
@@ -197,8 +202,8 @@ public class ScoreItActivity extends ActionBarActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (null != mLap) {
-            outState.putSerializable("lap", mLap);
-            outState.putSerializable("edited", mIsEdited);
+            outState.putInt("lap", mGameHelper.getLaps().indexOf(mLap));
+            outState.putBoolean("edited", mIsEdited);
         }
     }
 
@@ -402,6 +407,11 @@ public class ScoreItActivity extends ActionBarActivity
 
         getSupportFragmentManager()
                 .beginTransaction()
+                .setCustomAnimations(
+                        R.anim.scale_in,
+                        android.R.anim.slide_out_right,
+                        android.R.anim.slide_in_left,
+                        R.anim.scale_out)
                 .replace(R.id.main_container, mLapFragment)
                 .addToBackStack(LapFragment.TAG)
                 .commit();

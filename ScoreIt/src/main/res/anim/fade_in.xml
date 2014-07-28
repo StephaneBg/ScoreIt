@@ -20,6 +20,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="@android:integer/config_mediumAnimTime"
     android:fromAlpha="0.0"
-    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+    android:interpolator="@android:anim/decelerate_interpolator"
     android:startOffset="@android:integer/config_mediumAnimTime"
     android:toAlpha="1.0"/>
