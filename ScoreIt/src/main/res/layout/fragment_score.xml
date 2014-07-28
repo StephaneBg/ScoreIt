@@ -15,16 +15,21 @@
   ~ limitations under the License.
   -->
 
-<com.fortysevendeg.swipelistview.SwipeListView
-    android:id="@android:id/list"
+<com.sbgapps.scoreit.view.FractionFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:choiceMode="singleChoice"
-    android:listSelector="#00000000"
-    android:transcriptMode="alwaysScroll"
-    app:swipeBackView="@+id/action_view"
-    app:swipeCloseAllItemsWhenMoveList="true"
-    app:swipeFrontView="@+id/score_view"
-    app:swipeMode="both"/>
+    android:layout_height="match_parent">
+
+    <com.fortysevendeg.swipelistview.SwipeListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:choiceMode="singleChoice"
+        android:listSelector="#00000000"
+        android:transcriptMode="alwaysScroll"
+        app:swipeBackView="@+id/action_view"
+        app:swipeCloseAllItemsWhenMoveList="true"
+        app:swipeFrontView="@+id/score_view"
+        app:swipeMode="both"/>
+</com.sbgapps.scoreit.view.FractionFrameLayout>

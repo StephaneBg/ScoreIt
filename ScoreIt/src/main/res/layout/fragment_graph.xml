@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout
+<com.sbgapps.scoreit.view.FractionFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -26,4 +26,4 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/default_margin"/>
 
-</FrameLayout>
+</com.sbgapps.scoreit.view.FractionFrameLayout>

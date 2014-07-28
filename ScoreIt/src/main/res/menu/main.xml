@@ -15,21 +15,20 @@
   -->
 
 <menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_count"
         android:icon="@drawable/ic_action_social_group"
-        android:title="@string/player_number"
-        app:showAsAction="always"/>
+        android:showAsAction="always"
+        android:title="@string/player_number"/>
     <item
         android:id="@+id/menu_view"
         android:icon="@drawable/ic_action_view"
-        android:title="@string/view"
-        app:showAsAction="ifRoom"/>
+        android:showAsAction="ifRoom"
+        android:title="@string/view"/>
     <item
         android:id="@+id/menu_clear"
         android:icon="@drawable/ic_action_clear"
-        android:title="@string/clear"
-        app:showAsAction="ifRoom"/>
+        android:showAsAction="ifRoom"
+        android:title="@string/clear"/>
 </menu>

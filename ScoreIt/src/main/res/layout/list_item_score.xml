@@ -22,14 +22,14 @@
 
     <LinearLayout
         android:id="@+id/action_view"
-        style="?buttonBarStyle"
+        style="?android:buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/action_discard"
-            style="?buttonBarStyle"
+            style="?android:borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -39,7 +39,7 @@
 
         <ImageButton
             android:id="@+id/action_edit"
-            style="?buttonBarStyle"
+            style="?android:borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -16,10 +16,10 @@
 
 package com.sbgapps.scoreit.games;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
@@ -34,7 +34,7 @@ import butterknife.InjectView;
 /**
  * Created by sbaiget on 08/01/14.
  */
-public class LapActivity extends ActionBarActivity {
+public class LapActivity extends Activity {
 
     public int mPosition = -1;
     public Lap mLap;
@@ -112,7 +112,7 @@ public class LapActivity extends ActionBarActivity {
             params.dimAmount = 0.5f;
             getWindow().setAttributes(params);
         } else {
-            ActionBar actionBar = getSupportActionBar();
+            ActionBar actionBar = getActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
         }
