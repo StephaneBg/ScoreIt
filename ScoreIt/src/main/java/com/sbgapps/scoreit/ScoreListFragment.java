@@ -23,7 +23,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fortysevendeg.swipelistview.SwipeListView;
+import com.sbgapps.scoreit.adapter.GenericBeloteScoreAdapter;
 import com.sbgapps.scoreit.adapter.ScoreAdapter;
+import com.sbgapps.scoreit.adapter.TarotScoreAdapter;
+import com.sbgapps.scoreit.adapter.UniversalScoreAdapter;
+import com.sbgapps.scoreit.games.Game;
+import com.sbgapps.scoreit.games.GameHelper;
 
 /**
  * Created by sbaiget on 11/11/13.
@@ -44,7 +49,22 @@ public class ScoreListFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_score_list, null);
 
         mListView = (SwipeListView) view.findViewById(android.R.id.list);
-        ScoreAdapter adapter = new ScoreAdapter(getActivity(), mListView);
+
+        GameHelper gameHelper = ((ScoreItActivity) getActivity()).getGameHelper();
+        ScoreAdapter adapter;
+        switch (gameHelper.getPlayedGame()) {
+            default:
+            case Game.UNIVERSAL:
+                adapter = new UniversalScoreAdapter((ScoreItActivity) getActivity(), mListView);
+                break;
+            case Game.BELOTE:
+            case Game.COINCHE:
+                adapter = new GenericBeloteScoreAdapter((ScoreItActivity) getActivity(), mListView);
+                break;
+            case Game.TAROT:
+                adapter = new TarotScoreAdapter((ScoreItActivity) getActivity(), mListView);
+                break;
+        }
         setListAdapter(adapter);
 
         ((ScoreItActivity) getActivity()).getActionButton().attachToListView(mListView);

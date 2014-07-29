@@ -16,7 +16,11 @@
 
 package com.sbgapps.scoreit.games.tarot;
 
+import android.content.Context;
+import android.content.res.Resources;
+
 import com.google.gson.annotations.SerializedName;
+import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Player;
 
 import java.io.Serializable;
@@ -41,7 +45,11 @@ public class TarotBonus implements Serializable {
 
 
     public TarotBonus() {
-        this(BONUS_PETIT_AU_BOUT, Player.PLAYER_1);
+        this(BONUS_PETIT_AU_BOUT);
+    }
+
+    public TarotBonus(int type) {
+        this(type, Player.PLAYER_1);
     }
 
     public TarotBonus(int type, int player) {
@@ -49,11 +57,32 @@ public class TarotBonus implements Serializable {
         mPlayer = player;
     }
 
-    public int getBonus() {
+    public static String getLitteralBonus(Context context, int bonus) {
+        Resources res = context.getResources();
+        switch (bonus) {
+            case TarotBonus.BONUS_PETIT_AU_BOUT:
+                return res.getString(R.string.petit_au_bout);
+            case TarotBonus.BONUS_POIGNEE_SIMPLE:
+                return res.getString(R.string.poignee_simple);
+            case TarotBonus.BONUS_POIGNEE_DOUBLE:
+                return res.getString(R.string.poignee_double);
+            case TarotBonus.BONUS_POIGNEE_TRIPLE:
+                return res.getString(R.string.poignee_double);
+            case TarotBonus.BONUS_CHELEM_NON_ANNONCE:
+                return res.getString(R.string.chelem_non_annonce);
+            case TarotBonus.BONUS_CHELEM_ANNONCE_REALISE:
+                return res.getString(R.string.chelem_annonce_realise);
+            case TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE:
+                return res.getString(R.string.chelem_annonce_non_realise);
+        }
+        return null;
+    }
+
+    public int get() {
         return mBonus;
     }
 
-    public void setBonus(int bonus) {
+    public void set(int bonus) {
         mBonus = bonus;
     }
 

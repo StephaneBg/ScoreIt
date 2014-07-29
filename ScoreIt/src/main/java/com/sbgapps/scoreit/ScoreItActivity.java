@@ -115,6 +115,7 @@ public class ScoreItActivity extends ActionBarActivity
         mGameHelper = new GameHelper(this);
         mGameHelper.loadLaps();
 
+        setAccentDecor();
         setContentView(R.layout.activity_scoreit);
         ButterKnife.inject(this);
         //mIsTablet = (null != findViewById(R.id.fragment_container_large));
@@ -186,24 +187,7 @@ public class ScoreItActivity extends ActionBarActivity
         mActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null == mLap) {
-                    mActionButton.setImageDrawable(
-                            getResources().getDrawable(R.drawable.ic_action_accept_fab));
-                    addLap();
-                } else {
-                    mActionButton.setImageDrawable(
-                            getResources().getDrawable(R.drawable.ic_action_new_fab));
-                    mLap.computeScores();
-                    if (mIsEdited) {
-                        mIsEdited = false;
-                    } else {
-                        mGameHelper.addLap(mLap);
-                    }
-                    getSupportFragmentManager()
-                            .popBackStack(LapFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    update();
-                    mLap = null;
-                }
+                onActionButtonClicked();
             }
         });
     }
@@ -299,7 +283,8 @@ public class ScoreItActivity extends ActionBarActivity
     }
 
     private void selectItem(int position) {
-        if (mDrawerListView != null) {
+        if (mDrawerListView != null &&
+                position != 4) {
             mDrawerListView.setItemChecked(position, true);
 
             mNavigationItems.get(mSelectedPosition).setSelected(false);
@@ -498,6 +483,28 @@ public class ScoreItActivity extends ActionBarActivity
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintResource(R.drawable.background_status_bar);
+        }
+    }
+
+    private void onActionButtonClicked() {
+        mScoreListFragment.closeOpenedItems();
+        if (null == mLap) {
+            mActionButton.setImageDrawable(
+                    getResources().getDrawable(R.drawable.ic_action_accept_fab));
+            addLap();
+        } else {
+            mActionButton.setImageDrawable(
+                    getResources().getDrawable(R.drawable.ic_action_new_fab));
+            mLap.computeScores();
+            if (mIsEdited) {
+                mIsEdited = false;
+            } else {
+                mGameHelper.addLap(mLap);
+            }
+            getSupportFragmentManager()
+                    .popBackStack(LapFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            update();
+            mLap = null;
         }
     }
 

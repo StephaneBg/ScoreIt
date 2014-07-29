@@ -20,21 +20,15 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import com.fortysevendeg.swipelistview.SwipeListView;
-import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.utils.Constants;
-import com.sbgapps.scoreit.view.PlayerScore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,80 +36,26 @@ import java.util.List;
 /**
  * Created by sbaiget on 23/11/13.
  */
-public class ScoreAdapter extends BaseAdapter {
+public abstract class ScoreAdapter extends BaseAdapter {
 
     private final SwipeListView mSwipeListView;
-    private final Activity mActivity;
+    private final ScoreItActivity mActivity;
 
-    public ScoreAdapter(Activity activity, SwipeListView listView) {
+    public ScoreAdapter(ScoreItActivity activity, SwipeListView listView) {
         mSwipeListView = listView;
         mActivity = activity;
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        final Lap lap = getItem(position);
-        final int cnt = getGameHelper().getPlayerCount();
-        ViewHolder h;
+    public LayoutInflater getLayoutInflater() {
+        return LayoutInflater.from(mActivity);
+    }
 
-        if (null == convertView) {
-            convertView = LayoutInflater.from(mActivity)
-                    .inflate(R.layout.list_item_score, parent, false);
-            h = new ViewHolder();
+    public ScoreItActivity getActivity() {
+        return mActivity;
+    }
 
-            h.scores = new PlayerScore[cnt];
-
-            LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.score_view);
-            for (int i = 0; i < cnt; i++) {
-                PlayerScore score = new PlayerScore(mActivity);
-                score.setPlayer(i);
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT);
-                lp.weight = 1.0f;
-                score.setLayoutParams(lp);
-                ll.addView(score);
-                h.scores[i] = score;
-            }
-            h.discard = (ImageButton) convertView.findViewById(R.id.action_discard);
-            h.edit = (ImageButton) convertView.findViewById(R.id.action_edit);
-
-            convertView.setTag(h);
-        } else {
-            h = (ViewHolder) convertView.getTag();
-        }
-
-        final View view = convertView;
-        ((SwipeListView) parent).recycle(view, position);
-
-        for (int i = 0; i < cnt; i++) {
-            h.scores[i].getScore().setText(Integer.toString(lap.getScore(i)));
-        }
-
-        h.discard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSwipeListView.closeOpenedItems();
-                ObjectAnimator animator =
-                        ObjectAnimator.ofFloat(view, "alpha", Constants.ALPHA_MAX, Constants.ALPHA_MIN);
-                animator.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        view.setAlpha(Constants.ALPHA_MAX);
-                        ((ScoreItActivity) mActivity).removeLap(lap);
-                    }
-                });
-                animator.setDuration(Constants.ANIM_DURATION).start();
-            }
-        });
-        h.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((ScoreItActivity) mActivity).editLap(lap);
-            }
-        });
-
-        return view;
+    public SwipeListView getSwipeListView() {
+        return mSwipeListView;
     }
 
     @Override
@@ -154,7 +94,21 @@ public class ScoreAdapter extends BaseAdapter {
         animatorSet.start();
     }
 
-    private Animator createAnimatorForView(View view, int idx) {
+    public void discard(final View view, final Lap lap) {
+        getSwipeListView().closeOpenedItems();
+        ObjectAnimator animator =
+                ObjectAnimator.ofFloat(view, "alpha", Constants.ALPHA_MAX, Constants.ALPHA_MIN);
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                view.setAlpha(Constants.ALPHA_MAX);
+                getActivity().removeLap(lap);
+            }
+        });
+        animator.setDuration(Constants.ANIM_DURATION).start();
+    }
+
+    public Animator createAnimatorForView(View view, int idx) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(view, "x", 0, view.getWidth());
         animator.setDuration(Constants.ANIM_DURATION).setStartDelay(Constants.ANIM_OFFSET * idx);
         return animator;
@@ -162,11 +116,5 @@ public class ScoreAdapter extends BaseAdapter {
 
     public GameHelper getGameHelper() {
         return ((ScoreItActivity) mActivity).getGameHelper();
-    }
-
-    private static class ViewHolder {
-        PlayerScore[] scores;
-        ImageButton discard;
-        ImageButton edit;
     }
 }

@@ -26,27 +26,24 @@ import java.util.List;
  */
 public abstract class TarotLap implements Lap {
 
+    public static final int OUDLER_NONE_MSK = 0;
     public static final int OUDLER_PETIT_MSK = 1;
     public static final int OUDLER_EXCUSE_MSK = 2;
     public static final int OUDLER_21_MSK = 4;
-    public static final int BID_PRISE = 0;
-    public static final int BID_GARDE = 1;
-    public static final int BID_GARDE_SANS = 2;
-    public static final int BID_GARDE_CONTRE = 3;
-
     protected transient int[] mScores;
     @SerializedName("taker")
     protected int mTaker;
     @SerializedName("bid")
-    protected int mBid;
+    protected TarotBid mBid;
     @SerializedName("points")
     protected int mPoints;
     @SerializedName("oudlers")
     protected int mOudlers;
     @SerializedName("bonuses")
     protected List<TarotBonus> mBonuses;
+    private transient boolean mIsDone = true;
 
-    protected TarotLap(int taker, int bid, int points, int oudlers, List<TarotBonus> bonuses) {
+    protected TarotLap(int taker, TarotBid bid, int points, int oudlers, List<TarotBonus> bonuses) {
         mTaker = taker;
         mBid = bid;
         mPoints = points;
@@ -78,16 +75,24 @@ public abstract class TarotLap implements Lap {
         mPoints = points;
     }
 
-    public int getBid() {
+    public TarotBid getBid() {
         return mBid;
     }
 
     public void setBid(int bid) {
+        mBid.set(bid);
+    }
+
+    public void setBid(TarotBid bid) {
         mBid = bid;
     }
 
     public List<TarotBonus> getBonuses() {
         return mBonuses;
+    }
+
+    public boolean isDone() {
+        return mIsDone;
     }
 
     @Override
@@ -116,7 +121,7 @@ public abstract class TarotLap implements Lap {
     public int getPetitBonus() {
         int petit = 0;
         for (TarotBonus bonus : getBonuses()) {
-            switch (bonus.getBonus()) {
+            switch (bonus.get()) {
                 case TarotBonus.BONUS_PETIT_AU_BOUT:
                     petit = (mTaker == bonus.getPlayer()) ? 10 : -10;
                     petit *= getCoefficient();
@@ -127,15 +132,15 @@ public abstract class TarotLap implements Lap {
     }
 
     private int getCoefficient() {
-        switch (mBid) {
+        switch (mBid.get()) {
             default:
-            case BID_PRISE:
+            case TarotBid.BID_PRISE:
                 return 1;
-            case BID_GARDE:
+            case TarotBid.BID_GARDE:
                 return 2;
-            case BID_GARDE_SANS:
+            case TarotBid.BID_GARDE_SANS:
                 return 4;
-            case BID_GARDE_CONTRE:
+            case TarotBid.BID_GARDE_CONTRE:
                 return 6;
         }
     }
@@ -167,12 +172,12 @@ public abstract class TarotLap implements Lap {
                 points = mPoints - 36;
                 break;
         }
-        boolean done = (points > 0);
+        mIsDone = (points > 0);
         points = (25 + Math.abs(points)) * getCoefficient();
 
         // Poignée
         for (TarotBonus bonus : getBonuses()) {
-            switch (bonus.getBonus()) {
+            switch (bonus.get()) {
                 case TarotBonus.BONUS_POIGNEE_SIMPLE:
                     points += 20;
                     break;
@@ -185,7 +190,7 @@ public abstract class TarotLap implements Lap {
             }
         }
 
-        points = (done ? points : -points);
+        points = (mIsDone ? points : -points);
 
         // Petit au bout
         points += getPetitBonus();
@@ -193,7 +198,7 @@ public abstract class TarotLap implements Lap {
         // Chelem
         int chelem = 0;
         for (TarotBonus bonus : getBonuses()) {
-            switch (bonus.getBonus()) {
+            switch (bonus.get()) {
                 case TarotBonus.BONUS_CHELEM_NON_ANNONCE:
                     chelem = 200;
                     break;

@@ -35,6 +35,7 @@ public class BeloteLap extends GenericBeloteLap {
     @Override
     public void computeScores() {
         super.computeScores();
+        mIsDone = (160 != mPoints);
         mScores[Player.PLAYER_1] = (Player.PLAYER_1 == mTaker) ? mPoints : getCounterPoints(mPoints);
         mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mTaker) ? mPoints : getCounterPoints(mPoints);
         mScores[Player.PLAYER_1] += (Player.PLAYER_1 == mBelote) ? 20 : 0;
@@ -48,8 +49,12 @@ public class BeloteLap extends GenericBeloteLap {
     }
 
     private int getCounterPoints(int points) {
-        return (0 == points) ? 160 :
-                (250 == points) ? 0 :
-                        160 - points;
+        if (0 == points) {
+            return 160;
+        } else if (250 == points) {
+            return 0;
+        } else {
+            return 160 - points;
+        }
     }
 }

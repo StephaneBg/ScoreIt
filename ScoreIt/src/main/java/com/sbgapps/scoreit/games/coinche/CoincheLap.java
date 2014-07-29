@@ -92,6 +92,7 @@ public class CoincheLap extends GenericBeloteLap {
                     (COINCHE_DOUBLE == mCoinche) ? takerPts * 4 : takerPts;
         } else {
             // Deal failed
+            mIsDone = false;
             takerPts = 0;
             counterPts = (250 == mBid) ? 500 : 160 + mBid;
             counterPts = (COINCHE_NORMAL == mCoinche) ? counterPts * 2 :

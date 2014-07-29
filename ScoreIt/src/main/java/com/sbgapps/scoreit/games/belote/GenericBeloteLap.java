@@ -26,6 +26,7 @@ public abstract class GenericBeloteLap implements Lap {
 
     public static final int[] PROGRESS2POINTS = {80, 90, 100, 110, 120, 130, 140, 150, 160, 250};
 
+    protected transient boolean mIsDone = true;
     protected transient int[] mScores;
     @SerializedName("taker")
     protected int mTaker;
@@ -62,6 +63,10 @@ public abstract class GenericBeloteLap implements Lap {
 
     public void setBelote(int belote) {
         mBelote = belote;
+    }
+
+    public boolean isDone() {
+        return mIsDone;
     }
 
     @Override

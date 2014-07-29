@@ -27,12 +27,14 @@ import java.util.List;
  */
 public class TarotThreeLap extends TarotLap {
 
-    public TarotThreeLap(int taker, int deal, int points, int oudlers, List<TarotBonus> bonuses) {
-        super(taker, deal, points, oudlers, bonuses);
+    public TarotThreeLap() {
+        this(Player.PLAYER_1, new TarotBid(), 42,
+                OUDLER_NONE_MSK, new ArrayList<TarotBonus>());
     }
 
-    public TarotThreeLap() {
-        this(Player.PLAYER_1, BID_PRISE, 42, 0, new ArrayList<TarotBonus>());
+    public TarotThreeLap(int taker, TarotBid bid, int points,
+                         int oudlers, List<TarotBonus> bonuses) {
+        super(taker, bid, points, oudlers, bonuses);
     }
 
     @Override

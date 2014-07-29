@@ -16,7 +16,6 @@
 
 package com.sbgapps.scoreit.games.tarot;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,15 +113,15 @@ public class TarotLapFragment extends LapFragment
             });
         }
 
-        final ArrayAdapter<BidItem> dealItemArrayAdapter = new ArrayAdapter<>(getActivity(),
+        final ArrayAdapter<BidItem> bidItemArrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
-        dealItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dealItemArrayAdapter.add(new BidItem(TarotLap.BID_PRISE));
-        dealItemArrayAdapter.add(new BidItem(TarotLap.BID_GARDE));
-        dealItemArrayAdapter.add(new BidItem(TarotLap.BID_GARDE_SANS));
-        dealItemArrayAdapter.add(new BidItem(TarotLap.BID_GARDE_CONTRE));
-        mBid.setAdapter(dealItemArrayAdapter);
-        mBid.setSelection(getLap().getBid());
+        bidItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bidItemArrayAdapter.add(new BidItem(TarotBid.BID_PRISE));
+        bidItemArrayAdapter.add(new BidItem(TarotBid.BID_GARDE));
+        bidItemArrayAdapter.add(new BidItem(TarotBid.BID_GARDE_SANS));
+        bidItemArrayAdapter.add(new BidItem(TarotBid.BID_GARDE_CONTRE));
+        mBid.setAdapter(bidItemArrayAdapter);
+        mBid.setSelection(getLap().getBid().get());
         mBid.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -214,11 +213,11 @@ public class TarotLapFragment extends LapFragment
 
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner_announce);
         spinner.setAdapter(adapter);
-        spinner.setSelection(bonus.getBonus());
+        spinner.setSelection(bonus.get());
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                bonus.setBonus(position);
+                bonus.set(position);
             }
 
             @Override
@@ -294,7 +293,7 @@ public class TarotLapFragment extends LapFragment
 
     private boolean isBonusAlreadySet(int bonus) {
         for (TarotBonus b : getLap().getBonuses()) {
-            if (b.getBonus() == bonus) {
+            if (b.get() == bonus) {
                 return true;
             }
         }
@@ -317,18 +316,7 @@ public class TarotLapFragment extends LapFragment
 
         @Override
         public String toString() {
-            Resources r = getResources();
-            switch (mBid) {
-                case TarotLap.BID_PRISE:
-                    return r.getString(R.string.take);
-                case TarotLap.BID_GARDE:
-                    return r.getString(R.string.guard);
-                case TarotLap.BID_GARDE_CONTRE:
-                    return r.getString(R.string.guard_against);
-                case TarotLap.BID_GARDE_SANS:
-                    return r.getString(R.string.guard_without);
-            }
-            return null;
+            return TarotBid.getLitteralBid(getActivity(), mBid);
         }
     }
 
@@ -356,24 +344,7 @@ public class TarotLapFragment extends LapFragment
 
         @Override
         public String toString() {
-            Resources r = getResources();
-            switch (mBonus) {
-                case TarotBonus.BONUS_PETIT_AU_BOUT:
-                    return r.getString(R.string.petit_au_bout);
-                case TarotBonus.BONUS_POIGNEE_SIMPLE:
-                    return r.getString(R.string.poignee_simple);
-                case TarotBonus.BONUS_POIGNEE_DOUBLE:
-                    return r.getString(R.string.poignee_double);
-                case TarotBonus.BONUS_POIGNEE_TRIPLE:
-                    return r.getString(R.string.poignee_double);
-                case TarotBonus.BONUS_CHELEM_NON_ANNONCE:
-                    return r.getString(R.string.chelem_non_annonce);
-                case TarotBonus.BONUS_CHELEM_ANNONCE_REALISE:
-                    return r.getString(R.string.chelem_annonce_realise);
-                case TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE:
-                    return r.getString(R.string.chelem_annonce_non_realise);
-            }
-            return null;
+            return TarotBonus.getLitteralBonus(getActivity(), mBonus);
         }
     }
 }

@@ -31,14 +31,15 @@ public class TarotFiveLap extends TarotLap {
     @SerializedName("partner")
     private int mPartner;
 
-    public TarotFiveLap(int taker, int deal, int points, int oudlers, List<TarotBonus> bonuses,
-                        int partner) {
-        super(taker, deal, points, oudlers, bonuses);
-        mPartner = partner;
+    public TarotFiveLap() {
+        this(Player.PLAYER_1, new TarotBid(), 42,
+                OUDLER_NONE_MSK, new ArrayList<TarotBonus>(), Player.PLAYER_2);
     }
 
-    public TarotFiveLap() {
-        this(Player.PLAYER_1, BID_PRISE, 42, 0, new ArrayList<TarotBonus>(), Player.PLAYER_2);
+    public TarotFiveLap(int taker, TarotBid bid, int points,
+                        int oudlers, List<TarotBonus> bonuses, int partner) {
+        super(taker, bid, points, oudlers, bonuses);
+        mPartner = partner;
     }
 
     public int getPartner() {
@@ -88,7 +89,7 @@ public class TarotFiveLap extends TarotLap {
     @Override
     public int getPetitBonus() {
         for (TarotBonus bonus : getBonuses()) {
-            switch (bonus.getBonus()) {
+            switch (bonus.get()) {
                 case TarotBonus.BONUS_PETIT_AU_BOUT:
                     return (mTaker == bonus.getPlayer() || mPartner == bonus.getPlayer())
                             ? 10 : -10;

@@ -14,21 +14,27 @@
   ~ limitations under the License.
   -->
 
-<android.support.v4.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ScoreItActivity">
 
-    <include
-        layout="@layout/include_activity_scoreit"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/navigation_drawer"
-        layout="@layout/navigation_drawer_list_view"/>
+        <include
+            layout="@layout/include_activity_scoreit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-</android.support.v4.widget.DrawerLayout>
+        <include
+            android:id="@+id/navigation_drawer"
+            layout="@layout/navigation_drawer_list_view"/>
+
+    </android.support.v4.widget.DrawerLayout>
+</FrameLayout>
