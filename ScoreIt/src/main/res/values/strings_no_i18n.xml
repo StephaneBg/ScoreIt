@@ -29,31 +29,4 @@
         <!-- German -->
         <item translatable="false">Luca Eichler</item>
     </string-array>
-    <string-array name="libraries" translatable="false">
-        <item translatable="false">ScoreIt</item>
-        <item translatable="false">HoloGraphLibrary</item>
-        <item translatable="false">NineOldAndroids</item>
-        <item translatable="false">Android Support Libraries</item>
-    </string-array>
-    <string-array name="lib_licenses" translatable="false">
-        <item translatable="false">Copyright 2013 SBG Apps\n\n
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.\n
-You may obtain a copy of the License at\n\n
-http://www.apache.org/licenses/LICENSE-2.0\n\n
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</item>
-    <item translatable="false">Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.\n
-You may obtain a copy of the License at\n\n
-http://www.apache.org/licenses/LICENSE-2.0\n\n
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</item>
-        <item translatable="false">Copyright 2012 Jake Wharton\n\n
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.\n
-You may obtain a copy of the License at\n\n
-http://www.apache.org/licenses/LICENSE-2.0\n\n
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</item>
-        <item translatable="false">Copyright 2012 The Android Open Source Project\n\n
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.\n
-You may obtain a copy of the License at\n\n
-http://www.apache.org/licenses/LICENSE-2.0\n\n
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</item>
-    </string-array>
 </resources>

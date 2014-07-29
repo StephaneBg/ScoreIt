@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -33,6 +32,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.tundem.aboutlibraries.Libs;
+import com.tundem.aboutlibraries.ui.LibsFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,30 +103,6 @@ public class AboutActivity extends ActionBarActivity {
         }
     }
 
-    public static class LicensesFragment extends ListFragment {
-
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            String[] from = new String[]{"library", "license"};
-            int[] to = new int[]{R.id.library, R.id.license_text};
-
-            List<HashMap<String, String>> data = new ArrayList<>();
-            HashMap<String, String> map;
-            String[] lib = getResources().getStringArray(R.array.libraries);
-            String[] lic = getResources().getStringArray(R.array.lib_licenses);
-            for (int i = 0; i < lib.length; i++) {
-                map = new HashMap<>();
-                map.put("library", lib[i]);
-                map.put("license", lic[i]);
-                data.add(map);
-            }
-
-            setListAdapter(new SimpleAdapter(getActivity(),
-                    data, R.layout.list_item_license, from, to));
-        }
-    }
-
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -146,8 +123,20 @@ public class AboutActivity extends ActionBarActivity {
                             TranslationsFragment.class.getName());
                     break;
                 case 2:
-                    fragment = Fragment.instantiate(AboutActivity.this,
-                            LicensesFragment.class.getName());
+                    Bundle bundle = new Bundle();
+                    bundle.putStringArray(Libs.BUNDLE_FIELDS,
+                            Libs.toStringArray(R.string.class.getFields()));
+                    bundle.putStringArray(Libs.BUNDLE_LIBS,
+                            new String[]{"HoloGraphLibrary",
+                                    "NineOldAndroids",
+                                    "FloatingActionButton",
+                                    "Butterknife",
+                                    "androidBetterpickers",
+                                    "PagerSlidingTabStrip"});
+                    bundle.putBoolean(Libs.BUNDLE_VERSION, true);
+                    bundle.putBoolean(Libs.BUNDLE_LICENSE, true);
+                    fragment = new LibsFragment();
+                    fragment.setArguments(bundle);
                     break;
             }
             return fragment;

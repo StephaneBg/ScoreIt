@@ -29,7 +29,7 @@
         android:toYScale="2.0"/>
 
     <alpha
-        android:duration="@android:integer/config_mediumAnimTime"
+        android:duration="@android:integer/config_shortAnimTime"
         android:fromAlpha="0.5"
         android:toAlpha="0.0"/>
 </set>

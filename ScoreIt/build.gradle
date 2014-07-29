@@ -16,6 +16,8 @@
 
 
 
+
+
 apply plugin: 'com.android.application'
 
 android {
@@ -72,6 +74,7 @@ dependencies {
     compile 'com.larswerkman:HoloColorPicker:1.4'
     compile 'com.github.johnkil.android-robototextview:robototextview:2.1.0'
     compile 'com.jakewharton:butterknife:5.1.1'
+    compile 'com.tundem.aboutlibraries:library:2.1.5'
 
     compile project(':HoloGraphLibrary')
     compile project(':FloatingActionButton')
