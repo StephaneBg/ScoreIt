@@ -27,8 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/default_margin"
-        android:paddingRight="@dimen/default_margin">
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
 
         <ImageButton
             android:id="@+id/btn_minus"
@@ -42,7 +42,7 @@
         <TextView
             android:id="@+id/textview_points"
             android:layout_width="0dip"
-            android:layout_height="@dimen/default_list_item_height"
+            android:layout_height="@dimen/height_default"
             android:layout_weight="1"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
@@ -62,6 +62,6 @@
         android:id="@+id/seekbar_points"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/default_double_margin"
-        android:layout_marginTop="@dimen/default_margin"/>
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
 </LinearLayout>

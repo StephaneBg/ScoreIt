@@ -20,7 +20,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_background"
+    android:background="@color/white"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:scrollbars="none"
@@ -39,8 +39,8 @@
             android:id="@+id/radio_group_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
 
             <RadioButton
@@ -69,8 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"/>
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
         <View style="@style/Divider"/>
 
@@ -83,8 +83,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"/>
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
         <View style="@style/Divider"/>
 
@@ -96,8 +96,8 @@
             android:id="@+id/radio_group_belote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
 
             <RadioButton
@@ -132,8 +132,8 @@
             android:id="@+id/radio_group_coinche"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity">
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin">
 
             <RadioButton
                 android:id="@+id/rb_no_coinche"

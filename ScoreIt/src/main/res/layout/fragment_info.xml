@@ -30,25 +30,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_margin="@dimen/activity_horizontal_margin"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_launcher"
+                android:gravity="bottom"
                 android:text="@string/app_name"
-                android:textSize="@dimen/medium_font_size"/>
+                android:textSize="@dimen/font_headline"/>
 
             <TextView
                 android:id="@+id/version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/default_margin"/>
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:singleLine="true"
                 android:text="© SBG Apps - Stéphane Baiget"
                 tools:ignore="HardcodedText"/>
@@ -84,10 +86,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_margin="@dimen/activity_horizontal_margin"
             android:gravity="bottom"
             android:text="@string/donate"
-            android:textSize="@dimen/medium_font_size"/>
+            android:textSize="@dimen/font_headline"/>
 
         <Button
             android:id="@+id/btn_donate_coffee"

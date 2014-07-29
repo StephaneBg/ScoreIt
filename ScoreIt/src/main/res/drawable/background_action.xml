@@ -22,5 +22,5 @@
         android:drawable="@color/dim_lighter_gray"
         android:state_pressed="true"/>
     <item
-        android:drawable="@android:color/transparent"/>
+        android:drawable="@color/transparent"/>
 </selector>

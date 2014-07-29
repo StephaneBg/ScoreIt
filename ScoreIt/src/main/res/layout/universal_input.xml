@@ -32,8 +32,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/margin_default"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/default_margin"
-        android:paddingRight="@dimen/default_margin">
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
 
         <ImageButton
             android:id="@+id/btn_minus"
@@ -47,7 +47,7 @@
         <TextView
             android:id="@+id/edit_points"
             android:layout_width="0dip"
-            android:layout_height="@dimen/default_list_item_height"
+            android:layout_height="@dimen/height_default"
             android:layout_weight="1"
             android:background="@drawable/apptheme_textfield_activated_holo_light"
             android:gravity="center"

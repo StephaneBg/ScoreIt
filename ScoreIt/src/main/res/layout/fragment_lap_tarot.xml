@@ -20,7 +20,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_background"
+    android:background="@color/white"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:scrollbars="none"
@@ -40,8 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_default"
             android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:spinnerMode="dialog"/>
 
         <ViewStub
@@ -61,8 +61,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_default"
             android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:spinnerMode="dialog"/>
 
         <View style="@style/Divider"/>
@@ -76,8 +76,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/petit"/>
 
         <CheckBox
@@ -85,8 +85,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/twentyone"/>
 
         <CheckBox
@@ -94,8 +94,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/excuse"/>
 
         <View style="@style/Divider"/>
@@ -109,8 +109,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"/>
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
         <View style="@style/Divider"/>
 
@@ -122,8 +122,8 @@
             android:id="@+id/ll_bonuses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_activity"
-            android:layout_marginRight="@dimen/margin_activity"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:animateLayoutChanges="true"
             android:divider="?android:listDivider"
             android:orientation="vertical"
