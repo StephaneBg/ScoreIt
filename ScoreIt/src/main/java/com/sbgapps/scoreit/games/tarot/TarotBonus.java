@@ -67,7 +67,7 @@ public class TarotBonus implements Serializable {
             case TarotBonus.BONUS_POIGNEE_DOUBLE:
                 return res.getString(R.string.poignee_double);
             case TarotBonus.BONUS_POIGNEE_TRIPLE:
-                return res.getString(R.string.poignee_double);
+                return res.getString(R.string.poignee_triple);
             case TarotBonus.BONUS_CHELEM_NON_ANNONCE:
                 return res.getString(R.string.chelem_non_annonce);
             case TarotBonus.BONUS_CHELEM_ANNONCE_REALISE:

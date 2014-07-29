@@ -56,4 +56,9 @@ public class Player {
     public void setColor(int color) {
         mColor = color;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }
