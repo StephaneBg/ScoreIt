@@ -32,9 +32,9 @@
     <color name="lighter_gray">#e0e0e0</color>
     <color name="dim_lighter_gray">#80e0e0e0</color>
 
-    <color name="color_player1">#FF60B62F</color>
-    <color name="color_player2">#FFFEAF39</color>
-    <color name="color_player3">#FF0099E6</color>
-    <color name="color_player4">#FFFF3E61</color>
-    <color name="color_player5">#FF816FA1</color>
+    <color name="color_player1">#60B62F</color>
+    <color name="color_player2">#FEAF39</color>
+    <color name="color_player3">#0099E6</color>
+    <color name="color_player4">#FF3E61</color>
+    <color name="color_player5">#C47CD2</color>
 </resources>

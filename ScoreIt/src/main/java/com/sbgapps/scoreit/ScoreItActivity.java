@@ -132,6 +132,8 @@ public class ScoreItActivity extends ActionBarActivity
                     .findFragmentByTag(ScoreListFragment.TAG);
             mScoreGraphFragment = (ScoreGraphFragment) fragmentManager
                     .findFragmentByTag(ScoreGraphFragment.TAG);
+            mLapFragment = (LapFragment) fragmentManager
+                    .findFragmentByTag(LapFragment.TAG);
 
             mIsEdited = savedInstanceState.getBoolean("edited");
             if (mIsEdited) {
