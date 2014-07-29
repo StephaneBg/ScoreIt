@@ -25,7 +25,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -439,26 +438,24 @@ public class ScoreItActivity extends ActionBarActivity
     }
 
     public void switchScoreViews() {
-        Fragment fragment;
-        String tag;
-
         if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
-            fragment = mScoreListFragment;
-            tag = ScoreListFragment.TAG;
-        } else if (null == mScoreGraphFragment) {
-            fragment = mScoreGraphFragment = new ScoreGraphFragment();
-            tag = ScoreGraphFragment.TAG;
-        } else {
-            fragment = mScoreGraphFragment;
-            tag = ScoreGraphFragment.TAG;
+            getSupportFragmentManager().popBackStack(ScoreGraphFragment.TAG,
+                    android.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            return;
         }
+
+        if (null == mScoreGraphFragment)
+            mScoreGraphFragment = new ScoreGraphFragment();
 
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
                         R.anim.slide_in_down,
-                        R.anim.slide_out_up)
-                .replace(R.id.score_container, fragment, tag)
+                        R.anim.slide_out_up,
+                        R.anim.slide_in_up,
+                        R.anim.slide_out_down)
+                .addToBackStack(ScoreGraphFragment.TAG)
+                .replace(R.id.score_container, mScoreGraphFragment, ScoreGraphFragment.TAG)
                 .commit();
     }
 
