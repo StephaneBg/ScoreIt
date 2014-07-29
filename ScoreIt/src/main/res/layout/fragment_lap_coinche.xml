@@ -20,11 +20,143 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/gray_background"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:scrollbars="none"
     tools:context="ScoreItActivity">
 
-    <include
-        layout="@layout/lap_include_coinche"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/team"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group_player"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_player1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:text="@string/them"/>
+
+            <RadioButton
+                android:id="@+id/rb_player2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:text="@string/us"/>
+        </RadioGroup>
+
+        <View style="@style/Divider"/>
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/bidding"/>
+
+        <com.sbgapps.scoreit.view.SeekbarPoints
+            android:id="@+id/input_bid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"/>
+
+        <View style="@style/Divider"/>
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/points"/>
+
+        <com.sbgapps.scoreit.view.SeekbarPoints
+            android:id="@+id/input_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"/>
+
+        <View style="@style/Divider"/>
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/belote"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group_belote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_belote_none"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:text="@string/none"/>
+
+            <RadioButton
+                android:id="@+id/rb_belote_player1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:text="@string/them"/>
+
+            <RadioButton
+                android:id="@+id/rb_belote_player2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:text="@string/us"/>
+        </RadioGroup>
+
+        <View style="@style/Divider"/>
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/coinche"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group_coinche"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity">
+
+            <RadioButton
+                android:id="@+id/rb_no_coinche"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:text="@string/none"/>
+
+            <RadioButton
+                android:id="@+id/rb_coinche"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:text="@string/coinche"/>
+
+            <RadioButton
+                android:id="@+id/rb_surcoinche"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:layout_weight="1"
+                android:text="@string/surcoinche"/>
+        </RadioGroup>
+
+    </LinearLayout>
 </ScrollView>

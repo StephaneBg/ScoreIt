@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit.games;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.sbgapps.scoreit.ScoreItActivity;
@@ -26,6 +27,12 @@ import com.sbgapps.scoreit.ScoreItActivity;
 public class LapFragment extends Fragment {
 
     public static final String TAG = LapFragment.class.getName();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     public GameHelper getGameHelper() {
         return ((ScoreItActivity) getActivity()).getGameHelper();

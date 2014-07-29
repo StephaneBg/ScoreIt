@@ -20,11 +20,124 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/gray_background"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:scrollbars="none"
     tools:context="ScoreItActivity">
 
-    <include
-        layout="@layout/lap_include_tarot"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/taker"/>
+
+        <Spinner
+            android:id="@+id/spinner_taker"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_default"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"
+            android:spinnerMode="dialog"/>
+
+        <ViewStub
+            android:id="@+id/viewstub_partner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/stub_partner"/>
+
+        <View style="@style/Divider"/>
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/bidding"/>
+
+        <Spinner
+            android:id="@+id/spinner_bid"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_default"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"
+            android:spinnerMode="dialog"/>
+
+        <View style="@style/Divider"/>
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/oudlers"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_petit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"
+            android:text="@string/petit"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_twenty_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"
+            android:text="@string/twentyone"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_excuse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"
+            android:text="@string/excuse"/>
+
+        <View style="@style/Divider"/>
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/points"/>
+
+        <com.sbgapps.scoreit.view.SeekbarPoints
+            android:id="@+id/input_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"/>
+
+        <View style="@style/Divider"/>
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/bonuses"/>
+
+        <LinearLayout
+            android:id="@+id/ll_bonuses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_activity"
+            android:layout_marginRight="@dimen/margin_activity"
+            android:animateLayoutChanges="true"
+            android:divider="?android:listDivider"
+            android:orientation="vertical"
+            android:showDividers="middle|end">
+
+            <Button
+                android:id="@+id/btn_add_bonus"
+                style="?android:borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_default"
+                android:text="@string/add"
+                android:textAllCaps="true"/>
+        </LinearLayout>
+
+    </LinearLayout>
 </ScrollView>
