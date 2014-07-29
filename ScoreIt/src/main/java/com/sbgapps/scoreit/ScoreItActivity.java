@@ -104,6 +104,10 @@ public class ScoreItActivity extends ActionBarActivity
         return mLap;
     }
 
+    public FloatingActionButton getActionButton() {
+        return mActionButton;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,7 +141,7 @@ public class ScoreItActivity extends ActionBarActivity
                         getResources().getDrawable(R.drawable.ic_content_edit_fab));
             } else {
                 mLap = (Lap) savedInstanceState.getSerializable("lap");
-                mActionButton.setImageDrawable(
+                if (null != mLap) mActionButton.setImageDrawable(
                         getResources().getDrawable(R.drawable.ic_action_accept_fab));
             }
         }

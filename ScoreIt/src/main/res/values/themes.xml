@@ -37,6 +37,7 @@
         <item name="android:listChoiceIndicatorSingle">@drawable/apptheme_btn_radio_holo_light
         </item>
         <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
+        <item name="android:homeAsUpIndicator">@null</item>
     </style>
 
     <style name="ActionBar.Solid.Apptheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">

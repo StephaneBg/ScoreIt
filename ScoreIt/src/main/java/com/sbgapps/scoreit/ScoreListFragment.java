@@ -47,6 +47,8 @@ public class ScoreListFragment extends ListFragment {
         ScoreAdapter adapter = new ScoreAdapter(getActivity(), mListView);
         setListAdapter(adapter);
 
+        ((ScoreItActivity) getActivity()).getActionButton().attachToListView(mListView);
+
         return view;
     }
 
