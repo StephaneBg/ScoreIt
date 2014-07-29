@@ -26,7 +26,8 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name">
+        android:label="@string/app_name"
+        android:logo="@drawable/ic_logo">
         <activity
             android:name="com.sbgapps.scoreit.ScoreItActivity"
             android:theme="@style/Theme.ScoreIt">
@@ -38,7 +39,7 @@
         </activity>
         <activity
             android:name="com.sbgapps.scoreit.AboutActivity"
-            android:logo="@drawable/ic_logo"
+            android:logo="@drawable/ic_logo_void"
             android:parentActivityName=".ScoreItActivity"
             android:theme="@style/Theme.ScoreIt">
             <meta-data

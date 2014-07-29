@@ -121,14 +121,19 @@ public class ScoreItActivity extends ActionBarActivity
                     .add(R.id.main_container, mScoreFragment, ScoreFragment.TAG)
                     .commit();
         } else {
-            mIsEdited = savedInstanceState.getBoolean("edited");
             mScoreFragment = (ScoreFragment) fragmentManager.findFragmentByTag(ScoreFragment.TAG);
             mLapFragment = (LapFragment) fragmentManager.findFragmentByTag(LapFragment.TAG);
+
+            mIsEdited = savedInstanceState.getBoolean("edited");
             if (mIsEdited) {
-                int position = savedInstanceState.getInt("lap");
+                int position = savedInstanceState.getInt("position");
                 mLap = mGameHelper.getLaps().get(position);
                 mActionButton.setImageDrawable(
                         getResources().getDrawable(R.drawable.ic_content_edit_fab));
+            } else {
+                mLap = (Lap) savedInstanceState.getSerializable("lap");
+                mActionButton.setImageDrawable(
+                        getResources().getDrawable(R.drawable.ic_action_accept_fab));
             }
         }
 
@@ -202,8 +207,12 @@ public class ScoreItActivity extends ActionBarActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (null != mLap) {
-            outState.putInt("lap", mGameHelper.getLaps().indexOf(mLap));
             outState.putBoolean("edited", mIsEdited);
+            if (mIsEdited) {
+                outState.putInt("position", mGameHelper.getLaps().indexOf(mLap));
+            } else {
+                outState.putSerializable("lap", mLap);
+            }
         }
     }
 
