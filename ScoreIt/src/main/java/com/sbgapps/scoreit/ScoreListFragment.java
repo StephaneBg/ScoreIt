@@ -77,6 +77,7 @@ public class ScoreListFragment extends ListFragment {
     }
 
     public void closeOpenedItems() {
-        mListView.closeOpenedItems();
+        if (null != mListView)
+            mListView.closeOpenedItems();
     }
 }

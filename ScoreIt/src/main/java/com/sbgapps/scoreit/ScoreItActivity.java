@@ -414,11 +414,11 @@ public class ScoreItActivity extends ActionBarActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
-                        R.anim.scale_in,
-                        android.R.anim.slide_out_right,
-                        android.R.anim.slide_in_left,
-                        R.anim.scale_out)
-                .add(R.id.score_container, mLapFragment)
+                        R.anim.scale_enter_up,
+                        R.anim.scale_exit_down,
+                        R.anim.scale_enter_down,
+                        R.anim.scale_exit_up)
+                .replace(R.id.score_container, mLapFragment)
                 .addToBackStack(LapFragment.TAG)
                 .commit();
     }
