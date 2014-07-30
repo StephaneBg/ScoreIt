@@ -42,6 +42,6 @@
 
     <!-- Width -->
     <dimen name="width_default_column">280dp</dimen>
-    <dimen name="navigation_drawer_width">240dip</dimen>
+    <dimen name="navigation_drawer_width">240dp</dimen>
 
 </resources>

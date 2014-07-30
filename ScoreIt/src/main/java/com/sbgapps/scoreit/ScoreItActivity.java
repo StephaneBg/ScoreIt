@@ -117,7 +117,7 @@ public class ScoreItActivity extends ActionBarActivity
         setAccentDecor();
         setContentView(R.layout.activity_scoreit);
         ButterKnife.inject(this);
-        //mIsTablet = (null != findViewById(R.id.fragment_container_large));
+        mIsTablet = (null != findViewById(R.id.secondary_container));
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.addOnBackStackChangedListener(this);
@@ -218,8 +218,7 @@ public class ScoreItActivity extends ActionBarActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (mDrawerLayout.isDrawerOpen(mNavigationDrawer) ||
-                (null != mLapFragment && mLapFragment.isVisible())) {
+        if (mDrawerLayout.isDrawerOpen(mNavigationDrawer) || (null != mLap)) {
             return false;
         }
         getMenuInflater().inflate(R.menu.main, menu);
@@ -228,22 +227,22 @@ public class ScoreItActivity extends ActionBarActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (mDrawerLayout.isDrawerOpen(mNavigationDrawer) ||
-                (null != mLapFragment && mLapFragment.isVisible())) {
+        if (mDrawerLayout.isDrawerOpen(mNavigationDrawer) || (null != mLap)) {
             return false;
         }
+
+        int lapCnt = mGameHelper.getLaps().size();
+        int game = mGameHelper.getPlayedGame();
+
         MenuItem item;
-        if (0 == mGameHelper.getLaps().size()) {
-            if (!mIsTablet) {
-                item = menu.findItem(R.id.menu_view);
-                item.setVisible(false);
-            }
-            item = menu.findItem(R.id.menu_clear);
-            item.setVisible(false);
-        }
+        item = menu.findItem(R.id.menu_view);
+        item.setVisible(!mIsTablet && 0 != lapCnt);
+
+        item = menu.findItem(R.id.menu_clear);
+        item.setVisible(0 != lapCnt);
+
         item = menu.findItem(R.id.menu_count);
-        item.setVisible(Game.UNIVERSAL == mGameHelper.getPlayedGame() ||
-                Game.TAROT == mGameHelper.getPlayedGame());
+        item.setVisible(Game.UNIVERSAL == game || Game.TAROT == game);
         return true;
     }
 
@@ -270,7 +269,7 @@ public class ScoreItActivity extends ActionBarActivity
     }
 
     @OnItemClick(R.id.drawer_list_view)
-    public void onItemClick(int position, long id) {
+    public void onDrawerItemClick(int position, long id) {
         if (mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
             mDrawerLayout.closeDrawer(mNavigationDrawer);
             if (mSelectedPosition == position) {
@@ -424,17 +423,24 @@ public class ScoreItActivity extends ActionBarActivity
 
     public void loadFragments(boolean anim) {
         mHeaderFragment = new HeaderFragment();
-        mScoreListFragment = new ScoreListFragment();
-
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         ft.replace(R.id.header_container, mHeaderFragment, HeaderFragment.TAG)
                 .commit();
 
+        mScoreListFragment = new ScoreListFragment();
         ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_up);
         ft.replace(R.id.score_container, mScoreListFragment, ScoreListFragment.TAG)
                 .commit();
+
+        if (mIsTablet) {
+            mScoreGraphFragment = new ScoreGraphFragment();
+            ft = getSupportFragmentManager().beginTransaction();
+            if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+            ft.replace(R.id.secondary_container, mScoreGraphFragment, ScoreGraphFragment.TAG)
+                    .commit();
+        }
     }
 
     public void switchScoreViews() {
