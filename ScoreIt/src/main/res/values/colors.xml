@@ -19,9 +19,11 @@
     <color name="white">#FFF</color>
     <color name="black">#000</color>
 
-    <color name="primary_accent">#ff9800</color>
-    <color name="secondary_accent">#259b24</color>
-    <color name="secondary_accent_700">#0a7e07</color>
+    <color name="primary_accent">#F97026</color>
+    <color name="primary_accent_dark">#CC5C20</color>
+    <color name="primary_accent_translucent">#DDF97026</color>
+    <color name="secondary_accent">#60B62F</color>
+    <color name="secondary_accent_dark">#458221</color>
     <color name="window_background">#EDF1F0</color>
 
     <color name="darker_black">#DE000000</color>
@@ -30,6 +32,7 @@
     <color name="gray_background">#eeeeee</color>
     <color name="darker_gray">#757575</color>
     <color name="lighter_gray">#e0e0e0</color>
+    <color name="lighter_gray_tranluscent">#DDe0e0e0</color>
     <color name="dim_lighter_gray">#80e0e0e0</color>
 
     <color name="color_player1">#60B62F</color>
