@@ -34,60 +34,61 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/back"
-        android:background="@color/white"/>
+        android:background="@color/darker_gray"/>
+
+    <View
+        android:id="@+id/center_view"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="64dp"
-        android:layout_marginRight="64dp"
-        android:orientation="horizontal">
+        android:layout_marginLeft="120dp"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_toLeftOf="@id/center_view"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/card"
-            android:orientation="vertical">
+        <FrameLayout
+            android:id="@+id/header_container"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"/>
 
-            <FrameLayout
-                android:id="@+id/header_container"
-                android:layout_width="match_parent"
-                android:layout_height="128dp"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/primary_accent"/>
-
-            <FrameLayout
-                android:id="@+id/score_container"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/white"/>
-
-        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/primary_accent"/>
 
         <FrameLayout
             android:id="@+id/secondary_container"
-            android:layout_width="@dimen/card_width"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/card"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"/>
+
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/score_container"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="120dp"
+        android:layout_toRightOf="@id/center_view"
+        android:background="@color/white"/>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="41dp"
-        android:layout_marginTop="93dp"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="92dp"
         android:src="@drawable/ic_action_new_fab"
         app:fab_colorNormal="@color/secondary_accent"
         app:fab_colorPressed="@color/secondary_accent_dark"/>
