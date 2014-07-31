@@ -36,12 +36,12 @@ import java.util.List;
 /**
  * Created by sbaiget on 23/11/13.
  */
-public abstract class ScoreAdapter extends BaseAdapter {
+public abstract class ScoreListAdapter extends BaseAdapter {
 
     private final SwipeListView mSwipeListView;
     private final ScoreItActivity mActivity;
 
-    public ScoreAdapter(ScoreItActivity activity, SwipeListView listView) {
+    public ScoreListAdapter(ScoreItActivity activity, SwipeListView listView) {
         mSwipeListView = listView;
         mActivity = activity;
     }

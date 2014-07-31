@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 
 import com.fortysevendeg.swipelistview.SwipeListView;
 import com.sbgapps.scoreit.adapter.GenericBeloteScoreAdapter;
-import com.sbgapps.scoreit.adapter.ScoreAdapter;
+import com.sbgapps.scoreit.adapter.ScoreListAdapter;
 import com.sbgapps.scoreit.adapter.TarotScoreAdapter;
 import com.sbgapps.scoreit.adapter.UniversalScoreAdapter;
 import com.sbgapps.scoreit.games.Game;
@@ -39,8 +39,8 @@ public class ScoreListFragment extends ListFragment {
     private SwipeListView mListView;
 
     @Override
-    public ScoreAdapter getListAdapter() {
-        return (ScoreAdapter) super.getListAdapter();
+    public ScoreListAdapter getListAdapter() {
+        return (ScoreListAdapter) super.getListAdapter();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ScoreListFragment extends ListFragment {
         mListView = (SwipeListView) view.findViewById(android.R.id.list);
 
         GameHelper gameHelper = ((ScoreItActivity) getActivity()).getGameHelper();
-        ScoreAdapter adapter;
+        ScoreListAdapter adapter;
         switch (gameHelper.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:

@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class AboutActivity extends AccentActivity {
+public class AboutActivity extends BaseActivity {
 
     private InfoFragment mInfoFragment;
 
@@ -129,7 +129,6 @@ public class AboutActivity extends AccentActivity {
                     bundle.putStringArray(Libs.BUNDLE_LIBS,
                             new String[]{"HoloGraphLibrary",
                                     "NineOldAndroids",
-                                    "FloatingActionButton",
                                     "Butterknife",
                                     "androidBetterpickers",
                                     "PagerSlidingTabStrip"});

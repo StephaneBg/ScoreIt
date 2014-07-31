@@ -29,10 +29,10 @@ import com.sbgapps.scoreit.games.Lap;
  */
 public class LinearListAdapter extends BaseAdapter {
 
-    private final ScoreAdapter mScoreAdapter;
+    private final ScoreListAdapter mScoreAdapter;
     private final Lap mLap;
 
-    LinearListAdapter(ScoreAdapter adapter, Lap lap) {
+    LinearListAdapter(ScoreListAdapter adapter, Lap lap) {
         mScoreAdapter = adapter;
         mLap = lap;
     }

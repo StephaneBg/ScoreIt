@@ -36,7 +36,7 @@ import com.sbgapps.scoreit.games.tarot.TarotLap;
 /**
  * Created by sbaiget on 23/11/13.
  */
-public class TarotScoreAdapter extends ScoreAdapter {
+public class TarotScoreAdapter extends ScoreListAdapter {
 
     public TarotScoreAdapter(ScoreItActivity activity, SwipeListView listView) {
         super(activity, listView);
@@ -66,7 +66,7 @@ public class TarotScoreAdapter extends ScoreAdapter {
         ((SwipeListView) parent).recycle(view, position);
 
         Resources r = getActivity().getResources();
-        h.marker.setBackgroundColor(lap.isDone() ? r.getColor(R.color.secondary_accent)
+        h.marker.setBackgroundColor(lap.isDone() ? r.getColor(R.color.color_player1)
                 : r.getColor(R.color.color_player4));
 
         final GameHelper gameHelper = getGameHelper();

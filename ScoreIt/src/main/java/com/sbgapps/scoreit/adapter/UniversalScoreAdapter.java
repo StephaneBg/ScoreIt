@@ -29,7 +29,7 @@ import com.sbgapps.scoreit.games.Lap;
 /**
  * Created by sbaiget on 23/11/13.
  */
-public class UniversalScoreAdapter extends ScoreAdapter {
+public class UniversalScoreAdapter extends ScoreListAdapter {
 
     public UniversalScoreAdapter(ScoreItActivity activity, SwipeListView listView) {
         super(activity, listView);

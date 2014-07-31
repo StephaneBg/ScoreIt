@@ -16,11 +16,16 @@
 
 package com.sbgapps.scoreit;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -61,7 +66,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 
-public class ScoreItActivity extends AccentActivity
+public class ScoreItActivity extends BaseActivity
         implements FragmentManager.OnBackStackChangedListener {
 
     private static final int REQ_PICK_CONTACT = 1;
@@ -366,9 +371,9 @@ public class ScoreItActivity extends AccentActivity
         mIsEdited = true;
         mLap = lap;
         mScoreListFragment.closeOpenedItems();
-        mActionButton.setImageDrawable(
-                getResources().getDrawable(R.drawable.ic_content_edit_fab));
         showLapFragment();
+        Drawable drawable = getResources().getDrawable(R.drawable.ic_content_edit_fab);
+        animateActionButton(drawable);
     }
 
     public void removeLap(Lap lap) {
@@ -472,12 +477,10 @@ public class ScoreItActivity extends AccentActivity
     private void onActionButtonClicked() {
         mScoreListFragment.closeOpenedItems();
         if (null == mLap) {
-            mActionButton.setImageDrawable(
-                    getResources().getDrawable(R.drawable.ic_action_accept_fab));
             addLap();
+            Drawable drawable = getResources().getDrawable(R.drawable.ic_action_accept_fab);
+            animateActionButton(drawable);
         } else {
-            mActionButton.setImageDrawable(
-                    getResources().getDrawable(R.drawable.ic_action_new_fab));
             mLap.computeScores();
             if (mIsEdited) {
                 mIsEdited = false;
@@ -488,6 +491,8 @@ public class ScoreItActivity extends AccentActivity
                     .popBackStack(LapFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             update();
             mLap = null;
+            Drawable drawable = getResources().getDrawable(R.drawable.ic_action_new_fab);
+            animateActionButton(drawable);
         }
     }
 
@@ -646,8 +651,33 @@ public class ScoreItActivity extends AccentActivity
         }
         mLap = null;
         mIsEdited = false;
-        mActionButton.setImageDrawable(
-                getResources().getDrawable(R.drawable.ic_action_new_fab));
+        Drawable drawable = getResources().getDrawable(R.drawable.ic_action_new_fab);
+        animateActionButton(drawable);
         supportInvalidateOptionsMenu();
+    }
+
+    private void animateActionButton(Drawable drawable) {
+        final Drawable icon = drawable;
+        final boolean orange = (null == mLap);
+        final AnimatorSet anim1 = (AnimatorSet)
+                AnimatorInflater.loadAnimator(this, R.animator.card_flip_right_out);
+        final AnimatorSet anim2 = (AnimatorSet)
+                AnimatorInflater.loadAnimator(this, R.animator.card_flip_right_in);
+        anim1.setTarget(mActionButton);
+        anim1.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mActionButton.setImageDrawable(icon);
+                int color = ScoreItActivity.this.getResources()
+                        .getColor(orange ? R.color.secondary_accent : R.color.primary_accent);
+                mActionButton.setColorNormal(color);
+                color = ScoreItActivity.this.getResources()
+                        .getColor(orange ? R.color.secondary_accent_dark : R.color.primary_accent_dark);
+                mActionButton.setColorPressed(color);
+                anim2.setTarget(mActionButton);
+                anim2.start();
+            }
+        });
+        anim1.start();
     }
 }

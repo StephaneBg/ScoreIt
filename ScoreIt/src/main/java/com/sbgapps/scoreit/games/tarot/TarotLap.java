@@ -79,12 +79,12 @@ public abstract class TarotLap implements Lap {
         return mBid;
     }
 
-    public void setBid(int bid) {
-        mBid.set(bid);
-    }
-
     public void setBid(TarotBid bid) {
         mBid = bid;
+    }
+
+    public void setBid(int bid) {
+        mBid.set(bid);
     }
 
     public List<TarotBonus> getBonuses() {
@@ -118,33 +118,6 @@ public abstract class TarotLap implements Lap {
 
     abstract public int getPlayerCount();
 
-    public int getPetitBonus() {
-        int petit = 0;
-        for (TarotBonus bonus : getBonuses()) {
-            switch (bonus.get()) {
-                case TarotBonus.BONUS_PETIT_AU_BOUT:
-                    petit = (mTaker == bonus.getPlayer()) ? 10 : -10;
-                    petit *= getCoefficient();
-                    break;
-            }
-        }
-        return petit;
-    }
-
-    private int getCoefficient() {
-        switch (mBid.get()) {
-            default:
-            case TarotBid.BID_PRISE:
-                return 1;
-            case TarotBid.BID_GARDE:
-                return 2;
-            case TarotBid.BID_GARDE_SANS:
-                return 4;
-            case TarotBid.BID_GARDE_CONTRE:
-                return 6;
-        }
-    }
-
     public int getResult() {
         int points;
 
@@ -176,41 +149,68 @@ public abstract class TarotLap implements Lap {
         points = (25 + Math.abs(points)) * getCoefficient();
 
         // Poignée
-        for (TarotBonus bonus : getBonuses()) {
-            switch (bonus.get()) {
-                case TarotBonus.BONUS_POIGNEE_SIMPLE:
-                    points += 20;
-                    break;
-                case TarotBonus.BONUS_POIGNEE_DOUBLE:
-                    points += 30;
-                    break;
-                case TarotBonus.BONUS_POIGNEE_TRIPLE:
-                    points += 40;
-                    break;
-            }
-        }
-
+        points += getPoigneeBonus();
         points = (mIsDone ? points : -points);
 
         // Petit au bout
         points += getPetitBonus();
 
         // Chelem
-        int chelem = 0;
+        points += getChelemBonus();
+        return points;
+    }
+
+    public int getPetitBonus() {
+        for (TarotBonus bonus : getBonuses()) {
+            switch (bonus.get()) {
+                case TarotBonus.BONUS_PETIT_AU_BOUT:
+                    int petit = (mTaker == bonus.getPlayer()) ? 10 : -10;
+                    petit *= getCoefficient();
+                    return petit;
+            }
+        }
+        return 0;
+    }
+
+    public int getPoigneeBonus() {
+        for (TarotBonus bonus : getBonuses()) {
+            switch (bonus.get()) {
+                case TarotBonus.BONUS_POIGNEE_SIMPLE:
+                    return 20;
+                case TarotBonus.BONUS_POIGNEE_DOUBLE:
+                    return 30;
+                case TarotBonus.BONUS_POIGNEE_TRIPLE:
+                    return 40;
+            }
+        }
+        return 0;
+    }
+
+    public int getChelemBonus() {
         for (TarotBonus bonus : getBonuses()) {
             switch (bonus.get()) {
                 case TarotBonus.BONUS_CHELEM_NON_ANNONCE:
-                    chelem = 200;
-                    break;
+                    return 200;
                 case TarotBonus.BONUS_CHELEM_ANNONCE_REALISE:
-                    chelem = 400;
-                    break;
+                    return 400;
                 case TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE:
-                    chelem = -200;
-                    break;
+                    return -200;
             }
         }
-        points += chelem;
-        return points;
+        return 0;
+    }
+
+    private int getCoefficient() {
+        switch (mBid.get()) {
+            default:
+            case TarotBid.BID_PRISE:
+                return 1;
+            case TarotBid.BID_GARDE:
+                return 2;
+            case TarotBid.BID_GARDE_SANS:
+                return 4;
+            case TarotBid.BID_GARDE_CONTRE:
+                return 6;
+        }
     }
 }

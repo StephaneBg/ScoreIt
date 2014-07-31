@@ -30,7 +30,7 @@ import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
 /**
  * Created by sbaiget on 23/11/13.
  */
-public class GenericBeloteScoreAdapter extends ScoreAdapter {
+public class GenericBeloteScoreAdapter extends ScoreListAdapter {
 
     public GenericBeloteScoreAdapter(ScoreItActivity activity, SwipeListView listView) {
         super(activity, listView);
@@ -59,7 +59,7 @@ public class GenericBeloteScoreAdapter extends ScoreAdapter {
         ((SwipeListView) parent).recycle(view, position);
 
         Resources r = getActivity().getResources();
-        h.marker.setBackgroundColor(lap.isDone() ? r.getColor(R.color.secondary_accent)
+        h.marker.setBackgroundColor(lap.isDone() ? r.getColor(R.color.color_player1)
                 : r.getColor(R.color.color_player4));
 
         h.list.setAdapter(new LinearListAdapter(this, lap));

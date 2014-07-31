@@ -28,7 +28,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 /**
  * Created by Stéphane on 31/07/2014.
  */
-public class AccentActivity extends ActionBarActivity {
+public class BaseActivity extends ActionBarActivity {
 
     public void setAccentDecor() {
         getWindow().getDecorView().setBackgroundResource(R.drawable.background_pattern);
