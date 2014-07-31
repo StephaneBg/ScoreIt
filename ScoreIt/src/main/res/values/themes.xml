@@ -20,6 +20,10 @@
     <style name="Theme.ScoreIt" parent="AppTheme">
     </style>
 
+    <style name="Theme.Adaptive" parent="AppTheme">
+        <item name="isDialog">false</item>
+    </style>
+
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
         <item name="android:actionBarSize">56dp</item>

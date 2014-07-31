@@ -84,7 +84,7 @@ public class NavigationDrawerItemView extends RelativeLayout {
             }
             itemIconIV.setImageDrawable(getIcon(item.getItemIcon()));
             itemIconIV.setVisibility(View.VISIBLE);
-            rr.setBackgroundColor(res.getColor(R.color.gray_background));
+            rr.setBackgroundColor(res.getColor(R.color.lighter_gray));
         }
 
         if (item.isSelected()) {

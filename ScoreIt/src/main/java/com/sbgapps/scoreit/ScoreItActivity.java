@@ -21,25 +21,20 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.melnykov.fab.FloatingActionButton;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
@@ -66,7 +61,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 
-public class ScoreItActivity extends ActionBarActivity
+public class ScoreItActivity extends AccentActivity
         implements FragmentManager.OnBackStackChangedListener {
 
     private static final int REQ_PICK_CONTACT = 1;
@@ -474,22 +469,6 @@ public class ScoreItActivity extends ActionBarActivity
             mScoreGraphFragment.update();
     }
 
-    private void setAccentDecor() {
-        getWindow().getDecorView().setBackgroundResource(R.drawable.background_pattern);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window win = getWindow();
-            WindowManager.LayoutParams winParams = win.getAttributes();
-            final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-            winParams.flags |= bits;
-            win.setAttributes(winParams);
-        }
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintResource(R.drawable.background_status_bar);
-        }
-    }
-
     private void onActionButtonClicked() {
         mScoreListFragment.closeOpenedItems();
         if (null == mLap) {
@@ -613,6 +592,7 @@ public class ScoreItActivity extends ActionBarActivity
                                 String name = editText.getText().toString();
                                 mEditedPlayer.setName(name);
                                 mHeaderFragment.update();
+                                if (mScoreListFragment.isVisible()) mScoreListFragment.update();
                             }
                         }
                 )

@@ -23,7 +23,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class AboutActivity extends ActionBarActivity {
+public class AboutActivity extends AccentActivity {
 
     private InfoFragment mInfoFragment;
 
@@ -48,6 +47,7 @@ public class AboutActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setupFauxDialog();
         setContentView(R.layout.activity_about);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
