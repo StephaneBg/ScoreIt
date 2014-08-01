@@ -53,6 +53,14 @@
     <string name="excuse">Dwaas</string>
     <string name="petit">Petit</string>
     <string name="twentyone">Blackjack</string>
+    <string name="bonuses">Bonussen</string>
+    <string name="poignee_simple">Poignée simple</string>
+    <string name="poignee_double">Poignée double</string>
+    <string name="poignee_triple">Poignée triple</string>
+    <string name="petit_au_bout">Petit au bout</string>
+    <string name="chelem_non_annonce">Chelem non annoncé</string>
+    <string name="chelem_annonce_realise">Chelem annoncé réalisé</string>
+    <string name="chelem_annonce_non_realise">Chelem annoncé non réalisé</string>
     <string name="navigation_drawer_open">Open navigatiebalk</string>
     <string name="navigation_drawer_close">Sluit navigatiebalk</string>
     <string name="inside">Binnenin</string>
@@ -69,6 +77,7 @@
     <string name="settings">Instellingen</string>
     <string name="player_number">Aantal spelers</string>
     <string name="edit_name">Naam wijzigen</string>
+    <string name="edit_color">Kleur bewerken</string>
     <string name="enter_name">Naam invoeren</string>
     <string name="pick_contact">Pick contact</string>
     <string name="application">App</string>
