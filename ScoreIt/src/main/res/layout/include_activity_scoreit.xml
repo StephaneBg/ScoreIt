@@ -56,8 +56,8 @@
         android:layout_gravity="bottom|right"
         android:layout_marginBottom="@dimen/margin_default"
         android:layout_marginRight="@dimen/margin_default"
-        android:src="@drawable/ic_action_new_fab"
-        app:fab_colorNormal="@color/secondary_accent"
-        app:fab_colorPressed="@color/secondary_accent_dark"/>
+        app:fab_colorNormal="@color/secondary_accent_translucent"
+        app:fab_colorPressed="@color/secondary_accent_dark_translucent"
+        app:fab_drawable="@drawable/ic_action_new_fab"/>
 
 </FrameLayout>

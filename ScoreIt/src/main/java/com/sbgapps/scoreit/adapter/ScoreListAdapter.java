@@ -115,6 +115,6 @@ public abstract class ScoreListAdapter extends BaseAdapter {
     }
 
     public GameHelper getGameHelper() {
-        return ((ScoreItActivity) mActivity).getGameHelper();
+        return mActivity.getGameHelper();
     }
 }

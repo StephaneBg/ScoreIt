@@ -89,8 +89,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="92dp"
-        android:src="@drawable/ic_action_new_fab"
         app:fab_colorNormal="@color/secondary_accent"
-        app:fab_colorPressed="@color/secondary_accent_dark"/>
+        app:fab_colorPressed="@color/secondary_accent_dark"
+        app:fab_drawable="@drawable/ic_action_new_fab"/>
 
 </RelativeLayout>

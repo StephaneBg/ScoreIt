@@ -25,7 +25,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -82,13 +81,13 @@ public class ScoreItActivity extends BaseActivity
 
     private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mTitle;
     private int mSelectedPosition = 0;
     private boolean mIsTablet;
     private GameHelper mGameHelper;
     private Player mEditedPlayer;
     private Lap mLap;
     private boolean mIsEdited = false;
+    private boolean mAnimateFab = false;
 
     private ScoreListFragment mScoreListFragment;
     private ScoreGraphFragment mScoreGraphFragment;
@@ -101,10 +100,6 @@ public class ScoreItActivity extends BaseActivity
 
     public Lap getLap() {
         return mLap;
-    }
-
-    public FloatingActionButton getActionButton() {
-        return mActionButton;
     }
 
     @Override
@@ -149,7 +144,6 @@ public class ScoreItActivity extends BaseActivity
         }
 
         // Init drawer
-        mTitle = getTitle();
         mNavigationItems = new ArrayList<>();
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.universal), true));
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.tarot), true));
@@ -372,8 +366,7 @@ public class ScoreItActivity extends BaseActivity
         mLap = lap;
         mScoreListFragment.closeOpenedItems();
         showLapFragment();
-        Drawable drawable = getResources().getDrawable(R.drawable.ic_content_edit_fab);
-        animateActionButton(drawable);
+        animateActionButton(R.drawable.ic_content_edit_fab);
     }
 
     public void removeLap(Lap lap) {
@@ -409,6 +402,7 @@ public class ScoreItActivity extends BaseActivity
                 break;
         }
 
+        mAnimateFab = true;
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
@@ -478,8 +472,7 @@ public class ScoreItActivity extends BaseActivity
         mScoreListFragment.closeOpenedItems();
         if (null == mLap) {
             addLap();
-            Drawable drawable = getResources().getDrawable(R.drawable.ic_action_accept_fab);
-            animateActionButton(drawable);
+            animateActionButton(R.drawable.ic_action_accept_fab);
         } else {
             mLap.computeScores();
             if (mIsEdited) {
@@ -491,8 +484,7 @@ public class ScoreItActivity extends BaseActivity
                     .popBackStack(LapFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             update();
             mLap = null;
-            Drawable drawable = getResources().getDrawable(R.drawable.ic_action_new_fab);
-            animateActionButton(drawable);
+            animateActionButton(R.drawable.ic_action_new_fab);
         }
     }
 
@@ -651,13 +643,13 @@ public class ScoreItActivity extends BaseActivity
         }
         mLap = null;
         mIsEdited = false;
-        Drawable drawable = getResources().getDrawable(R.drawable.ic_action_new_fab);
-        animateActionButton(drawable);
+        if (mAnimateFab) animateActionButton(R.drawable.ic_action_new_fab);
+        mAnimateFab = false;
         supportInvalidateOptionsMenu();
     }
 
-    private void animateActionButton(Drawable drawable) {
-        final Drawable icon = drawable;
+    private void animateActionButton(int resId) {
+        final int resource = resId;
         final boolean orange = (null == mLap);
         final AnimatorSet anim1 = (AnimatorSet)
                 AnimatorInflater.loadAnimator(this, R.animator.card_flip_right_out);
@@ -667,12 +659,14 @@ public class ScoreItActivity extends BaseActivity
         anim1.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                mActionButton.setImageDrawable(icon);
+                mActionButton.setImageDrawable(resource);
                 int color = ScoreItActivity.this.getResources()
-                        .getColor(orange ? R.color.secondary_accent : R.color.primary_accent);
+                        .getColor(orange ? R.color.secondary_accent_translucent
+                                : R.color.primary_accent_translucent);
                 mActionButton.setColorNormal(color);
                 color = ScoreItActivity.this.getResources()
-                        .getColor(orange ? R.color.secondary_accent_dark : R.color.primary_accent_dark);
+                        .getColor(orange ? R.color.secondary_accent_dark_translucent
+                                : R.color.primary_accent_dark_translucent);
                 mActionButton.setColorPressed(color);
                 anim2.setTarget(mActionButton);
                 anim2.start();

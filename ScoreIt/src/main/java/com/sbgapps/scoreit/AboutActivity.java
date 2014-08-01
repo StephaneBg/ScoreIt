@@ -127,8 +127,7 @@ public class AboutActivity extends BaseActivity {
                     bundle.putStringArray(Libs.BUNDLE_FIELDS,
                             Libs.toStringArray(R.string.class.getFields()));
                     bundle.putStringArray(Libs.BUNDLE_LIBS,
-                            new String[]{"HoloGraphLibrary",
-                                    "NineOldAndroids",
+                            new String[]{"NineOldAndroids",
                                     "Butterknife",
                                     "androidBetterpickers",
                                     "PagerSlidingTabStrip"});
