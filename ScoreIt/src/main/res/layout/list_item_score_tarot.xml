@@ -28,7 +28,7 @@
         style="?android:buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_gray"
+        android:background="@color/lighter_gray"
         android:orientation="horizontal">
 
         <ImageButton

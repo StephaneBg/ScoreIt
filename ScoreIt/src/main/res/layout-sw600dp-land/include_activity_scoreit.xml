@@ -28,7 +28,7 @@
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="128dp"
-        android:background="@color/primary_accent_translucent"/>
+        android:background="@color/primary_accent"/>
 
     <View
         android:id="@+id/center_view"
@@ -49,7 +49,7 @@
         <FrameLayout
             android:id="@+id/header_container"
             android:layout_width="match_parent"
-            android:layout_height="128dp"/>
+            android:layout_height="127dp"/>
 
         <View
             android:layout_width="match_parent"

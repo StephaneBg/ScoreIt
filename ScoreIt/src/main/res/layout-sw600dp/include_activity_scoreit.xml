@@ -27,8 +27,8 @@
     <View
         android:id="@+id/back"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
-        android:background="@color/primary_accent_translucent"/>
+        android:layout_height="127dp"
+        android:background="@color/primary_accent"/>
 
     <View
         android:id="@+id/center_view"
