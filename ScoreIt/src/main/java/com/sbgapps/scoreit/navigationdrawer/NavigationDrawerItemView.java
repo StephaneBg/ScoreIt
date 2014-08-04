@@ -19,11 +19,9 @@ package com.sbgapps.scoreit.navigationdrawer;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.devspark.robototextview.widget.RobotoTextView;
@@ -32,35 +30,28 @@ import com.sbgapps.scoreit.R;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-/**
- * Created by Michal Bialas on 19/07/14.
- */
 public class NavigationDrawerItemView extends RelativeLayout {
 
-    final Resources res;
+    final Resources mRes;
     @InjectView(R.id.itemRR)
-    RelativeLayout rr;
+    RelativeLayout mLayout;
     @InjectView(R.id.navigationDrawerItemTitleTV)
-    RobotoTextView itemTitleTV;
-    @InjectView(R.id.navigationDrawerItemIconIV)
-    ImageView itemIconIV;
-
+    RobotoTextView mItemTitle;
+    @InjectView(R.id.separator)
+    View mSeparator;
 
     public NavigationDrawerItemView(Context context) {
-        super(context);
-        res = context.getResources();
-
+        this(context, null);
     }
 
     public NavigationDrawerItemView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        res = context.getResources();
+        this(context, attrs, 0);
     }
 
     public NavigationDrawerItemView(Context context, AttributeSet attrs,
                                     int defStyle) {
         super(context, attrs, defStyle);
-        res = context.getResources();
+        mRes = context.getResources();
     }
 
     @Override
@@ -69,33 +60,20 @@ public class NavigationDrawerItemView extends RelativeLayout {
         ButterKnife.inject(this);
     }
 
-    @SuppressWarnings("NewApi")
     public void bindTo(NavigationDrawerItem item) {
         requestLayout();
-        if (item.isMainItem()) {
-            itemTitleTV.setText(item.getItemName());
-            itemTitleTV.setTextSize(22);
-            itemIconIV.setVisibility(View.GONE);
+        if (item.isSeparator()) {
+            mSeparator.setVisibility(VISIBLE);
+            mItemTitle.setVisibility(GONE);
+            mLayout.setBackgroundColor(Color.WHITE);
         } else {
-            itemTitleTV.setText(item.getItemName());
-            itemTitleTV.setTextSize(14);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                itemTitleTV.setAllCaps(true);
-            }
-            itemIconIV.setImageDrawable(getIcon(item.getItemIcon()));
-            itemIconIV.setVisibility(View.VISIBLE);
-            rr.setBackgroundColor(res.getColor(R.color.lighter_gray));
+            mItemTitle.setText(item.getItemName());
         }
 
         if (item.isSelected()) {
-            itemTitleTV.setTextColor(res.getColor(R.color.secondary_accent));
+            mItemTitle.setTextColor(mRes.getColor(R.color.secondary_accent));
         } else {
-            itemTitleTV.setTextColor(res.getColor(R.color.darker_black));
+            mItemTitle.setTextColor(mRes.getColor(R.color.darker_black));
         }
-
-    }
-
-    private Drawable getIcon(int res) {
-        return getContext().getResources().getDrawable(res);
     }
 }

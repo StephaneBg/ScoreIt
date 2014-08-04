@@ -22,26 +22,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
     android:background="@drawable/navigation_drawer_list_item_bg"
-    android:orientation="vertical"
-    android:padding="@dimen/default_small_padding">
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/navigationDrawerItemIconIV"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/default_small_padding"
-        android:visibility="gone"/>
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginTop="@dimen/margin_default"
+        android:background="@color/lighter_gray"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <com.devspark.robototextview.widget.RobotoTextView
         android:id="@+id/navigationDrawerItemTitleTV"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/height_ab"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="12dp"
-        android:layout_toRightOf="@+id/navigationDrawerItemIconIV"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:gravity="center_vertical"
         android:textColor="@color/darker_black"
         android:textSize="20sp"
         android:textStyle="normal"

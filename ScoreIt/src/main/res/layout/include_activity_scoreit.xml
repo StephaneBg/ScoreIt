@@ -54,8 +54,8 @@
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_gravity="bottom|right"
-        android:layout_marginBottom="@dimen/margin_default"
-        android:layout_marginRight="@dimen/margin_default"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         app:fab_colorNormal="@color/secondary_accent_translucent"
         app:fab_colorPressed="@color/secondary_accent_dark_translucent"
         app:fab_drawable="@drawable/ic_action_new_fab"/>

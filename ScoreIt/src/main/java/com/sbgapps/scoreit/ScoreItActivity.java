@@ -145,12 +145,12 @@ public class ScoreItActivity extends BaseActivity
 
         // Init drawer
         mNavigationItems = new ArrayList<>();
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.universal), true));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.tarot), true));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.belote), true));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.coinche), true));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about),
-                R.drawable.ic_action_about, false));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.universal), false));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.tarot), false));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.belote), false));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.coinche), false));
+        mNavigationItems.add(new NavigationDrawerItem(true));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about), false));
         mNavigationDrawer.replaceWith(mNavigationItems);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
@@ -265,10 +265,11 @@ public class ScoreItActivity extends BaseActivity
     @OnItemClick(R.id.drawer_list_view)
     public void onDrawerItemClick(int position, long id) {
         if (mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
+            NavigationDrawerItem item = mNavigationDrawer.getAdapter().getItem(position);
+            if (item.isSeparator()) return;
+
             mDrawerLayout.closeDrawer(mNavigationDrawer);
-            if (mSelectedPosition == position) {
-                return;
-            }
+            if (mSelectedPosition == position) return;
             onNavigationDrawerItemSelected(position);
             selectItem(position);
         }
@@ -291,6 +292,8 @@ public class ScoreItActivity extends BaseActivity
 
     private void onNavigationDrawerItemSelected(int position) {
         switch (position) {
+            default:
+                return;
             case 0:
                 mGameHelper.setPlayedGame(Game.UNIVERSAL);
                 break;
@@ -303,7 +306,7 @@ public class ScoreItActivity extends BaseActivity
             case 3:
                 mGameHelper.setPlayedGame(Game.COINCHE);
                 break;
-            case 4:
+            case 5:
                 Intent intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
                 return;
@@ -648,8 +651,7 @@ public class ScoreItActivity extends BaseActivity
         supportInvalidateOptionsMenu();
     }
 
-    private void animateActionButton(int resId) {
-        final int resource = resId;
+    private void animateActionButton(final int resId) {
         final boolean orange = (null == mLap);
         final AnimatorSet anim1 = (AnimatorSet)
                 AnimatorInflater.loadAnimator(this, R.animator.card_flip_right_out);
@@ -659,7 +661,7 @@ public class ScoreItActivity extends BaseActivity
         anim1.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                mActionButton.setImageDrawable(resource);
+                mActionButton.setImageDrawable(resId);
                 int color = ScoreItActivity.this.getResources()
                         .getColor(orange ? R.color.secondary_accent_translucent
                                 : R.color.primary_accent_translucent);

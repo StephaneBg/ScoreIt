@@ -23,55 +23,41 @@ package com.sbgapps.scoreit.navigationdrawer;
  */
 public class NavigationDrawerItem {
 
-    private String itemName;
+    private String mItemName;
+    private boolean mSeparator;
+    private boolean mSelected;
 
-    private int itemIcon;
-
-    private boolean mainItem;
-
-    private boolean selected;
-
-    public NavigationDrawerItem(String itemName, int itemIcon, boolean mainItem) {
-        this.itemName = itemName;
-        this.itemIcon = itemIcon;
-        this.mainItem = mainItem;
+    public NavigationDrawerItem(boolean separator) {
+        this(null, separator);
     }
 
-    public NavigationDrawerItem(String itemName, boolean mainItem) {
-        this(itemName, 0, mainItem);
+    public NavigationDrawerItem(String itemName, boolean separator) {
+        this.mItemName = itemName;
+        this.mSeparator = separator;
     }
-
 
     public String getItemName() {
-        return itemName;
+        return mItemName;
     }
 
     public void setItemName(String itemName) {
-        this.itemName = itemName;
+        this.mItemName = itemName;
     }
 
-    public int getItemIcon() {
-        return itemIcon;
+    public boolean isSeparator() {
+        return mSeparator;
     }
 
-    public void setItemIcon(int itemIcon) {
-        this.itemIcon = itemIcon;
-    }
-
-    public boolean isMainItem() {
-        return mainItem;
-    }
-
-    public void setMainItem(boolean mainItem) {
-        this.mainItem = mainItem;
+    public void setSeparator(boolean separator) {
+        this.mSeparator = separator;
     }
 
     public boolean isSelected() {
-        return selected;
+        return mSelected;
     }
 
     public void setSelected(boolean selected) {
-        this.selected = selected;
+        this.mSelected = selected;
     }
 
 }

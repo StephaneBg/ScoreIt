@@ -29,23 +29,20 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-/**
- * Created by Michal Bialas on 19/07/14.
- */
 public class NavigationDrawerView extends BetterViewAnimator {
 
-    private final NavigationDrawerAdapter adapter;
+    private final NavigationDrawerAdapter mAdapter;
     @InjectView(R.id.drawer_list_view)
     ListView mListView;
 
 
     public NavigationDrawerView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        adapter = new NavigationDrawerAdapter(context);
+        mAdapter = new NavigationDrawerAdapter(context);
     }
 
     public void replaceWith(List<NavigationDrawerItem> items) {
-        adapter.replaceWith(items);
+        mAdapter.replaceWith(items);
         setDisplayedChildId(R.id.drawer_list_view);
     }
 
@@ -53,10 +50,10 @@ public class NavigationDrawerView extends BetterViewAnimator {
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.inject(this);
-        mListView.setAdapter(adapter);
+        mListView.setAdapter(mAdapter);
     }
 
     public NavigationDrawerAdapter getAdapter() {
-        return adapter;
+        return mAdapter;
     }
 }
