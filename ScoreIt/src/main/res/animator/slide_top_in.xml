@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright (c) 2014 SBG Apps
   ~
@@ -16,20 +15,14 @@
   ~ limitations under the License.
   -->
 
-<set
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:interpolator="@android:anim/decelerate_interpolator">
-    <scale
-        android:duration="@android:integer/config_mediumAnimTime"
-        android:fromXScale="0.0"
-        android:fromYScale="0.0"
-        android:pivotX="100%"
-        android:pivotY="100%"
-        android:toXScale="1.0"
-        android:toYScale="1.0"/>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:interpolator="@android:interpolator/decelerate_cubic">
 
-    <alpha
-        android:duration="@android:integer/config_mediumAnimTime"
-        android:fromAlpha="0.5"
-        android:toAlpha="1.0"/>
+    <objectAnimator
+        android:duration="@integer/animation_time_full"
+        android:propertyName="yFraction"
+        android:valueFrom="-1.0"
+        android:valueTo="0.0"
+        android:valueType="floatType"/>
+
 </set>

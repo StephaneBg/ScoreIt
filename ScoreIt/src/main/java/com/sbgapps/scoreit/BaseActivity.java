@@ -16,8 +16,8 @@
 
 package com.sbgapps.scoreit;
 
+import android.app.Activity;
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Window;
@@ -28,7 +28,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 /**
  * Created by Stéphane on 31/07/2014.
  */
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity extends Activity {
 
     public void setAccentDecor() {
         getWindow().getDecorView().setBackgroundResource(R.drawable.background_pattern);

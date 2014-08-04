@@ -76,7 +76,7 @@ public class UniversalInput extends FrameLayout {
             @Override
             public void onClick(View v) {
                 new NumberPickerBuilder()
-                        .setFragmentManager(mLapFragment.getChildFragmentManager())
+                        .setFragmentManager(mLapFragment.getFragmentManager())
                         .setStyleResId(R.style.BetterPickerTheme)
                         .setDecimalVisibility(View.INVISIBLE)
                         .setTargetFragment(mLapFragment)

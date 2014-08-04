@@ -64,7 +64,7 @@
             style="@style/SubHeader"
             android:text="@string/bidding"/>
 
-        <com.sbgapps.scoreit.view.SeekbarPoints
+        <com.sbgapps.scoreit.widget.SeekbarPoints
             android:id="@+id/input_bid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
             style="@style/SubHeader"
             android:text="@string/points"/>
 
-        <com.sbgapps.scoreit.view.SeekbarPoints
+        <com.sbgapps.scoreit.widget.SeekbarPoints
             android:id="@+id/input_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

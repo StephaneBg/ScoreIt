@@ -16,7 +16,7 @@ gen/
 *.jks
 
 # Local configuration file (sdk path, etc)
-*.properties
+local.properties
 
 # Intellij project files
 *.iml
@@ -28,3 +28,4 @@ gen/
 # Gradle
 build/
 .gradle
+signing.gradle

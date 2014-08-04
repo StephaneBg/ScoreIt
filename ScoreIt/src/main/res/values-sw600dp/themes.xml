@@ -17,12 +17,8 @@
 
 <resources>
 
-    <style name="Theme.Adaptive" parent="Theme.Base.AppCompat.Light.DialogWhenLarge">
+    <style name="Theme.Adaptive" parent="@android:style/Theme.Holo.Light.Dialog">
         <item name="isDialog">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowSoftInputMode">stateAlwaysHidden</item>
-        <item name="android:windowIsTranslucent">true</item>
     </style>
 
 </resources>

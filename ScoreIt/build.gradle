@@ -15,7 +15,6 @@
  */
 
 
-
 apply plugin: 'com.android.application'
 
 android {
@@ -55,8 +54,8 @@ if (signingFile.exists())
     apply from: signingFile
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:20.+'
     compile 'com.android.support:support-v4:20.+'
+    compile 'com.android.support:support-v13:20.+'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.github.frankiesardo:linearlistview:1.0.1'
     compile 'com.anjlab.android.iab.v3:library:1.0.8@aar'
@@ -64,15 +63,12 @@ dependencies {
     compile('com.fortysevendeg.swipelistview:swipelistview:1.0-SNAPSHOT@aar') {
         transitive = true
     }
-    compile('com.doomonafireball.betterpickers:library:1.5.2') {
-        exclude group: 'com.android.support', module: 'support-v4'
-    }
     compile 'com.larswerkman:HoloColorPicker:1.4'
     compile 'com.github.johnkil.android-robototextview:robototextview:2.1.0'
     compile 'com.jakewharton:butterknife:5.1.1'
-    compile 'com.tundem.aboutlibraries:library:2.1.5'
 
     compile project(':HoloGraphLibrary')
     compile project(':FloatingActionButton')
     compile project(':PagerSlidingTabStrip')
+    compile project(':BetterPickers')
 }

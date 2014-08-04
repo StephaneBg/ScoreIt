@@ -33,7 +33,7 @@ import android.widget.Spinner;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.view.SeekbarPoints;
+import com.sbgapps.scoreit.widget.SeekbarPoints;
 
 import java.util.List;
 

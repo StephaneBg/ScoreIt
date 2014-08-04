@@ -22,14 +22,14 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -114,7 +114,7 @@ public class ScoreItActivity extends BaseActivity
         ButterKnife.inject(this);
         mIsTablet = (null != findViewById(R.id.secondary_container));
 
-        final FragmentManager fragmentManager = getSupportFragmentManager();
+        final FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.addOnBackStackChangedListener(this);
 
         // Init fragments
@@ -158,20 +158,20 @@ public class ScoreItActivity extends BaseActivity
                 R.string.navigation_drawer_close) {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar()
+                getActionBar()
                         .setTitle(mNavigationItems.get(mSelectedPosition).getItemName());
-                supportInvalidateOptionsMenu();
+                invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle(getTitle());
-                supportInvalidateOptionsMenu();
+                getActionBar().setTitle(getTitle());
+                invalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
         mSelectedPosition = mGameHelper.getPlayedGame();
         selectItem(mSelectedPosition);
@@ -284,7 +284,7 @@ public class ScoreItActivity extends BaseActivity
             mNavigationItems.get(position).setSelected(true);
 
             mSelectedPosition = position;
-            getSupportActionBar()
+            getActionBar()
                     .setTitle(mNavigationItems.get(mSelectedPosition).getItemName());
         }
         mDrawerLayout.closeDrawer(mNavigationDrawer);
@@ -311,8 +311,8 @@ public class ScoreItActivity extends BaseActivity
                 startActivity(intent);
                 return;
         }
-        getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        supportInvalidateOptionsMenu();
+        getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        invalidateOptionsMenu();
         loadFragments(true);
     }
 
@@ -406,35 +406,35 @@ public class ScoreItActivity extends BaseActivity
         }
 
         mAnimateFab = true;
-        getSupportFragmentManager()
+        getFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
-                        R.anim.scale_enter_up,
-                        R.anim.scale_exit_down,
-                        R.anim.scale_enter_down,
-                        R.anim.scale_exit_up)
-                .replace(R.id.score_container, mLapFragment)
+                        R.animator.scale_enter_up,
+                        R.animator.scale_exit_down,
+                        R.animator.scale_enter_down,
+                        R.animator.scale_exit_up)
+                .replace(R.id.score_container, mLapFragment, LapFragment.TAG)
                 .addToBackStack(LapFragment.TAG)
                 .commit();
     }
 
     public void loadFragments(boolean anim) {
         mHeaderFragment = new HeaderFragment();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        if (anim) ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
         ft.replace(R.id.header_container, mHeaderFragment, HeaderFragment.TAG)
                 .commit();
 
         mScoreListFragment = new ScoreListFragment();
-        ft = getSupportFragmentManager().beginTransaction();
-        if (anim) ft.setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_up);
+        ft = getFragmentManager().beginTransaction();
+        if (anim) ft.setCustomAnimations(R.animator.slide_bottom_in, R.animator.slide_top_out);
         ft.replace(R.id.score_container, mScoreListFragment, ScoreListFragment.TAG)
                 .commit();
 
         if (mIsTablet) {
             mScoreGraphFragment = new ScoreGraphFragment();
-            ft = getSupportFragmentManager().beginTransaction();
-            if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+            ft = getFragmentManager().beginTransaction();
+            if (anim) ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
             ft.replace(R.id.secondary_container, mScoreGraphFragment, ScoreGraphFragment.TAG)
                     .commit();
         }
@@ -442,7 +442,7 @@ public class ScoreItActivity extends BaseActivity
 
     public void switchScoreViews() {
         if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
-            getSupportFragmentManager().popBackStack(ScoreGraphFragment.TAG,
+            getFragmentManager().popBackStack(ScoreGraphFragment.TAG,
                     android.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
             return;
         }
@@ -450,13 +450,13 @@ public class ScoreItActivity extends BaseActivity
         if (null == mScoreGraphFragment)
             mScoreGraphFragment = new ScoreGraphFragment();
 
-        getSupportFragmentManager()
+        getFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
-                        R.anim.slide_in_down,
-                        R.anim.slide_out_up,
-                        R.anim.slide_in_up,
-                        R.anim.slide_out_down)
+                        R.animator.slide_bottom_in,
+                        R.animator.slide_top_out,
+                        R.animator.slide_top_in,
+                        R.animator.slide_bottom_out)
                 .addToBackStack(ScoreGraphFragment.TAG)
                 .replace(R.id.score_container, mScoreGraphFragment, ScoreGraphFragment.TAG)
                 .commit();
@@ -483,7 +483,7 @@ public class ScoreItActivity extends BaseActivity
             } else {
                 mGameHelper.addLap(mLap);
             }
-            getSupportFragmentManager()
+            getFragmentManager()
                     .popBackStack(LapFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             update();
             mLap = null;
@@ -506,9 +506,9 @@ public class ScoreItActivity extends BaseActivity
                                     mScoreListFragment.getListAdapter().removeAll();
                                 if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
                                     mScoreGraphFragment.update();
-                                    if (!mIsTablet) getSupportFragmentManager().popBackStack();
+                                    if (!mIsTablet) getFragmentManager().popBackStack();
                                 }
-                                supportInvalidateOptionsMenu();
+                                invalidateOptionsMenu();
                             }
                         }
                 )
@@ -648,7 +648,7 @@ public class ScoreItActivity extends BaseActivity
         mIsEdited = false;
         if (mAnimateFab) animateActionButton(R.drawable.ic_action_new_fab);
         mAnimateFab = false;
-        supportInvalidateOptionsMenu();
+        invalidateOptionsMenu();
     }
 
     private void animateActionButton(final int resId) {

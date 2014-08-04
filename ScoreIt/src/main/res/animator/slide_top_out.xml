@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright (c) 2014 SBG Apps
   ~
@@ -16,8 +15,14 @@
   ~ limitations under the License.
   -->
 
-<translate
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:duration="@android:integer/config_longAnimTime"
-    android:fromYDelta="-100%p"
-    android:toYDelta="0"/>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:interpolator="@android:interpolator/accelerate_cubic">
+
+    <objectAnimator
+        android:duration="@integer/animation_time_full"
+        android:propertyName="yFraction"
+        android:valueFrom="0.0"
+        android:valueTo="-1.0"
+        android:valueType="floatType"/>
+
+</set>

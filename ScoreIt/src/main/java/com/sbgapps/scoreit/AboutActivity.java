@@ -16,12 +16,12 @@
 
 package com.sbgapps.scoreit;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +31,6 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.tundem.aboutlibraries.Libs;
-import com.tundem.aboutlibraries.ui.LibsFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +48,7 @@ public class AboutActivity extends BaseActivity {
         setupFauxDialog();
         setContentView(R.layout.activity_about);
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -123,18 +121,18 @@ public class AboutActivity extends BaseActivity {
                             TranslationsFragment.class.getName());
                     break;
                 case 2:
-                    Bundle bundle = new Bundle();
-                    bundle.putStringArray(Libs.BUNDLE_FIELDS,
-                            Libs.toStringArray(R.string.class.getFields()));
-                    bundle.putStringArray(Libs.BUNDLE_LIBS,
-                            new String[]{"NineOldAndroids",
-                                    "Butterknife",
-                                    "androidBetterpickers",
-                                    "PagerSlidingTabStrip"});
-                    bundle.putBoolean(Libs.BUNDLE_VERSION, true);
-                    bundle.putBoolean(Libs.BUNDLE_LICENSE, true);
-                    fragment = new LibsFragment();
-                    fragment.setArguments(bundle);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putStringArray(Libs.BUNDLE_FIELDS,
+//                            Libs.toStringArray(R.string.class.getFields()));
+//                    bundle.putStringArray(Libs.BUNDLE_LIBS,
+//                            new String[]{"NineOldAndroids",
+//                                    "Butterknife",
+//                                    "androidBetterpickers",
+//                                    "PagerSlidingTabStrip"});
+//                    bundle.putBoolean(Libs.BUNDLE_VERSION, true);
+//                    bundle.putBoolean(Libs.BUNDLE_LICENSE, true);
+//                    fragment = new LibsFragment();
+//                    fragment.setArguments(bundle);
                     break;
             }
             return fragment;
@@ -142,7 +140,7 @@ public class AboutActivity extends BaseActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
 
         @Override
