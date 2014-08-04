@@ -79,12 +79,12 @@ public abstract class TarotLap implements Lap {
         return mBid;
     }
 
-    public void setBid(TarotBid bid) {
-        mBid = bid;
-    }
-
     public void setBid(int bid) {
         mBid.set(bid);
+    }
+
+    public void setBid(TarotBid bid) {
+        mBid = bid;
     }
 
     public List<TarotBonus> getBonuses() {
@@ -145,7 +145,7 @@ public abstract class TarotLap implements Lap {
                 points = mPoints - 36;
                 break;
         }
-        mIsDone = (points > 0);
+        mIsDone = (points >= 0);
         points = (25 + Math.abs(points)) * getCoefficient();
 
         // Poignée

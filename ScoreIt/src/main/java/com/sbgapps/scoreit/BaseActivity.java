@@ -31,6 +31,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 public class BaseActivity extends Activity {
 
     public void setAccentDecor() {
+        getWindow().getDecorView().setBackgroundResource(R.drawable.background_pattern);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window win = getWindow();
             WindowManager.LayoutParams winParams = win.getAttributes();

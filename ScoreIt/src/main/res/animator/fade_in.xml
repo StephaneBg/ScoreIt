@@ -26,9 +26,9 @@
         android:valueType="floatType"/>
 
     <objectAnimator
-        android:duration="@android:integer/config_mediumAnimTime"
+        android:duration="@android:integer/config_shortAnimTime"
         android:propertyName="alpha"
-        android:startOffset="@android:integer/config_mediumAnimTime"
+        android:startOffset="@android:integer/config_shortAnimTime"
         android:valueFrom="0.0"
         android:valueTo="1.0"
         android:valueType="floatType"/>

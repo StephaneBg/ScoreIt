@@ -18,7 +18,6 @@
 <resources>
 
     <style name="Theme.ScoreIt" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/background_dim_triangles</item>
     </style>
 
     <style name="Theme.Adaptive" parent="@android:style/Theme.Holo.Light.Dialog">

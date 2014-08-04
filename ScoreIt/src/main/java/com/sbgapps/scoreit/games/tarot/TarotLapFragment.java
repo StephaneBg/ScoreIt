@@ -213,8 +213,8 @@ public class TarotLapFragment extends LapFragment
             tarotBonus = !petit ? new TarotBonus(TarotBonus.BONUS_PETIT_AU_BOUT) :
                     !poignee ? new TarotBonus(TarotBonus.BONUS_POIGNEE_SIMPLE) :
                             !chelem ? new TarotBonus(TarotBonus.BONUS_CHELEM_NON_ANNONCE) : null;
+            if (null == tarotBonus) return;
             bonuses.add(tarotBonus);
-            mButtonBonus.setEnabled(bonuses.size() < 3);
         }
         final TarotBonus bonus = tarotBonus;
 
@@ -263,6 +263,7 @@ public class TarotLapFragment extends LapFragment
 
         int pos = mBonuses.getChildCount() - 1;
         mBonuses.addView(view, pos);
+        mButtonBonus.setEnabled(bonuses.size() < 3);
     }
 
     private ArrayAdapter<PlayerItem> getPlayerArrayAdapter() {

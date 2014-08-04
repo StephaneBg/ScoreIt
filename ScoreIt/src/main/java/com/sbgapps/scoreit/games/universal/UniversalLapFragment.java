@@ -59,5 +59,6 @@ public class UniversalLapFragment extends LapFragment
                                   boolean isNegative, double fullNumber) {
         UniversalInput input = (UniversalInput) mLinearLayout.getChildAt(reference);
         input.updateScore(number);
+        input.setScore(number);
     }
 }

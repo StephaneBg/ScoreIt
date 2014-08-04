@@ -86,6 +86,10 @@ public class UniversalInput extends FrameLayout {
         });
     }
 
+    public void setScore(int score) {
+        mScore = score;
+    }
+
     public void updateScore(int score) {
         mLapFragment.getLap().setScore(mPlayer, score);
         mTextViewPoints.setText(Integer.toString(score));

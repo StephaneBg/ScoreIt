@@ -21,5 +21,5 @@
     <item android:color="@color/default_text_color_holo_light_disabled"
           android:state_enabled="false"/>
 
-    <item android:color="@color/secondary_accent_translucent"/>
+    <item android:color="@color/primary_accent_translucent"/>
 </selector>

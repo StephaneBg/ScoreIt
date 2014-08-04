@@ -28,7 +28,13 @@
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="128dp"
-        android:background="@color/primary_accent"/>
+        android:background="@color/primary_accent_translucent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/back"
+        android:background="@color/lighter_gray_tranluscent"/>
 
     <View
         android:id="@+id/center_view"
@@ -43,7 +49,7 @@
         android:layout_marginLeft="120dp"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_toLeftOf="@id/center_view"
-        android:background="@drawable/card"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <FrameLayout
@@ -73,7 +79,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="120dp"
         android:layout_toRightOf="@id/center_view"
-        android:background="@drawable/card"/>
+        android:background="@color/white"/>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
@@ -83,8 +89,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="92dp"
-        app:fab_colorNormal="@color/secondary_accent"
-        app:fab_colorPressed="@color/secondary_accent_dark"
+        app:fab_colorNormal="@color/primary_accent_translucent"
+        app:fab_colorPressed="@color/primary_accent_dark_translucent"
         app:fab_drawable="@drawable/ic_action_new_fab"/>
 
 </RelativeLayout>

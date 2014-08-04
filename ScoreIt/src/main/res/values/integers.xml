@@ -16,7 +16,6 @@
   -->
 
 <resources>
-    <integer name="animation_time_full">400</integer>
-    <integer name="card_flip_time_full">300</integer>
-    <integer name="card_flip_time_half">150</integer>
+    <integer name="card_flip_time_full">200</integer>
+    <integer name="card_flip_time_half">100</integer>
 </resources>

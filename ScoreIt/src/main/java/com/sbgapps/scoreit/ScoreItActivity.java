@@ -716,12 +716,12 @@ public class ScoreItActivity extends BaseActivity
             public void onAnimationEnd(Animator animation) {
                 mActionButton.setImageDrawable(resId);
                 int color = ScoreItActivity.this.getResources()
-                        .getColor(orange ? R.color.secondary_accent_translucent
-                                : R.color.primary_accent_translucent);
+                        .getColor(orange ? R.color.primary_accent_translucent
+                                : R.color.secondary_accent_translucent);
                 mActionButton.setColorNormal(color);
                 color = ScoreItActivity.this.getResources()
-                        .getColor(orange ? R.color.secondary_accent_dark_translucent
-                                : R.color.primary_accent_dark_translucent);
+                        .getColor(orange ? R.color.primary_accent_dark_translucent
+                                : R.color.secondary_accent_dark_translucent);
                 mActionButton.setColorPressed(color);
                 anim2.setTarget(mActionButton);
                 anim2.start();
