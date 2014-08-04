@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItemView;
-import com.sbgapps.scoreit.utils.BindableAdapter;
+import com.sbgapps.scoreit.util.BindableAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -20,17 +20,23 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.fortysevendeg.swipelistview.SwipeListView;
 import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.ScoreListFragment;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
-import com.sbgapps.scoreit.utils.Constants;
+import com.sbgapps.scoreit.util.AdapterViewUtil;
+import com.sbgapps.scoreit.util.Constants;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -38,11 +44,11 @@ import java.util.List;
  */
 public abstract class ScoreListAdapter extends BaseAdapter {
 
-    private final SwipeListView mSwipeListView;
+    private final ScoreListFragment mScoreListFragment;
     private final ScoreItActivity mActivity;
 
-    public ScoreListAdapter(ScoreItActivity activity, SwipeListView listView) {
-        mSwipeListView = listView;
+    public ScoreListAdapter(ScoreItActivity activity, ScoreListFragment fragment) {
+        mScoreListFragment = fragment;
         mActivity = activity;
     }
 
@@ -54,8 +60,8 @@ public abstract class ScoreListAdapter extends BaseAdapter {
         return mActivity;
     }
 
-    public SwipeListView getSwipeListView() {
-        return mSwipeListView;
+    public SwipeListView getListView() {
+        return mScoreListFragment.getListView();
     }
 
     @Override
@@ -77,8 +83,8 @@ public abstract class ScoreListAdapter extends BaseAdapter {
         List<View> views = new ArrayList<>();
         List<Animator> animators = new ArrayList<>();
 
-        for (int i = 0; i < mSwipeListView.getChildCount(); i++) {
-            View view = mSwipeListView.getChildAt(i);
+        for (int i = 0; i < getListView().getChildCount(); i++) {
+            View view = getListView().getChildAt(i);
             views.add(view);
             animators.add(createAnimatorForView(view, i));
         }
@@ -94,20 +100,6 @@ public abstract class ScoreListAdapter extends BaseAdapter {
         animatorSet.start();
     }
 
-    public void discard(final View view, final Lap lap) {
-        getSwipeListView().closeOpenedItems();
-        ObjectAnimator animator =
-                ObjectAnimator.ofFloat(view, "alpha", Constants.ALPHA_MAX, Constants.ALPHA_MIN);
-        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                view.setAlpha(Constants.ALPHA_MAX);
-                getActivity().removeLap(lap);
-            }
-        });
-        animator.setDuration(Constants.ANIM_DURATION).start();
-    }
-
     public Animator createAnimatorForView(View view, int idx) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(view, "x", 0, view.getWidth());
         animator.setDuration(Constants.ANIM_DURATION).setStartDelay(Constants.ANIM_OFFSET * idx);
@@ -116,5 +108,95 @@ public abstract class ScoreListAdapter extends BaseAdapter {
 
     public GameHelper getGameHelper() {
         return mActivity.getGameHelper();
+    }
+
+
+    public void animateDismiss(final int position, final Lap lap) {
+        animateDismiss(Arrays.asList(position), lap);
+    }
+
+    public void animateDismiss(final Collection<Integer> positions, final Lap lap) {
+        getListView().closeOpenedItems();
+
+        final List<Integer> positionsCopy = new ArrayList<>(positions);
+        List<View> views = getVisibleViewsForPositions(positionsCopy);
+
+        if (!views.isEmpty()) {
+            List<Animator> animators = new ArrayList<>();
+            for (final View view : views) {
+                animators.add(createAnimatorForView(view));
+            }
+
+            AnimatorSet animatorSet = new AnimatorSet();
+
+            Animator[] animatorsArray = new Animator[animators.size()];
+            for (int i = 0; i < animatorsArray.length; i++) {
+                animatorsArray[i] = animators.get(i);
+            }
+
+            animatorSet.playTogether(animatorsArray);
+            animatorSet.addListener(new AnimatorListenerAdapter() {
+
+                @Override
+                public void onAnimationEnd(final Animator animator) {
+                    ((ScoreItActivity) mScoreListFragment.getActivity()).removeLap(lap);
+                }
+            });
+            animatorSet.start();
+        } else {
+            ((ScoreItActivity) mScoreListFragment.getActivity()).removeLap(lap);
+        }
+    }
+
+    private List<View> getVisibleViewsForPositions(final Collection<Integer> positions) {
+        List<View> views = new ArrayList<>();
+        for (int i = 0; i < getListView().getChildCount(); i++) {
+            View child = getListView().getChildAt(i);
+            if (positions.contains(AdapterViewUtil.getPositionForView(getListView(), child))) {
+                views.add(child);
+            }
+        }
+        return views;
+    }
+
+    private Animator createAnimatorForView(final View view) {
+        final ViewGroup.LayoutParams lp = view.getLayoutParams();
+        final int originalHeight = view.getHeight();
+
+        ValueAnimator animator = ValueAnimator.ofInt(originalHeight, 0);
+        animator.addListener(new Animator.AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(final Animator animator) {
+                lp.height = 0;
+                view.setLayoutParams(lp);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(final ValueAnimator valueAnimator) {
+                lp.height = (Integer) valueAnimator.getAnimatedValue();
+                view.setLayoutParams(lp);
+            }
+        });
+
+        return animator;
     }
 }

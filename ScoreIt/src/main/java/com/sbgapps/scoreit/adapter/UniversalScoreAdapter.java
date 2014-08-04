@@ -24,6 +24,7 @@ import com.fortysevendeg.swipelistview.SwipeListView;
 import com.linearlistview.LinearListView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.ScoreListFragment;
 import com.sbgapps.scoreit.games.Lap;
 
 /**
@@ -31,12 +32,12 @@ import com.sbgapps.scoreit.games.Lap;
  */
 public class UniversalScoreAdapter extends ScoreListAdapter {
 
-    public UniversalScoreAdapter(ScoreItActivity activity, SwipeListView listView) {
-        super(activity, listView);
+    public UniversalScoreAdapter(ScoreItActivity activity, ScoreListFragment fragment) {
+        super(activity, fragment);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final Lap lap = getItem(position);
         ViewHolder h;
 
@@ -61,7 +62,7 @@ public class UniversalScoreAdapter extends ScoreListAdapter {
         h.discard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                discard(v, lap);
+                animateDismiss(position, lap);
             }
         });
         h.edit.setOnClickListener(new View.OnClickListener() {

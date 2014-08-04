@@ -31,7 +31,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
-import com.sbgapps.scoreit.utils.IabKey;
+import com.sbgapps.scoreit.util.IabKey;
 
 /**
  * Created by sbaiget on 03/03/14.

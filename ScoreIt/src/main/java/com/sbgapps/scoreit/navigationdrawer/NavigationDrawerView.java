@@ -22,7 +22,7 @@ import android.widget.ListView;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.adapter.NavigationDrawerAdapter;
-import com.sbgapps.scoreit.utils.BetterViewAnimator;
+import com.sbgapps.scoreit.util.BetterViewAnimator;
 
 import java.util.List;
 

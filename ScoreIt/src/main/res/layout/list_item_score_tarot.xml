@@ -69,6 +69,7 @@
             android:layout_height="24dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:gravity="center_vertical"
+            android:singleLine="true"
             app:typeface="roboto_medium"
             tools:text="Joueur - Annonce"/>
 

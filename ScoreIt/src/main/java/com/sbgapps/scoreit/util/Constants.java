@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.utils;
+package com.sbgapps.scoreit.util;
 
 /**
  * Created by Stéphane on 06/07/2014.

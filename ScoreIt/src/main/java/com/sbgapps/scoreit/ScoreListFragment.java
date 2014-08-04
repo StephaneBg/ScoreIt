@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit;
 
-import android.app.ListFragment;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,14 +33,18 @@ import com.sbgapps.scoreit.games.GameHelper;
 /**
  * Created by sbaiget on 11/11/13.
  */
-public class ScoreListFragment extends ListFragment {
+public class ScoreListFragment extends Fragment {
 
     public static final String TAG = ScoreListFragment.class.getName();
     private SwipeListView mListView;
+    private ScoreListAdapter mAdapter;
 
-    @Override
     public ScoreListAdapter getListAdapter() {
-        return (ScoreListAdapter) super.getListAdapter();
+        return mAdapter;
+    }
+
+    public SwipeListView getListView() {
+        return mListView;
     }
 
     @Override
@@ -51,21 +55,20 @@ public class ScoreListFragment extends ListFragment {
         mListView = (SwipeListView) view.findViewById(android.R.id.list);
 
         GameHelper gameHelper = ((ScoreItActivity) getActivity()).getGameHelper();
-        ScoreListAdapter adapter;
         switch (gameHelper.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
-                adapter = new UniversalScoreAdapter((ScoreItActivity) getActivity(), mListView);
+                mAdapter = new UniversalScoreAdapter((ScoreItActivity) getActivity(), this);
                 break;
             case Game.BELOTE:
             case Game.COINCHE:
-                adapter = new GenericBeloteScoreAdapter((ScoreItActivity) getActivity(), mListView);
+                mAdapter = new GenericBeloteScoreAdapter((ScoreItActivity) getActivity(), this);
                 break;
             case Game.TAROT:
-                adapter = new TarotScoreAdapter((ScoreItActivity) getActivity(), mListView);
+                mAdapter = new TarotScoreAdapter((ScoreItActivity) getActivity(), this);
                 break;
         }
-        setListAdapter(adapter);
+        mListView.setAdapter(mAdapter);
 
         return view;
     }

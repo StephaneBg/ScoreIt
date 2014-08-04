@@ -56,7 +56,7 @@ import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.games.universal.UniversalLapFragment;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerView;
-import com.sbgapps.scoreit.utils.Utils;
+import com.sbgapps.scoreit.util.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -374,7 +374,6 @@ public class ScoreItActivity extends BaseActivity
 
     public void removeLap(Lap lap) {
         mGameHelper.removeLap(lap);
-        mScoreListFragment.closeOpenedItems();
         update();
     }
 
@@ -523,7 +522,7 @@ public class ScoreItActivity extends BaseActivity
                 )
                 .create();
         dialog.show();
-        Utils.colorizeDialog(dialog);
+        DialogUtil.colorizeDialog(dialog);
     }
 
     private void showEditNameActionChoices() {
@@ -550,7 +549,7 @@ public class ScoreItActivity extends BaseActivity
                 )
                 .create();
         dialog.show();
-        Utils.colorizeDialog(dialog);
+        DialogUtil.colorizeDialog(dialog);
     }
 
     public void showPlayerCountDialog() {
@@ -576,7 +575,7 @@ public class ScoreItActivity extends BaseActivity
                 )
                 .create();
         dialog.show();
-        Utils.colorizeDialog(dialog);
+        DialogUtil.colorizeDialog(dialog);
     }
 
     private void showEditNameDialog() {
@@ -606,7 +605,7 @@ public class ScoreItActivity extends BaseActivity
                 )
                 .create();
         dialog.show();
-        Utils.colorizeDialog(dialog);
+        DialogUtil.colorizeDialog(dialog);
     }
 
     private void showColorPickerDialog() {
@@ -636,7 +635,7 @@ public class ScoreItActivity extends BaseActivity
                 )
                 .create();
         dialog.show();
-        Utils.colorizeDialog(dialog);
+        DialogUtil.colorizeDialog(dialog);
     }
 
     @Override

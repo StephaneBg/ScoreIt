@@ -26,6 +26,7 @@ import com.fortysevendeg.swipelistview.SwipeListView;
 import com.linearlistview.LinearListView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.ScoreListFragment;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.tarot.TarotBid;
@@ -38,12 +39,12 @@ import com.sbgapps.scoreit.games.tarot.TarotLap;
  */
 public class TarotScoreAdapter extends ScoreListAdapter {
 
-    public TarotScoreAdapter(ScoreItActivity activity, SwipeListView listView) {
-        super(activity, listView);
+    public TarotScoreAdapter(ScoreItActivity activity, ScoreListFragment fragment) {
+        super(activity, fragment);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final TarotLap lap = getItem(position);
         ViewHolder h;
 
@@ -92,7 +93,7 @@ public class TarotScoreAdapter extends ScoreListAdapter {
         h.discard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                discard(v, lap);
+                animateDismiss(position, lap);
             }
         });
         h.edit.setOnClickListener(new View.OnClickListener() {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.utils;
+package com.sbgapps.scoreit.util;
 
 import android.app.Dialog;
 import android.content.res.Resources;
@@ -26,7 +26,7 @@ import com.sbgapps.scoreit.R;
 /**
  * Created by sbaiget on 04/07/2014.
  */
-public class Utils {
+public class DialogUtil {
 
     public static void colorizeDialog(Dialog dialog) {
         final Resources r = dialog.getContext().getResources();
