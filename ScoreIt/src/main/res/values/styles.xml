@@ -76,6 +76,7 @@
         <item name="bpDividerColor">@color/lighter_gray</item>
         <item name="bpKeyBackground">@drawable/picker_button_background</item>
         <item name="bpButtonBackground">@drawable/picker_button_background</item>
+        <item name="bpSetTextColor">@color/dialog_text_color_accept</item>
     </style>
 
 </resources>
