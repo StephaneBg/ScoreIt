@@ -30,4 +30,9 @@
         android:icon="@drawable/ic_action_clear"
         android:showAsAction="ifRoom"
         android:title="@string/clear"/>
+    <!--<item-->
+    <!--android:id="@+id/menu_open"-->
+    <!--android:icon="@drawable/ic_action_open_file"-->
+    <!--android:showAsAction="ifRoom"-->
+    <!--android:title="Open"/>-->
 </menu>

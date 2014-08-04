@@ -37,8 +37,19 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.sbgapps.scoreit.AboutActivity"
+            android:logo="@drawable/ic_navigation_back"
+            android:parentActivityName=".ScoreItActivity"
+            android:theme="@style/Theme.Adaptive">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ScoreItActivity"/>
+        </activity>
+
+        <activity
+            android:name=".SavedGameActivity"
             android:logo="@drawable/ic_navigation_back"
             android:parentActivityName=".ScoreItActivity"
             android:theme="@style/Theme.Adaptive">

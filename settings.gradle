@@ -16,10 +16,11 @@
 
 
 
-include ':ScoreIt', ':HoloGraphLibrary', ':FloatingActionButton', 'PagerSlidingTabStrip', 'BetterPickers'
+
+
+include ':ScoreIt', ':HoloGraphLibrary', ':FloatingActionButton', 'BetterPickers'
 
 project(':HoloGraphLibrary').projectDir = new File(rootDir, '../HoloGraphLibrary/HoloGraphLibrary')
 project(':FloatingActionButton').projectDir = new File(rootDir, '../FloatingActionButton/library')
-project(':PagerSlidingTabStrip').projectDir = new File(rootDir, '../PagerSlidingTabStrip/library')
 project(':BetterPickers').projectDir = new File(rootDir, '../android-betterpickers/library')
 

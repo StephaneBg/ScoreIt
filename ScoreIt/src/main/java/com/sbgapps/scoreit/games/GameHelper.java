@@ -28,6 +28,7 @@ import com.sbgapps.scoreit.games.tarot.TarotFiveGame;
 import com.sbgapps.scoreit.games.tarot.TarotFourGame;
 import com.sbgapps.scoreit.games.tarot.TarotThreeGame;
 import com.sbgapps.scoreit.games.universal.UniversalGame;
+import com.sbgapps.scoreit.util.FileSaveUtil;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -78,7 +79,27 @@ public class GameHelper {
     }
 
     public void saveGame() {
-        String file = FileSaveUtil.getLastSavedFile(this);
+        save(FileSaveUtil.getLastSavedFile(this), mGame);
+    }
+
+    public void saveGame(String file) {
+        saveGame();
+        switch (mPlayedGame) {
+            default:
+            case Game.UNIVERSAL:
+                file = "universal_" + getPlayerCount() + "_" + file;
+                break;
+            case Game.BELOTE:
+                file = "belote_" + file;
+                break;
+            case Game.COINCHE:
+                file = "coinche_" + file;
+                break;
+            case Game.TAROT:
+                file = "tarot_" + getPlayerCount() + "_" + file;
+                break;
+        }
+        FileSaveUtil.setLastSavedFile(file, this);
         save(file, mGame);
     }
 

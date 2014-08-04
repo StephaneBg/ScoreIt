@@ -39,6 +39,8 @@
     <string name="no">Нет</string>
     <string name="clear_game">Очистить счет</string>
     <string name="sure">Вы уверены?</string>
+    <string name="save">Вы хотите сохранить?</string>
+    <string name="filename">Имя файла</string>
     <string name="cancel">Отмена</string>
     <string name="clear">Очистить</string>
     <string name="view">Просмотр</string>

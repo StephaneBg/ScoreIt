@@ -69,6 +69,7 @@ public class ScoreItActivity extends BaseActivity
         implements FragmentManager.OnBackStackChangedListener {
 
     private static final int REQ_PICK_CONTACT = 1;
+    private static final int REQ_SAVED_GAME = 2;
 
     @InjectView(R.id.navigation_drawer)
     NavigationDrawerView mNavigationDrawer;
@@ -258,6 +259,28 @@ public class ScoreItActivity extends BaseActivity
             case R.id.menu_count:
                 showPlayerCountDialog();
                 return true;
+
+//            case R.id.menu_open:
+//                Intent intent = new Intent(this, SavedGameActivity.class);
+//                String game;
+//                switch (mGameHelper.getPlayedGame()) {
+//                    default:
+//                    case Game.UNIVERSAL:
+//                        game = "universal_" + mGameHelper.getPlayerCount() + "_";
+//                        break;
+//                    case Game.TAROT:
+//                        game = "tarot_" + mGameHelper.getPlayerCount() + "_";
+//                        break;
+//                    case Game.BELOTE:
+//                        game = "belote_";
+//                        break;
+//                    case Game.COINCHE:
+//                        game = "coinche_";
+//                        break;
+//                }
+//                intent.putExtra("game", game);
+//                startActivityForResult(intent, REQ_SAVED_GAME);
+//                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -331,6 +354,11 @@ public class ScoreItActivity extends BaseActivity
                     mEditedPlayer.setName(name);
                     mHeaderFragment.update();
                 }
+                break;
+
+            case REQ_SAVED_GAME:
+                String file = data.getStringExtra("file");
+                mGameHelper.saveGame(file);
                 break;
         }
     }
@@ -499,15 +527,7 @@ public class ScoreItActivity extends BaseActivity
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mGameHelper.deleteAll();
-                                mHeaderFragment.update();
-                                if (null != mScoreListFragment && mScoreListFragment.isVisible())
-                                    mScoreListFragment.getListAdapter().removeAll();
-                                if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
-                                    mScoreGraphFragment.update();
-                                    if (!mIsTablet) getFragmentManager().popBackStack();
-                                }
-                                invalidateOptionsMenu();
+                                dismissAll();
                             }
                         }
                 )
@@ -523,6 +543,18 @@ public class ScoreItActivity extends BaseActivity
                 .create();
         dialog.show();
         DialogUtil.colorizeDialog(dialog);
+    }
+
+    private void dismissAll() {
+        mGameHelper.deleteAll();
+        mHeaderFragment.update();
+        if (null != mScoreListFragment && mScoreListFragment.isVisible())
+            mScoreListFragment.getListAdapter().removeAll();
+        if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
+            mScoreGraphFragment.update();
+            if (!mIsTablet) getFragmentManager().popBackStack();
+        }
+        invalidateOptionsMenu();
     }
 
     private void showEditNameActionChoices() {
@@ -579,8 +611,8 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void showEditNameDialog() {
-        View view = getLayoutInflater().inflate(R.layout.dialog_edit_name, null);
-        final EditText editText = (EditText) view.findViewById(R.id.edit_name);
+        View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
+        final EditText editText = (EditText) view.findViewById(R.id.edit_text);
         Dialog dialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.edit_name)
                 .setView(view)
@@ -603,6 +635,28 @@ public class ScoreItActivity extends BaseActivity
                             }
                         }
                 )
+                .create();
+        dialog.show();
+        DialogUtil.colorizeDialog(dialog);
+    }
+
+    private void showSaveFileDialog() {
+        View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
+        final EditText editText = (EditText) view.findViewById(R.id.edit_text);
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.filename)
+                .setView(view)
+                .setPositiveButton(R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String file = editText.getText().toString();
+                                mGameHelper.saveGame(file);
+                                dismissAll();
+                            }
+                        }
+                )
+                .setCancelable(true)
                 .create();
         dialog.show();
         DialogUtil.colorizeDialog(dialog);

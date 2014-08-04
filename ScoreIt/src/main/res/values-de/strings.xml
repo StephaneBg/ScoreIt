@@ -39,6 +39,8 @@
     <string name="no">Nein</string>
     <string name="clear_game">Lösche Score</string>
     <string name="sure">Bist du sicher?</string>
+    <string name="save">Möchten Sie diese speichern?</string>
+    <string name="filename">Dateiname</string>
     <string name="cancel">Abbrechen</string>
     <string name="clear">Leeren</string>
     <string name="view">Anzeigen</string>

@@ -39,6 +39,8 @@
     <string name="no">Nee</string>
     <string name="clear_game">Scores verwijderen</string>
     <string name="sure">Zeker weten?</string>
+    <string name="save">Wilt u deze opslaan?</string>
+    <string name="filename">Bestandsnaam</string>
     <string name="cancel">Annuleren</string>
     <string name="clear">Verwijderen</string>
     <string name="view">Bekijken</string>
