@@ -31,12 +31,6 @@
         android:background="@color/primary_accent_translucent"/>
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/back"
-        android:background="@color/lighter_gray"/>
-
-    <View
         android:id="@+id/center_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -33,8 +33,7 @@
             android:id="@+id/header_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/lighter_gray_tranluscent"/>
+            android:layout_weight="1"/>
 
         <View
             android:layout_width="match_parent"
@@ -45,8 +44,7 @@
             android:id="@+id/score_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
-            android:background="@color/white"/>
+            android:layout_weight="3"/>
     </LinearLayout>
 
     <com.melnykov.fab.FloatingActionButton

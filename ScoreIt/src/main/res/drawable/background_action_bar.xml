@@ -19,5 +19,5 @@
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android">
     <solid
-        android:color="@color/primary_accent_translucent"/>
+        android:color="@color/primary_accent"/>
 </shape>
