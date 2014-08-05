@@ -26,6 +26,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -132,15 +133,22 @@ public class ScoreItActivity extends BaseActivity
                     .findFragmentByTag(LapFragment.TAG);
 
             mIsEdited = savedInstanceState.getBoolean("edited");
+            Resources resources = getResources();
             if (mIsEdited) {
                 int position = savedInstanceState.getInt("position");
                 mLap = mGameHelper.getLaps().get(position);
                 mActionButton.setImageDrawable(
                         getResources().getDrawable(R.drawable.ic_content_edit_fab));
+                mActionButton.setColorNormal(resources.getColor(R.color.secondary_accent_translucent));
+                mActionButton.setColorPressed(resources.getColor(R.color.secondary_accent_dark_translucent));
             } else {
                 mLap = (Lap) savedInstanceState.getSerializable("lap");
-                if (null != mLap) mActionButton.setImageDrawable(
-                        getResources().getDrawable(R.drawable.ic_action_accept_fab));
+                if (null != mLap) {
+                    mActionButton.setImageDrawable(
+                            getResources().getDrawable(R.drawable.ic_action_accept_fab));
+                    mActionButton.setColorNormal(resources.getColor(R.color.secondary_accent_translucent));
+                    mActionButton.setColorPressed(resources.getColor(R.color.secondary_accent_dark_translucent));
+                }
             }
         }
 

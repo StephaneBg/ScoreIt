@@ -43,9 +43,6 @@
             android:logo="@drawable/ic_navigation_back"
             android:parentActivityName=".ScoreItActivity"
             android:theme="@style/Theme.Adaptive">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScoreItActivity"/>
         </activity>
 
         <activity
@@ -53,9 +50,6 @@
             android:logo="@drawable/ic_navigation_back"
             android:parentActivityName=".ScoreItActivity"
             android:theme="@style/Theme.Adaptive">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScoreItActivity"/>
         </activity>
     </application>
 
