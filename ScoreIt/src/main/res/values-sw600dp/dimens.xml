@@ -26,6 +26,7 @@
     <!-- Fonts -->
 
     <!-- Height -->
+    <dimen name="height_extended_ab">128dp</dimen>
     <dimen name="height_ab">64dp</dimen>
     <dimen name="height_default">72dp</dimen>
 

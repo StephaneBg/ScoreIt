@@ -294,7 +294,6 @@ public class ScoreItActivity extends BaseActivity
             mDrawerLayout.closeDrawer(mNavigationDrawer);
             if (mSelectedPosition == position) return;
             onNavigationDrawerItemSelected(position);
-            selectItem(position);
         }
     }
 
@@ -337,6 +336,7 @@ public class ScoreItActivity extends BaseActivity
         getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         invalidateOptionsMenu();
         loadFragments(true);
+        selectItem(position);
     }
 
     @Override
