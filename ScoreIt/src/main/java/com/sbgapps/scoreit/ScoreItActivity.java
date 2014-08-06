@@ -104,6 +104,10 @@ public class ScoreItActivity extends BaseActivity
         return mLap;
     }
 
+    public FloatingActionButton getActionButton() {
+        return mActionButton;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -54,18 +54,21 @@ public class ScoreListFragment extends Fragment {
 
         mListView = (SwipeListView) view.findViewById(android.R.id.list);
 
-        GameHelper gameHelper = ((ScoreItActivity) getActivity()).getGameHelper();
+        ScoreItActivity activity = (ScoreItActivity) getActivity();
+        activity.getActionButton().attachToListView(mListView);
+
+        GameHelper gameHelper = activity.getGameHelper();
         switch (gameHelper.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
-                mAdapter = new UniversalScoreAdapter((ScoreItActivity) getActivity(), this);
+                mAdapter = new UniversalScoreAdapter(activity, this);
                 break;
             case Game.BELOTE:
             case Game.COINCHE:
-                mAdapter = new GenericBeloteScoreAdapter((ScoreItActivity) getActivity(), this);
+                mAdapter = new GenericBeloteScoreAdapter(activity, this);
                 break;
             case Game.TAROT:
-                mAdapter = new TarotScoreAdapter((ScoreItActivity) getActivity(), this);
+                mAdapter = new TarotScoreAdapter(activity, this);
                 break;
         }
         mListView.setAdapter(mAdapter);
