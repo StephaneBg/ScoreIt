@@ -28,7 +28,7 @@ import java.util.List;
 public class TarotThreeLap extends TarotLap {
 
     public TarotThreeLap() {
-        this(Player.PLAYER_1, new TarotBid(), 42,
+        this(Player.PLAYER_1, new TarotBid(), 41,
                 OUDLER_NONE_MSK, new ArrayList<TarotBonus>());
     }
 

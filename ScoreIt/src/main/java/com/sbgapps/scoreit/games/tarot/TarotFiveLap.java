@@ -32,7 +32,7 @@ public class TarotFiveLap extends TarotLap {
     private int mPartner;
 
     public TarotFiveLap() {
-        this(Player.PLAYER_1, new TarotBid(), 42,
+        this(Player.PLAYER_1, new TarotBid(), 41,
                 OUDLER_NONE_MSK, new ArrayList<TarotBonus>(), Player.PLAYER_2);
     }
 

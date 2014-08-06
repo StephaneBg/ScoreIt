@@ -50,7 +50,7 @@ public class UniversalInput extends FrameLayout {
         final String name = mLapFragment.getGameHelper().getPlayer(mPlayer).getName();
         textView.setText(name);
 
-        mTextViewPoints = (TextView) findViewById(R.id.edit_points);
+        mTextViewPoints = (TextView) findViewById(R.id.tv_points);
         mScore = mLapFragment.getLap().getScore(mPlayer);
         mTextViewPoints.setText(Integer.toString(mScore));
 

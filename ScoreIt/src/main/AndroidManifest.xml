@@ -41,14 +41,6 @@
         <activity
             android:name="com.sbgapps.scoreit.AboutActivity"
             android:logo="@drawable/ic_navigation_back"
-            android:parentActivityName=".ScoreItActivity"
-            android:theme="@style/Theme.Adaptive">
-        </activity>
-
-        <activity
-            android:name=".SavedGameActivity"
-            android:logo="@drawable/ic_navigation_back"
-            android:parentActivityName=".ScoreItActivity"
             android:theme="@style/Theme.Adaptive">
         </activity>
     </application>
