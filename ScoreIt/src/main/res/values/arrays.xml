@@ -45,4 +45,17 @@
         <item>@string/language_german</item>
     </string-array>
 
+    <string-array name="translators" translatable="false">
+        <!-- English -->
+        <item translatable="false">Stéphane Baiget</item>
+        <!-- French -->
+        <item translatable="false">Stéphane Baiget</item>
+        <!-- Dutch -->
+        <item translatable="false">Frank Barten</item>
+        <!-- Russian -->
+        <item translatable="false">Danila Lepikhin</item>
+        <!-- German -->
+        <item translatable="false">Luca Eichler</item>
+    </string-array>
+
 </resources>

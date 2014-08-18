@@ -18,17 +18,31 @@ package com.sbgapps.scoreit;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.sbgapps.scoreit.util.TypefaceSpan;
 
 /**
  * Created by Stéphane on 31/07/2014.
  */
 public class BaseActivity extends Activity {
+
+    private TypefaceSpan mTypefaceSpan;
+
+    public TypefaceSpan getTypefaceSpan() {
+        return mTypefaceSpan;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
+    }
 
     public void setAccentDecor() {
         getWindow().getDecorView().setBackgroundResource(R.drawable.background_pattern);

@@ -18,6 +18,7 @@
 
 <resources>
 
+    <string name="app_name" translatable="false">Score It</string>
     <string name="score">Score</string>
     <string name="graph">Graph</string>
     <string name="belote">Belote</string>

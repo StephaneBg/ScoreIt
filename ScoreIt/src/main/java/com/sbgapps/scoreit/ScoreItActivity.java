@@ -32,6 +32,8 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -171,14 +173,13 @@ public class ScoreItActivity extends BaseActivity
                 R.string.navigation_drawer_close) {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getActionBar()
-                        .setTitle(mNavigationItems.get(mSelectedPosition).getItemName());
+                setTitle();
                 invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getActionBar().setTitle(getTitle());
+                setTitle();
                 invalidateOptionsMenu();
             }
         };
@@ -318,10 +319,36 @@ public class ScoreItActivity extends BaseActivity
             mNavigationItems.get(position).setSelected(true);
 
             mSelectedPosition = position;
-            getActionBar()
-                    .setTitle(mNavigationItems.get(mSelectedPosition).getItemName());
+            setTitle();
         }
         mDrawerLayout.closeDrawer(mNavigationDrawer);
+    }
+
+    private void setTitle() {
+        SpannableString title;
+
+        if (mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
+            title = new SpannableString(getResources().getString(R.string.app_name));
+        } else {
+            switch (mSelectedPosition) {
+                default:
+                case Game.UNIVERSAL:
+                    title = new SpannableString(getResources().getString(R.string.universal));
+                    break;
+                case Game.BELOTE:
+                    title = new SpannableString(getResources().getString(R.string.belote));
+                    break;
+                case Game.COINCHE:
+                    title = new SpannableString(getResources().getString(R.string.coinche));
+                    break;
+                case Game.TAROT:
+                    title = new SpannableString(getResources().getString(R.string.tarot));
+                    break;
+            }
+        }
+
+        title.setSpan(getTypefaceSpan(), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        getActionBar().setTitle(title);
     }
 
     private void onNavigationDrawerItemSelected(int position) {
