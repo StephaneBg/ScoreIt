@@ -141,20 +141,6 @@ public class AboutActivity extends BaseActivity {
                     fragment = Fragment.instantiate(AboutActivity.this,
                             TranslationsFragment.class.getName());
                     break;
-                case 2:
-//                    Bundle bundle = new Bundle();
-//                    bundle.putStringArray(Libs.BUNDLE_FIELDS,
-//                            Libs.toStringArray(R.string.class.getFields()));
-//                    bundle.putStringArray(Libs.BUNDLE_LIBS,
-//                            new String[]{"NineOldAndroids",
-//                                    "Butterknife",
-//                                    "androidBetterpickers",
-//                                    "PagerSlidingTabStrip"});
-//                    bundle.putBoolean(Libs.BUNDLE_VERSION, true);
-//                    bundle.putBoolean(Libs.BUNDLE_LICENSE, true);
-//                    fragment = new LibsFragment();
-//                    fragment.setArguments(bundle);
-                    break;
             }
             return fragment;
         }
@@ -172,8 +158,6 @@ public class AboutActivity extends BaseActivity {
                     return getString(R.string.application).toUpperCase(l);
                 case 1:
                     return getString(R.string.translations).toUpperCase(l);
-                case 2:
-                    return getString(R.string.licenses).toUpperCase(l);
             }
             return null;
         }

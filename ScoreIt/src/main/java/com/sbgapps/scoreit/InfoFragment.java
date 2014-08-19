@@ -68,7 +68,7 @@ public class InfoFragment extends Fragment
         String version;
         try {
             PackageInfo info = pm.getPackageInfo(packageName, 0);
-            version = "V" + info.versionName;
+            version = info.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             version = VERSION_UNAVAILABLE;
         }

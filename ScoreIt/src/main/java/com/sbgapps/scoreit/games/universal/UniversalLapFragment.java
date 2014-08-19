@@ -20,12 +20,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.adapter.UniversalLapAdapter;
 import com.sbgapps.scoreit.games.LapFragment;
-import com.sbgapps.scoreit.games.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sbaiget on 02/02/14.
@@ -33,7 +37,7 @@ import com.sbgapps.scoreit.games.Player;
 public class UniversalLapFragment extends LapFragment
         implements NumberPickerDialogFragment.NumberPickerDialogHandler {
 
-    private LinearLayout mLinearLayout;
+    private ListView mListView;
 
     @Override
     public UniversalLap getLap() {
@@ -43,21 +47,27 @@ public class UniversalLapFragment extends LapFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap_universal, null);
-        mLinearLayout = (LinearLayout) view.findViewById(R.id.ll_universal);
 
-        int i = 0;
-        for (Player player : getGameHelper().getPlayers()) {
+        mListView = (ListView) view.findViewById(R.id.list_view);
+        ScoreItActivity activity = (ScoreItActivity) getActivity();
+        activity.getActionButton().attachToListView(mListView);
+
+        int count = getGameHelper().getPlayerCount();
+        List<UniversalInput> inputs = new ArrayList<>(count);
+        for (int i = 0; i < count; i++) {
             UniversalInput input = new UniversalInput(this, i);
-            mLinearLayout.addView(input);
-            i++;
+            inputs.add(input);
         }
+        UniversalLapAdapter adapter = new UniversalLapAdapter(inputs);
+        mListView.setAdapter(adapter);
+
         return view;
     }
 
     @Override
     public void onDialogNumberSet(int reference, int number, double decimal,
                                   boolean isNegative, double fullNumber) {
-        UniversalInput input = (UniversalInput) mLinearLayout.getChildAt(reference);
+        UniversalInput input = (UniversalInput) mListView.getAdapter().getItem(reference);
         input.updateScore(number);
         input.setScore(number);
     }
