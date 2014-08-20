@@ -61,14 +61,14 @@ public class ScoreListFragment extends Fragment {
         switch (gameHelper.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
-                mAdapter = new UniversalScoreAdapter(activity, this);
+                mAdapter = new UniversalScoreAdapter(this);
                 break;
             case Game.BELOTE:
             case Game.COINCHE:
-                mAdapter = new GenericBeloteScoreAdapter(activity, this);
+                mAdapter = new GenericBeloteScoreAdapter(this);
                 break;
             case Game.TAROT:
-                mAdapter = new TarotScoreAdapter(activity, this);
+                mAdapter = new TarotScoreAdapter(this);
                 break;
         }
         mListView.setAdapter(mAdapter);

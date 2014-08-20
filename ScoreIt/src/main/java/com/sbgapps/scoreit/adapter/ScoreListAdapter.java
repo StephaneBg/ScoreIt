@@ -47,9 +47,9 @@ public abstract class ScoreListAdapter extends BaseAdapter {
     private final ScoreListFragment mScoreListFragment;
     private final ScoreItActivity mActivity;
 
-    public ScoreListAdapter(ScoreItActivity activity, ScoreListFragment fragment) {
+    public ScoreListAdapter(ScoreListFragment fragment) {
         mScoreListFragment = fragment;
-        mActivity = activity;
+        mActivity = (ScoreItActivity) fragment.getActivity();
     }
 
     public LayoutInflater getLayoutInflater() {

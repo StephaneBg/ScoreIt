@@ -28,16 +28,13 @@ import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.adapter.UniversalLapAdapter;
 import com.sbgapps.scoreit.games.LapFragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by sbaiget on 02/02/14.
  */
 public class UniversalLapFragment extends LapFragment
         implements NumberPickerDialogFragment.NumberPickerDialogHandler {
 
-    private ListView mListView;
+    private UniversalLapAdapter mAdapter;
 
     @Override
     public UniversalLap getLap() {
@@ -48,18 +45,12 @@ public class UniversalLapFragment extends LapFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap_universal, null);
 
-        mListView = (ListView) view.findViewById(R.id.list_view);
+        ListView listView = (ListView) view.findViewById(R.id.list_view);
         ScoreItActivity activity = (ScoreItActivity) getActivity();
-        activity.getActionButton().attachToListView(mListView);
+        activity.getActionButton().attachToListView(listView);
 
-        int count = getGameHelper().getPlayerCount();
-        List<UniversalInput> inputs = new ArrayList<>(count);
-        for (int i = 0; i < count; i++) {
-            UniversalInput input = new UniversalInput(this, i);
-            inputs.add(input);
-        }
-        UniversalLapAdapter adapter = new UniversalLapAdapter(inputs);
-        mListView.setAdapter(adapter);
+        mAdapter = new UniversalLapAdapter(this);
+        listView.setAdapter(mAdapter);
 
         return view;
     }
@@ -67,8 +58,7 @@ public class UniversalLapFragment extends LapFragment
     @Override
     public void onDialogNumberSet(int reference, int number, double decimal,
                                   boolean isNegative, double fullNumber) {
-        UniversalInput input = (UniversalInput) mListView.getAdapter().getItem(reference);
-        input.updateScore(number);
-        input.setScore(number);
+        getLap().setScore(reference, number);
+        mAdapter.notifyDataSetChanged();
     }
 }

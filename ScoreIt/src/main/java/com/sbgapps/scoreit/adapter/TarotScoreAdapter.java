@@ -39,8 +39,8 @@ import com.sbgapps.scoreit.games.tarot.TarotLap;
  */
 public class TarotScoreAdapter extends ScoreListAdapter {
 
-    public TarotScoreAdapter(ScoreItActivity activity, ScoreListFragment fragment) {
-        super(activity, fragment);
+    public TarotScoreAdapter(ScoreListFragment fragment) {
+        super(fragment);
     }
 
     @Override

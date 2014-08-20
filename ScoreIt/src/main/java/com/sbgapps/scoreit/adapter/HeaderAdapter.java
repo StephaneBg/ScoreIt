@@ -65,36 +65,38 @@ public class HeaderAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        ViewHolder h;
 
         if (null == convertView) {
-            holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.list_item_header, parent, false);
-            holder.name = (TextView) convertView.findViewById(R.id.name);
-            holder.score = (TextView) convertView.findViewById(R.id.score);
+
+            h = new ViewHolder();
+            h.name = (TextView) convertView.findViewById(R.id.name);
+            h.score = (TextView) convertView.findViewById(R.id.score);
+            convertView.setTag(h);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            h = (ViewHolder) convertView.getTag();
         }
 
         final Info info = getItem(position);
 
-        holder.name.setOnClickListener(new View.OnClickListener() {
+        h.name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mActivity.editName(info.mPlayer);
             }
         });
 
-        holder.score.setOnClickListener(new View.OnClickListener() {
+        h.score.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mActivity.editColor(info.mPlayer);
             }
         });
 
-        holder.name.setText(info.mPlayer.getName());
-        holder.score.setText(Integer.toString(info.mScore));
-        holder.score.setTextColor(info.mPlayer.getColor());
+        h.name.setText(info.mPlayer.getName());
+        h.score.setText(Integer.toString(info.mScore));
+        h.score.setTextColor(info.mPlayer.getColor());
 
         return convertView;
     }

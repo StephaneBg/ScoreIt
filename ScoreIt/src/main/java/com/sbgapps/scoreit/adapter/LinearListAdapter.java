@@ -59,8 +59,8 @@ public class LinearListAdapter extends BaseAdapter {
         if (null == convertView) {
             convertView = mScoreAdapter.getLayoutInflater()
                     .inflate(R.layout.list_item_score, parent, false);
-            h = new ViewHolder();
 
+            h = new ViewHolder();
             h.score = (RobotoTextView) convertView.findViewById(R.id.score);
             convertView.setTag(h);
         } else {

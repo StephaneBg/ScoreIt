@@ -32,8 +32,8 @@ import com.sbgapps.scoreit.games.Lap;
  */
 public class UniversalScoreAdapter extends ScoreListAdapter {
 
-    public UniversalScoreAdapter(ScoreItActivity activity, ScoreListFragment fragment) {
-        super(activity, fragment);
+    public UniversalScoreAdapter(ScoreListFragment fragment) {
+        super(fragment);
     }
 
     @Override

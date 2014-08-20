@@ -33,8 +33,8 @@ import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
  */
 public class GenericBeloteScoreAdapter extends ScoreListAdapter {
 
-    public GenericBeloteScoreAdapter(ScoreItActivity activity, ScoreListFragment fragment) {
-        super(activity, fragment);
+    public GenericBeloteScoreAdapter(ScoreListFragment fragment) {
+        super(fragment);
     }
 
     @Override
