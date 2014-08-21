@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -40,6 +41,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.cocosw.undobar.UndoBarController;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.melnykov.fab.FloatingActionButton;
 import com.sbgapps.scoreit.games.Game;
@@ -69,7 +71,8 @@ import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 public class ScoreItActivity extends BaseActivity
-        implements FragmentManager.OnBackStackChangedListener {
+        implements FragmentManager.OnBackStackChangedListener,
+        UndoBarController.UndoListener {
 
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_SAVED_GAME = 2;
@@ -202,6 +205,7 @@ public class ScoreItActivity extends BaseActivity
     @Override
     protected void onPause() {
         super.onPause();
+        UndoBarController.clear(this);
         mGameHelper.saveGame();
     }
 
@@ -440,8 +444,20 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void removeLap(Lap lap) {
+        final int index = mGameHelper.getLaps().indexOf(lap);
+        final Bundle b = new Bundle();
+        b.putInt("index", index);
+        b.putSerializable("lap", lap);
+
         mGameHelper.removeLap(lap);
         update();
+
+        new UndoBarController
+                .UndoBar(this)
+                .message(getString(R.string.deleted_lap))
+                .listener(this)
+                .token(b)
+                .show();
     }
 
     public void editName(Player player) {
@@ -767,5 +783,14 @@ public class ScoreItActivity extends BaseActivity
             }
         });
         anim1.start();
+    }
+
+    @Override
+    public void onUndo(Parcelable parcelable) {
+        int index = ((Bundle) parcelable).getInt("index");
+        Lap lap = (Lap) ((Bundle) parcelable).getSerializable("lap");
+
+        mGameHelper.getLaps().add(index, lap);
+        update();
     }
 }

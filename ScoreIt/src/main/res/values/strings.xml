@@ -41,6 +41,7 @@
     <string name="clear_game">Erase scores</string>
     <string name="sure">Are you sure?</string>
     <string name="save">Do you want to save?</string>
+    <string name="deleted_lap">Lap deleted</string>
     <string name="filename">Filename</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
@@ -74,7 +75,6 @@
     <string name="guard_against">Guard against the kitty</string>
     <string name="more">More</string>
     <string name="less">Less</string>
-    <string name="undo">Undo</string>
     <string name="about">About</string>
     <string name="donate">Donate</string>
     <string name="settings">Settings</string>
