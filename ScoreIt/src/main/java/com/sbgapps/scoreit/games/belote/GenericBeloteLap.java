@@ -19,6 +19,8 @@ package com.sbgapps.scoreit.games.belote;
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.games.Lap;
 
+import java.util.List;
+
 /**
  * Created by sbaiget on 11/10/13.
  */

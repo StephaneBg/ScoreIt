@@ -43,37 +43,35 @@ public class TarotBonus implements Serializable {
     @SerializedName("player")
     private int mPlayer;
 
-
     public TarotBonus() {
         this(BONUS_PETIT_AU_BOUT);
     }
 
-    public TarotBonus(int type) {
-        this(type, Player.PLAYER_1);
+    public TarotBonus(int bonus) {
+        this(bonus, Player.PLAYER_1);
     }
 
-    public TarotBonus(int type, int player) {
-        mBonus = type;
+    public TarotBonus(int bonus, int player) {
+        mBonus = bonus;
         mPlayer = player;
     }
 
     public static String getLitteralBonus(Context context, int bonus) {
-        Resources res = context.getResources();
         switch (bonus) {
             case TarotBonus.BONUS_PETIT_AU_BOUT:
-                return res.getString(R.string.petit_au_bout);
+                return context.getString(R.string.petit_au_bout);
             case TarotBonus.BONUS_POIGNEE_SIMPLE:
-                return res.getString(R.string.poignee_simple);
+                return context.getString(R.string.poignee_simple);
             case TarotBonus.BONUS_POIGNEE_DOUBLE:
-                return res.getString(R.string.poignee_double);
+                return context.getString(R.string.poignee_double);
             case TarotBonus.BONUS_POIGNEE_TRIPLE:
-                return res.getString(R.string.poignee_triple);
+                return context.getString(R.string.poignee_triple);
             case TarotBonus.BONUS_CHELEM_NON_ANNONCE:
-                return res.getString(R.string.chelem_non_annonce);
+                return context.getString(R.string.chelem_non_annonce);
             case TarotBonus.BONUS_CHELEM_ANNONCE_REALISE:
-                return res.getString(R.string.chelem_annonce_realise);
+                return context.getString(R.string.chelem_annonce_realise);
             case TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE:
-                return res.getString(R.string.chelem_annonce_non_realise);
+                return context.getString(R.string.chelem_annonce_non_realise);
         }
         return null;
     }

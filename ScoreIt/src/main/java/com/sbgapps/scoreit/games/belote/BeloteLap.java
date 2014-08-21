@@ -16,20 +16,33 @@
 
 package com.sbgapps.scoreit.games.belote;
 
+import com.google.gson.annotations.SerializedName;
+import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sbaiget on 11/11/13.
  */
 public class BeloteLap extends GenericBeloteLap {
 
-    public BeloteLap(int taker, int points, int belote) {
+    @SerializedName("bonuses")
+    protected List<BeloteBonus> mBonuses;
+
+    public BeloteLap(int taker, int points, int belote, List<BeloteBonus> bonuses) {
         super(taker, points, belote);
+        mBonuses = bonuses;
     }
 
     public BeloteLap() {
-        this(Player.PLAYER_1, 120, Player.PLAYER_NONE);
+        this(Player.PLAYER_1, 120, Player.PLAYER_NONE, new ArrayList<BeloteBonus>());
+    }
+
+    public List<BeloteBonus> getBonuses() {
+        return mBonuses;
     }
 
     @Override
@@ -40,6 +53,28 @@ public class BeloteLap extends GenericBeloteLap {
         mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mTaker) ? mPoints : getCounterPoints(mPoints);
         mScores[Player.PLAYER_1] += (Player.PLAYER_1 == mBelote) ? 20 : 0;
         mScores[Player.PLAYER_2] += (Player.PLAYER_2 == mBelote) ? 20 : 0;
+
+        // Bonuses
+        for(BeloteBonus bonus : mBonuses) {
+            switch (bonus.get()) {
+                case BeloteBonus.BONUS_RUN_3:
+                    mScores[bonus.getPlayer()] += 20;
+                    break;
+                case BeloteBonus.BONUS_RUN_4:
+                    mScores[bonus.getPlayer()] += 50;
+                    break;
+                case BeloteBonus.BONUS_RUN_5:
+                case BeloteBonus.BONUS_FOUR_NORMAL:
+                    mScores[bonus.getPlayer()] += 100;
+                    break;
+                case BeloteBonus.BONUS_FOUR_NINE:
+                    mScores[bonus.getPlayer()] += 150;
+                    break;
+                case BeloteBonus.BONUS_FOUR_JACK:
+                    mScores[bonus.getPlayer()] += 200;
+                    break;
+            }
+        }
     }
 
     @Override

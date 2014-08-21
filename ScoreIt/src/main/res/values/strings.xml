@@ -58,6 +58,7 @@
     <string name="petit">Petit</string>
     <string name="twentyone">21</string>
     <string name="bonuses">Bonuses</string>
+    <string name="announces">Announces</string>
     <string name="poignee_simple">Poignée simple</string>
     <string name="poignee_double">Poignée double</string>
     <string name="poignee_triple">Poignée triple</string>
@@ -65,6 +66,12 @@
     <string name="chelem_non_annonce">Chelem non annoncé</string>
     <string name="chelem_annonce_realise">Chelem annoncé réalisé</string>
     <string name="chelem_annonce_non_realise">Chelem annoncé non réalisé</string>
+    <string name="run_3">Run of 3 cards</string>
+    <string name="run_4">Run of 4 cards</string>
+    <string name="run_5">Run of 5 cards</string>
+    <string name="normal_four">Four of a kind - King, Queen and 10</string>
+    <string name="nine_four">Four of a kind - 9</string>
+    <string name="jack_four">Four of a kind - Jack</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="inside">Inside</string>

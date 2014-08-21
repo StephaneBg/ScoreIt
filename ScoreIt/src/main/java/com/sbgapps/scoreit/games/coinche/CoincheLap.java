@@ -19,7 +19,10 @@ package com.sbgapps.scoreit.games.coinche;
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.Player;
+import com.sbgapps.scoreit.games.belote.BeloteBonus;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
+
+import java.util.List;
 
 /**
  * Created by sbaiget on 11/11/13.

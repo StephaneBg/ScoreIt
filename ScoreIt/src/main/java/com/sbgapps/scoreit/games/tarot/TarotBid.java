@@ -46,16 +46,15 @@ public class TarotBid implements Serializable {
     }
 
     public static String getLitteralBid(Context context, int bid) {
-        Resources res = context.getResources();
         switch (bid) {
             case BID_PRISE:
-                return res.getString(R.string.take);
+                return context.getString(R.string.take);
             case BID_GARDE:
-                return res.getString(R.string.guard);
+                return context.getString(R.string.guard);
             case BID_GARDE_CONTRE:
-                return res.getString(R.string.guard_against);
+                return context.getString(R.string.guard_against);
             case BID_GARDE_SANS:
-                return res.getString(R.string.guard_without);
+                return context.getString(R.string.guard_without);
         }
         return null;
     }
