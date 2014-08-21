@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-
-
-
-
-
-
-include ':ScoreIt', ':HoloGraphLibrary', ':FloatingActionButton', 'BetterPickers', ':PagerSlidingTabStrip'
+include ':ScoreIt', ':HoloGraphLibrary', ':FloatingActionButton',
+        'BetterPickers', ':PagerSlidingTabStrip'
 
 project(':HoloGraphLibrary').projectDir = new File(rootDir, '../HoloGraphLibrary/HoloGraphLibrary')
 project(':FloatingActionButton').projectDir = new File(rootDir, '../FloatingActionButton/library')
 project(':BetterPickers').projectDir = new File(rootDir, '../android-betterpickers/library')
 project(':PagerSlidingTabStrip').projectDir = new File(rootDir, '../PagerSlidingTabStrip/library')
+
