@@ -439,6 +439,7 @@ public class ScoreItActivity extends BaseActivity
         mIsEdited = true;
         mLap = lap;
         mScoreListFragment.closeOpenedItems();
+        mActionButton.show();
         showLapFragment();
         animateActionButton(R.drawable.ic_content_edit_fab);
     }
@@ -461,6 +462,9 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void editName(Player player) {
+        if (null != mLapFragment && mLapFragment.isVisible()) {
+            return;
+        }
         mEditedPlayer = player;
         showEditNameActionChoices();
     }
@@ -769,7 +773,7 @@ public class ScoreItActivity extends BaseActivity
         anim1.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                mActionButton.setImageDrawable(resId);
+                mActionButton.setImageDrawable(getResources().getDrawable(resId));
                 int color = ScoreItActivity.this.getResources()
                         .getColor(orange ? R.color.primary_accent_translucent
                                 : R.color.secondary_accent_translucent);

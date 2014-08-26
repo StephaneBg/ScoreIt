@@ -48,14 +48,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/them"/>
+                tools:text="@string/them"/>
 
             <RadioButton
                 android:id="@+id/rb_player2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/us"/>
+                tools:text="@string/us"/>
         </RadioGroup>
 
         <View style="@style/Divider"/>
@@ -98,14 +98,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/them"/>
+                tools:text="@string/them"/>
 
             <RadioButton
                 android:id="@+id/rb_belote_player2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/us"/>
+                tools:text="@string/us"/>
         </RadioGroup>
 
         <View style="@style/Divider"/>
