@@ -19,46 +19,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe"
     android:layout_width="match_parent"
     android:layout_height="72dp"
     tools:context=".ScoreItActivity">
 
-    <LinearLayout
-        android:id="@+id/action_view"
-        style="?android:buttonBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/lighter_gray"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/action_discard"
-            style="?android:borderlessButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:contentDescription="@string/cancel"
-            android:src="@drawable/ic_content_discard"
-            android:text="@string/cancel"/>
-
-        <ImageButton
-            android:id="@+id/action_edit"
-            style="?android:borderlessButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:contentDescription="@string/done"
-            android:src="@drawable/ic_content_edit_light"
-            android:text="@string/done"/>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/top_shadow"/>
+    <include
+        layout="@layout/include_bottom_score_list"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
 
     <RelativeLayout
-        android:id="@+id/score_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
