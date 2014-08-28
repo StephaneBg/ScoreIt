@@ -378,6 +378,7 @@ public class ScoreItActivity extends BaseActivity
         }
         getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         invalidateOptionsMenu();
+        UndoBarController.clear(this);
         loadFragments(true);
         selectItem(position);
     }
@@ -462,7 +463,9 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void editName(Player player) {
-        if (null != mLapFragment && mLapFragment.isVisible()) {
+        if (!mIsTablet
+                && null != mLapFragment
+                && mLapFragment.isVisible()) {
             return;
         }
         mEditedPlayer = player;
@@ -470,6 +473,11 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void editColor(Player player) {
+        if (!mIsTablet
+                && null != mLapFragment
+                && mLapFragment.isVisible()) {
+            return;
+        }
         mEditedPlayer = player;
         showColorPickerDialog();
     }

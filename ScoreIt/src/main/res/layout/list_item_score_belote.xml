@@ -18,14 +18,16 @@
 <com.daimajia.swipe.SwipeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe"
     android:layout_width="match_parent"
     android:layout_height="@dimen/height_default"
+    app:show_mode="lay_down"
     tools:context=".ScoreItActivity">
 
     <include
         layout="@layout/include_bottom_score_list"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/swipe_bottom_width"
         android:layout_height="match_parent"/>
 
     <RelativeLayout

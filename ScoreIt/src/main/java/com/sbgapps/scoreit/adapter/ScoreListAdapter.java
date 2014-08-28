@@ -27,7 +27,10 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.daimajia.swipe.SwipeAdapter;
+import com.daimajia.swipe.SwipeLayout;
 import com.linearlistview.LinearListView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
@@ -49,6 +52,7 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
 
     private final ScoreListFragment mScoreListFragment;
     private final ScoreItActivity mActivity;
+    private SwipeLayout mSwipeLayout;
 
     public ScoreListAdapter(ScoreListFragment fragment) {
         mScoreListFragment = fragment;
@@ -149,7 +153,7 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
     }
 
     public void animateDismiss(final Collection<Integer> positions, final Lap lap) {
-//        getListView().closeOpenedItems();
+        mSwipeLayout.close();
 
         final List<Integer> positionsCopy = new ArrayList<>(positions);
         List<View> views = getVisibleViewsForPositions(positionsCopy);
@@ -231,5 +235,39 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
         });
 
         return animator;
+    }
+
+    public void setSwipeLaout(SwipeLayout swipe) {
+        mSwipeLayout = swipe;
+        mSwipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
+            @Override
+            public void onClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+
+            }
+
+            @Override
+            public void onOpen(SwipeLayout layout) {
+                YoYo
+                        .with(Techniques.Tada)
+                        .duration(500)
+                        .delay(100)
+                        .playOn(layout.findViewById(R.id.action_discard));
+                YoYo
+                        .with(Techniques.Tada)
+                        .duration(500)
+                        .delay(100)
+                        .playOn(layout.findViewById(R.id.action_edit));
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+
+            }
+        });
     }
 }

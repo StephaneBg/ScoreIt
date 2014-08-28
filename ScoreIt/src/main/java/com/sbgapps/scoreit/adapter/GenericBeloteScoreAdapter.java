@@ -20,6 +20,7 @@ import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreListFragment;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
@@ -35,7 +36,9 @@ public class GenericBeloteScoreAdapter extends ScoreListAdapter {
 
     @Override
     public View generateView(int position, ViewGroup parent) {
-        return getLayoutInflater().inflate(R.layout.list_item_score_belote, null);
+        View view = getLayoutInflater().inflate(R.layout.list_item_score_belote, null);
+        setSwipeLaout((SwipeLayout) view.findViewById(R.id.swipe));
+        return view;
     }
 
     @Override

@@ -19,6 +19,7 @@ package com.sbgapps.scoreit.adapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreListFragment;
 
@@ -33,6 +34,8 @@ public class UniversalScoreAdapter extends ScoreListAdapter {
 
     @Override
     public View generateView(int position, ViewGroup parent) {
-        return getLayoutInflater().inflate(R.layout.list_item_score_universal, null);
+        View view = getLayoutInflater().inflate(R.layout.list_item_score_universal, null);
+        setSwipeLaout((SwipeLayout) view.findViewById(R.id.swipe));
+        return view;
     }
 }

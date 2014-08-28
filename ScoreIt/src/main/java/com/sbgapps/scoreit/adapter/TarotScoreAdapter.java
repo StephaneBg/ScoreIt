@@ -17,10 +17,10 @@
 package com.sbgapps.scoreit.adapter;
 
 import android.content.res.Resources;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.devspark.robototextview.widget.RobotoTextView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreListFragment;
@@ -42,7 +42,9 @@ public class TarotScoreAdapter extends ScoreListAdapter {
 
     @Override
     public View generateView(int position, ViewGroup parent) {
-        return getLayoutInflater().inflate(R.layout.list_item_score_tarot, null);
+        View view = getLayoutInflater().inflate(R.layout.list_item_score_tarot, null);
+        setSwipeLaout((SwipeLayout) view.findViewById(R.id.swipe));
+        return view;
     }
 
     @Override
