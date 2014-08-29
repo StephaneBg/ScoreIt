@@ -29,6 +29,7 @@ import android.widget.ListView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeAdapter;
 import com.daimajia.swipe.SwipeLayout;
 import com.linearlistview.LinearListView;
@@ -52,7 +53,6 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
 
     private final ScoreListFragment mScoreListFragment;
     private final ScoreItActivity mActivity;
-    private SwipeLayout mSwipeLayout;
 
     public ScoreListAdapter(ScoreListFragment fragment) {
         mScoreListFragment = fragment;
@@ -84,10 +84,28 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
         LinearListView list = (LinearListView) convertView.findViewById(R.id.list_score);
         list.setAdapter(new LinearListAdapter(this, lap));
 
+        final SwipeLayout swipeLayout = (SwipeLayout) convertView.findViewById(R.id.swipe);
+        swipeLayout.addSwipeListener(new SimpleSwipeListener() {
+            @Override
+            public void onOpen(SwipeLayout layout) {
+                YoYo
+                        .with(Techniques.Tada)
+                        .duration(500)
+                        .delay(100)
+                        .playOn(layout.findViewById(R.id.action_discard));
+                YoYo
+                        .with(Techniques.Tada)
+                        .duration(500)
+                        .delay(100)
+                        .playOn(layout.findViewById(R.id.action_edit));
+            }
+        });
+
         ImageButton button = (ImageButton) convertView.findViewById(R.id.action_discard);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                swipeLayout.close(false);
                 animateDismiss(pos, lap);
             }
         });
@@ -153,8 +171,6 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
     }
 
     public void animateDismiss(final Collection<Integer> positions, final Lap lap) {
-        mSwipeLayout.close();
-
         final List<Integer> positionsCopy = new ArrayList<>(positions);
         List<View> views = getVisibleViewsForPositions(positionsCopy);
 
@@ -235,39 +251,5 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
         });
 
         return animator;
-    }
-
-    public void setSwipeLaout(SwipeLayout swipe) {
-        mSwipeLayout = swipe;
-        mSwipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
-            @Override
-            public void onClose(SwipeLayout layout) {
-
-            }
-
-            @Override
-            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
-
-            }
-
-            @Override
-            public void onOpen(SwipeLayout layout) {
-                YoYo
-                        .with(Techniques.Tada)
-                        .duration(500)
-                        .delay(100)
-                        .playOn(layout.findViewById(R.id.action_discard));
-                YoYo
-                        .with(Techniques.Tada)
-                        .duration(500)
-                        .delay(100)
-                        .playOn(layout.findViewById(R.id.action_edit));
-            }
-
-            @Override
-            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
-
-            }
-        });
     }
 }

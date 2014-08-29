@@ -36,9 +36,7 @@ public class GenericBeloteScoreAdapter extends ScoreListAdapter {
 
     @Override
     public View generateView(int position, ViewGroup parent) {
-        View view = getLayoutInflater().inflate(R.layout.list_item_score_belote, null);
-        setSwipeLaout((SwipeLayout) view.findViewById(R.id.swipe));
-        return view;
+        return getLayoutInflater().inflate(R.layout.list_item_score_belote, null);
     }
 
     @Override
