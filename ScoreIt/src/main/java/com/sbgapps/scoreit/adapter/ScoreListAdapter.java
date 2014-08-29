@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -101,7 +102,7 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
             }
         });
 
-        ImageButton button = (ImageButton) convertView.findViewById(R.id.action_discard);
+        ImageView button = (ImageView) convertView.findViewById(R.id.action_discard);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +111,7 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
             }
         });
 
-        button = (ImageButton) convertView.findViewById(R.id.action_edit);
+        button = (ImageView) convertView.findViewById(R.id.action_edit);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

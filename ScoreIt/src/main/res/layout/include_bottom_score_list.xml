@@ -2,28 +2,24 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="?android:buttonBarStyle"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:background="@color/lighter_gray"
     android:orientation="horizontal">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/action_discard"
-        style="?android:borderlessButtonStyle"
-        android:layout_width="0dp"
+        android:background="@color/primary_accent"
+        android:layout_width="70dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:contentDescription="@string/cancel"
         android:src="@drawable/ic_content_discard"
         android:text="@string/cancel"/>
 
-    <ImageButton
+    <ImageView
         android:id="@+id/action_edit"
-        style="?android:borderlessButtonStyle"
-        android:layout_width="0dp"
+        android:background="@color/secondary_accent"
+        android:layout_width="70dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:contentDescription="@string/done"
         android:src="@drawable/ic_content_edit_light"
         android:text="@string/done"/>

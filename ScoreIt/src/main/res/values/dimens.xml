@@ -43,6 +43,5 @@
     <dimen name="width_default_column">280dp</dimen>
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="dialog_width">480dp</dimen>
-    <dimen name="swipe_bottom_width">120dp</dimen>
 
 </resources>

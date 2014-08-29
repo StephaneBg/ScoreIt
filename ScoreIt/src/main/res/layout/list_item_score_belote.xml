@@ -27,7 +27,7 @@
 
     <include
         layout="@layout/include_bottom_score_list"
-        android:layout_width="@dimen/swipe_bottom_width"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
 
     <RelativeLayout
