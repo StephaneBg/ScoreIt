@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.sbgapps.scoreit.adapter.GenericBeloteScoreAdapter;
 import com.sbgapps.scoreit.adapter.ScoreListAdapter;
 import com.sbgapps.scoreit.adapter.TarotScoreAdapter;
@@ -55,7 +56,8 @@ public class ScoreListFragment extends Fragment {
         mListView = (ListView) view.findViewById(android.R.id.list);
 
         ScoreItActivity activity = (ScoreItActivity) getActivity();
-        activity.getActionButton().attachToListView(mListView);
+        if (!activity.isTablet())
+            activity.getActionButton().attachToListView(mListView);
 
         GameHelper gameHelper = activity.getGameHelper();
         switch (gameHelper.getPlayedGame()) {

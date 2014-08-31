@@ -113,6 +113,10 @@ public class ScoreItActivity extends BaseActivity
         return mActionButton;
     }
 
+    public boolean isTablet() {
+        return mIsTablet;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
