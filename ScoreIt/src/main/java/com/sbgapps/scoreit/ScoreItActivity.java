@@ -379,6 +379,7 @@ public class ScoreItActivity extends BaseActivity
         }
         getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         invalidateOptionsMenu();
+        UndoBarController.clear(this);
         loadFragments(true);
         selectItem(position);
     }
@@ -464,11 +465,21 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void editName(Player player) {
+        if (!mIsTablet
+                && null != mLapFragment
+                && mLapFragment.isVisible()) {
+            return;
+        }
         mEditedPlayer = player;
         showEditNameActionChoices();
     }
 
     public void editColor(Player player) {
+        if (!mIsTablet
+                && null != mLapFragment
+                && mLapFragment.isVisible()) {
+            return;
+        }
         mEditedPlayer = player;
         showColorPickerDialog();
     }
@@ -774,14 +785,14 @@ public class ScoreItActivity extends BaseActivity
         anim1.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                mActionButton.setImageDrawable(resId);
+                mActionButton.setImageDrawable(getResources().getDrawable(resId));
                 int color = ScoreItActivity.this.getResources()
-                        .getColor(orange ? R.color.primary_accent_translucent
-                                : R.color.secondary_accent_translucent);
+                        .getColor(orange ? R.color.primary_accent
+                                : R.color.secondary_accent);
                 mActionButton.setColorNormal(color);
                 color = ScoreItActivity.this.getResources()
-                        .getColor(orange ? R.color.primary_accent_dark_translucent
-                                : R.color.secondary_accent_dark_translucent);
+                        .getColor(orange ? R.color.primary_accent_dark
+                                : R.color.secondary_accent_dark);
                 mActionButton.setColorPressed(color);
                 anim2.setTarget(mActionButton);
                 anim2.start();

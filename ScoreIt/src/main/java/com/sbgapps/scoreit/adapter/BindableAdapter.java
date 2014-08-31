@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.util;
+package com.sbgapps.scoreit.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -25,13 +25,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.tarot.TarotBonus;
 import com.sbgapps.scoreit.widget.SeekbarPoints;
 
 import java.util.List;
@@ -66,6 +66,11 @@ public class BeloteLapFragment extends LapFragment
         View view = inflater.inflate(R.layout.fragment_lap_belote, null);
         ButterKnife.inject(this, view);
 
+        RadioButton rb = (RadioButton) view.findViewById(R.id.rb_player1);
+        rb.setText(getGameHelper().getPlayer(Player.PLAYER_1).getName());
+        rb = (RadioButton) view.findViewById(R.id.rb_player2);
+        rb.setText(getGameHelper().getPlayer(Player.PLAYER_2).getName());
+
         switch (getLap().getTaker()) {
             case Player.PLAYER_1:
                 mRadioGroupPlayer.check(R.id.rb_player1);
@@ -93,6 +98,11 @@ public class BeloteLapFragment extends LapFragment
                 pointsToProgress(250),
                 getLap().getPoints());
         mPoints.setOnPointsChangedListener(this, "points");
+
+        rb = (RadioButton) view.findViewById(R.id.rb_belote_player1);
+        rb.setText(getGameHelper().getPlayer(Player.PLAYER_1).getName());
+        rb = (RadioButton) view.findViewById(R.id.rb_belote_player2);
+        rb.setText(getGameHelper().getPlayer(Player.PLAYER_2).getName());
 
         switch (getLap().getBelote()) {
             case Player.PLAYER_NONE:
@@ -122,7 +132,7 @@ public class BeloteLapFragment extends LapFragment
             }
         });
 
-       mButtonBonus.setOnClickListener(new View.OnClickListener() {
+        mButtonBonus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addBonus(null);

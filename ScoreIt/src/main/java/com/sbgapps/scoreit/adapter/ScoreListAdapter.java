@@ -24,9 +24,13 @@ import android.animation.ValueAnimator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ListView;
 
-import com.fortysevendeg.swipelistview.SwipeListView;
+import com.daimajia.swipe.SwipeAdapter;
+import com.daimajia.swipe.SwipeLayout;
+import com.linearlistview.LinearListView;
+import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.ScoreListFragment;
 import com.sbgapps.scoreit.games.GameHelper;
@@ -42,7 +46,7 @@ import java.util.List;
 /**
  * Created by sbaiget on 23/11/13.
  */
-public abstract class ScoreListAdapter extends BaseAdapter {
+public abstract class ScoreListAdapter extends SwipeAdapter {
 
     private final ScoreListFragment mScoreListFragment;
     private final ScoreItActivity mActivity;
@@ -60,8 +64,40 @@ public abstract class ScoreListAdapter extends BaseAdapter {
         return mActivity;
     }
 
-    public SwipeListView getListView() {
+    public ListView getListView() {
         return mScoreListFragment.getListView();
+    }
+
+    @Override
+    public int getSwipeLayoutResourceId(int i) {
+        return R.id.swipe;
+    }
+
+    @Override
+    public void fillValues(int position, View convertView) {
+        final Lap lap = getItem(position);
+        final int pos = position;
+
+        LinearListView list = (LinearListView) convertView.findViewById(R.id.list_score);
+        list.setAdapter(new LinearListAdapter(this, lap));
+
+        final SwipeLayout swipeLayout = (SwipeLayout) convertView.findViewById(R.id.swipe);
+        ImageButton button = (ImageButton) convertView.findViewById(R.id.action_discard);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                swipeLayout.close(false);
+                animateDismiss(pos, lap);
+            }
+        });
+
+        button = (ImageButton) convertView.findViewById(R.id.action_edit);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().editLap(lap);
+            }
+        });
     }
 
     @Override
@@ -116,8 +152,6 @@ public abstract class ScoreListAdapter extends BaseAdapter {
     }
 
     public void animateDismiss(final Collection<Integer> positions, final Lap lap) {
-        getListView().closeOpenedItems();
-
         final List<Integer> positionsCopy = new ArrayList<>(positions);
         List<View> views = getVisibleViewsForPositions(positionsCopy);
 

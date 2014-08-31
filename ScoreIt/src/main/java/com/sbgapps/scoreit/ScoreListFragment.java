@@ -21,8 +21,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
-import com.fortysevendeg.swipelistview.SwipeListView;
 import com.sbgapps.scoreit.adapter.GenericBeloteScoreAdapter;
 import com.sbgapps.scoreit.adapter.ScoreListAdapter;
 import com.sbgapps.scoreit.adapter.TarotScoreAdapter;
@@ -36,15 +36,15 @@ import com.sbgapps.scoreit.games.GameHelper;
 public class ScoreListFragment extends Fragment {
 
     public static final String TAG = ScoreListFragment.class.getName();
-    private SwipeListView mListView;
+    private ListView mListView;
     private ScoreListAdapter mAdapter;
+
+    public ListView getListView() {
+        return mListView;
+    }
 
     public ScoreListAdapter getListAdapter() {
         return mAdapter;
-    }
-
-    public SwipeListView getListView() {
-        return mListView;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ScoreListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score_list, null);
 
-        mListView = (SwipeListView) view.findViewById(android.R.id.list);
+        mListView = (ListView) view.findViewById(android.R.id.list);
 
         ScoreItActivity activity = (ScoreItActivity) getActivity();
         activity.getActionButton().attachToListView(mListView);
@@ -81,7 +81,6 @@ public class ScoreListFragment extends Fragment {
     }
 
     public void closeOpenedItems() {
-        if (null != mListView)
-            mListView.closeOpenedItems();
+        // TODO
     }
 }
