@@ -356,6 +356,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void onNavigationDrawerItemSelected(int position) {
+        UndoBarController.clear(this);
         switch (position) {
             default:
                 return;
@@ -439,6 +440,7 @@ public class ScoreItActivity extends BaseActivity
         mIsEdited = true;
         mLap = lap;
         mScoreListFragment.closeOpenedItems();
+        mActionButton.show();
         showLapFragment();
         animateActionButton(R.drawable.ic_content_edit_fab);
     }
@@ -451,6 +453,7 @@ public class ScoreItActivity extends BaseActivity
 
         mGameHelper.removeLap(lap);
         update();
+        invalidateOptionsMenu();
 
         new UndoBarController
                 .UndoBar(this)
@@ -752,11 +755,13 @@ public class ScoreItActivity extends BaseActivity
         if (null != mLapFragment && mLapFragment.isVisible()) {
             return;
         }
+        if (null != mLap) mLap.computeScores();
         mLap = null;
         mIsEdited = false;
         if (mAnimateFab) animateActionButton(R.drawable.ic_action_new_fab);
         mAnimateFab = false;
         invalidateOptionsMenu();
+        update();
     }
 
     private void animateActionButton(final int resId) {
@@ -792,5 +797,6 @@ public class ScoreItActivity extends BaseActivity
 
         mGameHelper.getLaps().add(index, lap);
         update();
+        invalidateOptionsMenu();
     }
 }
