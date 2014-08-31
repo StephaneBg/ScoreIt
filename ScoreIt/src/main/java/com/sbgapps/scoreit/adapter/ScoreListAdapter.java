@@ -25,12 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
-import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeAdapter;
 import com.daimajia.swipe.SwipeLayout;
 import com.linearlistview.LinearListView;
@@ -86,23 +82,7 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
         list.setAdapter(new LinearListAdapter(this, lap));
 
         final SwipeLayout swipeLayout = (SwipeLayout) convertView.findViewById(R.id.swipe);
-        swipeLayout.addSwipeListener(new SimpleSwipeListener() {
-            @Override
-            public void onOpen(SwipeLayout layout) {
-                YoYo
-                        .with(Techniques.Tada)
-                        .duration(500)
-                        .delay(100)
-                        .playOn(layout.findViewById(R.id.action_discard));
-                YoYo
-                        .with(Techniques.Tada)
-                        .duration(500)
-                        .delay(100)
-                        .playOn(layout.findViewById(R.id.action_edit));
-            }
-        });
-
-        ImageView button = (ImageView) convertView.findViewById(R.id.action_discard);
+        ImageButton button = (ImageButton) convertView.findViewById(R.id.action_discard);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +91,7 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
             }
         });
 
-        button = (ImageView) convertView.findViewById(R.id.action_edit);
+        button = (ImageButton) convertView.findViewById(R.id.action_edit);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

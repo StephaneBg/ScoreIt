@@ -23,6 +23,7 @@
     android:layout_width="match_parent"
     android:layout_height="72dp"
     app:show_mode="lay_down"
+    app:drag_edge="left"
     tools:context=".ScoreItActivity">
 
     <include
