@@ -36,7 +36,6 @@
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
   <string name="clear_game">Lösche Score</string>
-  <string name="sure">Bist du sicher?</string>
   <string name="save">Möchten Sie diese speichern?</string>
   <string name="deleted_lap">Runde gelöscht</string>
   <string name="filename">Dateiname</string>
@@ -106,4 +105,5 @@
   <string name="language_dutch">Holländisch</string>
   <string name="language_russian">Russisch</string>
   <string name="language_german">Deutsch</string>
+  <string name="language_spanish">Spanisch</string>
 </resources>

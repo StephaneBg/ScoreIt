@@ -36,7 +36,6 @@
   <string name="yes">Да</string>
   <string name="no">Нет</string>
   <string name="clear_game">Очистить счет</string>
-  <string name="sure">Вы уверены?</string>
   <string name="save">Вы хотите сохранить?</string>
   <string name="deleted_lap">Круг удалены</string>
   <string name="filename">Имя файла</string>
@@ -106,4 +105,5 @@
   <string name="language_dutch">Голландский</string>
   <string name="language_russian">Русский</string>
   <string name="language_german">Германский</string>
+  <string name="language_spanish">Испанский</string>
 </resources>

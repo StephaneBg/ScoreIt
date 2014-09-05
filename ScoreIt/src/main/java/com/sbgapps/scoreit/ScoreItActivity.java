@@ -20,11 +20,8 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -61,7 +58,6 @@ import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.games.universal.UniversalLapFragment;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerView;
-import com.sbgapps.scoreit.util.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +65,8 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
+import uk.me.lewisdeane.ldialogs.CustomDialog;
+import uk.me.lewisdeane.ldialogs.CustomListDialog;
 
 public class ScoreItActivity extends BaseActivity
         implements FragmentManager.OnBackStackChangedListener,
@@ -592,30 +590,24 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void showClearDialog() {
-        Dialog dialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.clear_game)
-                .setMessage(R.string.sure)
-                .setPositiveButton(
-                        R.string.yes,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dismissAll();
-                            }
-                        }
-                )
-                .setNegativeButton(
-                        R.string.no,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Nothing to do!
-                            }
-                        }
-                )
-                .create();
+        CustomDialog dialog = new CustomDialog
+                .Builder(this, R.string.clear_game, R.string.ok)
+                .negativeText(R.string.cancel)
+                .positiveColorRes(R.color.primary_accent)
+                .build();
+
+        dialog.setClickListener(new CustomDialog.ClickListener() {
+            @Override
+            public void onConfirmClick() {
+                dismissAll();
+            }
+
+            @Override
+            public void onCancelClick() {
+
+            }
+        });
         dialog.show();
-        DialogUtil.colorizeDialog(dialog);
     }
 
     private void dismissAll() {
@@ -631,30 +623,30 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void showEditNameActionChoices() {
-        Dialog dialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.edit_name)
-                .setItems(R.array.edit_name_action,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent;
-                                switch (which) {
-                                    default:
-                                    case 0:
-                                        intent = new Intent(Intent.ACTION_PICK,
-                                                ContactsContract.Contacts.CONTENT_URI);
-                                        startActivityForResult(intent, REQ_PICK_CONTACT);
-                                        break;
-                                    case 1:
-                                        showEditNameDialog();
-                                        break;
-                                }
-                            }
-                        }
-                )
-                .create();
+        CustomListDialog dialog = new CustomListDialog
+                .Builder(this,
+                getString(R.string.edit_name),
+                getResources().getStringArray(R.array.edit_name_action))
+                .itemColorRes(R.color.primary_accent)
+                .build();
+        dialog.setListClickListener(new CustomListDialog.ListClickListener() {
+            @Override
+            public void onListItemSelected(int position, String[] items, String item) {
+                Intent intent;
+                switch (position) {
+                    default:
+                    case 0:
+                        intent = new Intent(Intent.ACTION_PICK,
+                                ContactsContract.Contacts.CONTENT_URI);
+                        startActivityForResult(intent, REQ_PICK_CONTACT);
+                        break;
+                    case 1:
+                        showEditNameDialog();
+                        break;
+                }
+            }
+        });
         dialog.show();
-        DialogUtil.colorizeDialog(dialog);
     }
 
     public void showPlayerCountDialog() {
@@ -667,102 +659,102 @@ public class ScoreItActivity extends BaseActivity
                 players = new String[]{"3", "4", "5"};
                 break;
         }
-        Dialog dialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.player_number)
-                .setItems(players,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                mGameHelper.setPlayerCount(which);
-                                loadFragments(true);
-                            }
-                        }
-                )
-                .create();
+
+        CustomListDialog dialog = new CustomListDialog
+                .Builder(this, getString(R.string.player_number), players)
+                .itemColorRes(R.color.primary_accent)
+                .build();
+        dialog.setListClickListener(new CustomListDialog.ListClickListener() {
+            @Override
+            public void onListItemSelected(int position, String[] items, String item) {
+                mGameHelper.setPlayerCount(position);
+                loadFragments(true);
+            }
+        });
         dialog.show();
-        DialogUtil.colorizeDialog(dialog);
     }
 
     private void showEditNameDialog() {
         View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
         final EditText editText = (EditText) view.findViewById(R.id.edit_text);
-        Dialog dialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.edit_name)
-                .setView(view)
-                .setPositiveButton(R.string.ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String name = editText.getText().toString();
-                                mEditedPlayer.setName(name);
-                                mHeaderFragment.update();
-                                if (mScoreListFragment.isVisible()) mScoreListFragment.update();
-                            }
-                        }
-                )
-                .setNegativeButton(R.string.cancel,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Nothing to do!
-                            }
-                        }
-                )
-                .create();
+
+        CustomDialog dialog = new CustomDialog
+                .Builder(this, R.string.edit_name, R.string.ok)
+                .negativeText(R.string.cancel)
+                .positiveColorRes(R.color.primary_accent)
+                .build();
+
+        dialog.setCustomView(view)
+                .setClickListener(new CustomDialog.ClickListener() {
+                    @Override
+                    public void onConfirmClick() {
+                        String name = editText.getText().toString();
+                        mEditedPlayer.setName(name);
+                        mHeaderFragment.update();
+                        if (mScoreListFragment.isVisible()) mScoreListFragment.update();
+                    }
+
+                    @Override
+                    public void onCancelClick() {
+
+                    }
+                });
         dialog.show();
-        DialogUtil.colorizeDialog(dialog);
     }
 
     private void showSaveFileDialog() {
         View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
         final EditText editText = (EditText) view.findViewById(R.id.edit_text);
-        Dialog dialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.filename)
-                .setView(view)
-                .setPositiveButton(R.string.ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String file = editText.getText().toString();
-                                mGameHelper.saveGame(file);
-                                dismissAll();
-                            }
-                        }
-                )
-                .setCancelable(true)
-                .create();
+
+        CustomDialog dialog = new CustomDialog
+                .Builder(this, R.string.filename, R.string.ok)
+                .negativeText(R.string.cancel)
+                .positiveColorRes(R.color.primary_accent)
+                .build();
+
+        dialog.setCustomView(view)
+                .setClickListener(new CustomDialog.ClickListener() {
+                    @Override
+                    public void onConfirmClick() {
+                        String file = editText.getText().toString();
+                        mGameHelper.saveGame(file);
+                        dismissAll();
+                    }
+
+                    @Override
+                    public void onCancelClick() {
+
+                    }
+                });
         dialog.show();
-        DialogUtil.colorizeDialog(dialog);
     }
 
     private void showColorPickerDialog() {
         View view = getLayoutInflater().inflate(R.layout.dialog_color_picker, null);
         final ColorPicker picker = (ColorPicker) view.findViewById(R.id.picker);
         picker.setColor(mEditedPlayer.getColor());
-        Dialog dialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.edit_color)
-                .setView(view)
-                .setPositiveButton(R.string.ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                int color = picker.getColor();
-                                mEditedPlayer.setColor(color);
-                                update();
-                            }
-                        }
-                )
-                .setNegativeButton(R.string.cancel,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Nothing to do!
-                            }
-                        }
-                )
-                .create();
+
+        CustomDialog dialog = new CustomDialog
+                .Builder(this, R.string.edit_color, R.string.ok)
+                .negativeText(R.string.cancel)
+                .positiveColorRes(R.color.primary_accent)
+                .build();
+
+        dialog.setCustomView(view)
+                .setClickListener(new CustomDialog.ClickListener() {
+                    @Override
+                    public void onConfirmClick() {
+                        int color = picker.getColor();
+                        mEditedPlayer.setColor(color);
+                        update();
+                    }
+
+                    @Override
+                    public void onCancelClick() {
+
+                    }
+                });
         dialog.show();
-        DialogUtil.colorizeDialog(dialog);
     }
 
     @Override

@@ -36,7 +36,6 @@
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <string name="clear_game">Scores verwijderen</string>
-  <string name="sure">Zeker weten?</string>
   <string name="save">Wilt u dit opslaan?</string>
   <string name="deleted_lap">Ronde verwijderd</string>
   <string name="filename">Bestandsnaam</string>
@@ -106,4 +105,5 @@
   <string name="language_dutch">Nederlands</string>
   <string name="language_russian">Russisch</string>
   <string name="language_german">Duits</string>
+  <string name="language_spanish">Spaans</string>
 </resources>

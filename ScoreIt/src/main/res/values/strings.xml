@@ -39,7 +39,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="clear_game">Erase scores</string>
-    <string name="sure">Are you sure?</string>
     <string name="save">Do you want to save?</string>
     <string name="deleted_lap">Lap deleted</string>
     <string name="filename">Filename</string>
@@ -109,5 +108,6 @@
     <string name="language_dutch">Dutch</string>
     <string name="language_russian">Russian</string>
     <string name="language_german">German</string>
+    <string name="language_spanish">Spanish</string>
 
 </resources>

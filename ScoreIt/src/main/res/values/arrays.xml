@@ -43,6 +43,7 @@
         <item>@string/language_dutch</item>
         <item>@string/language_russian</item>
         <item>@string/language_german</item>
+        <item>@string/language_spanish</item>
     </string-array>
 
     <string-array name="translators" translatable="false">
@@ -56,6 +57,8 @@
         <item translatable="false">Danila Lepikhin</item>
         <!-- German -->
         <item translatable="false">Luca Eichler</item>
+        <!-- Spanish -->
+        <item translatable="false">Alvaro Martinez</item>
     </string-array>
 
 </resources>
