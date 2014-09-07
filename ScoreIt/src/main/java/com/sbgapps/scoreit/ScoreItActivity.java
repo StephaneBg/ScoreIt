@@ -702,32 +702,32 @@ public class ScoreItActivity extends BaseActivity
         dialog.show();
     }
 
-    private void showSaveFileDialog() {
-        View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
-        final EditText editText = (EditText) view.findViewById(R.id.edit_text);
-
-        CustomDialog dialog = new CustomDialog
-                .Builder(this, R.string.filename, R.string.ok)
-                .negativeText(R.string.cancel)
-                .positiveColorRes(R.color.primary_accent)
-                .build();
-
-        dialog.setCustomView(view)
-                .setClickListener(new CustomDialog.ClickListener() {
-                    @Override
-                    public void onConfirmClick() {
-                        String file = editText.getText().toString();
-                        mGameHelper.saveGame(file);
-                        dismissAll();
-                    }
-
-                    @Override
-                    public void onCancelClick() {
-
-                    }
-                });
-        dialog.show();
-    }
+//    private void showSaveFileDialog() {
+//        View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
+//        final EditText editText = (EditText) view.findViewById(R.id.edit_text);
+//
+//        CustomDialog dialog = new CustomDialog
+//                .Builder(this, R.string.filename, R.string.ok)
+//                .negativeText(R.string.cancel)
+//                .positiveColorRes(R.color.primary_accent)
+//                .build();
+//
+//        dialog.setCustomView(view)
+//                .setClickListener(new CustomDialog.ClickListener() {
+//                    @Override
+//                    public void onConfirmClick() {
+//                        String file = editText.getText().toString();
+//                        mGameHelper.saveGame(file);
+//                        dismissAll();
+//                    }
+//
+//                    @Override
+//                    public void onCancelClick() {
+//
+//                    }
+//                });
+//        dialog.show();
+//    }
 
     private void showColorPickerDialog() {
         View view = getLayoutInflater().inflate(R.layout.dialog_color_picker, null);
