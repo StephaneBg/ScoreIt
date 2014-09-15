@@ -32,7 +32,7 @@
     <color name="secondary_accent_dark_translucent">#DD458221</color>
 
     <color name="lighter_gray">#E0E0E0</color>
-    <color name="lighter_gray_translucent">#DDE0E0E0</color>
+    <color name="lighter_gray_translucent">#EEF5F5F5</color>
     <color name="dim_lighter_gray">#80E0E0E0</color>
     <color name="darker_gray">#707070</color>
 

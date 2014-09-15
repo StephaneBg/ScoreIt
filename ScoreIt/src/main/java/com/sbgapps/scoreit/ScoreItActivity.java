@@ -38,7 +38,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.cocosw.undobar.UndoBarController;
+import com.github.mrengineer13.snackbar.SnackBar;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.melnykov.fab.FloatingActionButton;
 import com.sbgapps.scoreit.games.Game;
@@ -70,7 +70,7 @@ import uk.me.lewisdeane.ldialogs.CustomListDialog;
 
 public class ScoreItActivity extends BaseActivity
         implements FragmentManager.OnBackStackChangedListener,
-        UndoBarController.UndoListener {
+        SnackBar.OnMessageClickListener {
 
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_SAVED_GAME = 2;
@@ -93,6 +93,7 @@ public class ScoreItActivity extends BaseActivity
     private Lap mLap;
     private boolean mIsEdited = false;
     private boolean mAnimateFab = false;
+    private SnackBar mSnackBar;
 
     private ScoreListFragment mScoreListFragment;
     private ScoreGraphFragment mScoreGraphFragment;
@@ -202,12 +203,14 @@ public class ScoreItActivity extends BaseActivity
                 onActionButtonClicked();
             }
         });
+
+        mSnackBar = new SnackBar(this);
+        mSnackBar.setOnClickListener(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        UndoBarController.clear(this);
         mGameHelper.saveGame();
     }
 
@@ -358,7 +361,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void onNavigationDrawerItemSelected(int position) {
-        UndoBarController.clear(this);
+        mSnackBar.clear();
         switch (position) {
             default:
                 return;
@@ -381,7 +384,6 @@ public class ScoreItActivity extends BaseActivity
         }
         getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         invalidateOptionsMenu();
-        UndoBarController.clear(this);
         loadFragments(true);
         selectItem(position);
     }
@@ -450,20 +452,21 @@ public class ScoreItActivity extends BaseActivity
 
     public void removeLap(Lap lap) {
         final int index = mGameHelper.getLaps().indexOf(lap);
-        final Bundle b = new Bundle();
-        b.putInt("index", index);
-        b.putSerializable("lap", lap);
+        final Bundle token = new Bundle();
+        token.putInt("index", index);
+        token.putSerializable("lap", lap);
 
         mGameHelper.removeLap(lap);
         update();
         invalidateOptionsMenu();
 
-        new UndoBarController
-                .UndoBar(this)
-                .message(getString(R.string.deleted_lap))
-                .listener(this)
-                .token(b)
-                .show();
+        mSnackBar.show(
+                getString(R.string.deleted_lap),
+                getString(R.string.undo),
+                SnackBar.Style.ALERT,
+                0,
+                token,
+                SnackBar.MED_SNACK);
     }
 
     public void editName(Player player) {
@@ -629,6 +632,7 @@ public class ScoreItActivity extends BaseActivity
                 getResources().getStringArray(R.array.edit_name_action))
                 .itemColorRes(R.color.primary_accent)
                 .build();
+
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
             @Override
             public void onListItemSelected(int position, String[] items, String item) {
@@ -689,9 +693,11 @@ public class ScoreItActivity extends BaseActivity
                     @Override
                     public void onConfirmClick() {
                         String name = editText.getText().toString();
-                        mEditedPlayer.setName(name);
-                        mHeaderFragment.update();
-                        if (mScoreListFragment.isVisible()) mScoreListFragment.update();
+                        if (!name.isEmpty()) {
+                            mEditedPlayer.setName(name);
+                            mHeaderFragment.update();
+                            if (mScoreListFragment.isVisible()) mScoreListFragment.update();
+                        }
                     }
 
                     @Override
@@ -798,9 +804,9 @@ public class ScoreItActivity extends BaseActivity
     }
 
     @Override
-    public void onUndo(Parcelable parcelable) {
-        int index = ((Bundle) parcelable).getInt("index");
-        Lap lap = (Lap) ((Bundle) parcelable).getSerializable("lap");
+    public void onMessageClick(Parcelable token) {
+        int index = ((Bundle) token).getInt("index");
+        Lap lap = (Lap) ((Bundle) token).getSerializable("lap");
 
         mGameHelper.getLaps().add(index, lap);
         update();

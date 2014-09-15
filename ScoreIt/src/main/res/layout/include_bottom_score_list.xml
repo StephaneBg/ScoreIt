@@ -11,9 +11,8 @@
     <ImageButton
         android:id="@+id/action_discard"
         style="?android:borderlessButtonStyle"
-        android:layout_width="0dp"
+        android:layout_width="90dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:contentDescription="@string/cancel"
         android:src="@drawable/ic_content_discard"
         android:text="@string/cancel"/>
@@ -21,9 +20,8 @@
     <ImageButton
         android:id="@+id/action_edit"
         style="?android:borderlessButtonStyle"
-        android:layout_width="0dp"
+        android:layout_width="90dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:contentDescription="@string/done"
         android:src="@drawable/ic_content_edit_light"
         android:text="@string/done"/>

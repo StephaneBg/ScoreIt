@@ -41,6 +41,7 @@
     <string name="clear_game">Erase scores</string>
     <string name="save">Do you want to save?</string>
     <string name="deleted_lap">Lap deleted</string>
+    <string name="undo">Undo</string>
     <string name="filename">Filename</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
