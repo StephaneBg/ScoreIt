@@ -225,6 +225,14 @@ public class ScoreItActivity extends BaseActivity
                 outState.putSerializable("lap", mLap);
             }
         }
+        outState.putBundle("snackbar", mSnackBar.onSaveInstanceState());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mSnackBar.onRestoreInstanceState(
+                savedInstanceState.getBundle("snackbar"));
     }
 
     @Override

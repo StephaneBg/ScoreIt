@@ -64,10 +64,11 @@ dependencies {
     compile 'com.jakewharton:butterknife:5.1.1'
     compile 'com.melnykov:floatingactionbutton:1.0.2'
     compile "com.daimajia.swipelayout:library:1.0.4@aar"
-    compile 'com.github.mrengineer13:snackbar:0.2.0'
+//    compile 'com.github.mrengineer13:snackbar:0.2.0'
 
     compile project(':HoloGraphLibrary')
     compile project(':BetterPickers')
     compile project(':PagerSlidingTabStrip')
     compile project(':L-Dialogs')
+    compile project(':SnackBar')
 }

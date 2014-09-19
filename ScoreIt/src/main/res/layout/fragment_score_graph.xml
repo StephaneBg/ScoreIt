@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        app:lineAxisColor="@color/darker_gray"
+        app:lineAxisColor="@color/lighter_gray"
         app:lineUseDip="true"/>
 
 </com.sbgapps.scoreit.widget.FractionFrameLayout>
