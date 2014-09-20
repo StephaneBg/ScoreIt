@@ -28,4 +28,3 @@ local.properties
 # Gradle
 build/
 .gradle
-signing.gradle

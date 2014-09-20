@@ -35,7 +35,19 @@ android {
     }
 
     signingConfigs {
-        release
+        def signingFile = file("signing.properties")
+        def signingProperties = new Properties()
+
+        release {
+            if (signingFile.exists()) {
+                signingProperties.load(signingFile.newInputStream())
+
+                storeFile file(signingProperties["store.file"])
+                storePassword signingProperties["store.password"]
+                keyAlias signingProperties["key.alias"]
+                keyPassword signingProperties["key.password"]
+            }
+        }
     }
 
     buildTypes {
@@ -47,10 +59,6 @@ android {
         }
     }
 }
-
-signingFile = file("signing.gradle")
-if (signingFile.exists())
-    apply from: signingFile
 
 dependencies {
     compile 'com.android.support:support-v4:20.0.0'
@@ -64,7 +72,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:5.1.1'
     compile 'com.melnykov:floatingactionbutton:1.0.2'
     compile "com.daimajia.swipelayout:library:1.0.4@aar"
-//    compile 'com.github.mrengineer13:snackbar:0.2.0'
+    //compile 'com.github.mrengineer13:snackbar:0.3.0'
 
     compile project(':HoloGraphLibrary')
     compile project(':BetterPickers')

@@ -73,6 +73,7 @@ public class HeaderAdapter extends BaseAdapter {
             h = new ViewHolder();
             h.name = (TextView) convertView.findViewById(R.id.name);
             h.score = (TextView) convertView.findViewById(R.id.score);
+            h.marker = convertView.findViewById(R.id.marker);
             convertView.setTag(h);
         } else {
             h = (ViewHolder) convertView.getTag();
@@ -98,12 +99,16 @@ public class HeaderAdapter extends BaseAdapter {
         h.score.setText(Integer.toString(info.mScore));
         h.score.setTextColor(info.mPlayer.getColor());
 
+        int mod = mGameHelper.getLaps().size() % mGameHelper.getPlayerCount();
+        h.marker.setVisibility(position == mod ? View.VISIBLE : View.INVISIBLE);
+
         return convertView;
     }
 
     private static class ViewHolder {
         TextView name;
         TextView score;
+        View marker;
     }
 
     private class Info {

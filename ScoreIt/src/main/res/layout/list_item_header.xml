@@ -38,6 +38,13 @@
         android:textSize="@dimen/font_headline"
         app:typeface="roboto_regular"/>
 
+    <View
+        android:id="@+id/marker"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/primary_accent_translucent"
+        android:visibility="invisible"/>
+
     <com.devspark.robototextview.widget.RobotoTextView
         android:id="@+id/score"
         android:layout_width="match_parent"
