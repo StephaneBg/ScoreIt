@@ -38,6 +38,7 @@
   <string name="clear_game">Borrar puntajes</string>
   <string name="save">¿Quieres guardar?</string>
   <string name="deleted_lap">Regazo borrado</string>
+  <string name="undo">Deshacer</string>
   <string name="filename">Nombre del archivo</string>
   <string name="cancel">Cancelar</string>
   <string name="clear">Borrar</string>

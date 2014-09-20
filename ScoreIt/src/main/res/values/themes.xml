@@ -42,9 +42,6 @@
         </item>
         <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
         <item name="android:homeAsUpIndicator">@null</item>
-        <item name="snackBarContainerStyle">@style/SnackBar.Container</item>
-        <item name="snackBarTextStyle">@style/SnackBar.Message</item>
-        <item name="snackBarButtonStyle">@style/SnackBar.Button</item>
     </style>
 
     <style name="ActionBar.Solid.Apptheme" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">

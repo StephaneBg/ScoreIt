@@ -369,7 +369,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void onNavigationDrawerItemSelected(int position) {
-        mSnackBar.clear();
+        mSnackBar.clear(false);
         switch (position) {
             default:
                 return;
@@ -471,7 +471,7 @@ public class ScoreItActivity extends BaseActivity
         mSnackBar.show(
                 getString(R.string.deleted_lap),
                 getString(R.string.undo),
-                SnackBar.Style.ALERT,
+                R.color.primary_accent,
                 0,
                 token,
                 SnackBar.MED_SNACK);

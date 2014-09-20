@@ -38,6 +38,7 @@
   <string name="clear_game">Scores verwijderen</string>
   <string name="save">Wilt u dit opslaan?</string>
   <string name="deleted_lap">Ronde verwijderd</string>
+  <string name="undo">Ongedaan</string>
   <string name="filename">Bestandsnaam</string>
   <string name="cancel">Annuleren</string>
   <string name="clear">Verwijderen</string>
