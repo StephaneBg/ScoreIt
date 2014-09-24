@@ -665,7 +665,7 @@ public class ScoreItActivity extends BaseActivity
         String[] players;
         switch (mGameHelper.getPlayedGame()) {
             default:
-                players = new String[]{"2", "3", "4", "5"};
+                players = new String[]{"2", "3", "4", "5", "6", "7", "8"};
                 break;
             case Game.TAROT:
                 players = new String[]{"3", "4", "5"};

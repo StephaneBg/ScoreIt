@@ -57,6 +57,33 @@ public class UniversalGame extends Game<UniversalLap> {
                 mPlayers.add(new Player("Toto", r.getColor(R.color.color_player4)));
                 mPlayers.add(new Player("Titi", r.getColor(R.color.color_player5)));
                 break;
+            case 6:
+                mPlayers.add(new Player("Riri", r.getColor(R.color.color_player1)));
+                mPlayers.add(new Player("Fifi", r.getColor(R.color.color_player2)));
+                mPlayers.add(new Player("Loulou", r.getColor(R.color.color_player3)));
+                mPlayers.add(new Player("Toto", r.getColor(R.color.color_player4)));
+                mPlayers.add(new Player("Titi", r.getColor(R.color.color_player5)));
+                mPlayers.add(new Player("Lulu", r.getColor(R.color.color_player6)));
+                break;
+            case 7:
+                mPlayers.add(new Player("Riri", r.getColor(R.color.color_player1)));
+                mPlayers.add(new Player("Fifi", r.getColor(R.color.color_player2)));
+                mPlayers.add(new Player("Loulou", r.getColor(R.color.color_player3)));
+                mPlayers.add(new Player("Toto", r.getColor(R.color.color_player4)));
+                mPlayers.add(new Player("Titi", r.getColor(R.color.color_player5)));
+                mPlayers.add(new Player("Lulu", r.getColor(R.color.color_player6)));
+                mPlayers.add(new Player("Lili", r.getColor(R.color.color_player7)));
+                break;
+            case 8:
+                mPlayers.add(new Player("Riri", r.getColor(R.color.color_player1)));
+                mPlayers.add(new Player("Fifi", r.getColor(R.color.color_player2)));
+                mPlayers.add(new Player("Loulou", r.getColor(R.color.color_player3)));
+                mPlayers.add(new Player("Toto", r.getColor(R.color.color_player4)));
+                mPlayers.add(new Player("Titi", r.getColor(R.color.color_player5)));
+                mPlayers.add(new Player("Lulu", r.getColor(R.color.color_player6)));
+                mPlayers.add(new Player("Lili", r.getColor(R.color.color_player7)));
+                mPlayers.add(new Player("Tutu", r.getColor(R.color.color_player8)));
+                break;
         }
     }
 }

@@ -36,9 +36,12 @@
     <color name="dim_lighter_gray">#80E0E0E0</color>
     <color name="darker_gray">#707070</color>
 
-    <color name="color_player1">#60B62F</color>
-    <color name="color_player2">#FEAF39</color>
-    <color name="color_player3">#0099E6</color>
-    <color name="color_player4">#FF3E61</color>
-    <color name="color_player5">#C47CD2</color>
+    <color name="color_player1">#259b24</color>
+    <color name="color_player2">#ff9800</color>
+    <color name="color_player3">#3f51b5</color>
+    <color name="color_player4">#e51c23</color>
+    <color name="color_player5">#9c27b0</color>
+    <color name="color_player6">#009688</color>
+    <color name="color_player7">#e91e63</color>
+    <color name="color_player8">#795548</color>
 </resources>

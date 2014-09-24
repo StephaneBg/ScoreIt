@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-include ':ScoreIt', ':HoloGraphLibrary', 'BetterPickers', ':PagerSlidingTabStrip', ':L-Dialogs', ':SnackBar'
+include ':ScoreIt', ':HoloGraphLibrary', 'BetterPickers', ':PagerSlidingTabStrip',
+        ':L-Dialogs', ':SnackBar'
 
 project(':HoloGraphLibrary').projectDir = new File(rootDir, '../HoloGraphLibrary/HoloGraphLibrary')
 project(':BetterPickers').projectDir = new File(rootDir, '../android-betterpickers/library')

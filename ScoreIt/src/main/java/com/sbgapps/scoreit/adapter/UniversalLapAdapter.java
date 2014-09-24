@@ -21,7 +21,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
@@ -30,6 +29,8 @@ import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.games.universal.UniversalLapFragment;
+import com.sbgapps.scoreit.widget.CircleButton;
+
 
 /**
  * Created by Stéphane on 19/08/2014.
@@ -68,9 +69,13 @@ public class UniversalLapAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.list_item_universal_input, parent, false);
 
             h.name = (TextView) convertView.findViewById(R.id.tv_name);
-            h.score = (TextView) convertView.findViewById(R.id.tv_points);
-            h.plus = (ImageButton) convertView.findViewById(R.id.btn_plus);
-            h.minus = (ImageButton) convertView.findViewById(R.id.btn_minus);
+            h.score = (CircleButton) convertView.findViewById(R.id.points);
+            h.plus = (CircleButton) convertView.findViewById(R.id.btn_plus);
+            h.plus_5 = (CircleButton) convertView.findViewById(R.id.btn_plus_5);
+            h.plus_10 = (CircleButton) convertView.findViewById(R.id.btn_plus_10);
+            h.minus = (CircleButton) convertView.findViewById(R.id.btn_minus);
+            h.minus_5 = (CircleButton) convertView.findViewById(R.id.btn_minus_5);
+            h.minus_10 = (CircleButton) convertView.findViewById(R.id.btn_minus_10);
             convertView.setTag(h);
         } else {
             h = (ViewHolder) convertView.getTag();
@@ -81,11 +86,26 @@ public class UniversalLapAdapter extends BaseAdapter {
 
         final UniversalLap lap = mLapFragment.getLap();
         h.score.setText(Integer.toString(lap.getScore(position)));
+        h.score.setColor(player.getColor());
 
         h.plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lap.stepScore(position, true);
+                lap.stepScore(position, 1);
+                notifyDataSetChanged();
+            }
+        });
+        h.plus_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lap.stepScore(position, 5);
+                notifyDataSetChanged();
+            }
+        });
+        h.plus_10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lap.stepScore(position, 10);
                 notifyDataSetChanged();
             }
         });
@@ -93,7 +113,21 @@ public class UniversalLapAdapter extends BaseAdapter {
         h.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lap.stepScore(position, false);
+                lap.stepScore(position, -1);
+                notifyDataSetChanged();
+            }
+        });
+        h.minus_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lap.stepScore(position, -5);
+                notifyDataSetChanged();
+            }
+        });
+        h.minus_10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lap.stepScore(position, -10);
                 notifyDataSetChanged();
             }
         });
@@ -120,8 +154,12 @@ public class UniversalLapAdapter extends BaseAdapter {
 
     private class ViewHolder {
         TextView name;
-        TextView score;
-        ImageButton plus;
-        ImageButton minus;
+        CircleButton score;
+        CircleButton plus;
+        CircleButton plus_5;
+        CircleButton plus_10;
+        CircleButton minus;
+        CircleButton minus_5;
+        CircleButton minus_10;
     }
 }

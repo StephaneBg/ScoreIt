@@ -54,20 +54,14 @@
         <item name="android:paddingRight">16dip</item>
     </style>
 
-    <style name="Divider">
-        <item name="android:layout_height">1dp</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_marginBottom">@dimen/margin_default</item>
-        <item name="android:layout_marginTop">@dimen/margin_default</item>
-        <item name="android:background">@color/lighter_gray</item>
-    </style>
-
     <style name="SubHeader">
         <item name="android:layout_height">@dimen/height_default</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
         <item name="android:textColor">@color/secondary_accent</item>
-        <item name="android:textSize">@dimen/font_subhead</item>
+        <item name="android:textSize">@dimen/font_headline</item>
     </style>
 
     <style name="BetterPickerTheme" parent="BetterPickersDialogFragment.Light">

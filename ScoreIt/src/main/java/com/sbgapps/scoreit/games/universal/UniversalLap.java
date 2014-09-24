@@ -52,11 +52,7 @@ public class UniversalLap implements Lap {
         return mScores[player];
     }
 
-    public void stepScore(int player, boolean plus) {
-        if (plus) {
-            mScores[player]++;
-        } else {
-            mScores[player]--;
-        }
+    public void stepScore(int player, int step) {
+        mScores[player] += step;
     }
 }

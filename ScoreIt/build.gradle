@@ -70,9 +70,8 @@ dependencies {
     compile 'com.larswerkman:HoloColorPicker:1.4'
     compile 'com.github.johnkil.android-robototextview:robototextview:2.1.0'
     compile 'com.jakewharton:butterknife:5.1.1'
-    compile 'com.melnykov:floatingactionbutton:1.0.2'
+    compile 'com.melnykov:floatingactionbutton:1.0.3'
     compile "com.daimajia.swipelayout:library:1.0.4@aar"
-    //compile 'com.github.mrengineer13:snackbar:0.3.0'
 
     compile project(':HoloGraphLibrary')
     compile project(':BetterPickers')

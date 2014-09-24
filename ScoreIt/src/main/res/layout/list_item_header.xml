@@ -29,8 +29,7 @@
     <com.devspark.robototextview.widget.RobotoTextView
         android:id="@+id/name"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/height_ab"
         android:background="@drawable/background_action"
         android:gravity="center"
         android:singleLine="true"
@@ -42,14 +41,12 @@
         android:id="@+id/marker"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/primary_accent_translucent"
-        android:visibility="invisible"/>
+        android:background="@color/primary_accent_translucent"/>
 
     <com.devspark.robototextview.widget.RobotoTextView
         android:id="@+id/score"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/height_ab"
         android:background="@drawable/background_action"
         android:gravity="center"
         android:singleLine="true"
