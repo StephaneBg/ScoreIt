@@ -15,110 +15,104 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/SubHeader"
+        tools:text="Name"/>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/card">
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_name"
-            style="@style/SubHeader"
-            tools:text="Name"/>
+        <com.sbgapps.scoreit.widget.CircleButton
+            android:id="@+id/points"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_display_1"
+            app:cb_margin="10dp"
+            tools:text="16"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:orientation="horizontal">
+        <com.sbgapps.scoreit.widget.CircleButton
+            android:id="@+id/btn_minus_5"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_toLeftOf="@id/points"
+            android:layout_alignTop="@id/points"
+            android:contentDescription="@string/less"
+            android:text="-5"
+            app:cb_color="@color/lighter_gray"
+            android:textColor="@color/black"/>
 
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/points"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_centerInParent="true"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_display_1"
-                app:cb_margin="10dp"
-                tools:text="16"/>
+        <com.sbgapps.scoreit.widget.CircleButton
+            android:id="@+id/btn_minus"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_toLeftOf="@id/points"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/less"
+            android:layout_marginRight="24dp"
+            android:text="-1"
+            app:cb_color="@color/lighter_gray"
+            android:textColor="@color/black"/>
 
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_minus_5"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_toLeftOf="@id/points"
-                android:layout_alignTop="@id/points"
-                android:contentDescription="@string/less"
-                android:text="-5"
-                app:cb_color="@color/lighter_gray"
-                android:textColor="@color/black"/>
-
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_minus"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_toLeftOf="@id/points"
-                android:layout_centerVertical="true"
-                android:contentDescription="@string/less"
-                android:layout_marginRight="24dp"
-                android:text="-1"
-                app:cb_color="@color/lighter_gray"
-                android:textColor="@color/black"/>
-
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_minus_10"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_toLeftOf="@id/points"
-                android:layout_alignBottom="@id/points"
-                android:contentDescription="@string/less"
-                android:text="-10"
-                app:cb_color="@color/lighter_gray"
-                android:textColor="@color/black"/>
+        <com.sbgapps.scoreit.widget.CircleButton
+            android:id="@+id/btn_minus_10"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_toLeftOf="@id/points"
+            android:layout_alignBottom="@id/points"
+            android:contentDescription="@string/less"
+            android:text="-10"
+            app:cb_color="@color/lighter_gray"
+            android:textColor="@color/black"/>
 
 
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_plus_5"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_toRightOf="@id/points"
-                android:layout_alignTop="@id/points"
-                android:contentDescription="@string/more"
-                android:text="+5"
-                app:cb_color="@color/lighter_gray"
-                android:textColor="@color/black"/>
+        <com.sbgapps.scoreit.widget.CircleButton
+            android:id="@+id/btn_plus_5"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_toRightOf="@id/points"
+            android:layout_alignTop="@id/points"
+            android:contentDescription="@string/more"
+            android:text="+5"
+            app:cb_color="@color/lighter_gray"
+            android:textColor="@color/black"/>
 
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_plus"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_toRightOf="@id/points"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="24dp"
-                android:contentDescription="@string/more"
-                android:text="+1"
-                app:cb_color="@color/lighter_gray"
-                android:textColor="@color/black"/>
+        <com.sbgapps.scoreit.widget.CircleButton
+            android:id="@+id/btn_plus"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_toRightOf="@id/points"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="24dp"
+            android:contentDescription="@string/more"
+            android:text="+1"
+            app:cb_color="@color/lighter_gray"
+            android:textColor="@color/black"/>
 
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_plus_10"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_toRightOf="@id/points"
-                android:layout_alignBottom="@id/points"
-                android:contentDescription="@string/more"
-                android:text="+10"
-                app:cb_color="@color/lighter_gray"
-                android:textColor="@color/black"/>
-        </RelativeLayout>
+        <com.sbgapps.scoreit.widget.CircleButton
+            android:id="@+id/btn_plus_10"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_toRightOf="@id/points"
+            android:layout_alignBottom="@id/points"
+            android:contentDescription="@string/more"
+            android:text="+10"
+            app:cb_color="@color/lighter_gray"
+            android:textColor="@color/black"/>
+    </RelativeLayout>
 
-    </LinearLayout>
-</FrameLayout>
+</LinearLayout>

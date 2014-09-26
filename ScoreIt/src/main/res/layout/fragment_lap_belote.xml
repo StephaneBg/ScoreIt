@@ -21,6 +21,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
     android:scrollbars="none"
     tools:context="ScoreItActivity">
 
@@ -29,133 +31,109 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/team"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/card">
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
 
-            <TextView
-                style="@style/SubHeader"
-                android:text="@string/team"/>
-
-            <RadioGroup
-                android:id="@+id/radio_group_player"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/rb_player1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_default"
-                    tools:text="@string/them"/>
-
-                <RadioButton
-                    android:id="@+id/rb_player2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_default"
-                    tools:text="@string/us"/>
-            </RadioGroup>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/card">
-
-            <TextView
-                style="@style/SubHeader"
-                android:text="@string/points"/>
-
-            <com.sbgapps.scoreit.widget.SeekbarPoints
-                android:id="@+id/input_points"
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/rb_player1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_default"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+                tools:text="@string/them"/>
 
-        </LinearLayout>
+            <RadioButton
+                android:id="@+id/rb_player2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
+                tools:text="@string/us"/>
+        </RadioGroup>
 
-        <LinearLayout
+        <View style="@style/Divider"/>
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/points"/>
+
+        <com.sbgapps.scoreit.widget.SeekbarPoints
+            android:id="@+id/input_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/card">
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
-            <TextView
-                style="@style/SubHeader"
-                android:text="@string/belote"/>
+        <View style="@style/Divider"/>
 
-            <RadioGroup
-                android:id="@+id/radio_group_belote"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:orientation="vertical">
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/belote"/>
 
-                <RadioButton
-                    android:id="@+id/rb_belote_none"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_default"
-                    android:text="@string/none"/>
-
-                <RadioButton
-                    android:id="@+id/rb_belote_player1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_default"
-                    tools:text="@string/them"/>
-
-                <RadioButton
-                    android:id="@+id/rb_belote_player2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_default"
-                    tools:text="@string/us"/>
-            </RadioGroup>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <RadioGroup
+            android:id="@+id/radio_group_belote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_belote_none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:text="@string/none"/>
+
+            <RadioButton
+                android:id="@+id/rb_belote_player1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
+                tools:text="@string/them"/>
+
+            <RadioButton
+                android:id="@+id/rb_belote_player2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default"
+                tools:text="@string/us"/>
+        </RadioGroup>
+
+        <View style="@style/Divider"/>
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/announces"/>
+
+        <LinearLayout
+            android:id="@+id/ll_bonuses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:animateLayoutChanges="true"
+            android:divider="?android:listDivider"
             android:orientation="vertical"
-            android:background="@drawable/card">
+            android:showDividers="middle">
 
-            <TextView
-                style="@style/SubHeader"
-                android:text="@string/announces"/>
-
-            <LinearLayout
-                android:id="@+id/ll_bonuses"
+            <Button
+                android:id="@+id/btn_add_bonus"
+                style="?android:borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:animateLayoutChanges="true"
-                android:divider="?android:listDivider"
-                android:orientation="vertical"
-                android:showDividers="middle">
-
-                <Button
-                    android:id="@+id/btn_add_bonus"
-                    style="?android:borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_default"
-                    android:text="@string/add"
-                    android:textAllCaps="true"/>
-            </LinearLayout>
+                android:layout_margin="@dimen/margin_default"
+                android:text="@string/add"
+                android:textAllCaps="true"/>
         </LinearLayout>
+
     </LinearLayout>
 </ScrollView>
