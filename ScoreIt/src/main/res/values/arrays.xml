@@ -44,6 +44,7 @@
         <item>@string/language_russian</item>
         <item>@string/language_german</item>
         <item>@string/language_spanish</item>
+        <item>@string/language_italian</item>
     </string-array>
 
     <string-array name="translators" translatable="false">
@@ -59,6 +60,8 @@
         <item translatable="false">Luca Eichler</item>
         <!-- Spanish -->
         <item translatable="false">Alvaro Martinez</item>
+        <!-- Italian -->
+        <item translatable="false">Federico Cappelletti</item>
     </string-array>
 
 </resources>

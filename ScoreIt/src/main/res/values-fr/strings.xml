@@ -106,5 +106,6 @@
   <string name="language_dutch">Néerlandais</string>
   <string name="language_russian">Russe</string>
   <string name="language_german">Allemand</string>
-  <string name="language_spanish">Espangnol</string>
+  <string name="language_spanish">Espagnol</string>
+  <string name="language_italian">Italien</string>
 </resources>
