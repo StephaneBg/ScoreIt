@@ -21,9 +21,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
 
@@ -35,14 +33,14 @@ import butterknife.InjectView;
  */
 public class SeekbarPoints extends FrameLayout {
 
-    @InjectView(R.id.textview_points)
-    TextView mTextViewPoints;
+    @InjectView(R.id.points)
+    CircleTextButton mPoints;
     @InjectView(R.id.seekbar_points)
     SeekBar mSeekBarPoints;
     @InjectView(R.id.btn_minus)
-    ImageButton mButtonMinus;
+    CircleTextButton mButtonMinus;
     @InjectView(R.id.btn_plus)
-    ImageButton mButtonPlus;
+    CircleTextButton mButtonPlus;
 
     private OnPointsChangedListener mListener;
     private int mProgress;
@@ -72,7 +70,7 @@ public class SeekbarPoints extends FrameLayout {
 
     public void init(int progress, int max, int points) {
         mProgress = progress;
-        mTextViewPoints.setText(Integer.toString(points));
+        mPoints.setText(Integer.toString(points));
 
         mButtonMinus.setOnClickListener(new OnClickListener() {
             @Override
@@ -119,7 +117,7 @@ public class SeekbarPoints extends FrameLayout {
 
     public void manageProgress() {
         int points = mListener.onPointsChanged(mProgress, mTag);
-        mTextViewPoints.setText(Integer.toString(points));
+        mPoints.setText(Integer.toString(points));
         mSeekBarPoints.setProgress(mProgress);
         mButtonMinus.setEnabled(mProgress > 0);
         mButtonPlus.setEnabled(mProgress < mSeekBarPoints.getMax());

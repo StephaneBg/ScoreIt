@@ -452,7 +452,6 @@ public class ScoreItActivity extends BaseActivity
     public void editLap(Lap lap) {
         mIsEdited = true;
         mLap = lap;
-        mScoreListFragment.closeOpenedItems();
         mActionButton.show();
         showLapFragment();
         animateActionButton(R.drawable.ic_content_edit_fab);
@@ -581,7 +580,6 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void onActionButtonClicked() {
-        mScoreListFragment.closeOpenedItems();
         if (null == mLap) {
             addLap();
             animateActionButton(R.drawable.ic_action_accept_fab);

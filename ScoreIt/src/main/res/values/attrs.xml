@@ -21,9 +21,12 @@
         <attr name="isDialog" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="CircleButton">
+    <declare-styleable name="CircleTextButton">
         <attr name="cb_color" format="color"/>
-        <attr name="cb_margin" format="dimension"/>
+        <attr name="cb_pressedRingWidth" format="dimension"/>
+        <attr name="cb_text" format="string"/>
+        <attr name="cb_textColor" format="color"/>
+        <attr name="cb_textSize" format="dimension"/>
     </declare-styleable>
 
 </resources>
