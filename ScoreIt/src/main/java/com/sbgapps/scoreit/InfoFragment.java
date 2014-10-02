@@ -123,6 +123,16 @@ public class InfoFragment extends Fragment
             }
         });
 
+        btn = (Button) view.findViewById(R.id.btn_community);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://plus.google.com/u/0/communities/111590957716888215587"));
+                startActivity(intent);
+            }
+        });
+
         mCoffeeBtn = (Button) view.findViewById(R.id.btn_donate_coffee);
         mCoffeeBtn.setOnClickListener(new View.OnClickListener() {
             @Override

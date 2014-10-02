@@ -83,6 +83,15 @@
             android:gravity="center_vertical"
             android:text="@string/contact_developer"/>
 
+        <Button
+            android:id="@+id/btn_community"
+            style="?android:actionButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_google_plus"
+            android:gravity="center_vertical"
+            android:text="@string/plus_community"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
