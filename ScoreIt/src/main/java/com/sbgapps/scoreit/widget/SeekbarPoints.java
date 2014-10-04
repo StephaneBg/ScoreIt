@@ -22,9 +22,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
 
+import at.markushi.ui.CircleButton;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -34,13 +36,13 @@ import butterknife.InjectView;
 public class SeekbarPoints extends FrameLayout {
 
     @InjectView(R.id.points)
-    CircleTextButton mPoints;
+    TextView mPoints;
     @InjectView(R.id.seekbar_points)
     SeekBar mSeekBarPoints;
     @InjectView(R.id.btn_minus)
-    CircleTextButton mButtonMinus;
+    CircleButton mButtonMinus;
     @InjectView(R.id.btn_plus)
-    CircleTextButton mButtonPlus;
+    CircleButton mButtonPlus;
 
     private OnPointsChangedListener mListener;
     private int mProgress;

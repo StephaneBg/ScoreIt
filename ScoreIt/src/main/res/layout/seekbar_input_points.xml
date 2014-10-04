@@ -19,6 +19,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -31,34 +32,30 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
 
-        <com.sbgapps.scoreit.widget.CircleTextButton
+        <at.markushi.ui.CircleButton
             android:id="@+id/btn_minus"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            app:cb_color="@color/primary_accent"
-            app:cb_text="-"
-            app:cb_textColor="@color/white"
-            app:cb_textSize="32sp"/>
+            android:src="@drawable/ic_minus"
+            app:cb_color="@color/primary_accent"/>
 
-        <com.sbgapps.scoreit.widget.CircleTextButton
+        <TextView
             android:id="@+id/points"
+            android:gravity="center"
+            android:textSize="@dimen/font_display_1"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            app:cb_color="@color/secondary_accent"
-            app:cb_textColor="@color/white"
-            app:cb_textSize="32sp"/>
+            tools:text="48"/>
 
 
-        <com.sbgapps.scoreit.widget.CircleTextButton
+        <at.markushi.ui.CircleButton
             android:id="@+id/btn_plus"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            app:cb_color="@color/primary_accent"
-            app:cb_text="+"
-            app:cb_textColor="@color/white"
-            app:cb_textSize="32sp"/>
+            android:src="@drawable/ic_action_new"
+            app:cb_color="@color/primary_accent"/>
     </LinearLayout>
 
     <SeekBar

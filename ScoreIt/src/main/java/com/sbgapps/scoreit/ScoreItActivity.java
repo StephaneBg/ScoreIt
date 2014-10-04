@@ -594,7 +594,7 @@ public class ScoreItActivity extends BaseActivity
                     .popBackStack(LapFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             update();
             mLap = null;
-            animateActionButton(R.drawable.ic_action_new_fab);
+            animateActionButton(R.drawable.ic_action_new);
         }
     }
 
@@ -777,7 +777,7 @@ public class ScoreItActivity extends BaseActivity
         if (null != mLap) mLap.computeScores();
         mLap = null;
         mIsEdited = false;
-        if (mAnimateFab) animateActionButton(R.drawable.ic_action_new_fab);
+        if (mAnimateFab) animateActionButton(R.drawable.ic_action_new);
         mAnimateFab = false;
         invalidateOptionsMenu();
         update();

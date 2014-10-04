@@ -21,5 +21,10 @@ package com.sbgapps.scoreit.util;
  */
 public interface IabKey {
 
-    public static final String INAPP_KEY = "";
+    public static final String INAPP_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCA" +
+            "QEArvuUBKqb+xb0QnW84n02a3wfrZqthJWANI/DXVF5Gx7U5sY4wQsafmfte2VeFRobg0h1Ye" +
+            "vlqchaWFIoFZP4q2LUM98fQ58rMF6MCpemTuyKCLjl/KB9PGHHYiUqGb1lch5VP9qMvtABfxC" +
+            "QxhUx/4ABeQ9FERMUhATewT4QnuzGiKD83dVKyWCd/fm0DowVZw7TN9MPr+siSxbqIWRXLuQB" +
+            "AxNeuYDwWu7YaY/KN4ZCycLxndzu6jsiJoUB+8i795B+lFzKI/4DWSI0ex9Pu+5WzIAkYQHNF" +
+            "gEUd3YxfDtGMx+gAPAF0i2PuNJ796W1NOJTBqLgtFf8qIxFZ8WtbQIDAQAB";
 }

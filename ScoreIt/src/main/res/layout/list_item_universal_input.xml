@@ -38,83 +38,72 @@
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            <com.sbgapps.scoreit.widget.CircleTextButton
+            <at.markushi.ui.CircleButton
                 android:id="@+id/btn_minus"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                app:cb_color="@color/lighter_gray"
-                app:cb_text="-1"
-                app:cb_textColor="@color/darker_gray"/>
+                android:src="@drawable/ic_minus_1"
+                app:cb_color="@color/lighter_gray"/>
 
-            <com.sbgapps.scoreit.widget.CircleTextButton
+            <at.markushi.ui.CircleButton
                 android:id="@+id/btn_minus_10"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_toRightOf="@id/btn_minus"
-                app:cb_color="@color/lighter_gray"
-                app:cb_text="-10"
-                app:cb_textColor="@color/darker_gray"/>
+                android:src="@drawable/ic_minus_10"
+                app:cb_color="@color/lighter_gray"/>
 
-            <com.sbgapps.scoreit.widget.CircleTextButton
+            <at.markushi.ui.CircleButton
                 android:id="@+id/btn_minus_100"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_below="@id/btn_minus_10"
                 android:layout_toRightOf="@id/btn_minus"
-                app:cb_color="@color/lighter_gray"
-                app:cb_text="-100"
-                app:cb_textColor="@color/darker_gray"/>
+                android:src="@drawable/ic_minus_100"
+                app:cb_color="@color/lighter_gray"/>
         </RelativeLayout>
 
-        <com.sbgapps.scoreit.widget.CircleTextButton
+        <TextView
             android:id="@+id/points"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            app:cb_textColor="@color/white"
-            app:cb_textSize="@dimen/font_display_1"/>
+            android:gravity="center"
+            android:textSize="@dimen/font_display_1"
+            android:textColor="@color/white"
+            tools:text="128"/>
 
         <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            <com.sbgapps.scoreit.widget.CircleTextButton
-                android:id="@+id/btn_plus"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                app:cb_color="@color/lighter_gray"
-                app:cb_text="+1"
-                app:cb_textColor="@color/darker_gray"/>
-
-            <com.sbgapps.scoreit.widget.CircleTextButton
+            <at.markushi.ui.CircleButton
                 android:id="@+id/btn_plus_10"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:layout_centerHorizontal="true"
-                android:layout_toLeftOf="@id/btn_plus"
-                app:cb_color="@color/lighter_gray"
-                app:cb_text="+10"
-                app:cb_textColor="@color/darker_gray"/>
+                android:src="@drawable/ic_plus_10"
+                app:cb_color="@color/lighter_gray"/>
 
-            <com.sbgapps.scoreit.widget.CircleTextButton
+            <at.markushi.ui.CircleButton
+                android:id="@+id/btn_plus"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/btn_plus_10"
+                android:src="@drawable/ic_plus_1"
+                app:cb_color="@color/lighter_gray"/>
+
+            <at.markushi.ui.CircleButton
                 android:id="@+id/btn_plus_100"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_below="@id/btn_plus_10"
-                android:layout_toLeftOf="@id/btn_plus"
-                app:cb_color="@color/lighter_gray"
-                app:cb_text="+100"
-                app:cb_textColor="@color/darker_gray"/>
+                android:src="@drawable/ic_plus_100"
+                app:cb_color="@color/lighter_gray"/>
         </RelativeLayout>
     </LinearLayout>
 
