@@ -26,7 +26,7 @@
     android:orientation="vertical"
     tools:context="ScoreItActivity">
 
-    <com.astuetz.PagerSlidingTabStrip
+    <com.sbgapps.scoreit.widget.PagerSlidingTabStrip
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_ab"

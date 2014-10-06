@@ -279,7 +279,7 @@ public class ScoreItActivity extends BaseActivity
 
         switch (item.getItemId()) {
             case R.id.menu_clear:
-                showClearDialog();
+                showClearDialogActionChoices();
                 return true;
 
             case R.id.menu_view:
@@ -290,27 +290,9 @@ public class ScoreItActivity extends BaseActivity
                 showPlayerCountDialog();
                 return true;
 
-//            case R.id.menu_open:
-//                Intent intent = new Intent(this, SavedGameActivity.class);
-//                String game;
-//                switch (mGameHelper.getPlayedGame()) {
-//                    default:
-//                    case Game.UNIVERSAL:
-//                        game = "universal_" + mGameHelper.getPlayerCount() + "_";
-//                        break;
-//                    case Game.TAROT:
-//                        game = "tarot_" + mGameHelper.getPlayerCount() + "_";
-//                        break;
-//                    case Game.BELOTE:
-//                        game = "belote_";
-//                        break;
-//                    case Game.COINCHE:
-//                        game = "coinche_";
-//                        break;
-//                }
-//                intent.putExtra("game", game);
-//                startActivityForResult(intent, REQ_SAVED_GAME);
-//                return true;
+            case R.id.menu_files:
+                showLoadDialog();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -598,27 +580,6 @@ public class ScoreItActivity extends BaseActivity
         }
     }
 
-    private void showClearDialog() {
-        CustomDialog dialog = new CustomDialog
-                .Builder(this, R.string.clear_game, R.string.ok)
-                .negativeText(R.string.cancel)
-                .positiveColorRes(R.color.primary_accent)
-                .build();
-
-        dialog.setClickListener(new CustomDialog.ClickListener() {
-            @Override
-            public void onConfirmClick() {
-                dismissAll();
-            }
-
-            @Override
-            public void onCancelClick() {
-
-            }
-        });
-        dialog.show();
-    }
-
     private void dismissAll() {
         mGameHelper.deleteAll();
         mHeaderFragment.update();
@@ -629,6 +590,31 @@ public class ScoreItActivity extends BaseActivity
             if (!mIsTablet) getFragmentManager().popBackStack();
         }
         invalidateOptionsMenu();
+    }
+
+    private void showClearDialogActionChoices() {
+        CustomListDialog dialog = new CustomListDialog
+                .Builder(this,
+                getString(R.string.restart),
+                getResources().getStringArray(R.array.restart_actions))
+                .itemColorRes(R.color.primary_accent)
+                .build();
+
+        dialog.setListClickListener(new CustomListDialog.ListClickListener() {
+            @Override
+            public void onListItemSelected(int position, String[] items, String item) {
+                switch (position) {
+                    default:
+                    case 0:
+                        dismissAll();
+                        break;
+                    case 1:
+                        showSaveFileDialog();
+                        break;
+                }
+            }
+        });
+        dialog.show();
     }
 
     private void showEditNameActionChoices() {
@@ -657,6 +643,9 @@ public class ScoreItActivity extends BaseActivity
             }
         });
         dialog.show();
+    }
+
+    private void showLoadDialog() {
     }
 
     public void showPlayerCountDialog() {
@@ -708,38 +697,36 @@ public class ScoreItActivity extends BaseActivity
 
                     @Override
                     public void onCancelClick() {
-
                     }
                 });
         dialog.show();
     }
 
-//    private void showSaveFileDialog() {
-//        View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
-//        final EditText editText = (EditText) view.findViewById(R.id.edit_text);
-//
-//        CustomDialog dialog = new CustomDialog
-//                .Builder(this, R.string.filename, R.string.ok)
-//                .negativeText(R.string.cancel)
-//                .positiveColorRes(R.color.primary_accent)
-//                .build();
-//
-//        dialog.setCustomView(view)
-//                .setClickListener(new CustomDialog.ClickListener() {
-//                    @Override
-//                    public void onConfirmClick() {
-//                        String file = editText.getText().toString();
-//                        mGameHelper.saveGame(file);
-//                        dismissAll();
-//                    }
-//
-//                    @Override
-//                    public void onCancelClick() {
-//
-//                    }
-//                });
-//        dialog.show();
-//    }
+    private void showSaveFileDialog() {
+        View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
+        final EditText editText = (EditText) view.findViewById(R.id.edit_text);
+
+        CustomDialog dialog = new CustomDialog
+                .Builder(this, R.string.filename, R.string.ok)
+                .negativeText(R.string.cancel)
+                .positiveColorRes(R.color.primary_accent)
+                .build();
+
+        dialog.setCustomView(view)
+                .setClickListener(new CustomDialog.ClickListener() {
+                    @Override
+                    public void onConfirmClick() {
+                        String file = editText.getText().toString();
+                        mGameHelper.saveGame(file);
+                        // TODO: launch new game
+                    }
+
+                    @Override
+                    public void onCancelClick() {
+                    }
+                });
+        dialog.show();
+    }
 
     private void showColorPickerDialog() {
         View view = getLayoutInflater().inflate(R.layout.dialog_color_picker, null);

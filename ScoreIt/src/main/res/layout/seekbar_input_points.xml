@@ -32,7 +32,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
 
-        <at.markushi.ui.CircleButton
+        <com.sbgapps.scoreit.widget.CircleButton
             android:id="@+id/btn_minus"
             android:layout_width="56dp"
             android:layout_height="56dp"
@@ -50,7 +50,7 @@
             tools:text="48"/>
 
 
-        <at.markushi.ui.CircleButton
+        <com.sbgapps.scoreit.widget.CircleButton
             android:id="@+id/btn_plus"
             android:layout_width="56dp"
             android:layout_height="56dp"

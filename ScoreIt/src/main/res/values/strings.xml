@@ -38,8 +38,10 @@
     <string name="none">None</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="clear_game">Erase scores</string>
-    <string name="save">Do you want to save?</string>
+    <string name="restart">Restart</string>
+    <string name="discard">Discard</string>
+    <string name="save_discard">Save and discard</string>
+    <string name="saved_game">Saved game</string>
     <string name="deleted_lap">Lap deleted</string>
     <string name="undo">Undo</string>
     <string name="filename">Filename</string>

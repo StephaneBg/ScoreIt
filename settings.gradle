@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-include ':ScoreIt', ':HoloGraphLibrary', 'BetterPickers', ':PagerSlidingTabStrip',
-        ':L-Dialogs', ':SnackBar', ':CircleButton'
+include ':ScoreIt', ':HoloGraphLibrary', 'BetterPickers',
+        ':L-Dialogs', ':SnackBar'
 
 project(':HoloGraphLibrary').projectDir = new File(rootDir, '../HoloGraphLibrary/HoloGraphLibrary')
 project(':BetterPickers').projectDir = new File(rootDir, '../android-betterpickers/library')
-project(':PagerSlidingTabStrip').projectDir = new File(rootDir, '../PagerSlidingTabStrip/library')
 project(':L-Dialogs').projectDir = new File(rootDir, '../L-Dialogs/app')
 project(':SnackBar').projectDir = new File(rootDir, '../SnackBar/snackbar')
-project(':CircleButton').projectDir = new File(rootDir, '../android-circlebutton/library')

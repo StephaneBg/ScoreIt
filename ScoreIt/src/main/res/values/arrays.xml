@@ -37,6 +37,11 @@
         <item>@string/enter_name</item>
     </string-array>
 
+    <string-array name="restart_actions">
+        <item>@string/discard</item>
+        <item>@string/save_discard</item>
+    </string-array>
+
     <string-array name="languages">
         <item>@string/language_english</item>
         <item>@string/language_french</item>

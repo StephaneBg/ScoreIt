@@ -75,8 +75,6 @@ dependencies {
 
     compile project(':HoloGraphLibrary')
     compile project(':BetterPickers')
-    compile project(':PagerSlidingTabStrip')
     compile project(':L-Dialogs')
     compile project(':SnackBar')
-    compile project(':CircleButton')
 }
