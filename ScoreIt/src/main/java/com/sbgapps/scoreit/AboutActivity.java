@@ -34,7 +34,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.astuetz.PagerSlidingTabStrip;
+import com.sbgapps.scoreit.widget.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
 import java.util.HashMap;

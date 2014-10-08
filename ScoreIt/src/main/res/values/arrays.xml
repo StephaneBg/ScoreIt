@@ -39,7 +39,7 @@
 
     <string-array name="restart_actions">
         <item>@string/discard</item>
-        <item>@string/save_discard</item>
+        <item>@string/save_create</item>
     </string-array>
 
     <string-array name="languages">

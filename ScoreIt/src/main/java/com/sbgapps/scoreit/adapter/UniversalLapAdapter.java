@@ -31,9 +31,7 @@ import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.games.universal.UniversalLapFragment;
-
-import at.markushi.ui.CircleButton;
-
+import com.sbgapps.scoreit.widget.CircleButton;
 
 /**
  * Created by Stéphane on 19/08/2014.

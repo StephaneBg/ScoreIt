@@ -28,9 +28,12 @@ import com.sbgapps.scoreit.games.tarot.TarotFiveGame;
 import com.sbgapps.scoreit.games.tarot.TarotFourGame;
 import com.sbgapps.scoreit.games.tarot.TarotThreeGame;
 import com.sbgapps.scoreit.games.universal.UniversalGame;
-import com.sbgapps.scoreit.util.FileSaveUtil;
+import com.sbgapps.scoreit.util.FilesUtil;
+import com.sromku.simple.storage.SimpleStorage;
+import com.sromku.simple.storage.Storage;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
@@ -45,13 +48,17 @@ public class GameHelper {
     public static final String KEY_UNIVERSAL_PLAYER_CNT = "universal_player_count";
     public static final String KEY_TAROT_PLAYER_CNT = "tarot_player_count";
 
+    final private Context mContext;
+    final private SharedPreferences mPreferences;
+    final private Storage mStorage;
+    final private FilesUtil mFilesUtil;
     private Game mGame;
-    private Context mContext;
     private int mPlayedGame;
-    private SharedPreferences mPreferences;
 
     public GameHelper(Activity activity) {
         mContext = activity;
+        mStorage = SimpleStorage.getInternalStorage(mContext);
+        mFilesUtil = new FilesUtil(this);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         mPlayedGame = mPreferences.getInt(KEY_SELECTED_GAME, Game.UNIVERSAL);
     }
@@ -68,6 +75,14 @@ public class GameHelper {
         return mPlayedGame;
     }
 
+    public Storage getStorage() {
+        return mStorage;
+    }
+
+    public FilesUtil getFilesUtil() {
+        return mFilesUtil;
+    }
+
     public void setPlayedGame(int playedGame) {
         saveGame();
         mPlayedGame = playedGame;
@@ -79,28 +94,13 @@ public class GameHelper {
     }
 
     public void saveGame() {
-        save(FileSaveUtil.getLastSavedFile(this), mGame);
+        final File file = mFilesUtil.getPlayedFile();
+        save(file);
     }
 
-    public void saveGame(String file) {
-        saveGame();
-        switch (mPlayedGame) {
-            default:
-            case Game.UNIVERSAL:
-                file = "universal_" + getPlayerCount() + "_" + file;
-                break;
-            case Game.BELOTE:
-                file = "belote_" + file;
-                break;
-            case Game.COINCHE:
-                file = "coinche_" + file;
-                break;
-            case Game.TAROT:
-                file = "tarot_" + getPlayerCount() + "_" + file;
-                break;
-        }
-        FileSaveUtil.setLastSavedFile(file, this);
-        save(file, mGame);
+    public void saveGame(String fileName) {
+        File file = mFilesUtil.createFile(fileName);
+        save(file);
     }
 
     public int getPlayerCount() {
@@ -139,51 +139,64 @@ public class GameHelper {
     }
 
     public void loadLaps() {
-        String file = FileSaveUtil.getLastSavedFile(this);
         switch (mPlayedGame) {
             default:
             case Game.UNIVERSAL:
-                mGame = load(file, UniversalGame.class);
-                if (null == mGame) {
-                    mGame = new UniversalGame(mContext, getPlayerCount());
-                }
+                mGame = load(UniversalGame.class);
                 break;
             case Game.BELOTE:
-                mGame = load(file, BeloteGame.class);
-                if (null == mGame) {
-                    mGame = new BeloteGame(mContext);
-                }
+                mGame = load(BeloteGame.class);
                 break;
             case Game.COINCHE:
-                mGame = load(file, CoincheGame.class);
-                if (null == mGame) {
-                    mGame = new CoincheGame(mContext);
-                }
+                mGame = load(CoincheGame.class);
                 break;
             case Game.TAROT:
                 switch (getPlayerCount()) {
                     case 3:
-                        mGame = load(file, TarotThreeGame.class);
-                        if (null == mGame) {
-                            mGame = new TarotThreeGame(mContext);
-                        }
+                        mGame = load(TarotThreeGame.class);
                         break;
                     case 4:
-                        mGame = load(file, TarotFourGame.class);
-                        if (null == mGame) {
-                            mGame = new TarotFourGame(mContext);
-                        }
+                        mGame = load(TarotFourGame.class);
                         break;
                     case 5:
-                        mGame = load(file, TarotFiveGame.class);
-                        if (null == mGame) {
-                            mGame = new TarotFiveGame(mContext);
-                        }
+                        mGame = load(TarotFiveGame.class);
+                        break;
+                }
+                break;
+        }
+        if (null == mGame) {
+            createGame();
+        }
+    }
+
+    public void createGame() {
+        switch (mPlayedGame) {
+            default:
+            case Game.UNIVERSAL:
+                mGame = new UniversalGame(mContext, getPlayerCount());
+                break;
+            case Game.BELOTE:
+                mGame = new BeloteGame(mContext);
+                break;
+            case Game.COINCHE:
+                mGame = new CoincheGame(mContext);
+                break;
+            case Game.TAROT:
+                switch (getPlayerCount()) {
+                    case 3:
+                        mGame = new TarotThreeGame(mContext);
+                        break;
+                    case 4:
+                        mGame = new TarotFourGame(mContext);
+                        break;
+                    case 5:
+                        mGame = new TarotFiveGame(mContext);
                         break;
                 }
                 break;
         }
         mGame.initScores();
+        mFilesUtil.setPlayedFile("default");
     }
 
     public void addLap(Lap lap) {
@@ -210,10 +223,11 @@ public class GameHelper {
         return getPlayers().get(player);
     }
 
-    private <T> T load(final String file, final Class<T> clazz) {
+    private <T> T load(final Class<T> clazz) {
         try {
             final Gson g = new Gson();
-            final FileInputStream is = mContext.openFileInput(file);
+            final File file = mFilesUtil.getPlayedFile();
+            final FileInputStream is = new FileInputStream(file);
             final BufferedReader r = new BufferedReader(
                     new InputStreamReader(is));
             return g.fromJson(r, clazz);
@@ -223,11 +237,11 @@ public class GameHelper {
         return null;
     }
 
-    private void save(final String file, Object laps) {
+    private void save(final File file) {
         try {
             final Gson g = new Gson();
-            FileOutputStream os = mContext.openFileOutput(file, Context.MODE_PRIVATE);
-            os.write(g.toJson(laps).getBytes());
+            final FileOutputStream os = new FileOutputStream(file);
+            os.write(g.toJson(mGame).getBytes());
             os.close();
         } catch (Exception e) {
         }

@@ -26,7 +26,6 @@ import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
 
-import at.markushi.ui.CircleButton;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 

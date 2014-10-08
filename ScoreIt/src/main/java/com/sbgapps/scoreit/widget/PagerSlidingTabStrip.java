@@ -39,7 +39,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.astuetz.pagerslidingtabstrip.R;
+import com.sbgapps.scoreit.R;
 
 import java.util.Locale;
 
@@ -78,7 +78,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
     private Typeface tabTypeface = null;
     private int tabTypefaceStyle = Typeface.BOLD;
     private int lastScrollX = 0;
-    private int tabBackgroundResId = R.drawable.background_tab;
+    private int tabBackgroundResId = R.drawable.background_action;
     private Locale locale;
 
     public PagerSlidingTabStrip(Context context) {

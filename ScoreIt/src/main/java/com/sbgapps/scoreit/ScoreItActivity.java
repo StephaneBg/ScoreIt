@@ -73,7 +73,6 @@ public class ScoreItActivity extends BaseActivity
         SnackBar.OnMessageClickListener {
 
     private static final int REQ_PICK_CONTACT = 1;
-    private static final int REQ_SAVED_GAME = 2;
 
     @InjectView(R.id.navigation_drawer)
     NavigationDrawerView mNavigationDrawer;
@@ -268,6 +267,10 @@ public class ScoreItActivity extends BaseActivity
 
         item = menu.findItem(R.id.menu_count);
         item.setVisible(Game.UNIVERSAL == game || Game.TAROT == game);
+
+        item = menu.findItem(R.id.menu_save);
+        item.setVisible(0 != mGameHelper.getFilesUtil().getSavedFiles().size());
+
         return true;
     }
 
@@ -290,8 +293,9 @@ public class ScoreItActivity extends BaseActivity
                 showPlayerCountDialog();
                 return true;
 
-            case R.id.menu_files:
-                showLoadDialog();
+            case R.id.menu_save:
+                Intent intent = new Intent(this, SavedGamesActivity.class);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -393,11 +397,6 @@ public class ScoreItActivity extends BaseActivity
                     mEditedPlayer.setName(name);
                     mHeaderFragment.update();
                 }
-                break;
-
-            case REQ_SAVED_GAME:
-                String file = data.getStringExtra("file");
-                mGameHelper.saveGame(file);
                 break;
         }
     }
@@ -595,7 +594,7 @@ public class ScoreItActivity extends BaseActivity
     private void showClearDialogActionChoices() {
         CustomListDialog dialog = new CustomListDialog
                 .Builder(this,
-                getString(R.string.restart),
+                getString(R.string.game),
                 getResources().getStringArray(R.array.restart_actions))
                 .itemColorRes(R.color.primary_accent)
                 .build();
@@ -643,9 +642,6 @@ public class ScoreItActivity extends BaseActivity
             }
         });
         dialog.show();
-    }
-
-    private void showLoadDialog() {
     }
 
     public void showPlayerCountDialog() {
@@ -718,7 +714,8 @@ public class ScoreItActivity extends BaseActivity
                     public void onConfirmClick() {
                         String file = editText.getText().toString();
                         mGameHelper.saveGame(file);
-                        // TODO: launch new game
+                        mGameHelper.createGame();
+                        dismissAll();
                     }
 
                     @Override

@@ -32,7 +32,6 @@
         android:layout_height="@dimen/height_ab"
         android:background="@color/white"
         app:pstsIndicatorColor="@color/primary_accent"
-        app:pstsTabBackground="@drawable/background_action"
         app:pstsTextAllCaps="true"/>
 
     <android.support.v4.view.ViewPager

@@ -39,10 +39,14 @@
         </activity>
 
         <activity
+            android:name=".SavedGamesActivity"
+            android:logo="@drawable/ic_navigation_back"
+            android:theme="@style/Theme.Adaptive"/>
+
+        <activity
             android:name="com.sbgapps.scoreit.AboutActivity"
             android:logo="@drawable/ic_navigation_back"
-            android:theme="@style/Theme.Adaptive">
-        </activity>
+            android:theme="@style/Theme.Adaptive"/>
     </application>
 
 </manifest>

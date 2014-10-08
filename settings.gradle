@@ -15,9 +15,10 @@
  */
 
 include ':ScoreIt', ':HoloGraphLibrary', 'BetterPickers',
-        ':L-Dialogs', ':SnackBar'
+        ':L-Dialogs', ':SnackBar', ':SimpleStorage'
 
 project(':HoloGraphLibrary').projectDir = new File(rootDir, '../HoloGraphLibrary/HoloGraphLibrary')
 project(':BetterPickers').projectDir = new File(rootDir, '../android-betterpickers/library')
 project(':L-Dialogs').projectDir = new File(rootDir, '../L-Dialogs/app')
 project(':SnackBar').projectDir = new File(rootDir, '../SnackBar/snackbar')
+project(':SimpleStorage').projectDir = new File(rootDir, '../android-simple-storage/Simple Storage')

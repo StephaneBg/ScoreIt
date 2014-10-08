@@ -26,13 +26,13 @@
         android:showAsAction="always"
         android:title="@string/clear"/>
     <item
-        android:id="@+id/menu_files"
+        android:id="@+id/menu_save"
         android:icon="@drawable/ic_menu_backup"
-        android:showAsAction="always"
-        android:title="@string/saved_game"/>
+        android:showAsAction="ifRoom"
+        android:title="@string/saved_games"/>
     <item
         android:id="@+id/menu_view"
         android:icon="@drawable/ic_action_view"
         android:showAsAction="ifRoom"
-        android:title="@string/view"/>
+        android:title="@string/chart"/>
 </menu>

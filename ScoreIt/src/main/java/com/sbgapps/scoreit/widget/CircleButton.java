@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.ImageView;
 
-import at.markushi.circlebutton.R;
+import com.sbgapps.scoreit.R;
 
 public class CircleButton extends ImageView {
 
@@ -34,6 +34,7 @@ public class CircleButton extends ImageView {
     private int defaultColor = Color.BLACK;
     private int pressedColor;
     private ObjectAnimator pressedAnimator;
+    private boolean isAnimated = false;
 
     public CircleButton(Context context) {
         super(context);
@@ -57,12 +58,11 @@ public class CircleButton extends ImageView {
         if (circlePaint != null) {
             circlePaint.setColor(pressed ? pressedColor : defaultColor);
         }
+
         if (pressed) {
-            pressedAnimator.setFloatValues(animationProgress, pressedRingWidth);
-            pressedAnimator.start();
-        } else if (0 != animationProgress) {
-            pressedAnimator.setFloatValues(pressedRingWidth, 0f);
-            pressedAnimator.start();
+            showPressedRing();
+        } else if (isAnimated) {
+            hidePressedRing();
         }
     }
 
@@ -112,6 +112,18 @@ public class CircleButton extends ImageView {
         focusPaint.setAlpha(PRESSED_RING_ALPHA);
 
         this.invalidate();
+    }
+
+    private void hidePressedRing() {
+        isAnimated = false;
+        pressedAnimator.setFloatValues(pressedRingWidth, 0f);
+        pressedAnimator.start();
+    }
+
+    private void showPressedRing() {
+        pressedAnimator.setFloatValues(animationProgress, pressedRingWidth);
+        pressedAnimator.start();
+        isAnimated = true;
     }
 
     private void init(Context context, AttributeSet attrs) {

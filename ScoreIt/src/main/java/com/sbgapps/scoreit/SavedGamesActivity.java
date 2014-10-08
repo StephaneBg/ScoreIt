@@ -16,16 +16,20 @@
 
 package com.sbgapps.scoreit;
 
+import android.app.ActionBar;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.sbgapps.scoreit.util.FileSaveUtil;
+import com.sbgapps.scoreit.games.GameHelper;
 
 /**
  * Created by Stéphane on 04/08/2014.
  */
-public class SavedGameActivity extends BaseActivity {
+public class SavedGamesActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +40,28 @@ public class SavedGameActivity extends BaseActivity {
         setContentView(listView);
         setupFauxDialog();
 
-        String game = getIntent().getStringExtra("game");
+        ActionBar actionBar = getActionBar();
+        if (null != actionBar) {
+            SpannableString title = new SpannableString(getResources().getString(R.string.game));
+            title.setSpan(getTypefaceSpan(), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            actionBar.setTitle(title);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+        }
+
+        GameHelper gameHelper = new GameHelper(this);
         listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
-                FileSaveUtil.getSavedFiles(this, game)));
+                gameHelper.getFilesUtil().getSavedFiles()));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
