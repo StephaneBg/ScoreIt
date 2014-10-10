@@ -167,6 +167,7 @@ public class GameHelper {
         if (null == mGame) {
             createGame();
         }
+        mGame.initScores();
     }
 
     public void createGame() {
@@ -195,7 +196,6 @@ public class GameHelper {
                 }
                 break;
         }
-        mGame.initScores();
         mFilesUtil.setPlayedFile("default");
     }
 

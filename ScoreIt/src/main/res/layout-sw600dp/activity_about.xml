@@ -30,7 +30,7 @@
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_ab"
-        android:background="@color/white"
+        android:background="@color/background_gray"
         app:pstsIndicatorColor="@color/primary_accent"
         app:pstsTextAllCaps="true"/>
 

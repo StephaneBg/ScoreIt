@@ -55,8 +55,8 @@ public class ScoreListFragment extends Fragment {
         mListView = (ListView) view.findViewById(android.R.id.list);
 
         ScoreItActivity activity = (ScoreItActivity) getActivity();
-        if (!activity.isTablet())
-            activity.getActionButton().attachToListView(mListView);
+//        if (!activity.isTablet())
+//            activity.getActionButton().attachToListView(mListView);
 
         GameHelper gameHelper = activity.getGameHelper();
         switch (gameHelper.getPlayedGame()) {

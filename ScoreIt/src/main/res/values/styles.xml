@@ -67,7 +67,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/secondary_accent</item>
-        <item name="android:textSize">@dimen/font_subhead</item>
+        <item name="android:textSize">@dimen/font_headline</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="BetterPickerTheme" parent="BetterPickersDialogFragment.Light">

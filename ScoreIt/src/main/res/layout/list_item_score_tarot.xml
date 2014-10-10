@@ -21,7 +21,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="@dimen/list_item_height"
     app:show_mode="lay_down"
     app:drag_edge="left"
     tools:context=".ScoreItActivity">
@@ -49,7 +49,7 @@
         <com.linearlistview.LinearListView
             android:id="@+id/list_score"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_default"
+            android:layout_height="match_parent"
             android:layout_below="@id/summary"
             android:baselineAligned="false"
             android:orientation="horizontal"/>

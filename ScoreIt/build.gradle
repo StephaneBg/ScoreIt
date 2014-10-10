@@ -78,4 +78,5 @@ dependencies {
     compile project(':L-Dialogs')
     compile project(':SnackBar')
     compile project(':SimpleStorage')
+    compile project(':Fabuless')
 }

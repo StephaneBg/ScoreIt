@@ -37,6 +37,7 @@
     <!-- Height -->
     <dimen name="height_ab">56dp</dimen>
     <dimen name="height_default">48dp</dimen>
+    <dimen name="list_item_height">96dp</dimen>
     <dimen name="dialog_max_height">720dp</dimen>
 
     <!-- Width -->

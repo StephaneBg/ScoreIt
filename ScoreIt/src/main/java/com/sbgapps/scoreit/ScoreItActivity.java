@@ -16,10 +16,6 @@
 
 package com.sbgapps.scoreit;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -39,8 +35,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.github.mrengineer13.snackbar.SnackBar;
+import com.halfbit.fabview.FabView;
 import com.larswerkman.holocolorpicker.ColorPicker;
-import com.melnykov.fab.FloatingActionButton;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
@@ -81,7 +77,7 @@ public class ScoreItActivity extends BaseActivity
     @InjectView(R.id.drawer_list_view)
     ListView mDrawerListView;
     @InjectView(R.id.fab)
-    FloatingActionButton mActionButton;
+    FabView mActionButton;
 
     private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -91,7 +87,7 @@ public class ScoreItActivity extends BaseActivity
     private Player mEditedPlayer;
     private Lap mLap;
     private boolean mIsEdited = false;
-    private boolean mAnimateFab = false;
+    private boolean mUpdateFab = false;
     private SnackBar mSnackBar;
 
     private ScoreListFragment mScoreListFragment;
@@ -105,10 +101,6 @@ public class ScoreItActivity extends BaseActivity
 
     public Lap getLap() {
         return mLap;
-    }
-
-    public FloatingActionButton getActionButton() {
-        return mActionButton;
     }
 
     public boolean isTablet() {
@@ -148,17 +140,13 @@ public class ScoreItActivity extends BaseActivity
             if (mIsEdited) {
                 int position = savedInstanceState.getInt("position");
                 mLap = mGameHelper.getLaps().get(position);
-                mActionButton.setImageDrawable(
-                        getResources().getDrawable(R.drawable.ic_content_edit_fab));
-                mActionButton.setColorNormal(resources.getColor(R.color.secondary_accent_translucent));
-                mActionButton.setColorPressed(resources.getColor(R.color.secondary_accent_dark_translucent));
+                mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept_fab));
+                mActionButton.setBackgroundColor(resources.getColor(R.color.secondary_accent));
             } else {
                 mLap = (Lap) savedInstanceState.getSerializable("lap");
                 if (null != mLap) {
-                    mActionButton.setImageDrawable(
-                            getResources().getDrawable(R.drawable.ic_action_accept_fab));
-                    mActionButton.setColorNormal(resources.getColor(R.color.secondary_accent_translucent));
-                    mActionButton.setColorPressed(resources.getColor(R.color.secondary_accent_dark_translucent));
+                    mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept_fab));
+                    mActionButton.setBackgroundColor(resources.getColor(R.color.secondary_accent));
                 }
             }
         }
@@ -202,6 +190,19 @@ public class ScoreItActivity extends BaseActivity
                 onActionButtonClicked();
             }
         });
+        mActionButton.setTouchAnimationListener(new FabView.TouchAnimationListener() {
+            @Override
+            public void onAnimationEnd() {
+                Resources resources = getResources();
+                if (null == mLap) {
+                    mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_edit_fab));
+                    mActionButton.setBackgroundColor(resources.getColor(R.color.fab_accent));
+                } else {
+                    mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept_fab));
+                    mActionButton.setBackgroundColor(resources.getColor(R.color.secondary_accent));
+                }
+            }
+        });
 
         mSnackBar = new SnackBar(this);
         mSnackBar.setOnClickListener(this);
@@ -230,8 +231,7 @@ public class ScoreItActivity extends BaseActivity
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        mSnackBar.onRestoreInstanceState(
-                savedInstanceState.getBundle("snackbar"));
+        mSnackBar.onRestoreInstanceState(savedInstanceState.getBundle("snackbar"));
     }
 
     @Override
@@ -433,9 +433,8 @@ public class ScoreItActivity extends BaseActivity
     public void editLap(Lap lap) {
         mIsEdited = true;
         mLap = lap;
-        mActionButton.show();
+        //mActionButton.show();
         showLapFragment();
-        animateActionButton(R.drawable.ic_content_edit_fab);
     }
 
     public void removeLap(Lap lap) {
@@ -494,7 +493,7 @@ public class ScoreItActivity extends BaseActivity
                 break;
         }
 
-        mAnimateFab = true;
+        mUpdateFab = true;
         getFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
@@ -563,7 +562,6 @@ public class ScoreItActivity extends BaseActivity
     private void onActionButtonClicked() {
         if (null == mLap) {
             addLap();
-            animateActionButton(R.drawable.ic_action_accept_fab);
         } else {
             mLap.computeScores();
             if (mIsEdited) {
@@ -575,7 +573,6 @@ public class ScoreItActivity extends BaseActivity
                     .popBackStack(LapFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             update();
             mLap = null;
-            animateActionButton(R.drawable.ic_action_new);
         }
     }
 
@@ -761,36 +758,14 @@ public class ScoreItActivity extends BaseActivity
         if (null != mLap) mLap.computeScores();
         mLap = null;
         mIsEdited = false;
-        if (mAnimateFab) animateActionButton(R.drawable.ic_action_new);
-        mAnimateFab = false;
+        if (mUpdateFab) {
+            Resources resources = getResources();
+            mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_edit_fab));
+            mActionButton.setBackgroundColor(resources.getColor(R.color.fab_accent));
+        }
+        mUpdateFab = false;
         invalidateOptionsMenu();
         update();
-    }
-
-    private void animateActionButton(final int resId) {
-        final boolean orange = (null == mLap);
-        final AnimatorSet anim1 = (AnimatorSet)
-                AnimatorInflater.loadAnimator(this, R.animator.card_flip_right_out);
-        final AnimatorSet anim2 = (AnimatorSet)
-                AnimatorInflater.loadAnimator(this, R.animator.card_flip_right_in);
-        anim1.setTarget(mActionButton);
-        anim1.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mActionButton.setImageDrawable(getResources().getDrawable(resId));
-                int color = ScoreItActivity.this.getResources()
-                        .getColor(orange ? R.color.primary_accent
-                                : R.color.secondary_accent);
-                mActionButton.setColorNormal(color);
-                color = ScoreItActivity.this.getResources()
-                        .getColor(orange ? R.color.primary_accent_dark
-                                : R.color.secondary_accent_dark);
-                mActionButton.setColorPressed(color);
-                anim2.setTarget(mActionButton);
-                anim2.start();
-            }
-        });
-        anim1.start();
     }
 
     @Override

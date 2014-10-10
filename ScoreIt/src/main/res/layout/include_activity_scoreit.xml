@@ -32,7 +32,7 @@
             android:id="@+id/header_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/lighter_gray_translucent"/>
+            android:background="@color/background_gray"/>
 
         <FrameLayout
             android:id="@+id/score_container"
@@ -48,15 +48,13 @@
             android:background="@drawable/top_shadow"/>
     </RelativeLayout>
 
-    <com.melnykov.fab.FloatingActionButton
+    <com.halfbit.fabview.FabView
         android:id="@+id/fab"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_action_new"
-        app:fab_colorNormal="@color/primary_accent"
-        app:fab_colorPressed="@color/primary_accent_dark"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/fab_accent"
+        android:src="@drawable/ic_content_edit_fab"
+        app:fab_attachTo="@id/header_container"
+        app:fab_attachAt="bottom_right"/>
 
 </FrameLayout>

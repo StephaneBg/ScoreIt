@@ -28,7 +28,7 @@
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_extended_ab"
-        android:background="@color/primary_accent_translucent"/>
+        android:background="@color/primary_accent"/>
 
     <View
         android:layout_width="match_parent"
@@ -90,7 +90,6 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="92dp"
         android:src="@drawable/ic_action_new"
-        app:fab_colorNormal="@color/primary_accent"
-        app:fab_colorPressed="@color/primary_accent_dark"/>
+        android:background="@color/fab_accent"/>
 
 </RelativeLayout>

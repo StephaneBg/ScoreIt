@@ -47,8 +47,8 @@ public class UniversalLapFragment extends LapFragment
 
         ListView listView = (ListView) view.findViewById(R.id.list_view);
         ScoreItActivity activity = (ScoreItActivity) getActivity();
-        if (!activity.isTablet())
-            activity.getActionButton().attachToListView(listView);
+//        if (!activity.isTablet())
+//            activity.getActionButton().attachToListView(listView);
 
         mAdapter = new UniversalLapAdapter(this);
         listView.setAdapter(mAdapter);

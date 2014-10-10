@@ -30,10 +30,12 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_ab"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@drawable/background_action"
         android:gravity="center"
         android:singleLine="true"
-        android:textColor="@color/darker_black"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
         android:textSize="@dimen/font_headline"
         app:typeface="roboto_regular"/>
 
@@ -41,12 +43,13 @@
         android:id="@+id/marker"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/primary_accent_translucent"/>
+        android:background="@color/white"/>
 
     <com.devspark.robototextview.widget.RobotoTextView
         android:id="@+id/score"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_ab"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@drawable/background_action"
         android:gravity="center"
         android:singleLine="true"

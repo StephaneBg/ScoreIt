@@ -58,8 +58,6 @@
                 tools:text="@string/us"/>
         </RadioGroup>
 
-        <View style="@style/Divider"/>
-
         <TextView
             style="@style/SubHeader"
             android:text="@string/points"/>
@@ -71,8 +69,6 @@
             android:layout_marginBottom="@dimen/margin_default"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"/>
-
-        <View style="@style/Divider"/>
 
         <TextView
             style="@style/SubHeader"
@@ -107,8 +103,6 @@
                 android:layout_marginBottom="@dimen/margin_default"
                 tools:text="@string/us"/>
         </RadioGroup>
-
-        <View style="@style/Divider"/>
 
         <TextView
             style="@style/SubHeader"
