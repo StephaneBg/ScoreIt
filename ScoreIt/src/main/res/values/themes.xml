@@ -35,7 +35,7 @@
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:textColorHighlight">@color/secondary_accent</item>
-        <item name="android:textColor">@color/darker_black</item>
+        <item name="android:textColor">@color/darker_gray</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/apptheme_btn_check_holo_light
         </item>
         <item name="android:listChoiceIndicatorSingle">@drawable/apptheme_btn_radio_holo_light

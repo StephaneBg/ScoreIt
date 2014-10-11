@@ -66,18 +66,8 @@
         <item name="android:layout_height">@dimen/height_default</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/secondary_accent</item>
+        <item name="android:textColor">@color/primary_accent</item>
         <item name="android:textSize">@dimen/font_headline</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="BetterPickerTheme" parent="BetterPickersDialogFragment.Light">
-        <item name="bpTitleColor">@color/secondary_accent</item>
-        <item name="bpDeleteIcon">@drawable/ic_backspace</item>
-        <item name="bpDividerColor">@color/lighter_gray</item>
-        <item name="bpKeyBackground">@drawable/picker_button_background</item>
-        <item name="bpButtonBackground">@drawable/picker_button_background</item>
-        <item name="bpSetTextColor">@color/dialog_text_color_accept</item>
     </style>
 
 </resources>

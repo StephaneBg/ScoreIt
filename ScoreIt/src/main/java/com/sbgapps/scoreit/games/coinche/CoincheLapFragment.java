@@ -26,7 +26,7 @@ import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
-import com.sbgapps.scoreit.widget.SeekbarPoints;
+import com.sbgapps.scoreit.widget.SeekPoints;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -35,7 +35,7 @@ import butterknife.InjectView;
  * Created by sbaiget on 29/01/14.
  */
 public class CoincheLapFragment extends LapFragment
-        implements SeekbarPoints.OnPointsChangedListener {
+        implements SeekPoints.OnPointsChangedListener {
 
     @InjectView(R.id.radio_group_player)
     RadioGroup mRadioGroupPlayer;
@@ -44,9 +44,9 @@ public class CoincheLapFragment extends LapFragment
     @InjectView(R.id.radio_group_coinche)
     RadioGroup mRadioGroupCoinche;
     @InjectView(R.id.input_points)
-    SeekbarPoints mPoints;
+    SeekPoints mPoints;
     @InjectView(R.id.input_bid)
-    SeekbarPoints mBids;
+    SeekPoints mBids;
 
     @Override
     public CoincheLap getLap() {

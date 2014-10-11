@@ -48,7 +48,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_minus_1"
-                app:cb_color="@color/lighter_gray"/>
+                app:cb_color="@color/secondary_accent"/>
 
             <com.sbgapps.scoreit.widget.CircleButton
                 android:id="@+id/btn_minus_10"
@@ -56,7 +56,7 @@
                 android:layout_height="56dp"
                 android:layout_toRightOf="@id/btn_minus"
                 android:src="@drawable/ic_minus_10"
-                app:cb_color="@color/lighter_gray"/>
+                app:cb_color="@color/secondary_accent"/>
 
             <com.sbgapps.scoreit.widget.CircleButton
                 android:id="@+id/btn_minus_100"
@@ -65,16 +65,16 @@
                 android:layout_below="@id/btn_minus_10"
                 android:layout_toRightOf="@id/btn_minus"
                 android:src="@drawable/ic_minus_100"
-                app:cb_color="@color/lighter_gray"/>
+                app:cb_color="@color/secondary_accent"/>
         </RelativeLayout>
 
-        <TextView
+        <com.sbgapps.scoreit.widget.CircleTextView
             android:id="@+id/points"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:gravity="center"
             android:textSize="@dimen/font_display_1"
-            android:textColor="@color/white"
+            app:ct_strokeWidth="4dp"
             tools:text="128"/>
 
         <RelativeLayout
@@ -86,7 +86,7 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:src="@drawable/ic_plus_10"
-                app:cb_color="@color/lighter_gray"/>
+                app:cb_color="@color/secondary_accent"/>
 
             <com.sbgapps.scoreit.widget.CircleButton
                 android:id="@+id/btn_plus"
@@ -95,7 +95,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/btn_plus_10"
                 android:src="@drawable/ic_plus_1"
-                app:cb_color="@color/lighter_gray"/>
+                app:cb_color="@color/secondary_accent"/>
 
             <com.sbgapps.scoreit.widget.CircleButton
                 android:id="@+id/btn_plus_100"
@@ -103,7 +103,7 @@
                 android:layout_height="56dp"
                 android:layout_below="@id/btn_plus_10"
                 android:src="@drawable/ic_plus_100"
-                app:cb_color="@color/lighter_gray"/>
+                app:cb_color="@color/secondary_accent"/>
         </RelativeLayout>
     </LinearLayout>
 

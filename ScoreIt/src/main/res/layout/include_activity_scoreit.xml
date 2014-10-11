@@ -32,7 +32,7 @@
             android:id="@+id/header_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/background_gray"/>
+            android:background="@color/lighter_gray"/>
 
         <FrameLayout
             android:id="@+id/score_container"
@@ -48,13 +48,14 @@
             android:background="@drawable/top_shadow"/>
     </RelativeLayout>
 
-    <com.halfbit.fabview.FabView
+    <com.sbgapps.scoreit.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/fab_accent"
+        android:background="@color/tertiary_accent"
         android:src="@drawable/ic_content_edit_fab"
         app:fab_attachTo="@id/header_container"
-        app:fab_attachAt="bottom_right"/>
+        app:fab_attachAt="bottom_right"
+        app:fab_revealAfterMs="300"/>
 
 </FrameLayout>

@@ -19,6 +19,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ScoreItActivity">
@@ -56,7 +57,7 @@
         <FrameLayout
             android:id="@+id/header_container"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_extended_ab"/>
+            android:layout_height="wrap_content"/>
 
         <View
             android:layout_width="match_parent"
@@ -81,16 +82,13 @@
         android:layout_marginRight="120dp"
         android:background="@drawable/card"/>
 
-    <com.melnykov.fab.FloatingActionButton
+    <com.sbgapps.scoreit.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="92dp"
-        android:src="@drawable/ic_action_new"
-        android:background="@color/fab_accent"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/tertiary_accent"
+        android:src="@drawable/ic_content_edit_fab"
+        app:fab_attachTo="@id/back"
+        app:fab_attachAt="bottom_right"/>
 
 </RelativeLayout>

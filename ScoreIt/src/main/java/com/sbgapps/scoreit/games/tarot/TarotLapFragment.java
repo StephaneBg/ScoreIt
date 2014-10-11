@@ -33,7 +33,7 @@ import android.widget.Spinner;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.widget.SeekbarPoints;
+import com.sbgapps.scoreit.widget.SeekPoints;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ import butterknife.InjectView;
  * Created by sbaiget on 07/12/13.
  */
 public class TarotLapFragment extends LapFragment
-        implements SeekbarPoints.OnPointsChangedListener {
+        implements SeekPoints.OnPointsChangedListener {
 
     @InjectView(R.id.spinner_taker)
     Spinner mTaker;
@@ -57,7 +57,7 @@ public class TarotLapFragment extends LapFragment
     @InjectView(R.id.checkbox_excuse)
     CheckBox mExcuse;
     @InjectView(R.id.input_points)
-    SeekbarPoints mPoints;
+    SeekPoints mPoints;
     @InjectView(R.id.ll_bonuses)
     LinearLayout mBonuses;
     @InjectView(R.id.btn_add_bonus)

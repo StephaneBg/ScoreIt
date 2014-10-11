@@ -37,17 +37,33 @@
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:src="@drawable/ic_minus"
-            app:cb_color="@color/primary_accent"/>
+            app:cb_color="@color/secondary_accent"/>
 
-        <TextView
-            android:id="@+id/points"
-            android:gravity="center"
-            android:textSize="@dimen/font_display_1"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            tools:text="48"/>
+        <FrameLayout
+            android:layout_width="160dp"
+            android:layout_height="160dp">
+
+            <com.sbgapps.scoreit.widget.SeekArc
+                android:id="@+id/seekbar_points"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="30dp"
+                app:arcWidth="4dp"
+                app:progressWidth="4dp"
+                app:arcColor="@color/lighter_gray"
+                app:thumbColor="@color/tertiary_accent"
+                app:thumbRadius="6dp"
+                app:clockwise="false"
+                app:progressColor="@color/secondary_accent"/>
+
+            <TextView
+                android:id="@+id/points"
+                android:gravity="center"
+                android:textSize="@dimen/font_display_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:text="48"/>
+        </FrameLayout>
 
 
         <com.sbgapps.scoreit.widget.CircleButton
@@ -55,13 +71,7 @@
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:src="@drawable/ic_action_new"
-            app:cb_color="@color/primary_accent"/>
+            app:cb_color="@color/secondary_accent"/>
     </LinearLayout>
 
-    <SeekBar
-        android:id="@+id/seekbar_points"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"/>
 </LinearLayout>

@@ -34,16 +34,17 @@
         android:background="@drawable/background_action"
         android:gravity="center"
         android:singleLine="true"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
+        android:textColor="@color/darker_gray"
         android:textSize="@dimen/font_headline"
         app:typeface="roboto_regular"/>
 
     <View
         android:id="@+id/marker"
+        android:layout_marginRight="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/margin_default"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/white"/>
+        android:background="@color/primary_accent"/>
 
     <com.devspark.robototextview.widget.RobotoTextView
         android:id="@+id/score"

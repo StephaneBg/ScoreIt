@@ -32,7 +32,7 @@ import android.widget.Spinner;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.widget.SeekbarPoints;
+import com.sbgapps.scoreit.widget.SeekPoints;
 
 import java.util.List;
 
@@ -43,14 +43,14 @@ import butterknife.InjectView;
  * Created by sbaiget on 01/11/13.
  */
 public class BeloteLapFragment extends LapFragment
-        implements SeekbarPoints.OnPointsChangedListener {
+        implements SeekPoints.OnPointsChangedListener {
 
     @InjectView(R.id.radio_group_player)
     RadioGroup mRadioGroupPlayer;
     @InjectView(R.id.radio_group_belote)
     RadioGroup mRadioGroupBelote;
     @InjectView(R.id.input_points)
-    SeekbarPoints mPoints;
+    SeekPoints mPoints;
     @InjectView(R.id.ll_bonuses)
     LinearLayout mBonuses;
     @InjectView(R.id.btn_add_bonus)

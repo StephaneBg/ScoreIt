@@ -52,8 +52,8 @@ public class TarotScoreAdapter extends ScoreListAdapter {
         final Resources r = getActivity().getResources();
 
         View marker = convertView.findViewById(R.id.left_marker);
-        marker.setBackgroundColor(getItem(position).isDone() ? r.getColor(R.color.color_player1)
-                : r.getColor(R.color.color_player4));
+        marker.setBackgroundColor(getItem(position).isDone() ? r.getColor(R.color.secondary_accent)
+                : r.getColor(R.color.primary_accent));
 
         final GameHelper gameHelper = getGameHelper();
         final TarotLap lap = getItem(position);

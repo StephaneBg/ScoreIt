@@ -17,21 +17,19 @@
 package com.sbgapps.scoreit.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.games.universal.UniversalLapFragment;
 import com.sbgapps.scoreit.widget.CircleButton;
+import com.sbgapps.scoreit.widget.CircleTextView;
 
 /**
  * Created by Stéphane on 19/08/2014.
@@ -70,7 +68,7 @@ public class UniversalLapAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.list_item_universal_input, parent, false);
 
             h.name = (TextView) convertView.findViewById(R.id.tv_name);
-            h.points = (TextView) convertView.findViewById(R.id.points);
+            h.points = (CircleTextView) convertView.findViewById(R.id.points);
             h.plus = (CircleButton) convertView.findViewById(R.id.btn_plus);
             h.plus_10 = (CircleButton) convertView.findViewById(R.id.btn_plus_10);
             h.plus_100 = (CircleButton) convertView.findViewById(R.id.btn_plus_100);
@@ -86,66 +84,54 @@ public class UniversalLapAdapter extends BaseAdapter {
         h.name.setText(player.getName());
 
         final UniversalLap lap = mLapFragment.getLap();
-        h.points.setText(Integer.toString(lap.getScore(position)));
-        h.points.setBackgroundDrawable(getBackground(player));
+        if (null != lap) {
+            h.points.setText(Integer.toString(lap.getScore(position)));
+            h.points.setCircleColor(player.getColor());
 
-        h.plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lap.stepScore(position, 1);
-                notifyDataSetChanged();
-            }
-        });
-        h.plus_10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lap.stepScore(position, 10);
-                notifyDataSetChanged();
-            }
-        });
-        h.plus_100.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lap.stepScore(position, 100);
-                notifyDataSetChanged();
-            }
-        });
+            h.plus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lap.stepScore(position, 1);
+                    notifyDataSetChanged();
+                }
+            });
+            h.plus_10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lap.stepScore(position, 10);
+                    notifyDataSetChanged();
+                }
+            });
+            h.plus_100.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lap.stepScore(position, 100);
+                    notifyDataSetChanged();
+                }
+            });
 
-        h.minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lap.stepScore(position, -1);
-                notifyDataSetChanged();
-            }
-        });
-        h.minus_10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lap.stepScore(position, -10);
-                notifyDataSetChanged();
-            }
-        });
-        h.minus_100.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lap.stepScore(position, -100);
-                notifyDataSetChanged();
-            }
-        });
-
-        h.points.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new NumberPickerBuilder()
-                        .setFragmentManager(mLapFragment.getFragmentManager())
-                        .setStyleResId(R.style.BetterPickerTheme)
-                        .setDecimalVisibility(View.INVISIBLE)
-                        .setTargetFragment(mLapFragment)
-                        .setReference(position)
-                        .show();
-            }
-        });
-
+            h.minus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lap.stepScore(position, -1);
+                    notifyDataSetChanged();
+                }
+            });
+            h.minus_10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lap.stepScore(position, -10);
+                    notifyDataSetChanged();
+                }
+            });
+            h.minus_100.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lap.stepScore(position, -100);
+                    notifyDataSetChanged();
+                }
+            });
+        }
         return convertView;
     }
 
@@ -153,16 +139,9 @@ public class UniversalLapAdapter extends BaseAdapter {
         return mLapFragment.getGameHelper();
     }
 
-    private Drawable getBackground(Player player) {
-        GradientDrawable sd = new GradientDrawable();
-        sd.setShape(GradientDrawable.OVAL);
-        sd.setColor(player.getColor());
-        return sd;
-    }
-
     private class ViewHolder {
         TextView name;
-        TextView points;
+        CircleTextView points;
         CircleButton plus;
         CircleButton plus_10;
         CircleButton plus_100;

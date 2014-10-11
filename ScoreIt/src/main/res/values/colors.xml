@@ -18,22 +18,14 @@
 <resources>
     <color name="white">#FFF</color>
 
-    <color name="black">#000</color>
-    <color name="darker_black">#DE000000</color>
+    <color name="primary_accent">#F16A70</color>
+    <color name="secondary_accent">#B1D877</color>
+    <color name="tertiary_accent">#7883C0</color>
 
-    <color name="primary_accent">#F9A825</color>
-    <color name="primary_accent_translucent">#DDF9A825</color>
-
-    <color name="secondary_accent">#91C83E</color>
-    <color name="secondary_accent_translucent">#DD91C83E</color>
-
-    <color name="fab_accent">#7883C0</color>
-
-    <color name="lighter_gray">#E0E0E0</color>
-    <color name="lighter_gray_translucent">#EEF5F5F5</color>
-    <color name="dim_lighter_gray">#80E0E0E0</color>
-    <color name="darker_gray">#707070</color>
-    <color name="background_gray">#BCBEC0</color>
+    <color name="lighter_gray">#F0F0F0</color>
+    <color name="lighter_gray_translucent">#DDF0F0F0</color>
+    <color name="darker_gray">#4D4D4D</color>
+    <color name="darker_gray_translucent">#804D4D4D</color>
 
     <color name="color_player1">#259b24</color>
     <color name="color_player2">#ff9800</color>

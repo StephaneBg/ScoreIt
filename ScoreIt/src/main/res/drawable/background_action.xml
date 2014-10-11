@@ -19,7 +19,7 @@
 <selector
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@color/dim_lighter_gray"
+        android:drawable="@color/darker_gray_translucent"
         android:state_pressed="true"/>
     <item
         android:drawable="@color/transparent"/>

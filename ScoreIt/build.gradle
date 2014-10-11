@@ -74,9 +74,7 @@ dependencies {
     compile "com.daimajia.swipelayout:library:1.0.4@aar"
 
     compile project(':HoloGraphLibrary')
-    compile project(':BetterPickers')
     compile project(':L-Dialogs')
     compile project(':SnackBar')
     compile project(':SimpleStorage')
-    compile project(':Fabuless')
 }

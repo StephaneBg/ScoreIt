@@ -22,17 +22,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.adapter.UniversalLapAdapter;
 import com.sbgapps.scoreit.games.LapFragment;
 
 /**
  * Created by sbaiget on 02/02/14.
  */
-public class UniversalLapFragment extends LapFragment
-        implements NumberPickerDialogFragment.NumberPickerDialogHandler {
+public class UniversalLapFragment extends LapFragment {
 
     private UniversalLapAdapter mAdapter;
 
@@ -46,20 +43,9 @@ public class UniversalLapFragment extends LapFragment
         View view = inflater.inflate(R.layout.fragment_lap_universal, null);
 
         ListView listView = (ListView) view.findViewById(R.id.list_view);
-        ScoreItActivity activity = (ScoreItActivity) getActivity();
-//        if (!activity.isTablet())
-//            activity.getActionButton().attachToListView(listView);
-
         mAdapter = new UniversalLapAdapter(this);
         listView.setAdapter(mAdapter);
 
         return view;
-    }
-
-    @Override
-    public void onDialogNumberSet(int reference, int number, double decimal,
-                                  boolean isNegative, double fullNumber) {
-        getLap().setScore(reference, number);
-        mAdapter.notifyDataSetChanged();
     }
 }

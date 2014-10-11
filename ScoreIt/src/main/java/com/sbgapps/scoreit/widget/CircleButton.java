@@ -15,7 +15,6 @@ import com.sbgapps.scoreit.R;
 public class CircleButton extends ImageView {
 
     private static final int PRESSED_COLOR_LIGHTUP = 255 / 25;
-    private static final int DISABLED_COLOR_LIGHTUP = 3 * 255 / 25;
     private static final int PRESSED_RING_ALPHA = 75;
     private static final int DEFAULT_PRESSED_RING_WIDTH_DIP = 4;
     private static final int ANIMATION_TIME_ID = android.R.integer.config_shortAnimTime;
@@ -56,7 +55,8 @@ public class CircleButton extends ImageView {
         super.setPressed(pressed);
 
         if (circlePaint != null) {
-            circlePaint.setColor(pressed ? pressedColor : defaultColor);
+            circlePaint.setColor(pressed ? pressedColor :
+                    isEnabled() ? defaultColor : getDarkerColor(defaultColor));
         }
 
         if (pressed) {
@@ -73,7 +73,7 @@ public class CircleButton extends ImageView {
         if (enabled) {
             circlePaint.setColor(defaultColor);
         } else {
-            circlePaint.setColor(getHighlightColor(defaultColor, DISABLED_COLOR_LIGHTUP));
+            circlePaint.setColor(getDarkerColor(defaultColor));
         }
         invalidate();
     }
@@ -160,4 +160,12 @@ public class CircleButton extends ImageView {
         return Color.argb(Math.min(255, Color.alpha(color)), Math.min(255, Color.red(color) + amount),
                 Math.min(255, Color.green(color) + amount), Math.min(255, Color.blue(color) + amount));
     }
+
+    private int getDarkerColor(int color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+        hsv[2] *= 0.85f;
+        return Color.HSVToColor(hsv);
+    }
+
 }

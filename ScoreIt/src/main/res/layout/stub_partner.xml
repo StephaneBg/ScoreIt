@@ -24,8 +24,6 @@
     android:orientation="vertical"
     tools:context="ScoreItActivity">
 
-    <View style="@style/Divider"/>
-
     <TextView
         style="@style/SubHeader"
         android:text="@string/partner"/>

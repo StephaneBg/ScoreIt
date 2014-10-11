@@ -17,13 +17,13 @@
   -->
 
 <com.devspark.robototextview.widget.RobotoTextView
-    android:id="@+id/score"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/score"
     android:layout_width="0dp"
-    android:layout_height="@dimen/height_default"
+    android:layout_height="match_parent"
     android:layout_weight="1"
     android:gravity="center"
     android:singleLine="true"
-    android:textColor="@color/darker_black"
+    android:textColor="@color/darker_gray"
     app:typeface="roboto_regular"/>

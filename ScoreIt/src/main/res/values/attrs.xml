@@ -41,4 +41,43 @@
         <attr name="cb_pressedRingWidth" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="CircleTextView">
+        <attr name="ct_color" format="color"/>
+        <attr name="ct_strokeWidth" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="FloatingActionButton">
+        <attr name="fab_attachTo" format="reference"/>
+        <attr name="fab_attachAt" format="enum">
+            <enum name="top_left" value="1"/>
+            <enum name="top_right" value="2"/>
+            <enum name="bottom_left" value="3"/>
+            <enum name="bottom_right" value="4"/>
+        </attr>
+        <attr name="fab_size" format="enum">
+            <enum name="normal" value="1"/>
+            <enum name="small" value="2"/>
+        </attr>
+        <attr name="fab_padding" format="dimension"/>
+        <attr name="fab_revealAfterMs" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="SeekArc">
+        <attr name="thumbOffset" format="dimension"/>
+        <attr name="max" format="integer"/>
+        <attr name="progressWidth" format="dimension"/>
+        <attr name="arcWidth" format="dimension"/>
+        <attr name="progress" format="integer"/>
+        <attr name="rotation" format="integer"/>
+        <attr name="startAngle" format="integer"/>
+        <attr name="sweepAngle" format="integer"/>
+        <attr name="arcColor" format="color"/>
+        <attr name="progressColor" format="color"/>
+        <attr name="thumbColor" format="color"/>
+        <attr name="thumbRadius" format="dimension"/>
+        <attr name="roundEdges" format="boolean"/>
+        <attr name="touchInside" format="boolean"/>
+        <attr name="clockwise" format="boolean"/>
+        <attr name="touchable" format="boolean"/>
+    </declare-styleable>
 </resources>

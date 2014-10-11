@@ -50,8 +50,6 @@
             android:layout_height="wrap_content"
             android:layout="@layout/stub_partner"/>
 
-        <View style="@style/Divider"/>
-
         <TextView
             style="@style/SubHeader"
             android:text="@string/bidding"/>
@@ -64,8 +62,6 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:spinnerMode="dialog"/>
-
-        <View style="@style/Divider"/>
 
         <TextView
             style="@style/SubHeader"
@@ -98,21 +94,15 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/excuse"/>
 
-        <View style="@style/Divider"/>
-
         <TextView
             style="@style/SubHeader"
             android:text="@string/points"/>
 
-        <com.sbgapps.scoreit.widget.SeekbarPoints
+        <com.sbgapps.scoreit.widget.SeekPoints
             android:id="@+id/input_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
-
-        <View style="@style/Divider"/>
+            android:layout_marginBottom="@dimen/margin_default"/>
 
         <TextView
             style="@style/SubHeader"

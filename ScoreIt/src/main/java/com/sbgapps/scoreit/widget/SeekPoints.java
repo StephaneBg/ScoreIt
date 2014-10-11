@@ -21,7 +21,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
@@ -32,12 +31,12 @@ import butterknife.InjectView;
 /**
  * Created by sbaiget on 26/01/14.
  */
-public class SeekbarPoints extends FrameLayout {
+public class SeekPoints extends FrameLayout {
 
     @InjectView(R.id.points)
     TextView mPoints;
     @InjectView(R.id.seekbar_points)
-    SeekBar mSeekBarPoints;
+    SeekArc mSeekBarPoints;
     @InjectView(R.id.btn_minus)
     CircleButton mButtonMinus;
     @InjectView(R.id.btn_plus)
@@ -47,20 +46,20 @@ public class SeekbarPoints extends FrameLayout {
     private int mProgress;
     private String mTag;
 
-    public SeekbarPoints(Context context) {
+    public SeekPoints(Context context) {
         this(context, null);
     }
 
-    public SeekbarPoints(Context context, AttributeSet attrs) {
+    public SeekPoints(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SeekbarPoints(Context context, AttributeSet attrs, int defStyle) {
+    public SeekPoints(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.seekbar_input_points, this, true);
+        inflater.inflate(R.layout.seek_points, this, true);
         ButterKnife.inject(this);
     }
 
@@ -93,11 +92,11 @@ public class SeekbarPoints extends FrameLayout {
             }
         });
 
-        mSeekBarPoints.setProgress(progress);
         mSeekBarPoints.setMax(max);
-        mSeekBarPoints.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        mSeekBarPoints.setProgress(progress);
+        mSeekBarPoints.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            public void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser) {
                 if (fromUser) {
                     mProgress = progress;
                     manageProgress();
@@ -105,12 +104,12 @@ public class SeekbarPoints extends FrameLayout {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+            public void onStartTrackingTouch(SeekArc seekArc) {
 
             }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onStopTrackingTouch(SeekArc seekArc) {
 
             }
         });

@@ -35,7 +35,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.github.mrengineer13.snackbar.SnackBar;
-import com.halfbit.fabview.FabView;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
@@ -54,6 +53,7 @@ import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.games.universal.UniversalLapFragment;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerView;
+import com.sbgapps.scoreit.widget.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +77,7 @@ public class ScoreItActivity extends BaseActivity
     @InjectView(R.id.drawer_list_view)
     ListView mDrawerListView;
     @InjectView(R.id.fab)
-    FabView mActionButton;
+    FloatingActionButton mActionButton;
 
     private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -136,18 +136,17 @@ public class ScoreItActivity extends BaseActivity
                     .findFragmentByTag(LapFragment.TAG);
 
             mIsEdited = savedInstanceState.getBoolean("edited");
+            mUpdateFab = savedInstanceState.getBoolean("updateFab");
             Resources resources = getResources();
             if (mIsEdited) {
                 int position = savedInstanceState.getInt("position");
                 mLap = mGameHelper.getLaps().get(position);
-                mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept_fab));
-                mActionButton.setBackgroundColor(resources.getColor(R.color.secondary_accent));
             } else {
                 mLap = (Lap) savedInstanceState.getSerializable("lap");
-                if (null != mLap) {
-                    mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept_fab));
-                    mActionButton.setBackgroundColor(resources.getColor(R.color.secondary_accent));
-                }
+            }
+            if (null != mLap) {
+                mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
+                mActionButton.setBackgroundColor(resources.getColor(R.color.secondary_accent));
             }
         }
 
@@ -190,15 +189,15 @@ public class ScoreItActivity extends BaseActivity
                 onActionButtonClicked();
             }
         });
-        mActionButton.setTouchAnimationListener(new FabView.TouchAnimationListener() {
+        mActionButton.setTouchAnimationListener(new FloatingActionButton.TouchAnimationListener() {
             @Override
             public void onAnimationEnd() {
                 Resources resources = getResources();
                 if (null == mLap) {
                     mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_edit_fab));
-                    mActionButton.setBackgroundColor(resources.getColor(R.color.fab_accent));
+                    mActionButton.setBackgroundColor(resources.getColor(R.color.tertiary_accent));
                 } else {
-                    mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept_fab));
+                    mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
                     mActionButton.setBackgroundColor(resources.getColor(R.color.secondary_accent));
                 }
             }
@@ -219,6 +218,7 @@ public class ScoreItActivity extends BaseActivity
         super.onSaveInstanceState(outState);
         if (null != mLap) {
             outState.putBoolean("edited", mIsEdited);
+            outState.putBoolean("updateFab", mUpdateFab);
             if (mIsEdited) {
                 outState.putInt("position", mGameHelper.getLaps().indexOf(mLap));
             } else {
@@ -402,6 +402,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void addLap() {
+        mSnackBar.clear(false);
         switch (mGameHelper.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
@@ -433,7 +434,9 @@ public class ScoreItActivity extends BaseActivity
     public void editLap(Lap lap) {
         mIsEdited = true;
         mLap = lap;
-        //mActionButton.show();
+        Resources resources = getResources();
+        mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
+        mActionButton.setBackgroundColor(resources.getColor(R.color.secondary_accent));
         showLapFragment();
     }
 
@@ -492,7 +495,6 @@ public class ScoreItActivity extends BaseActivity
                 mLapFragment = new TarotLapFragment();
                 break;
         }
-
         mUpdateFab = true;
         getFragmentManager()
                 .beginTransaction()
@@ -569,6 +571,7 @@ public class ScoreItActivity extends BaseActivity
             } else {
                 mGameHelper.addLap(mLap);
             }
+            mUpdateFab = false;
             getFragmentManager()
                     .popBackStack(LapFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             update();
@@ -761,7 +764,7 @@ public class ScoreItActivity extends BaseActivity
         if (mUpdateFab) {
             Resources resources = getResources();
             mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_edit_fab));
-            mActionButton.setBackgroundColor(resources.getColor(R.color.fab_accent));
+            mActionButton.setBackgroundColor(resources.getColor(R.color.tertiary_accent));
         }
         mUpdateFab = false;
         invalidateOptionsMenu();
