@@ -31,14 +31,12 @@
         <item name="android:actionOverflowButtonStyle">@style/ButtonOverflow</item>
         <item name="android:spinnerStyle">@style/SpinnerAppTheme</item>
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemAppTheme</item>
-        <item name="android:editTextStyle">@style/EditTextAppTheme</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:textColorHighlight">@color/secondary_accent</item>
         <item name="android:textColor">@color/darker_gray</item>
-        <item name="android:listChoiceIndicatorMultiple">@drawable/btn_check</item>
-        <item name="android:listChoiceIndicatorSingle">@drawable/apptheme_btn_radio_holo_light
-        </item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/btn_check_selector</item>
+        <item name="android:listChoiceIndicatorSingle">@drawable/btn_radio_selector</item>
         <item name="android:homeAsUpIndicator">@null</item>
     </style>
 

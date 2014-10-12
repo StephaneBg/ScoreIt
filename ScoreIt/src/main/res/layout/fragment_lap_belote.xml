@@ -47,14 +47,14 @@
                 android:id="@+id/rb_player1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 tools:text="@string/them"/>
 
             <RadioButton
                 android:id="@+id/rb_player2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 tools:text="@string/us"/>
         </RadioGroup>
 
@@ -84,21 +84,21 @@
                 android:id="@+id/rb_belote_none"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:text="@string/none"/>
 
             <RadioButton
                 android:id="@+id/rb_belote_player1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 tools:text="@string/them"/>
 
             <RadioButton
                 android:id="@+id/rb_belote_player2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 tools:text="@string/us"/>
         </RadioGroup>
 
