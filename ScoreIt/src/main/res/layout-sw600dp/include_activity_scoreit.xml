@@ -59,11 +59,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/primary_accent"/>
-
         <FrameLayout
             android:id="@+id/score_container"
             android:layout_width="match_parent"

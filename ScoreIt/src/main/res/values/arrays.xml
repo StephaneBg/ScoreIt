@@ -37,9 +37,14 @@
         <item>@string/enter_name</item>
     </string-array>
 
-    <string-array name="restart_actions">
-        <item>@string/discard</item>
+    <string-array name="clear_actions">
+        <item>@string/reset_scores</item>
         <item>@string/save_create</item>
+    </string-array>
+
+    <string-array name="load_actions">
+        <item>@string/discard</item>
+        <item>@string/save_load</item>
     </string-array>
 
     <string-array name="languages">

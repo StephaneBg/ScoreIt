@@ -15,12 +15,15 @@
   ~ limitations under the License.
   -->
 
-<selector
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:drawable="@drawable/ic_content_backspace_enabled"
-        android:state_enabled="true"/>
-    <item
-        android:drawable="@drawable/ic_content_backspace_disabled"
-        android:state_enabled="false"/>
-</selector>
+<ListView
+    android:id="@android:id/list"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:scrollbars="none"
+    android:divider="@null"
+    tools:context="ScoreItActivity"/>

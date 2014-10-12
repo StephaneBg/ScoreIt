@@ -25,7 +25,7 @@
     <color name="lighter_gray">#F0F0F0</color>
     <color name="lighter_gray_translucent">#DDF0F0F0</color>
     <color name="darker_gray">#4D4D4D</color>
-    <color name="darker_gray_translucent">#804D4D4D</color>
+    <color name="darker_gray_translucent">#404D4D4D</color>
 
     <color name="color_player1">#259b24</color>
     <color name="color_player2">#ff9800</color>

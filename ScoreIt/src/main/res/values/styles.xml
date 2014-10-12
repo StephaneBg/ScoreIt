@@ -23,7 +23,7 @@
     </style>
 
     <style name="CheckBoxAppTheme" parent="android:Widget.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/apptheme_btn_check_holo_light</item>
+        <item name="android:button">@drawable/btn_check</item>
     </style>
 
     <style name="RadioButtonAppTheme" parent="android:Widget.CompoundButton.RadioButton">
@@ -37,21 +37,6 @@
 
     <style name="SpinnerDropDownItemAppTheme" parent="android:Widget.DropDownItem.Spinner">
         <item name="android:checkMark">@drawable/apptheme_btn_radio_holo_light</item>
-    </style>
-
-    <style name="SeekBarAppTheme" parent="android:Widget.SeekBar">
-        <item name="android:progressDrawable">
-            @drawable/apptheme_scrubber_progress_horizontal_holo_light
-        </item>
-        <item name="android:indeterminateDrawable">
-            @drawable/apptheme_scrubber_progress_horizontal_holo_light
-        </item>
-        <item name="android:minHeight">13dip</item>
-        <item name="android:maxHeight">13dip</item>
-        <item name="android:thumb">@drawable/apptheme_scrubber_control_selector_holo_light</item>
-        <item name="android:thumbOffset">16dip</item>
-        <item name="android:paddingLeft">16dip</item>
-        <item name="android:paddingRight">16dip</item>
     </style>
 
     <style name="Divider">

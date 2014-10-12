@@ -69,6 +69,7 @@ public class ScoreItActivity extends BaseActivity
         SnackBar.OnMessageClickListener {
 
     private static final int REQ_PICK_CONTACT = 1;
+    private static final int REQ_SAVED_GAME = 2;
 
     @InjectView(R.id.navigation_drawer)
     NavigationDrawerView mNavigationDrawer;
@@ -269,7 +270,8 @@ public class ScoreItActivity extends BaseActivity
         item.setVisible(Game.UNIVERSAL == game || Game.TAROT == game);
 
         item = menu.findItem(R.id.menu_save);
-        item.setVisible(0 != mGameHelper.getFilesUtil().getSavedFiles().size());
+        List<String> files = mGameHelper.getFilesUtil().getSavedFiles();
+        item.setVisible(0 != files.size());
 
         return true;
     }
@@ -294,8 +296,11 @@ public class ScoreItActivity extends BaseActivity
                 return true;
 
             case R.id.menu_save:
-                Intent intent = new Intent(this, SavedGamesActivity.class);
-                startActivity(intent);
+                if (mGameHelper.getFilesUtil().isDefaultFile()) {
+                    showLoadActionChoices();
+                } else {
+                    startSavedGamesActivity();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -397,6 +402,12 @@ public class ScoreItActivity extends BaseActivity
                     mEditedPlayer.setName(name);
                     mHeaderFragment.update();
                 }
+                break;
+
+            case REQ_SAVED_GAME:
+                mGameHelper.loadLaps();
+                invalidateOptionsMenu();
+                update();
                 break;
         }
     }
@@ -591,11 +602,16 @@ public class ScoreItActivity extends BaseActivity
         invalidateOptionsMenu();
     }
 
+    private void startSavedGamesActivity() {
+        Intent intent = new Intent(ScoreItActivity.this, SavedGamesActivity.class);
+        startActivityForResult(intent, REQ_SAVED_GAME);
+    }
+
     private void showClearDialogActionChoices() {
         CustomListDialog dialog = new CustomListDialog
                 .Builder(this,
-                getString(R.string.game),
-                getResources().getStringArray(R.array.restart_actions))
+                getString(R.string.current_game),
+                getResources().getStringArray(R.array.clear_actions))
                 .itemColorRes(R.color.primary_accent)
                 .build();
 
@@ -608,7 +624,14 @@ public class ScoreItActivity extends BaseActivity
                         dismissAll();
                         break;
                     case 1:
-                        showSaveFileDialog();
+                        if (mGameHelper.getFilesUtil().isDefaultFile()) {
+                            showSaveFileDialog(false);
+                        } else {
+                            mGameHelper.saveGame();
+                            mGameHelper.createGame();
+                            invalidateOptionsMenu();
+                            update();
+                        }
                         break;
                 }
             }
@@ -644,6 +667,31 @@ public class ScoreItActivity extends BaseActivity
         dialog.show();
     }
 
+    private void showLoadActionChoices() {
+        CustomListDialog dialog = new CustomListDialog
+                .Builder(this,
+                getString(R.string.current_game),
+                getResources().getStringArray(R.array.load_actions))
+                .itemColorRes(R.color.primary_accent)
+                .build();
+
+        dialog.setListClickListener(new CustomListDialog.ListClickListener() {
+            @Override
+            public void onListItemSelected(int position, String[] items, String item) {
+                switch (position) {
+                    default:
+                    case 0:
+                        startSavedGamesActivity();
+                        break;
+                    case 1:
+                        showSaveFileDialog(true);
+                        break;
+                }
+            }
+        });
+        dialog.show();
+    }
+
     public void showPlayerCountDialog() {
         String[] players;
         switch (mGameHelper.getPlayedGame()) {
@@ -663,6 +711,7 @@ public class ScoreItActivity extends BaseActivity
             @Override
             public void onListItemSelected(int position, String[] items, String item) {
                 mGameHelper.setPlayerCount(position);
+                invalidateOptionsMenu();
                 loadFragments(true);
             }
         });
@@ -698,7 +747,7 @@ public class ScoreItActivity extends BaseActivity
         dialog.show();
     }
 
-    private void showSaveFileDialog() {
+    private void showSaveFileDialog(final boolean load) {
         View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
         final EditText editText = (EditText) view.findViewById(R.id.edit_text);
 
@@ -715,7 +764,11 @@ public class ScoreItActivity extends BaseActivity
                         String file = editText.getText().toString();
                         mGameHelper.saveGame(file);
                         mGameHelper.createGame();
-                        dismissAll();
+                        if (load) {
+                            startSavedGamesActivity();
+                        } else {
+                            dismissAll();
+                        }
                     }
 
                     @Override

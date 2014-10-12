@@ -47,6 +47,9 @@ public class FilesUtil {
         return getStorage().getFile(getDirectory(), fileName);
     }
 
+    public boolean isDefaultFile() {
+        return mGameHelper.getPreferences().getString(getKey(), "default").equals("default");
+    }
 
     public void setPlayedFile(String fileName) {
         SharedPreferences.Editor editor = mGameHelper.getPreferences().edit();

@@ -38,9 +38,11 @@
     <string name="none">None</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="game">Game</string>
+    <string name="current_game">Current game</string>
     <string name="discard">Discard</string>
+    <string name="reset_scores">Reset scores</string>
     <string name="save_create">Save and create</string>
+    <string name="save_load">Save and load</string>
     <string name="saved_games">Saved games</string>
     <string name="deleted_lap">Lap deleted</string>
     <string name="undo">Undo</string>

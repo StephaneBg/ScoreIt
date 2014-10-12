@@ -21,10 +21,14 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.sbgapps.scoreit.games.GameHelper;
+
+import java.util.List;
 
 /**
  * Created by Stéphane on 04/08/2014.
@@ -35,23 +39,32 @@ public class SavedGamesActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ListView listView = new ListView(this);
-        listView.setFitsSystemWindows(true);
-        setContentView(listView);
+        setContentView(R.layout.activity_saved_games);
         setupFauxDialog();
 
         ActionBar actionBar = getActionBar();
         if (null != actionBar) {
-            SpannableString title = new SpannableString(getResources().getString(R.string.game));
+            SpannableString title = new SpannableString(getResources().getString(R.string.saved_games));
             title.setSpan(getTypefaceSpan(), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
         }
 
-        GameHelper gameHelper = new GameHelper(this);
-        listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
-                gameHelper.getFilesUtil().getSavedFiles()));
+        final GameHelper gameHelper = new GameHelper(this);
+        final List<String> games = gameHelper.getFilesUtil().getSavedFiles();
+
+        ListView listView = (ListView) findViewById(android.R.id.list);
+        listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, games));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String game = games.get(position);
+                gameHelper.getFilesUtil().setPlayedFile(game);
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
     }
 
     @Override
