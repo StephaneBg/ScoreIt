@@ -18,21 +18,23 @@
 <resources>
     <color name="white">#FFF</color>
 
-    <color name="primary_accent">#F16A70</color>
+    <color name="primary_accent">#7883C0</color>
     <color name="secondary_accent">#B1D877</color>
-    <color name="tertiary_accent">#7883C0</color>
+    <color name="tertiary_accent">#F16A70</color>
+
+    <color name="game_won">@color/secondary_accent</color>
+    <color name="game_lost">@color/tertiary_accent</color>
 
     <color name="lighter_gray">#F0F0F0</color>
-    <color name="lighter_gray_translucent">#DDF0F0F0</color>
     <color name="darker_gray">#4D4D4D</color>
     <color name="darker_gray_translucent">#404D4D4D</color>
 
-    <color name="color_player1">#259b24</color>
-    <color name="color_player2">#ff9800</color>
-    <color name="color_player3">#3f51b5</color>
-    <color name="color_player4">#e51c23</color>
-    <color name="color_player5">#9c27b0</color>
-    <color name="color_player6">#009688</color>
-    <color name="color_player7">#e91e63</color>
-    <color name="color_player8">#795548</color>
+    <color name="color_player1">#B1D877</color>
+    <color name="color_player2">#F16A70</color>
+    <color name="color_player3">#7883C0</color>
+    <color name="color_player4">#F9C8CB</color>
+    <color name="color_player5">#C2A1DA</color>
+    <color name="color_player6">#C1E4DD</color>
+    <color name="color_player7">#FDCDA7</color>
+    <color name="color_player8">#C5D9A6</color>
 </resources>

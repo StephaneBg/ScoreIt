@@ -51,7 +51,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_ab"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="@drawable/background_action"
         android:gravity="center"
         android:singleLine="true"
         android:textSize="@dimen/font_headline"

@@ -35,7 +35,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.github.mrengineer13.snackbar.SnackBar;
-import com.larswerkman.holocolorpicker.ColorPicker;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
@@ -480,16 +479,6 @@ public class ScoreItActivity extends BaseActivity
         showEditNameActionChoices();
     }
 
-    public void editColor(Player player) {
-        if (!mIsTablet
-                && null != mLapFragment
-                && mLapFragment.isVisible()) {
-            return;
-        }
-        mEditedPlayer = player;
-        showColorPickerDialog();
-    }
-
     private void showLapFragment() {
         switch (mGameHelper.getPlayedGame()) {
             default:
@@ -773,34 +762,6 @@ public class ScoreItActivity extends BaseActivity
 
                     @Override
                     public void onCancelClick() {
-                    }
-                });
-        dialog.show();
-    }
-
-    private void showColorPickerDialog() {
-        View view = getLayoutInflater().inflate(R.layout.dialog_color_picker, null);
-        final ColorPicker picker = (ColorPicker) view.findViewById(R.id.picker);
-        picker.setColor(mEditedPlayer.getColor());
-
-        CustomDialog dialog = new CustomDialog
-                .Builder(this, R.string.edit_color, R.string.ok)
-                .negativeText(R.string.cancel)
-                .positiveColorRes(R.color.primary_accent)
-                .build();
-
-        dialog.setCustomView(view)
-                .setClickListener(new CustomDialog.ClickListener() {
-                    @Override
-                    public void onConfirmClick() {
-                        int color = picker.getColor();
-                        mEditedPlayer.setColor(color);
-                        update();
-                    }
-
-                    @Override
-                    public void onCancelClick() {
-
                     }
                 });
         dialog.show();

@@ -45,8 +45,8 @@ public class GenericBeloteScoreAdapter extends ScoreListAdapter {
 
         final Resources r = getActivity().getResources();
         View marker = convertView.findViewById(R.id.left_marker);
-        marker.setBackgroundColor(getItem(position).isDone() ? r.getColor(R.color.secondary_accent)
-                : r.getColor(R.color.primary_accent));
+        marker.setBackgroundColor(getItem(position).isDone() ? r.getColor(R.color.game_won)
+                : r.getColor(R.color.game_lost));
     }
 
     @Override
