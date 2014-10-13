@@ -18,7 +18,6 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="0dp"
     android:layout_height="match_parent"
@@ -26,7 +25,7 @@
     android:orientation="vertical"
     tools:context="ScoreItActivity">
 
-    <com.devspark.robototextview.widget.RobotoTextView
+    <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_ab"
@@ -35,8 +34,8 @@
         android:gravity="center"
         android:singleLine="true"
         android:textColor="@color/darker_gray"
-        android:textSize="@dimen/font_headline"
-        app:typeface="roboto_regular"/>
+        android:fontFamily="sans-serif-medium"
+        android:textSize="@dimen/font_headline"/>
 
     <View
         android:id="@+id/marker"
@@ -46,14 +45,14 @@
         android:layout_height="1dp"
         android:background="@color/primary_accent"/>
 
-    <com.devspark.robototextview.widget.RobotoTextView
+    <TextView
         android:id="@+id/score"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_ab"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:gravity="center"
         android:singleLine="true"
-        android:textSize="@dimen/font_headline"
-        app:typeface="roboto_regular"/>
+        android:fontFamily="sans-serif-medium"
+        android:textSize="@dimen/font_headline"/>
 
 </LinearLayout>

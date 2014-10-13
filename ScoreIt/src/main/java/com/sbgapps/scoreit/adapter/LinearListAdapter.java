@@ -19,8 +19,8 @@ package com.sbgapps.scoreit.adapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
-import com.devspark.robototextview.widget.RobotoTextView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Lap;
 
@@ -61,7 +61,7 @@ public class LinearListAdapter extends BaseAdapter {
                     .inflate(R.layout.list_item_score, parent, false);
 
             h = new ViewHolder();
-            h.score = (RobotoTextView) convertView.findViewById(R.id.score);
+            h.score = (TextView) convertView.findViewById(R.id.score);
             convertView.setTag(h);
         } else {
             h = (ViewHolder) convertView.getTag();
@@ -72,6 +72,6 @@ public class LinearListAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        RobotoTextView score;
+        TextView score;
     }
 }

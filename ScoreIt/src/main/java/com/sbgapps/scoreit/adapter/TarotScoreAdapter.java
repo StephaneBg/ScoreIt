@@ -19,9 +19,8 @@ package com.sbgapps.scoreit.adapter;
 import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.daimajia.swipe.SwipeLayout;
-import com.devspark.robototextview.widget.RobotoTextView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreListFragment;
 import com.sbgapps.scoreit.games.GameHelper;
@@ -72,7 +71,7 @@ public class TarotScoreAdapter extends ScoreListAdapter {
                 summary += " • " + TarotBonus.getLitteralBonus(getActivity(), bonus.get());
             }
         }
-        RobotoTextView textView = (RobotoTextView) convertView.findViewById(R.id.summary);
+        TextView textView = (TextView) convertView.findViewById(R.id.summary);
         textView.setText(summary);
     }
 

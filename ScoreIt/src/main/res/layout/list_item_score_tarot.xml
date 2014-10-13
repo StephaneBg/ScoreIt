@@ -36,14 +36,13 @@
         android:layout_height="@dimen/height_ab"
         android:background="@color/white">
 
-        <com.devspark.robototextview.widget.RobotoTextView
+        <TextView
             android:id="@+id/summary"
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:gravity="center_vertical"
             android:singleLine="true"
-            app:typeface="roboto_medium"
             tools:text="Joueur - Annonce"/>
 
         <com.linearlistview.LinearListView

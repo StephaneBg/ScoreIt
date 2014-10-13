@@ -23,8 +23,8 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.devspark.robototextview.widget.RobotoTextView;
 import com.sbgapps.scoreit.R;
 
 import butterknife.ButterKnife;
@@ -36,7 +36,7 @@ public class NavigationDrawerItemView extends RelativeLayout {
     @InjectView(R.id.itemRR)
     RelativeLayout mLayout;
     @InjectView(R.id.navigationDrawerItemTitleTV)
-    RobotoTextView mItemTitle;
+    TextView mItemTitle;
     @InjectView(R.id.separator)
     View mSeparator;
 
