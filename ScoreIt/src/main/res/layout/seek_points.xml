@@ -51,7 +51,7 @@
                 app:arcWidth="4dp"
                 app:progressWidth="4dp"
                 app:arcColor="@color/lighter_gray"
-                app:thumbColor="@color/tertiary_accent"
+                app:thumbColor="@color/primary_accent"
                 app:thumbRadius="6dp"
                 app:clockwise="false"
                 app:progressColor="@color/secondary_accent"/>

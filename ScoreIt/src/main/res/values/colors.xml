@@ -32,9 +32,9 @@
     <color name="color_player1">#B1D877</color>
     <color name="color_player2">#F16A70</color>
     <color name="color_player3">#7883C0</color>
-    <color name="color_player4">#F9C8CB</color>
+    <color name="color_player4">#ae5a41</color>
     <color name="color_player5">#C2A1DA</color>
-    <color name="color_player6">#C1E4DD</color>
-    <color name="color_player7">#FDCDA7</color>
-    <color name="color_player8">#C5D9A6</color>
+    <color name="color_player6">#559e83</color>
+    <color name="color_player7">#c3cb71</color>
+    <color name="color_player8">#5a5255</color>
 </resources>

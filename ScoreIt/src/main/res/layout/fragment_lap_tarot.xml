@@ -69,9 +69,9 @@
 
         <ToggleButton
             android:id="@+id/checkbox_petit"
-            android:layout_width="match_parent"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/toggle_btn_selector"
+            android:background="@drawable/background_btn_toggle"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -80,9 +80,9 @@
 
         <ToggleButton
             android:id="@+id/checkbox_twenty_one"
-            android:layout_width="match_parent"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/toggle_btn_selector"
+            android:background="@drawable/background_btn_toggle"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -91,9 +91,9 @@
 
         <ToggleButton
             android:id="@+id/checkbox_excuse"
-            android:layout_width="match_parent"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/toggle_btn_selector"
+            android:background="@drawable/background_btn_toggle"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
