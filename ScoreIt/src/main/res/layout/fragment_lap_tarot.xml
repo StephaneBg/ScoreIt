@@ -67,32 +67,38 @@
             style="@style/SubHeader"
             android:text="@string/oudlers"/>
 
-        <CheckBox
+        <ToggleButton
             android:id="@+id/checkbox_petit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/toggle_btn_selector"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:text="@string/petit"/>
+            android:textOff="@string/petit"
+            android:textOn="@string/petit"/>
 
-        <CheckBox
+        <ToggleButton
             android:id="@+id/checkbox_twenty_one"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/toggle_btn_selector"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:text="@string/twentyone"/>
+            android:textOff="@string/twentyone"
+            android:textOn="@string/twentyone"/>
 
-        <CheckBox
+        <ToggleButton
             android:id="@+id/checkbox_excuse"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/toggle_btn_selector"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:text="@string/excuse"/>
+            android:textOff="@string/excuse"
+            android:textOn="@string/excuse"/>
 
         <TextView
             style="@style/SubHeader"

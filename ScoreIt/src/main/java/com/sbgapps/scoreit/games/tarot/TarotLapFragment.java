@@ -29,6 +29,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.ToggleButton;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.LapFragment;
@@ -51,11 +52,11 @@ public class TarotLapFragment extends LapFragment
     @InjectView(R.id.spinner_bid)
     Spinner mBid;
     @InjectView(R.id.checkbox_petit)
-    CheckBox mPetit;
+    ToggleButton mPetit;
     @InjectView(R.id.checkbox_twenty_one)
-    CheckBox mTwentyOne;
+    ToggleButton mTwentyOne;
     @InjectView(R.id.checkbox_excuse)
-    CheckBox mExcuse;
+    ToggleButton mExcuse;
     @InjectView(R.id.input_points)
     SeekPoints mPoints;
     @InjectView(R.id.ll_bonuses)
