@@ -27,7 +27,6 @@ import com.echo.holographlibrary.LineGraph;
 import com.echo.holographlibrary.LinePoint;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
-import com.sbgapps.scoreit.games.Player;
 
 public class ScoreGraphFragment extends Fragment {
 
@@ -59,9 +58,9 @@ public class ScoreGraphFragment extends Fragment {
         LinePoint p = new LinePoint(mX = 0, 0);
         int color = getActivity().getResources().getColor(R.color.darker_gray);
         p.setColor(color);
-        for (Player player : gameHelper.getPlayers()) {
+        for (int i = 0; i < gameHelper.getPlayerCount(); i++) {
             Line line = new Line();
-            line.setColor(player.getColor());
+            line.setColor(gameHelper.getPlayerColor(i));
             line.addPoint(p);
             mGraph.addLine(line);
         }

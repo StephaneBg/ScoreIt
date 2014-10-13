@@ -86,7 +86,7 @@ public class UniversalLapAdapter extends BaseAdapter {
         final UniversalLap lap = mLapFragment.getLap();
         if (null != lap) {
             h.points.setText(Integer.toString(lap.getScore(position)));
-            h.points.setCircleColor(player.getColor());
+            h.points.setCircleColor(getGameHelper().getPlayerColor(position));
 
             h.plus.setOnClickListener(new View.OnClickListener() {
                 @Override

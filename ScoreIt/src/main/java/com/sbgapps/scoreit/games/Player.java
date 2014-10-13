@@ -31,14 +31,11 @@ public class Player {
     public static final int PLAYER_5 = 4;
     public static final int PLAYER_COUNT_MAX = 5;
 
-    @SerializedName("color")
-    private int mColor;
     @SerializedName("name")
     private String mName;
 
-    public Player(String name, int color) {
+    public Player(String name) {
         mName = name;
-        mColor = color;
     }
 
     public String getName() {
@@ -47,14 +44,6 @@ public class Player {
 
     public void setName(String name) {
         mName = name;
-    }
-
-    public int getColor() {
-        return mColor;
-    }
-
-    public void setColor(int color) {
-        mColor = color;
     }
 
     @Override

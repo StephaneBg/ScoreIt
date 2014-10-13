@@ -18,8 +18,8 @@ public class TarotThreeGame extends Game<TarotThreeLap> {
         mLaps = new ArrayList<>();
         mPlayers = new ArrayList<>(3);
         Resources r = context.getResources();
-        mPlayers.add(new Player("Riri", r.getColor(R.color.color_player1)));
-        mPlayers.add(new Player("Fifi", r.getColor(R.color.color_player2)));
-        mPlayers.add(new Player("Loulou", r.getColor(R.color.color_player3)));
+        mPlayers.add(new Player("Riri"));
+        mPlayers.add(new Player("Fifi"));
+        mPlayers.add(new Player("Loulou"));
     }
 }

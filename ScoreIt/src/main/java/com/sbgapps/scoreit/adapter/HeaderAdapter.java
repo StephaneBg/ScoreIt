@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.Player;
@@ -90,9 +91,11 @@ public class HeaderAdapter extends BaseAdapter {
 
         h.name.setText(info.mPlayer.getName());
         h.score.setText(Integer.toString(info.mScore));
-        h.score.setTextColor(info.mPlayer.getColor());
+        h.score.setTextColor(mGameHelper.getPlayerColor(position));
 
-        int mod = mGameHelper.getLaps().size() % mGameHelper.getPlayerCount();
+        int mod = -1;
+        if (Game.BELOTE != mGameHelper.getPlayedGame())
+            mod = mGameHelper.getLaps().size() % mGameHelper.getPlayerCount();
         h.marker.setVisibility(position == mod ? View.VISIBLE : View.INVISIBLE);
 
         return convertView;

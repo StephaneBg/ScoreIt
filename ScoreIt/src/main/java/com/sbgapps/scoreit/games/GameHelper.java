@@ -22,6 +22,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
+import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.belote.BeloteGame;
 import com.sbgapps.scoreit.games.coinche.CoincheGame;
 import com.sbgapps.scoreit.games.tarot.TarotFiveGame;
@@ -221,6 +222,28 @@ public class GameHelper {
 
     public Player getPlayer(int player) {
         return getPlayers().get(player);
+    }
+
+    public int getPlayerColor(int player) {
+        switch (player) {
+            default:
+            case 0:
+                return mContext.getResources().getColor(R.color.color_player1);
+            case 1:
+                return mContext.getResources().getColor(R.color.color_player2);
+            case 2:
+                return mContext.getResources().getColor(R.color.color_player3);
+            case 3:
+                return mContext.getResources().getColor(R.color.color_player4);
+            case 4:
+                return mContext.getResources().getColor(R.color.color_player5);
+            case 5:
+                return mContext.getResources().getColor(R.color.color_player6);
+            case 6:
+                return mContext.getResources().getColor(R.color.color_player7);
+            case 7:
+                return mContext.getResources().getColor(R.color.color_player8);
+        }
     }
 
     private <T> T load(final Class<T> clazz) {

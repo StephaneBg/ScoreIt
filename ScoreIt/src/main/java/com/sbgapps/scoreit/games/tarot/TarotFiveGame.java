@@ -18,10 +18,10 @@ public class TarotFiveGame extends Game<TarotFiveLap> {
         mLaps = new ArrayList<>();
         mPlayers = new ArrayList<>(5);
         Resources r = context.getResources();
-        mPlayers.add(new Player("Riri", r.getColor(R.color.color_player1)));
-        mPlayers.add(new Player("Fifi", r.getColor(R.color.color_player2)));
-        mPlayers.add(new Player("Loulou", r.getColor(R.color.color_player3)));
-        mPlayers.add(new Player("Toto", r.getColor(R.color.color_player4)));
-        mPlayers.add(new Player("Titi", r.getColor(R.color.color_player5)));
+        mPlayers.add(new Player("Riri"));
+        mPlayers.add(new Player("Fifi"));
+        mPlayers.add(new Player("Loulou"));
+        mPlayers.add(new Player("Toto"));
+        mPlayers.add(new Player("Titi"));
     }
 }

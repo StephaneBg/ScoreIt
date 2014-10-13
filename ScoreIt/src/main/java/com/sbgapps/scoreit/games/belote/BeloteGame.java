@@ -34,7 +34,7 @@ public class BeloteGame extends Game<BeloteLap> {
         mLaps = new ArrayList<>();
         mPlayers = new ArrayList<>(2);
         Resources r = context.getResources();
-        mPlayers.add(new Player(r.getString(R.string.them), r.getColor(R.color.color_player1)));
-        mPlayers.add(new Player(r.getString(R.string.us), r.getColor(R.color.color_player2)));
+        mPlayers.add(new Player(r.getString(R.string.them)));
+        mPlayers.add(new Player(r.getString(R.string.us)));
     }
 }
