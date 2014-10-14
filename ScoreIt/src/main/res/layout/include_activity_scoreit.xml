@@ -35,11 +35,21 @@
             android:background="@color/lighter_gray"/>
 
         <FrameLayout
-            android:id="@+id/score_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/header_container"
-            android:background="@color/white"/>
+            android:layout_below="@id/header_container">
+
+            <FrameLayout
+                android:id="@+id/score_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <com.sbgapps.scoreit.widget.RippleLayout
+                android:id="@+id/ripple_layout"
+                android:background="@color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
 
         <View
             android:layout_width="match_parent"
@@ -55,7 +65,6 @@
         android:background="@color/tertiary_accent"
         android:src="@drawable/ic_content_edit_fab"
         app:fab_attachTo="@id/header_container"
-        app:fab_attachAt="bottom_right"
-        app:fab_revealAfterMs="300"/>
+        app:fab_attachAt="bottom_right"/>
 
 </FrameLayout>

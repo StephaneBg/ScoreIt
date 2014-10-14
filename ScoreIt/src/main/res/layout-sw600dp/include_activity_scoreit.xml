@@ -36,46 +36,55 @@
         android:layout_below="@id/back"
         android:background="@color/lighter_gray"/>
 
-    <View
-        android:id="@+id/center_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_centerVertical="true"/>
-
     <LinearLayout
-        android:id="@+id/top_card"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/center_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="120dp"
-        android:layout_marginRight="120dp"
-        android:background="@drawable/card"
-        android:orientation="vertical">
+        android:layout_marginRight="120dp">
 
-        <FrameLayout
-            android:id="@+id/header_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <FrameLayout
-            android:id="@+id/score_container"
+        <LinearLayout
+            android:id="@+id/top_card"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="2"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@drawable/card"
+            android:orientation="vertical">
 
+            <FrameLayout
+                android:id="@+id/header_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <FrameLayout
+                android:id="@+id/secondary_container"
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@drawable/card">
+
+            <FrameLayout
+                android:id="@+id/score_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <com.sbgapps.scoreit.widget.RippleLayout
+                android:id="@+id/ripple_layout"
+                android:background="@color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/secondary_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/center_view"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="120dp"
-        android:layout_marginRight="120dp"
-        android:background="@drawable/card"/>
 
     <com.sbgapps.scoreit.widget.FloatingActionButton
         android:id="@+id/fab"

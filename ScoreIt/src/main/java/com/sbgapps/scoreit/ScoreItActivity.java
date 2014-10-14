@@ -53,6 +53,7 @@ import com.sbgapps.scoreit.games.universal.UniversalLapFragment;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerView;
 import com.sbgapps.scoreit.widget.FloatingActionButton;
+import com.sbgapps.scoreit.widget.RippleLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +79,8 @@ public class ScoreItActivity extends BaseActivity
     ListView mDrawerListView;
     @InjectView(R.id.fab)
     FloatingActionButton mActionButton;
+    @InjectView(R.id.ripple_layout)
+    RippleLayout mRippleLayout;
 
     private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -155,7 +158,7 @@ public class ScoreItActivity extends BaseActivity
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.universal), false));
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.tarot), false));
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.belote), false));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.coinche), false));
+        //mNavigationItems.add(new NavigationDrawerItem(getString(R.string.coinche), false));
         mNavigationItems.add(new NavigationDrawerItem(true));
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about), false));
         mNavigationDrawer.replaceWith(mNavigationItems);
@@ -372,10 +375,10 @@ public class ScoreItActivity extends BaseActivity
             case 2:
                 mGameHelper.setPlayedGame(Game.BELOTE);
                 break;
-            case 3:
-                mGameHelper.setPlayedGame(Game.COINCHE);
-                break;
-            case 5:
+//            case 3:
+//                mGameHelper.setPlayedGame(Game.COINCHE);
+//                break;
+            case 4:
                 Intent intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
                 return;
@@ -463,7 +466,7 @@ public class ScoreItActivity extends BaseActivity
         mSnackBar.show(
                 getString(R.string.deleted_lap),
                 getString(R.string.undo),
-                R.color.primary_accent,
+                R.color.secondary_accent,
                 0,
                 token,
                 SnackBar.MED_SNACK);
@@ -499,10 +502,10 @@ public class ScoreItActivity extends BaseActivity
         getFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
-                        R.animator.scale_enter_up,
-                        R.animator.scale_exit_down,
-                        R.animator.scale_enter_down,
-                        R.animator.scale_exit_up)
+                        R.animator.fade_in,
+                        R.animator.fade_out,
+                        R.animator.fade_in,
+                        R.animator.fade_out)
                 .replace(R.id.score_container, mLapFragment, LapFragment.TAG)
                 .addToBackStack(LapFragment.TAG)
                 .commit();
@@ -517,7 +520,7 @@ public class ScoreItActivity extends BaseActivity
 
         mScoreListFragment = new ScoreListFragment();
         ft = getFragmentManager().beginTransaction();
-        if (anim) ft.setCustomAnimations(R.animator.slide_bottom_in, R.animator.slide_top_out);
+        if (anim) ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
         ft.replace(R.id.score_container, mScoreListFragment, ScoreListFragment.TAG)
                 .commit();
 
@@ -543,10 +546,10 @@ public class ScoreItActivity extends BaseActivity
         getFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
-                        R.animator.slide_bottom_in,
-                        R.animator.slide_top_out,
-                        R.animator.slide_top_in,
-                        R.animator.slide_bottom_out)
+                        R.animator.fade_in,
+                        R.animator.fade_out,
+                        R.animator.fade_in,
+                        R.animator.fade_out)
                 .addToBackStack(ScoreGraphFragment.TAG)
                 .replace(R.id.score_container, mScoreGraphFragment, ScoreGraphFragment.TAG)
                 .commit();
@@ -573,8 +576,8 @@ public class ScoreItActivity extends BaseActivity
             }
             mUpdateFab = false;
             getFragmentManager()
-                    .popBackStack(LapFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            update();
+                    .popBackStack(LapFragment.TAG,
+                            FragmentManager.POP_BACK_STACK_INCLUSIVE);
             mLap = null;
         }
     }
@@ -769,6 +772,7 @@ public class ScoreItActivity extends BaseActivity
 
     @Override
     public void onBackStackChanged() {
+        mRippleLayout.start();
         if (null != mLapFragment && mLapFragment.isVisible()) {
             return;
         }

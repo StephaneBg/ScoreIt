@@ -18,6 +18,4 @@
 <resources>
     <integer name="anim_short_time">150</integer>
     <integer name="anim_medium_time">300</integer>
-    <integer name="card_flip_time_full">160</integer>
-    <integer name="card_flip_time_half">80</integer>
 </resources>
