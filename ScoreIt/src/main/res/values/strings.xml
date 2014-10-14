@@ -20,16 +20,11 @@
 
     <string name="app_name" translatable="false">Score It</string>
     <string name="score">Score</string>
-    <string name="graph">Graph</string>
     <string name="belote">Belote</string>
-    <string name="classic">Classic</string>
     <string name="coinche">Coinche</string>
     <string name="surcoinche">Sur-coinche</string>
     <string name="tarot">Tarot</string>
     <string name="universal">Universal</string>
-    <string name="three_players">Three players</string>
-    <string name="four_players">Four players</string>
-    <string name="five_players">Five players</string>
     <string name="team">Team</string>
     <string name="scorer">Taker</string>
     <string name="partner">Partner</string>
@@ -88,10 +83,8 @@
     <string name="less">Less</string>
     <string name="about">About</string>
     <string name="donate">Donate</string>
-    <string name="settings">Settings</string>
     <string name="player_number">Number of players</string>
     <string name="edit_name">Edit name</string>
-    <string name="edit_color">Edit color</string>
     <string name="enter_name">Enter name</string>
     <string name="pick_contact">Pick contact</string>
     <string name="application">App</string>

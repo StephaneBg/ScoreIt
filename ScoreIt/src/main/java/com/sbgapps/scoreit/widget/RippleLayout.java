@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit.widget;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -47,11 +48,33 @@ public class RippleLayout extends FrameLayout {
         super(context, attrs, defStyle);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(context.getResources().getColor(R.color.lighter_gray));
+
+        mAlphaAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                RippleLayout.this.setAlpha(0.0f);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
     }
 
     public void start() {
         mCircleAnimator.setFloatValues(0.0f, 1.0f);
-        mAlphaAnimator.setFloatValues(1.0f, 0.0f);
+        mAlphaAnimator.setFloatValues(1.0f, 0.5f);
         mCircleAnimator.start();
         mAlphaAnimator.start();
     }

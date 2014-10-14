@@ -34,7 +34,6 @@ public class ToggleGroup extends LinearLayout {
      */
     public ToggleGroup(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         init();
     }
 
@@ -115,9 +114,6 @@ public class ToggleGroup extends LinearLayout {
     private void setCheckedId(int id) {
         mCheckedId = id;
         if (mOnCheckedChangeListener != null) {
-
-            //mOnCheckedChangeListener.
-
             mOnCheckedChangeListener.onCheckedChanged(this, mCheckedId);
         }
     }
@@ -125,7 +121,7 @@ public class ToggleGroup extends LinearLayout {
     private void setCheckedStateForView(int viewId, boolean checked) {
         View checkedView = findViewById(viewId);
         if (checkedView != null && checkedView instanceof ToggleButton) {
-            ((ToggleButton) checkedView).setChecked(checked);
+            ((NonUncheckableToggleButton) checkedView).forceSetChecked(checked);
         }
     }
 
