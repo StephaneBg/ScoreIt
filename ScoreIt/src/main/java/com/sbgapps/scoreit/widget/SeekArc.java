@@ -260,7 +260,7 @@ public class SeekArc extends View {
                     updateOnTouch(event);
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    updateOnTouch(event);
+                    //updateOnTouch(event);
                     break;
                 case MotionEvent.ACTION_UP:
                     onStopTrackingTouch();

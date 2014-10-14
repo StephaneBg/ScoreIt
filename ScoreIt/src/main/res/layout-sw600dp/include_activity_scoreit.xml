@@ -57,10 +57,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/primary_accent"/>
+
             <FrameLayout
                 android:id="@+id/secondary_container"
                 android:layout_width="match_parent"
-                android:layout_margin="@dimen/activity_horizontal_margin"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
         </LinearLayout>

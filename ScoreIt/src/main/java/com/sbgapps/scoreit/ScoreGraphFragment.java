@@ -32,12 +32,19 @@ public class ScoreGraphFragment extends Fragment {
 
     public static final String TAG = ScoreGraphFragment.class.getName();
 
+    private int mPointColor;
     private LineGraph mGraph;
     private int[] mScores;
     private int mX;
 
     public GameHelper getGameHelper() {
         return ((ScoreItActivity) getActivity()).getGameHelper();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mPointColor = getActivity().getResources().getColor(R.color.darker_gray);
     }
 
     @Override
@@ -73,12 +80,11 @@ public class ScoreGraphFragment extends Fragment {
     }
 
     public void addLap(Lap lap) {
-        int color = getActivity().getResources().getColor(R.color.darker_gray);
         mX++;
         for (int player = 0; player < getGameHelper().getPlayerCount(); player++) {
             mScores[player] += lap.getScore(player);
             LinePoint p = new LinePoint(mX, mScores[player]);
-            p.setColor(color);
+            p.setColor(mPointColor);
             mGraph.addPointToLine(player, p);
         }
     }
