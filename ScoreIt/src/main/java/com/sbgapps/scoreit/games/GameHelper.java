@@ -186,13 +186,13 @@ public class GameHelper {
             case Game.TAROT:
                 switch (getPlayerCount()) {
                     case 3:
-                        mGame = new TarotThreeGame(mContext);
+                        mGame = new TarotThreeGame();
                         break;
                     case 4:
-                        mGame = new TarotFourGame(mContext);
+                        mGame = new TarotFourGame();
                         break;
                     case 5:
-                        mGame = new TarotFiveGame(mContext);
+                        mGame = new TarotFiveGame();
                         break;
                 }
                 break;

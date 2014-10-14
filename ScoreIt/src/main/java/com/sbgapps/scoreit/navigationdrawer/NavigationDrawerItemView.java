@@ -20,6 +20,7 @@ package com.sbgapps.scoreit.navigationdrawer;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -48,8 +49,7 @@ public class NavigationDrawerItemView extends RelativeLayout {
         this(context, attrs, 0);
     }
 
-    public NavigationDrawerItemView(Context context, AttributeSet attrs,
-                                    int defStyle) {
+    public NavigationDrawerItemView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mRes = context.getResources();
     }
@@ -58,6 +58,8 @@ public class NavigationDrawerItemView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.inject(this);
+        Typeface tf = Typeface.createFromAsset(mRes.getAssets(), "Roboto-Medium.ttf");
+        mItemTitle.setTypeface(tf);
     }
 
     public void bindTo(NavigationDrawerItem item) {

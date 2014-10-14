@@ -17,7 +17,6 @@
 package com.sbgapps.scoreit.games.belote;
 
 import com.google.gson.annotations.SerializedName;
-import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.Player;
 
@@ -32,13 +31,13 @@ public class BeloteLap extends GenericBeloteLap {
     @SerializedName("bonuses")
     protected List<BeloteBonus> mBonuses;
 
-    public BeloteLap(int taker, int points, int belote, List<BeloteBonus> bonuses) {
-        super(taker, points, belote);
+    public BeloteLap(int taker, int points, List<BeloteBonus> bonuses) {
+        super(taker, points);
         mBonuses = bonuses;
     }
 
     public BeloteLap() {
-        this(Player.PLAYER_1, 120, Player.PLAYER_NONE, new ArrayList<BeloteBonus>());
+        this(Player.PLAYER_1, 110, new ArrayList<BeloteBonus>());
     }
 
     public List<BeloteBonus> getBonuses() {
@@ -49,14 +48,22 @@ public class BeloteLap extends GenericBeloteLap {
     public void computeScores() {
         super.computeScores();
         mIsDone = (160 != mPoints);
-        mScores[Player.PLAYER_1] = (Player.PLAYER_1 == mTaker) ? mPoints : getCounterPoints(mPoints);
-        mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mTaker) ? mPoints : getCounterPoints(mPoints);
-        mScores[Player.PLAYER_1] += (Player.PLAYER_1 == mBelote) ? 20 : 0;
-        mScores[Player.PLAYER_2] += (Player.PLAYER_2 == mBelote) ? 20 : 0;
+
+        int scores[] = getScores();
+        if (Player.PLAYER_1 == getScorer()) {
+            mScores[Player.PLAYER_1] = scores[0];
+            mScores[Player.PLAYER_2] = scores[1];
+        } else {
+            mScores[Player.PLAYER_1] = scores[1];
+            mScores[Player.PLAYER_2] = scores[0];
+        }
 
         // Bonuses
-        for(BeloteBonus bonus : mBonuses) {
+        for (BeloteBonus bonus : mBonuses) {
             switch (bonus.get()) {
+                case BeloteBonus.BONUS_BELOTE:
+                    mScores[bonus.getPlayer()] += 20;
+                    break;
                 case BeloteBonus.BONUS_RUN_3:
                     mScores[bonus.getPlayer()] += 20;
                     break;
@@ -81,15 +88,5 @@ public class BeloteLap extends GenericBeloteLap {
     public void set(Lap lap) {
         super.set(lap);
         computeScores();
-    }
-
-    private int getCounterPoints(int points) {
-        if (0 == points) {
-            return 160;
-        } else if (250 == points) {
-            return 0;
-        } else {
-            return 160 - points;
-        }
     }
 }

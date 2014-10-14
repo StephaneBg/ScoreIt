@@ -33,13 +33,13 @@
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/taker"/>
+            android:text="@string/scorer"/>
 
         <Spinner
             android:id="@+id/spinner_taker"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_default"
-            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:spinnerMode="dialog"/>
@@ -58,7 +58,7 @@
             android:id="@+id/spinner_bid"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_default"
-            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:spinnerMode="dialog"/>
@@ -67,38 +67,40 @@
             style="@style/SubHeader"
             android:text="@string/oudlers"/>
 
-        <ToggleButton
-            android:id="@+id/checkbox_petit"
-            android:layout_width="128dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_btn_toggle"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:textOff="@string/petit"
-            android:textOn="@string/petit"/>
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:orientation="horizontal">
 
-        <ToggleButton
-            android:id="@+id/checkbox_twenty_one"
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_btn_toggle"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:textOff="@string/twentyone"
-            android:textOn="@string/twentyone"/>
+            <ToggleButton
+                android:id="@+id/checkbox_petit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="@string/petit"
+                android:textOn="@string/petit"/>
 
-        <ToggleButton
-            android:id="@+id/checkbox_excuse"
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_btn_toggle"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:textOff="@string/excuse"
-            android:textOn="@string/excuse"/>
+            <ToggleButton
+                android:id="@+id/checkbox_twenty_one"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:textOff="@string/twentyone"
+                android:textOn="@string/twentyone"/>
+
+            <ToggleButton
+                android:id="@+id/checkbox_excuse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="@string/excuse"
+                android:textOn="@string/excuse"/>
+        </LinearLayout>
 
         <TextView
             style="@style/SubHeader"
@@ -108,7 +110,7 @@
             android:id="@+id/input_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_default"/>
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
 
         <TextView
             style="@style/SubHeader"

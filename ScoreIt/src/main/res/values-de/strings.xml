@@ -28,7 +28,7 @@
   <string name="four_players">Vier Spieler</string>
   <string name="five_players">Fünf Spieler</string>
   <string name="team">Team</string>
-  <string name="taker">Abnehmer</string>
+  <string name="scorer">Abnehmer</string>
   <string name="partner">Partner</string>
   <string name="us">Wir</string>
   <string name="them">Gegner</string>
@@ -42,7 +42,7 @@
   <string name="filename">Dateiname</string>
   <string name="cancel">Abbrechen</string>
   <string name="clear">Leeren</string>
-  <string name="chart">Anzeigen</string>
+  <string name="view">Anzeigen</string>
   <string name="ok">OK</string>
   <string name="add">Hinzufügen</string>
   <string name="done">Erledigt</string>

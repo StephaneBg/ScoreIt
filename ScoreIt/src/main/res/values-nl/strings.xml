@@ -28,7 +28,7 @@
   <string name="four_players">Vier spelers</string>
   <string name="five_players">Vijf spelers</string>
   <string name="team">Team</string>
-  <string name="taker">Speler</string>
+  <string name="scorer">Speler</string>
   <string name="partner">Partner</string>
   <string name="us">Wij</string>
   <string name="them">Zij</string>
@@ -42,7 +42,7 @@
   <string name="filename">Bestandsnaam</string>
   <string name="cancel">Annuleren</string>
   <string name="clear">Verwijderen</string>
-  <string name="chart">Bekijken</string>
+  <string name="view">Bekijken</string>
   <string name="ok">Oké</string>
   <string name="add">Toevoegen</string>
   <string name="done">Gereed</string>

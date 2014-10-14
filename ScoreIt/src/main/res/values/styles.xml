@@ -17,17 +17,17 @@
 
 <resources>
 
-    <style name="RadioButtonAppTheme" parent="android:Widget.CompoundButton.RadioButton">
-        <item name="android:button">@drawable/btn_radio_selector</item>
+    <style name="ToggleAppTheme" parent="android:Widget.Holo.Light.Button.Toggle">
+        <item name="android:background">@drawable/background_btn_toggle</item>
     </style>
 
     <style name="SpinnerAppTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/spinner_background</item>
     </style>
 
-    <style name="SpinnerDropDownItemAppTheme" parent="android:Widget.DropDownItem.Spinner">
-        <item name="android:checkMark">@drawable/btn_radio_selector</item>
-    </style>
+    <!--<style name="SpinnerDropDownItemAppTheme" parent="android:Widget.DropDownItem.Spinner">-->
+        <!--<item name="android:checkMark">@drawable/btn_radio_selector</item>-->
+    <!--</style>-->
 
     <style name="Divider">
         <item name="android:layout_height">1dp</item>

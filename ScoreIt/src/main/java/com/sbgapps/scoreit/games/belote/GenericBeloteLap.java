@@ -19,36 +19,29 @@ package com.sbgapps.scoreit.games.belote;
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.games.Lap;
 
-import java.util.List;
-
 /**
  * Created by sbaiget on 11/10/13.
  */
 public abstract class GenericBeloteLap implements Lap {
 
-    public static final int[] PROGRESS2POINTS = {80, 90, 100, 110, 120, 130, 140, 150, 160, 250};
-
     protected transient boolean mIsDone = true;
     protected transient int[] mScores;
-    @SerializedName("taker")
-    protected int mTaker;
+    @SerializedName("scorer")
+    protected int mScorer;
     @SerializedName("points")
     protected int mPoints;
-    @SerializedName("belote")
-    protected int mBelote;
 
-    public GenericBeloteLap(int taker, int points, int belote) {
-        mTaker = taker;
+    public GenericBeloteLap(int scorer, int points) {
+        mScorer = scorer;
         mPoints = points;
-        mBelote = belote;
     }
 
-    public int getTaker() {
-        return mTaker;
+    public int getScorer() {
+        return mScorer;
     }
 
-    public void setTaker(int taker) {
-        mTaker = taker;
+    public void setScorer(int scorer) {
+        mScorer = scorer;
     }
 
     public int getPoints() {
@@ -57,14 +50,6 @@ public abstract class GenericBeloteLap implements Lap {
 
     public void setPoints(int points) {
         mPoints = points;
-    }
-
-    public int getBelote() {
-        return mBelote;
-    }
-
-    public void setBelote(int belote) {
-        mBelote = belote;
     }
 
     public boolean isDone() {
@@ -78,9 +63,8 @@ public abstract class GenericBeloteLap implements Lap {
 
     @Override
     public void set(Lap lap) {
-        mTaker = ((GenericBeloteLap) lap).getTaker();
+        mScorer = ((GenericBeloteLap) lap).getScorer();
         mPoints = ((GenericBeloteLap) lap).getPoints();
-        mBelote = ((GenericBeloteLap) lap).getBelote();
     }
 
     @Override
@@ -88,5 +72,24 @@ public abstract class GenericBeloteLap implements Lap {
         if (null == mScores) {
             mScores = new int[2];
         }
+    }
+
+    public int[] getScores() {
+        int[] scores = new int[2];
+        if (160 == mPoints) {
+            scores[0] = 160;
+            scores[1] = 0;
+        } else if (250 == mPoints) {
+            scores[0] = 250;
+            scores[1] = 0;
+        } else {
+            int points = mPoints;
+            int mod = points % 10;
+            scores[0] = points - mod + ((mod >= 5) ? 10 : 0);
+            points = 162 - points;
+            mod = points % 10;
+            scores[1] = points - mod + ((mod >= 5) ? 10 : 0);
+        }
+        return scores;
     }
 }

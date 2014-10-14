@@ -19,10 +19,7 @@ package com.sbgapps.scoreit.games.coinche;
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.belote.BeloteBonus;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
-
-import java.util.List;
 
 /**
  * Created by sbaiget on 11/11/13.
@@ -38,14 +35,14 @@ public class CoincheLap extends GenericBeloteLap {
     @SerializedName("coinche")
     private int mCoinche;
 
-    public CoincheLap(int taker, int points, int belote, int bid, int coinche) {
-        super(taker, points, belote);
+    public CoincheLap(int taker, int points, int bid, int coinche) {
+        super(taker, points);
         mBid = bid;
         mCoinche = coinche;
     }
 
     public CoincheLap() {
-        this(Player.PLAYER_1, 120, Player.PLAYER_NONE, 120, COINCHE_NONE);
+        this(Player.PLAYER_1, 110, 110, COINCHE_NONE);
     }
 
     public int getBid() {
@@ -79,14 +76,14 @@ public class CoincheLap extends GenericBeloteLap {
         int takerPts = mPoints;
         int counterPts = getCounterPoints(mPoints);
 
-        if (Player.PLAYER_NONE != mBelote) {
-            if (((Player.PLAYER_1 == mTaker) && (Player.PLAYER_1 == mBelote)) ||
-                    ((Player.PLAYER_2 == mTaker) && (Player.PLAYER_2 == mBelote))) {
-                takerPts += 20;
-            } else {
-                counterPts += 20;
-            }
-        }
+//        if (Player.PLAYER_NONE != mBelote) {
+//            if (((Player.PLAYER_1 == mScorer) && (Player.PLAYER_1 == mBelote)) ||
+//                    ((Player.PLAYER_2 == mScorer) && (Player.PLAYER_2 == mBelote))) {
+//                takerPts += 20;
+//            } else {
+//                counterPts += 20;
+//            }
+//        }
 
         if ((mPoints >= mBid) && (takerPts > counterPts)) {
             // Deal succeeded
@@ -102,8 +99,8 @@ public class CoincheLap extends GenericBeloteLap {
                     (COINCHE_DOUBLE == mCoinche) ? counterPts * 4 : counterPts;
         }
 
-        mScores[Player.PLAYER_1] = (Player.PLAYER_1 == mTaker) ? takerPts : counterPts;
-        mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mTaker) ? takerPts : counterPts;
+        mScores[Player.PLAYER_1] = (Player.PLAYER_1 == mScorer) ? takerPts : counterPts;
+        mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mScorer) ? takerPts : counterPts;
     }
 
     private int getCounterPoints(int points) {

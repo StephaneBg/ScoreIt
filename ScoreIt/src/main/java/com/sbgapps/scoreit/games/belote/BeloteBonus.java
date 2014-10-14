@@ -29,12 +29,13 @@ import java.io.Serializable;
  */
 public class BeloteBonus implements Serializable {
 
-    public static final int BONUS_RUN_3 = 0;
-    public static final int BONUS_RUN_4 = 1;
-    public static final int BONUS_RUN_5 = 2;
-    public static final int BONUS_FOUR_NORMAL = 3;
-    public static final int BONUS_FOUR_NINE = 4;
-    public static final int BONUS_FOUR_JACK = 5;
+    public static final int BONUS_BELOTE = 0;
+    public static final int BONUS_RUN_3 = 1;
+    public static final int BONUS_RUN_4 = 2;
+    public static final int BONUS_RUN_5 = 3;
+    public static final int BONUS_FOUR_NORMAL = 4;
+    public static final int BONUS_FOUR_NINE = 5;
+    public static final int BONUS_FOUR_JACK = 6;
 
     @SerializedName("bonus")
     private int mBonus;
@@ -42,7 +43,7 @@ public class BeloteBonus implements Serializable {
     private int mPlayer;
 
     public BeloteBonus() {
-        this(BONUS_RUN_3);
+        this(BONUS_BELOTE);
     }
 
     public BeloteBonus(int bonus) {
@@ -56,6 +57,8 @@ public class BeloteBonus implements Serializable {
 
     public static String getLitteralBonus(Context context, int bonus) {
         switch (bonus) {
+            case BeloteBonus.BONUS_BELOTE:
+                return context.getString(R.string.belote);
             case BeloteBonus.BONUS_RUN_3:
                 return context.getString(R.string.run_3);
             case BeloteBonus.BONUS_RUN_4:

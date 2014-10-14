@@ -34,5 +34,5 @@
         android:id="@+id/menu_view"
         android:icon="@drawable/ic_action_view"
         android:showAsAction="ifRoom"
-        android:title="@string/chart"/>
+        android:title="@string/view"/>
 </menu>

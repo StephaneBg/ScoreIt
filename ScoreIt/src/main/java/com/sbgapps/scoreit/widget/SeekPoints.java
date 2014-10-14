@@ -34,7 +34,7 @@ import butterknife.InjectView;
 public class SeekPoints extends FrameLayout {
 
     @InjectView(R.id.points)
-    TextView mPoints;
+    TextView mPointsTv;
     @InjectView(R.id.seekbar_points)
     SeekArc mSeekBarPoints;
     @InjectView(R.id.btn_minus)
@@ -43,7 +43,7 @@ public class SeekPoints extends FrameLayout {
     CircleButton mButtonPlus;
 
     private OnPointsChangedListener mListener;
-    private int mProgress;
+    private int mPoints;
     private String mTag;
 
     public SeekPoints(Context context) {
@@ -63,20 +63,25 @@ public class SeekPoints extends FrameLayout {
         ButterKnife.inject(this);
     }
 
+    public void setPoints(int points) {
+        mPoints = points;
+        updatePoints();
+    }
+
     public void setOnPointsChangedListener(OnPointsChangedListener listener, String tag) {
         mListener = listener;
         mTag = tag;
     }
 
     public void init(int progress, int max, int points) {
-        mProgress = progress;
-        mPoints.setText(Integer.toString(points));
+        mPoints = progress;
+        mPointsTv.setText(Integer.toString(points));
 
         mButtonMinus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mProgress > 0) {
-                    mProgress--;
+                if (mPoints > 0) {
+                    mPoints--;
                     manageProgress();
                 }
             }
@@ -85,8 +90,8 @@ public class SeekPoints extends FrameLayout {
         mButtonPlus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mProgress < mSeekBarPoints.getMax()) {
-                    mProgress++;
+                if (mPoints < mSeekBarPoints.getMax()) {
+                    mPoints++;
                     manageProgress();
                 }
             }
@@ -98,7 +103,7 @@ public class SeekPoints extends FrameLayout {
             @Override
             public void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser) {
                 if (fromUser) {
-                    mProgress = progress;
+                    mPoints = progress;
                     manageProgress();
                 }
             }
@@ -116,15 +121,19 @@ public class SeekPoints extends FrameLayout {
     }
 
     public void manageProgress() {
-        int points = mListener.onPointsChanged(mProgress, mTag);
-        mPoints.setText(Integer.toString(points));
-        mSeekBarPoints.setProgress(mProgress);
-        mButtonMinus.setEnabled(mProgress > 0);
-        mButtonPlus.setEnabled(mProgress < mSeekBarPoints.getMax());
+        mListener.onPointsChanged(mPoints, mTag);
+        updatePoints();
+        mButtonMinus.setEnabled(mPoints > 0);
+        mButtonPlus.setEnabled(mPoints < mSeekBarPoints.getMax());
+    }
+
+    private void updatePoints() {
+        mPointsTv.setText(Integer.toString(mPoints));
+        mSeekBarPoints.setProgress(mPoints);
     }
 
     public interface OnPointsChangedListener {
 
-        public int onPointsChanged(int progress, String tag);
+        public void onPointsChanged(int points, String tag);
     }
 }

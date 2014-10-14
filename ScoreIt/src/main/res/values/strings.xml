@@ -31,7 +31,7 @@
     <string name="four_players">Four players</string>
     <string name="five_players">Five players</string>
     <string name="team">Team</string>
-    <string name="taker">Taker</string>
+    <string name="scorer">Taker</string>
     <string name="partner">Partner</string>
     <string name="us">Us</string>
     <string name="them">Them</string>
@@ -49,7 +49,7 @@
     <string name="filename">Filename</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
-    <string name="chart">Chart</string>
+    <string name="view">View</string>
     <string name="ok">OK</string>
     <string name="add">Add</string>
     <string name="done">Done</string>

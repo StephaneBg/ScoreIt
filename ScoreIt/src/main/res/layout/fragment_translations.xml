@@ -38,7 +38,7 @@
         style="?android:actionButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_location_web_site"
+        android:drawableLeft="@drawable/ic_translate"
         android:gravity="center_vertical"
         android:text="@string/help_translate"/>
 

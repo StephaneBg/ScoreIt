@@ -14,10 +14,9 @@ import java.util.ArrayList;
  */
 public class TarotFourGame extends Game<TarotFourLap> {
 
-    public TarotFourGame(Context context) {
+    public TarotFourGame() {
         mLaps = new ArrayList<>();
         mPlayers = new ArrayList<>(4);
-        Resources r = context.getResources();
         mPlayers.add(new Player("Riri"));
         mPlayers.add(new Player("Fifi"));
         mPlayers.add(new Player("Loulou"));

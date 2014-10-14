@@ -45,6 +45,5 @@
         android:textColor="@color/darker_gray"
         android:textSize="20sp"
         android:textStyle="normal"
-        android:fontFamily="sans-serif-medium"
         tools:text="@string/app_name"/>
 </com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItemView>

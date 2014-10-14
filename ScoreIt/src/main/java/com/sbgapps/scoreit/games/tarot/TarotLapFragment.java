@@ -301,9 +301,8 @@ public class TarotLapFragment extends LapFragment
     }
 
     @Override
-    public int onPointsChanged(int progress, String tag) {
-        getLap().setPoints(progress);
-        return progress;
+    public void onPointsChanged(int points, String tag) {
+        getLap().setPoints(points);
     }
 
     class BidItem {

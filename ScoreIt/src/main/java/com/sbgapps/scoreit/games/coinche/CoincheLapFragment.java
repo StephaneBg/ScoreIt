@@ -25,7 +25,6 @@ import android.widget.RadioGroup;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
 import com.sbgapps.scoreit.widget.SeekPoints;
 
 import butterknife.ButterKnife;
@@ -58,7 +57,7 @@ public class CoincheLapFragment extends LapFragment
         View view = inflater.inflate(R.layout.fragment_lap_coinche, null);
         ButterKnife.inject(this, view);
 
-        switch (getLap().getTaker()) {
+        switch (getLap().getScorer()) {
             case Player.PLAYER_1:
                 mRadioGroupPlayer.check(R.id.rb_player1);
                 break;
@@ -71,54 +70,54 @@ public class CoincheLapFragment extends LapFragment
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.rb_player1:
-                        getLap().setTaker(Player.PLAYER_1);
+                        getLap().setScorer(Player.PLAYER_1);
                         break;
                     case R.id.rb_player2:
-                        getLap().setTaker(Player.PLAYER_2);
+                        getLap().setScorer(Player.PLAYER_2);
                         break;
                 }
             }
         });
 
         mBids.init(
-                pointsToProgress(getLap().getBid()),
-                pointsToProgress(250),
+                getLap().getBid(),
+                157,
                 getLap().getPoints());
         mBids.setOnPointsChangedListener(this, "bid");
 
         mPoints.init(
-                pointsToProgress(getLap().getPoints()),
-                pointsToProgress(250),
+                getLap().getPoints(),
+                157,
                 getLap().getPoints());
         mPoints.setOnPointsChangedListener(this, "points");
 
-        switch (getLap().getBelote()) {
-            case Player.PLAYER_NONE:
-                mRadioGroupBelote.check(R.id.rb_belote_none);
-                break;
-            case Player.PLAYER_1:
-                mRadioGroupBelote.check(R.id.rb_belote_player1);
-                break;
-            case Player.PLAYER_2:
-                mRadioGroupBelote.check(R.id.rb_belote_player2);
-                break;
-        }
-        mRadioGroupBelote.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.rb_belote_none:
-                        getLap().setBelote(Player.PLAYER_NONE);
-                        break;
-                    case R.id.rb_belote_player1:
-                        getLap().setBelote(Player.PLAYER_1);
-                        break;
-                    case R.id.rb_belote_player2:
-                        getLap().setBelote(Player.PLAYER_2);
-                        break;
-                }
-            }
-        });
+//        switch (getLap().getBelote()) {
+//            case Player.PLAYER_NONE:
+//                mRadioGroupBelote.check(R.id.rb_belote_none);
+//                break;
+//            case Player.PLAYER_1:
+//                mRadioGroupBelote.check(R.id.rb_belote_player1);
+//                break;
+//            case Player.PLAYER_2:
+//                mRadioGroupBelote.check(R.id.rb_belote_player2);
+//                break;
+//        }
+//        mRadioGroupBelote.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                switch (checkedId) {
+//                    case R.id.rb_belote_none:
+//                        getLap().setBelote(Player.PLAYER_NONE);
+//                        break;
+//                    case R.id.rb_belote_player1:
+//                        getLap().setBelote(Player.PLAYER_1);
+//                        break;
+//                    case R.id.rb_belote_player2:
+//                        getLap().setBelote(Player.PLAYER_2);
+//                        break;
+//                }
+//            }
+//        });
 
         switch (getLap().getCoinche()) {
             case CoincheLap.COINCHE_NONE:
@@ -150,24 +149,12 @@ public class CoincheLapFragment extends LapFragment
         return view;
     }
 
-    private int progressToPoints(int progress) {
-        return GenericBeloteLap.PROGRESS2POINTS[progress];
-    }
-
-    private int pointsToProgress(int points) {
-        int progress = points / 10 - 8;
-        progress = (17 == progress) ? 8 : progress;
-        return progress;
-    }
-
     @Override
-    public int onPointsChanged(int progress, String tag) {
-        int points = progressToPoints(progress);
+    public void onPointsChanged(int points, String tag) {
         if (tag.equals("bid")) {
             getLap().setBid(points);
         } else if (tag.equals("points")) {
             getLap().setPoints(points);
         }
-        return points;
     }
 }
