@@ -17,16 +17,11 @@
   -->
 <resources>
   <string name="score">Puntuación</string>
-  <string name="graph">Gráfico</string>
   <string name="belote">Belote</string>
-  <string name="classic">Clásico</string>
   <string name="coinche">Coinche</string>
   <string name="surcoinche">Sur-coinche</string>
   <string name="tarot">Tarot</string>
   <string name="universal">Universal</string>
-  <string name="three_players">Tres jugadores</string>
-  <string name="four_players">Cuatro jugadores</string>
-  <string name="five_players">Cinco jugadores</string>
   <string name="team">Equipo</string>
   <string name="scorer">Tomador</string>
   <string name="partner">Compañero</string>
@@ -35,8 +30,12 @@
   <string name="none">Ninguno</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
-  <string name="clear_game">Borrar puntajes</string>
-  <string name="save">¿Quieres guardar?</string>
+  <string name="current_game">Partida Actual</string>
+  <string name="discard">Descartar</string>
+  <string name="reset_scores">Restablecer las puntuaciones</string>
+  <string name="save_create">Guardar y crear</string>
+  <string name="save_load">Guardar y cargar</string>
+  <string name="saved_games">Guardar juegos</string>
   <string name="deleted_lap">Regazo borrado</string>
   <string name="undo">Deshacer</string>
   <string name="filename">Nombre del archivo</string>
@@ -81,10 +80,8 @@
   <string name="less">Menos</string>
   <string name="about">Acerca de</string>
   <string name="donate">Donar</string>
-  <string name="settings">Ajustes</string>
   <string name="player_number">Número de jugadores</string>
   <string name="edit_name">Editar nombre</string>
-  <string name="edit_color">Editar color</string>
   <string name="enter_name">Introducir nombre</string>
   <string name="pick_contact">Seleccionar contacto</string>
   <string name="application">App</string>

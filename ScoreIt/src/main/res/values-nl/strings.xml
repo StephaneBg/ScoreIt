@@ -17,26 +17,25 @@
   -->
 <resources>
   <string name="score">Score</string>
-  <string name="graph">Grafiek</string>
   <string name="belote">Klaverjassen</string>
-  <string name="classic">Klassiek</string>
   <string name="coinche">Coinche</string>
   <string name="surcoinche">Sur-coinche</string>
   <string name="tarot">Franse tarot</string>
   <string name="universal">Universeel</string>
-  <string name="three_players">Drie spelers</string>
-  <string name="four_players">Vier spelers</string>
-  <string name="five_players">Vijf spelers</string>
   <string name="team">Team</string>
-  <string name="scorer">Speler</string>
+  <string name="scorer">Nemer</string>
   <string name="partner">Partner</string>
   <string name="us">Wij</string>
   <string name="them">Zij</string>
   <string name="none">Geen</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
-  <string name="clear_game">Scores verwijderen</string>
-  <string name="save">Wilt u dit opslaan?</string>
+  <string name="current_game">Huidig spel</string>
+  <string name="discard">Weggooien</string>
+  <string name="reset_scores">Reset scores</string>
+  <string name="save_create">Opslaan en aanmaken</string>
+  <string name="save_load">Opslaan en laden</string>
+  <string name="saved_games">Opgeslagen spellen</string>
   <string name="deleted_lap">Ronde verwijderd</string>
   <string name="undo">Ongedaan</string>
   <string name="filename">Bestandsnaam</string>
@@ -81,10 +80,8 @@
   <string name="less">Minder</string>
   <string name="about">Over</string>
   <string name="donate">Doneren</string>
-  <string name="settings">Instellingen</string>
   <string name="player_number">Aantal spelers</string>
   <string name="edit_name">Naam wijzigen</string>
-  <string name="edit_color">Kleur bewerken</string>
   <string name="enter_name">Naam invoeren</string>
   <string name="pick_contact">Contact kiezen</string>
   <string name="application">App</string>

@@ -17,26 +17,25 @@
   -->
 <resources>
   <string name="score">Счет</string>
-  <string name="graph">График</string>
   <string name="belote">Белот</string>
-  <string name="classic">Классическая</string>
   <string name="coinche">Коинч</string>
   <string name="surcoinche">Сюр-Коинч</string>
   <string name="tarot">Таро</string>
   <string name="universal">Универсальный</string>
-  <string name="three_players">Три игрока</string>
-  <string name="four_players">Четыре игрока</string>
-  <string name="five_players">Пять игроков</string>
   <string name="team">Команда</string>
-  <string name="scorer">Берущий</string>
+  <string name="scorer">Продавец</string>
   <string name="partner">Партнёр</string>
   <string name="us">Наше</string>
   <string name="them">Их</string>
   <string name="none">Нет</string>
   <string name="yes">Да</string>
   <string name="no">Нет</string>
-  <string name="clear_game">Очистить счет</string>
-  <string name="save">Вы хотите сохранить?</string>
+  <string name="current_game">Текущая игра</string>
+  <string name="discard">Отменить</string>
+  <string name="reset_scores">Сбросить результаты</string>
+  <string name="save_create">Сохранить и создать</string>
+  <string name="save_load">Сохранение и загрузка</string>
+  <string name="saved_games">Сохраненные игры</string>
   <string name="deleted_lap">Круг удалены</string>
   <string name="undo">Отменить</string>
   <string name="filename">Имя файла</string>
@@ -81,10 +80,8 @@
   <string name="less">Меньше</string>
   <string name="about">О программе</string>
   <string name="donate">Поддержать</string>
-  <string name="settings">Настройки</string>
   <string name="player_number">Количество игроков</string>
   <string name="edit_name">Изменить имя</string>
-  <string name="edit_color">Изменить цвет</string>
   <string name="enter_name">Введите имя</string>
   <string name="pick_contact">Выберите контакт</string>
   <string name="application">Aпп</string>

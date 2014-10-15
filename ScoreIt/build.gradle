@@ -66,7 +66,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.github.frankiesardo:linearlistview:1.0.1'
     compile 'com.anjlab.android.iab.v3:library:1.0.8@aar'
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.4'
     compile 'com.jakewharton:butterknife:5.1.1'
     compile "com.daimajia.swipelayout:library:1.0.4@aar"
 

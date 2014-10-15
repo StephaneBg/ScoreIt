@@ -67,6 +67,7 @@ public class AboutActivity extends BaseActivity {
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
+            actionBar.setLogo(R.drawable.ic_navigation_back);
         }
     }
 

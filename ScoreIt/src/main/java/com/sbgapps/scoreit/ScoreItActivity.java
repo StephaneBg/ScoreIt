@@ -117,7 +117,6 @@ public class ScoreItActivity extends BaseActivity
         mGameHelper = new GameHelper(this);
         mGameHelper.loadLaps();
 
-        setAccentDecor();
         setContentView(R.layout.activity_scoreit);
         ButterKnife.inject(this);
         mIsTablet = (null != findViewById(R.id.secondary_container));
@@ -181,6 +180,7 @@ public class ScoreItActivity extends BaseActivity
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setLogo(R.drawable.ic_hamburger);
 
         mSelectedPosition = mGameHelper.getPlayedGame();
         selectItem(mSelectedPosition);
@@ -227,6 +227,9 @@ public class ScoreItActivity extends BaseActivity
             } else {
                 outState.putSerializable("lap", mLap);
             }
+        }
+        if (null != mEditedPlayer) {
+            outState.putInt("editedPlayer", mEditedPlayer.hashCode());
         }
         outState.putBundle("snackbar", mSnackBar.onSaveInstanceState());
     }
@@ -402,6 +405,7 @@ public class ScoreItActivity extends BaseActivity
                     int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                     name = cursor.getString(columnIndex);
                     mEditedPlayer.setName(name);
+                    mEditedPlayer = null;
                     mHeaderFragment.update();
                 }
                 break;
@@ -727,6 +731,7 @@ public class ScoreItActivity extends BaseActivity
                         String name = editText.getText().toString();
                         if (!name.isEmpty()) {
                             mEditedPlayer.setName(name);
+                            mEditedPlayer = null;
                             mHeaderFragment.update();
                             if (mScoreListFragment.isVisible()) mScoreListFragment.update();
                         }

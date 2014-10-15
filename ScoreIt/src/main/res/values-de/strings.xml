@@ -17,26 +17,25 @@
   -->
 <resources>
   <string name="score">Score</string>
-  <string name="graph">Diagramm</string>
   <string name="belote">Belote</string>
-  <string name="classic">Klassisch</string>
   <string name="coinche">Coinche</string>
   <string name="surcoinche">Sur-Coinche</string>
   <string name="tarot">Tarot</string>
   <string name="universal">Universell</string>
-  <string name="three_players">Drei Spieler</string>
-  <string name="four_players">Vier Spieler</string>
-  <string name="five_players">Fünf Spieler</string>
   <string name="team">Team</string>
-  <string name="scorer">Abnehmer</string>
+  <string name="scorer">Nehmer</string>
   <string name="partner">Partner</string>
   <string name="us">Wir</string>
   <string name="them">Gegner</string>
   <string name="none">Keiner</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
-  <string name="clear_game">Lösche Score</string>
-  <string name="save">Möchten Sie diese speichern?</string>
+  <string name="current_game">Aktuelle Spiel</string>
+  <string name="discard">Verwerfen</string>
+  <string name="reset_scores">Reset-Resultate</string>
+  <string name="save_create">Speichern und erstellen</string>
+  <string name="save_load">Speichern und laden</string>
+  <string name="saved_games">Gespeicherte Spiele</string>
   <string name="deleted_lap">Runde gelöscht</string>
   <string name="undo">Rückgängig</string>
   <string name="filename">Dateiname</string>
@@ -81,10 +80,8 @@
   <string name="less">Weniger</string>
   <string name="about">Über</string>
   <string name="donate">Spenden</string>
-  <string name="settings">Einstellungen</string>
   <string name="player_number">Spieleranzahl</string>
   <string name="edit_name">Bearbeite Name</string>
-  <string name="edit_color">Farbe bearbeiten</string>
   <string name="enter_name">Namen eingeben</string>
   <string name="pick_contact">Wähle einen Kontakt</string>
   <string name="application">App</string>

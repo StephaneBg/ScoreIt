@@ -17,14 +17,11 @@
 package com.sbgapps.scoreit;
 
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.Window;
 import android.view.WindowManager;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.sbgapps.scoreit.util.TypefaceSpan;
 
 /**
@@ -44,26 +41,9 @@ public class BaseActivity extends Activity {
         mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
     }
 
-    public void setAccentDecor() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window win = getWindow();
-            WindowManager.LayoutParams winParams = win.getAttributes();
-            final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-            winParams.flags |= bits;
-            win.setAttributes(winParams);
-        }
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintResource(R.drawable.background_status_bar);
-        }
-    }
-
     public void setupFauxDialog() {
         TypedValue tv = new TypedValue();
-        if (!getTheme().resolveAttribute(R.attr.isDialog, tv, true) || tv.data == 0) {
-            setAccentDecor();
-        } else {
+        if (getTheme().resolveAttribute(R.attr.isDialog, tv, true) && tv.data != 0) {
             DisplayMetrics dm = getResources().getDisplayMetrics();
 
             WindowManager.LayoutParams params = getWindow().getAttributes();
