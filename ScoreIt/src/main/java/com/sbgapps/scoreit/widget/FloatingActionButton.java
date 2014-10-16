@@ -227,6 +227,7 @@ public class FloatingActionButton extends ImageView {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setBackgroundDrawable(Drawable background) {
         if (background instanceof ColorDrawable) {
             ColorDrawable cd = (ColorDrawable) background;

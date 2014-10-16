@@ -463,9 +463,9 @@ public class ScoreItActivity extends BaseActivity
         invalidateOptionsMenu();
 
         mSnackBar.show(
-                getString(R.string.deleted_lap),
-                getString(R.string.undo),
-                R.color.secondary_accent,
+                R.string.deleted_lap,
+                R.string.undo,
+                SnackBar.Style.ALERT,
                 0,
                 token,
                 SnackBar.MED_SNACK);
