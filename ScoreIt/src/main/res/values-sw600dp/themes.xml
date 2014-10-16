@@ -17,9 +17,6 @@
 
 <resources>
 
-    <style name="Theme.ScoreIt" parent="AppTheme">
-    </style>
-
     <style name="Theme.Adaptive" parent="@android:style/Theme.Holo.Light.Dialog">
         <item name="isDialog">true</item>
         <item name="android:windowNoTitle">true</item>

@@ -106,10 +106,6 @@ public class ScoreItActivity extends BaseActivity
         return mLap;
     }
 
-    public boolean isTablet() {
-        return mIsTablet;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,7 +176,6 @@ public class ScoreItActivity extends BaseActivity
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setLogo(R.drawable.ic_hamburger);
 
         mSelectedPosition = mGameHelper.getPlayedGame();
         selectItem(mSelectedPosition);

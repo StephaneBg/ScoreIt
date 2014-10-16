@@ -18,10 +18,12 @@
 <resources>
 
     <style name="Theme.ScoreIt" parent="AppTheme">
+        <item name="android:logo">@drawable/ic_hamburger</item>
     </style>
 
     <style name="Theme.Adaptive" parent="AppTheme">
         <item name="isDialog">false</item>
+        <item name="android:logo">@drawable/ic_navigation_back</item>
     </style>
 
     <style name="AppTheme" parent="@android:Theme.Holo.Light">

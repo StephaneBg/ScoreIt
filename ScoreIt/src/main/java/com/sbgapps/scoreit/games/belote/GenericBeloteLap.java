@@ -84,11 +84,9 @@ public abstract class GenericBeloteLap implements Lap {
             scores[1] = 0;
         } else {
             int points = mPoints;
-            int mod = points % 10;
-            scores[0] = points - mod + ((mod >= 5) ? 10 : 0);
-            points = 162 - points;
-            mod = points % 10;
-            scores[1] = points - mod + ((mod >= 5) ? 10 : 0);
+            scores[0] = ((points + 5) / 10) * 10;
+            points = 162 - mPoints;
+            scores[1] = ((points + 5) / 10) * 10;
         }
         return scores;
     }
