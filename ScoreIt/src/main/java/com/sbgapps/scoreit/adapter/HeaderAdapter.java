@@ -65,7 +65,7 @@ public class HeaderAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder h;
 
         if (null == convertView) {
@@ -85,7 +85,7 @@ public class HeaderAdapter extends BaseAdapter {
         h.name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActivity.editName(info.mPlayer);
+                mActivity.editName(position);
             }
         });
 

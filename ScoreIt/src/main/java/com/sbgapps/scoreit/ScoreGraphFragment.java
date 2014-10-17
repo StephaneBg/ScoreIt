@@ -22,9 +22,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.echo.holographlibrary.Line;
-import com.echo.holographlibrary.LineGraph;
-import com.echo.holographlibrary.LinePoint;
+import com.sbgapps.scoreit.widget.linechart.Line;
+import com.sbgapps.scoreit.widget.linechart.LineGraph;
+import com.sbgapps.scoreit.widget.linechart.LinePoint;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 

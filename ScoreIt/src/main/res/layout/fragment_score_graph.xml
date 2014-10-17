@@ -21,11 +21,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.echo.holographlibrary.LineGraph
+    <com.sbgapps.scoreit.widget.linechart.LineGraph
         android:id="@+id/line_graph"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        app:lineAxisColor="@color/lighter_gray"
-        app:lineUseDip="true"/>
+        app:lineAxisColor="@color/lighter_gray"/>
 </FrameLayout>

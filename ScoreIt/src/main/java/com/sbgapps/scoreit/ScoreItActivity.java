@@ -87,7 +87,7 @@ public class ScoreItActivity extends BaseActivity
     private int mSelectedPosition = 0;
     private boolean mIsTablet;
     private GameHelper mGameHelper;
-    private Player mEditedPlayer;
+    private int mEditedPlayer = Player.PLAYER_NONE;
     private Lap mLap;
     private boolean mIsEdited = false;
     private boolean mUpdateFab = false;
@@ -223,9 +223,7 @@ public class ScoreItActivity extends BaseActivity
                 outState.putSerializable("lap", mLap);
             }
         }
-        if (null != mEditedPlayer) {
-            outState.putInt("editedPlayer", mEditedPlayer.hashCode());
-        }
+        if (Player.PLAYER_NONE != mEditedPlayer) outState.putInt("editedPlayer", mEditedPlayer);
         outState.putBundle("snackbar", mSnackBar.onSaveInstanceState());
     }
 
@@ -233,6 +231,7 @@ public class ScoreItActivity extends BaseActivity
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mSnackBar.onRestoreInstanceState(savedInstanceState.getBundle("snackbar"));
+        mEditedPlayer = savedInstanceState.getInt("editedPlayer", Player.PLAYER_NONE);
     }
 
     @Override
@@ -399,8 +398,8 @@ public class ScoreItActivity extends BaseActivity
                 if (cursor.moveToFirst()) {
                     int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                     name = cursor.getString(columnIndex);
-                    mEditedPlayer.setName(name);
-                    mEditedPlayer = null;
+                    mGameHelper.getPlayer(mEditedPlayer).setName(name);
+                    mEditedPlayer = Player.PLAYER_NONE;
                     mHeaderFragment.update();
                 }
                 break;
@@ -471,7 +470,7 @@ public class ScoreItActivity extends BaseActivity
                 SnackBar.MED_SNACK);
     }
 
-    public void editName(Player player) {
+    public void editName(int player) {
         if (!mIsTablet
                 && null != mLapFragment
                 && mLapFragment.isVisible()) {
@@ -725,8 +724,8 @@ public class ScoreItActivity extends BaseActivity
                     public void onConfirmClick() {
                         String name = editText.getText().toString();
                         if (!name.isEmpty()) {
-                            mEditedPlayer.setName(name);
-                            mEditedPlayer = null;
+                            mGameHelper.getPlayer(mEditedPlayer).setName(name);
+                            mEditedPlayer = Player.PLAYER_NONE;
                             mHeaderFragment.update();
                             if (mScoreListFragment.isVisible()) mScoreListFragment.update();
                         }
