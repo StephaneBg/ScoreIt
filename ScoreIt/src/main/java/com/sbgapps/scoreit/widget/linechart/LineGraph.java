@@ -58,6 +58,7 @@ public class LineGraph extends View {
     private OnPointClickedListener mListener;
     private Bitmap mFullImage;
     private Canvas mCanvas;
+    private int mStrokeWidth;
 
     public LineGraph(Context context) {
         this(context, null);
@@ -74,6 +75,8 @@ public class LineGraph extends View {
         mAxisColor = a.getColor(R.styleable.LineGraph_lineAxisColor, Color.LTGRAY);
         mBackgroundColor = a.getColor(R.styleable.LineGraph_lineBackground, Color.WHITE);
         a.recycle();
+
+        mStrokeWidth = getPixelForDip(2);
     }
 
     public void removeAllLines() {
@@ -112,6 +115,17 @@ public class LineGraph extends View {
 
     public void setRangeXRatio(double rr) {
         mRangeXRatio = rr;
+    }
+
+    public int getStrokeWidth() {
+        return mStrokeWidth;
+    }
+
+    public void setStrokeWidth(int strokeWidth) {
+        if (strokeWidth < 0) {
+            throw new IllegalArgumentException("strokeWidth must not be less than zero");
+        }
+        mStrokeWidth = getPixelForDip(strokeWidth);
     }
 
     public void addPointToLine(int lineIndex, LinePoint point) {
@@ -347,7 +361,7 @@ public class LineGraph extends View {
             float lastYPixels = 0, newXPixels = 0;
 
             mPaint.setColor(line.getColor());
-            mPaint.setStrokeWidth(getStrokeWidth(line));
+            mPaint.setStrokeWidth(mStrokeWidth);
 
             for (LinePoint p : line.getPoints()) {
                 float yPercent = (p.getY() - minY) / (maxY - minY);
@@ -370,7 +384,7 @@ public class LineGraph extends View {
         int pointCount = 0;
         for (Line line : mLines) {
             mPaint.setColor(line.getColor());
-            mPaint.setStrokeWidth(getStrokeWidth(line));
+            mPaint.setStrokeWidth(mStrokeWidth);
             mPaint.setStrokeCap(Paint.Cap.ROUND);
 
             if (line.isShowingPoints()) {
@@ -380,7 +394,7 @@ public class LineGraph extends View {
                     float xPixels = padding + (xPercent * usableWidth);
                     float yPixels = getHeight() - padding - (usableHeight * yPercent);
 
-                    int outerRadius = getPixelForDip(line.getStrokeWidth() + 4);
+                    int outerRadius = getPixelForDip(mStrokeWidth + 4);
                     int innerRadius = outerRadius / 2;
 
                     mPaint.setColor(p.getColor());
@@ -410,11 +424,6 @@ public class LineGraph extends View {
             }
         }
         canvas.drawBitmap(mFullImage, 0, 0, null);
-    }
-
-    private int getStrokeWidth(Line line) {
-        int strokeWidth = getPixelForDip(line.getStrokeWidth());
-        return strokeWidth;
     }
 
     private int getPixelForDip(int dipValue) {

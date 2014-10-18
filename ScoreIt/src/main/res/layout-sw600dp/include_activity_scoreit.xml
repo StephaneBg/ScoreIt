@@ -22,6 +22,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lighter_gray"
     tools:context="ScoreItActivity">
 
     <View
@@ -30,12 +31,6 @@
         android:layout_height="@dimen/height_extended_ab"
         android:background="@color/primary_accent"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/back"
-        android:background="@color/lighter_gray"/>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -43,38 +38,44 @@
         android:layout_marginLeft="120dp"
         android:layout_marginRight="120dp">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:id="@+id/top_card"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:background="@drawable/bg_card"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:cardCornerRadius="4dp">
 
-            <FrameLayout
-                android:id="@+id/header_container"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/primary_accent"/>
+                <FrameLayout
+                    android:id="@+id/header_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-            <FrameLayout
-                android:id="@+id/secondary_container"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-        </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/primary_accent"/>
 
-        <FrameLayout
+                <FrameLayout
+                    android:id="@+id/secondary_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:background="@drawable/bg_card">
+            app:cardCornerRadius="4dp">
 
             <FrameLayout
                 android:id="@+id/score_container"
@@ -86,7 +87,7 @@
                 android:background="@color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
-        </FrameLayout>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
 

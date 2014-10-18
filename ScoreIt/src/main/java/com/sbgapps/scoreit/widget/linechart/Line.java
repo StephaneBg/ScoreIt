@@ -29,19 +29,6 @@ public class Line {
     private ArrayList<LinePoint> mPoints = new ArrayList<LinePoint>();
     private int mColor;
     private boolean mShowPoints = true;
-    private int mStrokeWidth = 2;
-
-
-    public int getStrokeWidth() {
-        return mStrokeWidth;
-    }
-
-    public void setStrokeWidth(int strokeWidth) {
-        if (strokeWidth < 0) {
-            throw new IllegalArgumentException("strokeWidth must not be less than zero");
-        }
-        mStrokeWidth = strokeWidth;
-    }
 
     public int getColor() {
         return mColor;
