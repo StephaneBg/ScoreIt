@@ -57,7 +57,7 @@ public class NavigationDrawerAdapter extends BindableAdapter<NavigationDrawerIte
 
     @Override
     public View newView(LayoutInflater inflater, int position, ViewGroup container) {
-        return inflater.inflate(R.layout.navigation_drawer_item, container, false);
+        return inflater.inflate(R.layout.list_item_nav_drawer, container, false);
     }
 
     @Override

@@ -68,8 +68,7 @@ dependencies {
     compile 'com.github.frankiesardo:linearlistview:1.0.1@aar'
     compile 'com.anjlab.android.iab.v3:library:1.0.8@aar'
     compile 'com.jakewharton:butterknife:5.1.2'
-    compile "com.daimajia.swipelayout:library:1.0.4@aar"
-    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.swipelayout:library:1.0.4@aar'
 
     compile project(':L-Dialogs')
     compile project(':SnackBar')

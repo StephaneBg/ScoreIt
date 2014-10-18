@@ -1,18 +1,15 @@
 ScoreIt Application
 =======================
 
-An application to count points for card games:
+An application to count points for games:
 - Universal counter
 - Tarot
 - Belote
-- Coinche
 
 ![screenshot](https://raw.github.com/StephaneBg/ScoreItProject/master/screenshot.png "screenshot")
 
-Download
---------
-
-[Google Play](https://play.google.com/store/apps/details?id=com.sbgapps.scoreit)
+<a href="https://play.google.com/store/apps/details?id=com.sbgapps.scoreit"><img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+</a>
 
 
 Credits
