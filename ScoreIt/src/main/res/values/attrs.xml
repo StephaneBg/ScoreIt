@@ -17,10 +17,6 @@
 
 <resources>
 
-    <declare-styleable name="AdaptiveTheme">
-        <attr name="isDialog" format="boolean"/>
-    </declare-styleable>
-
     <declare-styleable name="PagerSlidingTabStrip">
         <attr name="pstsIndicatorColor" format="color"/>
         <attr name="pstsUnderlineColor" format="color"/>

@@ -16,8 +16,8 @@
 
 package com.sbgapps.scoreit;
 
-import android.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.MenuItem;
@@ -40,9 +40,8 @@ public class SavedGamesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_saved_games);
-        setupFauxDialog();
 
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
             SpannableString title = new SpannableString(getResources().getString(R.string.saved_games));
             title.setSpan(getTypefaceSpan(), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -65,6 +64,11 @@ public class SavedGamesActivity extends BaseActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_saved_games;
     }
 
     @Override

@@ -31,8 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_default"
         android:layout_marginTop="@dimen/margin_default"
-        android:layout_toLeftOf="@+id/btn_remove_announce"
-        android:spinnerMode="dialog"/>
+        android:layout_toLeftOf="@+id/btn_remove_announce"/>
 
     <Spinner
         android:id="@+id/spinner_player"
@@ -41,8 +40,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/spinner_announce"
-        android:layout_toLeftOf="@+id/btn_remove_announce"
-        android:spinnerMode="dialog"/>
+        android:layout_toLeftOf="@+id/btn_remove_announce"/>
 
     <ImageButton
         android:id="@+id/btn_remove_announce"

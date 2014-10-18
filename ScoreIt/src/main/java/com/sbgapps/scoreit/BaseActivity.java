@@ -16,21 +16,20 @@
 
 package com.sbgapps.scoreit;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.WindowManager;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.sbgapps.scoreit.util.TypefaceSpan;
 
 /**
  * Created by Stéphane on 31/07/2014.
  */
-public class BaseActivity extends Activity {
+public abstract class BaseActivity extends ActionBarActivity {
 
     private TypefaceSpan mTypefaceSpan;
-
     public TypefaceSpan getTypefaceSpan() {
         return mTypefaceSpan;
     }
@@ -38,22 +37,18 @@ public class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutResource());
         mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
     }
 
-    public void setupFauxDialog() {
-        TypedValue tv = new TypedValue();
-        if (getTheme().resolveAttribute(R.attr.isDialog, tv, true) && tv.data != 0) {
-            DisplayMetrics dm = getResources().getDisplayMetrics();
+    protected abstract int getLayoutResource();
 
-            WindowManager.LayoutParams params = getWindow().getAttributes();
-            params.width = getResources().getDimensionPixelSize(R.dimen.dialog_width);
-            params.height = Math.min(
-                    getResources().getDimensionPixelSize(R.dimen.dialog_max_height),
-                    dm.heightPixels * 3 / 4);
-            params.alpha = 1.0f;
-            params.dimAmount = 0.5f;
-            getWindow().setAttributes(params);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
         }
+        return super.onOptionsItemSelected(item);
     }
 }

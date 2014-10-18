@@ -42,7 +42,7 @@
             android:theme="@style/Theme.Adaptive"/>
 
         <activity
-            android:name="com.sbgapps.scoreit.AboutActivity"
+            android:name=".AboutActivity"
             android:theme="@style/Theme.Adaptive"/>
     </application>
 

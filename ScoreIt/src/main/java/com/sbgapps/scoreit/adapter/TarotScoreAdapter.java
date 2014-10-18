@@ -17,6 +17,7 @@
 package com.sbgapps.scoreit.adapter;
 
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -71,8 +72,11 @@ public class TarotScoreAdapter extends ScoreListAdapter {
                 summary += " • " + TarotBonus.getLitteralBonus(getActivity(), bonus.get());
             }
         }
+        Typeface tf = Typeface.createFromAsset(r.getAssets(), "Roboto-Medium.ttf");
         TextView textView = (TextView) convertView.findViewById(R.id.summary);
         textView.setText(summary);
+        textView.setTypeface(tf);
+
     }
 
     @Override

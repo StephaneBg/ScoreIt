@@ -17,39 +17,26 @@
 
 <resources>
 
-    <style name="Theme.ScoreIt" parent="AppTheme">
-        <item name="android:logo">@drawable/ic_hamburger</item>
+    <style name="Theme.ScoreIt" parent="AppTheme.Base">
     </style>
 
-    <style name="Theme.Adaptive" parent="AppTheme">
-        <item name="isDialog">false</item>
-        <item name="android:logo">@drawable/ic_navigation_back</item>
+    <style name="Theme.Adaptive" parent="AppTheme.Adaptive">
     </style>
 
-    <style name="AppTheme" parent="@android:Theme.Holo.Light">
-        <item name="android:actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
-        <item name="android:actionBarSize">@dimen/height_ab</item>
-        <item name="android:actionMenuTextColor">@color/white</item>
-        <item name="android:actionOverflowButtonStyle">@style/ButtonOverflow</item>
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:textColorHighlight">@color/secondary_accent</item>
-        <item name="android:textColor">@color/darker_gray</item>
-        <item name="android:buttonStyleToggle">@style/ToggleAppTheme</item>
-        <item name="android:homeAsUpIndicator">@null</item>
+        <item name="colorPrimary">@color/primary_accent</item>
+        <item name="colorPrimaryDark">@color/primary_accent_dark</item>
+        <item name="colorAccent">@color/secondary_accent</item>
     </style>
 
-    <style name="ActionBar.Solid.Apptheme" parent="@android:Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/primary_accent</item>
-        <item name="android:titleTextStyle">@style/ActionBar.Solid.Title</item>
+    <style name="AppTheme.Adaptive" parent="Theme.AppCompat.Light.DialogWhenLarge">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorPrimary">@color/primary_accent</item>
+        <item name="colorPrimaryDark">@color/primary_accent_dark</item>
+        <item name="colorAccent">@color/secondary_accent</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
-
-    <style name="ActionBar.Solid.Title" parent="android:TextAppearance.Holo.Widget.ActionBar.Title.Inverse">
-        <item name="android:textSize">@dimen/font_ab</item>
-    </style>
-
-    <style name="ButtonOverflow" parent="android:Widget.Holo.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_action_overflow</item>
-    </style>
-
 </resources>

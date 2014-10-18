@@ -24,8 +24,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Menu;
@@ -110,11 +110,11 @@ public class ScoreItActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ButterKnife.inject(this);
+
         mGameHelper = new GameHelper(this);
         mGameHelper.loadLaps();
 
-        setContentView(R.layout.activity_scoreit);
-        ButterKnife.inject(this);
         mIsTablet = (null != findViewById(R.id.secondary_container));
 
         final FragmentManager fragmentManager = getFragmentManager();
@@ -158,8 +158,10 @@ public class ScoreItActivity extends BaseActivity
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about), false));
         mNavigationDrawer.replaceWith(mNavigationItems);
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.drawable.ic_navigation_drawer, R.string.navigation_drawer_open,
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                mDrawerLayout,
+                R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close) {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
@@ -174,8 +176,8 @@ public class ScoreItActivity extends BaseActivity
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         mSelectedPosition = mGameHelper.getPlayedGame();
         selectItem(mSelectedPosition);
@@ -203,6 +205,11 @@ public class ScoreItActivity extends BaseActivity
 
         mSnackBar = new SnackBar(this);
         mSnackBar.setOnClickListener(this);
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_scoreit;
     }
 
     @Override
@@ -355,7 +362,7 @@ public class ScoreItActivity extends BaseActivity
         }
 
         title.setSpan(getTypefaceSpan(), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        getActionBar().setTitle(title);
+        getSupportActionBar().setTitle(title);
     }
 
     private void onNavigationDrawerItemSelected(int position) {

@@ -16,7 +16,6 @@
 
 package com.sbgapps.scoreit;
 
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -24,6 +23,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -50,7 +50,6 @@ public class AboutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_about);
-        setupFauxDialog();
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
@@ -60,7 +59,7 @@ public class AboutActivity extends BaseActivity {
         PagerSlidingTabStrip slidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
         slidingTabLayout.setViewPager(viewPager);
 
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
             SpannableString title = new SpannableString(getResources().getString(R.string.about));
             title.setSpan(getTypefaceSpan(), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -68,6 +67,11 @@ public class AboutActivity extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
         }
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_about;
     }
 
     @Override
