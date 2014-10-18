@@ -26,6 +26,7 @@
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:buttonStyleToggle">@style/ToggleAppTheme</item>
         <item name="colorPrimary">@color/primary_accent</item>
         <item name="colorPrimaryDark">@color/primary_accent_dark</item>
         <item name="colorAccent">@color/secondary_accent</item>
@@ -34,6 +35,7 @@
     <style name="AppTheme.Adaptive" parent="Theme.AppCompat.Light.DialogWhenLarge">
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:buttonStyleToggle">@style/ToggleAppTheme</item>
         <item name="colorPrimary">@color/primary_accent</item>
         <item name="colorPrimaryDark">@color/primary_accent_dark</item>
         <item name="colorAccent">@color/secondary_accent</item>

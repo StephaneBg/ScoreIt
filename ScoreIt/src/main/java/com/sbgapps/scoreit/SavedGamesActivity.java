@@ -70,15 +70,4 @@ public class SavedGamesActivity extends BaseActivity {
     protected int getLayoutResource() {
         return R.layout.activity_saved_games;
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }

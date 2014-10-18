@@ -16,18 +16,19 @@
 
 package com.sbgapps.scoreit;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -117,7 +118,7 @@ public class ScoreItActivity extends BaseActivity
 
         mIsTablet = (null != findViewById(R.id.secondary_container));
 
-        final FragmentManager fragmentManager = getFragmentManager();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.addOnBackStackChangedListener(this);
 
         // Init fragments
@@ -387,7 +388,7 @@ public class ScoreItActivity extends BaseActivity
                 startActivity(intent);
                 return;
         }
-        getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         invalidateOptionsMenu();
         loadFragments(true);
         selectItem(position);
@@ -504,13 +505,13 @@ public class ScoreItActivity extends BaseActivity
                 break;
         }
         mUpdateFab = true;
-        getFragmentManager()
+        getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
-                        R.animator.fade_in,
-                        R.animator.fade_out,
-                        R.animator.fade_in,
-                        R.animator.fade_out)
+                        R.anim.fade_in,
+                        R.anim.fade_out,
+                        R.anim.fade_in,
+                        R.anim.fade_out)
                 .replace(R.id.score_container, mLapFragment, LapFragment.TAG)
                 .addToBackStack(LapFragment.TAG)
                 .commit();
@@ -518,21 +519,21 @@ public class ScoreItActivity extends BaseActivity
 
     public void loadFragments(boolean anim) {
         mHeaderFragment = new HeaderFragment();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        if (anim) ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         ft.replace(R.id.header_container, mHeaderFragment, HeaderFragment.TAG)
                 .commit();
 
         mScoreListFragment = new ScoreListFragment();
-        ft = getFragmentManager().beginTransaction();
-        if (anim) ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
+        ft = getSupportFragmentManager().beginTransaction();
+        if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         ft.replace(R.id.score_container, mScoreListFragment, ScoreListFragment.TAG)
                 .commit();
 
         if (mIsTablet) {
             mScoreGraphFragment = new ScoreGraphFragment();
-            ft = getFragmentManager().beginTransaction();
-            if (anim) ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
+            ft = getSupportFragmentManager().beginTransaction();
+            if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
             ft.replace(R.id.secondary_container, mScoreGraphFragment, ScoreGraphFragment.TAG)
                     .commit();
         }
@@ -540,7 +541,7 @@ public class ScoreItActivity extends BaseActivity
 
     public void switchScoreViews() {
         if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
-            getFragmentManager().popBackStack(ScoreGraphFragment.TAG,
+            getSupportFragmentManager().popBackStack(ScoreGraphFragment.TAG,
                     android.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
             return;
         }
@@ -548,13 +549,13 @@ public class ScoreItActivity extends BaseActivity
         if (null == mScoreGraphFragment)
             mScoreGraphFragment = new ScoreGraphFragment();
 
-        getFragmentManager()
+        getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
-                        R.animator.fade_in,
-                        R.animator.fade_out,
-                        R.animator.fade_in,
-                        R.animator.fade_out)
+                        R.anim.fade_in,
+                        R.anim.fade_out,
+                        R.anim.fade_in,
+                        R.anim.fade_out)
                 .addToBackStack(ScoreGraphFragment.TAG)
                 .replace(R.id.score_container, mScoreGraphFragment, ScoreGraphFragment.TAG)
                 .commit();
@@ -580,7 +581,7 @@ public class ScoreItActivity extends BaseActivity
                 mGameHelper.addLap(mLap);
             }
             mUpdateFab = false;
-            getFragmentManager()
+            getSupportFragmentManager()
                     .popBackStack(LapFragment.TAG,
                             FragmentManager.POP_BACK_STACK_INCLUSIVE);
             mLap = null;
@@ -594,7 +595,7 @@ public class ScoreItActivity extends BaseActivity
             mScoreListFragment.getListAdapter().removeAll();
         if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
             mScoreGraphFragment.update();
-            if (!mIsTablet) getFragmentManager().popBackStack();
+            if (!mIsTablet) getSupportFragmentManager().popBackStack();
         }
         invalidateOptionsMenu();
     }
@@ -793,6 +794,15 @@ public class ScoreItActivity extends BaseActivity
         mUpdateFab = false;
         invalidateOptionsMenu();
         update();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
+            mDrawerLayout.closeDrawer(Gravity.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
