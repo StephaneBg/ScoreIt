@@ -27,6 +27,7 @@
     <color name="game_lost">@color/tertiary_accent</color>
 
     <color name="lighter_gray">#F0F0F0</color>
+    <color name="select_gray">#E0E0E0</color>
     <color name="darker_gray">#4D4D4D</color>
 
     <color name="color_player1">#F5943C</color>
