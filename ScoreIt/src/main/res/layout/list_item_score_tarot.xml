@@ -29,11 +29,11 @@
     <include
         layout="@layout/include_bottom_score_list"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/height_ab"/>
+        android:layout_height="@dimen/list_item_height"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_ab"
+        android:layout_height="@dimen/list_item_height"
         android:background="@color/white">
 
         <TextView

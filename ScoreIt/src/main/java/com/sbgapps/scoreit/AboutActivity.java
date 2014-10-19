@@ -48,8 +48,6 @@ public class AboutActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_about);
-
         SectionsPagerAdapter sectionsPagerAdapter
                 = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -64,8 +62,6 @@ public class AboutActivity extends BaseActivity {
             SpannableString title = new SpannableString(getResources().getString(R.string.about));
             title.setSpan(getTypefaceSpan(), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             actionBar.setTitle(title);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
         }
     }
 

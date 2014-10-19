@@ -22,14 +22,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lighter_gray"
     tools:context="ScoreItActivity">
 
-    <View
-        android:id="@+id/back"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_extended_ab"
-        android:background="@color/primary_accent"/>
+        android:layout_height="@dimen/toolbar_height"
+        android:background="?attr/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <View
         android:id="@+id/center_view"
@@ -41,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginLeft="120dp"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_toLeftOf="@id/center_view"
@@ -75,6 +77,7 @@
         android:layout_width="@dimen/card_width"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="120dp"
         android:layout_toRightOf="@id/center_view"
@@ -98,7 +101,7 @@
         android:layout_height="wrap_content"
         android:background="@color/tertiary_accent"
         android:src="@drawable/ic_content_edit_fab"
-        app:fab_attachTo="@id/back"
+        app:fab_attachTo="@id/toolbar"
         app:fab_attachAt="bottom_right"/>
 
 </RelativeLayout>

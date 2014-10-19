@@ -35,10 +35,12 @@
     <dimen name="font_button">14sp</dimen>
 
     <!-- Height -->
-    <dimen name="height_ab">56dp</dimen>
-    <dimen name="height_default">48dp</dimen>
+    <dimen name="list_item_height">56dp</dimen>
+    <dimen name="widget_height">48dp</dimen>
+    <dimen name="dialog_max_height">720dp</dimen>
 
     <!-- Width -->
     <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="dialog_width">480dp</dimen>
 
 </resources>

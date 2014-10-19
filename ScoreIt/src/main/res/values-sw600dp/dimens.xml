@@ -26,9 +26,8 @@
     <!-- Fonts -->
 
     <!-- Height -->
-    <dimen name="height_extended_ab">128dp</dimen>
-    <dimen name="height_ab">64dp</dimen>
-    <dimen name="height_default">72dp</dimen>
+    <dimen name="toolbar_height">192dp</dimen>
+    <dimen name="widget_height">72dp</dimen>
 
     <!-- Width -->
     <dimen name="navigation_drawer_width">360dp</dimen>

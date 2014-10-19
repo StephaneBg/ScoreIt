@@ -31,7 +31,7 @@
     <Spinner
         android:id="@+id/spinner_partner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_default"
+        android:layout_height="@dimen/widget_height"
         android:layout_marginBottom="@dimen/margin_default"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"

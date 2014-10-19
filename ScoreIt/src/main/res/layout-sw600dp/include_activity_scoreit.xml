@@ -22,14 +22,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lighter_gray"
     tools:context="ScoreItActivity">
 
-    <View
-        android:id="@+id/back"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_extended_ab"
-        android:background="@color/primary_accent"/>
+        android:layout_height="@dimen/toolbar_height"
+        android:background="?attr/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -44,6 +45,7 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginTop="?attr/actionBarSize"
             android:orientation="vertical"
             app:cardCornerRadius="4dp">
 
@@ -97,7 +99,7 @@
         android:layout_height="wrap_content"
         android:background="@color/tertiary_accent"
         android:src="@drawable/ic_content_edit_fab"
-        app:fab_attachTo="@id/back"
+        app:fab_attachTo="@id/toolbar"
         app:fab_attachAt="bottom_right"/>
 
 </RelativeLayout>

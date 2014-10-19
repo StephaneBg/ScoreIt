@@ -28,7 +28,7 @@
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_ab"
+        android:layout_height="@dimen/list_item_height"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@drawable/bg_default_action"
         android:gravity="center"
@@ -48,7 +48,7 @@
     <TextView
         android:id="@+id/score"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_ab"
+        android:layout_height="@dimen/list_item_height"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:gravity="center"
         android:singleLine="true"

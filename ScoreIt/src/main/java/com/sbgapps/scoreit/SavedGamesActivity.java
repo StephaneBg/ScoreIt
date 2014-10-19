@@ -39,15 +39,11 @@ public class SavedGamesActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_saved_games);
-
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
             SpannableString title = new SpannableString(getResources().getString(R.string.saved_games));
             title.setSpan(getTypefaceSpan(), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             actionBar.setTitle(title);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
         }
 
         final GameHelper gameHelper = new GameHelper(this);

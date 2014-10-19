@@ -30,7 +30,7 @@
     </style>
 
     <style name="SubHeader">
-        <item name="android:layout_height">@dimen/height_default</item>
+        <item name="android:layout_height">@dimen/widget_height</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/tertiary_accent</item>

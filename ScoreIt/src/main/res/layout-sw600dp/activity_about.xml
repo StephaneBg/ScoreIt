@@ -28,7 +28,7 @@
     <com.sbgapps.scoreit.widget.PagerSlidingTabStrip
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_ab"
+        android:layout_height="@dimen/list_item_height"
         android:background="@color/primary_accent"
         app:pstsIndicatorColor="@color/white"
         app:pstsTabTextColor="@color/white"

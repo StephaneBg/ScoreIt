@@ -177,9 +177,6 @@ public class ScoreItActivity extends BaseActivity
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
         mSelectedPosition = mGameHelper.getPlayedGame();
         selectItem(mSelectedPosition);
 
