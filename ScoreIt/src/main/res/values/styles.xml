@@ -33,7 +33,7 @@
         <item name="android:layout_height">@dimen/widget_height</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/tertiary_accent</item>
+        <item name="android:textColor">@color/primary_accent</item>
         <item name="android:textSize">@dimen/font_headline</item>
     </style>
 

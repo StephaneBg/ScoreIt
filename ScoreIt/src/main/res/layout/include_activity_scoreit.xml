@@ -40,6 +40,7 @@
             android:id="@+id/header_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/lighter_gray"
             android:layout_below="@id/toolbar"/>
 
         <FrameLayout
