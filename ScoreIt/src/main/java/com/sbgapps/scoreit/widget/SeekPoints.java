@@ -36,7 +36,7 @@ public class SeekPoints extends FrameLayout {
     @InjectView(R.id.points)
     TextView mPointsTv;
     @InjectView(R.id.seekbar_points)
-    SeekArc mSeekBarPoints;
+    SeekCircle mSeekBarPoints;
     @InjectView(R.id.btn_minus)
     CircleButton mButtonMinus;
     @InjectView(R.id.btn_plus)
@@ -99,9 +99,9 @@ public class SeekPoints extends FrameLayout {
 
         mSeekBarPoints.setMax(max);
         mSeekBarPoints.setProgress(progress);
-        mSeekBarPoints.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener() {
+        mSeekBarPoints.setOnSeekCircleChangeListener(new SeekCircle.OnSeekCircleChangeListener() {
             @Override
-            public void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser) {
+            public void onProgressChanged(SeekCircle seekCircle, int progress, boolean fromUser) {
                 if (fromUser) {
                     mPoints = progress;
                     manageProgress();
@@ -109,12 +109,12 @@ public class SeekPoints extends FrameLayout {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekArc seekArc) {
+            public void onStartTrackingTouch(SeekCircle seekCircle) {
 
             }
 
             @Override
-            public void onStopTrackingTouch(SeekArc seekArc) {
+            public void onStopTrackingTouch(SeekCircle seekCircle) {
 
             }
         });

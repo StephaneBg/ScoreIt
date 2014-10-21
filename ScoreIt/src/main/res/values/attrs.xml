@@ -62,28 +62,18 @@
         <attr name="fab_revealAfterMs" format="integer"/>
     </declare-styleable>
 
-    <declare-styleable name="SeekArc">
-        <attr name="thumbOffset" format="dimension"/>
-        <attr name="max" format="integer"/>
-        <attr name="progressWidth" format="dimension"/>
-        <attr name="arcWidth" format="dimension"/>
-        <attr name="progress" format="integer"/>
-        <attr name="rotation" format="integer"/>
-        <attr name="startAngle" format="integer"/>
-        <attr name="sweepAngle" format="integer"/>
-        <attr name="arcColor" format="color"/>
-        <attr name="progressColor" format="color"/>
-        <attr name="thumbColor" format="color"/>
-        <attr name="thumbRadius" format="dimension"/>
-        <attr name="roundEdges" format="boolean"/>
-        <attr name="touchInside" format="boolean"/>
-        <attr name="clockwise" format="boolean"/>
-        <attr name="touchable" format="boolean"/>
-    </declare-styleable>
-
     <declare-styleable name="LineGraph">
         <attr name="lineAxisColor" format="color"/>
         <attr name="lineBackground" format="color"/>
     </declare-styleable>
 
+    <declare-styleable name="SeekCircle">
+        <attr name="sc_max" format="integer" value="100"/>
+        <attr name="sc_progress" format="integer" value="0"/>
+        <attr name="sc_inactive_color" format="color"/>
+        <attr name="sc_active_color" format="color"/>
+        <attr name="sc_stroke_width" format="dimension"/>
+        <attr name="sc_thumb_radius" format="dimension"/>
+        <attr name="sc_thumb_color" format="color"/>
+    </declare-styleable>
 </resources>
