@@ -193,10 +193,10 @@ public class ScoreItActivity extends BaseActivity
                 Resources resources = getResources();
                 if (null == mLap) {
                     mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_edit_fab));
-                    mActionButton.setBackgroundColor(resources.getColor(R.color.tertiary_accent));
+                    mActionButton.setBackgroundColor(resources.getColor(R.color.fab_primary));
                 } else {
                     mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
-                    mActionButton.setBackgroundColor(resources.getColor(R.color.secondary_accent));
+                    mActionButton.setBackgroundColor(resources.getColor(R.color.fab_secondary));
                 }
             }
         });
@@ -452,7 +452,7 @@ public class ScoreItActivity extends BaseActivity
         mLap = lap;
         Resources resources = getResources();
         mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
-        mActionButton.setBackgroundColor(resources.getColor(R.color.secondary_accent));
+        mActionButton.setBackgroundColor(resources.getColor(R.color.fab_secondary));
         showLapFragment();
     }
 
@@ -786,7 +786,7 @@ public class ScoreItActivity extends BaseActivity
         if (mUpdateFab) {
             Resources resources = getResources();
             mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_edit_fab));
-            mActionButton.setBackgroundColor(resources.getColor(R.color.tertiary_accent));
+            mActionButton.setBackgroundColor(resources.getColor(R.color.fab_primary));
         }
         mUpdateFab = false;
         invalidateOptionsMenu();

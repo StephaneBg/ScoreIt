@@ -76,7 +76,6 @@ public class TarotScoreAdapter extends ScoreListAdapter {
         TextView textView = (TextView) convertView.findViewById(R.id.summary);
         textView.setText(summary);
         textView.setTypeface(tf);
-
     }
 
     @Override

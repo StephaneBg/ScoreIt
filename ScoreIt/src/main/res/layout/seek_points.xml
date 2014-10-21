@@ -36,8 +36,7 @@
             android:id="@+id/btn_minus"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:src="@drawable/ic_minus"
-            app:cb_color="@color/secondary_accent"/>
+            android:src="@drawable/ic_minus"/>
 
         <FrameLayout
             android:layout_width="160dp"
@@ -65,7 +64,6 @@
             android:id="@+id/btn_plus"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:src="@drawable/ic_action_new"
-            app:cb_color="@color/secondary_accent"/>
+            android:src="@drawable/ic_action_new"/>
     </LinearLayout>
 </LinearLayout>

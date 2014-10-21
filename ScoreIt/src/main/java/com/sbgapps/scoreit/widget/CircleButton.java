@@ -4,14 +4,12 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.ImageView;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.util.Util;
 
 public class CircleButton extends ImageView {
 
@@ -60,19 +58,22 @@ public class CircleButton extends ImageView {
                 .getDisplayMetrics());
 
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleButton);
-        mDefaultColor = a.getColor(R.styleable.CircleButton_cb_color, Color.BLACK);
-        mPressedColor = Util.getDarkerColor(mDefaultColor);
-        mDisabledColor = context.getResources().getColor(R.color.lighter_gray);
+        int color = context.getResources().getColor(R.color.secondary_accent);
+        mDefaultColor = a.getColor(R.styleable.CircleButton_cb_color, color);
+        color = context.getResources().getColor(R.color.secondary_accent_dark);
+        mPressedColor = a.getColor(R.styleable.CircleButton_cb_pressed_color, color);
+        color = context.getResources().getColor(R.color.lighter_gray);
+        mDisabledColor = a.getColor(R.styleable.CircleButton_cb_diasbled_color, color);
         mPressedRingWidth = (int) a.getDimension(R.styleable.CircleButton_cb_pressedRingWidth, mPressedRingWidth);
         a.recycle();
-
-        mFocusPaint.setStrokeWidth(mPressedRingWidth);
-        final int pressedAnimationTime = getResources().getInteger(ANIMATION_TIME_ID);
-        mAnimator.setDuration(pressedAnimationTime);
 
         mCirclePaint.setColor(mDefaultColor);
         mFocusPaint.setColor(mDefaultColor);
         mFocusPaint.setAlpha(PRESSED_RING_ALPHA);
+        mFocusPaint.setStrokeWidth(mPressedRingWidth);
+
+        final int pressedAnimationTime = getResources().getInteger(ANIMATION_TIME_ID);
+        mAnimator.setDuration(pressedAnimationTime);
     }
 
     @Override

@@ -62,7 +62,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/tertiary_accent"
+        android:background="@color/fab_primary"
         android:src="@drawable/ic_content_edit_fab"
         app:fab_attachTo="@id/header_container"
         app:fab_attachAt="bottom_right"/>

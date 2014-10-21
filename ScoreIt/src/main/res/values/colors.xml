@@ -18,13 +18,18 @@
 <resources>
     <color name="white">#FFF</color>
 
-    <color name="primary_accent">#EB6841</color>
-    <color name="primary_accent_dark">#D25D3A</color>
-    <color name="secondary_accent">#A3BF3F</color>
-    <color name="tertiary_accent">#008F9D</color>
+    <color name="primary_accent">#EF7C49</color>
+    <color name="primary_accent_dark">#D56E41</color>
+    <color name="secondary_accent">#9DBA56</color>
+    <color name="secondary_accent_dark">#8CA64C</color>
 
     <color name="game_won">@color/secondary_accent</color>
     <color name="game_lost">@color/primary_accent</color>
+
+    <color name="fab_primary">@color/color_player3</color>
+    <color name="fab_secondary">@color/secondary_accent</color>
+
+    <color name="widget_accent">@color/secondary_accent</color>
 
     <color name="lighter_gray">#F0F0F0</color>
     <color name="select_gray">#E0E0E0</color>

@@ -38,6 +38,8 @@
 
     <declare-styleable name="CircleButton">
         <attr name="cb_color" format="color"/>
+        <attr name="cb_pressed_color" format="color"/>
+        <attr name="cb_diasbled_color" format="color"/>
         <attr name="cb_pressedRingWidth" format="dimension"/>
     </declare-styleable>
 
