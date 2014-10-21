@@ -26,7 +26,7 @@
     <!-- Fonts -->
 
     <!-- Height -->
-    <dimen name="toolbar_height">192dp</dimen>
+    <dimen name="toolbar_height">128dp</dimen>
     <dimen name="widget_height">72dp</dimen>
 
     <!-- Width -->

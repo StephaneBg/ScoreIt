@@ -18,7 +18,6 @@
 <resources>
 
     <style name="Theme.ScoreIt" parent="AppTheme.Base">
-        <item name="windowActionBar">false</item>
     </style>
 
     <style name="Theme.Adaptive" parent="AppTheme.Base">

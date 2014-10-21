@@ -54,7 +54,7 @@ public class ProgressCircle extends View {
         mProgress = Math.max(Math.min(progress, mMaxProgress), 0);
 
         // Colors
-        mInactiveColor = attributes.getColor(R.styleable.SeekCircle_sc_active_color,
+        mInactiveColor = attributes.getColor(R.styleable.SeekCircle_sc_inactive_color,
                 context.getResources().getColor(android.R.color.darker_gray));
         mColor = attributes.getColor(R.styleable.SeekCircle_sc_active_color,
                 context.getResources().getColor(android.R.color.holo_blue_bright));

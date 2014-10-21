@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.MenuItem;
@@ -33,15 +32,10 @@ import com.sbgapps.scoreit.util.TypefaceSpan;
  */
 public abstract class BaseActivity extends ActionBarActivity {
 
-    private Toolbar mToolbar;
     private TypefaceSpan mTypefaceSpan;
 
     public TypefaceSpan getTypefaceSpan() {
         return mTypefaceSpan;
-    }
-
-    public Toolbar getToolbar() {
-        return mToolbar;
     }
 
     @Override
@@ -49,14 +43,9 @@ public abstract class BaseActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (null != mToolbar) {
-            setSupportActionBar(mToolbar);
-        }
+        setupFauxDialog();
 
         mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
-
-        setupFauxDialog();
     }
 
     protected abstract int getLayoutResource();
