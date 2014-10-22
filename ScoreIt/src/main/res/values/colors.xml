@@ -18,10 +18,11 @@
 <resources>
     <color name="white">#FFF</color>
 
-    <color name="color_primary">#ffa726</color>
-    <color name="color_primary_translucent">#ddffa726</color>
-    <color name="color_primary_dark">#ffa726</color>
-    <color name="color_accent">#60B62F</color>
+    <color name="color_primary">#7883C0</color>
+    <color name="color_primary_translucent">#dd7883C0</color>
+    <color name="color_primary_dark">#606999</color>
+    <color name="color_accent">#F16A70</color>
+    <color name="color_accent_dark">#BF5459</color>
 
     <color name="game_won">#259b24</color>
     <color name="game_lost">#e51c23</color>
