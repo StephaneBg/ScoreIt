@@ -25,4 +25,5 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:scrollbars="none"
     android:divider="@null"
+    android:background="@color/white"
     tools:context="ScoreItActivity"/>

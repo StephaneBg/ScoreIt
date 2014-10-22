@@ -17,6 +17,7 @@
 package com.sbgapps.scoreit.adapter;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,11 +39,13 @@ public class HeaderAdapter extends BaseAdapter {
     private final ScoreItActivity mActivity;
     private final LayoutInflater mInflater;
     private final GameHelper mGameHelper;
+    private final Typeface mTypeface;
 
     public HeaderAdapter(Activity activity) {
         mActivity = (ScoreItActivity) activity;
         mInflater = LayoutInflater.from(mActivity);
         mGameHelper = mActivity.getGameHelper();
+        mTypeface = Typeface.createFromAsset(activity.getAssets(), "Roboto-Regular.ttf");
     }
 
     @Override
@@ -73,7 +76,9 @@ public class HeaderAdapter extends BaseAdapter {
 
             h = new ViewHolder();
             h.name = (TextView) convertView.findViewById(R.id.name);
+            h.name.setTypeface(mTypeface);
             h.score = (TextView) convertView.findViewById(R.id.score);
+            h.score.setTypeface(mTypeface);
             h.marker = convertView.findViewById(R.id.marker);
             convertView.setTag(h);
         } else {

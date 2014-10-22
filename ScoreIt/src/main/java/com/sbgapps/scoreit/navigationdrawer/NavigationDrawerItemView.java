@@ -58,7 +58,7 @@ public class NavigationDrawerItemView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.inject(this);
-        Typeface tf = Typeface.createFromAsset(mRes.getAssets(), "Roboto-Medium.ttf");
+        Typeface tf = Typeface.createFromAsset(mRes.getAssets(), "Roboto-Regular.ttf");
         mItemTitle.setTypeface(tf);
     }
 
@@ -73,7 +73,7 @@ public class NavigationDrawerItemView extends RelativeLayout {
         }
 
         if (item.isSelected()) {
-            mItemTitle.setTextColor(mRes.getColor(R.color.primary_accent));
+            mItemTitle.setTextColor(mRes.getColor(R.color.color_primary_dark));
         } else {
             mItemTitle.setTextColor(mRes.getColor(R.color.darker_gray));
         }

@@ -60,7 +60,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/primary_accent"/>
+                android:background="@color/color_primary"/>
 
             <FrameLayout
                 android:id="@+id/secondary_container"
@@ -97,7 +97,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/fab_primary"
+        android:background="?attr/colorAccent"
         android:src="@drawable/ic_content_edit_fab"
         app:fab_attachTo="@id/back"
         app:fab_attachAt="bottom_right"/>

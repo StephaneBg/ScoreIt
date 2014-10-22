@@ -145,7 +145,6 @@ public class ScoreItActivity extends BaseActivity
             }
             if (null != mLap) {
                 mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
-                mActionButton.setBackgroundColor(resources.getColor(R.color.secondary_accent));
             }
         }
 
@@ -193,10 +192,8 @@ public class ScoreItActivity extends BaseActivity
                 Resources resources = getResources();
                 if (null == mLap) {
                     mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_edit_fab));
-                    mActionButton.setBackgroundColor(resources.getColor(R.color.fab_primary));
                 } else {
                     mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
-                    mActionButton.setBackgroundColor(resources.getColor(R.color.fab_secondary));
                 }
             }
         });
@@ -452,7 +449,6 @@ public class ScoreItActivity extends BaseActivity
         mLap = lap;
         Resources resources = getResources();
         mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
-        mActionButton.setBackgroundColor(resources.getColor(R.color.fab_secondary));
         showLapFragment();
     }
 
@@ -607,7 +603,7 @@ public class ScoreItActivity extends BaseActivity
                 .Builder(this,
                 getString(R.string.current_game),
                 getResources().getStringArray(R.array.clear_actions))
-                .itemColorRes(R.color.primary_accent)
+                .itemColorRes(R.color.color_primary)
                 .build();
 
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
@@ -639,7 +635,7 @@ public class ScoreItActivity extends BaseActivity
                 .Builder(this,
                 getString(R.string.edit_name),
                 getResources().getStringArray(R.array.edit_name_action))
-                .itemColorRes(R.color.primary_accent)
+                .itemColorRes(R.color.color_primary)
                 .build();
 
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
@@ -667,7 +663,7 @@ public class ScoreItActivity extends BaseActivity
                 .Builder(this,
                 getString(R.string.current_game),
                 getResources().getStringArray(R.array.load_actions))
-                .itemColorRes(R.color.primary_accent)
+                .itemColorRes(R.color.color_primary)
                 .build();
 
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
@@ -700,7 +696,7 @@ public class ScoreItActivity extends BaseActivity
 
         CustomListDialog dialog = new CustomListDialog
                 .Builder(this, getString(R.string.player_number), players)
-                .itemColorRes(R.color.primary_accent)
+                .itemColorRes(R.color.color_primary)
                 .build();
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
             @Override
@@ -720,7 +716,7 @@ public class ScoreItActivity extends BaseActivity
         CustomDialog dialog = new CustomDialog
                 .Builder(this, R.string.edit_name, R.string.ok)
                 .negativeText(R.string.cancel)
-                .positiveColorRes(R.color.primary_accent)
+                .positiveColorRes(R.color.color_primary)
                 .build();
 
         dialog.setCustomView(view)
@@ -750,7 +746,7 @@ public class ScoreItActivity extends BaseActivity
         CustomDialog dialog = new CustomDialog
                 .Builder(this, R.string.filename, R.string.ok)
                 .negativeText(R.string.cancel)
-                .positiveColorRes(R.color.primary_accent)
+                .positiveColorRes(R.color.color_primary)
                 .build();
 
         dialog.setCustomView(view)
@@ -786,7 +782,6 @@ public class ScoreItActivity extends BaseActivity
         if (mUpdateFab) {
             Resources resources = getResources();
             mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_edit_fab));
-            mActionButton.setBackgroundColor(resources.getColor(R.color.fab_primary));
         }
         mUpdateFab = false;
         invalidateOptionsMenu();

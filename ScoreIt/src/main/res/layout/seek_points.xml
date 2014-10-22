@@ -46,10 +46,7 @@
                 android:id="@+id/seekbar_points"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="30dp"
-                app:sc_inactive_color="@color/lighter_gray"
-                app:sc_active_color="@color/secondary_accent"
-                app:sc_thumb_color="@color/primary_accent"/>
+                android:padding="30dp"/>
 
             <TextView
                 android:id="@+id/points"

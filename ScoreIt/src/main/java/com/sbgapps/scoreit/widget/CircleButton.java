@@ -58,9 +58,9 @@ public class CircleButton extends ImageView {
                 .getDisplayMetrics());
 
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleButton);
-        int color = context.getResources().getColor(R.color.secondary_accent);
+        int color = context.getResources().getColor(R.color.color_primary_dark);
         mDefaultColor = a.getColor(R.styleable.CircleButton_cb_color, color);
-        color = context.getResources().getColor(R.color.secondary_accent_dark);
+        color = context.getResources().getColor(R.color.color_primary_dark);
         mPressedColor = a.getColor(R.styleable.CircleButton_cb_pressed_color, color);
         color = context.getResources().getColor(R.color.lighter_gray);
         mDisabledColor = a.getColor(R.styleable.CircleButton_cb_diasbled_color, color);

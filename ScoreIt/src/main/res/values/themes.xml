@@ -28,8 +28,8 @@
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:buttonStyleToggle">@style/ToggleAppTheme</item>
-        <item name="colorPrimary">@color/primary_accent</item>
-        <item name="colorPrimaryDark">@color/primary_accent_dark</item>
-        <item name="colorAccent">@color/secondary_accent</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
     </style>
 </resources>

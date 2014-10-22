@@ -43,6 +43,8 @@ public abstract class BaseActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
 
+        getWindow().setBackgroundDrawableResource(R.drawable.bg_triangles);
+
         setupFauxDialog();
 
         mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");

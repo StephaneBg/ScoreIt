@@ -54,10 +54,10 @@ public class ProgressCircle extends View {
         mProgress = Math.max(Math.min(progress, mMaxProgress), 0);
 
         // Colors
-        mInactiveColor = attributes.getColor(R.styleable.SeekCircle_sc_inactive_color,
-                context.getResources().getColor(android.R.color.darker_gray));
-        mColor = attributes.getColor(R.styleable.SeekCircle_sc_active_color,
-                context.getResources().getColor(android.R.color.holo_blue_bright));
+        int color = context.getResources().getColor(R.color.lighter_gray);
+        mInactiveColor = attributes.getColor(R.styleable.SeekCircle_sc_inactive_color, color);
+        color = context.getResources().getColor(R.color.color_primary_dark);
+        mColor = attributes.getColor(R.styleable.SeekCircle_sc_active_color, color);
 
         int dim = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 DEFAULT_STROKE_WIDTH_DIP, getResources().getDisplayMetrics());
@@ -68,11 +68,13 @@ public class ProgressCircle extends View {
         dim = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 DEFAULT_THUMB_RADIUS_DIP, getResources().getDisplayMetrics());
         mThumbRadius = attributes.getDimension(R.styleable.SeekCircle_sc_thumb_radius, dim);
-        int color = attributes.getColor(R.styleable.SeekCircle_sc_thumb_color,
-                context.getResources().getColor(android.R.color.holo_orange_light));
+        color = context.getResources().getColor(R.color.color_accent);
+        color = attributes.getColor(R.styleable.SeekCircle_sc_thumb_color, color);
         mThumbPaint.setColor(color);
 
         attributes.recycle();
+
+        if (isInEditMode()) mProgress = 25;
     }
 
     private void updateDimensions(int width, int height) {

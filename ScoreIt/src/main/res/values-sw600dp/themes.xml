@@ -17,12 +17,12 @@
 
 <resources>
 
-    <style name="Theme.Adaptive" parent="Theme.AppCompat.Light.Dialog">
+    <style name="Theme.Adaptive" parent="Theme.AppCompat.Dialog">
         <item name="android:windowBackground">@color/lighter_gray</item>
         <item name="isDialog">true</item>
-        <item name="colorPrimary">@color/primary_accent</item>
-        <item name="colorPrimaryDark">@color/primary_accent_dark</item>
-        <item name="colorAccent">@color/secondary_accent</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
         <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
 </resources>
