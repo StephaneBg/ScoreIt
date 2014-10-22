@@ -31,5 +31,10 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
+        <item name="actionBarStyle">@style/Apptheme.ActionBar</item>
+    </style>
+
+    <style name="Apptheme.ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="background">@drawable/bg_action_bar</item>
     </style>
 </resources>

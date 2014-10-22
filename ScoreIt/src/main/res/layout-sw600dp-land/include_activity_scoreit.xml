@@ -28,7 +28,7 @@
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        android:background="?attr/colorPrimary"/>
+        android:background="@color/color_primary_translucent"/>
 
     <View
         android:id="@+id/center_view"
@@ -40,7 +40,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginLeft="120dp"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_toLeftOf="@id/center_view"
@@ -75,7 +74,6 @@
         android:layout_width="@dimen/card_width"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="120dp"
         android:layout_toRightOf="@id/center_view"

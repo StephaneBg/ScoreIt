@@ -18,14 +18,16 @@
 <resources>
     <color name="white">#FFF</color>
 
-    <color name="color_primary">#eeffa726</color>
-    <color name="color_primary_dark">#ffffa726</color>
-    <color name="color_accent">#259b24</color>
+    <color name="color_primary">#ffa726</color>
+    <color name="color_primary_translucent">#ddffa726</color>
+    <color name="color_primary_dark">#ffa726</color>
+    <color name="color_accent">#60B62F</color>
 
     <color name="game_won">#259b24</color>
     <color name="game_lost">#e51c23</color>
 
     <color name="lighter_gray">#F0F0F0</color>
+    <color name="lighter_gray_translucent">#EEF0F0F0</color>
     <color name="select_gray">#E0E0E0</color>
     <color name="darker_gray">#4D4D4D</color>
 

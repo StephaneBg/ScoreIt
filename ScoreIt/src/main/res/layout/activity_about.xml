@@ -23,13 +23,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context="ScoreItActivity">
 
     <com.sbgapps.scoreit.widget.PagerSlidingTabStrip
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/color_primary"
+        android:background="@color/color_primary_translucent"
         app:pstsIndicatorColor="@color/white"
         app:pstsTabTextColor="@color/white"
         app:pstsTextAllCaps="true"/>

@@ -15,12 +15,7 @@
   ~ limitations under the License.
   -->
 
-<ListView
-    android:id="@android:id/list"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="none"
-    android:fitsSystemWindows="true"
-    tools:context="ScoreItActivity"/>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid
+        android:color="@color/color_primary_translucent"/>
+</shape>

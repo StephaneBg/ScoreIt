@@ -28,7 +28,7 @@
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        android:background="?attr/colorPrimary"/>
+        android:background="@color/color_primary_translucent"/>
 
     <LinearLayout
         android:orientation="vertical"

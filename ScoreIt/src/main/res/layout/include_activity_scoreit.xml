@@ -32,7 +32,7 @@
             android:id="@+id/header_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"/>
+            android:background="@color/lighter_gray_translucent"/>
 
         <FrameLayout
             android:layout_width="match_parent"
