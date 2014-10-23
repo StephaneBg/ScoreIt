@@ -75,7 +75,7 @@ public class NavigationDrawerItemView extends RelativeLayout {
         if (item.isSelected()) {
             mItemTitle.setTextColor(mRes.getColor(R.color.color_hint));
         } else {
-            mItemTitle.setTextColor(mRes.getColor(R.color.darker_gray));
+            mItemTitle.setTextColor(mRes.getColor(R.color.gray_dark));
         }
     }
 }

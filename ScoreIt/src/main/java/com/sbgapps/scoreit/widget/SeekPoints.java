@@ -34,7 +34,7 @@ import butterknife.InjectView;
  */
 public class SeekPoints extends FrameLayout {
 
-    @InjectView(R.id.points)
+    @InjectView(R.id.tv_points)
     TextView mPointsTv;
     @InjectView(R.id.seekbar_points)
     SeekCircle mSeekBarPoints;

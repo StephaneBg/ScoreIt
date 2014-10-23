@@ -16,7 +16,6 @@
 
 package com.sbgapps.scoreit.widget;
 
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -47,7 +46,7 @@ public class RippleLayout extends FrameLayout {
     public RippleLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setColor(context.getResources().getColor(R.color.lighter_gray));
+        mPaint.setColor(context.getResources().getColor(R.color.gray_light));
     }
 
     public void start() {

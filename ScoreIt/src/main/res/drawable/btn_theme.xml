@@ -16,9 +16,25 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_window_focused="false"
+          android:state_enabled="true"
+          android:drawable="@drawable/btn_on"/>
 
-    <item android:drawable="@color/gray_light" android:state_pressed="true"/>
-    <item android:drawable="@color/gray_light" android:state_focused="true"/>
-    <item android:drawable="@color/white"/>
+    <item android:state_enabled="false"
+          android:drawable="@drawable/btn_disabled"/>
 
+    <item android:state_pressed="true"
+          android:drawable="@drawable/btn_on_pressed"/>
+
+    <item android:state_focused="true"
+          android:state_enabled="true"
+          android:drawable="@drawable/btn_on_pressed"/>
+
+    <item android:state_enabled="true"
+          android:drawable="@drawable/btn_on"/>
+
+    <item android:state_focused="true"
+          android:drawable="@drawable/btn_on_pressed"/>
+
+    <item android:drawable="@drawable/btn_on"/>
 </selector>

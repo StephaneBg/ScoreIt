@@ -18,7 +18,7 @@
 <resources>
 
     <style name="Theme.Adaptive" parent="Theme.AppCompat.Light.Dialog">
-        <item name="android:windowBackground">@color/lighter_gray</item>
+        <item name="android:windowBackground">@color/gray_light</item>
         <item name="isDialog">true</item>
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>

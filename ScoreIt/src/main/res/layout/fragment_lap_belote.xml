@@ -68,13 +68,12 @@
                     tools:text="120"/>
             </LinearLayout>
 
-            <com.sbgapps.scoreit.widget.CircleButton
+            <ImageButton
                 android:id="@+id/btn_switch"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_action_switch"
-                app:cb_color="?attr/colorAccent"/>
+                android:src="@drawable/ic_action_switch"/>
 
             <LinearLayout
                 android:layout_width="0dp"

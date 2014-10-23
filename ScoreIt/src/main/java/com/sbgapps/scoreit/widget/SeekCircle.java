@@ -76,20 +76,20 @@ public class SeekCircle extends ProgressCircle {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        getParent().requestDisallowInterceptTouchEvent(true);
         // Right hand coordinates X to the right, Y up
         float x = event.getX() - mCenterX;
         float y = mCenterY - event.getY();
 
         float distance = (float) Math.hypot(x, y);
 
-        boolean inRange = Math.abs(distance - mRadius) <= mRadius / 4;
+        boolean inRange = Math.abs(distance - mRadius) <= mRadius / 5;
 
         boolean updateProgress = false;
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (inRange) {
+                    getParent().requestDisallowInterceptTouchEvent(true);
                     mTrackingTouch = true;
                     mOldX = x;
                     mRevolutions = 0;
@@ -103,11 +103,13 @@ public class SeekCircle extends ProgressCircle {
                 break;
 
             case MotionEvent.ACTION_UP:
+                getParent().requestDisallowInterceptTouchEvent(false);
                 if (mTrackingTouch) updateProgress = true;
                 mTrackingTouch = false;
                 break;
 
             case MotionEvent.ACTION_CANCEL:
+                getParent().requestDisallowInterceptTouchEvent(false);
                 mTrackingTouch = false;
                 break;
         }

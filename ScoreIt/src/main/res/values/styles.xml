@@ -21,12 +21,8 @@
         <item name="android:background">@drawable/btn_toggle_theme</item>
     </style>
 
-    <style name="Divider">
-        <item name="android:layout_height">1dp</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_marginBottom">@dimen/margin_default</item>
-        <item name="android:layout_marginTop">@dimen/margin_default</item>
-        <item name="android:background">@color/lighter_gray</item>
+    <style name="ImageButtonAppTheme" parent="android:Widget.Holo.Light.ImageButton">
+        <item name="android:background">@drawable/btn_theme</item>
     </style>
 
     <style name="SubHeader">

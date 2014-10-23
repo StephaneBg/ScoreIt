@@ -25,10 +25,16 @@
     tools:context="ScoreItActivity">
 
     <View
-        android:id="@+id/back"
+        android:id="@+id/back_colored"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
         android:background="@color/color_primary_translucent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/back_colored"
+        android:background="@color/gray_light"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -56,11 +62,6 @@
                     android:id="@+id/header_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/color_primary"/>
 
                 <FrameLayout
                     android:id="@+id/secondary_container"
@@ -95,9 +96,9 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?attr/colorAccent"
+        android:background="@color/color_hint"
         android:src="@drawable/ic_content_edit_fab"
-        app:fab_attachTo="@id/back"
+        app:fab_attachTo="@id/back_colored"
         app:fab_attachAt="bottom_right"/>
 
 </RelativeLayout>

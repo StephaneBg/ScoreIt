@@ -15,12 +15,13 @@
   ~ limitations under the License.
   -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
     <padding
         android:left="2dp"
         android:top="2dp"
         android:right="2dp"
         android:bottom="2dp"/>
-    <corners android:radius="2dp"/>
-    <solid android:color="@color/gray_light"/>
+    <solid android:color="@color/color_accent_dark"/>
 </shape>

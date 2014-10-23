@@ -31,7 +31,7 @@
         android:layout_height="2dp"
         android:layout_marginBottom="@dimen/margin_default"
         android:layout_marginTop="@dimen/margin_default"
-        android:background="@color/lighter_gray"
+        android:background="@color/gray_light"
         android:visibility="gone"
         tools:visibility="visible"/>
 
@@ -42,7 +42,6 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:gravity="center_vertical"
-        android:textColor="@color/darker_gray"
         android:textSize="20sp"
         android:textStyle="normal"
         tools:text="@string/app_name"/>

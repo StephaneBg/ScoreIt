@@ -35,7 +35,6 @@
             android:id="@+id/btn_minus"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:background="@drawable/btn_on"
             android:src="@drawable/ic_minus"/>
 
         <FrameLayout
@@ -49,7 +48,7 @@
                 android:padding="30dp"/>
 
             <TextView
-                android:id="@+id/points"
+                android:id="@+id/tv_points"
                 android:gravity="center"
                 android:textSize="@dimen/font_display_1"
                 android:layout_width="match_parent"
@@ -61,7 +60,6 @@
             android:id="@+id/btn_plus"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:background="@drawable/btn_on"
             android:src="@drawable/ic_action_new"/>
     </LinearLayout>
 </LinearLayout>

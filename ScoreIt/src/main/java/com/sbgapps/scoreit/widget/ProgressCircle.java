@@ -54,9 +54,9 @@ public class ProgressCircle extends View {
         mProgress = Math.max(Math.min(progress, mMaxProgress), 0);
 
         // Colors
-        int color = context.getResources().getColor(R.color.lighter_gray);
+        int color = context.getResources().getColor(R.color.gray_light_pressed);
         mInactiveColor = attributes.getColor(R.styleable.SeekCircle_sc_inactive_color, color);
-        color = context.getResources().getColor(R.color.color_primary_dark);
+        color = context.getResources().getColor(R.color.color_primary);
         mColor = attributes.getColor(R.styleable.SeekCircle_sc_active_color, color);
 
         int dim = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
@@ -68,7 +68,7 @@ public class ProgressCircle extends View {
         dim = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 DEFAULT_THUMB_RADIUS_DIP, getResources().getDisplayMetrics());
         mThumbRadius = attributes.getDimension(R.styleable.SeekCircle_sc_thumb_radius, dim);
-        color = context.getResources().getColor(R.color.color_accent);
+        color = context.getResources().getColor(R.color.color_hint);
         color = attributes.getColor(R.styleable.SeekCircle_sc_thumb_color, color);
         mThumbPaint.setColor(color);
 
