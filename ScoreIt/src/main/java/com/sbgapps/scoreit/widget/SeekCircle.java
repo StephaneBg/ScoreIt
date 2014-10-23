@@ -67,17 +67,16 @@ public class SeekCircle extends ProgressCircle {
     }
 
     public SeekCircle(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public SeekCircle(Context context) {
-        super(context);
+        this(context, null);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         getParent().requestDisallowInterceptTouchEvent(true);
-
         // Right hand coordinates X to the right, Y up
         float x = event.getX() - mCenterX;
         float y = mCenterY - event.getY();
@@ -110,7 +109,6 @@ public class SeekCircle extends ProgressCircle {
 
             case MotionEvent.ACTION_CANCEL:
                 mTrackingTouch = false;
-                getParent().requestDisallowInterceptTouchEvent(false);
                 break;
         }
 

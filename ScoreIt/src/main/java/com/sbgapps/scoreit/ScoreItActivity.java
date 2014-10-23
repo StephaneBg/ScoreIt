@@ -603,7 +603,7 @@ public class ScoreItActivity extends BaseActivity
                 .Builder(this,
                 getString(R.string.current_game),
                 getResources().getStringArray(R.array.clear_actions))
-                .itemColorRes(R.color.color_primary)
+                .itemColorRes(R.color.color_hint)
                 .build();
 
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
@@ -635,7 +635,7 @@ public class ScoreItActivity extends BaseActivity
                 .Builder(this,
                 getString(R.string.edit_name),
                 getResources().getStringArray(R.array.edit_name_action))
-                .itemColorRes(R.color.color_primary)
+                .itemColorRes(R.color.color_hint)
                 .build();
 
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
@@ -663,7 +663,7 @@ public class ScoreItActivity extends BaseActivity
                 .Builder(this,
                 getString(R.string.current_game),
                 getResources().getStringArray(R.array.load_actions))
-                .itemColorRes(R.color.color_primary)
+                .itemColorRes(R.color.color_hint)
                 .build();
 
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
@@ -696,7 +696,7 @@ public class ScoreItActivity extends BaseActivity
 
         CustomListDialog dialog = new CustomListDialog
                 .Builder(this, getString(R.string.player_number), players)
-                .itemColorRes(R.color.color_primary)
+                .itemColorRes(R.color.color_hint)
                 .build();
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
             @Override
@@ -716,7 +716,7 @@ public class ScoreItActivity extends BaseActivity
         CustomDialog dialog = new CustomDialog
                 .Builder(this, R.string.edit_name, R.string.ok)
                 .negativeText(R.string.cancel)
-                .positiveColorRes(R.color.color_primary)
+                .positiveColorRes(R.color.color_hint)
                 .build();
 
         dialog.setCustomView(view)
@@ -746,7 +746,7 @@ public class ScoreItActivity extends BaseActivity
         CustomDialog dialog = new CustomDialog
                 .Builder(this, R.string.filename, R.string.ok)
                 .negativeText(R.string.cancel)
-                .positiveColorRes(R.color.color_primary)
+                .positiveColorRes(R.color.color_hint)
                 .build();
 
         dialog.setCustomView(view)
