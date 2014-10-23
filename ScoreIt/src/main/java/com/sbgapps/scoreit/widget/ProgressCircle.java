@@ -68,7 +68,7 @@ public class ProgressCircle extends View {
         dim = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 DEFAULT_THUMB_RADIUS_DIP, getResources().getDisplayMetrics());
         mThumbRadius = attributes.getDimension(R.styleable.SeekCircle_sc_thumb_radius, dim);
-        color = context.getResources().getColor(R.color.color_hint);
+        color = context.getResources().getColor(R.color.color_accent);
         color = attributes.getColor(R.styleable.SeekCircle_sc_thumb_color, color);
         mThumbPaint.setColor(color);
 

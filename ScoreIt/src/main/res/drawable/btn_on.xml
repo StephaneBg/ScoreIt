@@ -23,5 +23,5 @@
         android:top="2dp"
         android:right="2dp"
         android:bottom="2dp"/>
-    <solid android:color="@color/color_accent"/>
+    <solid android:color="@color/color_hint"/>
 </shape>

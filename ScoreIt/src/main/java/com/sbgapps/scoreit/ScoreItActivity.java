@@ -145,7 +145,7 @@ public class ScoreItActivity extends BaseActivity
             }
             if (null != mLap) {
                 mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
-                mActionButton.setBackgroundColor(resources.getColor(R.color.color_accent));
+                mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
             }
         }
 
@@ -193,10 +193,10 @@ public class ScoreItActivity extends BaseActivity
                 Resources resources = getResources();
                 if (null == mLap) {
                     mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_edit_fab));
-                    mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
+                    mActionButton.setBackgroundColor(resources.getColor(R.color.color_accent));
                 } else {
                     mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
-                    mActionButton.setBackgroundColor(resources.getColor(R.color.color_accent));
+                    mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
                 }
             }
         });
@@ -452,7 +452,7 @@ public class ScoreItActivity extends BaseActivity
         mLap = lap;
         Resources resources = getResources();
         mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
-        mActionButton.setBackgroundColor(resources.getColor(R.color.color_accent));
+        mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
         showLapFragment();
     }
 
@@ -469,7 +469,7 @@ public class ScoreItActivity extends BaseActivity
         mSnackBar.show(
                 getString(R.string.deleted_lap),
                 getString(R.string.undo),
-                R.color.color_accent,
+                SnackBar.Style.ALERT,
                 0,
                 token,
                 SnackBar.MED_SNACK);
@@ -607,7 +607,7 @@ public class ScoreItActivity extends BaseActivity
                 .Builder(this,
                 getString(R.string.current_game),
                 getResources().getStringArray(R.array.clear_actions))
-                .itemColorRes(R.color.color_hint)
+                .itemColorRes(R.color.color_accent)
                 .build();
 
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
@@ -639,7 +639,7 @@ public class ScoreItActivity extends BaseActivity
                 .Builder(this,
                 getString(R.string.edit_name),
                 getResources().getStringArray(R.array.edit_name_action))
-                .itemColorRes(R.color.color_hint)
+                .itemColorRes(R.color.color_accent)
                 .build();
 
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
@@ -667,7 +667,7 @@ public class ScoreItActivity extends BaseActivity
                 .Builder(this,
                 getString(R.string.current_game),
                 getResources().getStringArray(R.array.load_actions))
-                .itemColorRes(R.color.color_hint)
+                .itemColorRes(R.color.color_accent)
                 .build();
 
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
@@ -700,7 +700,7 @@ public class ScoreItActivity extends BaseActivity
 
         CustomListDialog dialog = new CustomListDialog
                 .Builder(this, getString(R.string.player_number), players)
-                .itemColorRes(R.color.color_hint)
+                .itemColorRes(R.color.color_accent)
                 .build();
         dialog.setListClickListener(new CustomListDialog.ListClickListener() {
             @Override
@@ -720,7 +720,7 @@ public class ScoreItActivity extends BaseActivity
         CustomDialog dialog = new CustomDialog
                 .Builder(this, R.string.edit_name, R.string.ok)
                 .negativeText(R.string.cancel)
-                .positiveColorRes(R.color.color_hint)
+                .positiveColorRes(R.color.color_accent)
                 .build();
 
         dialog.setCustomView(view)
@@ -750,7 +750,7 @@ public class ScoreItActivity extends BaseActivity
         CustomDialog dialog = new CustomDialog
                 .Builder(this, R.string.filename, R.string.ok)
                 .negativeText(R.string.cancel)
-                .positiveColorRes(R.color.color_hint)
+                .positiveColorRes(R.color.color_accent)
                 .build();
 
         dialog.setCustomView(view)
@@ -786,7 +786,7 @@ public class ScoreItActivity extends BaseActivity
         if (mUpdateFab) {
             Resources resources = getResources();
             mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_edit_fab));
-            mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
+            mActionButton.setBackgroundColor(resources.getColor(R.color.color_accent));
         }
         mUpdateFab = false;
         invalidateOptionsMenu();

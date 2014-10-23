@@ -96,7 +96,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/color_hint"
+        android:background="@color/color_accent"
         android:src="@drawable/ic_content_edit_fab"
         app:fab_attachTo="@id/back_colored"
         app:fab_attachAt="bottom_right"/>
