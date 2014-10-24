@@ -45,6 +45,7 @@
                 android:layout_height="56dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
+                android:background="@drawable/bg_btn_circle"
                 android:src="@drawable/ic_minus_1"/>
 
             <ImageButton
@@ -53,6 +54,7 @@
                 android:layout_height="56dp"
                 android:layout_marginBottom="4dp"
                 android:layout_toRightOf="@id/btn_minus"
+                android:background="@drawable/bg_btn_circle"
                 android:src="@drawable/ic_minus_10"/>
 
             <ImageButton
@@ -62,6 +64,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_below="@id/btn_minus_10"
                 android:layout_toRightOf="@id/btn_minus"
+                android:background="@drawable/bg_btn_circle"
                 android:src="@drawable/ic_minus_100"/>
         </RelativeLayout>
 
@@ -83,6 +86,7 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_marginBottom="4dp"
+                android:background="@drawable/bg_btn_circle"
                 android:src="@drawable/ic_plus_10"/>
 
             <ImageButton
@@ -91,6 +95,7 @@
                 android:layout_height="56dp"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/btn_plus_10"
+                android:background="@drawable/bg_btn_circle"
                 android:src="@drawable/ic_plus_1"/>
 
             <ImageButton
@@ -99,6 +104,7 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="4dp"
                 android:layout_below="@id/btn_plus_10"
+                android:background="@drawable/bg_btn_circle"
                 android:src="@drawable/ic_plus_100"/>
         </RelativeLayout>
     </LinearLayout>

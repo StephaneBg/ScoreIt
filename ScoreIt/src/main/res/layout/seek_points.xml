@@ -35,6 +35,7 @@
             android:id="@+id/btn_minus"
             android:layout_width="56dp"
             android:layout_height="56dp"
+            android:background="@drawable/bg_btn_circle"
             android:src="@drawable/ic_minus"/>
 
         <FrameLayout
@@ -60,6 +61,7 @@
             android:id="@+id/btn_plus"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:src="@drawable/ic_action_new"/>
+            android:background="@drawable/bg_btn_circle"
+            android:src="@drawable/ic_plus"/>
     </LinearLayout>
 </LinearLayout>

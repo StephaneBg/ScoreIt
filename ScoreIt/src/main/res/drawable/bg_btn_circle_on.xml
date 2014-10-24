@@ -23,5 +23,7 @@
         android:top="2dp"
         android:right="2dp"
         android:bottom="2dp"/>
-    <solid android:color="@color/gray_light"/>
+    <stroke
+        android:color="@color/color_hint"
+        android:width="4dp"/>
 </shape>
