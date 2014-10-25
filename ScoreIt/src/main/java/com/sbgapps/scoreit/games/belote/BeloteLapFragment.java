@@ -32,6 +32,7 @@ import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
+import com.sbgapps.scoreit.widget.CircleButton;
 import com.sbgapps.scoreit.widget.SeekPoints;
 import com.sbgapps.scoreit.widget.ToggleGroup;
 
@@ -55,7 +56,7 @@ public class BeloteLapFragment extends LapFragment
     @InjectView(R.id.player2_points)
     TextView mPlayer2Points;
     @InjectView(R.id.btn_switch)
-    ImageButton mSwitchBtn;
+    CircleButton mSwitchBtn;
     @InjectView(R.id.group_score)
     ToggleGroup mScoreGroup;
     @InjectView(R.id.input_points)

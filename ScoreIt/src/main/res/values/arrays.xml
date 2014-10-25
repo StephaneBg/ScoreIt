@@ -17,21 +17,6 @@
 
 <resources>
 
-    <string-array name="navigation_main_sections">
-        <item>@string/universal</item>
-        <item>@string/tarot</item>
-        <item>@string/belote</item>
-        <item>@string/coinche</item>
-    </string-array>
-
-    <string-array name="navigation_secondary_sections">
-        <item>@string/about</item>
-    </string-array>
-
-    <array name="navigation_secondary_drawable">
-        <item>@drawable/ic_action_about</item>
-    </array>
-
     <string-array name="edit_name_action">
         <item>@string/pick_contact</item>
         <item>@string/enter_name</item>

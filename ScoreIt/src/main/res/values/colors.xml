@@ -27,7 +27,7 @@
 
     <color name="gray_light">#E0E0E0</color>
     <color name="gray_light_translucent">#EEE0E0E0</color>
-    <color name="gray_light_pressed">#B2B2B2</color>
+    <color name="gray_light_pressed">#80B2B2B2</color>
     <color name="gray_dark">#4D4D4D</color>
 
     <color name="game_won">@color/color_hint</color>

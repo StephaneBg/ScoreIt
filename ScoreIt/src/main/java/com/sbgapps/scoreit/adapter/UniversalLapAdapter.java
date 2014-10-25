@@ -30,6 +30,7 @@ import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.games.universal.UniversalLapFragment;
+import com.sbgapps.scoreit.widget.CircleButton;
 import com.sbgapps.scoreit.widget.CircleTextView;
 
 /**
@@ -70,12 +71,12 @@ public class UniversalLapAdapter extends BaseAdapter {
 
             h.name = (TextView) convertView.findViewById(R.id.tv_name);
             h.points = (CircleTextView) convertView.findViewById(R.id.points);
-            h.plus = (ImageButton) convertView.findViewById(R.id.btn_plus);
-            h.plus_10 = (ImageButton) convertView.findViewById(R.id.btn_plus_10);
-            h.plus_100 = (ImageButton) convertView.findViewById(R.id.btn_plus_100);
-            h.minus = (ImageButton) convertView.findViewById(R.id.btn_minus);
-            h.minus_10 = (ImageButton) convertView.findViewById(R.id.btn_minus_10);
-            h.minus_100 = (ImageButton) convertView.findViewById(R.id.btn_minus_100);
+            h.plus = (CircleButton) convertView.findViewById(R.id.btn_plus);
+            h.plus_10 = (CircleButton) convertView.findViewById(R.id.btn_plus_10);
+            h.plus_100 = (CircleButton) convertView.findViewById(R.id.btn_plus_100);
+            h.minus = (CircleButton) convertView.findViewById(R.id.btn_minus);
+            h.minus_10 = (CircleButton) convertView.findViewById(R.id.btn_minus_10);
+            h.minus_100 = (CircleButton) convertView.findViewById(R.id.btn_minus_100);
             convertView.setTag(h);
         } else {
             h = (ViewHolder) convertView.getTag();
@@ -143,11 +144,11 @@ public class UniversalLapAdapter extends BaseAdapter {
     private class ViewHolder {
         TextView name;
         CircleTextView points;
-        ImageButton plus;
-        ImageButton plus_10;
-        ImageButton plus_100;
-        ImageButton minus;
-        ImageButton minus_10;
-        ImageButton minus_100;
+        CircleButton plus;
+        CircleButton plus_10;
+        CircleButton plus_100;
+        CircleButton minus;
+        CircleButton minus_10;
+        CircleButton minus_100;
     }
 }

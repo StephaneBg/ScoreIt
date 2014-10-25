@@ -44,7 +44,7 @@ public class ScoreGraphFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPointColor = getActivity().getResources().getColor(R.color.gray_light_pressed);
+        mPointColor = getActivity().getResources().getColor(R.color.gray_light);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ScoreGraphFragment extends Fragment {
         if (0 == lapCnt) return;
 
         LinePoint p = new LinePoint(mX = 0, 0);
-        int color = getActivity().getResources().getColor(R.color.gray_light_pressed);
+        int color = getActivity().getResources().getColor(R.color.gray_light);
         p.setColor(color);
         for (int i = 0; i < gameHelper.getPlayerCount(); i++) {
             Line line = new Line();

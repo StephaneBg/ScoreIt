@@ -39,13 +39,32 @@
     <declare-styleable name="CircleButton">
         <attr name="cb_color" format="color"/>
         <attr name="cb_pressed_color" format="color"/>
-        <attr name="cb_diasbled_color" format="color"/>
+        <attr name="cb_disabled_color" format="color"/>
+        <attr name="cb_shadow_color" format="color"/>
         <attr name="cb_pressedRingWidth" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="CircleTextView">
         <attr name="ct_color" format="color"/>
         <attr name="ct_strokeWidth" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="SeekArc">
+        <attr name="thumbOffset" format="dimension"/>
+        <attr name="max" format="integer"/>
+        <attr name="progressWidth" format="dimension"/>
+        <attr name="arcWidth" format="dimension"/>
+        <attr name="progress" format="integer"/>
+        <attr name="rotation" format="integer"/>
+        <attr name="startAngle" format="integer"/>
+        <attr name="sweepAngle" format="integer"/>
+        <attr name="arcColor" format="color"/>
+        <attr name="progressColor" format="color"/>
+        <attr name="thumbColor" format="color"/>
+        <attr name="thumbRadius" format="dimension"/>
+        <attr name="roundEdges" format="boolean"/>
+        <attr name="clockwise" format="boolean"/>
+        <attr name="touchable" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="FloatingActionButton">
