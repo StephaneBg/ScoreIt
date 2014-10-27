@@ -20,11 +20,12 @@
 
     <color name="color_primary">#FF7883C0</color>
     <color name="color_primary_translucent">#DD7883C0</color>
-    <color name="color_primary_dark">#FF606999</color>
+    <color name="color_primary_dark">#EE606999</color>
     <color name="color_accent">#FFF16A70</color>
     <color name="color_hint">#FFB1D877</color>
     <color name="color_hint_dark">#FF8CAA5F</color>
 
+    <color name="gray_background">#FAFAFA</color>
     <color name="gray_light">#E0E0E0</color>
     <color name="gray_light_translucent">#EEE0E0E0</color>
     <color name="gray_light_pressed">#80B2B2B2</color>

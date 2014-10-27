@@ -144,7 +144,7 @@ public class ScoreItActivity extends BaseActivity
                 mLap = (Lap) savedInstanceState.getSerializable("lap");
             }
             if (null != mLap) {
-                mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
+                mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
                 mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
             }
         }
@@ -192,10 +192,10 @@ public class ScoreItActivity extends BaseActivity
             public void onAnimationEnd() {
                 Resources resources = getResources();
                 if (null == mLap) {
-                    mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_edit_fab));
+                    mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_create));
                     mActionButton.setBackgroundColor(resources.getColor(R.color.color_accent));
                 } else {
-                    mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
+                    mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
                     mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
                 }
             }
@@ -451,7 +451,7 @@ public class ScoreItActivity extends BaseActivity
         mIsEdited = true;
         mLap = lap;
         Resources resources = getResources();
-        mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_accept));
+        mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
         mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
         showLapFragment();
     }
@@ -785,7 +785,7 @@ public class ScoreItActivity extends BaseActivity
         mIsEdited = false;
         if (mUpdateFab) {
             Resources resources = getResources();
-            mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_edit_fab));
+            mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_create));
             mActionButton.setBackgroundColor(resources.getColor(R.color.color_accent));
         }
         mUpdateFab = false;

@@ -26,5 +26,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/activity_horizontal_margin"
+        app:lineBackground="@color/gray_background"
         app:lineAxisColor="@color/gray_light"/>
 </FrameLayout>

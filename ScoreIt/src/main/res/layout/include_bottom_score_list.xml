@@ -5,7 +5,7 @@
     style="?android:buttonBarStyle"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:background="@color/gray_light"
+    android:background="@color/color_primary"
     android:orientation="horizontal">
 
     <ImageButton
@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/delete"
         android:background="@drawable/bg_default_action"
-        android:src="@drawable/ic_content_discard"
+        android:src="@drawable/ic_action_delete"
         android:text="@string/cancel"/>
 
     <ImageButton
@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/edit"
         android:background="@drawable/bg_default_action"
-        android:src="@drawable/ic_content_edit_light"
+        android:src="@drawable/ic_content_create"
         android:text="@string/done"/>
 
 </LinearLayout>
