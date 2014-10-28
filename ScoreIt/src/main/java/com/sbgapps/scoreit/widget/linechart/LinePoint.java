@@ -97,8 +97,7 @@ public class LinePoint {
 
     public int getSelectedColor() {
         if (-1 == mSelectedColor) {
-            mSelectedColor = Util.getDarkerColor(mColor);
-            mSelectedColor &= 0x80FFFFFF;
+            mSelectedColor = Util.getHighlightColor(mColor, 0.8f);
         }
         return mSelectedColor;
     }

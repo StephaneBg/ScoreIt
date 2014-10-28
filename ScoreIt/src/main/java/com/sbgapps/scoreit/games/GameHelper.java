@@ -29,7 +29,7 @@ import com.sbgapps.scoreit.games.tarot.TarotFiveGame;
 import com.sbgapps.scoreit.games.tarot.TarotFourGame;
 import com.sbgapps.scoreit.games.tarot.TarotThreeGame;
 import com.sbgapps.scoreit.games.universal.UniversalGame;
-import com.sbgapps.scoreit.util.FilesUtil;
+import com.sbgapps.scoreit.databackup.FilesUtil;
 import com.sromku.simple.storage.SimpleStorage;
 import com.sromku.simple.storage.Storage;
 

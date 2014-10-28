@@ -33,34 +33,36 @@
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/team"/>
+            android:text="@string/bidding"/>
 
-        <RadioGroup
-            android:id="@+id/radio_group_player"
+        <com.sbgapps.scoreit.widget.ToggleGroup
+            android:id="@+id/group_team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:orientation="vertical">
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin">
 
-            <RadioButton
-                android:id="@+id/rb_player1"
-                android:layout_width="match_parent"
+            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
+                android:id="@+id/btn_player_1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/them"/>
+                android:layout_weight="1"
+                android:checked="true"
+                android:background="@drawable/bg_btn_toggle"
+                tools:textOn="@string/them"/>
 
-            <RadioButton
-                android:id="@+id/rb_player2"
-                android:layout_width="match_parent"
+            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
+                android:id="@+id/btn_player_2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/us"/>
-        </RadioGroup>
+                android:layout_weight="1"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:background="@drawable/bg_btn_toggle"
+                tools:textOff="@string/us"/>
 
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/bidding"/>
+        </com.sbgapps.scoreit.widget.ToggleGroup>
 
         <com.sbgapps.scoreit.widget.SeekPoints
             android:id="@+id/input_bid"
@@ -74,6 +76,45 @@
             style="@style/SubHeader"
             android:text="@string/points"/>
 
+        <com.sbgapps.scoreit.widget.ToggleGroup
+            android:id="@+id/group_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
+                android:id="@+id/btn_score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:background="@drawable/bg_btn_toggle"
+                android:textOn="@string/score"
+                android:textOff="@string/score"/>
+
+            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
+                android:id="@+id/btn_inside"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:background="@drawable/bg_btn_toggle"
+                android:textOn="@string/inside"
+                android:textOff="@string/inside"/>
+
+            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
+                android:id="@+id/btn_capot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_toggle"
+                android:textOn="@string/capot"
+                android:textOff="@string/capot"/>
+        </com.sbgapps.scoreit.widget.ToggleGroup>
+
         <com.sbgapps.scoreit.widget.SeekPoints
             android:id="@+id/input_points"
             android:layout_width="match_parent"
@@ -81,74 +122,6 @@
             android:layout_marginBottom="@dimen/margin_default"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"/>
-
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/belote"/>
-
-        <RadioGroup
-            android:id="@+id/radio_group_belote"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/rb_belote_none"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/none"/>
-
-            <RadioButton
-                android:id="@+id/rb_belote_player1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/them"/>
-
-            <RadioButton
-                android:id="@+id/rb_belote_player2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/us"/>
-        </RadioGroup>
-
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/coinche"/>
-
-        <RadioGroup
-            android:id="@+id/radio_group_coinche"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin">
-
-            <RadioButton
-                android:id="@+id/rb_no_coinche"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/none"/>
-
-            <RadioButton
-                android:id="@+id/rb_coinche"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/coinche"/>
-
-            <RadioButton
-                android:id="@+id/rb_surcoinche"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
-                android:layout_weight="1"
-                android:text="@string/surcoinche"/>
-        </RadioGroup>
 
     </LinearLayout>
 </ScrollView>

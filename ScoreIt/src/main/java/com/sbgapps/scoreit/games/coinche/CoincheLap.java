@@ -21,6 +21,9 @@ import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by sbaiget on 11/11/13.
  */
@@ -32,17 +35,17 @@ public class CoincheLap extends GenericBeloteLap {
 
     @SerializedName("bid")
     private int mBid;
-    @SerializedName("coinche")
-    private int mCoinche;
+    @SerializedName("bonuses")
+    protected List<CoincheBonus> mBonuses;
 
-    public CoincheLap(int taker, int points, int bid, int coinche) {
+    public CoincheLap(int taker, int points, int bid, List<CoincheBonus> bonuses) {
         super(taker, points);
         mBid = bid;
-        mCoinche = coinche;
+        mBonuses = bonuses;
     }
 
     public CoincheLap() {
-        this(Player.PLAYER_1, 110, 110, COINCHE_NONE);
+        this(Player.PLAYER_1, 110, 110, new ArrayList<CoincheBonus>());
     }
 
     public int getBid() {
@@ -53,19 +56,15 @@ public class CoincheLap extends GenericBeloteLap {
         mBid = bid;
     }
 
-    public int getCoinche() {
-        return mCoinche;
-    }
-
-    public void setCoinche(int coinche) {
-        mCoinche = coinche;
+    public List<CoincheBonus> getBonuses() {
+        return mBonuses;
     }
 
     @Override
     public void set(Lap lap) {
         super.set(lap);
         mBid = ((CoincheLap) lap).getBid();
-        mCoinche = ((CoincheLap) lap).getCoinche();
+        mBonuses = ((CoincheLap) lap).getBonuses();
         computeScores();
     }
 
@@ -73,37 +72,45 @@ public class CoincheLap extends GenericBeloteLap {
     public void computeScores() {
         super.computeScores();
 
-        int takerPts = mPoints;
-        int counterPts = getCounterPoints(mPoints);
+        int takerPts = mScores[0];
+        int counterPts = mScores[1];
 
-//        if (Player.PLAYER_NONE != mBelote) {
-//            if (((Player.PLAYER_1 == mScorer) && (Player.PLAYER_1 == mBelote)) ||
-//                    ((Player.PLAYER_2 == mScorer) && (Player.PLAYER_2 == mBelote))) {
-//                takerPts += 20;
-//            } else {
-//                counterPts += 20;
-//            }
+        // Check belote
+        for (CoincheBonus bonus : mBonuses) {
+            if (CoincheBonus.BONUS_BELOTE == bonus.get()) {
+                if (((Player.PLAYER_1 == mScorer) && (Player.PLAYER_1 == bonus.getPlayer())) ||
+                        ((Player.PLAYER_2 == mScorer) && (Player.PLAYER_2 == bonus.getPlayer()))) {
+                    takerPts += 20;
+                } else {
+                    counterPts += 20;
+                }
+            }
+        }
+
+//        if ((mPoints >= mBid) && (takerPts > counterPts)) {
+//            // Deal succeeded
+//            takerPts += mBid;
+//            takerPts = (COINCHE_NORMAL == mCoinche) ? takerPts * 2 :
+//                    (COINCHE_DOUBLE == mCoinche) ? takerPts * 4 : takerPts;
+//        } else {
+//            // Deal failed
+//            mIsDone = false;
+//            takerPts = 0;
+//            counterPts = (250 == mBid) ? 500 : 160 + mBid;
+//            counterPts = (COINCHE_NORMAL == mCoinche) ? counterPts * 2 :
+//                    (COINCHE_DOUBLE == mCoinche) ? counterPts * 4 : counterPts;
 //        }
 
-        if ((mPoints >= mBid) && (takerPts > counterPts)) {
-            // Deal succeeded
-            takerPts += mBid;
-            takerPts = (COINCHE_NORMAL == mCoinche) ? takerPts * 2 :
-                    (COINCHE_DOUBLE == mCoinche) ? takerPts * 4 : takerPts;
-        } else {
-            // Deal failed
-            mIsDone = false;
-            takerPts = 0;
-            counterPts = (250 == mBid) ? 500 : 160 + mBid;
-            counterPts = (COINCHE_NORMAL == mCoinche) ? counterPts * 2 :
-                    (COINCHE_DOUBLE == mCoinche) ? counterPts * 4 : counterPts;
+        // Check coinche
+        for (CoincheBonus bonus : mBonuses) {
+            if (CoincheBonus.BONUS_COINCHE == bonus.get()) {
+
+            } else if (CoincheBonus.BONUS_SURCOINCHE == bonus.get()) {
+
+            }
         }
 
         mScores[Player.PLAYER_1] = (Player.PLAYER_1 == mScorer) ? takerPts : counterPts;
         mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mScorer) ? takerPts : counterPts;
-    }
-
-    private int getCounterPoints(int points) {
-        return (250 == points) ? 0 : 160 - points;
     }
 }

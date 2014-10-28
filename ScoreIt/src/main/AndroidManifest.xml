@@ -35,6 +35,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <meta-data
+                android:name="com.google.android.backup.api_key"
+                android:value="AEdPqrEAAAAIFCoVtKuiOisDPQmo0wutqKoed5sWnHLkLY7GaQ" />
         </activity>
 
         <activity

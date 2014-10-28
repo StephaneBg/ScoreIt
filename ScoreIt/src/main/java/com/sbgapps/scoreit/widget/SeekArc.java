@@ -218,15 +218,11 @@ public class SeekArc extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
-        final int height = getDefaultSize(getSuggestedMinimumHeight(),
-                heightMeasureSpec);
-        final int width = getDefaultSize(getSuggestedMinimumWidth(),
-                widthMeasureSpec);
+        final int height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
+        final int width = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
         final int min = Math.min(width, height);
-        float top = 0;
-        float left = 0;
-        int arcDiameter = 0;
+        float top, left;
+        int arcDiameter;
 
         mTranslateX = (int) (width * 0.5f);
         mTranslateY = (int) (height * 0.5f);
@@ -287,7 +283,7 @@ public class SeekArc extends View {
         setPressed(true);
         touchAngle = getTouchDegrees(event.getX(), event.getY());
         int progress = getProgressForAngle(touchAngle);
-        onProgressRefresh(progress, true);
+        updateProgress(progress, true);
     }
 
     private double getTouchDegrees(float xPos, float yPos) {
@@ -308,19 +304,13 @@ public class SeekArc extends View {
     private int getProgressForAngle(double angle) {
         int touchProgress = (int) Math.round(valuePerDegree() * angle);
 
-        touchProgress = (touchProgress < 0) ? INVALID_PROGRESS_VALUE
-                : touchProgress;
-        touchProgress = (touchProgress > mMax) ? INVALID_PROGRESS_VALUE
-                : touchProgress;
+        touchProgress = (touchProgress < 0) ? INVALID_PROGRESS_VALUE : touchProgress;
+        touchProgress = (touchProgress > mMax) ? INVALID_PROGRESS_VALUE : touchProgress;
         return touchProgress;
     }
 
     private float valuePerDegree() {
         return (float) mMax / mSweepAngle;
-    }
-
-    private void onProgressRefresh(int progress, boolean fromUser) {
-        updateProgress(progress, fromUser);
     }
 
     private void updateThumbPosition() {
@@ -330,14 +320,12 @@ public class SeekArc extends View {
     }
 
     private void updateProgress(int progress, boolean fromUser) {
-
         if (progress == INVALID_PROGRESS_VALUE) {
             return;
         }
 
         if (mOnSeekArcChangeListener != null) {
-            mOnSeekArcChangeListener
-                    .onProgressChanged(this, progress, fromUser);
+            mOnSeekArcChangeListener.onProgressChanged(this, progress, fromUser);
         }
 
         progress = (progress > mMax) ? mMax : progress;

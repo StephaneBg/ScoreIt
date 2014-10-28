@@ -23,10 +23,10 @@ import android.graphics.Color;
  */
 public class Util {
 
-    public static int getDarkerColor(int color) {
+    public static int getHighlightColor(int color, float ratio) {
         float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
-        hsv[2] *= 0.8f;
-        return Color.HSVToColor(hsv);
+        hsv[2] *= ratio;
+        return (Color.HSVToColor(hsv) & 0x80FFFFFF);
     }
 }

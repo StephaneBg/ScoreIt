@@ -87,6 +87,7 @@ public class BeloteLap extends GenericBeloteLap {
     @Override
     public void set(Lap lap) {
         super.set(lap);
+        mBonuses = ((BeloteLap) lap).getBonuses();
         computeScores();
     }
 }

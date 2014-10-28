@@ -115,7 +115,7 @@ public class FloatingActionButton extends ImageView {
         mBackgroundDrawable = new ShapeDrawable(new OvalShape());
 
         final Paint paint = mBackgroundDrawable.getPaint();
-        paint.setShadowLayer(mShadowOffset, 0f, 0f * density, 0x60000000);
+        paint.setShadowLayer(mShadowOffset, 0f, 0f, 0x60000000);
         paint.setColor(mBackgroundColor);
         setLayerType(LAYER_TYPE_SOFTWARE, paint);
 
