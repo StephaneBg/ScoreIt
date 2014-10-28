@@ -69,8 +69,8 @@ dependencies {
     compile 'com.anjlab.android.iab.v3:library:1.0.8@aar'
     compile 'com.jakewharton:butterknife:5.1.2'
     compile 'com.daimajia.swipelayout:library:1.0.4@aar'
-    compile 'com.github.mrengineer13:snackbar:0.4.0'
 
     compile project(':L-Dialogs')
     compile project(':SimpleStorage')
+    compile project(':SnackBar')
 }
