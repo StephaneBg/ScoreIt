@@ -36,16 +36,16 @@ import butterknife.InjectView;
 public class CoincheLapFragment extends LapFragment
         implements SeekPoints.OnPointsChangedListener {
 
-    @InjectView(R.id.radio_group_player)
-    RadioGroup mRadioGroupPlayer;
-    @InjectView(R.id.radio_group_belote)
-    RadioGroup mRadioGroupBelote;
-    @InjectView(R.id.radio_group_coinche)
-    RadioGroup mRadioGroupCoinche;
-    @InjectView(R.id.input_points)
-    SeekPoints mPoints;
-    @InjectView(R.id.input_bid)
-    SeekPoints mBids;
+//    @InjectView(R.id.radio_group_player)
+//    RadioGroup mRadioGroupPlayer;
+//    @InjectView(R.id.radio_group_belote)
+//    RadioGroup mRadioGroupBelote;
+//    @InjectView(R.id.radio_group_coinche)
+//    RadioGroup mRadioGroupCoinche;
+//    @InjectView(R.id.input_points)
+//    SeekPoints mPoints;
+//    @InjectView(R.id.input_bid)
+//    SeekPoints mBids;
 
     @Override
     public CoincheLap getLap() {
@@ -55,41 +55,41 @@ public class CoincheLapFragment extends LapFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap_coinche, null);
-        ButterKnife.inject(this, view);
-
-        switch (getLap().getScorer()) {
-            case Player.PLAYER_1:
-                mRadioGroupPlayer.check(R.id.rb_player1);
-                break;
-            case Player.PLAYER_2:
-                mRadioGroupPlayer.check(R.id.rb_player2);
-                break;
-        }
-        mRadioGroupPlayer.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.rb_player1:
-                        getLap().setScorer(Player.PLAYER_1);
-                        break;
-                    case R.id.rb_player2:
-                        getLap().setScorer(Player.PLAYER_2);
-                        break;
-                }
-            }
-        });
-
-        mBids.init(
-                getLap().getBid(),
-                157,
-                getLap().getPoints());
-        mBids.setOnPointsChangedListener(this, "bid");
-
-        mPoints.init(
-                getLap().getPoints(),
-                157,
-                getLap().getPoints());
-        mPoints.setOnPointsChangedListener(this, "points");
+//        ButterKnife.inject(this, view);
+//
+//        switch (getLap().getScorer()) {
+//            case Player.PLAYER_1:
+//                mRadioGroupPlayer.check(R.id.rb_player1);
+//                break;
+//            case Player.PLAYER_2:
+//                mRadioGroupPlayer.check(R.id.rb_player2);
+//                break;
+//        }
+//        mRadioGroupPlayer.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                switch (checkedId) {
+//                    case R.id.rb_player1:
+//                        getLap().setScorer(Player.PLAYER_1);
+//                        break;
+//                    case R.id.rb_player2:
+//                        getLap().setScorer(Player.PLAYER_2);
+//                        break;
+//                }
+//            }
+//        });
+//
+//        mBids.init(
+//                getLap().getBid(),
+//                157,
+//                getLap().getPoints());
+//        mBids.setOnPointsChangedListener(this, "bid");
+//
+//        mPoints.init(
+//                getLap().getPoints(),
+//                157,
+//                getLap().getPoints());
+//        mPoints.setOnPointsChangedListener(this, "points");
 
 //        switch (getLap().getBelote()) {
 //            case Player.PLAYER_NONE:
@@ -119,33 +119,33 @@ public class CoincheLapFragment extends LapFragment
 //            }
 //        });
 
-        switch (getLap().getCoinche()) {
-            case CoincheLap.COINCHE_NONE:
-                mRadioGroupCoinche.check(R.id.rb_no_coinche);
-                break;
-            case CoincheLap.COINCHE_NORMAL:
-                mRadioGroupCoinche.check(R.id.rb_coinche);
-                break;
-            case CoincheLap.COINCHE_DOUBLE:
-                mRadioGroupCoinche.check(R.id.rb_surcoinche);
-                break;
-        }
-        mRadioGroupCoinche.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.rb_no_coinche:
-                        getLap().setCoinche(CoincheLap.COINCHE_NONE);
-                        break;
-                    case R.id.rb_coinche:
-                        getLap().setCoinche(CoincheLap.COINCHE_NORMAL);
-                        break;
-                    case R.id.rb_surcoinche:
-                        getLap().setCoinche(CoincheLap.COINCHE_DOUBLE);
-                        break;
-                }
-            }
-        });
+//        switch (getLap().getCoinche()) {
+//            case CoincheLap.COINCHE_NONE:
+//                mRadioGroupCoinche.check(R.id.rb_no_coinche);
+//                break;
+//            case CoincheLap.COINCHE_NORMAL:
+//                mRadioGroupCoinche.check(R.id.rb_coinche);
+//                break;
+//            case CoincheLap.COINCHE_DOUBLE:
+//                mRadioGroupCoinche.check(R.id.rb_surcoinche);
+//                break;
+//        }
+//        mRadioGroupCoinche.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                switch (checkedId) {
+//                    case R.id.rb_no_coinche:
+//                        getLap().setCoinche(CoincheLap.COINCHE_NONE);
+//                        break;
+//                    case R.id.rb_coinche:
+//                        getLap().setCoinche(CoincheLap.COINCHE_NORMAL);
+//                        break;
+//                    case R.id.rb_surcoinche:
+//                        getLap().setCoinche(CoincheLap.COINCHE_DOUBLE);
+//                        break;
+//                }
+//            }
+//        });
         return view;
     }
 

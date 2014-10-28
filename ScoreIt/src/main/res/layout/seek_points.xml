@@ -42,7 +42,7 @@
             android:layout_height="160dp">
 
             <com.sbgapps.scoreit.widget.SeekArc
-                android:id="@+id/seekbar_points"
+                android:id="@+id/seekarc_points"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="30dp"/>

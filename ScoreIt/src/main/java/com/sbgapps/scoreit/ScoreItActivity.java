@@ -466,11 +466,10 @@ public class ScoreItActivity extends BaseActivity
         update();
         invalidateOptionsMenu();
 
-        //show(int messageResId, int actionMessageResId, int textColor, int actionIcon, Parcelable token, short duration)
         mSnackBar.show(
                 R.string.deleted_lap,
                 R.string.undo,
-                R.color.color_accent,
+                R.color.color_primary,
                 0,
                 token,
                 SnackBar.MED_SNACK);

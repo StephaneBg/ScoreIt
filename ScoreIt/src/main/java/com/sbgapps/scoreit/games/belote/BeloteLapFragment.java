@@ -26,15 +26,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.widget.CircleButton;
+import com.sbgapps.scoreit.widget.BeloteInputPoints;
 import com.sbgapps.scoreit.widget.SeekPoints;
-import com.sbgapps.scoreit.widget.ToggleGroup;
 
 import java.util.List;
 
@@ -47,20 +44,8 @@ import butterknife.InjectView;
 public class BeloteLapFragment extends LapFragment
         implements SeekPoints.OnPointsChangedListener {
 
-    @InjectView(R.id.player1_name)
-    TextView mPlayer1Name;
-    @InjectView(R.id.player2_name)
-    TextView mPlayer2Name;
-    @InjectView(R.id.player1_points)
-    TextView mPlayer1Points;
-    @InjectView(R.id.player2_points)
-    TextView mPlayer2Points;
-    @InjectView(R.id.btn_switch)
-    CircleButton mSwitchBtn;
-    @InjectView(R.id.group_score)
-    ToggleGroup mScoreGroup;
     @InjectView(R.id.input_points)
-    SeekPoints mSeekPoints;
+    BeloteInputPoints mInputPoints;
     @InjectView(R.id.ll_bonuses)
     LinearLayout mBonuses;
     @InjectView(R.id.btn_add_bonus)
@@ -76,60 +61,7 @@ public class BeloteLapFragment extends LapFragment
         View view = inflater.inflate(R.layout.fragment_lap_belote, null);
         ButterKnife.inject(this, view);
 
-        final GameHelper gameHelper = getGameHelper();
-        mPlayer1Name.setText(gameHelper.getPlayer(Player.PLAYER_1).getName());
-        mPlayer2Name.setText(gameHelper.getPlayer(Player.PLAYER_2).getName());
-
-        setScores();
-
-        mSwitchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Player.PLAYER_1 == getLap().getScorer()) {
-                    getLap().setScorer(Player.PLAYER_2);
-                } else {
-                    getLap().setScorer(Player.PLAYER_1);
-                }
-                setScores();
-            }
-        });
-
-        mScoreGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(ToggleGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.btn_score:
-                        mSeekPoints.setVisibility(View.VISIBLE);
-                        getLap().setPoints(110);
-                        mSeekPoints.setPoints(110);
-                        break;
-                    case R.id.btn_inside:
-                        mSeekPoints.setVisibility(View.GONE);
-                        getLap().setPoints(160);
-                        break;
-                    case R.id.btn_capot:
-                        mSeekPoints.setVisibility(View.GONE);
-                        getLap().setPoints(250);
-                        break;
-                }
-                setScores();
-            }
-        });
-
-        int points = getLap().getPoints();
-        if (160 == points) {
-            mScoreGroup.check(R.id.btn_inside);
-            mSeekPoints.setVisibility(View.GONE);
-        } else if (250 == points) {
-            mScoreGroup.check(R.id.btn_capot);
-            mSeekPoints.setVisibility(View.GONE);
-        } else {
-        }
-        mSeekPoints.init(
-                points,
-                162,
-                getLap().getPoints());
-        mSeekPoints.setOnPointsChangedListener(this, "points");
+        mInputPoints.init(this);
 
         mButtonBonus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,21 +75,11 @@ public class BeloteLapFragment extends LapFragment
         return view;
     }
 
-    private void setScores() {
-        int scores[] = getLap().getScores();
-        if (Player.PLAYER_1 == getLap().getScorer()) {
-            mPlayer1Points.setText(Integer.toString(scores[0]));
-            mPlayer2Points.setText(Integer.toString(scores[1]));
-        } else {
-            mPlayer1Points.setText(Integer.toString(scores[1]));
-            mPlayer2Points.setText(Integer.toString(scores[0]));
-        }
-    }
-
     @Override
     public void onPointsChanged(int progress, String tag) {
-        getLap().setPoints(progress);
-        setScores();
+        final BeloteLap lap = getLap();
+        lap.setPoints(progress);
+        mInputPoints.setScores(lap);
     }
 
     private void addBonus(BeloteBonus beloteBonus) {

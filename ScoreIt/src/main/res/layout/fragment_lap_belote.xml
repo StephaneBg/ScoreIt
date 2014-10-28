@@ -17,7 +17,6 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,117 +29,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
         android:orientation="vertical">
 
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/points"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/player1_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:textSize="@dimen/font_headline"
-                    tools:text="Them"/>
-
-                <TextView
-                    android:id="@+id/player1_points"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="@dimen/font_headline"
-                    tools:text="120"/>
-            </LinearLayout>
-
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_switch"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_action_switch"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/player2_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:textSize="@dimen/font_headline"
-                    tools:text="Us"/>
-
-                <TextView
-                    android:id="@+id/player2_points"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="@dimen/font_headline"
-                    tools:text="40"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <com.sbgapps.scoreit.widget.ToggleGroup
-            android:id="@+id/group_score"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
-                android:id="@+id/btn_score"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:background="@drawable/bg_btn_toggle"
-                android:textOn="@string/score"
-                android:textOff="@string/score"/>
-
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
-                android:id="@+id/btn_inside"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:background="@drawable/bg_btn_toggle"
-                android:textOn="@string/inside"
-                android:textOff="@string/inside"/>
-
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
-                android:id="@+id/btn_capot"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/bg_btn_toggle"
-                android:textOn="@string/capot"
-                android:textOff="@string/capot"/>
-        </com.sbgapps.scoreit.widget.ToggleGroup>
-
-        <com.sbgapps.scoreit.widget.SeekPoints
+        <com.sbgapps.scoreit.widget.BeloteInputPoints
             android:id="@+id/input_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
