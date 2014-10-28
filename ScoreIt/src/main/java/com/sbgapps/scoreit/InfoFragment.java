@@ -31,6 +31,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.sbgapps.scoreit.util.IabKey;
 
 /**
@@ -158,7 +159,7 @@ public class InfoFragment extends Fragment
     }
 
     @Override
-    public void onProductPurchased(String sku) {
+    public void onProductPurchased(String sku, TransactionDetails transactionDetails) {
         manageDonations();
     }
 
