@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.games.tarot;
+package com.sbgapps.scoreit.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,7 +24,6 @@ import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -32,8 +31,11 @@ import android.widget.Spinner;
 import android.widget.ToggleButton;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
+import com.sbgapps.scoreit.games.tarot.TarotBid;
+import com.sbgapps.scoreit.games.tarot.TarotBonus;
+import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
+import com.sbgapps.scoreit.games.tarot.TarotLap;
 import com.sbgapps.scoreit.widget.SeekPoints;
 
 import java.util.List;
@@ -45,7 +47,7 @@ import butterknife.InjectView;
  * Created by sbaiget on 07/12/13.
  */
 public class TarotLapFragment extends LapFragment
-        implements SeekPoints.OnPointsChangedListener {
+        implements SeekPoints.OnProgressChangedListener {
 
     @InjectView(R.id.spinner_taker)
     Spinner mTaker;
@@ -137,8 +139,9 @@ public class TarotLapFragment extends LapFragment
             }
         });
 
-        mPoints.init(getLap().getPoints(), 91, getLap().getPoints());
-        mPoints.setOnPointsChangedListener(this, "points");
+        int points = getLap().getPoints();
+        mPoints.init(points, 91, Integer.toString(points));
+        mPoints.setOnProgressChangedListener(this, "points");
 
         mPetit.setChecked((getLap().getOudlers() & TarotLap.OUDLER_PETIT_MSK)
                 == TarotLap.OUDLER_PETIT_MSK);
@@ -301,8 +304,9 @@ public class TarotLapFragment extends LapFragment
     }
 
     @Override
-    public void onPointsChanged(int points, String tag) {
-        getLap().setPoints(points);
+    public String onProgressChanged(int progress, String tag) {
+        getLap().setPoints(progress);
+        return Integer.toString(progress);
     }
 
     class BidItem {

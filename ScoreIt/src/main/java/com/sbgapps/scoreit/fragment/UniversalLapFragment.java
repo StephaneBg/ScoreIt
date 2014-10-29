@@ -14,43 +14,38 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit;
+package com.sbgapps.scoreit.fragment;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
-import com.linearlistview.LinearListView;
-import com.sbgapps.scoreit.adapter.HeaderAdapter;
+import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.adapter.UniversalLapAdapter;
+import com.sbgapps.scoreit.games.universal.UniversalLap;
 
 /**
- * Created by sbaiget on 24/12/13.
+ * Created by sbaiget on 02/02/14.
  */
-public class HeaderFragment extends Fragment {
+public class UniversalLapFragment extends LapFragment {
 
-    public static final String TAG = HeaderFragment.class.getName();
-
-    private HeaderAdapter mAdapter;
+    private UniversalLapAdapter mAdapter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public UniversalLap getLap() {
+        return (UniversalLap) super.getLap();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_header, null);
+        View view = inflater.inflate(R.layout.fragment_lap_universal, null);
 
-        LinearListView listView = (LinearListView) view.findViewById(R.id.list_header);
-        mAdapter = new HeaderAdapter(getActivity());
+        ListView listView = (ListView) view.findViewById(R.id.list_view);
+        mAdapter = new UniversalLapAdapter(this);
         listView.setAdapter(mAdapter);
-        return view;
-    }
 
-    public void update() {
-        if (null != mAdapter)
-            mAdapter.notifyDataSetChanged();
+        return view;
     }
 }

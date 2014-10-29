@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit;
+package com.sbgapps.scoreit.fragment;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -23,6 +23,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.adapter.GenericBeloteScoreAdapter;
 import com.sbgapps.scoreit.adapter.ScoreListAdapter;
 import com.sbgapps.scoreit.adapter.TarotScoreAdapter;

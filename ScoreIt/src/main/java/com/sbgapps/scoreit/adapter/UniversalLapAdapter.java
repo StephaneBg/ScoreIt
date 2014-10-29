@@ -21,15 +21,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
-import com.sbgapps.scoreit.games.universal.UniversalLapFragment;
+import com.sbgapps.scoreit.fragment.UniversalLapFragment;
 import com.sbgapps.scoreit.widget.CircleButton;
 import com.sbgapps.scoreit.widget.CircleTextView;
 

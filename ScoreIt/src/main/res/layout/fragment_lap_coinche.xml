@@ -67,11 +67,10 @@
             android:id="@+id/input_bid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            android:layout_marginBottom="@dimen/margin_default"/>
 
         <com.sbgapps.scoreit.widget.BeloteInputPoints
+            android:id="@+id/input_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -79,32 +78,24 @@
             style="@style/SubHeader"
             android:text="@string/coinche"/>
 
-        <com.sbgapps.scoreit.widget.ToggleGroup
-            android:id="@+id/group_coinche"
+        <Spinner
+            android:id="@+id/spinner_coinche"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_height="@dimen/widget_height"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin">
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
-            <ToggleButton
-                android:id="@+id/btn_coinche"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:background="@drawable/bg_btn_toggle"
-                tools:textOn="@string/them"/>
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/belote"/>
 
-            <ToggleButton
-                android:id="@+id/btn_surcoinche"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:background="@drawable/bg_btn_toggle"
-                tools:textOff="@string/us"/>
-        </com.sbgapps.scoreit.widget.ToggleGroup>
+        <Spinner
+            android:id="@+id/spinner_belote"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_height"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
     </LinearLayout>
 </ScrollView>

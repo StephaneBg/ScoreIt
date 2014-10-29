@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.databackup;
+package com.sbgapps.scoreit.util;
 
 import android.content.SharedPreferences;
 

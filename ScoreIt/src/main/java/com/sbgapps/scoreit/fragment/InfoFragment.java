@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit;
+package com.sbgapps.scoreit.fragment;
 
 import android.support.v4.app.Fragment;
 import android.content.ActivityNotFoundException;
@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.util.IabKey;
 
 /**

@@ -29,10 +29,6 @@ import java.util.List;
  */
 public class CoincheLap extends GenericBeloteLap {
 
-    public static final int COINCHE_NONE = 0;
-    public static final int COINCHE_NORMAL = 1;
-    public static final int COINCHE_DOUBLE = 2;
-
     @SerializedName("bid")
     private int mBid;
     @SerializedName("bonuses")
@@ -76,41 +72,54 @@ public class CoincheLap extends GenericBeloteLap {
         int counterPts = mScores[1];
 
         // Check belote
-        for (CoincheBonus bonus : mBonuses) {
-            if (CoincheBonus.BONUS_BELOTE == bonus.get()) {
-                if (((Player.PLAYER_1 == mScorer) && (Player.PLAYER_1 == bonus.getPlayer())) ||
-                        ((Player.PLAYER_2 == mScorer) && (Player.PLAYER_2 == bonus.getPlayer()))) {
-                    takerPts += 20;
-                } else {
-                    counterPts += 20;
-                }
+        CoincheBonus bonus = getBonus(CoincheBonus.BONUS_BELOTE);
+        if (null != bonus) {
+            if (((Player.PLAYER_1 == mScorer) && (Player.PLAYER_1 == bonus.getPlayer())) ||
+                    ((Player.PLAYER_2 == mScorer) && (Player.PLAYER_2 == bonus.getPlayer()))) {
+                takerPts += 20;
+            } else {
+                counterPts += 20;
             }
         }
 
-//        if ((mPoints >= mBid) && (takerPts > counterPts)) {
-//            // Deal succeeded
-//            takerPts += mBid;
-//            takerPts = (COINCHE_NORMAL == mCoinche) ? takerPts * 2 :
-//                    (COINCHE_DOUBLE == mCoinche) ? takerPts * 4 : takerPts;
-//        } else {
-//            // Deal failed
-//            mIsDone = false;
-//            takerPts = 0;
-//            counterPts = (250 == mBid) ? 500 : 160 + mBid;
-//            counterPts = (COINCHE_NORMAL == mCoinche) ? counterPts * 2 :
-//                    (COINCHE_DOUBLE == mCoinche) ? counterPts * 4 : counterPts;
-//        }
+        // Compute scores
+        bonus = getBonus(CoincheBonus.BONUS_COINCHE);
+        if (null == bonus) bonus = getBonus(CoincheBonus.BONUS_SURCOINCHE);
 
-        // Check coinche
-        for (CoincheBonus bonus : mBonuses) {
-            if (CoincheBonus.BONUS_COINCHE == bonus.get()) {
-
-            } else if (CoincheBonus.BONUS_SURCOINCHE == bonus.get()) {
-
+        if ((mPoints >= mBid) && (takerPts > counterPts)) {
+            // Deal succeeded
+            takerPts += mBid;
+            if (null != bonus) {
+                if (CoincheBonus.BONUS_COINCHE == bonus.get()) {
+                    takerPts *= 2;
+                } else {
+                    takerPts *= 4;
+                }
+            }
+        } else {
+            // Deal failed
+            mIsDone = false;
+            takerPts = 0;
+            counterPts = (250 == mBid) ? 500 : 160 + mBid;
+            if (null != bonus) {
+                if (CoincheBonus.BONUS_COINCHE == bonus.get()) {
+                    counterPts *= 2;
+                } else {
+                    counterPts *= 4;
+                }
             }
         }
 
         mScores[Player.PLAYER_1] = (Player.PLAYER_1 == mScorer) ? takerPts : counterPts;
         mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mScorer) ? takerPts : counterPts;
+    }
+
+    private CoincheBonus getBonus(int bonus) {
+        for (CoincheBonus b : mBonuses) {
+            if (bonus == b.get()) {
+                return b;
+            }
+        }
+        return null;
     }
 }

@@ -32,7 +32,7 @@ import com.daimajia.swipe.SwipeLayout;
 import com.linearlistview.LinearListView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
-import com.sbgapps.scoreit.ScoreListFragment;
+import com.sbgapps.scoreit.fragment.ScoreListFragment;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.util.AdapterViewUtil;

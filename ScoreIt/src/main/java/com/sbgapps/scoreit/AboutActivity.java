@@ -33,6 +33,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.sbgapps.scoreit.fragment.InfoFragment;
 import com.sbgapps.scoreit.widget.PagerSlidingTabStrip;
 
 import java.util.ArrayList;

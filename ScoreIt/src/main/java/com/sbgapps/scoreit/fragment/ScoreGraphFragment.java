@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit;
+package com.sbgapps.scoreit.fragment;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -22,6 +22,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.widget.linechart.Line;
 import com.sbgapps.scoreit.widget.linechart.LineGraph;
 import com.sbgapps.scoreit.widget.linechart.LinePoint;

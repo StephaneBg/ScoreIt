@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.games.belote;
+package com.sbgapps.scoreit.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,12 +26,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.ToggleButton;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.LapFragment;
 import com.sbgapps.scoreit.games.Player;
+import com.sbgapps.scoreit.games.belote.BeloteBonus;
+import com.sbgapps.scoreit.games.belote.BeloteLap;
 import com.sbgapps.scoreit.widget.BeloteInputPoints;
-import com.sbgapps.scoreit.widget.SeekPoints;
 
 import java.util.List;
 
@@ -41,8 +42,7 @@ import butterknife.InjectView;
 /**
  * Created by sbaiget on 01/11/13.
  */
-public class BeloteLapFragment extends LapFragment
-        implements SeekPoints.OnPointsChangedListener {
+public class BeloteLapFragment extends GenericBeloteLapFragment {
 
     @InjectView(R.id.input_points)
     BeloteInputPoints mInputPoints;
@@ -76,10 +76,11 @@ public class BeloteLapFragment extends LapFragment
     }
 
     @Override
-    public void onPointsChanged(int progress, String tag) {
+    public String onProgressChanged(int progress, String tag) {
         final BeloteLap lap = getLap();
         lap.setPoints(progress);
         mInputPoints.setScores(lap);
+        return Integer.toString(progress);
     }
 
     private void addBonus(BeloteBonus beloteBonus) {

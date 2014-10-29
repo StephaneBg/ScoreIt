@@ -19,9 +19,8 @@ package com.sbgapps.scoreit.adapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.daimajia.swipe.SwipeLayout;
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.ScoreListFragment;
+import com.sbgapps.scoreit.fragment.ScoreListFragment;
 
 /**
  * Created by sbaiget on 23/11/13.

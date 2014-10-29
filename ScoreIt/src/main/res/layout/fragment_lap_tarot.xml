@@ -138,6 +138,5 @@
                 android:text="@string/add"
                 android:textAllCaps="true"/>
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>

@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.games;
+package com.sbgapps.scoreit.fragment;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
 import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.games.GameHelper;
+import com.sbgapps.scoreit.games.Lap;
 
 /**
  * Created by sbaiget on 08/01/14.

@@ -10,8 +10,8 @@ import android.widget.TextView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.belote.BeloteLap;
-import com.sbgapps.scoreit.games.belote.BeloteLapFragment;
+import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
+import com.sbgapps.scoreit.fragment.GenericBeloteLapFragment;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -53,9 +53,9 @@ public class BeloteInputPoints extends FrameLayout {
         ButterKnife.inject(this);
     }
 
-    public void init(final BeloteLapFragment beloteFrag) {
+    public void init(final GenericBeloteLapFragment beloteFrag) {
         final GameHelper gameHelper = beloteFrag.getGameHelper();
-        final BeloteLap lap = beloteFrag.getLap();
+        final GenericBeloteLap lap = beloteFrag.getLap();
 
         mPlayer1Name.setText(gameHelper.getPlayer(Player.PLAYER_1).getName());
         mPlayer2Name.setText(gameHelper.getPlayer(Player.PLAYER_2).getName());
@@ -80,7 +80,7 @@ public class BeloteInputPoints extends FrameLayout {
                     case R.id.btn_score:
                         mSeekPoints.setVisibility(View.VISIBLE);
                         lap.setPoints(110);
-                        mSeekPoints.setPoints(110);
+                        mSeekPoints.setPoints(110, "110");
                         break;
                     case R.id.btn_inside:
                         mSeekPoints.setVisibility(View.GONE);
@@ -107,13 +107,13 @@ public class BeloteInputPoints extends FrameLayout {
         mSeekPoints.init(
                 points,
                 162,
-                lap.getPoints());
-        mSeekPoints.setOnPointsChangedListener(beloteFrag, "points");
+                Integer.toString(points));
+        mSeekPoints.setOnProgressChangedListener(beloteFrag, "points");
 
         setScores(lap);
     }
 
-    public void setScores(BeloteLap lap) {
+    public void setScores(GenericBeloteLap lap) {
         int scores[] = lap.getScores();
         if (Player.PLAYER_1 == lap.getScorer()) {
             mPlayer1Points.setText(Integer.toString(scores[0]));

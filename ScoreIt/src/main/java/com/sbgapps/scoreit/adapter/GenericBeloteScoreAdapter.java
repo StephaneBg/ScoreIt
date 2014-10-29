@@ -20,9 +20,8 @@ import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.daimajia.swipe.SwipeLayout;
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.ScoreListFragment;
+import com.sbgapps.scoreit.fragment.ScoreListFragment;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
 
 /**
