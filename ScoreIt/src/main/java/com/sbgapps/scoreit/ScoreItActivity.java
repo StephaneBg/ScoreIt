@@ -625,6 +625,7 @@ public class ScoreItActivity extends BaseActivity
                         if (mGameHelper.getFilesUtil().isDefaultFile()) {
                             showSaveFileDialog(false);
                         } else {
+                            mSnackBar.clear();
                             mGameHelper.saveGame();
                             mGameHelper.createGame();
                             invalidateOptionsMenu();

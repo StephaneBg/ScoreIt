@@ -141,7 +141,7 @@ public class TarotLapFragment extends LapFragment
 
         int points = getLap().getPoints();
         mPoints.init(points, 91, Integer.toString(points));
-        mPoints.setOnProgressChangedListener(this, "points");
+        mPoints.setOnProgressChangedListener(this);
 
         mPetit.setChecked((getLap().getOudlers() & TarotLap.OUDLER_PETIT_MSK)
                 == TarotLap.OUDLER_PETIT_MSK);
@@ -304,7 +304,7 @@ public class TarotLapFragment extends LapFragment
     }
 
     @Override
-    public String onProgressChanged(int progress, String tag) {
+    public String onProgressChanged(int progress) {
         getLap().setPoints(progress);
         return Integer.toString(progress);
     }

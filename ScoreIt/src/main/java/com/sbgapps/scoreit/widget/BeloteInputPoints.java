@@ -8,10 +8,10 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.fragment.GenericBeloteLapFragment;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
-import com.sbgapps.scoreit.fragment.GenericBeloteLapFragment;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -19,7 +19,8 @@ import butterknife.InjectView;
 /**
  * Created by sbaiget on 28/10/2014.
  */
-public class BeloteInputPoints extends FrameLayout {
+public class BeloteInputPoints extends FrameLayout
+        implements SeekPoints.OnProgressChangedListener {
 
     @InjectView(R.id.player1_name)
     TextView mPlayer1Name;
@@ -35,6 +36,8 @@ public class BeloteInputPoints extends FrameLayout {
     ToggleGroup mScoreGroup;
     @InjectView(R.id.seekbar_points)
     SeekPoints mSeekPoints;
+
+    GenericBeloteLap mLap;
 
     public BeloteInputPoints(Context context) {
         this(context, null);
@@ -55,7 +58,7 @@ public class BeloteInputPoints extends FrameLayout {
 
     public void init(final GenericBeloteLapFragment beloteFrag) {
         final GameHelper gameHelper = beloteFrag.getGameHelper();
-        final GenericBeloteLap lap = beloteFrag.getLap();
+        mLap = beloteFrag.getLap();
 
         mPlayer1Name.setText(gameHelper.getPlayer(Player.PLAYER_1).getName());
         mPlayer2Name.setText(gameHelper.getPlayer(Player.PLAYER_2).getName());
@@ -64,12 +67,12 @@ public class BeloteInputPoints extends FrameLayout {
         mSwitchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Player.PLAYER_1 == lap.getScorer()) {
-                    lap.setScorer(Player.PLAYER_2);
+                if (Player.PLAYER_1 == mLap.getScorer()) {
+                    mLap.setScorer(Player.PLAYER_2);
                 } else {
-                    lap.setScorer(Player.PLAYER_1);
+                    mLap.setScorer(Player.PLAYER_1);
                 }
-                setScores(lap);
+                setScores();
             }
         });
 
@@ -79,23 +82,23 @@ public class BeloteInputPoints extends FrameLayout {
                 switch (checkedId) {
                     case R.id.btn_score:
                         mSeekPoints.setVisibility(View.VISIBLE);
-                        lap.setPoints(110);
+                        mLap.setPoints(110);
                         mSeekPoints.setPoints(110, "110");
                         break;
                     case R.id.btn_inside:
                         mSeekPoints.setVisibility(View.GONE);
-                        lap.setPoints(160);
+                        mLap.setPoints(160);
                         break;
                     case R.id.btn_capot:
                         mSeekPoints.setVisibility(View.GONE);
-                        lap.setPoints(250);
+                        mLap.setPoints(250);
                         break;
                 }
-                setScores(lap);
+                setScores();
             }
         });
 
-        int points = lap.getPoints();
+        int points = mLap.getPoints();
         if (160 == points) {
             mScoreGroup.check(R.id.btn_inside);
             mSeekPoints.setVisibility(View.GONE);
@@ -103,19 +106,26 @@ public class BeloteInputPoints extends FrameLayout {
             mScoreGroup.check(R.id.btn_capot);
             mSeekPoints.setVisibility(View.GONE);
         } else {
+            mScoreGroup.check(R.id.btn_score);
         }
         mSeekPoints.init(
                 points,
                 162,
                 Integer.toString(points));
-        mSeekPoints.setOnProgressChangedListener(beloteFrag, "points");
-
-        setScores(lap);
+        mSeekPoints.setOnProgressChangedListener(this);
+        setScores();
     }
 
-    public void setScores(GenericBeloteLap lap) {
-        int scores[] = lap.getScores();
-        if (Player.PLAYER_1 == lap.getScorer()) {
+    @Override
+    public String onProgressChanged(int progress) {
+        mLap.setPoints(progress);
+        setScores();
+        return Integer.toString(progress);
+    }
+
+    public void setScores() {
+        int scores[] = mLap.getScores();
+        if (Player.PLAYER_1 == mLap.getScorer()) {
             mPlayer1Points.setText(Integer.toString(scores[0]));
             mPlayer2Points.setText(Integer.toString(scores[1]));
         } else {

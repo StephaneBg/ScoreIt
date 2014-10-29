@@ -37,14 +37,15 @@ import butterknife.InjectView;
 /**
  * Created by sbaiget on 29/01/14.
  */
-public class CoincheLapFragment extends GenericBeloteLapFragment {
+public class CoincheLapFragment extends GenericBeloteLapFragment
+        implements SeekPoints.OnProgressChangedListener {
 
     @InjectView(R.id.group_team)
     ToggleGroup mTeamGroup;
     @InjectView(R.id.input_bid)
     SeekPoints mBid;
     @InjectView(R.id.input_points)
-    BeloteInputPoints mPoints;
+    BeloteInputPoints mInputPoints;
     @InjectView(R.id.spinner_coinche)
     Spinner mCoincheSpinner;
     @InjectView(R.id.spinner_belote)
@@ -71,15 +72,21 @@ public class CoincheLapFragment extends GenericBeloteLapFragment {
 
         GameHelper gh = getGameHelper();
         ToggleButton btn = (ToggleButton) view.findViewById(R.id.btn_player_1);
-        btn.setText(gh.getPlayer(Player.PLAYER_1).getName());
+        String name = gh.getPlayer(Player.PLAYER_1).getName();
+        btn.setText(name);
+        btn.setTextOn(name);
+        btn.setTextOff(name);
         btn = (ToggleButton) view.findViewById(R.id.btn_player_2);
-        btn.setText(gh.getPlayer(Player.PLAYER_2).getName());
+        name = gh.getPlayer(Player.PLAYER_2).getName();
+        btn.setText(name);
+        btn.setTextOn(name);
+        btn.setTextOff(name);
 
         int bid = getLap().getBid();
-        mBid.init(getProgressFromBid(bid), 9, Integer.toString(bid));
-        mBid.setOnProgressChangedListener(this, "bid");
+        mBid.init(getProgressFromBid(bid), 8, Integer.toString(bid));
+        mBid.setOnProgressChangedListener(this);
 
-        mPoints.init(this);
+        mInputPoints.init(this);
 
         // TODO: spinners
 
@@ -87,15 +94,10 @@ public class CoincheLapFragment extends GenericBeloteLapFragment {
     }
 
     @Override
-    public String onProgressChanged(int progress, String tag) {
-        if (tag.equals("bid")) {
-            getLap().setBid(progress);
-            return getBidFromProgress(progress);
-        } else if (tag.equals("points")) {
-            getLap().setPoints(progress);
-            return Integer.toString(progress);
-        }
-        return null;
+    public String onProgressChanged(int progress) {
+        int bid = getBidFromProgress(progress);
+        getLap().setBid(bid);
+        return Integer.toString(bid);
     }
 
     private int getProgressFromBid(int bid) {
@@ -106,11 +108,11 @@ public class CoincheLapFragment extends GenericBeloteLapFragment {
         }
     }
 
-    private String getBidFromProgress(int progress) {
+    private int getBidFromProgress(int progress) {
         if (8 == progress) {
-            return "250";
+            return 250;
         } else {
-            return Integer.toString(10 * (progress + 80));
+            return (10 * progress + 80);
         }
     }
 }

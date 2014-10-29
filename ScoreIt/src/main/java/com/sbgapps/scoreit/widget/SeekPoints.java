@@ -44,7 +44,6 @@ public class SeekPoints extends FrameLayout {
 
     private OnProgressChangedListener mListener;
     private int mProgress;
-    private String mTag;
 
     public SeekPoints(Context context) {
         this(context, null);
@@ -69,9 +68,8 @@ public class SeekPoints extends FrameLayout {
         mPointsTv.setText(points);
     }
 
-    public void setOnProgressChangedListener(OnProgressChangedListener listener, String tag) {
+    public void setOnProgressChangedListener(OnProgressChangedListener listener) {
         mListener = listener;
-        mTag = tag;
     }
 
     public void init(int progress, int max, String points) {
@@ -122,7 +120,7 @@ public class SeekPoints extends FrameLayout {
     }
 
     public void manageProgress() {
-        String points = mListener.onProgressChanged(mProgress, mTag);
+        String points = mListener.onProgressChanged(mProgress);
         mSeekBarPoints.setProgress(mProgress);
         mPointsTv.setText(points);
         mButtonMinus.setEnabled(mProgress > 0);
@@ -131,6 +129,6 @@ public class SeekPoints extends FrameLayout {
 
     public interface OnProgressChangedListener {
 
-        public String onProgressChanged(int progress, String tag);
+        public String onProgressChanged(int progress);
     }
 }

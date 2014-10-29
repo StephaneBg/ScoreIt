@@ -395,12 +395,9 @@ public class LineGraph extends View {
                     float yPixels = getHeight() - padding - (usableHeight * yPercent);
 
                     int outerRadius = mStrokeWidth + getPixelForDip(2);
-                    int innerRadius = outerRadius / 2;
 
                     mPaint.setColor(p.getColor());
                     mCanvas.drawCircle(xPixels, yPixels, outerRadius, mPaint);
-                    mPaint.setColor(Color.WHITE);
-                    mCanvas.drawCircle(xPixels, yPixels, innerRadius, mPaint);
 
                     // Create selection region
                     Path path = p.getPath();

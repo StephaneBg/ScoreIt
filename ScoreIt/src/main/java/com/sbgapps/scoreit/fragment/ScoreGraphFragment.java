@@ -16,37 +16,30 @@
 
 package com.sbgapps.scoreit.fragment;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.games.GameHelper;
+import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.widget.linechart.Line;
 import com.sbgapps.scoreit.widget.linechart.LineGraph;
 import com.sbgapps.scoreit.widget.linechart.LinePoint;
-import com.sbgapps.scoreit.games.GameHelper;
-import com.sbgapps.scoreit.games.Lap;
 
 public class ScoreGraphFragment extends Fragment {
 
     public static final String TAG = ScoreGraphFragment.class.getName();
 
-    private int mPointColor;
     private LineGraph mGraph;
     private int[] mScores;
     private int mX;
 
     public GameHelper getGameHelper() {
         return ((ScoreItActivity) getActivity()).getGameHelper();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mPointColor = getActivity().getResources().getColor(R.color.gray_dark);
     }
 
     @Override
@@ -65,11 +58,12 @@ public class ScoreGraphFragment extends Fragment {
         if (0 == lapCnt) return;
 
         LinePoint p = new LinePoint(mX = 0, 0);
-        int color = getActivity().getResources().getColor(R.color.gray_dark);
-        p.setColor(color);
+        int color;
         for (int i = 0; i < gameHelper.getPlayerCount(); i++) {
             Line line = new Line();
-            line.setColor(gameHelper.getPlayerColor(i));
+            color = gameHelper.getPlayerColor(i);
+            line.setColor(color);
+            p.setColor(color);
             line.addPoint(p);
             mGraph.addLine(line);
         }
@@ -83,10 +77,11 @@ public class ScoreGraphFragment extends Fragment {
 
     public void addLap(Lap lap) {
         mX++;
-        for (int player = 0; player < getGameHelper().getPlayerCount(); player++) {
+        GameHelper gh = getGameHelper();
+        for (int player = 0; player < gh.getPlayerCount(); player++) {
             mScores[player] += lap.getScore(player);
             LinePoint p = new LinePoint(mX, mScores[player]);
-            p.setColor(mPointColor);
+            p.setColor(gh.getPlayerColor(player));
             mGraph.addPointToLine(player, p);
         }
     }

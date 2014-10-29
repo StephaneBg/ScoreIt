@@ -75,14 +75,6 @@ public class BeloteLapFragment extends GenericBeloteLapFragment {
         return view;
     }
 
-    @Override
-    public String onProgressChanged(int progress, String tag) {
-        final BeloteLap lap = getLap();
-        lap.setPoints(progress);
-        mInputPoints.setScores(lap);
-        return Integer.toString(progress);
-    }
-
     private void addBonus(BeloteBonus beloteBonus) {
         List<BeloteBonus> bonuses = getLap().getBonuses();
         if (null == beloteBonus) {
