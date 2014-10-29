@@ -67,5 +67,4 @@
         android:src="@drawable/ic_content_create"
         app:fab_attachTo="@id/header_container"
         app:fab_attachAt="bottom_right"/>
-
 </FrameLayout>

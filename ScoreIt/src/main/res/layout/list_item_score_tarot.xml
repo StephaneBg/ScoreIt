@@ -58,5 +58,4 @@
             android:layout_width="6dp"
             android:layout_height="match_parent"/>
     </RelativeLayout>
-
 </com.daimajia.swipe.SwipeLayout>

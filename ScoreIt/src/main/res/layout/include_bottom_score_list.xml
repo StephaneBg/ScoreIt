@@ -27,5 +27,4 @@
         android:background="@drawable/bg_default_action"
         android:src="@drawable/ic_content_create"
         android:text="@string/done"/>
-
 </LinearLayout>

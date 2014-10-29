@@ -53,5 +53,4 @@
         android:background="@drawable/bg_default_action"
         android:layout_alignTop="@+id/spinner_announce"
         android:src="@drawable/ic_action_cancel"/>
-
 </RelativeLayout>

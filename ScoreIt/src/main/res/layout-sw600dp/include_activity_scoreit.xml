@@ -99,5 +99,4 @@
         android:src="@drawable/ic_content_create"
         app:fab_attachTo="@id/back_colored"
         app:fab_attachAt="bottom_right"/>
-
 </RelativeLayout>

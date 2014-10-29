@@ -61,7 +61,6 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:background="@drawable/bg_btn_toggle"
                 tools:textOff="@string/us"/>
-
         </com.sbgapps.scoreit.widget.ToggleGroup>
 
         <com.sbgapps.scoreit.widget.SeekPoints
@@ -72,56 +71,40 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
+        <com.sbgapps.scoreit.widget.BeloteInputPoints
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <TextView
             style="@style/SubHeader"
-            android:text="@string/points"/>
+            android:text="@string/coinche"/>
 
         <com.sbgapps.scoreit.widget.ToggleGroup
-            android:id="@+id/group_score"
+            android:id="@+id/group_coinche"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_vertical_margin">
 
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
-                android:id="@+id/btn_score"
+            <ToggleButton
+                android:id="@+id/btn_coinche"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checked="true"
                 android:background="@drawable/bg_btn_toggle"
-                android:textOn="@string/score"
-                android:textOff="@string/score"/>
+                tools:textOn="@string/them"/>
 
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
-                android:id="@+id/btn_inside"
+            <ToggleButton
+                android:id="@+id/btn_surcoinche"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:background="@drawable/bg_btn_toggle"
-                android:textOn="@string/inside"
-                android:textOff="@string/inside"/>
-
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
-                android:id="@+id/btn_capot"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/bg_btn_toggle"
-                android:textOn="@string/capot"
-                android:textOff="@string/capot"/>
+                tools:textOff="@string/us"/>
         </com.sbgapps.scoreit.widget.ToggleGroup>
-
-        <com.sbgapps.scoreit.widget.SeekPoints
-            android:id="@+id/input_points"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
-
     </LinearLayout>
 </ScrollView>

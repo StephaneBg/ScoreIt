@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height"/>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/list_item_height">
 
@@ -47,5 +47,5 @@
             android:id="@+id/left_marker"
             android:layout_width="6dp"
             android:layout_height="match_parent"/>
-    </RelativeLayout>
+    </FrameLayout>
 </com.daimajia.swipe.SwipeLayout>
