@@ -16,8 +16,8 @@
 
 package com.sbgapps.scoreit.fragment;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.games.GameHelper;
@@ -42,5 +42,19 @@ public class LapFragment extends Fragment {
 
     public Lap getLap() {
         return ((ScoreItActivity) getActivity()).getLap();
+    }
+
+    class PlayerItem {
+
+        final int mPlayer;
+
+        public PlayerItem(int player) {
+            mPlayer = player;
+        }
+
+        @Override
+        public String toString() {
+            return getGameHelper().getPlayer(mPlayer).getName();
+        }
     }
 }

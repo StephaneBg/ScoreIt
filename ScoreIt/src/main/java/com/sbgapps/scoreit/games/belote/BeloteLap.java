@@ -49,7 +49,7 @@ public class BeloteLap extends GenericBeloteLap {
         super.computeScores();
         mIsDone = (160 != mPoints);
 
-        int scores[] = getScores();
+        final int scores[] = getScores();
         if (Player.PLAYER_1 == getScorer()) {
             mScores[Player.PLAYER_1] = scores[0];
             mScores[Player.PLAYER_2] = scores[1];

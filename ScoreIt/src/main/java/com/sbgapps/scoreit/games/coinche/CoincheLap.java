@@ -68,14 +68,15 @@ public class CoincheLap extends GenericBeloteLap {
     public void computeScores() {
         super.computeScores();
 
-        int takerPts = mScores[0];
-        int counterPts = mScores[1];
+        final int scores[] = getScores();
+        int takerPts = scores[Player.PLAYER_1];
+        int counterPts = scores[Player.PLAYER_2];
 
         // Check belote
-        CoincheBonus bonus = getBonus(CoincheBonus.BONUS_BELOTE);
-        if (null != bonus) {
-            if (((Player.PLAYER_1 == mScorer) && (Player.PLAYER_1 == bonus.getPlayer())) ||
-                    ((Player.PLAYER_2 == mScorer) && (Player.PLAYER_2 == bonus.getPlayer()))) {
+        CoincheBonus cb = getBonus(CoincheBonus.BONUS_BELOTE);
+        if (null != cb && Player.PLAYER_NONE != cb.getPlayer()) {
+            if (((Player.PLAYER_1 == mScorer) && (Player.PLAYER_1 == cb.getPlayer())) ||
+                    ((Player.PLAYER_2 == mScorer) && (Player.PLAYER_2 == cb.getPlayer()))) {
                 takerPts += 20;
             } else {
                 counterPts += 20;
@@ -83,14 +84,14 @@ public class CoincheLap extends GenericBeloteLap {
         }
 
         // Compute scores
-        bonus = getBonus(CoincheBonus.BONUS_COINCHE);
-        if (null == bonus) bonus = getBonus(CoincheBonus.BONUS_SURCOINCHE);
+        cb = getBonus(CoincheBonus.BONUS_COINCHE);
+        if (null == cb) cb = getBonus(CoincheBonus.BONUS_SURCOINCHE);
 
-        if ((mPoints >= mBid) && (takerPts > counterPts)) {
+        if ((takerPts >= mBid) && (takerPts > counterPts)) {
             // Deal succeeded
             takerPts += mBid;
-            if (null != bonus) {
-                if (CoincheBonus.BONUS_COINCHE == bonus.get()) {
+            if (null != cb) {
+                if (CoincheBonus.BONUS_COINCHE == cb.get()) {
                     takerPts *= 2;
                 } else {
                     takerPts *= 4;
@@ -101,8 +102,8 @@ public class CoincheLap extends GenericBeloteLap {
             mIsDone = false;
             takerPts = 0;
             counterPts = (250 == mBid) ? 500 : 160 + mBid;
-            if (null != bonus) {
-                if (CoincheBonus.BONUS_COINCHE == bonus.get()) {
+            if (null != cb) {
+                if (CoincheBonus.BONUS_COINCHE == cb.get()) {
                     counterPts *= 2;
                 } else {
                     counterPts *= 4;
@@ -114,7 +115,7 @@ public class CoincheLap extends GenericBeloteLap {
         mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mScorer) ? takerPts : counterPts;
     }
 
-    private CoincheBonus getBonus(int bonus) {
+    public CoincheBonus getBonus(int bonus) {
         for (CoincheBonus b : mBonuses) {
             if (bonus == b.get()) {
                 return b;

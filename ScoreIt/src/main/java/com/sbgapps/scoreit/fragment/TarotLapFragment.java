@@ -289,22 +289,22 @@ public class TarotLapFragment extends LapFragment
         return playerItemArrayAdapter;
     }
 
-    private ArrayAdapter<BonusItem> getBonusArrayAdapter() {
-        final ArrayAdapter<BonusItem> announceItemArrayAdapter = new ArrayAdapter<>(getActivity(),
+    private ArrayAdapter<TarotBonusItem> getBonusArrayAdapter() {
+        final ArrayAdapter<TarotBonusItem> announceItemArrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
         announceItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_PETIT_AU_BOUT));
-        announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_POIGNEE_SIMPLE));
-        announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_POIGNEE_DOUBLE));
-        announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_POIGNEE_TRIPLE));
-        announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_CHELEM_NON_ANNONCE));
-        announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE));
-        announceItemArrayAdapter.add(new BonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE));
+        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_PETIT_AU_BOUT));
+        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_SIMPLE));
+        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_DOUBLE));
+        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_TRIPLE));
+        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_NON_ANNONCE));
+        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE));
+        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE));
         return announceItemArrayAdapter;
     }
 
     @Override
-    public String onProgressChanged(int progress) {
+    public String onProgressChanged(SeekPoints seekPoints, int progress) {
         getLap().setPoints(progress);
         return Integer.toString(progress);
     }
@@ -323,25 +323,11 @@ public class TarotLapFragment extends LapFragment
         }
     }
 
-    class PlayerItem {
-
-        final int mPlayer;
-
-        public PlayerItem(int player) {
-            mPlayer = player;
-        }
-
-        @Override
-        public String toString() {
-            return getGameHelper().getPlayer(mPlayer).getName();
-        }
-    }
-
-    class BonusItem {
+    class TarotBonusItem {
 
         final int mBonus;
 
-        BonusItem(int bonus) {
+        TarotBonusItem(int bonus) {
             mBonus = bonus;
         }
 

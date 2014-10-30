@@ -26,7 +26,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.ToggleButton;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Player;
@@ -128,51 +127,28 @@ public class BeloteLapFragment extends GenericBeloteLapFragment {
 
         int pos = mBonuses.getChildCount() - 1;
         mBonuses.addView(view, pos);
-        mButtonBonus.setEnabled(bonuses.size() < 4);
+        mButtonBonus.setEnabled(bonuses.size() < 3);
     }
 
-    private ArrayAdapter<PlayerItem> getPlayerArrayAdapter() {
-        ArrayAdapter<PlayerItem> playerItemArrayAdapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_spinner_item);
-        playerItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_1));
-        playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_2));
-        return playerItemArrayAdapter;
-    }
-
-    private ArrayAdapter<BonusItem> getBonusArrayAdapter() {
-        final ArrayAdapter<BonusItem> announceItemArrayAdapter = new ArrayAdapter<>(getActivity(),
+    private ArrayAdapter<BeloteBonusItem> getBonusArrayAdapter() {
+        final ArrayAdapter<BeloteBonusItem> announceItemArrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
         announceItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        announceItemArrayAdapter.add(new BonusItem(BeloteBonus.BONUS_BELOTE));
-        announceItemArrayAdapter.add(new BonusItem(BeloteBonus.BONUS_RUN_3));
-        announceItemArrayAdapter.add(new BonusItem(BeloteBonus.BONUS_RUN_4));
-        announceItemArrayAdapter.add(new BonusItem(BeloteBonus.BONUS_RUN_5));
-        announceItemArrayAdapter.add(new BonusItem(BeloteBonus.BONUS_FOUR_NORMAL));
-        announceItemArrayAdapter.add(new BonusItem(BeloteBonus.BONUS_FOUR_NINE));
-        announceItemArrayAdapter.add(new BonusItem(BeloteBonus.BONUS_FOUR_JACK));
+        announceItemArrayAdapter.add(new BeloteBonusItem(BeloteBonus.BONUS_BELOTE));
+        announceItemArrayAdapter.add(new BeloteBonusItem(BeloteBonus.BONUS_RUN_3));
+        announceItemArrayAdapter.add(new BeloteBonusItem(BeloteBonus.BONUS_RUN_4));
+        announceItemArrayAdapter.add(new BeloteBonusItem(BeloteBonus.BONUS_RUN_5));
+        announceItemArrayAdapter.add(new BeloteBonusItem(BeloteBonus.BONUS_FOUR_NORMAL));
+        announceItemArrayAdapter.add(new BeloteBonusItem(BeloteBonus.BONUS_FOUR_NINE));
+        announceItemArrayAdapter.add(new BeloteBonusItem(BeloteBonus.BONUS_FOUR_JACK));
         return announceItemArrayAdapter;
     }
 
-    class PlayerItem {
-
-        final int mPlayer;
-
-        public PlayerItem(int player) {
-            mPlayer = player;
-        }
-
-        @Override
-        public String toString() {
-            return getGameHelper().getPlayer(mPlayer).getName();
-        }
-    }
-
-    class BonusItem {
+    class BeloteBonusItem {
 
         final int mBonus;
 
-        BonusItem(int bonus) {
+        BeloteBonusItem(int bonus) {
             mBonus = bonus;
         }
 

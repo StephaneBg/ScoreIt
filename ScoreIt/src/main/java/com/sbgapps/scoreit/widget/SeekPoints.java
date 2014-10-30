@@ -120,7 +120,7 @@ public class SeekPoints extends FrameLayout {
     }
 
     public void manageProgress() {
-        String points = mListener.onProgressChanged(mProgress);
+        String points = mListener.onProgressChanged(this, mProgress);
         mSeekBarPoints.setProgress(mProgress);
         mPointsTv.setText(points);
         mButtonMinus.setEnabled(mProgress > 0);
@@ -129,6 +129,6 @@ public class SeekPoints extends FrameLayout {
 
     public interface OnProgressChangedListener {
 
-        public String onProgressChanged(int progress);
+        public String onProgressChanged(SeekPoints seekPoints, int progress);
     }
 }

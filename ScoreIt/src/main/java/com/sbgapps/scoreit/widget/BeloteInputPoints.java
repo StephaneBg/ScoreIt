@@ -117,7 +117,7 @@ public class BeloteInputPoints extends FrameLayout
     }
 
     @Override
-    public String onProgressChanged(int progress) {
+    public String onProgressChanged(SeekPoints seekPoints, int progress) {
         mLap.setPoints(progress);
         setScores();
         return Integer.toString(progress);
