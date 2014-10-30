@@ -28,10 +28,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.BeloteBonus;
 import com.sbgapps.scoreit.games.belote.BeloteLap;
-import com.sbgapps.scoreit.widget.BeloteInputPoints;
+import com.sbgapps.scoreit.widget.BelotePoints;
 
 import java.util.List;
 
@@ -44,7 +43,7 @@ import butterknife.InjectView;
 public class BeloteLapFragment extends GenericBeloteLapFragment {
 
     @InjectView(R.id.input_points)
-    BeloteInputPoints mInputPoints;
+    BelotePoints mInputPoints;
     @InjectView(R.id.ll_bonuses)
     LinearLayout mBonuses;
     @InjectView(R.id.btn_add_bonus)

@@ -41,7 +41,7 @@ public class CoincheLap extends GenericBeloteLap {
     }
 
     public CoincheLap() {
-        this(Player.PLAYER_1, 110, 110, new ArrayList<CoincheBonus>());
+        this(Player.PLAYER_1, 100, 100, new ArrayList<CoincheBonus>());
     }
 
     public int getBid() {

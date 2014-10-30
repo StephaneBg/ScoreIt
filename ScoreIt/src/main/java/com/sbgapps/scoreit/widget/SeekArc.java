@@ -38,6 +38,7 @@ import com.sbgapps.scoreit.R;
 public class SeekArc extends View {
 
     private static int INVALID_PROGRESS_VALUE = -1;
+
     // The initial rotational offset -90 means we start at 12 o'clock
     private final int mAngleOffset = -90;
 
@@ -50,26 +51,6 @@ public class SeekArc extends View {
      * The Current value that the SeekArc is set to
      */
     private int mProgress = 0;
-
-    /**
-     * The Angle to start drawing this Arc from
-     */
-    private int mStartAngle = 0;
-
-    /**
-     * The Angle through which to draw the arc (Max is 360)
-     */
-    private int mSweepAngle = 360;
-
-    /**
-     * The rotation of the SeekArc- 0 is twelve o'clock
-     */
-    private int mRotation = 0;
-
-    /**
-     * Give the SeekArc rounded edges
-     */
-    private boolean mRoundedEdges = false;
 
     /**
      * Will the progress increase clockwise or anti-clockwise
@@ -146,10 +127,6 @@ public class SeekArc extends View {
         mProgress = a.getInteger(R.styleable.SeekArc_progress, mProgress);
         mProgressWidth = (int) a.getDimension(R.styleable.SeekArc_progressWidth, 4 * density);
         mArcWidth = (int) a.getDimension(R.styleable.SeekArc_arcWidth, 4 * density);
-        mStartAngle = a.getInt(R.styleable.SeekArc_startAngle, mStartAngle);
-        mSweepAngle = a.getInt(R.styleable.SeekArc_sweepAngle, mSweepAngle);
-        mRotation = a.getInt(R.styleable.SeekArc_rotation, mRotation);
-        mRoundedEdges = a.getBoolean(R.styleable.SeekArc_roundEdges, mRoundedEdges);
         mClockwise = a.getBoolean(R.styleable.SeekArc_clockwise, mClockwise);
         mTouchable = a.getBoolean(R.styleable.SeekArc_touchable, mTouchable);
         int arcColor = a.getColor(R.styleable.SeekArc_arcColor,
@@ -165,12 +142,6 @@ public class SeekArc extends View {
         mProgress = (mProgress > mMax) ? mMax : mProgress;
         mProgress = (mProgress < 0) ? 0 : mProgress;
 
-        mSweepAngle = (mSweepAngle > 360) ? 360 : mSweepAngle;
-        mSweepAngle = (mSweepAngle < 0) ? 0 : mSweepAngle;
-
-        mStartAngle = (mStartAngle > 360) ? 0 : mStartAngle;
-        mStartAngle = (mStartAngle < 0) ? 0 : mStartAngle;
-
         mArcPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mArcPaint.setColor(arcColor);
         mArcPaint.setStyle(Paint.Style.STROKE);
@@ -183,11 +154,6 @@ public class SeekArc extends View {
 
         mThumbPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mThumbPaint.setColor(thumbColor);
-
-        if (mRoundedEdges) {
-            mArcPaint.setStrokeCap(Paint.Cap.ROUND);
-            mProgressPaint.setStrokeCap(Paint.Cap.ROUND);
-        }
     }
 
     public int getMax() {
@@ -206,8 +172,8 @@ public class SeekArc extends View {
         }
 
         // Draw the arcs
-        final int arcStart = mStartAngle + mAngleOffset + mRotation;
-        final int arcSweep = mSweepAngle;
+        final int arcStart = mAngleOffset;
+        final int arcSweep = 360;
         canvas.drawArc(mArcRect, arcStart, arcSweep, false, mArcPaint);
         canvas.drawArc(mArcRect, arcStart, mProgressSweep, false,
                 mProgressPaint);
@@ -233,7 +199,7 @@ public class SeekArc extends View {
         left = width / 2 - (arcDiameter / 2);
         mArcRect.set(left, top, left + arcDiameter, top + arcDiameter);
 
-        int arcStart = (int) mProgressSweep + mStartAngle + mRotation + 90;
+        int arcStart = (int) mProgressSweep + 90;
         mThumbXPos = (int) (mArcRadius * Math.cos(Math.toRadians(arcStart)));
         mThumbYPos = (int) (mArcRadius * Math.sin(Math.toRadians(arcStart)));
 
@@ -292,12 +258,10 @@ public class SeekArc extends View {
         // invert the x-coord if we are rotating anti-clockwise
         x = (mClockwise) ? x : -x;
         // convert to arc Angle
-        double angle = Math.toDegrees(Math.atan2(y, x) + (Math.PI / 2)
-                - Math.toRadians(mRotation));
+        double angle = Math.toDegrees(Math.atan2(y, x) + (Math.PI / 2));
         if (angle < 0) {
             angle = 360 + angle;
         }
-        angle -= mStartAngle;
         return angle;
     }
 
@@ -310,11 +274,11 @@ public class SeekArc extends View {
     }
 
     private float valuePerDegree() {
-        return (float) mMax / mSweepAngle;
+        return (float) mMax / 360;
     }
 
     private void updateThumbPosition() {
-        int thumbAngle = (int) (mStartAngle + mProgressSweep + mRotation + 90);
+        int thumbAngle = (int) (mProgressSweep + 90);
         mThumbXPos = (int) (mArcRadius * Math.cos(Math.toRadians(thumbAngle)));
         mThumbYPos = (int) (mArcRadius * Math.sin(Math.toRadians(thumbAngle)));
     }
@@ -332,7 +296,7 @@ public class SeekArc extends View {
         progress = (mProgress < 0) ? 0 : progress;
 
         mProgress = progress;
-        mProgressSweep = (float) progress / mMax * mSweepAngle;
+        mProgressSweep = (float) progress / mMax * 360;
 
         updateThumbPosition();
         invalidate();
@@ -352,15 +316,6 @@ public class SeekArc extends View {
 
     public void setProgress(int progress) {
         updateProgress(progress, false);
-    }
-
-    public int getArcRotation() {
-        return mRotation;
-    }
-
-    public void setArcRotation(int mRotation) {
-        this.mRotation = mRotation;
-        updateThumbPosition();
     }
 
     public int getProgressColor() {
@@ -387,35 +342,6 @@ public class SeekArc extends View {
     public void setArcColor(int color) {
         mArcPaint.setColor(color);
         invalidate();
-    }
-
-    public int getStartAngle() {
-        return mStartAngle;
-    }
-
-    public void setStartAngle(int mStartAngle) {
-        this.mStartAngle = mStartAngle;
-        updateThumbPosition();
-    }
-
-    public int getSweepAngle() {
-        return mSweepAngle;
-    }
-
-    public void setSweepAngle(int mSweepAngle) {
-        this.mSweepAngle = mSweepAngle;
-        updateThumbPosition();
-    }
-
-    public void setRoundedEdges(boolean isEnabled) {
-        mRoundedEdges = isEnabled;
-        if (mRoundedEdges) {
-            mArcPaint.setStrokeCap(Paint.Cap.ROUND);
-            mProgressPaint.setStrokeCap(Paint.Cap.ROUND);
-        } else {
-            mArcPaint.setStrokeCap(Paint.Cap.SQUARE);
-            mProgressPaint.setStrokeCap(Paint.Cap.SQUARE);
-        }
     }
 
     public void setClockwise(boolean isClockwise) {

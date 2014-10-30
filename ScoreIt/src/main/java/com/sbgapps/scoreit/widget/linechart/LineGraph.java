@@ -394,7 +394,7 @@ public class LineGraph extends View {
                     float xPixels = padding + (xPercent * usableWidth);
                     float yPixels = getHeight() - padding - (usableHeight * yPercent);
 
-                    int outerRadius = mStrokeWidth + getPixelForDip(2);
+                    int outerRadius = 2 * mStrokeWidth;
 
                     mPaint.setColor(p.getColor());
                     mCanvas.drawCircle(xPixels, yPixels, outerRadius, mPaint);

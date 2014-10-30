@@ -37,7 +37,7 @@ public class BeloteLap extends GenericBeloteLap {
     }
 
     public BeloteLap() {
-        this(Player.PLAYER_1, 110, new ArrayList<BeloteBonus>());
+        this(Player.PLAYER_1, 81, new ArrayList<BeloteBonus>());
     }
 
     public List<BeloteBonus> getBonuses() {

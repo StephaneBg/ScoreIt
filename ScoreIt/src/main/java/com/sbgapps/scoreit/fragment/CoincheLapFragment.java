@@ -33,7 +33,7 @@ import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.coinche.CoincheBonus;
 import com.sbgapps.scoreit.games.coinche.CoincheLap;
-import com.sbgapps.scoreit.widget.BeloteInputPoints;
+import com.sbgapps.scoreit.widget.BelotePoints;
 import com.sbgapps.scoreit.widget.SeekPoints;
 import com.sbgapps.scoreit.widget.ToggleGroup;
 
@@ -53,7 +53,7 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
     @InjectView(R.id.input_bid)
     SeekPoints mBid;
     @InjectView(R.id.input_points)
-    BeloteInputPoints mInputPoints;
+    BelotePoints mInputPoints;
     @InjectView(R.id.ll_bonuses)
     LinearLayout mBonuses;
     @InjectView(R.id.btn_add_bonus)

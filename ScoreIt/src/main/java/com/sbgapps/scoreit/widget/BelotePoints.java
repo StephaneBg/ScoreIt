@@ -19,7 +19,7 @@ import butterknife.InjectView;
 /**
  * Created by sbaiget on 28/10/2014.
  */
-public class BeloteInputPoints extends FrameLayout
+public class BelotePoints extends FrameLayout
         implements SeekPoints.OnProgressChangedListener {
 
     @InjectView(R.id.player1_name)
@@ -39,15 +39,15 @@ public class BeloteInputPoints extends FrameLayout
 
     GenericBeloteLap mLap;
 
-    public BeloteInputPoints(Context context) {
+    public BelotePoints(Context context) {
         this(context, null);
     }
 
-    public BeloteInputPoints(Context context, AttributeSet attrs) {
+    public BelotePoints(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BeloteInputPoints(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BelotePoints(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         LayoutInflater inflater = (LayoutInflater) context

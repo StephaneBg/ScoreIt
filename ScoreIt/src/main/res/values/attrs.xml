@@ -54,14 +54,10 @@
         <attr name="progressWidth" format="dimension"/>
         <attr name="arcWidth" format="dimension"/>
         <attr name="progress" format="integer"/>
-        <attr name="rotation" format="integer"/>
-        <attr name="startAngle" format="integer"/>
-        <attr name="sweepAngle" format="integer"/>
         <attr name="arcColor" format="color"/>
         <attr name="progressColor" format="color"/>
         <attr name="thumbColor" format="color"/>
         <attr name="thumbRadius" format="dimension"/>
-        <attr name="roundEdges" format="boolean"/>
         <attr name="clockwise" format="boolean"/>
         <attr name="touchable" format="boolean"/>
     </declare-styleable>
