@@ -15,6 +15,7 @@
  */
 package com.sbgapps.scoreit.widget;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -37,7 +38,8 @@ import com.sbgapps.scoreit.R;
  */
 public class SeekArc extends View {
 
-    private static int INVALID_PROGRESS_VALUE = -1;
+    private static final int ANIMATION_TIME_ID = android.R.integer.config_shortAnimTime;
+    private static final int INVALID_PROGRESS_VALUE = -1;
 
     // The initial rotational offset -90 means we start at 12 o'clock
     private final int mAngleOffset = -90;
@@ -46,11 +48,6 @@ public class SeekArc extends View {
      * The Maximum value that this SeekArc can be set to
      */
     private int mMax = 100;
-
-    /**
-     * The Current value that the SeekArc is set to
-     */
-    private int mProgress = 0;
 
     /**
      * Will the progress increase clockwise or anti-clockwise
@@ -67,6 +64,7 @@ public class SeekArc extends View {
 
     private int mArcRadius = 0;
     private float mProgressSweep = 0;
+    private float mProgress = 0;
     private int mTranslateX;
     private int mTranslateY;
     private int mThumbXPos;
@@ -74,38 +72,7 @@ public class SeekArc extends View {
     private OnSeekArcChangeListener mOnSeekArcChangeListener;
     private boolean mTouchable = true;
 
-    public interface OnSeekArcChangeListener {
-
-        /**
-         * Notification that the progress level has changed. Clients can use the
-         * fromUser parameter to distinguish user-initiated changes from those
-         * that occurred programmatically.
-         *
-         * @param seekArc  The SeekArc whose progress has changed
-         * @param progress The current progress level. This will be in the range
-         *                 0..max where max was set by
-         *                 {@link com.sbgapps.scoreit.widget.SeekArc#setMax(int)}. (The default value for
-         *                 max is 100.)
-         * @param fromUser True if the progress change was initiated by the user.
-         */
-        void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser);
-
-        /**
-         * Notification that the user has started a touch gesture. Clients may
-         * want to use this to disable advancing the seekbar.
-         *
-         * @param seekArc The SeekArc in which the touch gesture began
-         */
-        void onStartTrackingTouch(SeekArc seekArc);
-
-        /**
-         * Notification that the user has finished a touch gesture. Clients may
-         * want to use this to re-enable advancing the seekarc.
-         *
-         * @param seekArc The SeekArc in which the touch gesture began
-         */
-        void onStopTrackingTouch(SeekArc seekArc);
-    }
+    private final ObjectAnimator mAnimator = ObjectAnimator.ofFloat(this, "progressSweep", 0f, 0f);
 
     public SeekArc(Context context) {
         this(context, null);
@@ -124,7 +91,6 @@ public class SeekArc extends View {
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SeekArc, defStyle, 0);
 
         mMax = a.getInteger(R.styleable.SeekArc_max, mMax);
-        mProgress = a.getInteger(R.styleable.SeekArc_progress, mProgress);
         mProgressWidth = (int) a.getDimension(R.styleable.SeekArc_progressWidth, 4 * density);
         mArcWidth = (int) a.getDimension(R.styleable.SeekArc_arcWidth, 4 * density);
         mClockwise = a.getBoolean(R.styleable.SeekArc_clockwise, mClockwise);
@@ -139,9 +105,6 @@ public class SeekArc extends View {
 
         a.recycle();
 
-        mProgress = (mProgress > mMax) ? mMax : mProgress;
-        mProgress = (mProgress < 0) ? 0 : mProgress;
-
         mArcPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mArcPaint.setColor(arcColor);
         mArcPaint.setStyle(Paint.Style.STROKE);
@@ -154,6 +117,9 @@ public class SeekArc extends View {
 
         mThumbPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mThumbPaint.setColor(thumbColor);
+
+        final int pressedAnimationTime = getResources().getInteger(ANIMATION_TIME_ID);
+        mAnimator.setDuration(pressedAnimationTime);
     }
 
     public int getMax() {
@@ -175,8 +141,7 @@ public class SeekArc extends View {
         final int arcStart = mAngleOffset;
         final int arcSweep = 360;
         canvas.drawArc(mArcRect, arcStart, arcSweep, false, mArcPaint);
-        canvas.drawArc(mArcRect, arcStart, mProgressSweep, false,
-                mProgressPaint);
+        canvas.drawArc(mArcRect, arcStart, mProgressSweep, false, mProgressPaint);
 
         // Draw the thumbnail
         canvas.drawCircle(mTranslateX - mThumbXPos, mTranslateY - mThumbYPos, mThumbRadius, mThumbPaint);
@@ -293,13 +258,25 @@ public class SeekArc extends View {
         }
 
         progress = (progress > mMax) ? mMax : progress;
-        progress = (mProgress < 0) ? 0 : progress;
+        progress = (progress < 0) ? 0 : progress;
 
+        if (fromUser) {
+            setProgressSweep(progress);
+        } else {
+            mAnimator.setFloatValues(mProgress, progress);
+            mAnimator.start();
+        }
         mProgress = progress;
-        mProgressSweep = (float) progress / mMax * 360;
+    }
 
+    public void setProgressSweep(float progress) {
+        mProgressSweep = progress / mMax * 360;
         updateThumbPosition();
         invalidate();
+    }
+
+    public float getProgressSweep() {
+        return mProgressSweep;
     }
 
     /**
@@ -346,5 +323,38 @@ public class SeekArc extends View {
 
     public void setClockwise(boolean isClockwise) {
         mClockwise = isClockwise;
+    }
+
+    public interface OnSeekArcChangeListener {
+
+        /**
+         * Notification that the progress level has changed. Clients can use the
+         * fromUser parameter to distinguish user-initiated changes from those
+         * that occurred programmatically.
+         *
+         * @param seekArc  The SeekArc whose progress has changed
+         * @param progress The current progress level. This will be in the range
+         *                 0..max where max was set by
+         *                 {@link com.sbgapps.scoreit.widget.SeekArc#setMax(int)}. (The default value for
+         *                 max is 100.)
+         * @param fromUser True if the progress change was initiated by the user.
+         */
+        void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser);
+
+        /**
+         * Notification that the user has started a touch gesture. Clients may
+         * want to use this to disable advancing the seekbar.
+         *
+         * @param seekArc The SeekArc in which the touch gesture began
+         */
+        void onStartTrackingTouch(SeekArc seekArc);
+
+        /**
+         * Notification that the user has finished a touch gesture. Clients may
+         * want to use this to re-enable advancing the seekarc.
+         *
+         * @param seekArc The SeekArc in which the touch gesture began
+         */
+        void onStopTrackingTouch(SeekArc seekArc);
     }
 }

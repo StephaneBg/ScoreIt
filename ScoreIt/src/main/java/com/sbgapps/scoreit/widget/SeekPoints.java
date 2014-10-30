@@ -81,7 +81,7 @@ public class SeekPoints extends FrameLayout {
             public void onClick(View v) {
                 if (mProgress > 0) {
                     mProgress--;
-                    manageProgress();
+                    manageProgress(true);
                 }
             }
         });
@@ -91,7 +91,7 @@ public class SeekPoints extends FrameLayout {
             public void onClick(View v) {
                 if (mProgress < mSeekBarPoints.getMax()) {
                     mProgress++;
-                    manageProgress();
+                    manageProgress(true);
                 }
             }
         });
@@ -103,7 +103,7 @@ public class SeekPoints extends FrameLayout {
             public void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser) {
                 if (fromUser) {
                     mProgress = progress;
-                    manageProgress();
+                    manageProgress(false);
                 }
             }
 
@@ -119,9 +119,9 @@ public class SeekPoints extends FrameLayout {
         });
     }
 
-    public void manageProgress() {
+    public void manageProgress(boolean fromButton) {
         String points = mListener.onProgressChanged(this, mProgress);
-        mSeekBarPoints.setProgress(mProgress);
+        if (fromButton) mSeekBarPoints.setProgress(mProgress);
         mPointsTv.setText(points);
         mButtonMinus.setEnabled(mProgress > 0);
         mButtonPlus.setEnabled(mProgress < mSeekBarPoints.getMax());
