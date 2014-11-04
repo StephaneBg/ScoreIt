@@ -63,7 +63,6 @@ public class ScoreGraphFragment extends Fragment {
             Line line = new Line();
             color = gameHelper.getPlayerColor(i);
             line.setColor(color);
-            p.setColor(color);
             line.addPoint(p);
             mGraph.addLine(line);
         }
@@ -81,7 +80,6 @@ public class ScoreGraphFragment extends Fragment {
         for (int player = 0; player < gh.getPlayerCount(); player++) {
             mScores[player] += lap.getScore(player);
             LinePoint p = new LinePoint(mX, mScores[player]);
-            p.setColor(gh.getPlayerColor(player));
             mGraph.addPointToLine(player, p);
         }
     }

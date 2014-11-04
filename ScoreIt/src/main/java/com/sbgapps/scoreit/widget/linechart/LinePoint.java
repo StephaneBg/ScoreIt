@@ -34,7 +34,6 @@ public class LinePoint {
     private final Region mRegion = new Region();
     private float mX;
     private float mY;
-    private int mColor = 0xFF000000;
     private int mSelectedColor = -1;
 
     public LinePoint() {
@@ -85,24 +84,5 @@ public class LinePoint {
     @Override
     public String toString() {
         return "x= " + mX + ", y= " + mY;
-    }
-
-    public int getColor() {
-        return mColor;
-    }
-
-    public void setColor(int color) {
-        mColor = color;
-    }
-
-    public int getSelectedColor() {
-        if (-1 == mSelectedColor) {
-            mSelectedColor = Util.getHighlightColor(mColor, 0.8f);
-        }
-        return mSelectedColor;
-    }
-
-    public void setSelectedColor(int selectedColor) {
-        mSelectedColor = selectedColor;
     }
 }

@@ -24,7 +24,7 @@ import com.sbgapps.scoreit.games.Lap;
  */
 public abstract class GenericBeloteLap implements Lap {
 
-    protected transient boolean mIsDone = true;
+    protected transient boolean mIsDone;
     protected transient int[] mScores;
     @SerializedName("scorer")
     protected int mScorer;

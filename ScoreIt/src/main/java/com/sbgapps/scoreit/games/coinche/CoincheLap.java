@@ -89,6 +89,7 @@ public class CoincheLap extends GenericBeloteLap {
 
         if ((takerPts >= mBid) && (takerPts > counterPts)) {
             // Deal succeeded
+            mIsDone = true;
             takerPts += mBid;
             if (null != cb) {
                 if (CoincheBonus.BONUS_COINCHE == cb.get()) {

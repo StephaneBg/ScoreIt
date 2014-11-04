@@ -54,8 +54,6 @@ public class LineGraph extends View {
     private double mRangeYRatio = 0;
     private double mRangeXRatio = 0;
     private boolean mUserSetMaxX = false;
-    private int mSelectedIndex = -1;
-    private OnPointClickedListener mListener;
     private Bitmap mFullImage;
     private Canvas mCanvas;
     private int mStrokeWidth;
@@ -382,8 +380,10 @@ public class LineGraph extends View {
 
         // Draw points
         int pointCount = 0;
+        int color;
         for (Line line : mLines) {
-            mPaint.setColor(line.getColor());
+            color = line.getColor();
+            mPaint.setColor(color);
             mPaint.setStrokeWidth(mStrokeWidth);
             mPaint.setStrokeCap(Paint.Cap.ROUND);
 
@@ -396,7 +396,7 @@ public class LineGraph extends View {
 
                     int outerRadius = 2 * mStrokeWidth;
 
-                    mPaint.setColor(p.getColor());
+                    mPaint.setColor(color);
                     mCanvas.drawCircle(xPixels, yPixels, outerRadius, mPaint);
 
                     // Create selection region
@@ -408,14 +408,6 @@ public class LineGraph extends View {
                             (int) (yPixels - outerRadius),
                             (int) (xPixels + outerRadius),
                             (int) (yPixels + outerRadius));
-
-                    // Draw selection
-                    if (mSelectedIndex == pointCount && mListener != null) {
-                        mPaint.setColor(p.getSelectedColor());
-                        mCanvas.drawPath(p.getPath(), mPaint);
-                        mPaint.setAlpha(255);
-                    }
-
                     pointCount++;
                 }
             }
@@ -428,61 +420,5 @@ public class LineGraph extends View {
                 TypedValue.COMPLEX_UNIT_DIP,
                 dipValue,
                 getResources().getDisplayMetrics());
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        Point point = new Point();
-        point.x = (int) event.getX();
-        point.y = (int) event.getY();
-
-        int count = 0;
-        int lineCount = 0;
-        int pointCount;
-
-        Region r = new Region();
-        for (Line line : mLines) {
-            pointCount = 0;
-            for (LinePoint p : line.getPoints()) {
-                r.setPath(p.getPath(), p.getRegion());
-
-                switch (event.getAction()) {
-                    default:
-                        break;
-                    case MotionEvent.ACTION_DOWN:
-                        if (r.contains(point.x, point.y)) {
-                            mSelectedIndex = count;
-                            postInvalidate();
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        if (count == mSelectedIndex
-                                && mListener != null
-                                && r.contains(point.x, point.y)) {
-                            mListener.onClick(lineCount, pointCount);
-                        }
-                        break;
-                }
-                pointCount++;
-                count++;
-            }
-            lineCount++;
-        }
-        // Reset selection
-        if (MotionEvent.ACTION_UP == event.getAction()
-                || MotionEvent.ACTION_CANCEL == event.getAction()) {
-            mSelectedIndex = -1;
-            postInvalidate();
-        }
-        return true;
-    }
-
-    public void setOnPointClickedListener(OnPointClickedListener listener) {
-        mListener = listener;
-    }
-
-    public interface OnPointClickedListener {
-        abstract void onClick(int lineIndex, int pointIndex);
     }
 }

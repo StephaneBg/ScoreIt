@@ -472,7 +472,7 @@ public class ScoreItActivity extends BaseActivity
         mSnackBar.show(
                 R.string.deleted_lap,
                 R.string.undo,
-                R.color.color_primary,
+                R.color.sb_text_color,
                 0,
                 token,
                 SnackBar.MED_SNACK);

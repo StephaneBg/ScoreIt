@@ -53,9 +53,9 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            runProguard false
+            minifyEnabled false
             debuggable false
-            jniDebugBuild false
+            jniDebuggable false
         }
     }
 }

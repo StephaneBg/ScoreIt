@@ -99,7 +99,8 @@ public class HeaderAdapter extends BaseAdapter {
         h.score.setTextColor(mGameHelper.getPlayerColor(position));
 
         int mod = -1;
-        if (Game.BELOTE != mGameHelper.getPlayedGame())
+        if (Game.BELOTE != mGameHelper.getPlayedGame()
+                && Game.COINCHE != mGameHelper.getPlayedGame())
             mod = mGameHelper.getLaps().size() % mGameHelper.getPlayerCount();
         h.marker.setVisibility(position == mod ? View.VISIBLE : View.INVISIBLE);
 
