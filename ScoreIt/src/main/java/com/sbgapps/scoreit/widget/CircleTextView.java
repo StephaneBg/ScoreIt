@@ -52,7 +52,7 @@ public class CircleTextView extends TextView {
         int color = ta.getColor(R.styleable.CircleTextView_ct_color, Color.BLACK);
         mCirclePaint.setColor(color);
         final float density = getResources().getDisplayMetrics().density;
-        mStrokeWidth = ta.getDimension(R.styleable.CircleTextView_ct_strokeWidth, 4 * density);
+        mStrokeWidth = ta.getDimension(R.styleable.CircleTextView_ct_strokeWidth, 2 * density);
         mCirclePaint.setStrokeWidth(mStrokeWidth);
 
         ta.recycle();

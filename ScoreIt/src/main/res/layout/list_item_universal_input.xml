@@ -68,11 +68,11 @@
 
         <com.sbgapps.scoreit.widget.CircleTextView
             android:id="@+id/points"
-            android:layout_width="96dp"
+            android:layout_width="0dp"
             android:layout_height="96dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:textSize="@dimen/font_display_1"
-            app:ct_strokeWidth="4dp"
             tools:text="128"/>
 
         <RelativeLayout

@@ -16,6 +16,8 @@
 
 package com.sbgapps.scoreit.navigationdrawer;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Created by Michal Bialas on 19/07/14.
  *
@@ -24,15 +26,21 @@ package com.sbgapps.scoreit.navigationdrawer;
 public class NavigationDrawerItem {
 
     private String mItemName;
+    private Drawable mItemImage;
     private boolean mSeparator;
     private boolean mSelected;
 
     public NavigationDrawerItem(boolean separator) {
-        this(null, separator);
+        this(null, null, separator);
     }
 
-    public NavigationDrawerItem(String itemName, boolean separator) {
+    public NavigationDrawerItem(String itemName, Drawable itemImg) {
+        this(itemName, itemImg, false);
+    }
+
+    public NavigationDrawerItem(String itemName, Drawable itemImg, boolean separator) {
         this.mItemName = itemName;
+        this.mItemImage = itemImg;
         this.mSeparator = separator;
     }
 
@@ -42,6 +50,14 @@ public class NavigationDrawerItem {
 
     public void setItemName(String itemName) {
         this.mItemName = itemName;
+    }
+
+    public Drawable getItemImage() {
+        return mItemImage;
+    }
+
+    public void setItemImage(Drawable itemImage) {
+        mItemImage = itemImage;
     }
 
     public boolean isSeparator() {
@@ -59,5 +75,4 @@ public class NavigationDrawerItem {
     public void setSelected(boolean selected) {
         this.mSelected = selected;
     }
-
 }

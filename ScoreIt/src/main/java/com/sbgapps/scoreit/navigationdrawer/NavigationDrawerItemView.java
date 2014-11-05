@@ -23,6 +23,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,6 +39,8 @@ public class NavigationDrawerItemView extends RelativeLayout {
     RelativeLayout mLayout;
     @InjectView(R.id.navigationDrawerItemTitleTV)
     TextView mItemTitle;
+    @InjectView(R.id.navigationDrawerItemImage)
+    ImageView mItemImage;
     @InjectView(R.id.separator)
     View mSeparator;
 
@@ -58,8 +61,10 @@ public class NavigationDrawerItemView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.inject(this);
-        Typeface tf = Typeface.createFromAsset(mRes.getAssets(), "Roboto-Medium.ttf");
-        mItemTitle.setTypeface(tf);
+        if (!isInEditMode()) {
+            Typeface tf = Typeface.createFromAsset(mRes.getAssets(), "Roboto-Medium.ttf");
+            mItemTitle.setTypeface(tf);
+        }
     }
 
     public void bindTo(NavigationDrawerItem item) {
@@ -67,15 +72,16 @@ public class NavigationDrawerItemView extends RelativeLayout {
         if (item.isSeparator()) {
             mSeparator.setVisibility(VISIBLE);
             mItemTitle.setVisibility(GONE);
+            mItemImage.setVisibility(GONE);
             mLayout.setBackgroundColor(Color.WHITE);
         } else {
             mItemTitle.setText(item.getItemName());
+            mItemImage.setImageDrawable(item.getItemImage());
         }
 
-        if (item.isSelected()) {
-            mItemTitle.setTextColor(mRes.getColor(R.color.color_accent));
-        } else {
-            mItemTitle.setTextColor(mRes.getColor(R.color.gray_dark));
-        }
+        int color = item.isSelected() ?
+                mRes.getColor(R.color.color_accent) : mRes.getColor(R.color.gray_dark);
+        mItemTitle.setTextColor(color);
+        mItemImage.setColorFilter(color);
     }
 }

@@ -68,6 +68,5 @@ public class NavigationDrawerAdapter extends BindableAdapter<NavigationDrawerIte
     @Override
     public void bindView(NavigationDrawerItem item, int position, View view) {
         ((NavigationDrawerItemView) view).bindTo(item);
-
     }
 }

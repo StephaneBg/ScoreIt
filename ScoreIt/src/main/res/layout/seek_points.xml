@@ -39,8 +39,9 @@
             android:src="@drawable/ic_minus"/>
 
         <FrameLayout
-            android:layout_width="160dp"
-            android:layout_height="160dp">
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_weight="1">
 
             <com.sbgapps.scoreit.widget.SeekArc
                 android:id="@+id/seekarc_points"

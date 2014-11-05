@@ -36,24 +36,24 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.github.mrengineer13.snackbar.SnackBar;
+import com.sbgapps.scoreit.fragment.BeloteLapFragment;
+import com.sbgapps.scoreit.fragment.CoincheLapFragment;
 import com.sbgapps.scoreit.fragment.HeaderFragment;
+import com.sbgapps.scoreit.fragment.LapFragment;
 import com.sbgapps.scoreit.fragment.ScoreGraphFragment;
 import com.sbgapps.scoreit.fragment.ScoreListFragment;
+import com.sbgapps.scoreit.fragment.TarotLapFragment;
+import com.sbgapps.scoreit.fragment.UniversalLapFragment;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
-import com.sbgapps.scoreit.fragment.LapFragment;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.BeloteLap;
-import com.sbgapps.scoreit.fragment.BeloteLapFragment;
 import com.sbgapps.scoreit.games.coinche.CoincheLap;
-import com.sbgapps.scoreit.fragment.CoincheLapFragment;
 import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.games.tarot.TarotFourLap;
-import com.sbgapps.scoreit.fragment.TarotLapFragment;
 import com.sbgapps.scoreit.games.tarot.TarotThreeLap;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
-import com.sbgapps.scoreit.fragment.UniversalLapFragment;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerView;
 import com.sbgapps.scoreit.widget.FloatingActionButton;
@@ -153,13 +153,14 @@ public class ScoreItActivity extends BaseActivity
         }
 
         // Init drawer
+        Resources res = getResources();
         mNavigationItems = new ArrayList<>();
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.universal), false));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.tarot), false));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.belote), false));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.coinche), false));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.universal), res.getDrawable(R.drawable.ic_universal)));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.tarot), res.getDrawable(R.drawable.ic_tarot)));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.belote), res.getDrawable(R.drawable.ic_belote)));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.coinche), res.getDrawable(R.drawable.ic_coinche)));
         mNavigationItems.add(new NavigationDrawerItem(true));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about), false));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about), res.getDrawable(R.drawable.ic_universal)));
         mNavigationDrawer.replaceWith(mNavigationItems);
 
         mDrawerToggle = new ActionBarDrawerToggle(
@@ -175,6 +176,7 @@ public class ScoreItActivity extends BaseActivity
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                mSnackBar.clear();
                 setTitle();
                 invalidateOptionsMenu();
             }
@@ -367,7 +369,6 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void onNavigationDrawerItemSelected(int position) {
-        mSnackBar.clear(false);
         switch (position) {
             default:
                 return;
@@ -421,7 +422,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void addLap() {
-        mSnackBar.clear(false);
+        mSnackBar.clear();
         switch (mGameHelper.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:

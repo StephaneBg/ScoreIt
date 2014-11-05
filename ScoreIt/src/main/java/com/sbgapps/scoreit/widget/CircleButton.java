@@ -61,7 +61,7 @@ public class CircleButton extends ImageView {
 
         int color = context.getResources().getColor(R.color.color_hint);
         mDefaultColor = a.getColor(R.styleable.CircleButton_cb_color, color);
-        mPressedColor = Util.getHighlightColor(mDefaultColor, 0.8f);
+        mPressedColor = Util.getHighlightColor(mDefaultColor, 0.85f);
 
         mCirclePaint.setColor(mDefaultColor);
         color = context.getResources().getColor(R.color.gray_light);

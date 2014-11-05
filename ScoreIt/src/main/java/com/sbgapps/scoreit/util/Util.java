@@ -27,6 +27,6 @@ public class Util {
         float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
         hsv[2] *= ratio;
-        return (Color.HSVToColor(hsv) & 0x80FFFFFF);
+        return Color.HSVToColor(hsv);
     }
 }
