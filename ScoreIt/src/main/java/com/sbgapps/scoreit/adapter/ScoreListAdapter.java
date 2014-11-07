@@ -79,7 +79,7 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
         final int pos = position;
 
         LinearListView list = (LinearListView) convertView.findViewById(R.id.list_score);
-        list.setAdapter(new LinearListAdapter(this, lap));
+        list.setAdapter(new LapRowAdapter(this, lap));
 
         final SwipeLayout swipeLayout = (SwipeLayout) convertView.findViewById(R.id.swipe);
         ImageButton button = (ImageButton) convertView.findViewById(R.id.action_discard);
