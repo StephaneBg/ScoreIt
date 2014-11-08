@@ -92,4 +92,8 @@
         <attr name="sc_thumb_radius" format="dimension"/>
         <attr name="sc_thumb_color" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="MaxWidthFrameLayout">
+        <attr name="maxWidth" format="dimension"/>
+    </declare-styleable>
 </resources>
