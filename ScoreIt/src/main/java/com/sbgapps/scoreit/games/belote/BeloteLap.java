@@ -31,8 +31,8 @@ public class BeloteLap extends GenericBeloteLap {
     @SerializedName("bonuses")
     protected List<BeloteBonus> mBonuses;
 
-    public BeloteLap(int taker, int points, List<BeloteBonus> bonuses) {
-        super(taker, points);
+    public BeloteLap(int scorer, int points, List<BeloteBonus> bonuses) {
+        super(scorer, points);
         mBonuses = bonuses;
     }
 
@@ -89,5 +89,10 @@ public class BeloteLap extends GenericBeloteLap {
         super.set(lap);
         mBonuses = ((BeloteLap) lap).getBonuses();
         computeScores();
+    }
+
+    @Override
+    public Lap copy() {
+        return new BeloteLap(mScorer, mPoints, mBonuses);
     }
 }

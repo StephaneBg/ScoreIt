@@ -28,4 +28,6 @@ public interface Lap extends Serializable {
     public void computeScores();
 
     public void set(Lap lap);
+
+    public Lap copy();
 }

@@ -95,6 +95,7 @@ public class ScoreItActivity extends BaseActivity
     private GameHelper mGameHelper;
     private int mEditedPlayer = Player.PLAYER_NONE;
     private Lap mLap;
+    private Lap mEditedLap;
     private boolean mIsEdited = false;
     private boolean mUpdateFab = false;
     private SnackBar mSnackBar;
@@ -144,10 +145,9 @@ public class ScoreItActivity extends BaseActivity
             Resources resources = getResources();
             if (mIsEdited) {
                 int position = savedInstanceState.getInt("position");
-                mLap = mGameHelper.getLaps().get(position);
-            } else {
-                mLap = (Lap) savedInstanceState.getSerializable("lap");
+                mEditedLap = mGameHelper.getLaps().get(position);
             }
+            mLap = (Lap) savedInstanceState.getSerializable("lap");
             if (null != mLap) {
                 mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
                 mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
@@ -230,10 +230,10 @@ public class ScoreItActivity extends BaseActivity
             outState.putBoolean("edited", mIsEdited);
             outState.putBoolean("updateFab", mUpdateFab);
             if (mIsEdited) {
-                outState.putInt("position", mGameHelper.getLaps().indexOf(mLap));
-            } else {
-                outState.putSerializable("lap", mLap);
+                outState.putInt("position", mGameHelper.getLaps()
+                        .indexOf(mIsEdited ? mEditedLap : mLap));
             }
+            outState.putSerializable("lap", mLap);
         }
         if (Player.PLAYER_NONE != mEditedPlayer) outState.putInt("editedPlayer", mEditedPlayer);
         outState.putBundle("snackbar", mSnackBar.onSaveInstanceState());
@@ -465,7 +465,8 @@ public class ScoreItActivity extends BaseActivity
 
     public void editLap(Lap lap) {
         mIsEdited = true;
-        mLap = lap;
+        mEditedLap = lap;
+        mLap = lap.copy();
         Resources resources = getResources();
         mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
         mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
@@ -589,6 +590,8 @@ public class ScoreItActivity extends BaseActivity
         } else {
             mLap.computeScores();
             if (mIsEdited) {
+                mEditedLap.set(mLap);
+                mEditedLap = null;
                 mIsEdited = false;
             } else {
                 mGameHelper.addLap(mLap);
@@ -797,8 +800,8 @@ public class ScoreItActivity extends BaseActivity
         if (null != mLapFragment && mLapFragment.isVisible()) {
             return;
         }
-        if (null != mLap) mLap.computeScores();
         mLap = null;
+        mEditedLap = null;
         mIsEdited = false;
         if (mUpdateFab) {
             Resources resources = getResources();

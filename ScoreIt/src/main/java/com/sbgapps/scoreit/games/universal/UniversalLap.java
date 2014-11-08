@@ -18,7 +18,6 @@ package com.sbgapps.scoreit.games.universal;
 
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.games.Lap;
-import com.sbgapps.scoreit.games.Player;
 
 /**
  * Created by sbaiget on 06/02/14.
@@ -30,6 +29,10 @@ public class UniversalLap implements Lap {
 
     public UniversalLap(int playerCount) {
         mScores = new int[playerCount];
+    }
+
+    public UniversalLap(int[] scores) {
+        mScores = scores;
     }
 
     @Override
@@ -62,5 +65,10 @@ public class UniversalLap implements Lap {
 
     public void stepScore(int player, int step) {
         mScores[player] += step;
+    }
+
+    @Override
+    public Lap copy() {
+        return new UniversalLap(mScores.clone());
     }
 }

@@ -124,4 +124,9 @@ public class CoincheLap extends GenericBeloteLap {
         }
         return null;
     }
+
+    @Override
+    public Lap copy() {
+        return new CoincheLap(mScorer, mPoints, mBid, mBonuses);
+    }
 }

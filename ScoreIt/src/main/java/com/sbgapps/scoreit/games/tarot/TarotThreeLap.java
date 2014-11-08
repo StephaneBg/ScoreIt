@@ -56,4 +56,9 @@ public class TarotThreeLap extends TarotLap {
         mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mTaker) ? 2 * result : -result;
         mScores[Player.PLAYER_3] = (Player.PLAYER_3 == mTaker) ? 2 * result : -result;
     }
+
+    @Override
+    public Lap copy() {
+        return new TarotThreeLap(mTaker, mBid, mPoints, mOudlers, mBonuses);
+    }
 }

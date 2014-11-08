@@ -97,4 +97,9 @@ public class TarotFiveLap extends TarotLap {
         }
         return 0;
     }
+
+    @Override
+    public Lap copy() {
+        return new TarotFiveLap(mTaker, mBid, mPoints, mOudlers, mBonuses, mPartner);
+    }
 }
