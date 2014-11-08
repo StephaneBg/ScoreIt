@@ -29,7 +29,6 @@ public class Player {
     public static final int PLAYER_3 = 2;
     public static final int PLAYER_4 = 3;
     public static final int PLAYER_5 = 4;
-    public static final int PLAYER_COUNT_MAX = 5;
 
     @SerializedName("name")
     private String mName;

@@ -17,10 +17,12 @@
 package com.sbgapps.scoreit;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -160,7 +162,7 @@ public class ScoreItActivity extends BaseActivity
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.belote), res.getDrawable(R.drawable.ic_belote)));
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.coinche), res.getDrawable(R.drawable.ic_coinche)));
         mNavigationItems.add(new NavigationDrawerItem(true));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about), res.getDrawable(R.drawable.ic_universal)));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about), res.getDrawable(R.drawable.ic_action_info)));
         mNavigationDrawer.replaceWith(mNavigationItems);
 
         mDrawerToggle = new ActionBarDrawerToggle(
@@ -282,6 +284,9 @@ public class ScoreItActivity extends BaseActivity
         List<String> files = mGameHelper.getFilesUtil().getSavedFiles();
         item.setVisible(0 != files.size());
 
+        item = menu.findItem(R.id.menu_total);
+        item.setVisible(Game.UNIVERSAL == game);
+
         return true;
     }
 
@@ -310,6 +315,13 @@ public class ScoreItActivity extends BaseActivity
                 } else {
                     startSavedGamesActivity();
                 }
+                return true;
+
+            case R.id.menu_total:
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+                boolean show = sp.getBoolean(GameHelper.KEY_UNIVERSAL_TOTAL, false);
+                sp.edit().putBoolean(GameHelper.KEY_UNIVERSAL_TOTAL, !show).apply();
+                update();
                 return true;
         }
         return super.onOptionsItemSelected(item);

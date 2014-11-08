@@ -39,7 +39,7 @@ public class LapRowAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mScoreAdapter.getGameHelper().getPlayerCount();
+        return mScoreAdapter.getGameHelper().getPlayerCount(true);
     }
 
     @Override

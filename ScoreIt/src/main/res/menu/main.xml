@@ -38,4 +38,9 @@
         android:icon="@drawable/ic_action_view"
         app:showAsAction="ifRoom"
         android:title="@string/view"/>
+    <item
+        android:id="@+id/menu_total"
+        android:icon="@drawable/ic_action_total"
+        app:showAsAction="ifRoom"
+        android:title="@string/show_total"/>
 </menu>

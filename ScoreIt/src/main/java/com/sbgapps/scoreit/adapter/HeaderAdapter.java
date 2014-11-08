@@ -50,7 +50,7 @@ public class HeaderAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mGameHelper.getPlayerCount();
+        return mGameHelper.getPlayerCount(true);
     }
 
     @Override
@@ -87,12 +87,14 @@ public class HeaderAdapter extends BaseAdapter {
 
         final Info info = getItem(position);
 
-        h.name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mActivity.editName(position);
-            }
-        });
+        if (position < mGameHelper.getPlayers().size()) {
+            h.name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mActivity.editName(position);
+                }
+            });
+        }
 
         h.name.setText(info.mPlayer.getName());
         h.score.setText(Integer.toString(info.mScore));

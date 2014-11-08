@@ -48,6 +48,7 @@ public class GameHelper {
     public static final String KEY_SELECTED_GAME = "selected_game";
     public static final String KEY_UNIVERSAL_PLAYER_CNT = "universal_player_count";
     public static final String KEY_TAROT_PLAYER_CNT = "tarot_player_count";
+    public static final String KEY_UNIVERSAL_TOTAL = "universal_show_total";
 
     final private Context mContext;
     final private SharedPreferences mPreferences;
@@ -105,12 +106,20 @@ public class GameHelper {
     }
 
     public int getPlayerCount() {
+        return getPlayerCount(false);
+    }
+
+    public int getPlayerCount(boolean withTotal) {
         switch (mPlayedGame) {
             default:
                 // Belote and Coinche
                 return 2;
             case Game.UNIVERSAL:
-                return mPreferences.getInt(KEY_UNIVERSAL_PLAYER_CNT, 5);
+                int count = mPreferences.getInt(KEY_UNIVERSAL_PLAYER_CNT, 5);
+                if (withTotal && mPreferences.getBoolean(KEY_UNIVERSAL_TOTAL, false)) {
+                    count++;
+                }
+                return count;
             case Game.TAROT:
                 return mPreferences.getInt(KEY_TAROT_PLAYER_CNT, 5);
         }
@@ -221,7 +230,11 @@ public class GameHelper {
     }
 
     public Player getPlayer(int player) {
-        return getPlayers().get(player);
+        if (player >= getPlayers().size()) {
+            return new Player(mContext.getString(R.string.total));
+        } else {
+            return getPlayers().get(player);
+        }
     }
 
     public int getPlayerColor(int player) {
@@ -267,6 +280,7 @@ public class GameHelper {
             os.write(g.toJson(mGame).getBytes());
             os.close();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
