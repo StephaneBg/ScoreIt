@@ -42,6 +42,8 @@
   <string name="cancel">Отмена</string>
   <string name="clear">Очистить</string>
   <string name="view">Просмотр</string>
+  <string name="show_total">Показать общее</string>
+  <string name="total">Итого</string>
   <string name="ok">OK</string>
   <string name="add">Добавить</string>
   <string name="done">Готово</string>

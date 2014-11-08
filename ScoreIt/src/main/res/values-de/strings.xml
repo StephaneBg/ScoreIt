@@ -42,6 +42,8 @@
   <string name="cancel">Abbrechen</string>
   <string name="clear">Leeren</string>
   <string name="view">Anzeigen</string>
+  <string name="show_total">Zeigen Gesamt an</string>
+  <string name="total">Gesamt</string>
   <string name="ok">OK</string>
   <string name="add">Hinzufügen</string>
   <string name="done">Erledigt</string>
