@@ -25,14 +25,13 @@
     android:orientation="vertical"
     tools:context="ScoreItActivity">
 
-    <com.sbgapps.scoreit.widget.PagerSlidingTabStrip
+    <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_primary_translucent"
-        app:pstsIndicatorColor="@color/white"
-        app:pstsTabTextColor="@color/white"
-        app:pstsTextAllCaps="true"/>
+        app:pstsTabBackground="@drawable/bg_default_action"
+        app:pstsIndicatorColor="@color/color_primary_dark"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
@@ -40,5 +39,4 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@android:color/white"/>
-
 </LinearLayout>
