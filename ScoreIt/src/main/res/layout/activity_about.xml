@@ -16,7 +16,7 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,13 +30,18 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_primary_translucent"
-        app:pstsTabBackground="@drawable/bg_default_action"
-        app:pstsIndicatorColor="@color/color_primary_dark"/>
+        app:pstsTabBackground="@drawable/bg_default_action"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sliding_tabs"
         android:background="@android:color/white"/>
-</LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@id/sliding_tabs"
+        android:background="@drawable/top_shadow"/>
+</RelativeLayout>

@@ -35,6 +35,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.github.mrengineer13.snackbar.SnackBar;
@@ -186,6 +187,10 @@ public class ScoreItActivity extends BaseActivity
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mSelectedPosition = mGameHelper.getPlayedGame();
         selectItem(mSelectedPosition);
+
+        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mDrawerListView.getLayoutParams();
+        lp.width = calculateDrawerWidth();
+        mDrawerListView.setLayoutParams(lp);
 
         // Floating Action Button
         mActionButton.setOnClickListener(new View.OnClickListener() {

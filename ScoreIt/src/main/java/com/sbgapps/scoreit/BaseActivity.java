@@ -16,12 +16,14 @@
 
 package com.sbgapps.scoreit;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
@@ -59,6 +61,23 @@ public abstract class BaseActivity extends ActionBarActivity {
                 NavUtils.navigateUpFromSameTask(this);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public int calculateDrawerWidth() {
+        TypedValue tv = new TypedValue();
+        int actionBarHeight;
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+            int maxWidth = getResources().getDimensionPixelSize(R.dimen.navigation_drawer_max_width);
+            Display display = getWindowManager().getDefaultDisplay();
+            int width;
+            Point size = new Point();
+            display.getSize(size);
+            width = size.x - actionBarHeight;
+            return Math.min(width, maxWidth);
+        } else {
+            return getResources().getDimensionPixelSize(R.dimen.navigation_drawer_min_width);
+        }
     }
 
     private void setupFauxDialog() {

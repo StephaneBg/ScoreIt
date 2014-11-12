@@ -17,6 +17,7 @@
 
 <resources>
     <color name="white">#FFF</color>
+    <color name="transparent">#00000000</color>
 
     <color name="color_primary">#FF7883C0</color>
     <color name="color_primary_translucent">#DD7883C0</color>

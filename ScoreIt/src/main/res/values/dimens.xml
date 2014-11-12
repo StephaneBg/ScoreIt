@@ -40,7 +40,8 @@
     <dimen name="dialog_max_height">720dp</dimen>
 
     <!-- Width -->
-    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="navigation_drawer_min_width">240dp</dimen>
+    <dimen name="navigation_drawer_max_width">320dp</dimen>
     <dimen name="dialog_width">480dp</dimen>
 
 </resources>
