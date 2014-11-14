@@ -32,13 +32,12 @@
             android:id="@+id/header_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/gray_light_translucent"/>
+            android:background="#FEFEFE"/>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/header_container"
-            android:background="@color/gray_background">
+            android:layout_below="@id/header_container">
 
             <FrameLayout
                 android:id="@+id/score_container"
@@ -63,7 +62,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/color_accent"
+        android:background="?attr/colorAccent"
         android:src="@drawable/ic_content_create"
         app:fab_attachTo="@id/header_container"
         app:fab_attachAt="bottom_right"/>

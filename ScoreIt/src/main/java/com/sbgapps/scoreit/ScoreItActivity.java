@@ -28,8 +28,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -359,29 +357,26 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void setTitle() {
-        SpannableString title;
-
+        String title;
         if (mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
-            title = new SpannableString(getResources().getString(R.string.app_name));
+            title = getString(R.string.app_name);
         } else {
             switch (mSelectedPosition) {
                 default:
                 case Game.UNIVERSAL:
-                    title = new SpannableString(getResources().getString(R.string.universal));
+                    title = getString(R.string.universal);
                     break;
                 case Game.BELOTE:
-                    title = new SpannableString(getResources().getString(R.string.belote));
+                    title = getString(R.string.belote);
                     break;
                 case Game.COINCHE:
-                    title = new SpannableString(getResources().getString(R.string.coinche));
+                    title = getString(R.string.coinche);
                     break;
                 case Game.TAROT:
-                    title = new SpannableString(getResources().getString(R.string.tarot));
+                    title = getString(R.string.tarot);
                     break;
             }
         }
-
-        title.setSpan(getTypefaceSpan(), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(title);
     }
 

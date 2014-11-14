@@ -16,7 +16,7 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -25,23 +25,23 @@
     android:orientation="vertical"
     tools:context="ScoreItActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/color_primary_translucent"
-        app:pstsTabBackground="@drawable/bg_default_action"/>
+        android:background="?attr/colorPrimary"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/sliding_tabs"
-        android:background="@android:color/white"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_below="@id/sliding_tabs"
-        android:background="@drawable/top_shadow"/>
-</RelativeLayout>
+        android:layout_below="@id/sliding_tabs"/>
+</LinearLayout>

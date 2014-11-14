@@ -64,15 +64,14 @@ public class CircleButton extends ImageView {
         mPressedColor = Util.getHighlightColor(mDefaultColor, 0.85f);
 
         mCirclePaint.setColor(mDefaultColor);
+        mFocusPaint.setColor(mDefaultColor);
+        mFocusPaint.setAlpha(PRESSED_RING_ALPHA);
+        mFocusPaint.setStrokeWidth(mPressedRingWidth);
+
         color = context.getResources().getColor(R.color.gray_light);
         mDisabledColor = a.getColor(R.styleable.CircleButton_cb_disabled_color, color);
 
         mPressedRingWidth = (int) a.getDimension(R.styleable.CircleButton_cb_pressedRingWidth, mPressedRingWidth);
-        color = context.getResources().getColor(R.color.gray_dark);
-        color = a.getColor(R.styleable.CircleButton_cb_shadow_color, color);
-        mFocusPaint.setColor(color);
-        mFocusPaint.setAlpha(PRESSED_RING_ALPHA);
-        mFocusPaint.setStrokeWidth(mPressedRingWidth);
 
         a.recycle();
 

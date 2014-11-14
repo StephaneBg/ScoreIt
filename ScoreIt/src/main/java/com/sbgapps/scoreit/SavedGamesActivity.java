@@ -18,9 +18,6 @@ package com.sbgapps.scoreit;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,9 +38,8 @@ public class SavedGamesActivity extends BaseActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
-            SpannableString title = new SpannableString(getResources().getString(R.string.saved_games));
-            title.setSpan(getTypefaceSpan(), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            actionBar.setTitle(title);
+            actionBar.setTitle(getString(R.string.saved_games));
+            actionBar.setHomeButtonEnabled(true);
         }
 
         final GameHelper gameHelper = new GameHelper(this);

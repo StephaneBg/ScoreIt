@@ -21,35 +21,26 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
-import com.sbgapps.scoreit.util.TypefaceSpan;
-
 /**
  * Created by Stéphane on 31/07/2014.
  */
 public abstract class BaseActivity extends ActionBarActivity {
 
-    private TypefaceSpan mTypefaceSpan;
-
-    public TypefaceSpan getTypefaceSpan() {
-        return mTypefaceSpan;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
-
-        getWindow().setBackgroundDrawableResource(R.drawable.bg_triangles);
-
         setupFauxDialog();
 
-        mTypefaceSpan = new TypefaceSpan(this, "Lobster.otf");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) setSupportActionBar(toolbar);
     }
 
     protected abstract int getLayoutResource();
