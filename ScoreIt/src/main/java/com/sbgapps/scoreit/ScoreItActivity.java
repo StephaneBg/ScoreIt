@@ -58,7 +58,6 @@ import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerView;
 import com.sbgapps.scoreit.widget.FloatingActionButton;
-import com.sbgapps.scoreit.widget.RippleLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,8 +83,6 @@ public class ScoreItActivity extends BaseActivity
     ListView mDrawerListView;
     @InjectView(R.id.fab)
     FloatingActionButton mActionButton;
-    @InjectView(R.id.ripple_layout)
-    RippleLayout mRippleLayout;
 
     private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -796,7 +793,6 @@ public class ScoreItActivity extends BaseActivity
 
     @Override
     public void onBackStackChanged() {
-        mRippleLayout.start();
         if (null != mLapFragment && mLapFragment.isVisible()) {
             return;
         }
