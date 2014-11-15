@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checked="true"
-                android:background="@drawable/bg_btn_toggle"
+                android:background="@drawable/bg_selector_btn_toggle"
                 tools:textOn="@string/them"/>
 
             <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
@@ -58,7 +58,7 @@
                 android:layout_weight="1"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:background="@drawable/bg_btn_toggle"
+                android:background="@drawable/bg_selector_btn_toggle"
                 tools:textOff="@string/us"/>
         </com.sbgapps.scoreit.widget.ToggleGroup>
 

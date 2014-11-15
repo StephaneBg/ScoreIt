@@ -23,100 +23,106 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="?android:listDivider"
         android:orientation="vertical"
-        android:showDividers="middle|end">
+        android:gravity="center_horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:src="@drawable/ic_app_hi_res"
+            android:gravity="bottom"
+            android:text="@string/app_name"
+            android:textSize="@dimen/font_headline"/>
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:orientation="horizontal">
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:textColor="?attr/colorPrimary"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            tools:text="ScoreIt 0.0.0"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_launcher"
-                android:gravity="bottom"
-                android:text="@string/app_name"
-                android:textSize="@dimen/font_headline"/>
-
-            <TextView
-                android:id="@+id/version"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:singleLine="true"
-                android:text="© SBG Apps - Stéphane Baiget"
-                tools:ignore="HardcodedText"/>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_rate"
-            style="?android:actionButtonStyle"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_rating_important"
-            android:gravity="center_vertical"
-            android:text="@string/rate_app"/>
+            android:singleLine="true"
+            android:text="© SBG Apps - Stéphane Baiget"
+            android:textColor="@color/gray_dark"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            tools:ignore="HardcodedText"/>
 
-        <Button
-            android:id="@+id/btn_share"
-            style="?android:actionButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_social_share"
-            android:gravity="center_vertical"
-            android:text="@string/share_app"/>
-
-        <Button
-            android:id="@+id/btn_contact"
-            style="?android:actionButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_content_email"
-            android:gravity="center_vertical"
-            android:text="@string/contact_developer"/>
-
-        <Button
+        <ImageView
             android:id="@+id/btn_community"
-            style="?android:actionButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_google_plus"
+            android:layout_width="92dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:padding="8dp"
+            android:background="@drawable/bg_selector_circle"
+            android:src="@drawable/ic_google_plus"
             android:gravity="center_vertical"
             android:text="@string/plus_community"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:gravity="bottom"
-            android:text="@string/donate"
-            android:textSize="@dimen/font_headline"/>
+            android:text="@string/plus_community"
+            android:textColor="?attr/colorPrimary"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-        <Button
-            android:id="@+id/btn_donate_coffee"
-            style="?android:actionButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_donate_coffee"
+        <ImageView
+            android:id="@+id/btn_rate"
+            android:layout_width="92dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:padding="8dp"
+            android:background="@drawable/bg_selector_circle"
+            android:src="@drawable/ic_action_star_rate"
             android:gravity="center_vertical"
-            android:text="@string/donate_coffee"/>
+            android:text="@string/rate_app"/>
 
-        <Button
-            android:id="@+id/btn_donate_beer"
-            style="?android:actionButtonStyle"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_donate_beer"
-            android:gravity="center_vertical"
-            android:text="@string/donate_beer"/>
+            android:text="@string/rate_app"
+            android:textColor="?attr/colorPrimary"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
 
+        <ImageView
+            android:id="@+id/btn_share"
+            android:layout_width="92dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:padding="8dp"
+            android:background="@drawable/bg_selector_circle"
+            android:src="@drawable/ic_social_share"
+            android:gravity="center_vertical"
+            android:text="@string/share_app"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/share_app"
+            android:textColor="?attr/colorPrimary"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        <ImageView
+            android:id="@+id/btn_contact"
+            android:layout_width="92dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:padding="8dp"
+            android:background="@drawable/bg_selector_circle"
+            android:src="@drawable/ic_communication_email"
+            android:gravity="center_vertical"
+            android:text="@string/contact_developer"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_developer"
+            android:textColor="?attr/colorPrimary"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
     </LinearLayout>
 </ScrollView>

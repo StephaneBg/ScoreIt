@@ -19,54 +19,54 @@
     <item android:state_checked="true"
           android:state_window_focused="false"
           android:state_enabled="true"
-          android:drawable="@drawable/bg_btn_toggle_on"/>
+          android:drawable="@drawable/btn_toggle_on"/>
 
     <item android:state_checked="true"
           android:state_window_focused="false"
           android:state_enabled="false"
-          android:drawable="@drawable/bg_btn_toggle_disabled"/>
+          android:drawable="@drawable/btn_toggle_disabled"/>
 
     <item android:state_checked="true"
           android:state_pressed="true"
-          android:drawable="@drawable/bg_btn_toggle_on_pressed"/>
+          android:drawable="@drawable/btn_toggle_on_pressed"/>
 
     <item android:state_checked="true"
           android:state_focused="true"
           android:state_enabled="true"
-          android:drawable="@drawable/bg_btn_toggle_on"/>
+          android:drawable="@drawable/btn_toggle_on"/>
 
     <item android:state_checked="true"
           android:state_enabled="true"
-          android:drawable="@drawable/bg_btn_toggle_on"/>
+          android:drawable="@drawable/btn_toggle_on"/>
 
     <item android:state_checked="true"
           android:state_focused="true"
-          android:drawable="@drawable/bg_btn_toggle_on"/>
+          android:drawable="@drawable/btn_toggle_on"/>
 
     <item android:state_checked="true"
-          android:drawable="@drawable/bg_btn_toggle_on"/>
+          android:drawable="@drawable/btn_toggle_on"/>
 
     <item android:state_window_focused="false"
           android:state_enabled="true"
-          android:drawable="@drawable/bg_btn_toggle_off"/>
+          android:drawable="@drawable/btn_toggle_off"/>
 
     <item android:state_window_focused="false"
           android:state_enabled="false"
-          android:drawable="@drawable/bg_btn_toggle_disabled"/>
+          android:drawable="@drawable/btn_toggle_disabled"/>
 
     <item android:state_pressed="true"
-          android:drawable="@drawable/bg_btn_toggle_off_pressed"/>
+          android:drawable="@drawable/btn_toggle_off_pressed"/>
 
     <item android:state_focused="true"
           android:state_enabled="true"
-          android:drawable="@drawable/bg_btn_toggle_off"/>
+          android:drawable="@drawable/btn_toggle_off"/>
 
     <item android:state_enabled="true"
-          android:drawable="@drawable/bg_btn_toggle_off"/>
+          android:drawable="@drawable/btn_toggle_off"/>
 
     <item android:state_focused="true"
-          android:drawable="@drawable/bg_btn_toggle_off"/>
+          android:drawable="@drawable/btn_toggle_off"/>
 
     <item
-        android:drawable="@drawable/bg_btn_toggle_off"/>
+        android:drawable="@drawable/btn_toggle_off"/>
 </selector>

@@ -78,7 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/bg_btn_toggle"
+                android:background="@drawable/bg_selector_btn_toggle"
                 android:textOff="@string/petit"
                 android:textOn="@string/petit"/>
 
@@ -89,7 +89,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:background="@drawable/bg_btn_toggle"
+                android:background="@drawable/bg_selector_btn_toggle"
                 android:textOff="@string/twentyone"
                 android:textOn="@string/twentyone"/>
 
@@ -98,7 +98,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/bg_btn_toggle"
+                android:background="@drawable/bg_selector_btn_toggle"
                 android:textOff="@string/excuse"
                 android:textOn="@string/excuse"/>
         </LinearLayout>

@@ -17,31 +17,23 @@
 package com.sbgapps.scoreit;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.sbgapps.scoreit.fragment.DonateFragment;
 import com.sbgapps.scoreit.fragment.InfoFragment;
+import com.sbgapps.scoreit.fragment.TranslationsFragment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
 public class AboutActivity extends BaseActivity {
 
-    private InfoFragment mInfoFragment;
+    private DonateFragment mDonateFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,46 +62,8 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!mInfoFragment.getBillingProcessor().handleActivityResult(requestCode, resultCode, data))
+        if (!mDonateFragment.getBillingProcessor().handleActivityResult(requestCode, resultCode, data))
             super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    public static class TranslationsFragment extends Fragment {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment_translations, container, false);
-            ListView listView = (ListView) view.findViewById(R.id.list_view);
-
-            String[] from = new String[]{"language", "translator"};
-            int[] to = new int[]{R.id.language, R.id.translator};
-
-            List<HashMap<String, String>> data = new ArrayList<>();
-            HashMap<String, String> map;
-            String[] l = getResources().getStringArray(R.array.languages);
-            String[] t = getResources().getStringArray(R.array.translators);
-            for (int i = 0; i < l.length; i++) {
-                map = new HashMap<>();
-                map.put("language", l[i]);
-                map.put("translator", t[i]);
-                data.add(map);
-            }
-
-            listView.setAdapter(new SimpleAdapter(getActivity(),
-                    data, R.layout.list_item_translation, from, to));
-
-            Button btn = (Button) view.findViewById(R.id.btn_translate);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("https://crowdin.net/project/score-it"));
-                    startActivity(intent);
-                }
-            });
-
-            return view;
-        }
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -123,11 +77,15 @@ public class AboutActivity extends BaseActivity {
             Fragment fragment = null;
             switch (position) {
                 case 0:
-                    mInfoFragment = (InfoFragment) Fragment.instantiate(AboutActivity.this,
+                    fragment = Fragment.instantiate(AboutActivity.this,
                             InfoFragment.class.getName());
-                    fragment = mInfoFragment;
                     break;
                 case 1:
+                    mDonateFragment = (DonateFragment) Fragment.instantiate(AboutActivity.this,
+                            DonateFragment.class.getName());
+                    fragment = mDonateFragment;
+                    break;
+                case 2:
                     fragment = Fragment.instantiate(AboutActivity.this,
                             TranslationsFragment.class.getName());
                     break;
@@ -137,7 +95,7 @@ public class AboutActivity extends BaseActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -147,6 +105,8 @@ public class AboutActivity extends BaseActivity {
                 case 0:
                     return getString(R.string.application).toUpperCase(l);
                 case 1:
+                    return getString(R.string.donate).toUpperCase(l);
+                case 2:
                     return getString(R.string.translations).toUpperCase(l);
             }
             return null;

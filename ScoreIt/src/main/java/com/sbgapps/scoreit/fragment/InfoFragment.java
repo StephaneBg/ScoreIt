@@ -16,50 +16,28 @@
 
 package com.sbgapps.scoreit.fragment;
 
-import android.support.v4.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.TransactionDetails;
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.util.IabKey;
 
 /**
  * Created by sbaiget on 03/03/14.
  */
-public class InfoFragment extends Fragment
-        implements BillingProcessor.IBillingHandler, IabKey {
-
-    static final String LOG_TAG = "billing";
+public class InfoFragment extends Fragment {
 
     private static final String VERSION_UNAVAILABLE = "N/A";
-    private static final String PRODUCT_DONATE_COFFEE = "com.sbgapps.scoreit.coffee";
-    private static final String PRODUCT_DONATE_BEER = "com.sbgapps.scoreit.beer";
-    private BillingProcessor mBillingProcessor;
-    private boolean mReadyToPurchase = false;
-    private Button mCoffeeBtn;
-    private Button mBeerBtn;
-
-    public BillingProcessor getBillingProcessor() {
-        return mBillingProcessor;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBillingProcessor = new BillingProcessor(getActivity(), INAPP_KEY, this);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,12 +52,13 @@ public class InfoFragment extends Fragment
         } catch (PackageManager.NameNotFoundException e) {
             version = VERSION_UNAVAILABLE;
         }
+        version = getActivity().getString(R.string.app_name) + " " + version;
         TextView nameAndVersionView = (TextView) view.findViewById(R.id.version);
         nameAndVersionView.setText(version);
 
-        Button btn;
+        ImageView btn;
 
-        btn = (Button) view.findViewById(R.id.btn_contact);
+        btn = (ImageView) view.findViewById(R.id.btn_contact);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +73,7 @@ public class InfoFragment extends Fragment
             }
         });
 
-        btn = (Button) view.findViewById(R.id.btn_rate);
+        btn = (ImageView) view.findViewById(R.id.btn_rate);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +90,7 @@ public class InfoFragment extends Fragment
             }
         });
 
-        btn = (Button) view.findViewById(R.id.btn_share);
+        btn = (ImageView) view.findViewById(R.id.btn_share);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,7 +104,7 @@ public class InfoFragment extends Fragment
             }
         });
 
-        btn = (Button) view.findViewById(R.id.btn_community);
+        btn = (ImageView) view.findViewById(R.id.btn_community);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,63 +114,6 @@ public class InfoFragment extends Fragment
             }
         });
 
-        mCoffeeBtn = (Button) view.findViewById(R.id.btn_donate_coffee);
-        mCoffeeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mReadyToPurchase) mBillingProcessor.purchase(PRODUCT_DONATE_COFFEE);
-            }
-        });
-
-        mBeerBtn = (Button) view.findViewById(R.id.btn_donate_beer);
-        mBeerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mReadyToPurchase) mBillingProcessor.purchase(PRODUCT_DONATE_BEER);
-            }
-        });
         return view;
-    }
-
-    @Override
-    public void onDestroy() {
-        if (null != mBillingProcessor) mBillingProcessor.release();
-        super.onDestroy();
-    }
-
-    @Override
-    public void onProductPurchased(String sku, TransactionDetails transactionDetails) {
-        manageDonations();
-    }
-
-    @Override
-    public void onPurchaseHistoryRestored() {
-        Log.i(LOG_TAG, "onPurchaseHistoryRestored");
-        for (String sku : mBillingProcessor.listOwnedProducts()) {
-            Log.d(LOG_TAG, "Owned Managed Product: " + sku);
-            manageDonations();
-        }
-    }
-
-    private void manageDonations() {
-        if (mBillingProcessor.isPurchased(PRODUCT_DONATE_COFFEE)) {
-            mCoffeeBtn.setText(getString(R.string.bought_coffee));
-            mCoffeeBtn.setClickable(false);
-        }
-        if (mBillingProcessor.isPurchased(PRODUCT_DONATE_BEER)) {
-            mBeerBtn.setText(getString(R.string.bought_beer));
-            mBeerBtn.setClickable(false);
-        }
-    }
-
-    @Override
-    public void onBillingError(int errorCode, Throwable throwable) {
-        Log.e(LOG_TAG, "onBillingError: " + Integer.toString(errorCode));
-    }
-
-    @Override
-    public void onBillingInitialized() {
-        mReadyToPurchase = true;
-        manageDonations();
     }
 }

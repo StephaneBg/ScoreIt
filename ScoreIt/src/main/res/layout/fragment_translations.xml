@@ -20,30 +20,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:divider="?android:listDivider"
     android:orientation="vertical"
-    android:showDividers="middle">
+    android:gravity="center_horizontal">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text="@string/translations"
-        android:textSize="@dimen/font_headline"/>
-
-    <Button
+    <ImageView
         android:id="@+id/btn_translate"
-        style="?android:actionButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_translate"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:padding="8dp"
+        android:background="@drawable/bg_selector_circle"
+        android:src="@drawable/ic_action_translate"
         android:gravity="center_vertical"
         android:text="@string/help_translate"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:text="@string/help_translate"
+        android:textColor="?attr/colorPrimary"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_height"
         android:orientation="horizontal">
