@@ -46,7 +46,6 @@ public class LineGraph extends View {
 
     private static final int DEFAULT_PADDING = 10;
     private final int mAxisColor;
-    private final int mBackgroundColor;
     private ArrayList<Line> mLines = new ArrayList<>();
     private Paint mPaint = new Paint();
     private float mMinY = 0, mMinX = 0;
@@ -54,8 +53,6 @@ public class LineGraph extends View {
     private double mRangeYRatio = 0;
     private double mRangeXRatio = 0;
     private boolean mUserSetMaxX = false;
-    private Bitmap mFullImage;
-    private Canvas mCanvas;
     private int mStrokeWidth;
 
     public LineGraph(Context context) {
@@ -71,7 +68,6 @@ public class LineGraph extends View {
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.LineGraph, 0, 0);
         mAxisColor = a.getColor(R.styleable.LineGraph_lineAxisColor, Color.LTGRAY);
-        mBackgroundColor = a.getColor(R.styleable.LineGraph_lineBackground, Color.WHITE);
         a.recycle();
 
         mStrokeWidth = getPixelForDip(2);
@@ -314,12 +310,6 @@ public class LineGraph extends View {
     }
 
     public void onDraw(Canvas canvas) {
-        if (null == mFullImage) {
-            mFullImage = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
-            mCanvas = new Canvas(mFullImage);
-        }
-
-        mCanvas.drawColor(mBackgroundColor);
         resetPaintWithAntiAlias(mPaint, true);
         float padding = getPixelForDip(DEFAULT_PADDING);
         float usableHeight = getHeight() - 2 * padding;
@@ -344,7 +334,7 @@ public class LineGraph extends View {
             height = getHeight() - padding;
         }
 
-        mCanvas.drawLine(
+        canvas.drawLine(
                 padding,
                 height,
                 getWidth() - padding,
@@ -370,7 +360,7 @@ public class LineGraph extends View {
                 } else {
                     newXPixels = padding + (xPercent * usableWidth);
                     newYPixels = getHeight() - padding - (usableHeight * yPercent);
-                    mCanvas.drawLine(lastXPixels, lastYPixels, newXPixels, newYPixels, mPaint);
+                    canvas.drawLine(lastXPixels, lastYPixels, newXPixels, newYPixels, mPaint);
                     lastXPixels = newXPixels;
                     lastYPixels = newYPixels;
                 }
@@ -397,7 +387,7 @@ public class LineGraph extends View {
                     int outerRadius = 2 * mStrokeWidth;
 
                     mPaint.setColor(color);
-                    mCanvas.drawCircle(xPixels, yPixels, outerRadius, mPaint);
+                    canvas.drawCircle(xPixels, yPixels, outerRadius, mPaint);
 
                     // Create selection region
                     Path path = p.getPath();
@@ -412,7 +402,6 @@ public class LineGraph extends View {
                 }
             }
         }
-        canvas.drawBitmap(mFullImage, 0, 0, null);
     }
 
     private int getPixelForDip(int dipValue) {

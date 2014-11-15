@@ -65,7 +65,6 @@
 
     <declare-styleable name="LineGraph">
         <attr name="lineAxisColor" format="color"/>
-        <attr name="lineBackground" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="SeekCircle">
