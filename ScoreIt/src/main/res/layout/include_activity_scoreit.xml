@@ -31,25 +31,13 @@
         <FrameLayout
             android:id="@+id/header_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"/>
+            android:layout_height="168dp"/>
 
         <FrameLayout
+            android:id="@+id/score_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/header_container">
-
-            <FrameLayout
-                android:id="@+id/score_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-            <com.sbgapps.scoreit.widget.RippleLayout
-                android:id="@+id/ripple_layout"
-                android:background="@color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </FrameLayout>
+            android:layout_below="@id/header_container"/>
 
         <View
             android:layout_width="match_parent"
@@ -58,12 +46,15 @@
             android:background="@drawable/top_shadow"/>
     </RelativeLayout>
 
-    <com.sbgapps.scoreit.widget.FloatingActionButton
+    <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?attr/colorAccent"
+        android:layout_gravity="right"
+        android:layout_marginTop="140dp"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:src="@drawable/ic_content_create"
-        app:fab_attachTo="@id/header_container"
-        app:fab_attachAt="bottom_right"/>
+        app:fab_colorNormal="@color/fab_normal_score"
+        app:fab_colorPressed="@color/fab_pressed_score"
+        app:fab_colorRipple="@color/fab_ripple_score"/>
 </FrameLayout>

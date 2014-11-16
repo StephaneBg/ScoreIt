@@ -39,7 +39,6 @@
             android:id="@+id/version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:textColor="?attr/colorPrimary"
             android:textAppearance="?android:attr/textAppearanceLarge"
             tools:text="ScoreIt 0.0.0"/>

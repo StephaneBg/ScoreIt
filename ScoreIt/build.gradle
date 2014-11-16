@@ -70,6 +70,8 @@ dependencies {
     compile 'com.jakewharton:butterknife:6.0.0'
     compile 'com.daimajia.swipelayout:library:1.0.4@aar'
     compile 'com.jpardogo.materialtabstrip:library:1.0.0'
+    compile 'com.github.andkulikov:transitions-everywhere:1.1.0'
+    compile 'com.melnykov:floatingactionbutton:1.0.7'
 
     compile project(':L-Dialogs')
     compile project(':SimpleStorage')

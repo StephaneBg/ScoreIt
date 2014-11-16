@@ -35,7 +35,7 @@
     <dimen name="font_button">14sp</dimen>
 
     <!-- Height -->
-    <dimen name="list_item_height">56dp</dimen>
+    <dimen name="list_item_height">64dp</dimen>
     <dimen name="widget_height">48dp</dimen>
     <dimen name="dialog_max_height">720dp</dimen>
 

@@ -37,6 +37,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.github.mrengineer13.snackbar.SnackBar;
+import com.melnykov.fab.FloatingActionButton;
 import com.sbgapps.scoreit.fragment.BeloteLapFragment;
 import com.sbgapps.scoreit.fragment.CoincheLapFragment;
 import com.sbgapps.scoreit.fragment.HeaderFragment;
@@ -57,7 +58,6 @@ import com.sbgapps.scoreit.games.tarot.TarotThreeLap;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerView;
-import com.sbgapps.scoreit.widget.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -146,7 +146,9 @@ public class ScoreItActivity extends BaseActivity
             mLap = (Lap) savedInstanceState.getSerializable("lap");
             if (null != mLap) {
                 mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
-                mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
+                mActionButton.setColorNormal(resources.getColor(R.color.fab_normal_lap));
+                mActionButton.setColorPressed(resources.getColor(R.color.fab_pressed_lap));
+                mActionButton.setColorRipple(resources.getColor(R.color.fab_ripple_lap));
             }
         }
 
@@ -187,24 +189,10 @@ public class ScoreItActivity extends BaseActivity
         lp.width = calculateDrawerWidth();
         mDrawerListView.setLayoutParams(lp);
 
-        // Floating Action Button
         mActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onActionButtonClicked();
-            }
-        });
-        mActionButton.setTouchAnimationListener(new FloatingActionButton.TouchAnimationListener() {
-            @Override
-            public void onAnimationEnd() {
-                Resources resources = getResources();
-                if (null == mLap) {
-                    mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_create));
-                    mActionButton.setBackgroundColor(resources.getColor(R.color.color_accent));
-                } else {
-                    mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
-                    mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
-                }
             }
         });
 
@@ -466,7 +454,9 @@ public class ScoreItActivity extends BaseActivity
         mLap = lap.copy();
         Resources resources = getResources();
         mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
-        mActionButton.setBackgroundColor(resources.getColor(R.color.color_hint));
+        mActionButton.setColorNormal(resources.getColor(R.color.fab_normal_lap));
+        mActionButton.setColorPressed(resources.getColor(R.color.fab_pressed_lap));
+        mActionButton.setColorRipple(resources.getColor(R.color.fab_ripple_lap));
         showLapFragment();
     }
 
@@ -582,7 +572,12 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void onActionButtonClicked() {
+        Resources resources = getResources();
         if (null == mLap) {
+            mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
+            mActionButton.setColorNormal(resources.getColor(R.color.fab_normal_lap));
+            mActionButton.setColorPressed(resources.getColor(R.color.fab_pressed_lap));
+            mActionButton.setColorRipple(resources.getColor(R.color.fab_ripple_lap));
             addLap();
         } else {
             mLap.computeScores();
@@ -593,7 +588,6 @@ public class ScoreItActivity extends BaseActivity
             } else {
                 mGameHelper.addLap(mLap);
             }
-            mUpdateFab = false;
             getSupportFragmentManager()
                     .popBackStack(LapFragment.TAG,
                             FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -802,7 +796,9 @@ public class ScoreItActivity extends BaseActivity
         if (mUpdateFab) {
             Resources resources = getResources();
             mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_create));
-            mActionButton.setBackgroundColor(resources.getColor(R.color.color_accent));
+            mActionButton.setColorNormal(resources.getColor(R.color.fab_normal_score));
+            mActionButton.setColorPressed(resources.getColor(R.color.fab_pressed_score));
+            mActionButton.setColorRipple(resources.getColor(R.color.fab_ripple_score));
         }
         mUpdateFab = false;
         invalidateOptionsMenu();

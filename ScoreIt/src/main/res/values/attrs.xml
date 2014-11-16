@@ -47,34 +47,8 @@
         <attr name="touchable" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="FloatingActionButton">
-        <attr name="fab_attachTo" format="reference"/>
-        <attr name="fab_attachAt" format="enum">
-            <enum name="top_left" value="1"/>
-            <enum name="top_right" value="2"/>
-            <enum name="bottom_left" value="3"/>
-            <enum name="bottom_right" value="4"/>
-        </attr>
-        <attr name="fab_size" format="enum">
-            <enum name="normal" value="1"/>
-            <enum name="small" value="2"/>
-        </attr>
-        <attr name="fab_padding" format="dimension"/>
-        <attr name="fab_revealAfterMs" format="integer"/>
-    </declare-styleable>
-
     <declare-styleable name="LineGraph">
         <attr name="lineAxisColor" format="color"/>
-    </declare-styleable>
-
-    <declare-styleable name="SeekCircle">
-        <attr name="sc_max" format="integer" value="100"/>
-        <attr name="sc_progress" format="integer" value="0"/>
-        <attr name="sc_inactive_color" format="color"/>
-        <attr name="sc_active_color" format="color"/>
-        <attr name="sc_stroke_width" format="dimension"/>
-        <attr name="sc_thumb_radius" format="dimension"/>
-        <attr name="sc_thumb_color" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="MaxWidthFrameLayout">
