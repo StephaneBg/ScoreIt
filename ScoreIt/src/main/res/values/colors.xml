@@ -19,26 +19,26 @@
     <color name="white">#FFF</color>
     <color name="transparent">#00000000</color>
 
-    <color name="color_primary">#FF8A00</color>
-    <color name="color_primary_dark">#E47B00</color>
-    <color name="color_accent">#E8674E</color>
+    <color name="color_primary">#F9A825</color>
+    <color name="color_primary_dark">#DE9621</color>
+    <color name="color_accent">#7883C0</color>
 
-    <color name="color_hint">#AED957</color>
-    <color name="color_hint_dark">#9BC24D</color>
+    <color name="color_hint">#91C83E</color>
+    <color name="color_hint_dark">#81B237</color>
 
-    <color name="gray_light">#E0E0E0</color>
-    <color name="gray_pressed">#80B2B2B2</color>
+    <color name="gray_light">#BCBEC0</color>
+    <color name="gray_pressed">#BCBEC0</color>
     <color name="gray_dark">#4D4D4D</color>
 
     <color name="game_won">@color/color_hint</color>
     <color name="game_lost">@color/color_primary</color>
 
-    <color name="fab_normal_score">#00BABD</color>
-    <color name="fab_pressed_score">#00A6A9</color>
-    <color name="fab_ripple_score">#00D6D6</color>
-    <color name="fab_normal_lap">#AED957</color>
-    <color name="fab_pressed_lap">#9BC24D</color>
-    <color name="fab_ripple_lap">#C4F263</color>
+    <color name="fab_normal_score">#7883C0</color>
+    <color name="fab_pressed_score">#6B75AB</color>
+    <color name="fab_ripple_score">#909EE5</color>
+    <color name="fab_normal_lap">#91C83E</color>
+    <color name="fab_pressed_lap">#81B237</color>
+    <color name="fab_ripple_lap">#B0EF4A</color>
 
     <color name="color_player1">#ff9800</color>
     <color name="color_player2">#e51c23</color>

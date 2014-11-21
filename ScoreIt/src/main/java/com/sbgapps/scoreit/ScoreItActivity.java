@@ -418,46 +418,8 @@ public class ScoreItActivity extends BaseActivity
         }
     }
 
-    public void addLap() {
-        mSnackBar.clear();
-        switch (mGameHelper.getPlayedGame()) {
-            default:
-            case Game.UNIVERSAL:
-                mLap = new UniversalLap(mGameHelper.getPlayerCount());
-                break;
-            case Game.BELOTE:
-                mLap = new BeloteLap();
-                break;
-            case Game.COINCHE:
-                mLap = new CoincheLap();
-                break;
-            case Game.TAROT:
-                switch (mGameHelper.getPlayerCount()) {
-                    case 3:
-                        mLap = new TarotThreeLap();
-                        break;
-                    case 4:
-                        mLap = new TarotFourLap();
-                        break;
-                    case 5:
-                        mLap = new TarotFiveLap();
-                        break;
-                }
-                break;
-        }
-        showLapFragment();
-    }
-
     public void editLap(Lap lap) {
-        mIsEdited = true;
-        mEditedLap = lap;
-        mLap = lap.copy();
-        Resources resources = getResources();
-        mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
-        mActionButton.setColorNormal(resources.getColor(R.color.fab_normal_lap));
-        mActionButton.setColorPressed(resources.getColor(R.color.fab_pressed_lap));
-        mActionButton.setColorRipple(resources.getColor(R.color.fab_ripple_lap));
-        showLapFragment();
+        showLapScene(lap);
     }
 
     public void removeLap(Lap lap) {
@@ -572,27 +534,69 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void onActionButtonClicked() {
-        Resources resources = getResources();
         if (null == mLap) {
-            mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
-            mActionButton.setColorNormal(resources.getColor(R.color.fab_normal_lap));
-            mActionButton.setColorPressed(resources.getColor(R.color.fab_pressed_lap));
-            mActionButton.setColorRipple(resources.getColor(R.color.fab_ripple_lap));
-            addLap();
+            showLapScene(null);
         } else {
-            mLap.computeScores();
-            if (mIsEdited) {
-                mEditedLap.set(mLap);
-                mEditedLap = null;
-                mIsEdited = false;
-            } else {
-                mGameHelper.addLap(mLap);
-            }
-            getSupportFragmentManager()
-                    .popBackStack(LapFragment.TAG,
-                            FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            mLap = null;
+            showScoreScene();
         }
+    }
+
+    private void showLapScene(Lap lap) {
+        final Resources resources = getResources();
+        mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
+        mActionButton.setColorNormal(resources.getColor(R.color.fab_normal_lap));
+        mActionButton.setColorPressed(resources.getColor(R.color.fab_pressed_lap));
+        mActionButton.setColorRipple(resources.getColor(R.color.fab_ripple_lap));
+
+        mSnackBar.clear();
+
+        if (null == lap) {
+            switch (mGameHelper.getPlayedGame()) {
+                default:
+                case Game.UNIVERSAL:
+                    mLap = new UniversalLap(mGameHelper.getPlayerCount());
+                    break;
+                case Game.BELOTE:
+                    mLap = new BeloteLap();
+                    break;
+                case Game.COINCHE:
+                    mLap = new CoincheLap();
+                    break;
+                case Game.TAROT:
+                    switch (mGameHelper.getPlayerCount()) {
+                        case 3:
+                            mLap = new TarotThreeLap();
+                            break;
+                        case 4:
+                            mLap = new TarotFourLap();
+                            break;
+                        case 5:
+                            mLap = new TarotFiveLap();
+                            break;
+                    }
+                    break;
+            }
+        } else {
+            mIsEdited = true;
+            mEditedLap = lap;
+            mLap = lap.copy();
+        }
+        showLapFragment();
+    }
+
+    private void showScoreScene() {
+        mLap.computeScores();
+        if (mIsEdited) {
+            mEditedLap.set(mLap);
+            mEditedLap = null;
+            mIsEdited = false;
+        } else {
+            mGameHelper.addLap(mLap);
+        }
+        getSupportFragmentManager()
+                .popBackStack(LapFragment.TAG,
+                        FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        mLap = null;
     }
 
     private void dismissAll() {
