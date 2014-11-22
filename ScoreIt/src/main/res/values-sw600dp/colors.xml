@@ -17,13 +17,6 @@
 
 <resources>
 
-    <style name="Theme.ScoreIt" parent="AppTheme.Base"/>
-
-    <style name="Theme.Adaptive" parent="Theme.AppCompat.Light.Dialog">
-        <item name="windowActionBar">false</item>
-        <item name="isDialog">true</item>
-        <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="colorAccent">@color/color_accent</item>
-    </style>
+    <color name="fab_normal_lap">@color/color_hint</color>
+    <color name="fab_pressed_lap">@color/color_hint_dark</color>
 </resources>

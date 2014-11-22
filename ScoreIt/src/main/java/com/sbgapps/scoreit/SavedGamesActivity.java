@@ -39,7 +39,6 @@ public class SavedGamesActivity extends BaseActivity {
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
             actionBar.setTitle(getString(R.string.saved_games));
-            actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
         final GameHelper gameHelper = new GameHelper(this);

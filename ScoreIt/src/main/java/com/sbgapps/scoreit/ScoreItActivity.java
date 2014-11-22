@@ -87,13 +87,12 @@ public class ScoreItActivity extends BaseActivity
     ListView mDrawerListView;
     @InjectView(R.id.fab)
     FloatingActionButton mActionButton;
-    @InjectView(R.id.lap_container)
     ScrollView mLapContainer;
+    View mColoredBack;
 
     private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
     private int mSelectedPosition = 0;
-    private boolean mIsTablet;
     private GameHelper mGameHelper;
     private int mEditedPlayer = Player.PLAYER_NONE;
     private Lap mLap;
@@ -120,14 +119,14 @@ public class ScoreItActivity extends BaseActivity
         super.onCreate(savedInstanceState);
 
         ButterKnife.inject(this);
+        mLapContainer = (ScrollView) findViewById(R.id.lap_container);
+        if (isTablet()) mColoredBack = findViewById(R.id.back_colored);
 
         if (Utils.hasLollipopApi())
             getToolbar().setElevation(Utils.dpToPx(2, getResources()));
 
         mGameHelper = new GameHelper(this);
         mGameHelper.loadLaps();
-
-        mIsTablet = (null != findViewById(R.id.secondary_container));
 
         Resources res = getResources();
 
@@ -138,15 +137,18 @@ public class ScoreItActivity extends BaseActivity
         } else {
             mLap = (Lap) savedInstanceState.getSerializable("lap");
             if (null != mLap) {
-                mLapContainer.setVisibility(View.VISIBLE);
+                if (null != mLapContainer) mLapContainer.setVisibility(View.VISIBLE);
                 setSceneStyle(false);
-                View view = findViewById(R.id.root);
-                view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        setActionButtonPosition(true, false);
-                    }
-                });
+                if (!isTablet()) {
+                    final View view = findViewById(R.id.root);
+                    view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            setActionButtonPosition(true, false);
+                            view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+                    });
+                }
             }
 
             mHeaderFragment = (HeaderFragment) fragmentManager
@@ -212,6 +214,10 @@ public class ScoreItActivity extends BaseActivity
         mSnackBar.setOnClickListener(this);
     }
 
+    public boolean isTablet() {
+        return (null == mLapContainer);
+    }
+
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_scoreit;
@@ -271,7 +277,7 @@ public class ScoreItActivity extends BaseActivity
 
         MenuItem item;
         item = menu.findItem(R.id.menu_view);
-        item.setVisible(!mIsTablet && 0 != lapCnt);
+        item.setVisible(!isTablet() && 0 != lapCnt);
 
         item = menu.findItem(R.id.menu_clear);
         item.setVisible(0 != lapCnt);
@@ -399,11 +405,13 @@ public class ScoreItActivity extends BaseActivity
         }
         setSceneStyle(true);
         setActionButtonPosition(false);
-        mLapContainer.setVisibility(View.GONE);
+        if (null != mLapContainer) {
+            mLapContainer.setVisibility(View.GONE);
+            mLapContainer.scrollTo(0, 0);
+        }
         mLap = null;
         mEditedLap = null;
         mIsEdited = false;
-        mLapContainer.scrollTo(0, 0);
         invalidateOptionsMenu();
         loadFragments(true);
         selectItem(position);
@@ -459,6 +467,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void editName(int player) {
+        if (null != mLapFragment && mLapFragment.isVisible()) return;
         mEditedPlayer = player;
         showEditNameActionChoices();
     }
@@ -479,11 +488,16 @@ public class ScoreItActivity extends BaseActivity
                 mLapFragment = new TarotLapFragment();
                 break;
         }
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.lap_container, mLapFragment, LapFragment.TAG)
-                .commit();
-        mLapContainer.setVisibility(View.VISIBLE);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (isTablet()) {
+            ft
+                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                    .replace(R.id.score_container, mLapFragment, LapFragment.TAG);
+        } else {
+            ft.replace(R.id.lap_container, mLapFragment, LapFragment.TAG);
+            mLapContainer.setVisibility(View.VISIBLE);
+        }
+        ft.commit();
     }
 
     public void loadFragments(boolean anim) {
@@ -499,11 +513,11 @@ public class ScoreItActivity extends BaseActivity
         ft.replace(R.id.score_container, mScoreListFragment, ScoreListFragment.TAG)
                 .commit();
 
-        if (mIsTablet) {
+        if (isTablet()) {
             mScoreGraphFragment = new ScoreGraphFragment();
             ft = getSupportFragmentManager().beginTransaction();
             if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-            ft.replace(R.id.secondary_container, mScoreGraphFragment, ScoreGraphFragment.TAG)
+            ft.replace(R.id.graph_container, mScoreGraphFragment, ScoreGraphFragment.TAG)
                     .commit();
         }
     }
@@ -518,14 +532,9 @@ public class ScoreItActivity extends BaseActivity
             mScoreGraphFragment = null;
         }
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(
-                        R.anim.fade_in,
-                        R.anim.fade_out,
-                        R.anim.fade_in,
-                        R.anim.fade_out)
-                .replace(R.id.score_container, fragment, ScoreGraphFragment.TAG)
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .replace(isTablet() ? R.id.graph_container : R.id.score_container, fragment, ScoreGraphFragment.TAG)
                 .commit();
     }
 
@@ -596,10 +605,18 @@ public class ScoreItActivity extends BaseActivity
             mGameHelper.addLap(mLap);
         }
         mLap = null;
-        mLapContainer.setVisibility(View.INVISIBLE);
-        update();
+        if (isTablet()) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                    .replace(R.id.score_container,
+                            mScoreListFragment, ScoreListFragment.TAG)
+                    .commit();
+        } else {
+            setActionButtonPosition(false);
+        }
         setSceneStyle(true);
-        setActionButtonPosition(false);
+        update();
     }
 
     @SuppressWarnings("NewApi")
@@ -610,19 +627,11 @@ public class ScoreItActivity extends BaseActivity
             mActionButton.setColorNormal(res.getColor(R.color.fab_normal_score));
             mActionButton.setColorPressed(res.getColor(R.color.fab_pressed_score));
             mActionButton.setColorRipple(res.getColor(R.color.fab_ripple_score));
-
-            getToolbar().setBackgroundColor(res.getColor(R.color.color_primary));
-            if (Utils.hasLollipopApi())
-                getWindow().setStatusBarColor(res.getColor(R.color.color_primary_dark));
         } else {
             mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_action_done));
             mActionButton.setColorNormal(res.getColor(R.color.fab_normal_lap));
             mActionButton.setColorPressed(res.getColor(R.color.fab_pressed_lap));
             mActionButton.setColorRipple(res.getColor(R.color.fab_ripple_lap));
-
-            getToolbar().setBackgroundColor(res.getColor(R.color.color_accent));
-            if (Utils.hasLollipopApi())
-                getWindow().setStatusBarColor(res.getColor(R.color.color_accent_dark));
         }
     }
 
@@ -631,6 +640,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void setActionButtonPosition(boolean bottom, boolean animate) {
+        if (isTablet()) return;
         float newY;
         if (bottom) {
             newY = mLapContainer.getHeight() - mActionButton.getHeight()
@@ -655,7 +665,6 @@ public class ScoreItActivity extends BaseActivity
             mScoreListFragment.getListAdapter().removeAll();
         if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
             mScoreGraphFragment.update();
-            if (!mIsTablet) getSupportFragmentManager().popBackStack();
         }
         invalidateOptionsMenu();
     }
@@ -847,11 +856,22 @@ public class ScoreItActivity extends BaseActivity
             mLap = null;
             mEditedLap = null;
             mIsEdited = false;
-            mLapContainer.setVisibility(View.INVISIBLE);
-            mLapContainer.scrollTo(0, 0);
+            if (isTablet()) {
+                if (null == mScoreListFragment)
+                    mScoreListFragment = new ScoreListFragment();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.score_container,
+                                mScoreListFragment, ScoreListFragment.TAG)
+                        .commit();
+            } else {
+                mLapContainer.setVisibility(View.INVISIBLE);
+                mLapContainer.scrollTo(0, 0);
+                setActionButtonPosition(false);
+            }
             setSceneStyle(true);
-            setActionButtonPosition(false);
-        } else if (!mIsTablet && null != mScoreGraphFragment) {
+        } else if (!isTablet() && null != mScoreGraphFragment) {
             switchScoreViews();
         } else {
             super.onBackPressed();
