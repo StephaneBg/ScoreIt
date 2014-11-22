@@ -40,10 +40,11 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
-        setupFauxDialog();
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null) setSupportActionBar(mToolbar);
+
+        setupFauxDialog();
     }
 
     public Toolbar getToolbar() {
@@ -94,10 +95,9 @@ public abstract class BaseActivity extends ActionBarActivity {
             getWindow().setAttributes(params);
         }
 
-        ActionBar actionBar = getSupportActionBar();
-        if (null != actionBar) {
-            actionBar.setDisplayHomeAsUpEnabled(!isDialog);
-            actionBar.setHomeButtonEnabled(!isDialog);
+        if (null != mToolbar) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(!isDialog);
+            getSupportActionBar().setHomeButtonEnabled(!isDialog);
         }
     }
 }

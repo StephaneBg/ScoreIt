@@ -614,6 +614,7 @@ public class ScoreItActivity extends BaseActivity
                     .commit();
         } else {
             setActionButtonPosition(false);
+            mLapContainer.setVisibility(View.GONE);
         }
         setSceneStyle(true);
         update();
@@ -866,7 +867,7 @@ public class ScoreItActivity extends BaseActivity
                                 mScoreListFragment, ScoreListFragment.TAG)
                         .commit();
             } else {
-                mLapContainer.setVisibility(View.INVISIBLE);
+                mLapContainer.setVisibility(View.GONE);
                 mLapContainer.scrollTo(0, 0);
                 setActionButtonPosition(false);
             }
