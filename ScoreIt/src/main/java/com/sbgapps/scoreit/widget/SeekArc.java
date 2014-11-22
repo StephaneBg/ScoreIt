@@ -27,6 +27,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.util.Utils;
 
 /**
  * SeekArc.java
@@ -86,13 +87,11 @@ public class SeekArc extends View {
         super(context, attrs, defStyle);
 
         final Resources res = getResources();
-        float density = context.getResources().getDisplayMetrics().density;
-
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SeekArc, defStyle, 0);
 
         mMax = a.getInteger(R.styleable.SeekArc_max, mMax);
-        mProgressWidth = (int) a.getDimension(R.styleable.SeekArc_progressWidth, 4 * density);
-        mArcWidth = (int) a.getDimension(R.styleable.SeekArc_arcWidth, 4 * density);
+        mProgressWidth = (int) a.getDimension(R.styleable.SeekArc_progressWidth, Utils.dpToPx(6, res));
+        mArcWidth = (int) a.getDimension(R.styleable.SeekArc_arcWidth, Utils.dpToPx(6, res));
         mClockwise = a.getBoolean(R.styleable.SeekArc_clockwise, mClockwise);
         mTouchable = a.getBoolean(R.styleable.SeekArc_touchable, mTouchable);
         int arcColor = a.getColor(R.styleable.SeekArc_arcColor,
@@ -101,7 +100,7 @@ public class SeekArc extends View {
                 res.getColor(R.color.color_primary));
         int thumbColor = a.getColor(R.styleable.SeekArc_thumbColor,
                 res.getColor(R.color.color_accent));
-        mThumbRadius = a.getDimension(R.styleable.SeekArc_thumbRadius, 6 * density);
+        mThumbRadius = a.getDimension(R.styleable.SeekArc_thumbRadius, Utils.dpToPx(9, res));
 
         a.recycle();
 
@@ -214,7 +213,7 @@ public class SeekArc extends View {
         setPressed(true);
         touchAngle = getTouchDegrees(event.getX(), event.getY());
         int progress = getProgressForAngle(touchAngle);
-        updateProgress(progress, true);
+        updateProgress(progress, true, true);
     }
 
     private double getTouchDegrees(float xPos, float yPos) {
@@ -248,7 +247,7 @@ public class SeekArc extends View {
         mThumbYPos = (int) (mArcRadius * Math.sin(Math.toRadians(thumbAngle)));
     }
 
-    private void updateProgress(int progress, boolean fromUser) {
+    private void updateProgress(int progress, boolean fromUser, boolean animate) {
         if (progress == INVALID_PROGRESS_VALUE) {
             return;
         }
@@ -260,7 +259,7 @@ public class SeekArc extends View {
         progress = (progress > mMax) ? mMax : progress;
         progress = (progress < 0) ? 0 : progress;
 
-        if (fromUser) {
+        if (fromUser || !animate) {
             setProgressSweep(progress);
         } else {
             mAnimator.setFloatValues(mProgress, progress);
@@ -292,7 +291,11 @@ public class SeekArc extends View {
     }
 
     public void setProgress(int progress) {
-        updateProgress(progress, false);
+        setProgress(progress, true);
+    }
+
+    public void setProgress(int progress, boolean animate) {
+        updateProgress(progress, false, animate);
     }
 
     public int getProgressColor() {

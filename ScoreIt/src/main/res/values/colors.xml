@@ -27,7 +27,7 @@
     <color name="color_hint">#91C83E</color>
     <color name="color_hint_dark">#749E31</color>
 
-    <color name="gray_light">#BCBEC0</color>
+    <color name="gray_light">#EEEEEE</color>
     <color name="gray_dark">#4D4D4D</color>
 
     <color name="game_won">@color/color_hint</color>
@@ -35,10 +35,10 @@
 
     <color name="fab_normal_score">@color/color_accent</color>
     <color name="fab_pressed_score">@color/color_accent_dark</color>
-    <color name="fab_ripple_score">#FFC870</color>
-    <color name="fab_normal_lap">@color/color_hint</color>
-    <color name="fab_pressed_lap">@color/color_hint_dark</color>
-    <color name="fab_ripple_lap">#B0EF4A</color>
+    <color name="fab_ripple_score">@color/gray_light</color>
+    <color name="fab_normal_lap">@color/color_primary</color>
+    <color name="fab_pressed_lap">@color/color_primary_dark</color>
+    <color name="fab_ripple_lap">@color/gray_light</color>
 
     <color name="color_player1">#ff9800</color>
     <color name="color_player2">#e51c23</color>

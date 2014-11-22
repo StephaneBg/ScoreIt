@@ -25,6 +25,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.util.Utils;
 
 /**
  * Created by Stéphane on 11/10/2014.
@@ -51,8 +52,8 @@ public class CircleTextView extends TextView {
         mCirclePaint.setStyle(Paint.Style.STROKE);
         int color = ta.getColor(R.styleable.CircleTextView_ct_color, Color.BLACK);
         mCirclePaint.setColor(color);
-        final float density = getResources().getDisplayMetrics().density;
-        mStrokeWidth = ta.getDimension(R.styleable.CircleTextView_ct_strokeWidth, 2 * density);
+        mStrokeWidth = ta.getDimension(R.styleable.CircleTextView_ct_strokeWidth,
+                Utils.dpToPx(2, context.getResources()));
         mCirclePaint.setStrokeWidth(mStrokeWidth);
 
         ta.recycle();

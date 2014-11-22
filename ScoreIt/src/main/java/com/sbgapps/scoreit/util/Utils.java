@@ -16,17 +16,30 @@
 
 package com.sbgapps.scoreit.util;
 
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.os.Build;
+import android.util.TypedValue;
 
 /**
  * Created by Stéphane on 14/10/2014.
  */
-public class Util {
+public class Utils {
 
     public static int getHighlightColor(int color, float ratio) {
         float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
         hsv[2] *= ratio;
         return Color.HSVToColor(hsv);
+    }
+
+    public static int dpToPx(float dp, Resources resources) {
+        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dp, resources.getDisplayMetrics());
+        return (int) px;
+    }
+
+    public static boolean hasLollipopApi() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 }

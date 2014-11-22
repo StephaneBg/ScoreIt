@@ -33,14 +33,21 @@ import android.view.WindowManager;
  */
 public abstract class BaseActivity extends ActionBarActivity {
 
+    private Toolbar mToolbar;
+
     @Override
+    @SuppressWarnings("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
         setupFauxDialog();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (toolbar != null) setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (mToolbar != null) setSupportActionBar(mToolbar);
+    }
+
+    public Toolbar getToolbar() {
+        return mToolbar;
     }
 
     protected abstract int getLayoutResource();

@@ -20,8 +20,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
+import com.linearlistview.LinearListView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.adapter.UniversalLapAdapter;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
@@ -42,7 +42,7 @@ public class UniversalLapFragment extends LapFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap_universal, null);
 
-        ListView listView = (ListView) view.findViewById(R.id.list_view);
+        LinearListView listView = (LinearListView) view.findViewById(R.id.container);
         mAdapter = new UniversalLapAdapter(this);
         listView.setAdapter(mAdapter);
 

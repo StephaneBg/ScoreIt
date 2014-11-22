@@ -95,6 +95,7 @@ public abstract class ScoreListAdapter extends SwipeAdapter {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                swipeLayout.close();
                 getActivity().editLap(lap);
             }
         });

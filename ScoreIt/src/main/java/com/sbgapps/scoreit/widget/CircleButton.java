@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.util.Util;
+import com.sbgapps.scoreit.util.Utils;
 
 public class CircleButton extends ImageView {
 
@@ -61,7 +61,7 @@ public class CircleButton extends ImageView {
 
         int color = context.getResources().getColor(R.color.color_hint);
         mDefaultColor = a.getColor(R.styleable.CircleButton_cb_color, color);
-        mPressedColor = Util.getHighlightColor(mDefaultColor, 0.85f);
+        mPressedColor = Utils.getHighlightColor(mDefaultColor, 0.85f);
 
         mCirclePaint.setColor(mDefaultColor);
         mFocusPaint.setColor(mDefaultColor);

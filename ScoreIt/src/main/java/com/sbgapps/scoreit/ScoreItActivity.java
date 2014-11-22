@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -24,6 +25,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -32,9 +34,11 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 
 import com.github.mrengineer13.snackbar.SnackBar;
 import com.melnykov.fab.FloatingActionButton;
@@ -58,6 +62,7 @@ import com.sbgapps.scoreit.games.tarot.TarotThreeLap;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
 import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerView;
+import com.sbgapps.scoreit.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +74,7 @@ import uk.me.lewisdeane.ldialogs.CustomDialog;
 import uk.me.lewisdeane.ldialogs.CustomListDialog;
 
 public class ScoreItActivity extends BaseActivity
-        implements FragmentManager.OnBackStackChangedListener,
-        SnackBar.OnMessageClickListener {
+        implements SnackBar.OnMessageClickListener {
 
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_SAVED_GAME = 2;
@@ -83,6 +87,8 @@ public class ScoreItActivity extends BaseActivity
     ListView mDrawerListView;
     @InjectView(R.id.fab)
     FloatingActionButton mActionButton;
+    @InjectView(R.id.lap_container)
+    ScrollView mLapContainer;
 
     private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -93,7 +99,6 @@ public class ScoreItActivity extends BaseActivity
     private Lap mLap;
     private Lap mEditedLap;
     private boolean mIsEdited = false;
-    private boolean mUpdateFab = false;
     private SnackBar mSnackBar;
 
     private ScoreListFragment mScoreListFragment;
@@ -110,23 +115,40 @@ public class ScoreItActivity extends BaseActivity
     }
 
     @Override
+    @SuppressWarnings("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ButterKnife.inject(this);
+
+        if (Utils.hasLollipopApi())
+            getToolbar().setElevation(Utils.dpToPx(2, getResources()));
 
         mGameHelper = new GameHelper(this);
         mGameHelper.loadLaps();
 
         mIsTablet = (null != findViewById(R.id.secondary_container));
 
-        final FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.addOnBackStackChangedListener(this);
+        Resources res = getResources();
 
         // Init fragments
+        final FragmentManager fragmentManager = getSupportFragmentManager();
         if (null == savedInstanceState) {
             loadFragments(false);
         } else {
+            mLap = (Lap) savedInstanceState.getSerializable("lap");
+            if (null != mLap) {
+                mLapContainer.setVisibility(View.VISIBLE);
+                setSceneStyle(false);
+                View view = findViewById(R.id.root);
+                view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        setActionButtonPosition(true, false);
+                    }
+                });
+            }
+
             mHeaderFragment = (HeaderFragment) fragmentManager
                     .findFragmentByTag(HeaderFragment.TAG);
             mScoreListFragment = (ScoreListFragment) fragmentManager
@@ -137,23 +159,13 @@ public class ScoreItActivity extends BaseActivity
                     .findFragmentByTag(LapFragment.TAG);
 
             mIsEdited = savedInstanceState.getBoolean("edited");
-            mUpdateFab = savedInstanceState.getBoolean("updateFab");
-            Resources resources = getResources();
             if (mIsEdited) {
                 int position = savedInstanceState.getInt("position");
                 mEditedLap = mGameHelper.getLaps().get(position);
             }
-            mLap = (Lap) savedInstanceState.getSerializable("lap");
-            if (null != mLap) {
-                mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
-                mActionButton.setColorNormal(resources.getColor(R.color.fab_normal_lap));
-                mActionButton.setColorPressed(resources.getColor(R.color.fab_pressed_lap));
-                mActionButton.setColorRipple(resources.getColor(R.color.fab_ripple_lap));
-            }
         }
 
         // Init drawer
-        Resources res = getResources();
         mNavigationItems = new ArrayList<>();
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.universal), res.getDrawable(R.drawable.ic_universal)));
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.tarot), res.getDrawable(R.drawable.ic_tarot)));
@@ -216,7 +228,6 @@ public class ScoreItActivity extends BaseActivity
         super.onSaveInstanceState(outState);
         if (null != mLap) {
             outState.putBoolean("edited", mIsEdited);
-            outState.putBoolean("updateFab", mUpdateFab);
             if (mIsEdited) {
                 outState.putInt("position", mGameHelper.getLaps()
                         .indexOf(mIsEdited ? mEditedLap : mLap));
@@ -386,7 +397,13 @@ public class ScoreItActivity extends BaseActivity
                 startActivity(intent);
                 return;
         }
-        getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        setSceneStyle(true);
+        setActionButtonPosition(false);
+        mLapContainer.setVisibility(View.GONE);
+        mLap = null;
+        mEditedLap = null;
+        mIsEdited = false;
+        mLapContainer.scrollTo(0, 0);
         invalidateOptionsMenu();
         loadFragments(true);
         selectItem(position);
@@ -442,11 +459,6 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void editName(int player) {
-        if (!mIsTablet
-                && null != mLapFragment
-                && mLapFragment.isVisible()) {
-            return;
-        }
         mEditedPlayer = player;
         showEditNameActionChoices();
     }
@@ -467,17 +479,11 @@ public class ScoreItActivity extends BaseActivity
                 mLapFragment = new TarotLapFragment();
                 break;
         }
-        mUpdateFab = true;
         getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(
-                        R.anim.fade_in,
-                        R.anim.fade_out,
-                        R.anim.fade_in,
-                        R.anim.fade_out)
-                .replace(R.id.score_container, mLapFragment, LapFragment.TAG)
-                .addToBackStack(LapFragment.TAG)
+                .replace(R.id.lap_container, mLapFragment, LapFragment.TAG)
                 .commit();
+        mLapContainer.setVisibility(View.VISIBLE);
     }
 
     public void loadFragments(boolean anim) {
@@ -503,14 +509,14 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void switchScoreViews() {
-        if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
-            getSupportFragmentManager().popBackStack(ScoreGraphFragment.TAG,
-                    android.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            return;
-        }
-
-        if (null == mScoreGraphFragment)
+        Fragment fragment;
+        if (null == mScoreGraphFragment) {
             mScoreGraphFragment = new ScoreGraphFragment();
+            fragment = mScoreGraphFragment;
+        } else {
+            fragment = mScoreListFragment;
+            mScoreGraphFragment = null;
+        }
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -519,8 +525,7 @@ public class ScoreItActivity extends BaseActivity
                         R.anim.fade_out,
                         R.anim.fade_in,
                         R.anim.fade_out)
-                .addToBackStack(ScoreGraphFragment.TAG)
-                .replace(R.id.score_container, mScoreGraphFragment, ScoreGraphFragment.TAG)
+                .replace(R.id.score_container, fragment, ScoreGraphFragment.TAG)
                 .commit();
     }
 
@@ -539,15 +544,10 @@ public class ScoreItActivity extends BaseActivity
         } else {
             showScoreScene();
         }
+        invalidateOptionsMenu();
     }
 
     private void showLapScene(Lap lap) {
-        final Resources resources = getResources();
-        mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_action_done));
-        mActionButton.setColorNormal(resources.getColor(R.color.fab_normal_lap));
-        mActionButton.setColorPressed(resources.getColor(R.color.fab_pressed_lap));
-        mActionButton.setColorRipple(resources.getColor(R.color.fab_ripple_lap));
-
         mSnackBar.clear();
 
         if (null == lap) {
@@ -582,6 +582,8 @@ public class ScoreItActivity extends BaseActivity
             mLap = lap.copy();
         }
         showLapFragment();
+        setSceneStyle(false);
+        setActionButtonPosition(true);
     }
 
     private void showScoreScene() {
@@ -593,10 +595,57 @@ public class ScoreItActivity extends BaseActivity
         } else {
             mGameHelper.addLap(mLap);
         }
-        getSupportFragmentManager()
-                .popBackStack(LapFragment.TAG,
-                        FragmentManager.POP_BACK_STACK_INCLUSIVE);
         mLap = null;
+        mLapContainer.setVisibility(View.INVISIBLE);
+        update();
+        setSceneStyle(true);
+        setActionButtonPosition(false);
+    }
+
+    @SuppressWarnings("NewApi")
+    private void setSceneStyle(boolean score) {
+        Resources res = getResources();
+        if (score) {
+            mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_content_create));
+            mActionButton.setColorNormal(res.getColor(R.color.fab_normal_score));
+            mActionButton.setColorPressed(res.getColor(R.color.fab_pressed_score));
+            mActionButton.setColorRipple(res.getColor(R.color.fab_ripple_score));
+
+            getToolbar().setBackgroundColor(res.getColor(R.color.color_primary));
+            if (Utils.hasLollipopApi())
+                getWindow().setStatusBarColor(res.getColor(R.color.color_primary_dark));
+        } else {
+            mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_action_done));
+            mActionButton.setColorNormal(res.getColor(R.color.fab_normal_lap));
+            mActionButton.setColorPressed(res.getColor(R.color.fab_pressed_lap));
+            mActionButton.setColorRipple(res.getColor(R.color.fab_ripple_lap));
+
+            getToolbar().setBackgroundColor(res.getColor(R.color.color_accent));
+            if (Utils.hasLollipopApi())
+                getWindow().setStatusBarColor(res.getColor(R.color.color_accent_dark));
+        }
+    }
+
+    public void setActionButtonPosition(boolean bottom) {
+        setActionButtonPosition(bottom, true);
+    }
+
+    public void setActionButtonPosition(boolean bottom, boolean animate) {
+        float newY;
+        if (bottom) {
+            newY = mLapContainer.getHeight() - mActionButton.getHeight()
+                    - getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
+        } else {
+            newY = getResources().getDimensionPixelSize(
+                    R.dimen.header_height) - mActionButton.getHeight() / 2;
+        }
+
+        if (animate) {
+            ObjectAnimator animator = ObjectAnimator.ofFloat(mActionButton, "y", newY);
+            animator.start();
+        } else {
+            mActionButton.setY(newY);
+        }
     }
 
     private void dismissAll() {
@@ -790,29 +839,20 @@ public class ScoreItActivity extends BaseActivity
     }
 
     @Override
-    public void onBackStackChanged() {
-        if (null != mLapFragment && mLapFragment.isVisible()) {
-            return;
-        }
-        mLap = null;
-        mEditedLap = null;
-        mIsEdited = false;
-        if (mUpdateFab) {
-            Resources resources = getResources();
-            mActionButton.setImageDrawable(resources.getDrawable(R.drawable.ic_content_create));
-            mActionButton.setColorNormal(resources.getColor(R.color.fab_normal_score));
-            mActionButton.setColorPressed(resources.getColor(R.color.fab_pressed_score));
-            mActionButton.setColorRipple(resources.getColor(R.color.fab_ripple_score));
-        }
-        mUpdateFab = false;
-        invalidateOptionsMenu();
-        update();
-    }
-
-    @Override
     public void onBackPressed() {
+        invalidateOptionsMenu();
         if (mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
             mDrawerLayout.closeDrawer(Gravity.START);
+        } else if (null != mLap) {
+            mLap = null;
+            mEditedLap = null;
+            mIsEdited = false;
+            mLapContainer.setVisibility(View.INVISIBLE);
+            mLapContainer.scrollTo(0, 0);
+            setSceneStyle(true);
+            setActionButtonPosition(false);
+        } else if (!mIsTablet && null != mScoreGraphFragment) {
+            switchScoreViews();
         } else {
             super.onBackPressed();
         }

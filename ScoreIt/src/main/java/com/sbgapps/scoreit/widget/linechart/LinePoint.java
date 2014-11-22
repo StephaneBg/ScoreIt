@@ -26,8 +26,6 @@ package com.sbgapps.scoreit.widget.linechart;
 import android.graphics.Path;
 import android.graphics.Region;
 
-import com.sbgapps.scoreit.util.Util;
-
 public class LinePoint {
 
     private final Path mPath = new Path();

@@ -97,7 +97,7 @@ public class SeekPoints extends FrameLayout {
         });
 
         mSeekBarPoints.setMax(max);
-        mSeekBarPoints.setProgress(progress);
+        mSeekBarPoints.setProgress(progress, false);
         mSeekBarPoints.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener() {
             @Override
             public void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser) {

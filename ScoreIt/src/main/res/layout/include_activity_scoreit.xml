@@ -20,6 +20,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ScoreItActivity">
@@ -31,7 +32,8 @@
         <FrameLayout
             android:id="@+id/header_container"
             android:layout_width="match_parent"
-            android:layout_height="168dp"/>
+            android:background="@color/gray_light"
+            android:layout_height="@dimen/header_height"/>
 
         <FrameLayout
             android:id="@+id/score_container"
@@ -43,8 +45,16 @@
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:layout_below="@id/header_container"
-            android:background="@drawable/top_shadow"/>
+            android:background="@drawable/bottom_shadow"/>
     </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/lap_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:visibility="invisible"
+        tools:visibility="visible"/>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"

@@ -59,16 +59,18 @@ public class BeloteLapFragment extends GenericBeloteLapFragment {
         View view = inflater.inflate(R.layout.fragment_lap_belote, null);
         ButterKnife.inject(this, view);
 
-        mInputPoints.init(this);
+        if (null != getLap()) {
+            mInputPoints.init(this);
 
-        mButtonBonus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addBonus(null);
+            mButtonBonus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addBonus(null);
+                }
+            });
+            for (BeloteBonus bonus : getLap().getBonuses()) {
+                addBonus(bonus);
             }
-        });
-        for (BeloteBonus bonus : getLap().getBonuses()) {
-            addBonus(bonus);
         }
         return view;
     }

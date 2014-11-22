@@ -38,6 +38,7 @@
     <dimen name="list_item_height">64dp</dimen>
     <dimen name="widget_height">48dp</dimen>
     <dimen name="dialog_max_height">720dp</dimen>
+    <dimen name="header_height">168dp</dimen>
 
     <!-- Width -->
     <dimen name="navigation_drawer_min_width">240dp</dimen>

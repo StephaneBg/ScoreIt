@@ -23,7 +23,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -53,7 +52,7 @@ public class TranslationsFragment extends Fragment {
             }
         });
 
-        ListView listView = (ListView) view.findViewById(R.id.list_view);
+        ListView listView = (ListView) view.findViewById(R.id.container);
 
         String[] from = new String[]{"language", "translator"};
         int[] to = new int[]{R.id.language, R.id.translator};
