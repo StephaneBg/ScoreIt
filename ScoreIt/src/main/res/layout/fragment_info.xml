@@ -39,7 +39,7 @@
             android:id="@+id/version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorAccent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             tools:text="ScoreIt 0.0.0"/>
 
@@ -52,76 +52,84 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             tools:ignore="HardcodedText"/>
 
-        <ImageView
-            android:id="@+id/btn_community"
-            android:layout_width="92dp"
-            android:layout_height="92dp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:padding="8dp"
-            android:background="@drawable/bg_selector_circle"
-            android:src="@drawable/ic_google_plus"
-            android:gravity="center_vertical"
-            android:text="@string/plus_community"/>
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/plus_community"
-            android:textColor="?attr/colorPrimary"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
 
-        <ImageView
-            android:id="@+id/btn_rate"
-            android:layout_width="92dp"
-            android:layout_height="92dp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:padding="8dp"
-            android:background="@drawable/bg_selector_circle"
-            android:src="@drawable/ic_action_star_rate"
-            android:gravity="center_vertical"
-            android:text="@string/rate_app"/>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-        <TextView
-            android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/btn_community"
+                    android:layout_width="@dimen/circle_info_radius"
+                    android:layout_height="@dimen/circle_info_radius"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_selector_circle"
+                    android:src="@drawable/ic_google_plus"
+                    android:gravity="center_vertical"
+                    android:text="@string/plus_community"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/btn_rate"
+                    android:layout_width="@dimen/circle_info_radius"
+                    android:layout_height="@dimen/circle_info_radius"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_selector_circle"
+                    android:src="@drawable/ic_action_star_rate"
+                    android:gravity="center_vertical"
+                    android:text="@string/rate_app"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/rate_app"
-            android:textColor="?attr/colorPrimary"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
 
-        <ImageView
-            android:id="@+id/btn_share"
-            android:layout_width="92dp"
-            android:layout_height="92dp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:padding="8dp"
-            android:background="@drawable/bg_selector_circle"
-            android:src="@drawable/ic_social_share"
-            android:gravity="center_vertical"
-            android:text="@string/share_app"/>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/btn_share"
+                    android:layout_width="@dimen/circle_info_radius"
+                    android:layout_height="@dimen/circle_info_radius"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_selector_circle"
+                    android:src="@drawable/ic_social_share"
+                    android:gravity="center_vertical"
+                    android:text="@string/share_app"/>
+            </FrameLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/share_app"
-            android:textColor="?attr/colorPrimary"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-        <ImageView
-            android:id="@+id/btn_contact"
-            android:layout_width="92dp"
-            android:layout_height="92dp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:padding="8dp"
-            android:background="@drawable/bg_selector_circle"
-            android:src="@drawable/ic_communication_email"
-            android:gravity="center_vertical"
-            android:text="@string/contact_developer"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/contact_developer"
-            android:textColor="?attr/colorPrimary"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/btn_contact"
+                    android:layout_width="@dimen/circle_info_radius"
+                    android:layout_height="@dimen/circle_info_radius"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_selector_circle"
+                    android:src="@drawable/ic_communication_email"
+                    android:gravity="center_vertical"
+                    android:text="@string/contact_developer"/>
+            </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -13,7 +13,7 @@
         android:layout_width="90dp"
         android:layout_height="match_parent"
         android:contentDescription="@string/delete"
-        android:background="@drawable/bg_default_action"
+        android:background="?attr/selectableItemBackground"
         android:src="@drawable/ic_action_delete"
         android:text="@string/cancel"/>
 
@@ -23,7 +23,7 @@
         android:layout_width="90dp"
         android:layout_height="match_parent"
         android:contentDescription="@string/edit"
-        android:background="@drawable/bg_default_action"
+        android:background="?attr/selectableItemBackground"
         android:src="@drawable/ic_content_create"
         android:text="@string/done"/>
 </LinearLayout>

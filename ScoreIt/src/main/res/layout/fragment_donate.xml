@@ -30,8 +30,8 @@
 
         <ImageView
             android:id="@+id/btn_donate_coffee"
-            android:layout_width="92dp"
-            android:layout_height="92dp"
+            android:layout_width="@dimen/circle_info_radius"
+            android:layout_height="@dimen/circle_info_radius"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:padding="8dp"
             android:background="@drawable/bg_selector_circle"
@@ -44,13 +44,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/vertical_margin_bottom"
             android:text="@string/donate_coffee"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorAccent"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <ImageView
             android:id="@+id/btn_donate_beer"
-            android:layout_width="92dp"
-            android:layout_height="92dp"
+            android:layout_width="@dimen/circle_info_radius"
+            android:layout_height="@dimen/circle_info_radius"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:padding="8dp"
             android:background="@drawable/bg_selector_circle"
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/donate_beer"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorAccent"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
     </LinearLayout>
 </ScrollView>

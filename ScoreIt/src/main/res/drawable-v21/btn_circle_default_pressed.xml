@@ -15,8 +15,13 @@
   ~ limitations under the License.
   -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-       android:shape="oval">
-
-    <solid android:color="@color/color_accent"/>
-</shape>
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/color_accent_dark">
+    <item>
+        <shape
+            android:shape="oval">
+            <solid android:color="@color/color_accent"/>
+        </shape>
+    </item>
+</ripple>

@@ -50,7 +50,7 @@
         android:layout_alignBottom="@+id/spinner_player"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/bg_default_action"
+        android:background="?attr/selectableItemBackground"
         android:layout_alignTop="@+id/spinner_announce"
         android:src="@drawable/ic_action_cancel"/>
 </RelativeLayout>
