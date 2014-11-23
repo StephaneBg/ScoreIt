@@ -156,11 +156,11 @@ public class ScoreItActivity extends BaseActivity
                 @Override
                 public void onGlobalLayout() {
                     if (null != mLap) {
-                        setSceneStyle(false);
                         setActionButtonPosition(true, false);
                     } else {
-                        mLapContainer.setY(mLapContainer.getHeight());
+                        mLapContainer.setTranslationY(mLapContainer.getHeight());
                     }
+                    root.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
             });
         }
@@ -401,8 +401,7 @@ public class ScoreItActivity extends BaseActivity
                 startActivity(intent);
                 return;
         }
-        setSceneStyle(true);
-        setActionButtonPosition(false);
+        setActionButtonToBottom(false);
         showLapContainer(false);
         mLap = null;
         mEditedLap = null;
@@ -586,8 +585,7 @@ public class ScoreItActivity extends BaseActivity
             mLap = lap.copy();
         }
         showLapFragment();
-        setSceneStyle(false);
-        setActionButtonPosition(true);
+        setActionButtonToBottom(true);
     }
 
     private void showScoreScene() {
@@ -607,11 +605,11 @@ public class ScoreItActivity extends BaseActivity
                     .replace(R.id.score_container,
                             mScoreListFragment, ScoreListFragment.TAG)
                     .commit();
+            setSceneStyle(true);
         } else {
-            setActionButtonPosition(false);
+            setActionButtonToBottom(false);
             showLapContainer(false);
         }
-        setSceneStyle(true);
         update();
     }
 
@@ -631,20 +629,17 @@ public class ScoreItActivity extends BaseActivity
         }
     }
 
-    public void setActionButtonPosition(boolean bottom) {
+    public void setActionButtonToBottom(boolean bottom) {
         setActionButtonPosition(bottom, true);
     }
 
-    public void setActionButtonPosition(boolean bottom, boolean animate) {
+    public void setActionButtonPosition(final boolean bottom, boolean animate) {
         if (isTablet()) return;
-        float newY;
-        if (bottom) {
-            newY = mLapContainer.getHeight() - mActionButton.getHeight()
-                    - getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
-        } else {
-            newY = getResources().getDimensionPixelSize(
-                    R.dimen.header_height) - mActionButton.getHeight() / 2;
-        }
+        final float newY = bottom ?
+                (mLapContainer.getHeight() - mActionButton.getHeight()
+                        - getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin)) :
+                (getResources().getDimensionPixelSize(R.dimen.header_height)
+                        - mActionButton.getHeight() / 2);
 
         if (animate) {
             ObjectAnimator animator = ObjectAnimator.ofFloat(mActionButton, "y", newY);
@@ -652,6 +647,7 @@ public class ScoreItActivity extends BaseActivity
         } else {
             mActionButton.setY(newY);
         }
+        setSceneStyle(!bottom);
     }
 
     public void showLapContainer(boolean show) {
@@ -874,11 +870,11 @@ public class ScoreItActivity extends BaseActivity
                         .replace(R.id.score_container,
                                 mScoreListFragment, ScoreListFragment.TAG)
                         .commit();
+                setSceneStyle(true);
             } else {
                 showLapContainer(false);
-                setActionButtonPosition(false);
+                setActionButtonToBottom(false);
             }
-            setSceneStyle(true);
         } else if (!isTablet() && null != mScoreGraphFragment) {
             switchScoreViews();
         } else {
