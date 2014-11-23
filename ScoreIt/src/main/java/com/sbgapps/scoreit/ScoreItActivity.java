@@ -88,7 +88,6 @@ public class ScoreItActivity extends BaseActivity
     @InjectView(R.id.fab)
     FloatingActionButton mActionButton;
     ScrollView mLapContainer;
-    View mColoredBack;
 
     private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -120,7 +119,6 @@ public class ScoreItActivity extends BaseActivity
 
         ButterKnife.inject(this);
         mLapContainer = (ScrollView) findViewById(R.id.lap_container);
-        if (isTablet()) mColoredBack = findViewById(R.id.back_colored);
 
         if (Utils.hasLollipopApi())
             getToolbar().setElevation(Utils.dpToPx(2, getResources()));
@@ -136,21 +134,6 @@ public class ScoreItActivity extends BaseActivity
             loadFragments(false);
         } else {
             mLap = (Lap) savedInstanceState.getSerializable("lap");
-            if (null != mLap) {
-                if (null != mLapContainer) mLapContainer.setVisibility(View.VISIBLE);
-                setSceneStyle(false);
-                if (!isTablet()) {
-                    final View view = findViewById(R.id.root);
-                    view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                        @Override
-                        public void onGlobalLayout() {
-                            setActionButtonPosition(true, false);
-                            view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                        }
-                    });
-                }
-            }
-
             mHeaderFragment = (HeaderFragment) fragmentManager
                     .findFragmentByTag(HeaderFragment.TAG);
             mScoreListFragment = (ScoreListFragment) fragmentManager
@@ -165,6 +148,21 @@ public class ScoreItActivity extends BaseActivity
                 int position = savedInstanceState.getInt("position");
                 mEditedLap = mGameHelper.getLaps().get(position);
             }
+        }
+
+        if (!isTablet()) {
+            final View root = findViewById(R.id.root);
+            root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (null != mLap) {
+                        setSceneStyle(false);
+                        setActionButtonPosition(true, false);
+                    } else {
+                        mLapContainer.setY(mLapContainer.getHeight());
+                    }
+                }
+            });
         }
 
         // Init drawer
@@ -405,10 +403,7 @@ public class ScoreItActivity extends BaseActivity
         }
         setSceneStyle(true);
         setActionButtonPosition(false);
-        if (null != mLapContainer) {
-            mLapContainer.setVisibility(View.GONE);
-            mLapContainer.scrollTo(0, 0);
-        }
+        showLapContainer(false);
         mLap = null;
         mEditedLap = null;
         mIsEdited = false;
@@ -495,7 +490,7 @@ public class ScoreItActivity extends BaseActivity
                     .replace(R.id.score_container, mLapFragment, LapFragment.TAG);
         } else {
             ft.replace(R.id.lap_container, mLapFragment, LapFragment.TAG);
-            mLapContainer.setVisibility(View.VISIBLE);
+            showLapContainer(true);
         }
         ft.commit();
     }
@@ -614,7 +609,7 @@ public class ScoreItActivity extends BaseActivity
                     .commit();
         } else {
             setActionButtonPosition(false);
-            mLapContainer.setVisibility(View.GONE);
+            showLapContainer(false);
         }
         setSceneStyle(true);
         update();
@@ -657,6 +652,19 @@ public class ScoreItActivity extends BaseActivity
         } else {
             mActionButton.setY(newY);
         }
+    }
+
+    public void showLapContainer(boolean show) {
+        if (isTablet()) return;
+        ObjectAnimator animator;
+        float height = mLapContainer.getHeight();
+        if (show) {
+            animator = ObjectAnimator.ofFloat(mLapContainer, "y", 0);
+        } else {
+            mLapContainer.scrollTo(0, 0);
+            animator = ObjectAnimator.ofFloat(mLapContainer, "y", height);
+        }
+        animator.start();
     }
 
     private void dismissAll() {
@@ -867,8 +875,7 @@ public class ScoreItActivity extends BaseActivity
                                 mScoreListFragment, ScoreListFragment.TAG)
                         .commit();
             } else {
-                mLapContainer.setVisibility(View.GONE);
-                mLapContainer.scrollTo(0, 0);
+                showLapContainer(false);
                 setActionButtonPosition(false);
             }
             setSceneStyle(true);

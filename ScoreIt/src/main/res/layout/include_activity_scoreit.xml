@@ -52,9 +52,7 @@
         android:id="@+id/lap_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:visibility="invisible"
-        tools:visibility="visible"/>
+        android:fillViewport="true"/>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
