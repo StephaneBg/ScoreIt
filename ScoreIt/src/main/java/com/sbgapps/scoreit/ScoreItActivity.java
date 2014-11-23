@@ -121,7 +121,7 @@ public class ScoreItActivity extends BaseActivity
         mLapContainer = (ScrollView) findViewById(R.id.lap_container);
 
         if (Utils.hasLollipopApi())
-            getToolbar().setElevation(Utils.dpToPx(2, getResources()));
+            getToolbar().setElevation(Utils.dpToPx(4, getResources()));
 
         mGameHelper = new GameHelper(this);
         mGameHelper.loadLaps();
@@ -150,15 +150,17 @@ public class ScoreItActivity extends BaseActivity
             }
         }
 
+        if (null != mLap) setActionButtonColor();
+
         if (!isTablet()) {
             final View root = findViewById(R.id.root);
             root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                    if (null != mLap) {
-                        setActionButtonPosition(true, false);
-                    } else {
+                    if (null == mLap) {
                         mLapContainer.setTranslationY(mLapContainer.getHeight());
+                    } else {
+                        setActionButtonPosition(false);
                     }
                     root.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
@@ -401,11 +403,12 @@ public class ScoreItActivity extends BaseActivity
                 startActivity(intent);
                 return;
         }
-        setActionButtonToBottom(false);
-        showLapContainer(false);
         mLap = null;
         mEditedLap = null;
         mIsEdited = false;
+        showLapContainer(false);
+        setActionButtonPosition();
+        setActionButtonColor();
         invalidateOptionsMenu();
         loadFragments(true);
         selectItem(position);
@@ -461,7 +464,9 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void editName(int player) {
-        if (null != mLapFragment && mLapFragment.isVisible()) return;
+        if (null != mLapFragment
+                && mLapFragment.isVisible()
+                && isTablet()) return;
         mEditedPlayer = player;
         showEditNameActionChoices();
     }
@@ -585,7 +590,8 @@ public class ScoreItActivity extends BaseActivity
             mLap = lap.copy();
         }
         showLapFragment();
-        setActionButtonToBottom(true);
+        setActionButtonPosition();
+        setActionButtonColor();
     }
 
     private void showScoreScene() {
@@ -599,24 +605,18 @@ public class ScoreItActivity extends BaseActivity
         }
         mLap = null;
         if (isTablet()) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                    .replace(R.id.score_container,
-                            mScoreListFragment, ScoreListFragment.TAG)
-                    .commit();
-            setSceneStyle(true);
+            showScoreListFragment();
         } else {
-            setActionButtonToBottom(false);
+            setActionButtonPosition();
             showLapContainer(false);
         }
+        setActionButtonColor();
         update();
     }
 
-    @SuppressWarnings("NewApi")
-    private void setSceneStyle(boolean score) {
+    private void setActionButtonColor() {
         Resources res = getResources();
-        if (score) {
+        if (null == mLap) {
             mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_content_create));
             mActionButton.setColorNormal(res.getColor(R.color.fab_normal_score));
             mActionButton.setColorPressed(res.getColor(R.color.fab_pressed_score));
@@ -629,13 +629,13 @@ public class ScoreItActivity extends BaseActivity
         }
     }
 
-    public void setActionButtonToBottom(boolean bottom) {
-        setActionButtonPosition(bottom, true);
+    public void setActionButtonPosition() {
+        setActionButtonPosition(true);
     }
 
-    public void setActionButtonPosition(final boolean bottom, boolean animate) {
+    public void setActionButtonPosition(boolean animate) {
         if (isTablet()) return;
-        final float newY = bottom ?
+        final float newY = (null != mLap) ?
                 (mLapContainer.getHeight() - mActionButton.getHeight()
                         - getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin)) :
                 (getResources().getDimensionPixelSize(R.dimen.header_height)
@@ -647,7 +647,6 @@ public class ScoreItActivity extends BaseActivity
         } else {
             mActionButton.setY(newY);
         }
-        setSceneStyle(!bottom);
     }
 
     public void showLapContainer(boolean show) {
@@ -862,19 +861,12 @@ public class ScoreItActivity extends BaseActivity
             mEditedLap = null;
             mIsEdited = false;
             if (isTablet()) {
-                if (null == mScoreListFragment)
-                    mScoreListFragment = new ScoreListFragment();
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                        .replace(R.id.score_container,
-                                mScoreListFragment, ScoreListFragment.TAG)
-                        .commit();
-                setSceneStyle(true);
+                showScoreListFragment();
             } else {
                 showLapContainer(false);
-                setActionButtonToBottom(false);
+                setActionButtonPosition();
             }
+            setActionButtonColor();
         } else if (!isTablet() && null != mScoreGraphFragment) {
             switchScoreViews();
         } else {
@@ -882,10 +874,24 @@ public class ScoreItActivity extends BaseActivity
         }
     }
 
+    private void showScoreListFragment() {
+        if (null == mScoreListFragment)
+            mScoreListFragment = new ScoreListFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .replace(R.id.score_container,
+                        mScoreListFragment, ScoreListFragment.TAG)
+                .commit();
+    }
+
     @Override
     public void onMessageClick(Parcelable token) {
         int index = ((Bundle) token).getInt("index");
         Lap lap = (Lap) ((Bundle) token).getSerializable("lap");
+
+        if (index > mGameHelper.getLaps().size())
+            index = mGameHelper.getLaps().size();
 
         mGameHelper.getLaps().add(index, lap);
         update();
