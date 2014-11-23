@@ -36,8 +36,8 @@
     <color name="fab_normal_score">@color/color_accent</color>
     <color name="fab_pressed_score">@color/color_accent_dark</color>
     <color name="fab_ripple_score">@color/gray_light</color>
-    <color name="fab_normal_lap">@color/color_primary</color>
-    <color name="fab_pressed_lap">@color/color_primary_dark</color>
+    <color name="fab_normal_lap">@color/color_hint</color>
+    <color name="fab_pressed_lap">@color/color_hint_dark</color>
     <color name="fab_ripple_lap">@color/gray_light</color>
 
     <color name="color_player1">#ff9800</color>

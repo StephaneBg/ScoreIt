@@ -69,8 +69,7 @@ dependencies {
     compile 'com.anjlab.android.iab.v3:library:1.0.16'
     compile 'com.jakewharton:butterknife:6.0.0'
     compile 'com.daimajia.swipelayout:library:1.0.4@aar'
-    compile 'com.jpardogo.materialtabstrip:library:1.0.0'
-    compile 'com.github.andkulikov:transitions-everywhere:1.1.0'
+    compile 'com.jpardogo.materialtabstrip:library:1.0.5'
     compile 'com.melnykov:floatingactionbutton:1.0.7'
 
     compile project(':L-Dialogs')
