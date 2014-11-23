@@ -160,7 +160,7 @@ public class ScoreItActivity extends BaseActivity
                     if (null == mLap) {
                         mLapContainer.setTranslationY(mLapContainer.getHeight());
                     } else {
-                        setActionButtonPosition(false);
+                        setActionButtonProperties(false);
                     }
                     root.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
@@ -407,8 +407,7 @@ public class ScoreItActivity extends BaseActivity
         mEditedLap = null;
         mIsEdited = false;
         showLapContainer(false);
-        setActionButtonPosition();
-        setActionButtonColor();
+        setActionButtonProperties();
         invalidateOptionsMenu();
         loadFragments(true);
         selectItem(position);
@@ -590,8 +589,7 @@ public class ScoreItActivity extends BaseActivity
             mLap = lap.copy();
         }
         showLapFragment();
-        setActionButtonPosition();
-        setActionButtonColor();
+        setActionButtonProperties();
     }
 
     private void showScoreScene() {
@@ -607,10 +605,9 @@ public class ScoreItActivity extends BaseActivity
         if (isTablet()) {
             showScoreListFragment();
         } else {
-            setActionButtonPosition();
             showLapContainer(false);
         }
-        setActionButtonColor();
+        setActionButtonProperties();
         update();
     }
 
@@ -629,11 +626,12 @@ public class ScoreItActivity extends BaseActivity
         }
     }
 
-    public void setActionButtonPosition() {
-        setActionButtonPosition(true);
+    public void setActionButtonProperties() {
+        setActionButtonProperties(true);
     }
 
-    public void setActionButtonPosition(boolean animate) {
+    public void setActionButtonProperties(boolean animate) {
+        setActionButtonColor();
         if (isTablet()) return;
         final float newY = (null != mLap) ?
                 (mLapContainer.getHeight() - mActionButton.getHeight()
@@ -864,9 +862,8 @@ public class ScoreItActivity extends BaseActivity
                 showScoreListFragment();
             } else {
                 showLapContainer(false);
-                setActionButtonPosition();
             }
-            setActionButtonColor();
+            setActionButtonProperties();
         } else if (!isTablet() && null != mScoreGraphFragment) {
             switchScoreViews();
         } else {
