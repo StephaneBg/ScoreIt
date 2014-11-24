@@ -17,6 +17,7 @@
 package com.sbgapps.scoreit;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -636,8 +637,10 @@ public class ScoreItActivity extends BaseActivity
             setActionButtonColor();
         } else {
             if (animate) {
-                ObjectAnimator animator = ObjectAnimator.ofFloat(mActionButton, "alpha", 0);
-                animator.addListener(new Animator.AnimatorListener() {
+                ObjectAnimator scaleX = ObjectAnimator.ofFloat(mActionButton, "scaleX", 0f);
+                ObjectAnimator scaleY = ObjectAnimator.ofFloat(mActionButton, "scaleY", 0f);
+                AnimatorSet animatorSet = new AnimatorSet();
+                animatorSet.addListener(new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animation) {
 
@@ -647,8 +650,11 @@ public class ScoreItActivity extends BaseActivity
                     public void onAnimationEnd(Animator animation) {
                         setActionButtonColor();
                         setActionButtonPosition();
-                        ObjectAnimator animator = ObjectAnimator.ofFloat(mActionButton, "alpha", 1);
-                        animator.start();
+                        ObjectAnimator scaleX = ObjectAnimator.ofFloat(mActionButton, "scaleX", 1f);
+                        ObjectAnimator scaleY = ObjectAnimator.ofFloat(mActionButton, "scaleY", 1f);
+                        AnimatorSet animatorSet = new AnimatorSet();
+                        animatorSet.play(scaleX).with(scaleY);
+                        animatorSet.start();
                     }
 
                     @Override
@@ -661,7 +667,8 @@ public class ScoreItActivity extends BaseActivity
 
                     }
                 });
-                animator.start();
+                animatorSet.play(scaleX).with(scaleY);
+                animatorSet.start();
             } else {
                 setActionButtonPosition();
             }
