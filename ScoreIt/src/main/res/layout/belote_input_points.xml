@@ -5,7 +5,7 @@
     android:animateLayoutChanges="true"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         style="@style/SubHeader"
@@ -48,7 +48,6 @@
             android:id="@+id/btn_switch"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:layout_centerInParent="true"
             android:src="@drawable/ic_action_switch"/>
 
         <LinearLayout

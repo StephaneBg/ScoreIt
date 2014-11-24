@@ -24,6 +24,7 @@ import android.view.View;
 import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.util.Utils;
 
 /**
  * Created by sbaiget on 08/01/14.

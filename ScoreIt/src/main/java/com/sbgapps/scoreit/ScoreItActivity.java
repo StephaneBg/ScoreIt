@@ -120,7 +120,7 @@ public class ScoreItActivity extends BaseActivity
         ButterKnife.inject(this);
         mLapContainer = (ScrollView) findViewById(R.id.lap_container);
 
-        if (Utils.hasLollipopApi())
+        if (!isTablet() && Utils.hasLollipopApi())
             getToolbar().setElevation(Utils.dpToPx(4, getResources()));
 
         mGameHelper = new GameHelper(this);
@@ -488,8 +488,7 @@ public class ScoreItActivity extends BaseActivity
         }
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (isTablet()) {
-            ft
-                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+            ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                     .replace(R.id.score_container, mLapFragment, LapFragment.TAG);
         } else {
             ft.replace(R.id.lap_container, mLapFragment, LapFragment.TAG);

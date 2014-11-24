@@ -15,61 +15,44 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
-    <View
-        android:id="@+id/spacer"
+    <com.sbgapps.scoreit.widget.BelotePoints
+        android:id="@+id/input_points"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+    <TextView
+        style="@style/SubHeader"
+        android:text="@string/announces"/>
 
     <LinearLayout
-        android:id="@+id/container"
+        android:id="@+id/ll_bonuses"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:animateLayoutChanges="true"
+        android:divider="?android:listDivider"
         android:orientation="vertical"
-        android:layout_below="@id/spacer"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:showDividers="middle">
 
-        <com.sbgapps.scoreit.widget.BelotePoints
-            android:id="@+id/input_points"
+        <Button
+            android:id="@+id/btn_add_bonus"
+            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
-
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/announces"/>
-
-        <LinearLayout
-            android:id="@+id/ll_bonuses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:animateLayoutChanges="true"
-            android:divider="?android:listDivider"
-            android:orientation="vertical"
-            android:showDividers="middle">
-
-            <Button
-                android:id="@+id/btn_add_bonus"
-                style="?android:borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:text="@string/add"
-                android:textAllCaps="true"/>
-        </LinearLayout>
+            android:layout_margin="@dimen/margin_default"
+            android:text="@string/add"
+            android:textAllCaps="true"/>
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_above="@id/container"
-        android:background="@drawable/top_shadow"/>
-</RelativeLayout>
+</LinearLayout>

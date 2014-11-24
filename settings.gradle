@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-include ':ScoreIt', ':L-Dialogs', ':SimpleStorage', ':SnackBar'
+include ':ScoreIt', ':L-Dialogs', ':SimpleStorage', ':SnackBar', ':Fab'
 
 project(':L-Dialogs').projectDir = new File(rootDir, '../L-Dialogs/app')
 project(':SimpleStorage').projectDir = new File(rootDir, '../android-simple-storage/Simple Storage')
 project(':SnackBar').projectDir = new File(rootDir, '../SnackBar/snackbar')
+project(':Fab').projectDir = new File(rootDir, '../FloatingActionButton/library')
