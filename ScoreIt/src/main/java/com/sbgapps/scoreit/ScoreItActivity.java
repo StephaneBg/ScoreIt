@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,6 +39,7 @@ import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.github.mrengineer13.snackbar.SnackBar;
@@ -630,20 +632,50 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void setActionButtonProperties(boolean animate) {
-        setActionButtonColor();
-        if (isTablet()) return;
-        final float newY = (null != mLap) ?
-                (mLapContainer.getHeight() - mActionButton.getHeight()
-                        - getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin)) :
-                (getResources().getDimensionPixelSize(R.dimen.header_height)
-                        - mActionButton.getHeight() / 2);
-
-        if (animate) {
-            ObjectAnimator animator = ObjectAnimator.ofFloat(mActionButton, "y", newY);
-            animator.start();
+        if (isTablet()) {
+            setActionButtonColor();
         } else {
-            mActionButton.setY(newY);
+            if (animate) {
+                ObjectAnimator animator = ObjectAnimator.ofFloat(mActionButton, "alpha", 0);
+                animator.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        setActionButtonColor();
+                        setActionButtonPosition();
+                        ObjectAnimator animator = ObjectAnimator.ofFloat(mActionButton, "alpha", 1);
+                        animator.start();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                animator.start();
+            } else {
+                setActionButtonPosition();
+            }
         }
+    }
+
+    private void setActionButtonPosition() {
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mActionButton.getLayoutParams();
+        if (null == mLap) {
+            lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+        } else {
+            lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        }
+        mActionButton.setLayoutParams(lp);
     }
 
     public void showLapContainer(boolean show) {
