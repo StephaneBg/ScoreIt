@@ -24,11 +24,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.fragment.UniversalLapFragment;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
-import com.sbgapps.scoreit.widget.UniversalInputPoint;
+import com.sbgapps.scoreit.fragment.UniversalLapFragment;
+import com.sbgapps.scoreit.widget.CircleButton;
+import com.sbgapps.scoreit.widget.CircleTextView;
 
 /**
  * Created by Stéphane on 19/08/2014.
@@ -67,24 +68,66 @@ public class UniversalLapAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.list_item_universal_input, parent, false);
 
             h.name = (TextView) convertView.findViewById(R.id.tv_name);
-            h.points = (TextView) convertView.findViewById(R.id.points);
-            h.input = (UniversalInputPoint) convertView.findViewById(R.id.input_points);
+            h.points = (CircleTextView) convertView.findViewById(R.id.points);
+            h.plus = (CircleButton) convertView.findViewById(R.id.btn_plus);
+            h.plus_10 = (CircleButton) convertView.findViewById(R.id.btn_plus_10);
+            h.plus_100 = (CircleButton) convertView.findViewById(R.id.btn_plus_100);
+            h.minus = (CircleButton) convertView.findViewById(R.id.btn_minus);
+            h.minus_10 = (CircleButton) convertView.findViewById(R.id.btn_minus_10);
+            h.minus_100 = (CircleButton) convertView.findViewById(R.id.btn_minus_100);
             convertView.setTag(h);
         } else {
             h = (ViewHolder) convertView.getTag();
         }
 
-        final Player player = getItem(position);
+        Player player = getItem(position);
         h.name.setText(player.getName());
 
         final UniversalLap lap = mLapFragment.getLap();
         if (null != lap) {
             h.points.setText(Integer.toString(lap.getScore(position)));
+            h.points.setCircleColor(getGameHelper().getPlayerColor(position));
 
-            h.input.setOnButtonClickedListener(new UniversalInputPoint.OnButtonClickedListener() {
+            h.plus.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(int value) {
-                    lap.stepScore(position, value);
+                public void onClick(View v) {
+                    lap.stepScore(position, 1);
+                    notifyDataSetChanged();
+                }
+            });
+            h.plus_10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lap.stepScore(position, 10);
+                    notifyDataSetChanged();
+                }
+            });
+            h.plus_100.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lap.stepScore(position, 100);
+                    notifyDataSetChanged();
+                }
+            });
+
+            h.minus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lap.stepScore(position, -1);
+                    notifyDataSetChanged();
+                }
+            });
+            h.minus_10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lap.stepScore(position, -10);
+                    notifyDataSetChanged();
+                }
+            });
+            h.minus_100.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lap.stepScore(position, -100);
                     notifyDataSetChanged();
                 }
             });
@@ -98,7 +141,12 @@ public class UniversalLapAdapter extends BaseAdapter {
 
     private class ViewHolder {
         TextView name;
-        TextView points;
-        UniversalInputPoint input;
+        CircleTextView points;
+        CircleButton plus;
+        CircleButton plus_10;
+        CircleButton plus_100;
+        CircleButton minus;
+        CircleButton minus_10;
+        CircleButton minus_100;
     }
 }
