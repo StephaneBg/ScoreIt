@@ -44,6 +44,7 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_toLeftOf="@id/center_view"
         android:orientation="vertical"
+        app:cardElevation="4dp"
         app:cardCornerRadius="4dp">
 
         <LinearLayout
@@ -71,6 +72,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="92dp"
         android:layout_toRightOf="@id/center_view"
+        app:cardElevation="4dp"
         app:cardCornerRadius="4dp">
 
         <FrameLayout
