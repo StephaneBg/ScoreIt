@@ -3,6 +3,7 @@ package com.sbgapps.scoreit.widget;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
@@ -26,6 +27,7 @@ public class UniversalInputPoint extends View {
     private final Resources mResources;
     private final Paint mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint mBtnPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     private final int mPadding;
     private final int mColor;
@@ -55,6 +57,9 @@ public class UniversalInputPoint extends View {
         mColor = mResources.getColor(R.color.color_hint);
         mSelectedColor = mResources.getColor(R.color.color_hint_dark);
 
+        mTextPaint.setColor(Color.BLACK);
+        mTextPaint.setTextSize(Utils.spToPx(14, mResources));
+
         mPadding = Utils.dpToPx(1, mResources);
 
         mButtons.add(new Button("+10", 10));
@@ -71,20 +76,19 @@ public class UniversalInputPoint extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        float midX, midY, radius, innerRadius;
+        float midX, midY, radius;
 
         midY = getHeight() / 2;
         midX = getWidth() / 2;
         radius = Math.min(midY, midX);
-        innerRadius = radius * 0.55f;
         canvas.drawCircle(midX, midY, radius / 2, mCirclePaint);
 
         float currentAngle = -67.5f;
         float currentSweep = 45.0f;
 
         int count = 0;
-        for (Button slice : mButtons) {
-            Path p = slice.getPath();
+        for (Button button : mButtons) {
+            Path p = button.getPath();
             p.reset();
 
             if (mSelectedIndex == count && mListener != null) {
@@ -95,25 +99,30 @@ public class UniversalInputPoint extends View {
 
             // Draw button
             mRectF.set(midX - radius, midY - radius, midX + radius, midY + radius);
-            createArc(p, mRectF, currentSweep,
-                    currentAngle + mPadding, currentSweep - mPadding);
-            mRectF.set(midX - innerRadius, midY - innerRadius,
-                    midX + innerRadius, midY + innerRadius);
-            createArc(p, mRectF, currentSweep,
+            createArc(p, mRectF,
+                    currentSweep,
+                    currentAngle + mPadding,
+                    currentSweep - mPadding);
+            mRectF.set(midX - radius / 2, midY - radius / 2,
+                    midX + radius / 2, midY + radius / 2);
+            createArc(p, mRectF,
+                    currentSweep,
                     (currentAngle + mPadding) + (currentSweep - mPadding),
                     -(currentSweep - mPadding));
             p.close();
 
-            // Draw text
-            // TODO
-
             // Create selection region
-            Region r = slice.getRegion();
+            Region r = button.getRegion();
             r.set((int) (midX - radius),
                     (int) (midY - radius),
                     (int) (midX + radius),
                     (int) (midY + radius));
             canvas.drawPath(p, mBtnPaint);
+
+            // Draw text
+//        public void drawText(@NonNull String text, float x, float y, @NonNull Paint paint) {
+            canvas.drawText(button.getText(), 0, 0, mTextPaint);
+
             currentAngle = currentAngle + (2 == count++ ? 90.0f : 45.0f);
         }
     }

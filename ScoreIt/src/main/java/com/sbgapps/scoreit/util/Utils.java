@@ -39,6 +39,11 @@ public class Utils {
         return (int) px;
     }
 
+    public static int spToPx(int textSizeSp, Resources resources) {
+        final float density = resources.getDisplayMetrics().density;
+        return (int) (0.5f + density * textSizeSp);
+    }
+
     public static boolean hasLollipopApi() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
