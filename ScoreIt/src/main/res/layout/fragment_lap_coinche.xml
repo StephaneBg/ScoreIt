@@ -15,82 +15,97 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin">
+    android:layout_height="wrap_content">
 
-    <TextView
-        style="@style/SubHeader"
-        android:text="@string/bidding"/>
-
-    <com.sbgapps.scoreit.widget.ToggleGroup
-        android:id="@+id/group_team"
+    <View
+        android:id="@+id/spacer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-        <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
-            android:id="@+id/btn_player_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
-            android:background="@drawable/bg_selector_btn_toggle"
-            tools:textOn="@string/them"/>
-
-        <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
-            android:id="@+id/btn_player_2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:background="@drawable/bg_selector_btn_toggle"
-            tools:textOff="@string/us"/>
-    </com.sbgapps.scoreit.widget.ToggleGroup>
-
-    <com.sbgapps.scoreit.widget.SeekPoints
-        android:id="@+id/input_bid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_default"/>
-
-    <com.sbgapps.scoreit.widget.BelotePoints
-        android:id="@+id/input_points"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        style="@style/SubHeader"
-        android:text="@string/announces"/>
+        android:layout_height="@dimen/header_height"/>
 
     <LinearLayout
-        android:id="@+id/ll_bonuses"
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:animateLayoutChanges="true"
-        android:divider="?android:listDivider"
-        android:orientation="vertical"
-        android:showDividers="middle">
+        android:layout_below="@id/spacer"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_add_bonus"
-            style="?android:borderlessButtonStyle"
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/bidding"/>
+
+        <com.sbgapps.scoreit.widget.ToggleGroup
+            android:id="@+id/group_team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
-            android:text="@string/add"
-            android:textAllCaps="true"/>
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
+                android:id="@+id/btn_player_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:background="@drawable/bg_selector_btn_toggle"
+                tools:textOn="@string/them"/>
+
+            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
+                android:id="@+id/btn_player_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:background="@drawable/bg_selector_btn_toggle"
+                tools:textOff="@string/us"/>
+        </com.sbgapps.scoreit.widget.ToggleGroup>
+
+        <com.sbgapps.scoreit.widget.SeekPoints
+            android:id="@+id/input_bid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"/>
+
+        <com.sbgapps.scoreit.widget.BelotePoints
+            android:id="@+id/input_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/announces"/>
+
+        <LinearLayout
+            android:id="@+id/ll_bonuses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:animateLayoutChanges="true"
+            android:divider="?android:listDivider"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <Button
+                android:id="@+id/btn_add_bonus"
+                style="?android:borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_default"
+                android:text="@string/add"
+                android:textAllCaps="true"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_above="@id/container"
+        android:background="@drawable/top_shadow"/>
+</RelativeLayout>

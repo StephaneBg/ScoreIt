@@ -43,13 +43,11 @@
         android:layout_below="@id/header_container"
         android:background="@drawable/bottom_shadow"/>
 
-    <ScrollView
+    <com.melnykov.fab.ObservableScrollView
         android:id="@+id/lap_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:paddingTop="@dimen/header_height"
-        android:clipToPadding="false"/>
+        android:fillViewport="true"/>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"

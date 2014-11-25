@@ -77,7 +77,6 @@ public class TarotLapFragment extends LapFragment
         View view = inflater.inflate(R.layout.fragment_lap_tarot, null);
         ButterKnife.inject(this, view);
         if (null != getLap()) {
-
             mTaker.setAdapter(getPlayerArrayAdapter());
             mTaker.setSelection(getLap().getTaker());
             mTaker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

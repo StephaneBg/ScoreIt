@@ -17,7 +17,6 @@
   -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -28,87 +27,22 @@
         style="@style/SubHeader"
         tools:text="Name"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
+    <FrameLayout
+        android:layout_width="192dp"
+        android:layout_height="192dp"
+        android:layout_gravity="center_horizontal">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <com.sbgapps.scoreit.widget.UniversalInputPoint
+            android:id="@+id/input_points"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_minus"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_minus_1"/>
-
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_minus_10"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginBottom="4dp"
-                android:layout_toRightOf="@id/btn_minus"
-                android:src="@drawable/ic_minus_10"/>
-
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_minus_100"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="4dp"
-                android:layout_below="@id/btn_minus_10"
-                android:layout_toRightOf="@id/btn_minus"
-                android:src="@drawable/ic_minus_100"/>
-        </RelativeLayout>
-
-        <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
-            android:layout_width="0dp"
-            android:layout_height="96dp"
-            app:maxWidth="96dp"
-            android:layout_weight="1">
-
-            <com.sbgapps.scoreit.widget.CircleTextView
-                android:id="@+id/points"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="@dimen/font_display_1"
-                tools:text="128"/>
-        </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_plus_10"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginBottom="4dp"
-                android:src="@drawable/ic_plus_10"/>
-
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_plus"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/btn_plus_10"
-                android:src="@drawable/ic_plus_1"/>
-
-            <com.sbgapps.scoreit.widget.CircleButton
-                android:id="@+id/btn_plus_100"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="4dp"
-                android:layout_below="@id/btn_plus_10"
-                android:src="@drawable/ic_plus_100"/>
-        </RelativeLayout>
-    </LinearLayout>
-
+        <TextView
+            android:id="@+id/points"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="@dimen/font_headline"
+            tools:text="128"/>
+    </FrameLayout>
 </LinearLayout>
