@@ -27,7 +27,7 @@ public class CircleButton extends ImageView {
     private final Paint mFocusPaint;
     private final int mDisabledColor;
     private final int mDefaultColor;
-    private final ObjectAnimator mAnimator = ObjectAnimator.ofFloat(this, "animationProgress", 0f, 0f);
+    private final ObjectAnimator mAnimator = ObjectAnimator.ofFloat(this, "animationProgress", 0f);
     private final int mPressedColor;
 
     private int mPressedRingWidth;
@@ -110,7 +110,7 @@ public class CircleButton extends ImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.d("CircleButton", "mAnimationProgress " + mAnimationProgress);
+        //Log.d("CircleButton", "mAnimationProgress " + mAnimationProgress);
         canvas.drawCircle(mCenterX, mCenterY, mPressedRingRadius + mAnimationProgress, mFocusPaint);
         canvas.drawCircle(mCenterX, mCenterY, mOuterRadius - mPressedRingWidth, mCirclePaint);
         super.onDraw(canvas);
@@ -135,12 +135,14 @@ public class CircleButton extends ImageView {
     }
 
     private void hidePressedRing() {
+        //Log.d("CircleButton", "hide");
         mIsAnimated = false;
         mAnimator.setFloatValues(mPressedRingWidth, 0f);
         mAnimator.start();
     }
 
     private void showPressedRing() {
+        //Log.d("CircleButton", "show");
         mAnimator.setFloatValues(mAnimationProgress, mPressedRingWidth);
         mAnimator.start();
         mIsAnimated = true;
