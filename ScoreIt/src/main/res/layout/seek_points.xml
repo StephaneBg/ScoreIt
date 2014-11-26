@@ -30,8 +30,8 @@
 
     <com.sbgapps.scoreit.widget.CircleButton
         android:id="@+id/btn_minus"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="@dimen/circle_btn"
+        android:layout_height="@dimen/circle_btn"
         android:src="@drawable/ic_minus"/>
 
     <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
@@ -57,7 +57,7 @@
 
     <com.sbgapps.scoreit.widget.CircleButton
         android:id="@+id/btn_plus"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="@dimen/circle_btn"
+        android:layout_height="@dimen/circle_btn"
         android:src="@drawable/ic_plus"/>
 </LinearLayout>

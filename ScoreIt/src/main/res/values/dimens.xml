@@ -45,5 +45,5 @@
     <dimen name="navigation_drawer_max_width">320dp</dimen>
     <dimen name="dialog_width">480dp</dimen>
 
-    <dimen name="circle_info_radius">72dp</dimen>
+    <dimen name="circle_btn">56dp</dimen>
 </resources>

@@ -46,8 +46,8 @@
 
         <com.sbgapps.scoreit.widget.CircleButton
             android:id="@+id/btn_switch"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="@dimen/circle_btn"
+            android:layout_height="@dimen/circle_btn"
             android:src="@drawable/ic_action_switch"/>
 
         <LinearLayout

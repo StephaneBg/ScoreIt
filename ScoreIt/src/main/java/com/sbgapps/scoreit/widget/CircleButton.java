@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.sbgapps.scoreit.R;
@@ -109,6 +110,7 @@ public class CircleButton extends ImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.d("CircleButton", "mAnimationProgress " + mAnimationProgress);
         canvas.drawCircle(mCenterX, mCenterY, mPressedRingRadius + mAnimationProgress, mFocusPaint);
         canvas.drawCircle(mCenterX, mCenterY, mOuterRadius - mPressedRingWidth, mCirclePaint);
         super.onDraw(canvas);
