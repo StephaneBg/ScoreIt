@@ -17,11 +17,11 @@
 
 <ripple
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/color_accent_dark">
+    android:color="@color/gray_light">
     <item>
         <shape
             android:shape="oval">
-            <solid android:color="@color/color_accent"/>
+            <solid android:color="@color/color_accent_pressed"/>
         </shape>
     </item>
 </ripple>

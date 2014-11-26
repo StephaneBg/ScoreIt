@@ -135,7 +135,7 @@ public class ScoreItActivity extends BaseActivity
         // Init fragments
         final FragmentManager fragmentManager = getSupportFragmentManager();
         if (null == savedInstanceState) {
-            loadFragments(false);
+            reloadFragments(false);
         } else {
             mLap = (Lap) savedInstanceState.getSerializable("lap");
             mHeaderFragment = (HeaderFragment) fragmentManager
@@ -416,9 +416,9 @@ public class ScoreItActivity extends BaseActivity
         mEditedLap = null;
         mIsEdited = false;
         animateLapContainer();
-        setActionButtonProperties();
+        setActionButtonProperties(true);
         invalidateOptionsMenu();
-        loadFragments(true);
+        reloadFragments(true);
         selectItem(position);
     }
 
@@ -479,60 +479,22 @@ public class ScoreItActivity extends BaseActivity
         showEditNameActionChoices();
     }
 
-    private void showLapFragment() {
-        switch (mGameHelper.getPlayedGame()) {
-            default:
-            case Game.UNIVERSAL:
-                mLapFragment = new UniversalLapFragment();
-                break;
-            case Game.BELOTE:
-                mLapFragment = new BeloteLapFragment();
-                break;
-            case Game.COINCHE:
-                mLapFragment = new CoincheLapFragment();
-                break;
-            case Game.TAROT:
-                mLapFragment = new TarotLapFragment();
-                break;
-        }
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        if (isTablet()) {
-            ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                    .replace(R.id.score_container, mLapFragment, LapFragment.TAG);
-        } else {
-            ft.replace(R.id.lap_container, mLapFragment, LapFragment.TAG);
-            animateLapContainer();
-        }
-        ft.commit();
-    }
+    public void reloadFragments(boolean anim) {
+        mHeaderFragment = null;
+        mScoreListFragment = null;
+        mScoreGraphFragment = null;
 
-    public void loadFragments(boolean anim) {
-        mHeaderFragment = new HeaderFragment();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        ft.replace(R.id.header_container, mHeaderFragment, HeaderFragment.TAG)
-                .commit();
-
-        mScoreListFragment = new ScoreListFragment();
-        ft = getSupportFragmentManager().beginTransaction();
-        if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        ft.replace(R.id.score_container, mScoreListFragment, ScoreListFragment.TAG)
-                .commit();
-
-        if (isTablet()) {
-            mScoreGraphFragment = new ScoreGraphFragment();
-            ft = getSupportFragmentManager().beginTransaction();
-            if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-            ft.replace(R.id.graph_container, mScoreGraphFragment, ScoreGraphFragment.TAG)
-                    .commit();
-        }
+        showHeaderFragment(anim);
+        showScoreListFragment(anim);
+        if (isTablet())
+            showScoreGraphFragment(anim);
     }
 
     public void switchScoreViews() {
         if (null == mScoreGraphFragment) {
-            showScoreGraphFragment();
+            showScoreGraphFragment(true);
         } else {
-            showScoreListFragment();
+            showScoreListFragment(true);
             mScoreGraphFragment = null;
         }
     }
@@ -590,7 +552,7 @@ public class ScoreItActivity extends BaseActivity
             mLap = lap.copy();
         }
         showLapFragment();
-        setActionButtonProperties();
+        setActionButtonProperties(true);
     }
 
     private void showScoreScene() {
@@ -604,11 +566,11 @@ public class ScoreItActivity extends BaseActivity
         }
         mLap = null;
         if (isTablet()) {
-            showScoreListFragment();
+            showScoreListFragment(true);
         } else {
             animateLapContainer();
         }
-        setActionButtonProperties();
+        setActionButtonProperties(true);
         update();
     }
 
@@ -625,10 +587,6 @@ public class ScoreItActivity extends BaseActivity
             mActionButton.setColorPressed(res.getColor(R.color.fab_pressed_lap));
             mActionButton.setColorRipple(res.getColor(R.color.fab_ripple_lap));
         }
-    }
-
-    public void setActionButtonProperties() {
-        setActionButtonProperties(true);
     }
 
     public void setActionButtonProperties(boolean animate) {
@@ -840,7 +798,7 @@ public class ScoreItActivity extends BaseActivity
             public void onListItemSelected(int position, String[] items, String item) {
                 mGameHelper.setPlayerCount(position);
                 invalidateOptionsMenu();
-                loadFragments(true);
+                reloadFragments(true);
             }
         });
         dialog.show();
@@ -917,11 +875,11 @@ public class ScoreItActivity extends BaseActivity
             mEditedLap = null;
             mIsEdited = false;
             if (isTablet()) {
-                showScoreListFragment();
+                showScoreListFragment(true);
             } else {
                 animateLapContainer();
             }
-            setActionButtonProperties();
+            setActionButtonProperties(true);
         } else if (!isTablet() && null != mScoreGraphFragment) {
             switchScoreViews();
         } else {
@@ -929,26 +887,61 @@ public class ScoreItActivity extends BaseActivity
         }
     }
 
-    private void showScoreListFragment() {
-        if (null == mScoreListFragment)
-            mScoreListFragment = new ScoreListFragment();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .replace(isTablet() ? R.id.graph_container : R.id.score_container,
-                        mScoreListFragment, ScoreListFragment.TAG)
-                .commit();
+    private void showHeaderFragment(boolean anim) {
+        if (null == mHeaderFragment)
+            mHeaderFragment = new HeaderFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        ft.replace(R.id.header_container, mHeaderFragment, HeaderFragment.TAG);
+        ft.commit();
     }
 
-    private void showScoreGraphFragment() {
+    private void showScoreListFragment(boolean anim) {
+        if (null == mScoreListFragment)
+            mScoreListFragment = new ScoreListFragment();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        ft.replace(R.id.score_container, mScoreListFragment, HeaderFragment.TAG);
+        ft.commit();
+    }
+
+    private void showScoreGraphFragment(boolean anim) {
         if (null == mScoreGraphFragment)
             mScoreGraphFragment = new ScoreGraphFragment();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .replace(isTablet() ? R.id.graph_container : R.id.score_container,
-                        mScoreGraphFragment, ScoreGraphFragment.TAG)
-                .commit();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        int id = isTablet() ? R.id.graph_container : R.id.score_container;
+        ft.replace(id, mScoreGraphFragment, HeaderFragment.TAG);
+        ft.commit();
+    }
+
+    private void showLapFragment() {
+        switch (mGameHelper.getPlayedGame()) {
+            default:
+            case Game.UNIVERSAL:
+                mLapFragment = new UniversalLapFragment();
+                break;
+            case Game.BELOTE:
+                mLapFragment = new BeloteLapFragment();
+                break;
+            case Game.COINCHE:
+                mLapFragment = new CoincheLapFragment();
+                break;
+            case Game.TAROT:
+                mLapFragment = new TarotLapFragment();
+                break;
+        }
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (isTablet()) {
+            ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+            ft.replace(R.id.score_container, mLapFragment, LapFragment.TAG);
+        } else {
+            ft.replace(R.id.lap_container, mLapFragment, LapFragment.TAG);
+            animateLapContainer();
+        }
+        ft.commit();
     }
 
     @Override

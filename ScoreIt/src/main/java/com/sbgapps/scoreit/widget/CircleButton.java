@@ -16,7 +16,6 @@ public class CircleButton extends ImageView {
 
     private static final int PRESSED_RING_ALPHA = 48;
     private static final int DEFAULT_PRESSED_RING_WIDTH_DIP = 3;
-    private static final int ANIMATION_TIME_ID = android.R.integer.config_shortAnimTime;
 
     private int mCenterY;
     private int mCenterX;
@@ -65,10 +64,10 @@ public class CircleButton extends ImageView {
         mDefaultColor = a.getColor(R.styleable.CircleButton_cb_color, color);
         mCirclePaint.setColor(mDefaultColor);
 
-        color = res.getColor(R.color.color_hint_dark);
+        color = res.getColor(R.color.color_hint_pressed);
         mPressedColor = a.getColor(R.styleable.CircleButton_cb_pressed_color, color);
 
-        color = res.getColor(R.color.gray_light);
+        color = res.getColor(R.color.gray_dark);
         color = a.getColor(R.styleable.CircleButton_cb_shadow_color, color);
         mFocusPaint.setColor(color);
         mFocusPaint.setAlpha(PRESSED_RING_ALPHA);
@@ -78,9 +77,6 @@ public class CircleButton extends ImageView {
         mDisabledColor = a.getColor(R.styleable.CircleButton_cb_disabled_color, color);
 
         a.recycle();
-
-        final int pressedAnimationTime = getResources().getInteger(ANIMATION_TIME_ID);
-        mAnimator.setDuration(pressedAnimationTime);
     }
 
     @Override
