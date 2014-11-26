@@ -23,6 +23,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -42,7 +43,7 @@ public class TranslationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_translations, container, false);
 
-        ImageView iv = (ImageView) view.findViewById(R.id.btn_translate);
+        Button iv = (Button) view.findViewById(R.id.btn_translate);
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +53,7 @@ public class TranslationsFragment extends Fragment {
             }
         });
 
-        ListView listView = (ListView) view.findViewById(R.id.container);
+        ListView listView = (ListView) view.findViewById(android.R.id.list);
 
         String[] from = new String[]{"language", "translator"};
         int[] to = new int[]{R.id.language, R.id.translator};

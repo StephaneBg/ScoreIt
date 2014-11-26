@@ -27,7 +27,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
@@ -56,9 +55,9 @@ public class InfoFragment extends Fragment {
         TextView nameAndVersionView = (TextView) view.findViewById(R.id.version);
         nameAndVersionView.setText(version);
 
-        ImageView btn;
+        Button btn;
 
-        btn = (ImageView) view.findViewById(R.id.btn_contact);
+        btn = (Button) view.findViewById(R.id.btn_contact);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +72,7 @@ public class InfoFragment extends Fragment {
             }
         });
 
-        btn = (ImageView) view.findViewById(R.id.btn_rate);
+        btn = (Button) view.findViewById(R.id.btn_rate);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +89,7 @@ public class InfoFragment extends Fragment {
             }
         });
 
-        btn = (ImageView) view.findViewById(R.id.btn_share);
+        btn = (Button) view.findViewById(R.id.btn_share);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +103,7 @@ public class InfoFragment extends Fragment {
             }
         });
 
-        btn = (ImageView) view.findViewById(R.id.btn_community);
+        btn = (Button) view.findViewById(R.id.btn_community);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

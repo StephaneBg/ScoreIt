@@ -16,16 +16,13 @@
 
 package com.sbgapps.scoreit.fragment;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Button;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
@@ -43,31 +40,28 @@ public class DonateFragment extends Fragment
     private static final String PRODUCT_DONATE_BEER = "com.sbgapps.scoreit.beer";
     private BillingProcessor mBillingProcessor;
     private boolean mReadyToPurchase = false;
-    private TextView mCoffeeTv;
-    private TextView mBeerTv;
+    private Button mCoffeeBtn;
+    private Button mBeerBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_donate, container, false);
 
-        ImageView iv = (ImageView) view.findViewById(R.id.btn_donate_coffee);
-        iv.setOnClickListener(new View.OnClickListener() {
+        mCoffeeBtn = (Button) view.findViewById(R.id.btn_donate_coffee);
+        mCoffeeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mReadyToPurchase) mBillingProcessor.purchase(PRODUCT_DONATE_COFFEE);
             }
         });
 
-        iv = (ImageView) view.findViewById(R.id.btn_donate_beer);
-        iv.setOnClickListener(new View.OnClickListener() {
+        mBeerBtn = (Button) view.findViewById(R.id.btn_donate_beer);
+        mBeerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mReadyToPurchase) mBillingProcessor.purchase(PRODUCT_DONATE_BEER);
             }
         });
-
-        mCoffeeTv = (TextView) view.findViewById(R.id.tv_donate_coffee);
-        mBeerTv = (TextView) view.findViewById(R.id.tv_donate_beer);
 
         return view;
     }
@@ -104,12 +98,12 @@ public class DonateFragment extends Fragment
 
     private void manageDonations() {
         if (mBillingProcessor.isPurchased(PRODUCT_DONATE_COFFEE)) {
-            mCoffeeTv.setText(getString(R.string.bought_coffee));
-            mCoffeeTv.setClickable(false);
+            mCoffeeBtn.setText(getString(R.string.bought_coffee));
+            mCoffeeBtn.setClickable(false);
         }
         if (mBillingProcessor.isPurchased(PRODUCT_DONATE_BEER)) {
-            mBeerTv.setText(getString(R.string.bought_beer));
-            mBeerTv.setClickable(false);
+            mBeerBtn.setText(getString(R.string.bought_beer));
+            mBeerBtn.setClickable(false);
         }
     }
 
