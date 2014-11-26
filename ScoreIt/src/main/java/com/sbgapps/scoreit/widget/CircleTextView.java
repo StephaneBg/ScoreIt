@@ -50,7 +50,7 @@ public class CircleTextView extends TextView {
 
         mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCirclePaint.setStyle(Paint.Style.STROKE);
-        int color = ta.getColor(R.styleable.CircleTextView_ct_color, Color.BLACK);
+        int color = ta.getColor(R.styleable.CircleTextView_ct_color, Color.LTGRAY);
         mCirclePaint.setColor(color);
         mStrokeWidth = ta.getDimension(R.styleable.CircleTextView_ct_strokeWidth,
                 Utils.dpToPx(6, context.getResources()));

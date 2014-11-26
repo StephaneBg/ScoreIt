@@ -17,6 +17,7 @@
 package com.sbgapps.scoreit;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -27,7 +28,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -36,6 +36,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -161,7 +162,11 @@ public class ScoreItActivity extends BaseActivity
                 @Override
                 public void onGlobalLayout() {
                     if (null == mLap) {
-                        mLapContainer.setTranslationY(mLapContainer.getHeight());
+                        if (Utils.hasLollipopApi()) {
+                            mLapContainer.setVisibility(View.INVISIBLE);
+                        } else {
+                            mLapContainer.setTranslationY(mLapContainer.getHeight());
+                        }
                     } else {
                         setActionButtonProperties(false);
                     }
@@ -524,19 +529,12 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void switchScoreViews() {
-        Fragment fragment;
         if (null == mScoreGraphFragment) {
-            mScoreGraphFragment = new ScoreGraphFragment();
-            fragment = mScoreGraphFragment;
+            showScoreGraphFragment();
         } else {
-            fragment = mScoreListFragment;
+            showScoreListFragment();
             mScoreGraphFragment = null;
         }
-
-        getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .replace(isTablet() ? R.id.graph_container : R.id.score_container, fragment, ScoreGraphFragment.TAG)
-                .commit();
     }
 
     public void update() {
@@ -683,17 +681,41 @@ public class ScoreItActivity extends BaseActivity
         mActionButton.setLayoutParams(lp);
     }
 
+    @SuppressWarnings("NewApi")
     public void animateLapContainer() {
         if (isTablet()) return;
-        ObjectAnimator animY;
-        float height = mLapContainer.getHeight();
-        if (null != mLap) {
-            animY = ObjectAnimator.ofFloat(mLapContainer, "y", 0);
+        if (Utils.hasLollipopApi()) {
+            int cx = (mActionButton.getLeft() + mActionButton.getRight()) / 2;
+            int cy = (mActionButton.getTop() + mActionButton.getBottom()) / 2;
+            if (null != mLap) {
+                int finalRadius = Math.max(mLapContainer.getWidth(), mLapContainer.getHeight());
+                Animator anim = ViewAnimationUtils.createCircularReveal(mLapContainer, cx, cy, 0, finalRadius);
+                mLapContainer.setVisibility(View.VISIBLE);
+                anim.start();
+            } else {
+                int initialRadius = mLapContainer.getWidth();
+                Animator anim = ViewAnimationUtils.createCircularReveal(mLapContainer, cx, cy, initialRadius, 0);
+                anim.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        mLapContainer.setVisibility(View.INVISIBLE);
+                        mLapContainer.scrollTo(0, 0);
+                    }
+                });
+                anim.start();
+            }
         } else {
-            mLapContainer.scrollTo(0, 0);
-            animY = ObjectAnimator.ofFloat(mLapContainer, "y", height);
+            ObjectAnimator animY;
+            float height = mLapContainer.getHeight();
+            if (null != mLap) {
+                animY = ObjectAnimator.ofFloat(mLapContainer, "y", 0);
+            } else {
+                mLapContainer.scrollTo(0, 0);
+                animY = ObjectAnimator.ofFloat(mLapContainer, "y", height);
+            }
+            animY.start();
         }
-        animY.start();
     }
 
     private void dismissAll() {
@@ -913,8 +935,19 @@ public class ScoreItActivity extends BaseActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .replace(R.id.score_container,
+                .replace(isTablet() ? R.id.graph_container : R.id.score_container,
                         mScoreListFragment, ScoreListFragment.TAG)
+                .commit();
+    }
+
+    private void showScoreGraphFragment() {
+        if (null == mScoreGraphFragment)
+            mScoreGraphFragment = new ScoreGraphFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .replace(isTablet() ? R.id.graph_container : R.id.score_container,
+                        mScoreGraphFragment, ScoreGraphFragment.TAG)
                 .commit();
     }
 

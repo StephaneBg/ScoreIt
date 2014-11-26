@@ -2,6 +2,7 @@ package com.sbgapps.scoreit.widget;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -14,7 +15,7 @@ import com.sbgapps.scoreit.util.Utils;
 public class CircleButton extends ImageView {
 
     private static final int PRESSED_RING_ALPHA = 48;
-    private static final int DEFAULT_PRESSED_RING_WIDTH_DIP = 2;
+    private static final int DEFAULT_PRESSED_RING_WIDTH_DIP = 3;
     private static final int ANIMATION_TIME_ID = android.R.integer.config_shortAnimTime;
 
     private int mCenterY;
@@ -44,8 +45,8 @@ public class CircleButton extends ImageView {
 
     public CircleButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        this.setFocusable(true);
-        this.setScaleType(ScaleType.CENTER_INSIDE);
+        setFocusable(true);
+        setScaleType(ScaleType.CENTER_INSIDE);
         setClickable(true);
 
         mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -54,24 +55,27 @@ public class CircleButton extends ImageView {
         mFocusPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mFocusPaint.setStyle(Paint.Style.STROKE);
 
-        final float density = getResources().getDisplayMetrics().density;
-        mPressedRingWidth = (int) (DEFAULT_PRESSED_RING_WIDTH_DIP * density);
-
+        final Resources res = context.getResources();
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleButton);
 
-        int color = context.getResources().getColor(R.color.color_hint);
-        mDefaultColor = a.getColor(R.styleable.CircleButton_cb_color, color);
-        mPressedColor = Utils.getHighlightColor(mDefaultColor, 0.85f);
+        mPressedRingWidth = Utils.dpToPx(DEFAULT_PRESSED_RING_WIDTH_DIP, res);
+        mPressedRingWidth = (int) a.getDimension(R.styleable.CircleButton_cb_pressedRingWidth, mPressedRingWidth);
 
+        int color = res.getColor(R.color.color_hint);
+        mDefaultColor = a.getColor(R.styleable.CircleButton_cb_color, color);
         mCirclePaint.setColor(mDefaultColor);
-        mFocusPaint.setColor(mDefaultColor);
+
+        color = res.getColor(R.color.color_hint_dark);
+        mPressedColor = a.getColor(R.styleable.CircleButton_cb_pressed_color, color);
+
+        color = res.getColor(R.color.gray_light);
+        color = a.getColor(R.styleable.CircleButton_cb_shadow_color, color);
+        mFocusPaint.setColor(color);
         mFocusPaint.setAlpha(PRESSED_RING_ALPHA);
         mFocusPaint.setStrokeWidth(mPressedRingWidth);
 
         color = context.getResources().getColor(R.color.gray_light);
         mDisabledColor = a.getColor(R.styleable.CircleButton_cb_disabled_color, color);
-
-        mPressedRingWidth = (int) a.getDimension(R.styleable.CircleButton_cb_pressedRingWidth, mPressedRingWidth);
 
         a.recycle();
 
