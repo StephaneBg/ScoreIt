@@ -902,7 +902,7 @@ public class ScoreItActivity extends BaseActivity
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        ft.replace(R.id.score_container, mScoreListFragment, HeaderFragment.TAG);
+        ft.replace(R.id.score_container, mScoreListFragment, ScoreListFragment.TAG);
         ft.commit();
     }
 
@@ -913,7 +913,7 @@ public class ScoreItActivity extends BaseActivity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         int id = isTablet() ? R.id.graph_container : R.id.score_container;
-        ft.replace(id, mScoreGraphFragment, HeaderFragment.TAG);
+        ft.replace(id, mScoreGraphFragment, ScoreGraphFragment.TAG);
         ft.commit();
     }
 
