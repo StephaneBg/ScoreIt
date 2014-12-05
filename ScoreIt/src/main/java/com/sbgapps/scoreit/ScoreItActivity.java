@@ -43,6 +43,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.mrengineer13.snackbar.SnackBar;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ObservableScrollView;
@@ -74,8 +75,6 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
-import uk.me.lewisdeane.ldialogs.CustomDialog;
-import uk.me.lewisdeane.ldialogs.CustomListDialog;
 
 public class ScoreItActivity extends BaseActivity
         implements SnackBar.OnMessageClickListener {
@@ -693,89 +692,76 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void showClearDialogActionChoices() {
-        CustomListDialog dialog = new CustomListDialog
-                .Builder(this,
-                getString(R.string.current_game),
-                getResources().getStringArray(R.array.clear_actions))
-                .itemColorRes(R.color.color_accent)
-                .build();
-
-        dialog.setListClickListener(new CustomListDialog.ListClickListener() {
-            @Override
-            public void onListItemSelected(int position, String[] items, String item) {
-                switch (position) {
-                    default:
-                    case 0:
-                        dismissAll();
-                        break;
-                    case 1:
-                        if (mGameHelper.getFilesUtil().isDefaultFile()) {
-                            showSaveFileDialog(false);
-                        } else {
-                            mSnackBar.clear();
-                            mGameHelper.saveGame();
-                            mGameHelper.createGame();
-                            invalidateOptionsMenu();
-                            update();
+        new MaterialDialog.Builder(this)
+                .title(getString(R.string.current_game))
+                .items(getResources().getStringArray(R.array.clear_actions))
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        switch (which) {
+                            default:
+                            case 0:
+                                dismissAll();
+                                break;
+                            case 1:
+                                if (mGameHelper.getFilesUtil().isDefaultFile()) {
+                                    showSaveFileDialog(false);
+                                } else {
+                                    mSnackBar.clear();
+                                    mGameHelper.saveGame();
+                                    mGameHelper.createGame();
+                                    invalidateOptionsMenu();
+                                    update();
+                                }
+                                break;
                         }
-                        break;
-                }
-            }
-        });
-        dialog.show();
+                    }
+                })
+                .show();
     }
 
     private void showEditNameActionChoices() {
-        CustomListDialog dialog = new CustomListDialog
-                .Builder(this,
-                getString(R.string.edit_name),
-                getResources().getStringArray(R.array.edit_name_action))
-                .itemColorRes(R.color.color_accent)
-                .build();
-
-        dialog.setListClickListener(new CustomListDialog.ListClickListener() {
-            @Override
-            public void onListItemSelected(int position, String[] items, String item) {
-                Intent intent;
-                switch (position) {
-                    default:
-                    case 0:
-                        intent = new Intent(Intent.ACTION_PICK,
-                                ContactsContract.Contacts.CONTENT_URI);
-                        startActivityForResult(intent, REQ_PICK_CONTACT);
-                        break;
-                    case 1:
-                        showEditNameDialog();
-                        break;
-                }
-            }
-        });
-        dialog.show();
+        new MaterialDialog.Builder(this)
+                .title(getString(R.string.edit_name))
+                .items(getResources().getStringArray(R.array.edit_name_action))
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        switch (which) {
+                            default:
+                            case 0:
+                                Intent intent = new Intent(Intent.ACTION_PICK,
+                                        ContactsContract.Contacts.CONTENT_URI);
+                                startActivityForResult(intent, REQ_PICK_CONTACT);
+                                break;
+                            case 1:
+                                showEditNameDialog();
+                                break;
+                        }
+                    }
+                })
+                .show();
     }
 
     private void showLoadActionChoices() {
-        CustomListDialog dialog = new CustomListDialog
-                .Builder(this,
-                getString(R.string.current_game),
-                getResources().getStringArray(R.array.load_actions))
-                .itemColorRes(R.color.color_accent)
-                .build();
-
-        dialog.setListClickListener(new CustomListDialog.ListClickListener() {
-            @Override
-            public void onListItemSelected(int position, String[] items, String item) {
-                switch (position) {
-                    default:
-                    case 0:
-                        startSavedGamesActivity();
-                        break;
-                    case 1:
-                        showSaveFileDialog(true);
-                        break;
-                }
-            }
-        });
-        dialog.show();
+        new MaterialDialog.Builder(this)
+                .title(getString(R.string.current_game))
+                .items(getResources().getStringArray(R.array.load_actions))
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        switch (which) {
+                            default:
+                            case 0:
+                                startSavedGamesActivity();
+                                break;
+                            case 1:
+                                showSaveFileDialog(true);
+                                break;
+                        }
+                    }
+                })
+                .show();
     }
 
     public void showPlayerCountDialog() {
@@ -789,35 +775,33 @@ public class ScoreItActivity extends BaseActivity
                 break;
         }
 
-        CustomListDialog dialog = new CustomListDialog
-                .Builder(this, getString(R.string.player_number), players)
-                .itemColorRes(R.color.color_accent)
-                .build();
-        dialog.setListClickListener(new CustomListDialog.ListClickListener() {
-            @Override
-            public void onListItemSelected(int position, String[] items, String item) {
-                mGameHelper.setPlayerCount(position);
-                invalidateOptionsMenu();
-                reloadFragments(true);
-            }
-        });
-        dialog.show();
+        new MaterialDialog.Builder(this)
+                .title(getString(R.string.player_number))
+                .items(players)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        mGameHelper.setPlayerCount(which);
+                        invalidateOptionsMenu();
+                        reloadFragments(true);
+                    }
+                })
+                .show();
     }
 
     private void showEditNameDialog() {
         View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
         final EditText editText = (EditText) view.findViewById(R.id.edit_text);
 
-        CustomDialog dialog = new CustomDialog
-                .Builder(this, R.string.edit_name, R.string.ok)
-                .negativeText(R.string.cancel)
+        new MaterialDialog.Builder(this)
+                .title(R.string.edit_name)
+                .customView(view)
+                .positiveText(R.string.ok)
                 .positiveColorRes(R.color.color_accent)
-                .build();
-
-        dialog.setCustomView(view)
-                .setClickListener(new CustomDialog.ClickListener() {
+                .negativeText(R.string.cancel)
+                .callback(new MaterialDialog.SimpleCallback() {
                     @Override
-                    public void onConfirmClick() {
+                    public void onPositive(MaterialDialog dialog) {
                         String name = editText.getText().toString();
                         if (!name.isEmpty()) {
                             mGameHelper.getPlayer(mEditedPlayer).setName(name);
@@ -826,43 +810,35 @@ public class ScoreItActivity extends BaseActivity
                             if (mScoreListFragment.isVisible()) mScoreListFragment.update();
                         }
                     }
-
-                    @Override
-                    public void onCancelClick() {
-                    }
-                });
-        dialog.show();
+                })
+                .build()
+                .show();
     }
 
     private void showSaveFileDialog(final boolean load) {
         View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
         final EditText editText = (EditText) view.findViewById(R.id.edit_text);
 
-        CustomDialog dialog = new CustomDialog
-                .Builder(this, R.string.filename, R.string.ok)
-                .negativeText(R.string.cancel)
+        new MaterialDialog.Builder(this)
+                .title(R.string.filename)
+                .customView(view)
+                .positiveText(R.string.ok)
                 .positiveColorRes(R.color.color_accent)
-                .build();
-
-        dialog.setCustomView(view)
-                .setClickListener(new CustomDialog.ClickListener() {
+                .negativeText(R.string.cancel)
+                .callback(new MaterialDialog.SimpleCallback() {
                     @Override
-                    public void onConfirmClick() {
-                        String file = editText.getText().toString();
-                        mGameHelper.saveGame(file);
-                        mGameHelper.createGame();
-                        if (load) {
-                            startSavedGamesActivity();
-                        } else {
-                            dismissAll();
+                    public void onPositive(MaterialDialog dialog) {
+                        String name = editText.getText().toString();
+                        if (!name.isEmpty()) {
+                            mGameHelper.getPlayer(mEditedPlayer).setName(name);
+                            mEditedPlayer = Player.PLAYER_NONE;
+                            mHeaderFragment.update();
+                            if (mScoreListFragment.isVisible()) mScoreListFragment.update();
                         }
                     }
-
-                    @Override
-                    public void onCancelClick() {
-                    }
-                });
-        dialog.show();
+                })
+                .build()
+                .show();
     }
 
     @Override
