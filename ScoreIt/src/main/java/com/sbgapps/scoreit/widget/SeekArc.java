@@ -42,9 +42,6 @@ public class SeekArc extends View {
     private static final int ANIMATION_TIME_ID = android.R.integer.config_shortAnimTime;
     private static final int INVALID_PROGRESS_VALUE = -1;
 
-    // The initial rotational offset -90 means we start at 12 o'clock
-    private final int mAngleOffset = -90;
-
     /**
      * The Maximum value that this SeekArc can be set to
      */
@@ -60,8 +57,6 @@ public class SeekArc extends View {
     private final Paint mThumbPaint;
     private final float mThumbRadius;
     private final RectF mArcRect = new RectF();
-    private final int mProgressWidth;
-    private final int mArcWidth;
 
     private int mArcRadius = 0;
     private float mProgressSweep = 0;
@@ -90,8 +85,6 @@ public class SeekArc extends View {
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SeekArc, defStyle, 0);
 
         mMax = a.getInteger(R.styleable.SeekArc_max, mMax);
-        mProgressWidth = (int) a.getDimension(R.styleable.SeekArc_progressWidth, Utils.dpToPx(6, res));
-        mArcWidth = (int) a.getDimension(R.styleable.SeekArc_arcWidth, Utils.dpToPx(6, res));
         mClockwise = a.getBoolean(R.styleable.SeekArc_clockwise, mClockwise);
         mTouchable = a.getBoolean(R.styleable.SeekArc_touchable, mTouchable);
         int arcColor = a.getColor(R.styleable.SeekArc_arcColor,
@@ -102,23 +95,25 @@ public class SeekArc extends View {
                 res.getColor(R.color.color_accent));
         mThumbRadius = a.getDimension(R.styleable.SeekArc_thumbRadius, Utils.dpToPx(9, res));
 
-        a.recycle();
-
         mArcPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mArcPaint.setColor(arcColor);
         mArcPaint.setStyle(Paint.Style.STROKE);
-        mArcPaint.setStrokeWidth(mArcWidth);
+        int width = (int) a.getDimension(R.styleable.SeekArc_progressWidth, Utils.dpToPx(6, res));
+        mArcPaint.setStrokeWidth(width);
 
         mProgressPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mProgressPaint.setColor(progressColor);
         mProgressPaint.setStyle(Paint.Style.STROKE);
-        mProgressPaint.setStrokeWidth(mProgressWidth);
+        width = (int) a.getDimension(R.styleable.SeekArc_arcWidth, Utils.dpToPx(6, res));
+        mProgressPaint.setStrokeWidth(width);
 
         mThumbPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mThumbPaint.setColor(thumbColor);
 
         final int pressedAnimationTime = getResources().getInteger(ANIMATION_TIME_ID);
         mAnimator.setDuration(pressedAnimationTime);
+
+        a.recycle();
     }
 
     public int getMax() {
@@ -137,10 +132,8 @@ public class SeekArc extends View {
         }
 
         // Draw the arcs
-        final int arcStart = mAngleOffset;
-        final int arcSweep = 360;
-        canvas.drawArc(mArcRect, arcStart, arcSweep, false, mArcPaint);
-        canvas.drawArc(mArcRect, arcStart, mProgressSweep, false, mProgressPaint);
+        canvas.drawArc(mArcRect, -90, 360, false, mArcPaint);
+        canvas.drawArc(mArcRect, -90, mProgressSweep, false, mProgressPaint);
 
         // Draw the thumbnail
         canvas.drawCircle(mTranslateX - mThumbXPos, mTranslateY - mThumbYPos, mThumbRadius, mThumbPaint);

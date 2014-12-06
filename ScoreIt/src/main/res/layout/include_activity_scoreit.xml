@@ -43,11 +43,10 @@
         android:layout_below="@id/header_container"
         android:background="@drawable/bottom_shadow"/>
 
-    <com.melnykov.fab.ObservableScrollView
+    <FrameLayout
         android:id="@+id/lap_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"/>
+        android:layout_height="match_parent"/>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"

@@ -27,7 +27,7 @@
     <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:maxWidth="320dp">
+        app:maxWidth="420dp">
 
         <Button
             android:id="@+id/btn_translate"

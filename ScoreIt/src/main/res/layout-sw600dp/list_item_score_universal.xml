@@ -15,12 +15,27 @@
   ~ limitations under the License.
   -->
 
-<ScrollView
+<com.daimajia.swipe.SwipeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fillViewport="true"
-    android:scrollbars="none">
+    app:show_mode="lay_down"
+    app:drag_edge="left"
+    tools:context=".ScoreItActivity">
 
-    <include layout="@layout/include_fragment_lap_tarot"/>
-</ScrollView>
+    <include
+        layout="@layout/include_bottom_score_list"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/list_item_height"/>
+
+    <com.linearlistview.LinearListView
+        android:id="@+id/list_score"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_item_height"
+        android:background="@color/white"
+        android:baselineAligned="false"
+        android:orientation="horizontal"/>
+</com.daimajia.swipe.SwipeLayout>

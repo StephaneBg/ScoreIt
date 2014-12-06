@@ -17,85 +17,9 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none">
 
-    <LinearLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
-
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/bidding"/>
-
-        <com.sbgapps.scoreit.widget.ToggleGroup
-            android:id="@+id/group_team"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
-                android:id="@+id/btn_player_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:background="@drawable/bg_selector_btn_toggle"
-                tools:textOn="@string/them"/>
-
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
-                android:id="@+id/btn_player_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:background="@drawable/bg_selector_btn_toggle"
-                tools:textOff="@string/us"/>
-        </com.sbgapps.scoreit.widget.ToggleGroup>
-
-        <com.sbgapps.scoreit.widget.SeekPoints
-            android:id="@+id/input_bid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_default"/>
-
-        <com.sbgapps.scoreit.widget.BelotePoints
-            android:id="@+id/input_points"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/announces"/>
-
-        <LinearLayout
-            android:id="@+id/ll_bonuses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:animateLayoutChanges="true"
-            android:divider="?android:listDivider"
-            android:orientation="vertical"
-            android:showDividers="middle">
-
-            <Button
-                android:id="@+id/btn_add_bonus"
-                style="?android:borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:text="@string/add"
-                android:textAllCaps="true"/>
-        </LinearLayout>
-    </LinearLayout>
+    <include layout="@layout/include_fragment_lap_coinche"/>
 </ScrollView>

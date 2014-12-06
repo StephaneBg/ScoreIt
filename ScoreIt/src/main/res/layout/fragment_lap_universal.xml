@@ -15,29 +15,12 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout
+<ListView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/list"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <View
-        android:id="@+id/spacer"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height"/>
-
-    <com.linearlistview.LinearListView
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/spacer"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_above="@id/container"
-        android:background="@drawable/top_shadow"/>
-</RelativeLayout>
+    android:layout_height="match_parent"
+    android:paddingTop="164dp"
+    android:clipToPadding="false"
+    android:scrollbars="none"
+    android:divider="@null"/>

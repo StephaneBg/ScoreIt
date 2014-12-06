@@ -46,7 +46,6 @@ import android.widget.RelativeLayout;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.mrengineer13.snackbar.SnackBar;
 import com.melnykov.fab.FloatingActionButton;
-import com.melnykov.fab.ObservableScrollView;
 import com.sbgapps.scoreit.fragment.BeloteLapFragment;
 import com.sbgapps.scoreit.fragment.CoincheLapFragment;
 import com.sbgapps.scoreit.fragment.HeaderFragment;
@@ -90,7 +89,7 @@ public class ScoreItActivity extends BaseActivity
     ListView mDrawerListView;
     @InjectView(R.id.fab)
     FloatingActionButton mActionButton;
-    ObservableScrollView mLapContainer;
+    FrameLayout mLapContainer;
 
     private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -115,13 +114,17 @@ public class ScoreItActivity extends BaseActivity
         return mLap;
     }
 
+    public FloatingActionButton getActionButton() {
+        return mActionButton;
+    }
+
     @Override
     @SuppressWarnings("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ButterKnife.inject(this);
-        mLapContainer = (ObservableScrollView) findViewById(R.id.lap_container);
+        mLapContainer = (FrameLayout) findViewById(R.id.lap_container);
 
         if (!isTablet() && Utils.hasLollipopApi())
             getToolbar().setElevation(Utils.dpToPx(4, getResources()));
@@ -216,7 +219,6 @@ public class ScoreItActivity extends BaseActivity
                 onActionButtonClicked();
             }
         });
-        if (!isTablet()) mActionButton.attachToScrollView(mLapContainer);
 
         mSnackBar = new SnackBar(this);
         mSnackBar.setOnClickListener(this);
@@ -636,6 +638,7 @@ public class ScoreItActivity extends BaseActivity
             lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         }
         mActionButton.setLayoutParams(lp);
+        mActionButton.show(false);
     }
 
     @SuppressWarnings("NewApi")
@@ -694,6 +697,7 @@ public class ScoreItActivity extends BaseActivity
     private void showClearDialogActionChoices() {
         new MaterialDialog.Builder(this)
                 .title(getString(R.string.current_game))
+                .titleColorRes(R.color.color_accent)
                 .items(getResources().getStringArray(R.array.clear_actions))
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
@@ -723,6 +727,7 @@ public class ScoreItActivity extends BaseActivity
     private void showEditNameActionChoices() {
         new MaterialDialog.Builder(this)
                 .title(getString(R.string.edit_name))
+                .titleColorRes(R.color.color_accent)
                 .items(getResources().getStringArray(R.array.edit_name_action))
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
@@ -746,6 +751,7 @@ public class ScoreItActivity extends BaseActivity
     private void showLoadActionChoices() {
         new MaterialDialog.Builder(this)
                 .title(getString(R.string.current_game))
+                .titleColorRes(R.color.color_accent)
                 .items(getResources().getStringArray(R.array.load_actions))
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
@@ -777,6 +783,7 @@ public class ScoreItActivity extends BaseActivity
 
         new MaterialDialog.Builder(this)
                 .title(getString(R.string.player_number))
+                .titleColorRes(R.color.color_accent)
                 .items(players)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
@@ -795,6 +802,7 @@ public class ScoreItActivity extends BaseActivity
 
         new MaterialDialog.Builder(this)
                 .title(R.string.edit_name)
+                .titleColorRes(R.color.color_accent)
                 .customView(view)
                 .positiveText(R.string.ok)
                 .positiveColorRes(R.color.color_accent)
@@ -821,6 +829,7 @@ public class ScoreItActivity extends BaseActivity
 
         new MaterialDialog.Builder(this)
                 .title(R.string.filename)
+                .titleColorRes(R.color.color_accent)
                 .customView(view)
                 .positiveText(R.string.ok)
                 .positiveColorRes(R.color.color_accent)
@@ -828,12 +837,13 @@ public class ScoreItActivity extends BaseActivity
                 .callback(new MaterialDialog.SimpleCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
-                        String name = editText.getText().toString();
-                        if (!name.isEmpty()) {
-                            mGameHelper.getPlayer(mEditedPlayer).setName(name);
-                            mEditedPlayer = Player.PLAYER_NONE;
-                            mHeaderFragment.update();
-                            if (mScoreListFragment.isVisible()) mScoreListFragment.update();
+                        String file = editText.getText().toString();
+                        mGameHelper.saveGame(file);
+                        mGameHelper.createGame();
+                        if (load) {
+                            startSavedGamesActivity();
+                        } else {
+                            dismissAll();
                         }
                     }
                 })

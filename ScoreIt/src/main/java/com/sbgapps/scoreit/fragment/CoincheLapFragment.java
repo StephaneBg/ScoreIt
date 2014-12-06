@@ -28,7 +28,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
 
+import com.melnykov.fab.ObservableScrollView;
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.coinche.CoincheBonus;
@@ -69,57 +71,62 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         View view = inflater.inflate(R.layout.fragment_lap_coinche, null);
         ButterKnife.inject(this, view);
 
-        if (null != getLap()) {
-            switch (getLap().getScorer()) {
-                case Player.PLAYER_1:
-                    mTeamGroup.check(R.id.btn_player_1);
-                    break;
-                case Player.PLAYER_2:
-                    mTeamGroup.check(R.id.btn_player_2);
-                    break;
-            }
+        if (!((ScoreItActivity) getActivity()).isTablet()) {
+            ObservableScrollView scrollView = (ObservableScrollView) view.findViewById(R.id.obs_scrollview);
+            ((ScoreItActivity) getActivity()).getActionButton().attachToScrollView(scrollView);
+        }
 
-            mTeamGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(ToggleGroup group, int checkedId) {
-                    switch (checkedId) {
-                        case R.id.btn_player_1:
-                            getLap().setScorer(Player.PLAYER_1);
-                            break;
-                        case R.id.btn_player_2:
-                            getLap().setScorer(Player.PLAYER_2);
-                            break;
-                    }
+        if(null == getLap()) return view;
+
+        switch (getLap().getScorer()) {
+            case Player.PLAYER_1:
+                mTeamGroup.check(R.id.btn_player_1);
+                break;
+            case Player.PLAYER_2:
+                mTeamGroup.check(R.id.btn_player_2);
+                break;
+        }
+
+        mTeamGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(ToggleGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.btn_player_1:
+                        getLap().setScorer(Player.PLAYER_1);
+                        break;
+                    case R.id.btn_player_2:
+                        getLap().setScorer(Player.PLAYER_2);
+                        break;
                 }
-            });
-
-            GameHelper gh = getGameHelper();
-            ToggleButton btn = (ToggleButton) view.findViewById(R.id.btn_player_1);
-            String name = gh.getPlayer(Player.PLAYER_1).getName();
-            btn.setText(name);
-            btn.setTextOn(name);
-            btn.setTextOff(name);
-            btn = (ToggleButton) view.findViewById(R.id.btn_player_2);
-            name = gh.getPlayer(Player.PLAYER_2).getName();
-            btn.setText(name);
-            btn.setTextOn(name);
-            btn.setTextOff(name);
-
-            int bid = getLap().getBid();
-            mBid.init(getProgressFromBid(bid), 8, Integer.toString(bid));
-            mBid.setOnProgressChangedListener(this);
-
-            mInputPoints.init(this);
-
-            mButtonBonus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    addBonus(null);
-                }
-            });
-            for (CoincheBonus bonus : getLap().getBonuses()) {
-                addBonus(bonus);
             }
+        });
+
+        GameHelper gh = getGameHelper();
+        ToggleButton btn = (ToggleButton) view.findViewById(R.id.btn_player_1);
+        String name = gh.getPlayer(Player.PLAYER_1).getName();
+        btn.setText(name);
+        btn.setTextOn(name);
+        btn.setTextOff(name);
+        btn = (ToggleButton) view.findViewById(R.id.btn_player_2);
+        name = gh.getPlayer(Player.PLAYER_2).getName();
+        btn.setText(name);
+        btn.setTextOn(name);
+        btn.setTextOff(name);
+
+        int bid = getLap().getBid();
+        mBid.init(getProgressFromBid(bid), 8, Integer.toString(bid));
+        mBid.setOnProgressChangedListener(this);
+
+        mInputPoints.init(this);
+
+        mButtonBonus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addBonus(null);
+            }
+        });
+        for (CoincheBonus bonus : getLap().getBonuses()) {
+            addBonus(bonus);
         }
 
         return view;

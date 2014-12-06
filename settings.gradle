@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
-include ':ScoreIt', ':SimpleStorage'
+include ':ScoreIt', ':SimpleStorage', ':SnackBar'
 
 project(':SimpleStorage').projectDir = new File(rootDir, '../android-simple-storage/Simple Storage')
+project(':SnackBar').projectDir = new File(rootDir, '../SnackBar/snackbar')

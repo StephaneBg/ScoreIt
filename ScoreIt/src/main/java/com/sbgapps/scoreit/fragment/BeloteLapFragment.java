@@ -27,7 +27,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.melnykov.fab.ObservableScrollView;
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.games.belote.BeloteBonus;
 import com.sbgapps.scoreit.games.belote.BeloteLap;
 import com.sbgapps.scoreit.widget.BelotePoints;
@@ -59,19 +61,25 @@ public class BeloteLapFragment extends GenericBeloteLapFragment {
         View view = inflater.inflate(R.layout.fragment_lap_belote, null);
         ButterKnife.inject(this, view);
 
-        if (null != getLap()) {
-            mInputPoints.init(this);
-
-            mButtonBonus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    addBonus(null);
-                }
-            });
-            for (BeloteBonus bonus : getLap().getBonuses()) {
-                addBonus(bonus);
-            }
+        if (!((ScoreItActivity) getActivity()).isTablet()) {
+            ObservableScrollView scrollView = (ObservableScrollView) view.findViewById(R.id.obs_scrollview);
+            ((ScoreItActivity) getActivity()).getActionButton().attachToScrollView(scrollView);
         }
+
+        if(null == getLap()) return view;
+
+        mInputPoints.init(this);
+
+        mButtonBonus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addBonus(null);
+            }
+        });
+        for (BeloteBonus bonus : getLap().getBonuses()) {
+            addBonus(bonus);
+        }
+
         return view;
     }
 

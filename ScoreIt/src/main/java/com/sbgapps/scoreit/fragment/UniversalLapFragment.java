@@ -20,18 +20,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.ListView;
 
-import com.linearlistview.LinearListView;
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.adapter.UniversalLapAdapter;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
+import com.sbgapps.scoreit.util.Utils;
 
 /**
  * Created by sbaiget on 02/02/14.
  */
 public class UniversalLapFragment extends LapFragment {
-
-    private UniversalLapAdapter mAdapter;
 
     @Override
     public UniversalLap getLap() {
@@ -42,9 +43,23 @@ public class UniversalLapFragment extends LapFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap_universal, null);
 
-        LinearListView listView = (LinearListView) view.findViewById(R.id.container);
-        mAdapter = new UniversalLapAdapter(this);
-        listView.setAdapter(mAdapter);
+        ListView listView = (ListView) view.findViewById(android.R.id.list);
+
+        if (!((ScoreItActivity) getActivity()).isTablet()) {
+            ((ScoreItActivity) getActivity()).getActionButton().attachToListView(listView);
+
+            View header = new View(getActivity());
+            header.setLayoutParams(
+                    new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
+                            Utils.dpToPx(4, getResources())));
+            header.setBackgroundResource(R.drawable.top_shadow);
+
+            listView.addHeaderView(header);
+        }
+
+        if(null == getLap()) return view;
+
+        listView.setAdapter(new UniversalLapAdapter(this));
 
         return view;
     }

@@ -15,136 +15,25 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout
+<com.melnykov.fab.ObservableScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/obs_scrollview"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <View
-        android:id="@+id/spacer"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height"/>
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:paddingTop="164dp"
+    android:clipToPadding="false">
 
     <LinearLayout
-        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spacer"
-        android:background="@color/white"
         android:orientation="vertical">
 
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/scorer"/>
-
-        <Spinner
-            android:id="@+id/spinner_taker"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/widget_height"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            android:layout_height="4dp"
+            android:background="@drawable/top_shadow"/>
 
-        <ViewStub
-            android:id="@+id/viewstub_partner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout="@layout/stub_partner"/>
-
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/bidding"/>
-
-        <Spinner
-            android:id="@+id/spinner_bid"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/widget_height"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
-
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/oudlers"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
-
-            <ToggleButton
-                android:id="@+id/checkbox_petit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/bg_selector_btn_toggle"
-                android:textOff="@string/petit"
-                android:textOn="@string/petit"/>
-
-            <ToggleButton
-                android:id="@+id/checkbox_twenty_one"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:background="@drawable/bg_selector_btn_toggle"
-                android:textOff="@string/twentyone"
-                android:textOn="@string/twentyone"/>
-
-            <ToggleButton
-                android:id="@+id/checkbox_excuse"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/bg_selector_btn_toggle"
-                android:textOff="@string/excuse"
-                android:textOn="@string/excuse"/>
-        </LinearLayout>
-
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/points"/>
-
-        <com.sbgapps.scoreit.widget.SeekPoints
-            android:id="@+id/input_points"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
-
-        <TextView
-            style="@style/SubHeader"
-            android:text="@string/bonuses"/>
-
-        <LinearLayout
-            android:id="@+id/ll_bonuses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:animateLayoutChanges="true"
-            android:divider="?android:listDivider"
-            android:orientation="vertical"
-            android:showDividers="middle|end">
-
-            <Button
-                android:id="@+id/btn_add_bonus"
-                style="?android:borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:text="@string/add"
-                android:textAllCaps="true"/>
-        </LinearLayout>
+        <include layout="@layout/include_fragment_lap_tarot"/>
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_above="@id/container"
-        android:background="@drawable/top_shadow"/>
-</RelativeLayout>
+</com.melnykov.fab.ObservableScrollView>
