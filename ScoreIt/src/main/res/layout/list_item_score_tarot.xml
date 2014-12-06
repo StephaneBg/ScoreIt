@@ -34,7 +34,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/list_item_height"
-        android:background="@color/white">
+        android:background="@color/gray_light">
 
         <TextView
             android:id="@+id/summary"

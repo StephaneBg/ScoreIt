@@ -579,12 +579,12 @@ public class ScoreItActivity extends BaseActivity
             mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_content_create));
             mActionButton.setColorNormal(res.getColor(R.color.fab_normal_score));
             mActionButton.setColorPressed(res.getColor(R.color.fab_pressed_score));
-            mActionButton.setColorRipple(res.getColor(R.color.fab_ripple_score));
+            mActionButton.setColorRipple(res.getColor(R.color.fab_ripple));
         } else {
             mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_action_done));
             mActionButton.setColorNormal(res.getColor(R.color.fab_normal_lap));
             mActionButton.setColorPressed(res.getColor(R.color.fab_pressed_lap));
-            mActionButton.setColorRipple(res.getColor(R.color.fab_ripple_lap));
+            mActionButton.setColorRipple(res.getColor(R.color.fab_ripple));
         }
     }
 

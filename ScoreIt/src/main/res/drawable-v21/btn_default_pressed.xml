@@ -27,7 +27,7 @@
                 android:right="2dp"
                 android:bottom="2dp"/>
             <corners android:radius="2dp"/>
-            <solid android:color="@color/color_accent_pressed"/>
+            <solid android:color="@color/color_hint_dark"/>
         </shape>
     </item>
 </ripple>

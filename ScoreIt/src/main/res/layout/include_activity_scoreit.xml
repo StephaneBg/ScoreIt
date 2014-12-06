@@ -28,7 +28,7 @@
     <FrameLayout
         android:id="@+id/header_container"
         android:layout_width="match_parent"
-        android:background="@color/gray_light"
+        android:background="@color/white"
         android:layout_height="@dimen/header_height"/>
 
     <FrameLayout
@@ -60,5 +60,5 @@
         android:src="@drawable/ic_content_create"
         app:fab_colorNormal="@color/fab_normal_score"
         app:fab_colorPressed="@color/fab_pressed_score"
-        app:fab_colorRipple="@color/fab_ripple_score"/>
+        app:fab_colorRipple="@color/fab_ripple"/>
 </RelativeLayout>

@@ -35,7 +35,7 @@
         android:id="@+id/list_score"
         android:layout_width="match_parent"
         android:layout_height="@dimen/list_item_height"
-        android:background="@color/white"
+        android:background="@color/gray_light"
         android:baselineAligned="false"
         android:orientation="horizontal"/>
 </com.daimajia.swipe.SwipeLayout>

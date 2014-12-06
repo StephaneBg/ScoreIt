@@ -7,7 +7,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.sbgapps.scoreit.R;
@@ -65,7 +64,7 @@ public class CircleButton extends ImageView {
         mDefaultColor = a.getColor(R.styleable.CircleButton_cb_color, color);
         mCirclePaint.setColor(mDefaultColor);
 
-        color = res.getColor(R.color.color_hint_pressed);
+        color = res.getColor(R.color.color_hint_dark);
         mPressedColor = a.getColor(R.styleable.CircleButton_cb_pressed_color, color);
 
         color = res.getColor(R.color.gray_dark);

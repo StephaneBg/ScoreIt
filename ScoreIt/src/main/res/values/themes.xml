@@ -18,7 +18,7 @@
 <resources>
 
     <style name="Theme.ScoreIt" parent="AppTheme.Base">
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">@color/gray_light</item>
     </style>
 
     <style name="Theme.Adaptive" parent="AppTheme.Base">
