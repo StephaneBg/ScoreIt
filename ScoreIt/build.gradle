@@ -72,10 +72,9 @@ dependencies {
     compile 'com.jakewharton:butterknife:6.0.0'
     compile 'com.daimajia.swipelayout:library:1.0.4@aar'
     compile 'com.jpardogo.materialtabstrip:library:1.0.6'
-    //compile 'com.github.mrengineer13:snackbar:0.4.1'
+    compile 'com.github.mrengineer13:snackbar:0.4.0@aar'
     compile 'com.melnykov:floatingactionbutton:1.1.0'
     compile 'com.afollestad:material-dialogs:0.3.6'
 
     compile project(':SimpleStorage')
-    compile project(':SnackBar')
 }
