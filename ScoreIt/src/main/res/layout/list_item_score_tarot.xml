@@ -15,47 +15,32 @@
   ~ limitations under the License.
   -->
 
-<com.daimajia.swipe.SwipeLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swipe"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:show_mode="lay_down"
-    app:drag_edge="left"
-    tools:context=".ScoreItActivity">
+    android:layout_height="@dimen/list_item_height"
+    android:background="@color/gray_light">
 
-    <include
-        layout="@layout/include_bottom_score_list"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/list_item_height"/>
-
-    <RelativeLayout
+    <TextView
+        android:id="@+id/summary"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/list_item_height"
-        android:background="@color/gray_light">
+        android:layout_height="24dp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        tools:text="Joueur - Annonce"/>
 
-        <TextView
-            android:id="@+id/summary"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            tools:text="Joueur - Annonce"/>
+    <com.linearlistview.LinearListView
+        android:id="@+id/list_score"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/summary"
+        android:baselineAligned="false"
+        android:orientation="horizontal"/>
 
-        <com.linearlistview.LinearListView
-            android:id="@+id/list_score"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/summary"
-            android:baselineAligned="false"
-            android:orientation="horizontal"/>
-
-        <View
-            android:id="@+id/left_marker"
-            android:layout_width="6dp"
-            android:layout_height="match_parent"/>
-    </RelativeLayout>
-</com.daimajia.swipe.SwipeLayout>
+    <View
+        android:id="@+id/marker"
+        android:layout_width="6dp"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

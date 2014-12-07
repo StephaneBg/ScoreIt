@@ -682,7 +682,7 @@ public class ScoreItActivity extends BaseActivity
         mGameHelper.deleteAll();
         mHeaderFragment.update();
         if (null != mScoreListFragment && mScoreListFragment.isVisible())
-            mScoreListFragment.getListAdapter().removeAll();
+            mScoreListFragment.getListAdapter().notifyDataSetChanged();
         if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
             mScoreGraphFragment.update();
         }
