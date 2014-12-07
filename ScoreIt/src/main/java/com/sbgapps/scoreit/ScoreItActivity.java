@@ -807,6 +807,7 @@ public class ScoreItActivity extends BaseActivity
                 .positiveText(R.string.ok)
                 .positiveColorRes(R.color.color_accent)
                 .negativeText(R.string.cancel)
+                .negativeColorRes(R.color.gray_dark)
                 .callback(new MaterialDialog.SimpleCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {

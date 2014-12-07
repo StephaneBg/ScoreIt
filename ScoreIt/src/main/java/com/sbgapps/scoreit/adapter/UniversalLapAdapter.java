@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
@@ -28,8 +29,7 @@ import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.fragment.UniversalLapFragment;
-import com.sbgapps.scoreit.widget.CircleButton;
-import com.sbgapps.scoreit.widget.CircleTextView;
+import com.sbgapps.scoreit.widget.CircleImageView;
 
 /**
  * Created by Stéphane on 19/08/2014.
@@ -68,13 +68,13 @@ public class UniversalLapAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.list_item_universal_input, parent, false);
 
             h.name = (TextView) convertView.findViewById(R.id.tv_name);
-            h.points = (CircleTextView) convertView.findViewById(R.id.points);
-            h.plus = (CircleButton) convertView.findViewById(R.id.btn_plus);
-            h.plus_10 = (CircleButton) convertView.findViewById(R.id.btn_plus_10);
-            h.plus_100 = (CircleButton) convertView.findViewById(R.id.btn_plus_100);
-            h.minus = (CircleButton) convertView.findViewById(R.id.btn_minus);
-            h.minus_10 = (CircleButton) convertView.findViewById(R.id.btn_minus_10);
-            h.minus_100 = (CircleButton) convertView.findViewById(R.id.btn_minus_100);
+            h.points = (TextView) convertView.findViewById(R.id.points);
+            h.plus = (CircleImageView) convertView.findViewById(R.id.btn_plus);
+            h.plus_10 = (CircleImageView) convertView.findViewById(R.id.btn_plus_10);
+            h.plus_100 = (CircleImageView) convertView.findViewById(R.id.btn_plus_100);
+            h.minus = (CircleImageView) convertView.findViewById(R.id.btn_minus);
+            h.minus_10 = (CircleImageView) convertView.findViewById(R.id.btn_minus_10);
+            h.minus_100 = (CircleImageView) convertView.findViewById(R.id.btn_minus_100);
             convertView.setTag(h);
         } else {
             h = (ViewHolder) convertView.getTag();
@@ -86,7 +86,6 @@ public class UniversalLapAdapter extends BaseAdapter {
         final UniversalLap lap = mLapFragment.getLap();
         if (null != lap) {
             h.points.setText(Integer.toString(lap.getScore(position)));
-            h.points.setCircleColor(getGameHelper().getPlayerColor(position));
 
             h.plus.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -141,12 +140,12 @@ public class UniversalLapAdapter extends BaseAdapter {
 
     private class ViewHolder {
         TextView name;
-        CircleTextView points;
-        CircleButton plus;
-        CircleButton plus_10;
-        CircleButton plus_100;
-        CircleButton minus;
-        CircleButton minus_10;
-        CircleButton minus_100;
+        TextView points;
+        CircleImageView plus;
+        CircleImageView plus_10;
+        CircleImageView plus_100;
+        CircleImageView minus;
+        CircleImageView minus_10;
+        CircleImageView minus_100;
     }
 }

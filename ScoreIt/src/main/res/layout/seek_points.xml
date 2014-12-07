@@ -28,7 +28,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:baselineAligned="false">
 
-    <com.sbgapps.scoreit.widget.CircleButton
+    <com.sbgapps.scoreit.widget.CircleImageView
         android:id="@+id/btn_minus"
         android:layout_width="@dimen/circle_btn"
         android:layout_height="@dimen/circle_btn"
@@ -55,7 +55,7 @@
             tools:text="48"/>
     </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
 
-    <com.sbgapps.scoreit.widget.CircleButton
+    <com.sbgapps.scoreit.widget.CircleImageView
         android:id="@+id/btn_plus"
         android:layout_width="@dimen/circle_btn"
         android:layout_height="@dimen/circle_btn"

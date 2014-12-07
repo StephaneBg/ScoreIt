@@ -44,7 +44,7 @@
                 tools:text="120"/>
         </LinearLayout>
 
-        <com.sbgapps.scoreit.widget.CircleButton
+        <com.sbgapps.scoreit.widget.CircleImageView
             android:id="@+id/btn_switch"
             android:layout_width="@dimen/circle_btn"
             android:layout_height="@dimen/circle_btn"

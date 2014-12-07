@@ -31,7 +31,7 @@ public class BelotePoints extends FrameLayout
     @InjectView(R.id.player2_points)
     TextView mPlayer2Points;
     @InjectView(R.id.btn_switch)
-    CircleButton mSwitchBtn;
+    CircleImageView mSwitchBtn;
     @InjectView(R.id.group_score)
     ToggleGroup mScoreGroup;
     @InjectView(R.id.seekbar_points)

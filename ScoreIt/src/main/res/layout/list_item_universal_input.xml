@@ -34,27 +34,22 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:gravity="center"
-        android:orientation="horizontal">
-
-        <com.sbgapps.scoreit.widget.CircleButton
-            android:id="@+id/btn_minus"
-            android:layout_width="@dimen/circle_btn"
-            android:layout_height="@dimen/circle_btn"
-            android:src="@drawable/ic_minus_1"/>
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.sbgapps.scoreit.widget.CircleButton
+            <com.sbgapps.scoreit.widget.CircleImageView
                 android:id="@+id/btn_minus_10"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_marginBottom="4dp"
                 android:src="@drawable/ic_minus_10"/>
 
-            <com.sbgapps.scoreit.widget.CircleButton
+            <com.sbgapps.scoreit.widget.CircleImageView
                 android:id="@+id/btn_minus_100"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
@@ -64,18 +59,38 @@
 
         <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:maxWidth="112dp"
             android:layout_weight="1">
 
-            <com.sbgapps.scoreit.widget.CircleTextView
-                android:id="@+id/points"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/font_display_1"
-                tools:text="128"/>
+                android:orientation="vertical">
+
+                <com.sbgapps.scoreit.widget.CircleImageView
+                    android:id="@+id/btn_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_minus_1"/>
+
+                <TextView
+                    android:id="@+id/points"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/font_display_1"
+                    tools:text="128"/>
+
+                <com.sbgapps.scoreit.widget.CircleImageView
+                    android:id="@+id/btn_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_plus_1"/>
+            </LinearLayout>
         </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
 
         <LinearLayout
@@ -83,26 +98,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.sbgapps.scoreit.widget.CircleButton
+            <com.sbgapps.scoreit.widget.CircleImageView
                 android:id="@+id/btn_plus_10"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_marginBottom="4dp"
                 android:src="@drawable/ic_plus_10"/>
 
-            <com.sbgapps.scoreit.widget.CircleButton
+            <com.sbgapps.scoreit.widget.CircleImageView
                 android:id="@+id/btn_plus_100"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_plus_100"/>
         </LinearLayout>
-
-        <com.sbgapps.scoreit.widget.CircleButton
-            android:id="@+id/btn_plus"
-            android:layout_width="@dimen/circle_btn"
-            android:layout_height="@dimen/circle_btn"
-            android:src="@drawable/ic_plus_1"/>
 
     </LinearLayout>
 </LinearLayout>

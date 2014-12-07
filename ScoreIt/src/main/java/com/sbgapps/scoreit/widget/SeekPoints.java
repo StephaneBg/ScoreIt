@@ -38,9 +38,9 @@ public class SeekPoints extends FrameLayout {
     @InjectView(R.id.seekarc_points)
     SeekArc mSeekBarPoints;
     @InjectView(R.id.btn_minus)
-    CircleButton mButtonMinus;
+    CircleImageView mButtonMinus;
     @InjectView(R.id.btn_plus)
-    CircleButton mButtonPlus;
+    CircleImageView mButtonPlus;
 
     private OnProgressChangedListener mListener;
     private int mProgress;
