@@ -463,13 +463,13 @@ public class ScoreItActivity extends BaseActivity
         update();
         invalidateOptionsMenu();
 
-//        mSnackBar.show(
-//                R.string.deleted_lap,
-//                R.string.undo,
-//                R.color.sb_text_color,
-//                0,
-//                token,
-//                SnackBar.MED_SNACK);
+        mSnackBar.show(
+                R.string.deleted_lap,
+                R.string.undo,
+                R.color.sb_text_color,
+                0,
+                token,
+                SnackBar.MED_SNACK);
     }
 
     public void editName(int player) {
