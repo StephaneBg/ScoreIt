@@ -16,32 +16,20 @@
 
 package com.sbgapps.scoreit.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.linearlistview.LinearListView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.fragment.ScoreListFragment;
 
 /**
  * Created by sbaiget on 23/11/13.
  */
-public class UniversalScoreAdapter extends ScoreListAdapter<UniversalScoreAdapter.ViewHolder> {
+public class UniversalScoreAdapter extends ScoreListAdapter<ScoreListAdapter.ViewHolder> {
 
     public UniversalScoreAdapter(ScoreListFragment fragment) {
         super(fragment);
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public LinearListView mLinearListView;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            mLinearListView = (LinearListView) itemView;
-        }
     }
 
     @Override
@@ -53,6 +41,7 @@ public class UniversalScoreAdapter extends ScoreListAdapter<UniversalScoreAdapte
 
     @Override
     public void onBindViewHolder(UniversalScoreAdapter.ViewHolder viewHolder, int i) {
+        super.onBindViewHolder(viewHolder, i);
         viewHolder.mLinearListView.setAdapter(
                 new LapRowAdapter(this, getGameHelper().getLaps().get(i)));
     }

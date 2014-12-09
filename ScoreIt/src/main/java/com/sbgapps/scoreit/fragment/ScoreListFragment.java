@@ -18,6 +18,7 @@ package com.sbgapps.scoreit.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -53,8 +54,21 @@ public class ScoreListFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(android.R.id.list);
         recyclerView.setHasFixedSize(true);
 
-        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        final LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
+
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                int begin = manager.findFirstVisibleItemPosition();
+                int end = manager.findLastVisibleItemPosition();
+                for (int i = begin; i < end; i++) {
+                    ViewPager vp = (ViewPager) manager.getChildAt(i).findViewById(R.id.viewpager);
+                    vp.setCurrentItem(0);
+                }
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
 
         ScoreItActivity activity = (ScoreItActivity) getActivity();
         GameHelper gameHelper = activity.getGameHelper();

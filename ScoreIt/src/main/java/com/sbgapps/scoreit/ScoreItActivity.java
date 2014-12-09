@@ -463,13 +463,13 @@ public class ScoreItActivity extends BaseActivity
         update();
         invalidateOptionsMenu();
 
-        mSnackBar.show(
-                R.string.deleted_lap,
-                R.string.undo,
-                R.color.sb_text_color,
-                0,
-                token,
-                SnackBar.MED_SNACK);
+//        mSnackBar.show(
+//                R.string.deleted_lap,
+//                R.string.undo,
+//                R.color.sb_text_color,
+//                0,
+//                token,
+//                SnackBar.MED_SNACK);
     }
 
     public void editName(int player) {
@@ -697,7 +697,7 @@ public class ScoreItActivity extends BaseActivity
     private void showClearDialogActionChoices() {
         new MaterialDialog.Builder(this)
                 .title(getString(R.string.current_game))
-                .titleColorRes(R.color.color_accent)
+                .titleColorRes(R.color.color_primary)
                 .items(getResources().getStringArray(R.array.clear_actions))
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
@@ -727,7 +727,7 @@ public class ScoreItActivity extends BaseActivity
     private void showEditNameActionChoices() {
         new MaterialDialog.Builder(this)
                 .title(getString(R.string.edit_name))
-                .titleColorRes(R.color.color_accent)
+                .titleColorRes(R.color.color_primary)
                 .items(getResources().getStringArray(R.array.edit_name_action))
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
@@ -751,7 +751,7 @@ public class ScoreItActivity extends BaseActivity
     private void showLoadActionChoices() {
         new MaterialDialog.Builder(this)
                 .title(getString(R.string.current_game))
-                .titleColorRes(R.color.color_accent)
+                .titleColorRes(R.color.color_primary)
                 .items(getResources().getStringArray(R.array.load_actions))
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
@@ -783,7 +783,7 @@ public class ScoreItActivity extends BaseActivity
 
         new MaterialDialog.Builder(this)
                 .title(getString(R.string.player_number))
-                .titleColorRes(R.color.color_accent)
+                .titleColorRes(R.color.color_primary)
                 .items(players)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
@@ -802,10 +802,10 @@ public class ScoreItActivity extends BaseActivity
 
         new MaterialDialog.Builder(this)
                 .title(R.string.edit_name)
-                .titleColorRes(R.color.color_accent)
+                .titleColorRes(R.color.color_primary)
                 .customView(view)
                 .positiveText(R.string.ok)
-                .positiveColorRes(R.color.color_accent)
+                .positiveColorRes(R.color.color_primary)
                 .negativeText(R.string.cancel)
                 .negativeColorRes(R.color.gray_dark)
                 .callback(new MaterialDialog.SimpleCallback() {
@@ -830,11 +830,12 @@ public class ScoreItActivity extends BaseActivity
 
         new MaterialDialog.Builder(this)
                 .title(R.string.filename)
-                .titleColorRes(R.color.color_accent)
+                .titleColorRes(R.color.color_primary)
                 .customView(view)
                 .positiveText(R.string.ok)
-                .positiveColorRes(R.color.color_accent)
+                .positiveColorRes(R.color.color_primary)
                 .negativeText(R.string.cancel)
+                .negativeColorRes(R.color.gray_dark)
                 .callback(new MaterialDialog.SimpleCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {

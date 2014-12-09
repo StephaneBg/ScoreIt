@@ -17,12 +17,10 @@
 package com.sbgapps.scoreit.adapter;
 
 import android.content.res.Resources;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.linearlistview.LinearListView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.fragment.ScoreListFragment;
 import com.sbgapps.scoreit.games.belote.GenericBeloteLap;
@@ -36,14 +34,12 @@ public class GenericBeloteScoreAdapter extends ScoreListAdapter<GenericBeloteSco
         super(fragment);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends ScoreListAdapter.ViewHolder {
         public View mMaker;
-        public LinearListView mLinearListView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mMaker = itemView.findViewById(R.id.marker);
-            mLinearListView = (LinearListView) itemView.findViewById(R.id.list_score);
         }
     }
 
@@ -56,6 +52,8 @@ public class GenericBeloteScoreAdapter extends ScoreListAdapter<GenericBeloteSco
 
     @Override
     public void onBindViewHolder(GenericBeloteScoreAdapter.ViewHolder viewHolder, int i) {
+        super.onBindViewHolder(viewHolder, i);
+
         final GenericBeloteLap lap = (GenericBeloteLap) getGameHelper().getLaps().get(i);
         final Resources res = getActivity().getResources();
 

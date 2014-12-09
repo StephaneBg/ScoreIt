@@ -22,9 +22,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.linearlistview.LinearListView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.adapter.HeaderAdapter;
+import com.sbgapps.scoreit.widget.LinearListView;
 
 /**
  * Created by sbaiget on 24/12/13.
