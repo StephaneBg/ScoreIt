@@ -41,6 +41,7 @@ public class ScoreListFragment extends Fragment {
 
     public static final String TAG = ScoreListFragment.class.getName();
     private ScoreListAdapter mAdapter;
+    private LinearLayoutManager mManager;
 
     public ScoreListAdapter getListAdapter() {
         return mAdapter;
@@ -54,18 +55,13 @@ public class ScoreListFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(android.R.id.list);
         recyclerView.setHasFixedSize(true);
 
-        final LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(manager);
+        mManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mManager);
 
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                int begin = manager.findFirstVisibleItemPosition();
-                int end = manager.findLastVisibleItemPosition();
-                for (int i = begin; i < end; i++) {
-                    ViewPager vp = (ViewPager) manager.getChildAt(i).findViewById(R.id.viewpager);
-                    vp.setCurrentItem(0);
-                }
+                closeAllItems();
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
@@ -90,7 +86,20 @@ public class ScoreListFragment extends Fragment {
         return view;
     }
 
+    public void closeAllItems() {
+        int begin = mManager.findFirstVisibleItemPosition();
+        int end = mManager.findLastVisibleItemPosition();
+        for (int i = begin; i < end; i++) {
+            View view = mManager.getChildAt(i);
+            if (null != view) {
+                ViewPager vp = (ViewPager) view.findViewById(R.id.viewpager);
+                vp.setCurrentItem(0);
+            }
+        }
+    }
+
     public void update() {
+        closeAllItems();
         getListAdapter().notifyDataSetChanged();
     }
 }

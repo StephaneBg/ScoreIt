@@ -38,18 +38,22 @@ import com.sbgapps.scoreit.widget.LinearListView;
  */
 public abstract class ScoreListAdapter<E extends ScoreListAdapter.ViewHolder> extends RecyclerView.Adapter<E> {
 
-    private final ScoreItActivity mActivity;
+    private final ScoreListFragment mScoreListFragment;
 
     public ScoreListAdapter(ScoreListFragment fragment) {
-        mActivity = (ScoreItActivity) fragment.getActivity();
+        mScoreListFragment = fragment;
     }
 
     public LayoutInflater getLayoutInflater() {
-        return LayoutInflater.from(mActivity);
+        return LayoutInflater.from(getActivity());
     }
 
     public ScoreItActivity getActivity() {
-        return mActivity;
+        return (ScoreItActivity) mScoreListFragment.getActivity();
+    }
+
+    public ScoreListFragment getFragment() {
+        return mScoreListFragment;
     }
 
     @Override
@@ -78,7 +82,7 @@ public abstract class ScoreListAdapter<E extends ScoreListAdapter.ViewHolder> ex
     }
 
     public GameHelper getGameHelper() {
-        return mActivity.getGameHelper();
+        return getActivity().getGameHelper();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
