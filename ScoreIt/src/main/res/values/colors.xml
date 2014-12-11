@@ -24,9 +24,6 @@
     <color name="color_accent">#EB645E</color>
     <color name="color_accent_dark">#D25954</color>
 
-    <color name="color_hint">#EA9D9A</color>
-    <color name="color_hint_dark">#BA7C7A</color>
-
     <color name="gray_light">#EEEEEE</color>
     <color name="gray_dark">#4D4D4D</color>
 
@@ -39,12 +36,12 @@
     <color name="fab_pressed_lap">#84A241</color>
     <color name="fab_ripple">@color/gray_light</color>
 
-    <color name="color_player1">#ff9800</color>
-    <color name="color_player2">#e51c23</color>
-    <color name="color_player3">#47799B</color>
-    <color name="color_player4">#665445</color>
-    <color name="color_player5">#259b24</color>
-    <color name="color_player6">#cddc39</color>
-    <color name="color_player7">#9c27b0</color>
-    <color name="color_player8">#607d8b</color>
+    <color name="color_player1">#DF7738</color>
+    <color name="color_player2">#B53A2A</color>
+    <color name="color_player3">#1D5FB3</color>
+    <color name="color_player4">#3D804B</color>
+    <color name="color_player5">#8B56C8</color>
+    <color name="color_player6">#D74C6B</color>
+    <color name="color_player7">#59B4E0</color>
+    <color name="color_player8">#91A949</color>
 </resources>

@@ -21,7 +21,7 @@
     <item>
         <shape
             android:shape="rectangle">
-            <solid android:color="@color/color_hint_dark"/>
+            <solid android:color="@color/color_accent_dark"/>
             <padding
                 android:left="2dp"
                 android:top="2dp"

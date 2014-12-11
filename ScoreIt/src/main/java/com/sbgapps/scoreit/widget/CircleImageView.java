@@ -60,14 +60,13 @@ public class CircleImageView extends ImageView {
         mPressedRingWidth = Utils.dpToPx(DEFAULT_PRESSED_RING_WIDTH_DIP, res);
         mPressedRingWidth = (int) a.getDimension(R.styleable.CircleImageView_cb_pressedRingWidth, mPressedRingWidth);
 
-        int color = res.getColor(R.color.color_hint);
+        int color = res.getColor(R.color.color_accent);
         mDefaultColor = a.getColor(R.styleable.CircleImageView_cb_color, color);
         mCirclePaint.setColor(mDefaultColor);
 
-        color = res.getColor(R.color.color_hint_dark);
+        color = res.getColor(R.color.color_accent_dark);
         mPressedColor = a.getColor(R.styleable.CircleImageView_cb_pressed_color, color);
 
-        color = res.getColor(R.color.gray_dark);
         color = a.getColor(R.styleable.CircleImageView_cb_shadow_color, color);
         mFocusPaint.setColor(color);
         mFocusPaint.setAlpha(PRESSED_RING_ALPHA);
