@@ -87,13 +87,15 @@ public class ScoreListFragment extends Fragment {
     }
 
     public void closeAllItems() {
-        int begin = mManager.findFirstVisibleItemPosition();
-        int end = mManager.findLastVisibleItemPosition();
-        for (int i = begin; i < end; i++) {
+        closeOthers(null);
+    }
+
+    public void closeOthers(ViewPager viewPager) {
+        for (int i = 0; i < mManager.getChildCount(); i++) {
             View view = mManager.getChildAt(i);
             if (null != view) {
                 ViewPager vp = (ViewPager) view.findViewById(R.id.viewpager);
-                vp.setCurrentItem(0);
+                if (!vp.equals(viewPager)) vp.setCurrentItem(0);
             }
         }
     }

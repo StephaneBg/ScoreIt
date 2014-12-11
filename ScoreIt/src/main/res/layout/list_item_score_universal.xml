@@ -31,8 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:background="?attr/selectableItemBackground"/>
+            android:orientation="horizontal"/>
     </FrameLayout>
 
     <include layout="@layout/include_bottom_score_list"/>

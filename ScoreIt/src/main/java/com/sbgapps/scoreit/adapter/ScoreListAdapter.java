@@ -74,6 +74,23 @@ public abstract class ScoreListAdapter<E extends ScoreListAdapter.ViewHolder> ex
                 viewHolder.mViewPager.setCurrentItem(0);
             }
         });
+
+        viewHolder.mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (0 != position) mScoreListFragment.closeOthers(viewHolder.mViewPager);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
