@@ -200,7 +200,7 @@ public class ScoreItActivity extends BaseActivity
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                mSnackBar.clear();
+                if(null != mSnackBar) mSnackBar.clear();
                 setTitle();
                 invalidateOptionsMenu();
             }
@@ -219,9 +219,6 @@ public class ScoreItActivity extends BaseActivity
                 onActionButtonClicked();
             }
         });
-
-        mSnackBar = new SnackBar(this);
-        mSnackBar.setOnClickListener(this);
     }
 
     public boolean isTablet() {
@@ -251,13 +248,11 @@ public class ScoreItActivity extends BaseActivity
             outState.putSerializable("lap", mLap);
         }
         if (Player.PLAYER_NONE != mEditedPlayer) outState.putInt("editedPlayer", mEditedPlayer);
-        outState.putBundle("snackbar", mSnackBar.onSaveInstanceState());
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        mSnackBar.onRestoreInstanceState(savedInstanceState.getBundle("snackbar"));
         mEditedPlayer = savedInstanceState.getInt("editedPlayer", Player.PLAYER_NONE);
     }
 
@@ -463,13 +458,14 @@ public class ScoreItActivity extends BaseActivity
         update();
         invalidateOptionsMenu();
 
-        mSnackBar.show(
-                R.string.deleted_lap,
-                R.string.undo,
-                R.color.sb_text_color,
-                0,
-                token,
-                SnackBar.MED_SNACK);
+        mSnackBar = new SnackBar.Builder(this)
+                .withOnClickListener(this)
+                .withMessageId(R.string.deleted_lap)
+                .withActionMessageId(R.string.undo)
+                .withTextColorId(R.color.sb_text_color)
+                .withToken(token)
+                .withDuration(SnackBar.MED_SNACK)
+                .show();
     }
 
     public void editName(int player) {
@@ -519,7 +515,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void showLapScene(Lap lap) {
-        mSnackBar.clear();
+        if(null != mSnackBar) mSnackBar.clear();
 
         if (null == lap) {
             switch (mGameHelper.getPlayedGame()) {
@@ -711,7 +707,7 @@ public class ScoreItActivity extends BaseActivity
                                 if (mGameHelper.getFilesUtil().isDefaultFile()) {
                                     showSaveFileDialog(false);
                                 } else {
-                                    mSnackBar.clear();
+                                    if(null != mSnackBar) mSnackBar.clear();
                                     mGameHelper.saveGame();
                                     mGameHelper.createGame();
                                     invalidateOptionsMenu();

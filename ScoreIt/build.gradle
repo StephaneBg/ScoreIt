@@ -72,6 +72,7 @@ dependencies {
     compile 'com.jpardogo.materialtabstrip:library:1.0.6'
     compile 'com.melnykov:floatingactionbutton:1.1.0'
     compile 'com.afollestad:material-dialogs:0.3.6'
+    //compile 'com.github.mrengineer13:snackbar:0.5.0'
+    compile project(':SnackBar')
     compile project(':SimpleStorage')
-    compile project(':snackbar-0.4.0')
 }
