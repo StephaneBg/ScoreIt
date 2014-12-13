@@ -20,15 +20,16 @@
 
     <!-- Margin -->
     <dimen name="activity_horizontal_margin">24dp</dimen>
+    <dimen name="fab_margin_top">196dp</dimen>
 
     <!-- Padding -->
+    <dimen name="scrollview_padding">220dp</dimen>
 
     <!-- Fonts -->
 
     <!-- Height -->
-    <dimen name="toolbar_height">128dp</dimen>
     <dimen name="widget_height">72dp</dimen>
+    <dimen name="header_height">224dp</dimen>
 
     <!-- Width -->
-    <dimen name="card_width">512dp</dimen>
 </resources>

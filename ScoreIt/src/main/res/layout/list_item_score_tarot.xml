@@ -20,14 +20,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/viewpager"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_height"
-    android:overScrollMode="never">
+    android:layout_height="@dimen/list_item_height">
 
     <RelativeLayout
         android:id="@+id/primary_content"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/list_item_height"
-        android:background="@color/gray_light">
+        android:layout_height="@dimen/list_item_height">
 
         <TextView
             android:id="@+id/summary"

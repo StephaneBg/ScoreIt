@@ -28,7 +28,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -46,6 +45,7 @@ import android.widget.RelativeLayout;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.mrengineer13.snackbar.SnackBar;
 import com.melnykov.fab.FloatingActionButton;
+import com.melnykov.fab.ObservableScrollView;
 import com.sbgapps.scoreit.fragment.BeloteLapFragment;
 import com.sbgapps.scoreit.fragment.CoincheLapFragment;
 import com.sbgapps.scoreit.fragment.HeaderFragment;
@@ -89,7 +89,9 @@ public class ScoreItActivity extends BaseActivity
     ListView mDrawerListView;
     @InjectView(R.id.fab)
     FloatingActionButton mActionButton;
-    FrameLayout mLapContainer;
+    @InjectView(R.id.lap_container)
+    ObservableScrollView mLapContainer;
+    FrameLayout mGraphContainer;
 
     private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -124,9 +126,9 @@ public class ScoreItActivity extends BaseActivity
         super.onCreate(savedInstanceState);
 
         ButterKnife.inject(this);
-        mLapContainer = (FrameLayout) findViewById(R.id.lap_container);
+        mGraphContainer = (FrameLayout) findViewById(R.id.graph_container);
 
-        if (!isTablet() && Utils.hasLollipopApi())
+        if (Utils.hasLollipopApi())
             getToolbar().setElevation(Utils.dpToPx(4, getResources()));
 
         mGameHelper = new GameHelper(this);
@@ -135,20 +137,10 @@ public class ScoreItActivity extends BaseActivity
         Resources res = getResources();
 
         // Init fragments
-        final FragmentManager fragmentManager = getSupportFragmentManager();
-        if (null == savedInstanceState) {
-            reloadFragments(false);
-        } else {
-            mLap = (Lap) savedInstanceState.getSerializable("lap");
-            mHeaderFragment = (HeaderFragment) fragmentManager
-                    .findFragmentByTag(HeaderFragment.TAG);
-            mScoreListFragment = (ScoreListFragment) fragmentManager
-                    .findFragmentByTag(ScoreListFragment.TAG);
-            mScoreGraphFragment = (ScoreGraphFragment) fragmentManager
-                    .findFragmentByTag(ScoreGraphFragment.TAG);
-            mLapFragment = (LapFragment) fragmentManager
-                    .findFragmentByTag(LapFragment.TAG);
+        reloadFragments(false);
 
+        if (null != savedInstanceState) {
+            mLap = (Lap) savedInstanceState.getSerializable("lap");
             mIsEdited = savedInstanceState.getBoolean("edited");
             if (mIsEdited) {
                 int position = savedInstanceState.getInt("position");
@@ -158,24 +150,22 @@ public class ScoreItActivity extends BaseActivity
 
         if (null != mLap) setActionButtonColor();
 
-        if (!isTablet()) {
-            final View root = findViewById(R.id.root);
-            root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    if (null == mLap) {
-                        if (Utils.hasLollipopApi()) {
-                            mLapContainer.setVisibility(View.INVISIBLE);
-                        } else {
-                            mLapContainer.setTranslationY(mLapContainer.getHeight());
-                        }
+        final View root = findViewById(R.id.root);
+        root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (null == mLap) {
+                    if (Utils.hasLollipopApi()) {
+                        mLapContainer.setVisibility(View.INVISIBLE);
                     } else {
-                        setActionButtonProperties(false);
+                        mLapContainer.setTranslationY(mLapContainer.getHeight());
                     }
-                    root.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                } else {
+                    setActionButtonProperties(false);
                 }
-            });
-        }
+                root.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+            }
+        });
 
         // Init drawer
         mNavigationItems = new ArrayList<>();
@@ -200,7 +190,7 @@ public class ScoreItActivity extends BaseActivity
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                if(null != mSnackBar) mSnackBar.clear();
+                if (null != mSnackBar) mSnackBar.clear();
                 setTitle();
                 invalidateOptionsMenu();
             }
@@ -219,10 +209,11 @@ public class ScoreItActivity extends BaseActivity
                 onActionButtonClicked();
             }
         });
+        if(!isTablet()) mActionButton.attachToScrollView(mLapContainer);
     }
 
     public boolean isTablet() {
-        return (null == mLapContainer);
+        return (null != mGraphContainer);
     }
 
     @Override
@@ -430,7 +421,7 @@ public class ScoreItActivity extends BaseActivity
                 if (cursor.moveToFirst()) {
                     int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                     name = cursor.getString(columnIndex);
-                    mGameHelper.getPlayer(mEditedPlayer).setName(name);
+                    mGameHelper.getPlayer(mEditedPlayer).setName(name.split(" ")[0]);
                     mEditedPlayer = Player.PLAYER_NONE;
                     mHeaderFragment.update();
                 }
@@ -469,9 +460,6 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void editName(int player) {
-        if (null != mLapFragment
-                && mLapFragment.isVisible()
-                && isTablet()) return;
         mEditedPlayer = player;
         showEditNameActionChoices();
     }
@@ -515,7 +503,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void showLapScene(Lap lap) {
-        if(null != mSnackBar) mSnackBar.clear();
+        if (null != mSnackBar) mSnackBar.clear();
 
         if (null == lap) {
             switch (mGameHelper.getPlayedGame()) {
@@ -562,11 +550,7 @@ public class ScoreItActivity extends BaseActivity
             mGameHelper.addLap(mLap);
         }
         mLap = null;
-        if (isTablet()) {
-            showScoreListFragment(true);
-        } else {
-            animateLapContainer();
-        }
+        animateLapContainer();
         setActionButtonProperties(true);
         update();
     }
@@ -575,14 +559,14 @@ public class ScoreItActivity extends BaseActivity
         Resources res = getResources();
         if (null == mLap) {
             mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_content_create));
-            mActionButton.setColorNormal(res.getColor(R.color.fab_normal_score));
-            mActionButton.setColorPressed(res.getColor(R.color.fab_pressed_score));
-            mActionButton.setColorRipple(res.getColor(R.color.fab_ripple));
+            mActionButton.setColorNormal(res.getColor(R.color.color_accent));
+            mActionButton.setColorPressed(res.getColor(R.color.color_accent_dark));
+            mActionButton.setColorRipple(res.getColor(R.color.gray_light));
         } else {
             mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_action_done));
-            mActionButton.setColorNormal(res.getColor(R.color.fab_normal_lap));
-            mActionButton.setColorPressed(res.getColor(R.color.fab_pressed_lap));
-            mActionButton.setColorRipple(res.getColor(R.color.fab_ripple));
+            mActionButton.setColorNormal(res.getColor(R.color.color_primary));
+            mActionButton.setColorPressed(res.getColor(R.color.color_primary_dark));
+            mActionButton.setColorRipple(res.getColor(R.color.gray_light));
         }
     }
 
@@ -627,7 +611,8 @@ public class ScoreItActivity extends BaseActivity
 
     private void setActionButtonPosition() {
         if (isTablet()) return;
-        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mActionButton.getLayoutParams();
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)
+                mActionButton.getLayoutParams();
         if (null == mLap) {
             lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
         } else {
@@ -639,7 +624,6 @@ public class ScoreItActivity extends BaseActivity
 
     @SuppressWarnings("NewApi")
     public void animateLapContainer() {
-        if (isTablet()) return;
         if (Utils.hasLollipopApi()) {
             int cx = (mActionButton.getLeft() + mActionButton.getRight()) / 2;
             int cy = (mActionButton.getTop() + mActionButton.getBottom()) / 2;
@@ -707,7 +691,7 @@ public class ScoreItActivity extends BaseActivity
                                 if (mGameHelper.getFilesUtil().isDefaultFile()) {
                                     showSaveFileDialog(false);
                                 } else {
-                                    if(null != mSnackBar) mSnackBar.clear();
+                                    if (null != mSnackBar) mSnackBar.clear();
                                     mGameHelper.saveGame();
                                     mGameHelper.createGame();
                                     invalidateOptionsMenu();
@@ -858,11 +842,7 @@ public class ScoreItActivity extends BaseActivity
             mLap = null;
             mEditedLap = null;
             mIsEdited = false;
-            if (isTablet()) {
-                showScoreListFragment(true);
-            } else {
-                animateLapContainer();
-            }
+            animateLapContainer();
             setActionButtonProperties(true);
         } else if (!isTablet() && null != mScoreGraphFragment) {
             switchScoreViews();
@@ -874,6 +854,7 @@ public class ScoreItActivity extends BaseActivity
     private void showHeaderFragment(boolean anim) {
         if (null == mHeaderFragment)
             mHeaderFragment = new HeaderFragment();
+
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         ft.replace(R.id.header_container, mHeaderFragment, HeaderFragment.TAG);
@@ -918,14 +899,9 @@ public class ScoreItActivity extends BaseActivity
                 break;
         }
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        if (isTablet()) {
-            ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-            ft.replace(R.id.score_container, mLapFragment, LapFragment.TAG);
-        } else {
-            ft.replace(R.id.lap_container, mLapFragment, LapFragment.TAG);
-            animateLapContainer();
-        }
+        ft.replace(R.id.lap_container, mLapFragment, LapFragment.TAG);
         ft.commit();
+        animateLapContainer();
     }
 
     @Override

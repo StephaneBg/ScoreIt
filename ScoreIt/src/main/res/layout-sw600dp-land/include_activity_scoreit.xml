@@ -16,82 +16,73 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ScoreItActivity">
 
-    <View
-        android:id="@+id/back_colored"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:background="?attr/colorPrimary"/>
-
-    <View
-        android:id="@+id/center_view"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"/>
-
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="92dp"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_toLeftOf="@id/center_view"
-        android:orientation="vertical"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="4dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:id="@+id/header_container"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/header_height"/>
-
-            <FrameLayout
-                android:id="@+id/graph_container"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="@dimen/card_width"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="92dp"
-        android:layout_toRightOf="@id/center_view"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="4dp">
+        android:orientation="horizontal">
 
         <FrameLayout
-            android:id="@+id/score_container"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </android.support.v7.widget.CardView>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/header_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/header_height"/>
+
+                <FrameLayout
+                    android:id="@+id/score_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+
+            <com.melnykov.fab.ObservableScrollView
+                android:id="@+id/lap_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:paddingTop="@dimen/scrollview_padding"
+                android:clipToPadding="false"/>
+        </FrameLayout>
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/right_shadow"/>
+
+        <FrameLayout
+            android:id="@+id/graph_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginBottom="72dp"/>
+    </LinearLayout>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="100dp"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_gravity="bottom|right"
         android:src="@drawable/ic_content_create"
-        app:fab_colorNormal="@color/fab_normal_score"
-        app:fab_colorPressed="@color/fab_pressed_score"
-        app:fab_colorRipple="@color/fab_ripple"/>
-</RelativeLayout>
+        app:fab_colorNormal="@color/color_accent"
+        app:fab_colorPressed="@color/color_accent_dark"
+        app:fab_colorRipple="@color/gray_light"/>
+</FrameLayout>

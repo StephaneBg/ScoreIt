@@ -38,7 +38,7 @@ public class Player {
     }
 
     public String getName() {
-        return mName.split(" ")[0];
+        return mName;
     }
 
     public void setName(String name) {

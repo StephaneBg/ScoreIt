@@ -71,11 +71,6 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         View view = inflater.inflate(R.layout.fragment_lap_coinche, null);
         ButterKnife.inject(this, view);
 
-        if (!((ScoreItActivity) getActivity()).isTablet()) {
-            ObservableScrollView scrollView = (ObservableScrollView) view.findViewById(R.id.obs_scrollview);
-            ((ScoreItActivity) getActivity()).getActionButton().attachToScrollView(scrollView);
-        }
-
         if(null == getLap()) return view;
 
         switch (getLap().getScorer()) {

@@ -19,8 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/viewpager"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_height"
-    android:overScrollMode="never">
+    android:layout_height="@dimen/list_item_height">
 
     <FrameLayout
         android:id="@+id/primary_content"
@@ -31,7 +30,6 @@
             android:id="@+id/list_score"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray_light"
             android:baselineAligned="false"
             android:orientation="horizontal"/>
 

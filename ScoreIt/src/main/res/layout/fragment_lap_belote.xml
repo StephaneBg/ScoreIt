@@ -15,25 +15,16 @@
   ~ limitations under the License.
   -->
 
-<com.melnykov.fab.ObservableScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/obs_scrollview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="none"
-    android:paddingTop="164dp"
-    android:clipToPadding="false">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="4dp"
+        android:background="@drawable/top_shadow"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@drawable/top_shadow"/>
-
-        <include layout="@layout/include_fragment_lap_belote"/>
-    </LinearLayout>
-</com.melnykov.fab.ObservableScrollView>
+    <include layout="@layout/include_fragment_lap_belote"/>
+</LinearLayout>

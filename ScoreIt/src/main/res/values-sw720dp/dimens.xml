@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
   ~ Copyright (c) 2014 SBG Apps
   ~
@@ -15,9 +16,17 @@
   ~ limitations under the License.
   -->
 
-<ListView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:divider="@null"/>
+<resources>
+
+    <!-- Margin -->
+
+    <!-- Padding -->
+    <dimen name="scrollview_padding">220dp</dimen>
+
+    <!-- Fonts -->
+
+    <!-- Height -->
+    <dimen name="header_height">224dp</dimen>
+
+    <!-- Width -->
+</resources>

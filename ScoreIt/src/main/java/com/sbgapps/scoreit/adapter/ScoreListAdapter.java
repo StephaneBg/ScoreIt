@@ -115,11 +115,7 @@ public abstract class ScoreListAdapter<E extends ScoreListAdapter.ViewHolder> ex
             mLinearListView = (LinearListView) itemView.findViewById(R.id.list_score);
             mDeleteBtn = (ImageButton) itemView.findViewById(R.id.action_discard);
             mEditBtn = (ImageButton) itemView.findViewById(R.id.action_edit);
-
             mViewPager.setAdapter(new ViewPagerAdapter());
-            DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
-            mViewPager.getLayoutParams().width = displayMetrics.widthPixels;
-            mViewPager.requestLayout();
         }
     }
 

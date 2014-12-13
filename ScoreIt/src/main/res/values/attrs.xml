@@ -29,11 +29,6 @@
         <attr name="cb_pressedRingWidth" format="dimension"/>
     </declare-styleable>
 
-    <declare-styleable name="CircleTextView">
-        <attr name="ct_color" format="color"/>
-        <attr name="ct_strokeWidth" format="dimension"/>
-    </declare-styleable>
-
     <declare-styleable name="SeekArc">
         <attr name="thumbOffset" format="dimension"/>
         <attr name="max" format="integer"/>

@@ -28,6 +28,7 @@ import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.adapter.UniversalLapAdapter;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.util.Utils;
+import com.sbgapps.scoreit.widget.LinearListView;
 
 /**
  * Created by sbaiget on 02/02/14.
@@ -42,23 +43,9 @@ public class UniversalLapFragment extends LapFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap_universal, null);
-
-        ListView listView = (ListView) view.findViewById(android.R.id.list);
-
-        if (!((ScoreItActivity) getActivity()).isTablet()) {
-            ((ScoreItActivity) getActivity()).getActionButton().attachToListView(listView);
-
-            View header = new View(getActivity());
-            header.setLayoutParams(
-                    new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
-                            Utils.dpToPx(4, getResources())));
-            header.setBackgroundResource(R.drawable.top_shadow);
-
-            listView.addHeaderView(header);
-        }
-
         if(null == getLap()) return view;
 
+        LinearListView listView = (LinearListView) view.findViewById(R.id.list_players);
         listView.setAdapter(new UniversalLapAdapter(this));
 
         return view;

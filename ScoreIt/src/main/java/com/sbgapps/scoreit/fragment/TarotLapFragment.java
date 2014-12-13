@@ -79,11 +79,6 @@ public class TarotLapFragment extends LapFragment
         View view = inflater.inflate(R.layout.fragment_lap_tarot, null);
         ButterKnife.inject(this, view);
 
-        if (!((ScoreItActivity) getActivity()).isTablet()) {
-            ObservableScrollView scrollView = (ObservableScrollView) view.findViewById(R.id.obs_scrollview);
-            ((ScoreItActivity) getActivity()).getActionButton().attachToScrollView(scrollView);
-        }
-
         if(null == getLap()) return view;
 
         mTaker.setAdapter(getPlayerArrayAdapter());

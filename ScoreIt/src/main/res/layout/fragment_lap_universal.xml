@@ -15,12 +15,20 @@
   ~ limitations under the License.
   -->
 
-<ListView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/list"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="164dp"
-    android:clipToPadding="false"
-    android:scrollbars="none"
-    android:divider="@null"/>
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/top_shadow"/>
+
+    <com.sbgapps.scoreit.widget.LinearListView
+        android:id="@+id/list_players"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
+</LinearLayout>
