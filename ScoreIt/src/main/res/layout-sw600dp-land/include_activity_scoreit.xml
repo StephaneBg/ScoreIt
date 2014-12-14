@@ -57,8 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="none"
-                android:paddingTop="@dimen/scrollview_padding"
-                android:clipToPadding="false"/>
+                android:fillViewport="true"/>
         </FrameLayout>
 
         <View

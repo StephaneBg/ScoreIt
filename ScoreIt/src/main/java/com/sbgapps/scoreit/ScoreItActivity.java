@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -106,7 +107,6 @@ public class ScoreItActivity extends BaseActivity
     private ScoreListFragment mScoreListFragment;
     private ScoreGraphFragment mScoreGraphFragment;
     private HeaderFragment mHeaderFragment;
-    private LapFragment mLapFragment;
 
     public GameHelper getGameHelper() {
         return mGameHelper;
@@ -114,10 +114,6 @@ public class ScoreItActivity extends BaseActivity
 
     public Lap getLap() {
         return mLap;
-    }
-
-    public FloatingActionButton getActionButton() {
-        return mActionButton;
     }
 
     @Override
@@ -883,23 +879,24 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void showLapFragment() {
+        Fragment fragment;
         switch (mGameHelper.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
-                mLapFragment = new UniversalLapFragment();
+                fragment = new UniversalLapFragment();
                 break;
             case Game.BELOTE:
-                mLapFragment = new BeloteLapFragment();
+                fragment = new BeloteLapFragment();
                 break;
             case Game.COINCHE:
-                mLapFragment = new CoincheLapFragment();
+                fragment = new CoincheLapFragment();
                 break;
             case Game.TAROT:
-                mLapFragment = new TarotLapFragment();
+                fragment = new TarotLapFragment();
                 break;
         }
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.lap_container, mLapFragment, LapFragment.TAG);
+        ft.replace(R.id.lap_container, fragment, LapFragment.TAG);
         ft.commit();
         animateLapContainer();
     }
