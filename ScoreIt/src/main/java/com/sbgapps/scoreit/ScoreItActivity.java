@@ -17,7 +17,6 @@
 package com.sbgapps.scoreit;
 
 import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -36,7 +35,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -151,11 +149,7 @@ public class ScoreItActivity extends BaseActivity
             @Override
             public void onGlobalLayout() {
                 if (null == mLap) {
-                    if (Utils.hasLollipopApi()) {
-                        mLapContainer.setVisibility(View.INVISIBLE);
-                    } else {
-                        mLapContainer.setTranslationY(mLapContainer.getHeight());
-                    }
+                    mLapContainer.setTranslationY(mLapContainer.getHeight());
                 } else {
                     setActionButtonProperties(false);
                 }
@@ -205,7 +199,7 @@ public class ScoreItActivity extends BaseActivity
                 onActionButtonClicked();
             }
         });
-        if(!isTablet()) mActionButton.attachToScrollView(mLapContainer);
+        if (!isTablet()) mActionButton.attachToScrollView(mLapContainer);
     }
 
     public boolean isTablet() {
@@ -620,38 +614,15 @@ public class ScoreItActivity extends BaseActivity
 
     @SuppressWarnings("NewApi")
     public void animateLapContainer() {
-        if (Utils.hasLollipopApi()) {
-            int cx = (mActionButton.getLeft() + mActionButton.getRight()) / 2;
-            int cy = (mActionButton.getTop() + mActionButton.getBottom()) / 2;
-            if (null != mLap) {
-                int finalRadius = Math.max(mLapContainer.getWidth(), mLapContainer.getHeight());
-                Animator anim = ViewAnimationUtils.createCircularReveal(mLapContainer, cx, cy, 0, finalRadius);
-                mLapContainer.setVisibility(View.VISIBLE);
-                anim.start();
-            } else {
-                int initialRadius = mLapContainer.getWidth();
-                Animator anim = ViewAnimationUtils.createCircularReveal(mLapContainer, cx, cy, initialRadius, 0);
-                anim.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        super.onAnimationEnd(animation);
-                        mLapContainer.setVisibility(View.INVISIBLE);
-                        mLapContainer.scrollTo(0, 0);
-                    }
-                });
-                anim.start();
-            }
+        ObjectAnimator animY;
+        float height = mLapContainer.getHeight();
+        if (null != mLap) {
+            animY = ObjectAnimator.ofFloat(mLapContainer, "y", 0);
         } else {
-            ObjectAnimator animY;
-            float height = mLapContainer.getHeight();
-            if (null != mLap) {
-                animY = ObjectAnimator.ofFloat(mLapContainer, "y", 0);
-            } else {
-                mLapContainer.scrollTo(0, 0);
-                animY = ObjectAnimator.ofFloat(mLapContainer, "y", height);
-            }
-            animY.start();
+            mLapContainer.scrollTo(0, 0);
+            animY = ObjectAnimator.ofFloat(mLapContainer, "y", height);
         }
+        animY.start();
     }
 
     private void dismissAll() {
