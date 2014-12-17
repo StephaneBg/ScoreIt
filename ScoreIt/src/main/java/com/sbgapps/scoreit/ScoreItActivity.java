@@ -430,13 +430,20 @@ public class ScoreItActivity extends BaseActivity
     }
 
     public void removeLap(Lap lap) {
-        final int index = mGameHelper.getLaps().indexOf(lap);
-        final Bundle token = new Bundle();
-        token.putInt("index", index);
+        int position = mGameHelper.getLaps().indexOf(lap);
+        Bundle token = new Bundle();
+        token.putInt("position", position);
         token.putSerializable("lap", lap);
 
         mGameHelper.removeLap(lap);
-        update();
+
+        if (null != mHeaderFragment)
+            mHeaderFragment.update();
+        if (null != mScoreListFragment && mScoreListFragment.isVisible())
+            mScoreListFragment.getListAdapter().notifyItemRemoved(position);
+        if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible())
+            mScoreGraphFragment.update();
+
         invalidateOptionsMenu();
 
         mSnackBar = new SnackBar.Builder(this)
@@ -874,14 +881,19 @@ public class ScoreItActivity extends BaseActivity
 
     @Override
     public void onMessageClick(Parcelable token) {
-        int index = ((Bundle) token).getInt("index");
+        int position = ((Bundle) token).getInt("position");
         Lap lap = (Lap) ((Bundle) token).getSerializable("lap");
 
-        if (index > mGameHelper.getLaps().size())
-            index = mGameHelper.getLaps().size();
+        if (position > mGameHelper.getLaps().size())
+            position = mGameHelper.getLaps().size();
 
-        mGameHelper.getLaps().add(index, lap);
-        update();
+        mGameHelper.getLaps().add(position, lap);
+        if (null != mHeaderFragment)
+            mHeaderFragment.update();
+        if (null != mScoreListFragment && mScoreListFragment.isVisible())
+            mScoreListFragment.getListAdapter().notifyItemInserted(position);
+        if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible())
+            mScoreGraphFragment.update();
         invalidateOptionsMenu();
     }
 }

@@ -19,23 +19,23 @@
     <color name="white">#FFF</color>
     <color name="transparent">#00000000</color>
 
-    <color name="color_primary">#66A84F</color>
-    <color name="color_primary_dark">#5B9646</color>
-    <color name="color_accent">#FFAB40</color>
-    <color name="color_accent_dark">#E49839</color>
+    <color name="color_primary">#8BC34A</color>
+    <color name="color_primary_dark">#689F38</color>
+    <color name="color_accent">#FF9800</color>
+    <color name="color_accent_dark">#F48E00</color>
 
     <color name="gray_light">#EEEEEE</color>
     <color name="gray_dark">#4D4D4D</color>
 
     <color name="game_won">@color/color_primary</color>
-    <color name="game_lost">#DA5241</color>
+    <color name="game_lost">#F44336</color>
 
-    <color name="color_player1">#FFAB40</color>
-    <color name="color_player2">#66A84F</color>
+    <color name="color_player1">#FF9800</color>
+    <color name="color_player2">#8BC34A</color>
     <color name="color_player3">#1D5FB3</color>
-    <color name="color_player4">#B53A2A</color>
+    <color name="color_player4">#009688</color>
     <color name="color_player5">#8B56C8</color>
     <color name="color_player6">#D74C6B</color>
     <color name="color_player7">#59B4E0</color>
-    <color name="color_player8">#91A949</color>
+    <color name="color_player8">#795548</color>
 </resources>
