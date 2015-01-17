@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/number_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <com.sbgapps.scoreit.widget.AutoScrollHorizontalScrollView
+            android:id="@+id/horizontal_scroll_view"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content">
+
+            <com.sbgapps.scoreit.widget.numberpicker.NumberView
+                android:id="@+id/number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/margin_default"
+                android:baselineAligned="false"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/minus_label"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:singleLine="true"
+                    android:ellipsize="none"
+                    android:textSize="@dimen/font_display_1"
+                    android:gravity="bottom"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/number_picker_minus_label"/>
+
+                <TextView
+                    android:id="@+id/number"
+                    android:textSize="@dimen/font_display_2"
+                    android:fontFamily="sans-serif-light"
+                    android:singleLine="true"
+                    android:ellipsize="none"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    tools:text="256"/>
+
+            </com.sbgapps.scoreit.widget.numberpicker.NumberView>
+        </com.sbgapps.scoreit.widget.AutoScrollHorizontalScrollView>
+
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_backspace"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/delete"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/three_keys_view"
+            android:id="@+id/first"/>
+
+        <include
+            layout="@layout/three_keys_view"
+            android:id="@+id/second"/>
+
+        <include
+            layout="@layout/three_keys_view"
+            android:id="@+id/third"/>
+
+        <include
+            layout="@layout/three_keys_view_accept"
+            android:id="@+id/fourth"/>
+    </LinearLayout>
+</LinearLayout>

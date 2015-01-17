@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,11 +28,19 @@ import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.widget.CircleImageView;
+import com.sbgapps.scoreit.widget.numberpicker.NumberPickerBuilder;
+import com.sbgapps.scoreit.widget.numberpicker.NumberPickerDialogFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sbaiget on 02/02/14.
  */
-public class UniversalLapFragment extends LapFragment {
+public class UniversalLapFragment extends LapFragment
+        implements NumberPickerDialogFragment.NumberPickerDialogHandler {
+
+    final List<Button> mPoints = new ArrayList<>();
 
     @Override
     public UniversalLap getLap() {
@@ -60,15 +69,27 @@ public class UniversalLapFragment extends LapFragment {
 
         TextView name = (TextView) view.findViewById(R.id.tv_name);
         name.setText(player.getName());
-        final TextView points = (TextView) view.findViewById(R.id.points);
+
+        Button points = (Button) view.findViewById(R.id.points);
+        mPoints.add(points);
         points.setText(Integer.toString(getLap().getScore(position)));
+        points.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NumberPickerBuilder npb = new NumberPickerBuilder()
+                        .setFragmentManager(UniversalLapFragment.this.getFragmentManager())
+                        .setTargetFragment(UniversalLapFragment.this)
+                        .setReference(position);
+                npb.show();
+            }
+        });
 
         cv = (CircleImageView) view.findViewById(R.id.btn_plus);
         cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, 1);
-                points.setText(Integer.toString(getLap().getScore(position)));
+                updatePoints(position);
             }
         });
         cv = (CircleImageView) view.findViewById(R.id.btn_plus_10);
@@ -76,7 +97,7 @@ public class UniversalLapFragment extends LapFragment {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, 10);
-                points.setText(Integer.toString(getLap().getScore(position)));
+                updatePoints(position);
             }
         });
         cv = (CircleImageView) view.findViewById(R.id.btn_plus_100);
@@ -84,7 +105,7 @@ public class UniversalLapFragment extends LapFragment {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, 100);
-                points.setText(Integer.toString(getLap().getScore(position)));
+                updatePoints(position);
             }
         });
         cv = (CircleImageView) view.findViewById(R.id.btn_minus);
@@ -92,7 +113,7 @@ public class UniversalLapFragment extends LapFragment {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, -1);
-                points.setText(Integer.toString(getLap().getScore(position)));
+                updatePoints(position);
             }
         });
         cv = (CircleImageView) view.findViewById(R.id.btn_minus_10);
@@ -100,7 +121,7 @@ public class UniversalLapFragment extends LapFragment {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, -10);
-                points.setText(Integer.toString(getLap().getScore(position)));
+                updatePoints(position);
             }
         });
         cv = (CircleImageView) view.findViewById(R.id.btn_minus_100);
@@ -108,8 +129,18 @@ public class UniversalLapFragment extends LapFragment {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, -100);
-                points.setText(Integer.toString(getLap().getScore(position)));
+                updatePoints(position);
             }
         });
+    }
+
+    @Override
+    public void onDialogNumberSet(int reference, int number) {
+        getLap().setScore(reference, number);
+        updatePoints(reference);
+    }
+
+    private void updatePoints(int position) {
+        mPoints.get(position).setText(Integer.toString(getLap().getScore(position)));
     }
 }
