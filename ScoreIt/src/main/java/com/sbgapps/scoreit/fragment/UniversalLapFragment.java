@@ -27,7 +27,7 @@ import android.widget.TextView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
-import com.sbgapps.scoreit.widget.CircleImageView;
+import com.sbgapps.scoreit.widget.CircleTextView;
 import com.sbgapps.scoreit.widget.numberpicker.NumberPickerBuilder;
 import com.sbgapps.scoreit.widget.numberpicker.NumberPickerDialogFragment;
 
@@ -40,7 +40,7 @@ import java.util.List;
 public class UniversalLapFragment extends LapFragment
         implements NumberPickerDialogFragment.NumberPickerDialogHandler {
 
-    final List<Button> mPoints = new ArrayList<>();
+    final List<CircleTextView> mPoints = new ArrayList<>();
 
     @Override
     public UniversalLap getLap() {
@@ -64,16 +64,16 @@ public class UniversalLapFragment extends LapFragment
     }
 
     private void initView(View view, final int position) {
-        CircleImageView cv;
+        CircleTextView cv;
         Player player = getGameHelper().getPlayer(position);
 
         TextView name = (TextView) view.findViewById(R.id.tv_name);
         name.setText(player.getName());
 
-        Button points = (Button) view.findViewById(R.id.points);
-        mPoints.add(points);
-        points.setText(Integer.toString(getLap().getScore(position)));
-        points.setOnClickListener(new View.OnClickListener() {
+        cv = (CircleTextView) view.findViewById(R.id.points);
+        mPoints.add(cv);
+        cv.setText(Integer.toString(getLap().getScore(position)));
+        cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NumberPickerBuilder npb = new NumberPickerBuilder()
@@ -84,7 +84,7 @@ public class UniversalLapFragment extends LapFragment
             }
         });
 
-        cv = (CircleImageView) view.findViewById(R.id.btn_plus);
+        cv = (CircleTextView) view.findViewById(R.id.btn_plus);
         cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +92,7 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
-        cv = (CircleImageView) view.findViewById(R.id.btn_plus_10);
+        cv = (CircleTextView) view.findViewById(R.id.btn_plus_10);
         cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +100,7 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
-        cv = (CircleImageView) view.findViewById(R.id.btn_plus_100);
+        cv = (CircleTextView) view.findViewById(R.id.btn_plus_100);
         cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +108,7 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
-        cv = (CircleImageView) view.findViewById(R.id.btn_minus);
+        cv = (CircleTextView) view.findViewById(R.id.btn_minus);
         cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +116,7 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
-        cv = (CircleImageView) view.findViewById(R.id.btn_minus_10);
+        cv = (CircleTextView) view.findViewById(R.id.btn_minus_10);
         cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +124,7 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
-        cv = (CircleImageView) view.findViewById(R.id.btn_minus_100);
+        cv = (CircleTextView) view.findViewById(R.id.btn_minus_100);
         cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
