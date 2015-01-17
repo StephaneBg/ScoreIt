@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center">
 
-        <com.sbgapps.scoreit.widget.AutoScrollHorizontalScrollView
+        <com.sbgapps.scoreit.widget.numberpicker.AutoScrollHorizontalScrollView
             android:id="@+id/horizontal_scroll_view"
             android:layout_width="0dp"
             android:layout_weight="2"
@@ -34,8 +34,7 @@
                     android:ellipsize="none"
                     android:textSize="@dimen/font_display_1"
                     android:gravity="bottom"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@string/number_picker_minus_label"/>
+                    android:fontFamily="sans-serif-light"/>
 
                 <TextView
                     android:id="@+id/number"
@@ -48,7 +47,7 @@
                     tools:text="256"/>
 
             </com.sbgapps.scoreit.widget.numberpicker.NumberView>
-        </com.sbgapps.scoreit.widget.AutoScrollHorizontalScrollView>
+        </com.sbgapps.scoreit.widget.numberpicker.AutoScrollHorizontalScrollView>
 
         <ImageButton
             android:id="@+id/delete"

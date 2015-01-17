@@ -51,7 +51,7 @@ public class DonateFragment extends Fragment
         mCoffeeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mReadyToPurchase) mBillingProcessor.purchase(PRODUCT_DONATE_COFFEE);
+                if (mReadyToPurchase) mBillingProcessor.purchase(getActivity(), PRODUCT_DONATE_COFFEE);
             }
         });
 
@@ -59,7 +59,7 @@ public class DonateFragment extends Fragment
         mBeerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mReadyToPurchase) mBillingProcessor.purchase(PRODUCT_DONATE_BEER);
+                if (mReadyToPurchase) mBillingProcessor.purchase(getActivity(), PRODUCT_DONATE_BEER);
             }
         });
 

@@ -66,12 +66,11 @@ dependencies {
     compile 'com.android.support:cardview-v7:21.0.2'
     compile 'com.android.support:recyclerview-v7:21.0.2'
     compile 'com.google.code.gson:gson:2.3'
-    compile 'com.anjlab.android.iab.v3:library:1.0.17'
+    compile 'com.anjlab.android.iab.v3:library:1.0.19'
     compile 'com.jakewharton:butterknife:6.0.0'
-    compile 'com.daimajia.swipelayout:library:1.0.4@aar'
     compile 'com.jpardogo.materialtabstrip:library:1.0.6'
     compile 'com.melnykov:floatingactionbutton:1.1.0'
-    compile 'com.afollestad:material-dialogs:0.5.9'
+    compile 'com.afollestad:material-dialogs:0.6.0'
     compile 'com.github.mrengineer13:snackbar:1.0.0'
     compile project(':SimpleStorage')
 }
