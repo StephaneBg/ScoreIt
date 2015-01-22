@@ -54,6 +54,7 @@ public class NumberView extends LinearLayout {
 
         mNumber = (TextView) findViewById(R.id.number);
         mMinusLabel = (TextView) findViewById(R.id.minus_label);
+        mMinusLabel.setText("-");
     }
 
     /**

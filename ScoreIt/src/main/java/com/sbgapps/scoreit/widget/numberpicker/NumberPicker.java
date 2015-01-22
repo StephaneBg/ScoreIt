@@ -249,7 +249,7 @@ public class NumberPicker extends LinearLayout implements Button.OnClickListener
      *
      * @return a double representing the entered number
      */
-    public double getEnteredNumber() {
+    public int getNumber() {
         String value = "0";
         for (int i = mInputPointer; i >= 0; i--) {
             if (mInput[i] == -1) {
@@ -261,7 +261,7 @@ public class NumberPicker extends LinearLayout implements Button.OnClickListener
         if (mSign == SIGN_NEGATIVE) {
             value = "-" + value;
         }
-        return Double.parseDouble(value);
+        return Integer.parseInt(value);
     }
 
     /**
@@ -280,17 +280,6 @@ public class NumberPicker extends LinearLayout implements Button.OnClickListener
 
         // If the user entered 1 digits or more
         mSetButton.setEnabled(mInputPointer >= 0);
-    }
-
-    /**
-     * Returns the number as currently inputted by the user
-     *
-     * @return an int representation of the number with no decimal
-     */
-    public int getNumber() {
-        String numberString = Double.toString(getEnteredNumber());
-        String[] split = numberString.split("\\.");
-        return Integer.parseInt(split[0]);
     }
 
     /**
