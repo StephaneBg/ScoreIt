@@ -15,17 +15,20 @@
   ~ limitations under the License.
   -->
 
-<android.support.v4.view.ViewPager
+<com.sbgapps.scoreit.widget.RevealView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/viewpager"
+    android:id="@+id/reveal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_height">
 
+    <include layout="@layout/include_back_score_list"/>
+
     <RelativeLayout
-        android:id="@+id/primary_content"
+        android:id="@id/front"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/list_item_height">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_navigation_drawer_list_item">
 
         <TextView
             android:id="@+id/summary"
@@ -49,6 +52,4 @@
             android:layout_width="6dp"
             android:layout_height="match_parent"/>
     </RelativeLayout>
-
-    <include layout="@layout/include_bottom_score_list"/>
-</android.support.v4.view.ViewPager>
+</com.sbgapps.scoreit.widget.RevealView>

@@ -16,14 +16,9 @@
 
 package com.sbgapps.scoreit.adapter;
 
-import android.content.res.Resources;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.sbgapps.scoreit.R;
@@ -32,6 +27,7 @@ import com.sbgapps.scoreit.fragment.ScoreListFragment;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
 import com.sbgapps.scoreit.widget.LinearListView;
+import com.sbgapps.scoreit.widget.RevealView;
 
 /**
  * Created by sbaiget on 23/11/13.
@@ -63,7 +59,7 @@ public abstract class ScoreListAdapter<E extends ScoreListAdapter.ViewHolder> ex
             @Override
             public void onClick(View v) {
                 getActivity().removeLap(lap);
-                viewHolder.mViewPager.setCurrentItem(0);
+                viewHolder.mRevealView.hide();
             }
         });
 
@@ -71,24 +67,14 @@ public abstract class ScoreListAdapter<E extends ScoreListAdapter.ViewHolder> ex
             @Override
             public void onClick(View v) {
                 getActivity().editLap(lap);
-                viewHolder.mViewPager.setCurrentItem(0);
+                viewHolder.mRevealView.hide();
             }
         });
 
-        viewHolder.mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewHolder.mRevealView.setRevealViewListener(new RevealView.RevealViewListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (0 != position) mScoreListFragment.closeOthers(viewHolder.mViewPager);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+            public void onViewRevealed(RevealView revealView) {
+                mScoreListFragment.closeOthers(revealView);
             }
         });
     }
@@ -104,44 +90,17 @@ public abstract class ScoreListAdapter<E extends ScoreListAdapter.ViewHolder> ex
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ViewPager mViewPager;
+        public RevealView mRevealView;
         public LinearListView mLinearListView;
         public ImageButton mDeleteBtn;
         public ImageButton mEditBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mViewPager = (ViewPager) itemView.findViewById(R.id.viewpager);
+            mRevealView = (RevealView) itemView.findViewById(R.id.reveal);
             mLinearListView = (LinearListView) itemView.findViewById(R.id.list_score);
             mDeleteBtn = (ImageButton) itemView.findViewById(R.id.action_discard);
             mEditBtn = (ImageButton) itemView.findViewById(R.id.action_edit);
-            mViewPager.setAdapter(new ViewPagerAdapter());
-        }
-    }
-
-    public static class ViewPagerAdapter extends PagerAdapter {
-
-        public Object instantiateItem(ViewGroup collection, int position) {
-            int resId = 0;
-            switch (position) {
-                case 0:
-                    resId = R.id.primary_content;
-                    break;
-                case 1:
-                    resId = R.id.secondary_content;
-                    break;
-            }
-            return collection.findViewById(resId);
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
-
-        @Override
-        public boolean isViewFromObject(View arg0, Object arg1) {
-            return arg0 == arg1;
         }
     }
 }

@@ -18,7 +18,6 @@ package com.sbgapps.scoreit.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,6 +32,7 @@ import com.sbgapps.scoreit.adapter.TarotScoreAdapter;
 import com.sbgapps.scoreit.adapter.UniversalScoreAdapter;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
+import com.sbgapps.scoreit.widget.RevealView;
 
 /**
  * Created by sbaiget on 11/11/13.
@@ -90,12 +90,12 @@ public class ScoreListFragment extends Fragment {
         closeOthers(null);
     }
 
-    public void closeOthers(ViewPager viewPager) {
+    public void closeOthers(RevealView revealView) {
         for (int i = 0; i < mManager.getChildCount(); i++) {
             View view = mManager.getChildAt(i);
             if (null != view) {
-                ViewPager vp = (ViewPager) view.findViewById(R.id.viewpager);
-                if (!vp.equals(viewPager)) vp.setCurrentItem(0);
+                RevealView rv = (RevealView) view.findViewById(R.id.reveal);
+                if (!rv.equals(revealView)) rv.hide();
             }
         }
     }

@@ -2,11 +2,12 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/secondary_content"
-    android:layout_width="match_parent"
+    android:id="@id/back"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:background="?attr/colorAccent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_gravity="right">
 
     <ImageButton
         android:id="@+id/action_discard"
