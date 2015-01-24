@@ -68,23 +68,11 @@ public class CoincheLap extends GenericBeloteLap {
     public void computeScores() {
         super.computeScores();
 
-        final int scores[] = getScores();
-        int takerPts = scores[Player.PLAYER_1];
-        int counterPts = scores[Player.PLAYER_2];
-
-        // Check belote
-        CoincheBonus cb = getBonus(CoincheBonus.BONUS_BELOTE);
-        if (null != cb && Player.PLAYER_NONE != cb.getPlayer()) {
-            if (((Player.PLAYER_1 == mScorer) && (Player.PLAYER_1 == cb.getPlayer())) ||
-                    ((Player.PLAYER_2 == mScorer) && (Player.PLAYER_2 == cb.getPlayer()))) {
-                takerPts += 20;
-            } else {
-                counterPts += 20;
-            }
-        }
+        int takerPts = getTeamPoints(Player.PLAYER_1);
+        int counterPts = getTeamPoints(Player.PLAYER_2);
 
         // Compute scores
-        cb = getBonus(CoincheBonus.BONUS_COINCHE);
+        CoincheBonus cb = getBonus(CoincheBonus.BONUS_COINCHE);
         if (null == cb) cb = getBonus(CoincheBonus.BONUS_SURCOINCHE);
 
         if ((takerPts >= mBid) && (takerPts > counterPts)) {
@@ -128,5 +116,35 @@ public class CoincheLap extends GenericBeloteLap {
     @Override
     public Lap copy() {
         return new CoincheLap(mScorer, mPoints, mBid, mBonuses);
+    }
+
+    private int getTeamPoints(int player) {
+        // Points
+        int points = getScores()[player];
+        // Bonuses
+        for (CoincheBonus bonus : mBonuses) {
+            if (player == bonus.getPlayer()) {
+                switch (bonus.get()) {
+                    case CoincheBonus.BONUS_BELOTE:
+                    case CoincheBonus.BONUS_RUN_3:
+                        points += 20;
+                        break;
+                    case CoincheBonus.BONUS_RUN_4:
+                        points += 50;
+                        break;
+                    case CoincheBonus.BONUS_RUN_5:
+                    case CoincheBonus.BONUS_FOUR_NORMAL:
+                        points += 100;
+                        break;
+                    case CoincheBonus.BONUS_FOUR_NINE:
+                        points += 150;
+                        break;
+                    case CoincheBonus.BONUS_FOUR_JACK:
+                        points += 200;
+                        break;
+                }
+            }
+        }
+        return points;
     }
 }

@@ -77,10 +77,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_default"/>
 
-        <com.sbgapps.scoreit.widget.BelotePoints
-            android:id="@+id/input_points"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <include
+            layout="@layout/belote_points"/>
 
         <TextView
             style="@style/SubHeader"

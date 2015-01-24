@@ -16,11 +16,9 @@
 
 package com.sbgapps.scoreit.adapter;
 
-import android.content.res.Resources;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +99,7 @@ public abstract class ScoreListAdapter<E extends ScoreListAdapter.ViewHolder> ex
     public GameHelper getGameHelper() {
         return getActivity().getGameHelper();
     }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 

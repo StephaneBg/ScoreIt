@@ -32,6 +32,12 @@ public class CoincheBonus implements Serializable {
     public static final int BONUS_BELOTE = 0;
     public static final int BONUS_COINCHE = 1;
     public static final int BONUS_SURCOINCHE = 2;
+    public static final int BONUS_RUN_3 = 3;
+    public static final int BONUS_RUN_4 = 4;
+    public static final int BONUS_RUN_5 = 5;
+    public static final int BONUS_FOUR_NORMAL = 6;
+    public static final int BONUS_FOUR_NINE = 7;
+    public static final int BONUS_FOUR_JACK = 8;
 
     @SerializedName("bonus")
     private int mBonus;
@@ -59,6 +65,18 @@ public class CoincheBonus implements Serializable {
                 return context.getString(R.string.coinche);
             case BONUS_SURCOINCHE:
                 return context.getString(R.string.surcoinche);
+            case BONUS_RUN_3:
+                return context.getString(R.string.run_3);
+            case BONUS_RUN_4:
+                return context.getString(R.string.run_4);
+            case BONUS_RUN_5:
+                return context.getString(R.string.run_5);
+            case BONUS_FOUR_NORMAL:
+                return context.getString(R.string.normal_four);
+            case BONUS_FOUR_NINE:
+                return context.getString(R.string.nine_four);
+            case BONUS_FOUR_JACK:
+                return context.getString(R.string.jack_four);
         }
         return null;
     }

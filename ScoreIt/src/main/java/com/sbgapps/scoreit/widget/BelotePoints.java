@@ -2,9 +2,8 @@ package com.sbgapps.scoreit.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
@@ -19,7 +18,7 @@ import butterknife.InjectView;
 /**
  * Created by sbaiget on 28/10/2014.
  */
-public class BelotePoints extends FrameLayout
+public class BelotePoints extends LinearLayout
         implements SeekPoints.OnProgressChangedListener {
 
     @InjectView(R.id.player1_name)
@@ -49,10 +48,11 @@ public class BelotePoints extends FrameLayout
 
     public BelotePoints(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
 
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.belote_input_points, this, true);
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
         ButterKnife.inject(this);
     }
 

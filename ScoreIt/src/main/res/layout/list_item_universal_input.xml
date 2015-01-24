@@ -87,9 +87,9 @@
                 android:gravity="center"
                 android:fontFamily="sans-serif-light"
                 android:textSize="@dimen/font_display_1"
-                app:cb_color="@color/gray_light"
-                app:cb_pressed_color="#B5B5B5"
-                app:cb_shadow_color="@color/gray_dark"
+                app:ct_color="@color/gray_light"
+                app:ct_pressed_color="#B5B5B5"
+                app:ct_shadow_color="@color/gray_dark"
                 tools:text="128"/>
         </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
 
