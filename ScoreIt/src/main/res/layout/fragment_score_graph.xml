@@ -21,10 +21,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.sbgapps.scoreit.widget.linechart.LineGraph
-        android:id="@+id/line_graph"
+    <com.db.chart.view.LineChartView
+        android:id="@+id/line_chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        app:lineAxisColor="@color/gray_dark"/>
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:chart_axisColor="@color/gray_dark"/>
 </FrameLayout>

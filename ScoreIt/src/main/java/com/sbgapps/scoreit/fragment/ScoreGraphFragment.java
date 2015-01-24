@@ -16,27 +16,29 @@
 
 package com.sbgapps.scoreit.fragment;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.db.chart.model.LineSet;
+import com.db.chart.view.LineChartView;
+import com.db.chart.view.XController;
+import com.db.chart.view.YController;
+import com.db.chart.view.animation.Animation;
+import com.db.chart.view.animation.easing.cubic.CubicEaseOut;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
-import com.sbgapps.scoreit.widget.linechart.Line;
-import com.sbgapps.scoreit.widget.linechart.LineGraph;
-import com.sbgapps.scoreit.widget.linechart.LinePoint;
 
 public class ScoreGraphFragment extends Fragment {
 
     public static final String TAG = ScoreGraphFragment.class.getName();
 
-    private LineGraph mGraph;
-    private int[] mScores;
-    private int mX;
+    private LineChartView mChartView;
 
     public GameHelper getGameHelper() {
         return ((ScoreItActivity) getActivity()).getGameHelper();
@@ -46,42 +48,45 @@ public class ScoreGraphFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score_graph, null);
-        mGraph = (LineGraph) view.findViewById(R.id.line_graph);
+        mChartView = (LineChartView) view.findViewById(R.id.line_chart);
+        mChartView.setXLabels(XController.LabelPosition.NONE);
+        mChartView.setYLabels(YController.LabelPosition.NONE);
+        mChartView.setXAxis(false);
+        mChartView.setYAxis(false);
+
         return view;
     }
 
     public void update() {
         final GameHelper gameHelper = getGameHelper();
         final int lapCnt = gameHelper.getLaps().size();
-        mGraph.removeAllLines();
-        mGraph.setVisibility((0 == lapCnt) ? View.INVISIBLE : View.VISIBLE);
+        mChartView.reset();
+        mChartView.setVisibility((0 == lapCnt) ? View.INVISIBLE : View.VISIBLE);
         if (0 == lapCnt) return;
 
-        LinePoint p = new LinePoint(mX = 0, 0);
-        int color;
-        for (int i = 0; i < gameHelper.getPlayerCount(); i++) {
-            Line line = new Line();
-            color = gameHelper.getPlayerColor(i);
-            line.setColor(color);
-            line.addPoint(p);
-            mGraph.addLine(line);
+        final Resources resources = getActivity().getResources();
+        int score;
+        for (int player = 0; player < gameHelper.getPlayerCount(); player++) {
+            LineSet set = new LineSet();
+            set.setLineColor(gameHelper.getPlayerColor(player));
+            set.setLineThickness(resources.getDimension(R.dimen.line_thickness));
+            set.setDots(true);
+            set.setDotsColor(gameHelper.getPlayerColor(player));
+            set.addPoint("", 0);
+            score = 0;
+            for (Lap lap : gameHelper.getLaps()) {
+                score += lap.getScore(player);
+                set.addPoint("", score);
+            }
+            mChartView.addData(set);
         }
 
-        mScores = new int[gameHelper.getPlayerCount()];
-        for (int i = 0; i < lapCnt; i++) {
-            Lap lap = gameHelper.getLaps().get(i);
-            addLap(lap);
-        }
-    }
-
-    public void addLap(Lap lap) {
-        mX++;
-        GameHelper gh = getGameHelper();
-        for (int player = 0; player < gh.getPlayerCount(); player++) {
-            mScores[player] += lap.getScore(player);
-            LinePoint p = new LinePoint(mX, mScores[player]);
-            mGraph.addPointToLine(player, p);
-        }
+        mChartView.show(new Animation()
+                .setEasing(new CubicEaseOut())
+                .setOverlap(0.8f)
+                .setStartPoint(-1f, 0f)
+                .setAlpha(1)
+                .setDuration(getActivity().getResources().getInteger(R.integer.anim_medium_time)));
     }
 
     @Override
