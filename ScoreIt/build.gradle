@@ -68,9 +68,10 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.anjlab.android.iab.v3:library:1.0.19'
     compile 'com.jakewharton:butterknife:6.0.0'
-    compile 'com.jpardogo.materialtabstrip:library:1.0.6'
+    compile 'com.jpardogo.materialtabstrip:library:1.0.8'
     compile 'com.melnykov:floatingactionbutton:1.1.0'
-    compile 'com.afollestad:material-dialogs:0.6.0'
+    compile 'com.afollestad:material-dialogs:0.6.1.5'
     compile 'com.github.mrengineer13:snackbar:1.0.0'
-    compile project(':SimpleStorage')
+    compile 'com.db.williamchart:library:1.7.0'
+    compile 'com.sromku.simple.storage:library:1.0.0'
 }
