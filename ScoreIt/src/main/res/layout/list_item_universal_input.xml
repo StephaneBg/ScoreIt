@@ -41,30 +41,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.sbgapps.scoreit.widget.CircleImageView
+            <com.sbgapps.scoreit.widget.CircleTextView
                 android:id="@+id/btn_minus"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_minus_1"/>
+                android:text="-1"
+                android:gravity="center"
+                android:textColor="@color/white"/>
 
-            <com.sbgapps.scoreit.widget.CircleImageView
+            <com.sbgapps.scoreit.widget.CircleTextView
                 android:id="@+id/btn_minus_10"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_marginBottom="4dp"
                 android:layout_toRightOf="@id/btn_minus"
-                android:src="@drawable/ic_minus_10"/>
+                android:text="-10"
+                android:gravity="center"
+                android:textColor="@color/white"/>
 
-            <com.sbgapps.scoreit.widget.CircleImageView
+            <com.sbgapps.scoreit.widget.CircleTextView
                 android:id="@+id/btn_minus_100"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_marginTop="4dp"
                 android:layout_below="@id/btn_minus_10"
                 android:layout_toRightOf="@id/btn_minus"
-                android:src="@drawable/ic_minus_100"/>
+                android:text="-100"
+                android:gravity="center"
+                android:textColor="@color/white"/>
         </RelativeLayout>
 
         <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
@@ -73,8 +79,7 @@
             app:maxWidth="96dp"
             android:layout_weight="1">
 
-            <Button
-                style="?android:attr/borderlessButtonStyle"
+            <com.sbgapps.scoreit.widget.CircleTextView
                 android:id="@+id/points"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -82,6 +87,9 @@
                 android:gravity="center"
                 android:fontFamily="sans-serif-light"
                 android:textSize="@dimen/font_display_1"
+                app:ct_color="@color/gray_light"
+                app:ct_pressed_color="#B5B5B5"
+                app:ct_shadow_color="@color/gray_dark"
                 tools:text="128"/>
         </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
 
@@ -89,28 +97,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.sbgapps.scoreit.widget.CircleImageView
+            <com.sbgapps.scoreit.widget.CircleTextView
                 android:id="@+id/btn_plus_10"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_marginBottom="4dp"
-                android:src="@drawable/ic_plus_10"/>
+                android:text="+10"
+                android:gravity="center"
+                android:textColor="@color/white"/>
 
-            <com.sbgapps.scoreit.widget.CircleImageView
+            <com.sbgapps.scoreit.widget.CircleTextView
                 android:id="@+id/btn_plus"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/btn_plus_10"
-                android:src="@drawable/ic_plus_1"/>
+                android:text="+1"
+                android:gravity="center"
+                android:textColor="@color/white"/>
 
-            <com.sbgapps.scoreit.widget.CircleImageView
+            <com.sbgapps.scoreit.widget.CircleTextView
                 android:id="@+id/btn_plus_100"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_marginTop="4dp"
                 android:layout_below="@id/btn_plus_10"
-                android:src="@drawable/ic_plus_100"/>
+                android:text="+100"
+                android:gravity="center"
+                android:textColor="@color/white"/>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

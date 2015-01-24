@@ -28,9 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
 
-import com.melnykov.fab.ObservableScrollView;
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.coinche.CoincheBonus;
@@ -71,7 +69,7 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         View view = inflater.inflate(R.layout.fragment_lap_coinche, null);
         ButterKnife.inject(this, view);
 
-        if(null == getLap()) return view;
+        if (null == getLap()) return view;
 
         switch (getLap().getScorer()) {
             case Player.PLAYER_1:
@@ -149,7 +147,7 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
             @Override
             public void onClick(View v) {
                 getLap().getBonuses().remove(bonus);
-                mButtonBonus.setEnabled(getLap().getBonuses().size() < 2);
+                mButtonBonus.setEnabled(getLap().getBonuses().size() < 3);
                 mBonuses.removeView(view);
             }
         });
@@ -187,7 +185,7 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
 
         int pos = mBonuses.getChildCount() - 1;
         mBonuses.addView(view, pos);
-        mButtonBonus.setEnabled(bonuses.size() < 2);
+        mButtonBonus.setEnabled(bonuses.size() < 3);
     }
 
     private ArrayAdapter<CoincheBonusItem> getBonusArrayAdapter() {
@@ -197,6 +195,12 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_BELOTE));
         bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_COINCHE));
         bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_SURCOINCHE));
+        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_RUN_3));
+        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_RUN_4));
+        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_RUN_5));
+        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_FOUR_NORMAL));
+        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_FOUR_NINE));
+        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_FOUR_JACK));
         return bonusArrayAdapter;
     }
 
