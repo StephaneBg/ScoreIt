@@ -39,8 +39,6 @@ public class NavigationDrawerItemView extends RelativeLayout {
     RelativeLayout mLayout;
     @InjectView(R.id.navigationDrawerItemTitleTV)
     TextView mItemTitle;
-    @InjectView(R.id.navigationDrawerItemImage)
-    ImageView mItemImage;
     @InjectView(R.id.separator)
     View mSeparator;
 
@@ -72,11 +70,9 @@ public class NavigationDrawerItemView extends RelativeLayout {
         if (item.isSeparator()) {
             mSeparator.setVisibility(VISIBLE);
             mItemTitle.setVisibility(GONE);
-            mItemImage.setVisibility(GONE);
             mLayout.setBackgroundColor(Color.WHITE);
         } else {
             mItemTitle.setText(item.getItemName());
-            mItemImage.setImageDrawable(item.getItemImage());
         }
 
         int color;
@@ -87,6 +83,5 @@ public class NavigationDrawerItemView extends RelativeLayout {
         }
 
         mItemTitle.setTextColor(color);
-        mItemImage.setColorFilter(color);
     }
 }

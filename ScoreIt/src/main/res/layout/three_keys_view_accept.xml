@@ -17,7 +17,6 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_weight="1"
     android:gravity="center"
@@ -28,9 +27,10 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:textColor="?attr/colorAccent"
-        android:textSize="@dimen/font_display_1"
+        android:textSize="@dimen/font_dialpad"
         android:fontFamily="sans-serif-light"
         style="?android:attr/borderlessButtonStyle"
+        android:background="?attr/selectableItemBackground"
         android:layout_height="match_parent"/>
 
     <Button
@@ -38,9 +38,10 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:textColor="?attr/colorAccent"
-        android:textSize="@dimen/font_display_1"
+        android:textSize="@dimen/font_dialpad"
         android:fontFamily="sans-serif-light"
         style="?android:attr/borderlessButtonStyle"
+        android:background="?attr/selectableItemBackground"
         android:layout_height="match_parent"/>
 
     <ImageButton
@@ -50,5 +51,7 @@
         android:src="@drawable/ic_action_done"
         android:tint="@color/color_accent"
         style="?android:attr/borderlessButtonStyle"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/ok"
         android:layout_height="match_parent"/>
 </LinearLayout>

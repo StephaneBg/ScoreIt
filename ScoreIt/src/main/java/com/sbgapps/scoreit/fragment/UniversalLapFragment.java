@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,8 +27,8 @@ import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.widget.CircleTextView;
-import com.sbgapps.scoreit.widget.numberpicker.NumberPickerBuilder;
-import com.sbgapps.scoreit.widget.numberpicker.NumberPickerDialogFragment;
+import com.sbgapps.scoreit.numberpicker.NumberPickerBuilder;
+import com.sbgapps.scoreit.numberpicker.NumberPickerDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -26,6 +26,8 @@
     <dimen name="scrollview_padding">220dp</dimen>
 
     <!-- Fonts -->
+    <dimen name="font_number_picker">60sp</dimen>
+    <dimen name="font_dialpad">45sp</dimen>
 
     <!-- Height -->
     <dimen name="widget_height">72dp</dimen>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.widget.numberpicker;
+package com.sbgapps.scoreit.numberpicker;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -123,7 +123,7 @@ public class NumberPicker extends LinearLayout implements Button.OnClickListener
         }
         updateNumber();
 
-        mSignButton.setText("+/-");
+        mSignButton.setText("±");
         mSignButton.setOnClickListener(this);
         mSetButton.setOnClickListener(this);
         mSign = SIGN_POSITIVE;

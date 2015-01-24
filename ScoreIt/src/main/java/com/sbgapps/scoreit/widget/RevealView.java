@@ -3,7 +3,6 @@ package com.sbgapps.scoreit.widget;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -43,25 +42,14 @@ public class RevealView extends FrameLayout {
         mFront = findViewById(R.id.front);
         mBack = findViewById(R.id.back);
 
-        mFront.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                reveal();
-                return true;
-            }
-        });
-
         mFront.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mIsOpen) hide();
-            }
-        });
-
-        mFront.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
+                if (mIsOpen) {
+                    hide();
+                } else {
+                    reveal();
+                }
             }
         });
     }

@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.widget.numberpicker;
+package com.sbgapps.scoreit.numberpicker;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-
-import java.util.Vector;
 
 public class NumberPickerBuilder {
 
@@ -81,6 +79,7 @@ public class NumberPickerBuilder {
         if (targetFragment != null) {
             fragment.setTargetFragment(targetFragment, 0);
         }
+
         fragment.show(ft, "number_dialog");
     }
 }

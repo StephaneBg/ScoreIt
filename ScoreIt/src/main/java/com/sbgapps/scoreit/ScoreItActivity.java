@@ -159,12 +159,12 @@ public class ScoreItActivity extends BaseActivity
 
         // Init drawer
         mNavigationItems = new ArrayList<>();
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.universal), res.getDrawable(R.drawable.ic_universal)));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.tarot), res.getDrawable(R.drawable.ic_tarot)));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.belote), res.getDrawable(R.drawable.ic_belote)));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.coinche), res.getDrawable(R.drawable.ic_coinche)));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.universal)));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.tarot)));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.belote)));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.coinche)));
         mNavigationItems.add(new NavigationDrawerItem(true));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about), res.getDrawable(R.drawable.ic_action_info)));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about)));
         mNavigationDrawer.replaceWith(mNavigationItems);
 
         mDrawerToggle = new ActionBarDrawerToggle(
@@ -757,12 +757,12 @@ public class ScoreItActivity extends BaseActivity
         new MaterialDialog.Builder(this)
                 .title(R.string.edit_name)
                 .titleColorRes(R.color.color_primary)
-                .customView(view)
+                .customView(view, false)
                 .positiveText(R.string.ok)
                 .positiveColorRes(R.color.color_primary)
                 .negativeText(R.string.cancel)
                 .negativeColorRes(R.color.gray_dark)
-                .callback(new MaterialDialog.SimpleCallback() {
+                .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         String name = editText.getText().toString();
@@ -790,7 +790,7 @@ public class ScoreItActivity extends BaseActivity
                 .positiveColorRes(R.color.color_primary)
                 .negativeText(R.string.cancel)
                 .negativeColorRes(R.color.gray_dark)
-                .callback(new MaterialDialog.SimpleCallback() {
+                .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         String file = editText.getText().toString();

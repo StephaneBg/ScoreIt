@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.widget.numberpicker;
+package com.sbgapps.scoreit.numberpicker;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageButton;
 
 import com.sbgapps.scoreit.R;
@@ -88,6 +90,18 @@ public class NumberPickerDialogFragment extends DialogFragment {
         });
 
         return picker;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Window window = getDialog().getWindow();
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        int width = Math.min(
+                getActivity().getResources().getDimensionPixelSize(R.dimen.dialog_width),
+                dm.widthPixels * 3 / 4);
+        int height = window.getAttributes().height;
+        window.setLayout(width, height);
     }
 
     /**

@@ -26,21 +26,19 @@ import android.graphics.drawable.Drawable;
 public class NavigationDrawerItem {
 
     private String mItemName;
-    private Drawable mItemImage;
     private boolean mSeparator;
     private boolean mSelected;
 
     public NavigationDrawerItem(boolean separator) {
-        this(null, null, separator);
+        this(null, separator);
     }
 
-    public NavigationDrawerItem(String itemName, Drawable itemImg) {
-        this(itemName, itemImg, false);
+    public NavigationDrawerItem(String itemName) {
+        this(itemName, false);
     }
 
-    public NavigationDrawerItem(String itemName, Drawable itemImg, boolean separator) {
+    public NavigationDrawerItem(String itemName, boolean separator) {
         this.mItemName = itemName;
-        this.mItemImage = itemImg;
         this.mSeparator = separator;
     }
 
@@ -50,14 +48,6 @@ public class NavigationDrawerItem {
 
     public void setItemName(String itemName) {
         this.mItemName = itemName;
-    }
-
-    public Drawable getItemImage() {
-        return mItemImage;
-    }
-
-    public void setItemImage(Drawable itemImage) {
-        mItemImage = itemImage;
     }
 
     public boolean isSeparator() {

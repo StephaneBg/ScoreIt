@@ -36,7 +36,6 @@
         <item>@string/language_english</item>
         <item>@string/language_french</item>
         <item>@string/language_dutch</item>
-        <item>@string/language_russian</item>
         <item>@string/language_german</item>
         <item>@string/language_spanish</item>
         <item>@string/language_italian</item>
@@ -49,8 +48,6 @@
         <item translatable="false">Stéphane Baiget</item>
         <!-- Dutch -->
         <item translatable="false">Frank Barten</item>
-        <!-- Russian -->
-        <item translatable="false">Danila Lepikhin</item>
         <!-- German -->
         <item translatable="false">Luca Eichler</item>
         <!-- Spanish -->

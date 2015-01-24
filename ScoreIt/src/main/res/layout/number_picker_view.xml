@@ -3,51 +3,44 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/number_view_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+        android:layout_height="wrap_content">
 
-        <com.sbgapps.scoreit.widget.numberpicker.AutoScrollHorizontalScrollView
-            android:id="@+id/horizontal_scroll_view"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content">
-
-            <com.sbgapps.scoreit.widget.numberpicker.NumberView
+            <com.sbgapps.scoreit.numberpicker.NumberView
                 android:id="@+id/number_text"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginLeft="@dimen/margin_default"
-                android:baselineAligned="false"
-                android:gravity="center_horizontal">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:baselineAligned="false">
 
                 <TextView
                     android:id="@+id/minus_label"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_default"
                     android:singleLine="true"
                     android:ellipsize="none"
-                    android:textSize="@dimen/font_display_1"
-                    android:gravity="bottom"
-                    android:fontFamily="sans-serif-light"/>
+                    android:textSize="@dimen/font_display_2"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_gravity="center_vertical"
+                    tools:text="-"/>
 
                 <TextView
                     android:id="@+id/number"
-                    android:textSize="@dimen/font_display_2"
+                    android:textSize="@dimen/font_number_picker"
                     android:fontFamily="sans-serif-light"
                     android:singleLine="true"
                     android:ellipsize="none"
-                    android:layout_height="match_parent"
-                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
                     tools:text="256"/>
 
-            </com.sbgapps.scoreit.widget.numberpicker.NumberView>
-        </com.sbgapps.scoreit.widget.numberpicker.AutoScrollHorizontalScrollView>
+            </com.sbgapps.scoreit.numberpicker.NumberView>
 
         <ImageButton
             android:id="@+id/delete"
@@ -62,7 +55,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
