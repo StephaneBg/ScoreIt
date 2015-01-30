@@ -18,6 +18,8 @@ package com.sbgapps.scoreit.navigationdrawer;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.sbgapps.scoreit.R;
@@ -43,7 +45,7 @@ public class NavigationDrawerView extends BetterViewAnimator {
 
     public void replaceWith(List<NavigationDrawerItem> items) {
         mAdapter.replaceWith(items);
-        setDisplayedChildId(R.id.drawer_list_view);
+        //setDisplayedChildId(R.id.drawer_list_view);
     }
 
     @Override

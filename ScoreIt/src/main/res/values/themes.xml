@@ -32,4 +32,11 @@
         <item name="colorAccent">@color/color_accent</item>
         <item name="windowActionBar">false</item>
     </style>
+
+    <style name="Theme.Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+    </style>
 </resources>

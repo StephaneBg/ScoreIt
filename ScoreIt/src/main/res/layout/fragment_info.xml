@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="© SBG Apps - Stéphane Baiget"
+            android:text="Stéphane Baiget"
             android:textColor="@color/gray_dark"
             android:textAppearance="?android:attr/textAppearanceMedium"
             tools:ignore="HardcodedText"/>

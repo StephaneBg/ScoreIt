@@ -1,39 +1,24 @@
-/*
- * Copyright (c) 2014 SBG Apps
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+package com.sbgapps.scoreit;
 
-package com.sbgapps.scoreit.fragment;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
-import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.util.IabKey;
 
 /**
- * Created by Stéphane on 15/11/2014.
+ * Created by sbaiget on 30/01/2015.
  */
-public class DonateFragment extends Fragment
+public class DonateActivity extends BaseActivity
         implements BillingProcessor.IBillingHandler, IabKey {
+
     static final String LOG_TAG = "billing";
 
     private static final String PRODUCT_DONATE_COFFEE = "com.sbgapps.scoreit.coffee";
@@ -44,36 +29,45 @@ public class DonateFragment extends Fragment
     private Button mBeerBtn;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_donate, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        mCoffeeBtn = (Button) view.findViewById(R.id.btn_donate_coffee);
-        mCoffeeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mReadyToPurchase) mBillingProcessor.purchase(getActivity(), PRODUCT_DONATE_COFFEE);
-            }
-        });
+        mCoffeeBtn = (Button) findViewById(R.id.btn_donate_coffee);
+        mBeerBtn = (Button) findViewById(R.id.btn_donate_beer);
 
-        mBeerBtn = (Button) view.findViewById(R.id.btn_donate_beer);
-        mBeerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mReadyToPurchase) mBillingProcessor.purchase(getActivity(), PRODUCT_DONATE_BEER);
-            }
-        });
+        mBillingProcessor = new BillingProcessor(this, INAPP_KEY, this);
 
-        return view;
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.width = Math.min(
+                getResources().getDimensionPixelSize(R.dimen.dialog_width),
+                dm.widthPixels * 3 / 4);
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        params.alpha = 1.0f;
+        params.dimAmount = 0.5f;
+        getWindow().setAttributes(params);
     }
 
-    public BillingProcessor getBillingProcessor() {
-        return mBillingProcessor;
+    public void onDonateCoffee(View view) {
+        if (mReadyToPurchase)
+            mBillingProcessor.purchase(DonateActivity.this, PRODUCT_DONATE_COFFEE);
+    }
+
+    public void onDonateBeer(View view) {
+        if (mReadyToPurchase)
+            mBillingProcessor.purchase(DonateActivity.this, PRODUCT_DONATE_BEER);
+
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBillingProcessor = new BillingProcessor(getActivity(), INAPP_KEY, this);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!mBillingProcessor.handleActivityResult(requestCode, resultCode, data))
+            super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_donate;
     }
 
     @Override

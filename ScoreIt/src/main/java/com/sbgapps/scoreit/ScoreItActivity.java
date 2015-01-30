@@ -164,6 +164,7 @@ public class ScoreItActivity extends BaseActivity
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.belote)));
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.coinche)));
         mNavigationItems.add(new NavigationDrawerItem(true));
+        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.donate)));
         mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about)));
         mNavigationDrawer.replaceWith(mNavigationItems);
 
@@ -369,6 +370,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void onNavigationDrawerItemSelected(int position) {
+        Intent intent;
         switch (position) {
             default:
                 return;
@@ -385,10 +387,15 @@ public class ScoreItActivity extends BaseActivity
                 mGameHelper.setPlayedGame(Game.COINCHE);
                 break;
             case 5:
-                Intent intent = new Intent(this, AboutActivity.class);
+                intent = new Intent(this, DonateActivity.class);
+                startActivity(intent);
+                return;
+            case 6:
+                intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
                 return;
         }
+
         mLap = null;
         mEditedLap = null;
         mIsEdited = false;

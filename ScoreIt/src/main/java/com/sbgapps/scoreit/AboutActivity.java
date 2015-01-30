@@ -16,7 +16,6 @@
 
 package com.sbgapps.scoreit;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,15 +24,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.sbgapps.scoreit.fragment.DonateFragment;
 import com.sbgapps.scoreit.fragment.InfoFragment;
 import com.sbgapps.scoreit.fragment.TranslationsFragment;
 
 import java.util.Locale;
 
 public class AboutActivity extends BaseActivity {
-
-    private DonateFragment mDonateFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +55,6 @@ public class AboutActivity extends BaseActivity {
         return R.layout.activity_about;
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!mDonateFragment.getBillingProcessor().handleActivityResult(requestCode, resultCode, data))
-            super.onActivityResult(requestCode, resultCode, data);
-    }
-
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -80,11 +70,6 @@ public class AboutActivity extends BaseActivity {
                             InfoFragment.class.getName());
                     break;
                 case 1:
-                    mDonateFragment = (DonateFragment) Fragment.instantiate(AboutActivity.this,
-                            DonateFragment.class.getName());
-                    fragment = mDonateFragment;
-                    break;
-                case 2:
                     fragment = Fragment.instantiate(AboutActivity.this,
                             TranslationsFragment.class.getName());
                     break;
@@ -94,7 +79,7 @@ public class AboutActivity extends BaseActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
 
         @Override
@@ -104,8 +89,6 @@ public class AboutActivity extends BaseActivity {
                 case 0:
                     return getString(R.string.application).toUpperCase(l);
                 case 1:
-                    return getString(R.string.donate).toUpperCase(l);
-                case 2:
                     return getString(R.string.translations).toUpperCase(l);
             }
             return null;
