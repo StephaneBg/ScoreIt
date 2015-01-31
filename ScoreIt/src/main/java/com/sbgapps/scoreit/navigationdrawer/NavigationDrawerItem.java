@@ -16,13 +16,6 @@
 
 package com.sbgapps.scoreit.navigationdrawer;
 
-import android.graphics.drawable.Drawable;
-
-/**
- * Created by Michal Bialas on 19/07/14.
- *
- * @author Michal Bialas
- */
 public class NavigationDrawerItem {
 
     private String mItemName;

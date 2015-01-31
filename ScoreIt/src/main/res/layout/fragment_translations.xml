@@ -24,7 +24,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-    <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
+    <com.sbgapps.scoreit.views.MaxWidthFrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:maxWidth="420dp">
@@ -38,7 +38,7 @@
             android:drawableLeft="@drawable/ic_action_translate"
             android:text="@string/help_translate"
             android:textColor="@color/white"/>
-    </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
+    </com.sbgapps.scoreit.views.MaxWidthFrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

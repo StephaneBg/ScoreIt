@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.sbgapps.scoreit.widget.CircleTextView
+            <com.sbgapps.scoreit.views.CircleTextView
                 android:id="@+id/btn_minus"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
@@ -51,7 +51,7 @@
                 android:gravity="center"
                 android:textColor="@color/white"/>
 
-            <com.sbgapps.scoreit.widget.CircleTextView
+            <com.sbgapps.scoreit.views.CircleTextView
                 android:id="@+id/btn_minus_10"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
@@ -61,7 +61,7 @@
                 android:gravity="center"
                 android:textColor="@color/white"/>
 
-            <com.sbgapps.scoreit.widget.CircleTextView
+            <com.sbgapps.scoreit.views.CircleTextView
                 android:id="@+id/btn_minus_100"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
@@ -73,13 +73,13 @@
                 android:textColor="@color/white"/>
         </RelativeLayout>
 
-        <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
+        <com.sbgapps.scoreit.views.MaxWidthFrameLayout
             android:layout_width="0dp"
             android:layout_height="96dp"
             app:maxWidth="96dp"
             android:layout_weight="1">
 
-            <com.sbgapps.scoreit.widget.CircleTextView
+            <com.sbgapps.scoreit.views.CircleTextView
                 android:id="@+id/points"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -91,13 +91,13 @@
                 app:ct_pressed_color="#B5B5B5"
                 app:ct_shadow_color="@color/gray_dark"
                 tools:text="128"/>
-        </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
+        </com.sbgapps.scoreit.views.MaxWidthFrameLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.sbgapps.scoreit.widget.CircleTextView
+            <com.sbgapps.scoreit.views.CircleTextView
                 android:id="@+id/btn_plus_10"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
@@ -106,7 +106,7 @@
                 android:gravity="center"
                 android:textColor="@color/white"/>
 
-            <com.sbgapps.scoreit.widget.CircleTextView
+            <com.sbgapps.scoreit.views.CircleTextView
                 android:id="@+id/btn_plus"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
@@ -116,7 +116,7 @@
                 android:gravity="center"
                 android:textColor="@color/white"/>
 
-            <com.sbgapps.scoreit.widget.CircleTextView
+            <com.sbgapps.scoreit.views.CircleTextView
                 android:id="@+id/btn_plus_100"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"

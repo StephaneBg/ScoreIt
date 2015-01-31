@@ -54,7 +54,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             tools:ignore="HardcodedText"/>
 
-        <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
+        <com.sbgapps.scoreit.views.MaxWidthFrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:maxWidth="420dp">
@@ -104,6 +104,6 @@
                     android:textColor="@color/white"
                     android:drawableLeft="@drawable/ic_communication_email"/>
             </LinearLayout>
-        </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
+        </com.sbgapps.scoreit.views.MaxWidthFrameLayout>
     </LinearLayout>
 </ScrollView>

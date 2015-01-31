@@ -25,7 +25,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
         <activity
-            android:name="com.sbgapps.scoreit.ScoreItActivity"
+            android:name=".ui.ScoreItActivity"
             android:theme="@style/Theme.ScoreIt">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -38,28 +38,28 @@
                 android:value="AEdPqrEAAAAIFCoVtKuiOisDPQmo0wutqKoed5sWnHLkLY7GaQ"/>
         </activity>
         <activity
-            android:name="com.sbgapps.scoreit.SavedGamesActivity"
-            android:parentActivityName="com.sbgapps.scoreit.ScoreItActivity"
+            android:name=".ui.SavedGamesActivity"
+            android:parentActivityName=".ui.ScoreItActivity"
             android:theme="@style/Theme.Adaptive">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScoreItActivity"/>
+                android:value=".ui.ScoreItActivity"/>
         </activity>
         <activity
-            android:name="com.sbgapps.scoreit.AboutActivity"
-            android:parentActivityName="com.sbgapps.scoreit.ScoreItActivity"
+            android:name=".ui.AboutActivity"
+            android:parentActivityName=".ui.ScoreItActivity"
             android:theme="@style/Theme.Adaptive">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScoreItActivity"/>
+                android:value=".ui.ScoreItActivity"/>
         </activity>
         <activity
-            android:name="com.sbgapps.scoreit.DonateActivity"
-            android:parentActivityName="com.sbgapps.scoreit.ScoreItActivity"
+            android:name=".ui.DonateActivity"
+            android:parentActivityName=".ui.ScoreItActivity"
             android:theme="@style/Theme.Dialog">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScoreItActivity"/>
+                android:value=".ui.ScoreItActivity"/>
         </activity>
     </application>
 </manifest>

@@ -115,7 +115,7 @@
             style="@style/SubHeader"
             android:text="@string/points"/>
 
-        <com.sbgapps.scoreit.widget.SeekPoints
+        <com.sbgapps.scoreit.views.SeekPoints
             android:id="@+id/input_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

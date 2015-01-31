@@ -43,7 +43,7 @@
             style="@style/SubHeader"
             android:text="@string/bidding"/>
 
-        <com.sbgapps.scoreit.widget.ToggleGroup
+        <com.sbgapps.scoreit.views.ToggleGroup
             android:id="@+id/group_team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_vertical_margin">
 
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
+            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
                 android:id="@+id/btn_player_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 android:background="@drawable/bg_selector_btn_toggle"
                 tools:textOn="@string/them"/>
 
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
+            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
                 android:id="@+id/btn_player_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -69,9 +69,9 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:background="@drawable/bg_selector_btn_toggle"
                 tools:textOff="@string/us"/>
-        </com.sbgapps.scoreit.widget.ToggleGroup>
+        </com.sbgapps.scoreit.views.ToggleGroup>
 
-        <com.sbgapps.scoreit.widget.SeekPoints
+        <com.sbgapps.scoreit.views.SeekPoints
             android:id="@+id/input_bid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
