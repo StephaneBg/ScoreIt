@@ -39,6 +39,7 @@
         <item>@string/language_german</item>
         <item>@string/language_spanish</item>
         <item>@string/language_italian</item>
+        <item>@string/language_portuguese</item>
     </string-array>
 
     <string-array name="translators" translatable="false">
@@ -54,6 +55,8 @@
         <item translatable="false">Alvaro Martinez</item>
         <!-- Italian -->
         <item translatable="false">Federico Cappelletti</item>
+        <!-- Portuguese -->
+        <item translatable="false">Maurício Portela</item>
     </string-array>
 
 </resources>
