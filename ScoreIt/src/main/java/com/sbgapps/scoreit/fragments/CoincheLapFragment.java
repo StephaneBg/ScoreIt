@@ -48,10 +48,12 @@ import butterknife.InjectView;
 public class CoincheLapFragment extends GenericBeloteLapFragment
         implements SeekPoints.OnProgressChangedListener {
 
-    @InjectView(R.id.group_team)
-    ToggleGroup mTeamGroup;
+    @InjectView(R.id.bidder_group)
+    ToggleGroup mBidderGroup;
     @InjectView(R.id.input_bid)
     SeekPoints mBid;
+    @InjectView(R.id.spinner_coinche)
+    Spinner mCoincheSpinner;
     @InjectView(R.id.input_points)
     BelotePoints mInputPoints;
     @InjectView(R.id.ll_bonuses)
@@ -71,26 +73,45 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
 
         if (null == getLap()) return view;
 
-        switch (getLap().getScorer()) {
+        switch (getLap().getBidder()) {
             case Player.PLAYER_1:
-                mTeamGroup.check(R.id.btn_player_1);
+                mBidderGroup.check(R.id.btn_player_1);
                 break;
             case Player.PLAYER_2:
-                mTeamGroup.check(R.id.btn_player_2);
+                mBidderGroup.check(R.id.btn_player_2);
                 break;
         }
 
-        mTeamGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
+        mBidderGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(ToggleGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.btn_player_1:
-                        getLap().setScorer(Player.PLAYER_1);
+                        getLap().setBidder(Player.PLAYER_1);
                         break;
                     case R.id.btn_player_2:
-                        getLap().setScorer(Player.PLAYER_2);
+                        getLap().setBidder(Player.PLAYER_2);
                         break;
                 }
+            }
+        });
+
+        ArrayAdapter<CoincheItem> coincheAdapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item);
+        coincheAdapter.add(new CoincheItem(CoincheLap.COINCHE_NONE));
+        coincheAdapter.add(new CoincheItem(CoincheLap.COINCHE_COINCHE));
+        coincheAdapter.add(new CoincheItem(CoincheLap.COINCHE_SURCOINCHE));
+        mCoincheSpinner.setAdapter(coincheAdapter);
+        mCoincheSpinner.setSelection(getLap().getCoinche());
+        mCoincheSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getLap().setCoinche(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -193,8 +214,6 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
                 android.R.layout.simple_spinner_item);
         bonusArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_BELOTE));
-        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_COINCHE));
-        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_SURCOINCHE));
         bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_RUN_3));
         bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_RUN_4));
         bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_RUN_5));
@@ -231,6 +250,28 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         @Override
         public String toString() {
             return CoincheBonus.getLitteralBonus(getActivity(), mBonus);
+        }
+    }
+
+    class CoincheItem {
+
+        final int mCoinche;
+
+        CoincheItem(int coinche) {
+            mCoinche = coinche;
+        }
+
+        @Override
+        public String toString() {
+            switch (mCoinche) {
+                default:
+                case CoincheLap.COINCHE_NONE:
+                    return getActivity().getString(R.string.none);
+                case CoincheLap.COINCHE_COINCHE:
+                    return getActivity().getString(R.string.coinche);
+                case CoincheLap.COINCHE_SURCOINCHE:
+                    return getActivity().getString(R.string.surcoinche);
+            }
         }
     }
 }

@@ -29,19 +29,39 @@ import java.util.List;
  */
 public class CoincheLap extends GenericBeloteLap {
 
+    public static final int COINCHE_NONE = 0;
+    public static final int COINCHE_COINCHE = 1;
+    public static final int COINCHE_SURCOINCHE = 2;
+
+    @SerializedName("bidder")
+    protected int mBidder;
     @SerializedName("bid")
-    private int mBid;
+    protected int mBid;
+    @SerializedName("coinche")
+    protected int mCoinche;
     @SerializedName("bonuses")
     protected List<CoincheBonus> mBonuses;
 
-    public CoincheLap(int taker, int points, int bid, List<CoincheBonus> bonuses) {
+    public CoincheLap(int taker, int points, int bidder,
+                      int bid, int coinche, List<CoincheBonus> bonuses) {
         super(taker, points);
+        mBidder = bidder;
         mBid = bid;
+        mCoinche = coinche;
         mBonuses = bonuses;
     }
 
     public CoincheLap() {
-        this(Player.PLAYER_1, 100, 100, new ArrayList<CoincheBonus>());
+        this(Player.PLAYER_1, 100, Player.PLAYER_1,
+                100, COINCHE_NONE, new ArrayList<CoincheBonus>());
+    }
+
+    public int getBidder() {
+        return mBidder;
+    }
+
+    public void setBidder(int bidder) {
+        mBidder = bidder;
     }
 
     public int getBid() {
@@ -50,6 +70,14 @@ public class CoincheLap extends GenericBeloteLap {
 
     public void setBid(int bid) {
         mBid = bid;
+    }
+
+    public int getCoinche() {
+        return mCoinche;
+    }
+
+    public void setCoinche(int coinche) {
+        mCoinche = coinche;
     }
 
     public List<CoincheBonus> getBonuses() {
@@ -68,54 +96,56 @@ public class CoincheLap extends GenericBeloteLap {
     public void computeScores() {
         super.computeScores();
 
-        int takerPts = getTeamPoints(Player.PLAYER_1);
-        int counterPts = getTeamPoints(Player.PLAYER_2);
+        int bidderPts;
+        int counterPts;
 
-        // Compute scores
-        CoincheBonus cb = getBonus(CoincheBonus.BONUS_COINCHE);
-        if (null == cb) cb = getBonus(CoincheBonus.BONUS_SURCOINCHE);
+        if (Player.PLAYER_1 == mBidder) {
+            bidderPts = getTeamPoints(Player.PLAYER_1);
+            counterPts = getTeamPoints(Player.PLAYER_2);
+        } else {
+            bidderPts = getTeamPoints(Player.PLAYER_2);
+            counterPts = getTeamPoints(Player.PLAYER_1);
+        }
 
-        if ((takerPts >= mBid) && (takerPts > counterPts)) {
+        if ((bidderPts >= mBid) && (bidderPts > counterPts)) {
             // Deal succeeded
             mIsDone = true;
-            takerPts += mBid;
-            if (null != cb) {
-                if (CoincheBonus.BONUS_COINCHE == cb.get()) {
-                    takerPts *= 2;
-                } else {
-                    takerPts *= 4;
-                }
+            bidderPts += mBid;
+            switch (mCoinche) {
+                case COINCHE_COINCHE:
+                    bidderPts *= 2;
+                    break;
+                case COINCHE_SURCOINCHE:
+                    bidderPts *= 4;
+                    break;
             }
         } else {
             // Deal failed
             mIsDone = false;
-            takerPts = 0;
-            counterPts = (250 == mBid) ? 500 : 160 + mBid;
-            if (null != cb) {
-                if (CoincheBonus.BONUS_COINCHE == cb.get()) {
+            bidderPts = 0;
+            counterPts = (250 == mBid) ? 500 : (160 + mBid);
+            switch (mCoinche) {
+                case COINCHE_COINCHE:
                     counterPts *= 2;
-                } else {
+                    break;
+                case COINCHE_SURCOINCHE:
                     counterPts *= 4;
-                }
+                    break;
             }
         }
 
-        mScores[Player.PLAYER_1] = (Player.PLAYER_1 == mScorer) ? takerPts : counterPts;
-        mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mScorer) ? takerPts : counterPts;
-    }
-
-    public CoincheBonus getBonus(int bonus) {
-        for (CoincheBonus b : mBonuses) {
-            if (bonus == b.get()) {
-                return b;
-            }
+        if (Player.PLAYER_1 == mBidder) {
+            mScores[Player.PLAYER_1] = bidderPts;
+            mScores[Player.PLAYER_2] = counterPts;
+        } else {
+            mScores[Player.PLAYER_1] = counterPts;
+            mScores[Player.PLAYER_2] = bidderPts;
         }
-        return null;
     }
 
     @Override
     public Lap copy() {
-        return new CoincheLap(mScorer, mPoints, mBid, mBonuses);
+        return new CoincheLap(mScorer, mPoints, mBidder, mBid, mCoinche, mBonuses);
     }
 
     private int getTeamPoints(int player) {
