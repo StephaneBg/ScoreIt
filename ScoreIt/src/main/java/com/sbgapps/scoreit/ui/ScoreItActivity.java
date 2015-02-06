@@ -550,12 +550,12 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void showScoreScene() {
-        mLap.computeScores();
         if (mIsEdited) {
             mEditedLap.set(mLap);
             mEditedLap = null;
             mIsEdited = false;
         } else {
+            mLap.computeScores();
             mGameHelper.addLap(mLap);
         }
         mLap = null;

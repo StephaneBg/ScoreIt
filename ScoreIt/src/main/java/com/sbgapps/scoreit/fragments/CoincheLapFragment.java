@@ -98,6 +98,7 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
 
         ArrayAdapter<CoincheItem> coincheAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
+        coincheAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         coincheAdapter.add(new CoincheItem(CoincheLap.COINCHE_NONE));
         coincheAdapter.add(new CoincheItem(CoincheLap.COINCHE_COINCHE));
         coincheAdapter.add(new CoincheItem(CoincheLap.COINCHE_SURCOINCHE));

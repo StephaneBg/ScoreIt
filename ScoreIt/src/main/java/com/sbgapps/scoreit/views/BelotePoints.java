@@ -72,7 +72,7 @@ public class BelotePoints extends LinearLayout
                 } else {
                     mLap.setScorer(Player.PLAYER_1);
                 }
-                setScores();
+                displayScores();
             }
         });
 
@@ -94,7 +94,7 @@ public class BelotePoints extends LinearLayout
                         mLap.setPoints(250);
                         break;
                 }
-                setScores();
+                displayScores();
             }
         });
 
@@ -113,24 +113,19 @@ public class BelotePoints extends LinearLayout
                 162,
                 Integer.toString(points));
         mSeekPoints.setOnProgressChangedListener(this);
-        setScores();
+        displayScores();
     }
 
     @Override
     public String onProgressChanged(SeekPoints seekPoints, int progress) {
         mLap.setPoints(progress);
-        setScores();
+        displayScores();
         return Integer.toString(progress);
     }
 
-    public void setScores() {
-        int scores[] = mLap.getScores();
-        if (Player.PLAYER_1 == mLap.getScorer()) {
-            mPlayer1Points.setText(Integer.toString(scores[0]));
-            mPlayer2Points.setText(Integer.toString(scores[1]));
-        } else {
-            mPlayer1Points.setText(Integer.toString(scores[1]));
-            mPlayer2Points.setText(Integer.toString(scores[0]));
-        }
+    private void displayScores() {
+        mLap.computePoints();
+        mPlayer1Points.setText(Integer.toString(mLap.getScore(Player.PLAYER_1)));
+        mPlayer2Points.setText(Integer.toString(mLap.getScore(Player.PLAYER_2)));
     }
 }

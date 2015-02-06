@@ -18,6 +18,7 @@ package com.sbgapps.scoreit.games.belote;
 
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.games.Player;
 
 /**
  * Created by sbaiget on 11/10/13.
@@ -34,6 +35,7 @@ public abstract class GenericBeloteLap implements Lap {
     public GenericBeloteLap(int scorer, int points) {
         mScorer = scorer;
         mPoints = points;
+        mScores = new int[2];
     }
 
     public int getScorer() {
@@ -67,27 +69,25 @@ public abstract class GenericBeloteLap implements Lap {
         mPoints = ((GenericBeloteLap) lap).getPoints();
     }
 
-    @Override
-    public void computeScores() {
-        if (null == mScores) {
-            mScores = new int[2];
-        }
-    }
-
-    public int[] getScores() {
-        int[] scores = new int[2];
+    public void computePoints() {
+        int[] points = new int[2];
         if (160 == mPoints) {
-            scores[0] = 160;
-            scores[1] = 0;
+            points[0] = 160;
+            points[1] = 0;
         } else if (250 == mPoints) {
-            scores[0] = 250;
-            scores[1] = 0;
+            points[0] = 250;
+            points[1] = 0;
         } else {
-            int points = mPoints;
-            scores[0] = ((points + 5) / 10) * 10;
-            points = 162 - mPoints;
-            scores[1] = ((points + 5) / 10) * 10;
+            points[0] = ((mPoints + 5) / 10) * 10;
+            points[1] = (((162 - mPoints) + 5) / 10) * 10;
         }
-        return scores;
+
+        if (Player.PLAYER_1 == getScorer()) {
+            mScores[Player.PLAYER_1] = points[0];
+            mScores[Player.PLAYER_2] = points[1];
+        } else {
+            mScores[Player.PLAYER_1] = points[1];
+            mScores[Player.PLAYER_2] = points[0];
+        }
     }
 }

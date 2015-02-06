@@ -46,17 +46,9 @@ public class BeloteLap extends GenericBeloteLap {
 
     @Override
     public void computeScores() {
-        super.computeScores();
         mIsDone = (160 != mPoints);
 
-        final int scores[] = getScores();
-        if (Player.PLAYER_1 == getScorer()) {
-            mScores[Player.PLAYER_1] = scores[0];
-            mScores[Player.PLAYER_2] = scores[1];
-        } else {
-            mScores[Player.PLAYER_1] = scores[1];
-            mScores[Player.PLAYER_2] = scores[0];
-        }
+        computePoints();
 
         // Bonuses
         for (BeloteBonus bonus : mBonuses) {
