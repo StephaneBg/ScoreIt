@@ -25,12 +25,11 @@
         <item name="isDialog">false</item>
     </style>
 
-    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
-        <item name="windowActionBar">false</item>
     </style>
 
     <style name="Theme.Dialog" parent="Theme.AppCompat.Light.Dialog">

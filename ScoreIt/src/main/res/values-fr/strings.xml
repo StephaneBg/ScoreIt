@@ -109,6 +109,6 @@
     <string name="language_german">Allemand</string>
     <string name="language_spanish">Espagnol</string>
     <string name="language_italian">Italien</string>
-    <string name="language_portuguese">Portugais</string>
+    <!--<string name="language_portuguese">Portugais</string>-->
     <string name="plus_community">Communauté Google +</string>
 </resources>

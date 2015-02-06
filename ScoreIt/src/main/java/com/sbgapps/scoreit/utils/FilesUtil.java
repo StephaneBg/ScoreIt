@@ -85,7 +85,7 @@ public class FilesUtil {
                 dir = "belote";
                 break;
             case Game.COINCHE:
-                dir = "coinche";
+                dir = "coinche_2";
                 break;
             case Game.TAROT:
                 dir = "tarot_" + mGameHelper.getPlayerCount();
