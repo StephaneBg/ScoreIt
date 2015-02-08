@@ -23,7 +23,9 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name">
+        android:label="@string/app_name"
+        android:supportsRtl="false">
+
         <activity
             android:name=".ui.ScoreItActivity"
             android:theme="@style/Theme.ScoreIt">
@@ -37,6 +39,7 @@
                 android:name="com.google.android.backup.api_key"
                 android:value="AEdPqrEAAAAIFCoVtKuiOisDPQmo0wutqKoed5sWnHLkLY7GaQ"/>
         </activity>
+
         <activity
             android:name=".ui.SavedGamesActivity"
             android:parentActivityName=".ui.ScoreItActivity"
@@ -45,6 +48,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.ScoreItActivity"/>
         </activity>
+
         <activity
             android:name=".ui.AboutActivity"
             android:parentActivityName=".ui.ScoreItActivity"
@@ -53,6 +57,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.ScoreItActivity"/>
         </activity>
+
         <activity
             android:name=".ui.DonateActivity"
             android:parentActivityName=".ui.ScoreItActivity"

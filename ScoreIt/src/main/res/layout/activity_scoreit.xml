@@ -21,6 +21,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ScoreItActivity">
 
     <LinearLayout
@@ -42,7 +43,11 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-    <include
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/navigation_drawer"
-        layout="@layout/navigation_drawer_list_view"/>
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"/>
 </android.support.v4.widget.DrawerLayout>

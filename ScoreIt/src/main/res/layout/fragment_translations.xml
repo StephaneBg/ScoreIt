@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_vertical_margin"
-            android:background="@drawable/bg_btn_selector"
+            android:background="@drawable/bg_selector_btn"
             android:drawableLeft="@drawable/ic_action_translate"
             android:text="@string/help_translate"
             android:textColor="@color/white"/>

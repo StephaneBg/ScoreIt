@@ -16,32 +16,36 @@
   ~ limitations under the License.
   -->
 
-<com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItemView
-    android:id="@+id/itemRR"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bg_navigation_drawer_list_item"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
     <View
-        android:id="@+id/separator"
+        android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="@dimen/margin_default"
-        android:background="@color/gray_light"
-        android:visibility="gone"
-        tools:visibility="visible"/>
+        android:layout_height="1dp"
+        android:background="#10000000"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"/>
 
-    <TextView
-        android:id="@+id/navigationDrawerItemTitleTV"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/list_item_height"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:gravity="center_vertical"
-        android:textSize="20sp"
-        android:textStyle="normal"
-        tools:text="@string/app_name"/>
-</com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItemView>
+    <FrameLayout
+        android:id="@+id/bg_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_height"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:background="@drawable/list_selector_nav_drawer">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_nav_drawer_item"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            tools:text="Title"/>
+    </FrameLayout>
+</LinearLayout>

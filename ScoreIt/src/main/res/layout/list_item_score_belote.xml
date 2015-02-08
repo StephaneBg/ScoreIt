@@ -27,7 +27,7 @@
         android:id="@id/front"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_navigation_drawer_list_item">
+        android:background="@drawable/list_selector_score">
 
         <com.sbgapps.scoreit.views.LinearListView
             android:id="@+id/list_score"

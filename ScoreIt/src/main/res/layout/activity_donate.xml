@@ -26,7 +26,7 @@
         android:id="@+id/btn_donate_coffee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_btn_selector"
+        android:background="@drawable/bg_selector_btn"
         android:onClick="onDonateCoffee"
         android:text="@string/donate_coffee"
         android:textColor="@color/white"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:onClick="onDonateBeer"
-        android:background="@drawable/bg_btn_selector"
+        android:background="@drawable/bg_selector_btn"
         android:text="@string/donate_beer"
         android:textColor="@color/white"
         android:drawableLeft="@drawable/ic_donate_beer"/>

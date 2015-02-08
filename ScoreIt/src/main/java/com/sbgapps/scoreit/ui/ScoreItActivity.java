@@ -31,6 +31,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,7 +40,6 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -46,6 +47,7 @@ import com.github.mrengineer13.snackbar.SnackBar;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ObservableScrollView;
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.adapters.NavigationDrawerAdapter;
 import com.sbgapps.scoreit.fragments.BeloteLapFragment;
 import com.sbgapps.scoreit.fragments.CoincheLapFragment;
 import com.sbgapps.scoreit.fragments.HeaderFragment;
@@ -64,16 +66,12 @@ import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.games.tarot.TarotFourLap;
 import com.sbgapps.scoreit.games.tarot.TarotThreeLap;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
-import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
-import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerView;
 import com.sbgapps.scoreit.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnItemClick;
 
 public class ScoreItActivity extends BaseActivity
         implements SnackBar.OnMessageClickListener {
@@ -82,20 +80,17 @@ public class ScoreItActivity extends BaseActivity
     private static final int REQ_SAVED_GAME = 2;
 
     @InjectView(R.id.navigation_drawer)
-    NavigationDrawerView mNavigationDrawer;
+    RecyclerView mNavigationDrawer;
     @InjectView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
-    @InjectView(R.id.drawer_list_view)
-    ListView mDrawerListView;
     @InjectView(R.id.fab)
     FloatingActionButton mActionButton;
     @InjectView(R.id.lap_container)
     ObservableScrollView mLapContainer;
     FrameLayout mGraphContainer;
 
-    private List<NavigationDrawerItem> mNavigationItems;
     private ActionBarDrawerToggle mDrawerToggle;
-    private int mSelectedPosition = 0;
+    private int mCurrentGame = Game.UNIVERSAL;
     private GameHelper mGameHelper;
     private int mEditedPlayer = Player.PLAYER_NONE;
     private Lap mLap;
@@ -115,6 +110,10 @@ public class ScoreItActivity extends BaseActivity
         return mLap;
     }
 
+    public int getCurrentGame() {
+        return mCurrentGame;
+    }
+
     @Override
     @SuppressWarnings("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,8 +127,8 @@ public class ScoreItActivity extends BaseActivity
 
         mGameHelper = new GameHelper(this);
         mGameHelper.loadLaps();
-
-        Resources res = getResources();
+        mCurrentGame = mGameHelper.getPlayedGame();
+        setTitle();
 
         // Init fragments
         reloadFragments(false);
@@ -145,6 +144,13 @@ public class ScoreItActivity extends BaseActivity
 
         if (null != mLap) setActionButtonColor();
 
+        initLapContainer();
+        initDrawer();
+        initActionButton();
+    }
+
+    @SuppressWarnings("deprecation")
+    private void initLapContainer() {
         final View root = findViewById(R.id.root);
         root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -157,17 +163,13 @@ public class ScoreItActivity extends BaseActivity
                 root.getViewTreeObserver().removeGlobalOnLayoutListener(this);
             }
         });
+    }
 
-        // Init drawer
-        mNavigationItems = new ArrayList<>();
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.universal)));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.tarot)));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.belote)));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.coinche)));
-        mNavigationItems.add(new NavigationDrawerItem(true));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.donate)));
-        mNavigationItems.add(new NavigationDrawerItem(getString(R.string.about)));
-        mNavigationDrawer.replaceWith(mNavigationItems);
+    private void initDrawer() {
+        mNavigationDrawer.setClipToPadding(false);
+        mNavigationDrawer.setLayoutManager(new LinearLayoutManager(this));
+        mNavigationDrawer.setAdapter(new NavigationDrawerAdapter(this));
+        mNavigationDrawer.setHasFixedSize(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -176,14 +178,12 @@ public class ScoreItActivity extends BaseActivity
                 R.string.navigation_drawer_close) {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                setTitle();
                 invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 if (null != mSnackBar) mSnackBar.clear();
-                setTitle();
                 invalidateOptionsMenu();
             }
 
@@ -192,13 +192,13 @@ public class ScoreItActivity extends BaseActivity
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        mSelectedPosition = mGameHelper.getPlayedGame();
-        selectItem(mSelectedPosition);
-
-        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mDrawerListView.getLayoutParams();
+        DrawerLayout.LayoutParams lp = (DrawerLayout.LayoutParams) mNavigationDrawer.getLayoutParams();
         lp.width = calculateDrawerWidth();
-        mDrawerListView.setLayoutParams(lp);
+        mNavigationDrawer.setLayoutParams(lp);
+        mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.color_primary));
+    }
 
+    private void initActionButton() {
         mActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -324,91 +324,70 @@ public class ScoreItActivity extends BaseActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @OnItemClick(R.id.drawer_list_view)
-    public void onDrawerItemClick(int position, long id) {
-        if (mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
-            NavigationDrawerItem item = mNavigationDrawer.getAdapter().getItem(position);
-            if (item.isSeparator()) return;
-
-            mDrawerLayout.closeDrawer(mNavigationDrawer);
-            if (mSelectedPosition == position) return;
-            onNavigationDrawerItemSelected(position);
-        }
-    }
-
-    private void selectItem(int position) {
-        if (mDrawerListView != null &&
-                position != 4) {
-            mDrawerListView.setItemChecked(position, true);
-
-            mNavigationItems.get(mSelectedPosition).setSelected(false);
-            mNavigationItems.get(position).setSelected(true);
-
-            mSelectedPosition = position;
-            setTitle();
-        }
+    public void onGameSelected(int position) {
         mDrawerLayout.closeDrawer(mNavigationDrawer);
-    }
+        if (mCurrentGame == position) return;
 
-    private void setTitle() {
-        String title;
-        if (mDrawerLayout.isDrawerOpen(mNavigationDrawer)) {
-            title = getString(R.string.app_name);
-        } else {
-            switch (mSelectedPosition) {
-                default:
-                case Game.UNIVERSAL:
-                    title = getString(R.string.universal);
-                    break;
-                case Game.BELOTE:
-                    title = getString(R.string.belote);
-                    break;
-                case Game.COINCHE:
-                    title = getString(R.string.coinche);
-                    break;
-                case Game.TAROT:
-                    title = getString(R.string.tarot);
-                    break;
-            }
-        }
-        getSupportActionBar().setTitle(title);
-    }
+        mNavigationDrawer.getAdapter().notifyItemChanged(mCurrentGame);
+        mCurrentGame = position;
+        mNavigationDrawer.getAdapter().notifyItemChanged(mCurrentGame);
 
-    private void onNavigationDrawerItemSelected(int position) {
-        Intent intent;
         switch (position) {
             default:
                 return;
-            case 0:
+            case Game.UNIVERSAL:
                 mGameHelper.setPlayedGame(Game.UNIVERSAL);
                 break;
-            case 1:
+            case Game.BELOTE:
                 mGameHelper.setPlayedGame(Game.TAROT);
                 break;
-            case 2:
+            case Game.COINCHE:
                 mGameHelper.setPlayedGame(Game.BELOTE);
                 break;
-            case 3:
+            case Game.TAROT:
                 mGameHelper.setPlayedGame(Game.COINCHE);
                 break;
-            case 5:
-                intent = new Intent(this, DonateActivity.class);
-                startActivity(intent);
-                return;
-            case 6:
-                intent = new Intent(this, AboutActivity.class);
-                startActivity(intent);
-                return;
         }
 
         mLap = null;
         mEditedLap = null;
         mIsEdited = false;
+
+        setTitle();
         animateLapContainer();
         setActionButtonProperties(true);
         invalidateOptionsMenu();
         reloadFragments(true);
-        selectItem(position);
+    }
+
+    private void setTitle() {
+        String title;
+        switch (mCurrentGame) {
+            default:
+            case Game.UNIVERSAL:
+                title = getString(R.string.universal);
+                break;
+            case Game.BELOTE:
+                title = getString(R.string.belote);
+                break;
+            case Game.COINCHE:
+                title = getString(R.string.coinche);
+                break;
+            case Game.TAROT:
+                title = getString(R.string.tarot);
+                break;
+        }
+        getSupportActionBar().setTitle(title);
+    }
+
+    public void onDonate() {
+        mDrawerLayout.closeDrawer(mNavigationDrawer);
+        startActivity(new Intent(this, DonateActivity.class));
+    }
+
+    public void onAbout() {
+        mDrawerLayout.closeDrawer(mNavigationDrawer);
+        startActivity(new Intent(this, AboutActivity.class));
     }
 
     @Override
@@ -480,8 +459,7 @@ public class ScoreItActivity extends BaseActivity
 
         showHeaderFragment(anim);
         showScoreListFragment(anim);
-        if (isTablet())
-            showScoreGraphFragment(anim);
+        if (isTablet()) showScoreGraphFragment(anim);
     }
 
     public void switchScoreViews() {
@@ -631,7 +609,6 @@ public class ScoreItActivity extends BaseActivity
         mActionButton.show(false);
     }
 
-    @SuppressWarnings("NewApi")
     public void animateLapContainer() {
         ObjectAnimator animY;
         float height = mLapContainer.getHeight();
@@ -797,7 +774,7 @@ public class ScoreItActivity extends BaseActivity
         new MaterialDialog.Builder(this)
                 .title(R.string.filename)
                 .titleColorRes(R.color.color_primary)
-                .customView(view)
+                .customView(view, false)
                 .positiveText(R.string.ok)
                 .positiveColorRes(R.color.color_primary)
                 .negativeText(R.string.cancel)

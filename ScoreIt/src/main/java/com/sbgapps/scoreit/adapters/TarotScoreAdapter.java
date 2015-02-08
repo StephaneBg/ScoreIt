@@ -40,8 +40,7 @@ public class TarotScoreAdapter extends ScoreListAdapter<TarotScoreAdapter.ViewHo
 
     public TarotScoreAdapter(ScoreListFragment fragment) {
         super(fragment);
-        mTypeface = Typeface.createFromAsset(getActivity().getResources().getAssets(),
-                "Roboto-Medium.ttf");
+        mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "Roboto-Medium.ttf");
     }
 
     public static class ViewHolder extends ScoreListAdapter.ViewHolder {

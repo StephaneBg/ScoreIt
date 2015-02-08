@@ -16,57 +16,123 @@
 
 package com.sbgapps.scoreit.adapters;
 
-import android.content.Context;
+import android.graphics.Typeface;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItem;
-import com.sbgapps.scoreit.navigationdrawer.NavigationDrawerItemView;
+import com.sbgapps.scoreit.games.Game;
+import com.sbgapps.scoreit.ui.ScoreItActivity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by Michal Bialas on 19/07/14.
  */
-public class NavigationDrawerAdapter extends BindableAdapter<NavigationDrawerItem> {
+public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.DrawerViewHolder>
+        implements View.OnClickListener {
 
-    private List<NavigationDrawerItem> items = Collections.emptyList();
+    private final ScoreItActivity mActivity;
+    private final List<NavigationDrawerGameItem> mNavigationItems;
+    private final Typeface mTypeface;
 
-    public NavigationDrawerAdapter(Context context) {
-        super(context);
-    }
+    public NavigationDrawerAdapter(ScoreItActivity activity) {
+        mActivity = activity;
 
-    public void replaceWith(List<NavigationDrawerItem> items) {
-        this.items = new ArrayList<>(items);
-        notifyDataSetChanged();
-    }
+        mTypeface = Typeface.createFromAsset(activity.getAssets(), "Roboto-Medium.ttf");
 
-    @Override
-    public NavigationDrawerItem getItem(int position) {
-        return items.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
+        mNavigationItems = new ArrayList<>();
+        mNavigationItems.add(new NavigationDrawerGameItem(activity.getString(R.string.universal), Game.UNIVERSAL));
+        mNavigationItems.add(new NavigationDrawerGameItem(activity.getString(R.string.tarot), Game.TAROT));
+        mNavigationItems.add(new NavigationDrawerGameItem(activity.getString(R.string.belote), Game.BELOTE));
+        mNavigationItems.add(new NavigationDrawerGameItem(activity.getString(R.string.coinche), Game.COINCHE));
     }
 
     @Override
-    public View newView(LayoutInflater inflater, int position, ViewGroup container) {
-        return inflater.inflate(R.layout.list_item_nav_drawer, container, false);
+    public DrawerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_nav_drawer, parent, false);
+        return new DrawerViewHolder(v);
     }
 
     @Override
-    public int getCount() {
-        return items.size();
+    public void onBindViewHolder(DrawerViewHolder holder, int position) {
+        if (position == mNavigationItems.size()) {
+            holder.divider.setVisibility(View.VISIBLE);
+            holder.title.setText(mActivity.getString(R.string.donate));
+            holder.view.setTag(position);
+        } else if (position == mNavigationItems.size() + 1) {
+            holder.title.setText(mActivity.getString(R.string.about));
+            holder.view.setTag(position);
+        } else {
+            NavigationDrawerGameItem item = mNavigationItems.get(position);
+            holder.view.setTag(item.getGameIndex());
+            holder.title.setText(item.getGameName());
+        }
+
+        holder.title.setTypeface(mTypeface);
+        holder.view.setOnClickListener(this);
+        if (mActivity.getCurrentGame() == position) {
+            holder.view.setActivated(true);
+            holder.title.setTextColor(mActivity.getResources().getColor(R.color.color_primary_dark));
+        } else {
+            holder.view.setActivated(false);
+            holder.title.setTextColor(mActivity.getResources().getColor(R.color.gray_dark));
+        }
     }
 
     @Override
-    public void bindView(NavigationDrawerItem item, int position, View view) {
-        ((NavigationDrawerItemView) view).bindTo(item);
+    public int getItemCount() {
+        return mNavigationItems.size() + 2;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int position = (int) v.getTag();
+        if (position == mNavigationItems.size()) {
+            mActivity.onDonate();
+        } else if (position == mNavigationItems.size() + 1) {
+            mActivity.onAbout();
+        } else {
+            mActivity.onGameSelected(position);
+        }
+    }
+
+    public static class DrawerViewHolder extends RecyclerView.ViewHolder {
+
+        public DrawerViewHolder(View itemView) {
+            super(itemView);
+            view = itemView;
+            divider = itemView.findViewById(R.id.divider);
+            background = itemView.findViewById(R.id.bg_title);
+            title = (TextView) itemView.findViewById(R.id.title);
+        }
+
+        View view;
+        View divider;
+        View background;
+        TextView title;
+    }
+
+    public static class NavigationDrawerGameItem {
+
+        private final int mGameIndex;
+        private final String mGameName;
+
+        public NavigationDrawerGameItem(String name, int index) {
+            mGameName = name;
+            mGameIndex = index;
+        }
+
+        public String getGameName() {
+            return mGameName;
+        }
+
+        public int getGameIndex() {
+            return mGameIndex;
+        }
     }
 }

@@ -35,6 +35,7 @@
     <dimen name="font_dialpad">40sp</dimen>
     <dimen name="font_display_1">34sp</dimen>
     <dimen name="font_headline">24sp</dimen>
+    <dimen name="font_nav_drawer_item">14sp</dimen>
     <dimen name="font_subhead">14sp</dimen>
     <dimen name="font_button">14sp</dimen>
 
