@@ -28,14 +28,13 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#10000000"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:visibility="gone"/>
 
     <FrameLayout
         android:id="@+id/bg_title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_height"
+        android:layout_height="@dimen/list_item_nav_drawer"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:background="@drawable/list_selector_nav_drawer">
 
