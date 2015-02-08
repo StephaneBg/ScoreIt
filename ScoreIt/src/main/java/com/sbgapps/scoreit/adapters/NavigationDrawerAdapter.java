@@ -21,6 +21,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
@@ -64,9 +65,13 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
             holder.divider.setVisibility(View.VISIBLE);
             holder.title.setText(mActivity.getString(R.string.donate));
             holder.view.setTag(position);
+            holder.icon.setVisibility(View.VISIBLE);
+            holder.icon.setImageResource(R.drawable.ic_drawer_donate);
         } else if (position == mNavigationItems.size() + 1) {
             holder.title.setText(mActivity.getString(R.string.about));
             holder.view.setTag(position);
+            holder.icon.setVisibility(View.VISIBLE);
+            holder.icon.setImageResource(R.drawable.ic_drawer_about);
         } else {
             NavigationDrawerGameItem item = mNavigationItems.get(position);
             holder.view.setTag(item.getGameIndex());
@@ -77,10 +82,10 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         holder.view.setOnClickListener(this);
         if (mActivity.getCurrentGame() == position) {
             holder.view.setActivated(true);
-            holder.title.setTextColor(mActivity.getResources().getColor(R.color.color_primary_dark));
+            holder.title.setTextColor(mActivity.getResources().getColor(R.color.color_primary));
         } else {
             holder.view.setActivated(false);
-            holder.title.setTextColor(mActivity.getResources().getColor(R.color.gray_dark));
+            holder.title.setTextColor(mActivity.getResources().getColor(R.color.nav_drawer_item));
         }
     }
 
@@ -109,12 +114,14 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
             divider = itemView.findViewById(R.id.divider);
             background = itemView.findViewById(R.id.bg_title);
             title = (TextView) itemView.findViewById(R.id.title);
+            icon = (ImageView) itemView.findViewById(R.id.icon);
         }
 
         View view;
         View divider;
         View background;
         TextView title;
+        ImageView icon;
     }
 
     public static class NavigationDrawerGameItem {

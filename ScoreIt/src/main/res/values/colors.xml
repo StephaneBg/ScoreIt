@@ -20,13 +20,15 @@
     <color name="transparent">#00000000</color>
 
     <color name="color_primary">#66A84F</color>
-    <color name="color_primary_dark">#5B9646</color>
+    <color name="color_primary_dark">#3D652F</color>
     <color name="color_accent">#FFAB40</color>
     <color name="color_accent_dark">#E49839</color>
 
     <color name="gray_light">#E4E4E4</color>
     <color name="gray_dark">#4D4D4D</color>
 
+    <color name="nav_drawer_item">#DE000000</color>
+    
     <color name="game_won">@color/color_primary</color>
     <color name="game_lost">#F44336</color>
 
