@@ -29,9 +29,9 @@
 
     <color name="divider">#10000000</color>
 
-    <color name="nav_drawer_font">#DE000000</color>
+    <color name="nav_drawer_item">#DE000000</color>
     <color name="nav_drawer_activated_bg">#F4F4F4</color>
-    
+
     <color name="game_won">@color/color_primary</color>
     <color name="game_lost">#F44336</color>
 

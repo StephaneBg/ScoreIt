@@ -17,6 +17,7 @@
 package com.sbgapps.scoreit.adapters;
 
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +32,6 @@ import com.sbgapps.scoreit.ui.ScoreItActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Michal Bialas on 19/07/14.
- */
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.DrawerViewHolder>
         implements View.OnClickListener {
 
@@ -47,10 +45,14 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         mTypeface = Typeface.createFromAsset(activity.getAssets(), "Roboto-Medium.ttf");
 
         mNavigationItems = new ArrayList<>();
-        mNavigationItems.add(new NavigationDrawerGameItem(activity.getString(R.string.universal), Game.UNIVERSAL));
-        mNavigationItems.add(new NavigationDrawerGameItem(activity.getString(R.string.tarot), Game.TAROT));
-        mNavigationItems.add(new NavigationDrawerGameItem(activity.getString(R.string.belote), Game.BELOTE));
-        mNavigationItems.add(new NavigationDrawerGameItem(activity.getString(R.string.coinche), Game.COINCHE));
+        mNavigationItems.add(new NavigationDrawerGameItem(activity.getString(R.string.universal),
+                activity.getResources().getDrawable(R.drawable.ic_drawer_universal), Game.UNIVERSAL));
+        mNavigationItems.add(new NavigationDrawerGameItem(activity.getString(R.string.tarot),
+                activity.getResources().getDrawable(R.drawable.ic_drawer_tarot), Game.TAROT));
+        mNavigationItems.add(new NavigationDrawerGameItem(activity.getString(R.string.belote),
+                activity.getResources().getDrawable(R.drawable.ic_drawer_belote), Game.BELOTE));
+        mNavigationItems.add(new NavigationDrawerGameItem(activity.getString(R.string.coinche),
+                activity.getResources().getDrawable(R.drawable.ic_drawer_coinche), Game.COINCHE));
     }
 
     @Override
@@ -65,28 +67,26 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
             holder.divider.setVisibility(View.VISIBLE);
             holder.title.setText(mActivity.getString(R.string.donate));
             holder.view.setTag(position);
-            holder.icon.setVisibility(View.VISIBLE);
             holder.icon.setImageResource(R.drawable.ic_drawer_donate);
         } else if (position == mNavigationItems.size() + 1) {
             holder.title.setText(mActivity.getString(R.string.about));
             holder.view.setTag(position);
-            holder.icon.setVisibility(View.VISIBLE);
             holder.icon.setImageResource(R.drawable.ic_drawer_about);
         } else {
             NavigationDrawerGameItem item = mNavigationItems.get(position);
             holder.view.setTag(item.getGameIndex());
             holder.title.setText(item.getGameName());
+            holder.icon.setImageDrawable(item.getIcon());
         }
 
         holder.title.setTypeface(mTypeface);
         holder.view.setOnClickListener(this);
-        if (mActivity.getCurrentGame() == position) {
-            holder.view.setActivated(true);
-            holder.title.setTextColor(mActivity.getResources().getColor(R.color.color_primary));
-        } else {
-            holder.view.setActivated(false);
-            holder.title.setTextColor(mActivity.getResources().getColor(R.color.nav_drawer_font));
-        }
+        final int color = (mActivity.getCurrentGame() == position) ?
+                mActivity.getResources().getColor(R.color.color_primary) :
+                mActivity.getResources().getColor(R.color.nav_drawer_item);
+        holder.view.setActivated(mActivity.getCurrentGame() == position);
+        holder.title.setTextColor(color);
+        holder.icon.setColorFilter(color);
     }
 
     @Override
@@ -128,14 +128,20 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
         private final int mGameIndex;
         private final String mGameName;
+        private final Drawable mIcon;
 
-        public NavigationDrawerGameItem(String name, int index) {
+        public NavigationDrawerGameItem(String name, Drawable icon, int index) {
             mGameName = name;
+            mIcon = icon;
             mGameIndex = index;
         }
 
         public String getGameName() {
             return mGameName;
+        }
+
+        public Drawable getIcon() {
+            return mIcon;
         }
 
         public int getGameIndex() {
