@@ -45,11 +45,15 @@ public class RevealView extends FrameLayout {
         mFront.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mIsOpen) {
-                    hide();
-                } else {
-                    reveal();
-                }
+                toggle();
+            }
+        });
+
+        mFront.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                toggle();
+                return true;
             }
         });
     }
@@ -69,6 +73,14 @@ public class RevealView extends FrameLayout {
             mIsOpen = false;
             ObjectAnimator oa = ObjectAnimator.ofFloat(mFront, "x", 0);
             oa.start();
+        }
+    }
+
+    private void toggle() {
+        if (mIsOpen) {
+            hide();
+        } else {
+            reveal();
         }
     }
 

@@ -27,9 +27,9 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#10000000"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:background="@color/divider"
+        android:layout_marginTop="@dimen/margin_default"
+        android:layout_marginBottom="@dimen/margin_default"
         android:visibility="gone"/>
 
     <LinearLayout

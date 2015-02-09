@@ -85,7 +85,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
             holder.title.setTextColor(mActivity.getResources().getColor(R.color.color_primary));
         } else {
             holder.view.setActivated(false);
-            holder.title.setTextColor(mActivity.getResources().getColor(R.color.nav_drawer_item));
+            holder.title.setTextColor(mActivity.getResources().getColor(R.color.nav_drawer_font));
         }
     }
 

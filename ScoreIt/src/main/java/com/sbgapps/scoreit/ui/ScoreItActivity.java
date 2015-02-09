@@ -328,8 +328,9 @@ public class ScoreItActivity extends BaseActivity
         mDrawerLayout.closeDrawer(mNavigationDrawer);
         if (mCurrentGame == position) return;
 
-        mNavigationDrawer.getAdapter().notifyItemChanged(mCurrentGame);
+        int before = mCurrentGame;
         mCurrentGame = position;
+        mNavigationDrawer.getAdapter().notifyItemChanged(before);
         mNavigationDrawer.getAdapter().notifyItemChanged(mCurrentGame);
 
         switch (position) {
