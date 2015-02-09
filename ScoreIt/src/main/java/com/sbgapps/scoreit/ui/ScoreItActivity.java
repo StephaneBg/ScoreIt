@@ -324,28 +324,28 @@ public class ScoreItActivity extends BaseActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public void onGameSelected(int position) {
+    public void onGameSelected(int game) {
         mDrawerLayout.closeDrawer(mNavigationDrawer);
-        if (mCurrentGame == position) return;
+        if (mCurrentGame == game) return;
 
         int before = mCurrentGame;
-        mCurrentGame = position;
+        mCurrentGame = game;
         mNavigationDrawer.getAdapter().notifyItemChanged(before);
         mNavigationDrawer.getAdapter().notifyItemChanged(mCurrentGame);
 
-        switch (position) {
+        switch (game) {
             default:
                 return;
             case Game.UNIVERSAL:
                 mGameHelper.setPlayedGame(Game.UNIVERSAL);
                 break;
-            case Game.BELOTE:
+            case Game.TAROT:
                 mGameHelper.setPlayedGame(Game.TAROT);
                 break;
-            case Game.COINCHE:
+            case Game.BELOTE:
                 mGameHelper.setPlayedGame(Game.BELOTE);
                 break;
-            case Game.TAROT:
+            case Game.COINCHE:
                 mGameHelper.setPlayedGame(Game.COINCHE);
                 break;
         }

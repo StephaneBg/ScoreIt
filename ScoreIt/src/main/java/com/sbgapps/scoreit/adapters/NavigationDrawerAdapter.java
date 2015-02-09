@@ -79,12 +79,12 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
             holder.icon.setImageDrawable(item.getIcon());
         }
 
-        holder.title.setTypeface(mTypeface);
         holder.view.setOnClickListener(this);
         final int color = (mActivity.getCurrentGame() == position) ?
                 mActivity.getResources().getColor(R.color.color_primary) :
                 mActivity.getResources().getColor(R.color.nav_drawer_item);
         holder.view.setActivated(mActivity.getCurrentGame() == position);
+        holder.title.setTypeface(mTypeface);
         holder.title.setTextColor(color);
         holder.icon.setColorFilter(color);
     }
@@ -96,13 +96,13 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
     @Override
     public void onClick(View v) {
-        int position = (int) v.getTag();
-        if (position == mNavigationItems.size()) {
+        int index = (int) v.getTag();
+        if (index == mNavigationItems.size()) {
             mActivity.onDonate();
-        } else if (position == mNavigationItems.size() + 1) {
+        } else if (index == mNavigationItems.size() + 1) {
             mActivity.onAbout();
         } else {
-            mActivity.onGameSelected(position);
+            mActivity.onGameSelected(index);
         }
     }
 

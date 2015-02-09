@@ -39,8 +39,7 @@ public class NonUncheckableToggleButton extends ToggleButton {
 
     @Override
     public void setChecked(boolean checked) {
-        if (isChecked()) return;
-        else super.setChecked(checked);
+        if (!isChecked()) super.setChecked(checked);
     }
 
     public void forceSetChecked(boolean checked) {
