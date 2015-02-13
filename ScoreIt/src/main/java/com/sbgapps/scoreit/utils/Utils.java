@@ -18,6 +18,10 @@ package com.sbgapps.scoreit.utils;
 
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.StateListDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
 import android.util.TypedValue;
 
@@ -26,11 +30,35 @@ import android.util.TypedValue;
  */
 public class Utils {
 
-    public static int getHighlightColor(int color, float ratio) {
+    public static int shiftColorDown(int color) {
         float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
-        hsv[2] *= ratio;
+        hsv[2] *= 0.9f; // value component
         return Color.HSVToColor(hsv);
+    }
+
+    public static int shiftColorUp(int color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+        hsv[2] *= 1.1f; // value component
+        return Color.HSVToColor(hsv);
+    }
+
+    public static Drawable createSelector(int color) {
+        ShapeDrawable darkerCircle = new ShapeDrawable(new OvalShape());
+        darkerCircle.getPaint().setColor(translucentColor(shiftColorDown(color)));
+        StateListDrawable stateListDrawable = new StateListDrawable();
+        stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, darkerCircle);
+        return stateListDrawable;
+    }
+
+    public static int translucentColor(int color) {
+        final float factor = 0.7f;
+        int alpha = Math.round(Color.alpha(color) * factor);
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        return Color.argb(alpha, red, green, blue);
     }
 
     public static int dpToPx(float dp, Resources resources) {

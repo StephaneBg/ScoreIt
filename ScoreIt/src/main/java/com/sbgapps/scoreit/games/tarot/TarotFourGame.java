@@ -28,14 +28,14 @@ import java.util.ArrayList;
 /**
  * Created by sbaiget on 24/06/2014.
  */
-public class TarotFourGame extends Game<TarotFourLap> {
+public class TarotFourGame extends TarotGame<TarotFourLap> {
 
-    public TarotFourGame() {
-        mLaps = new ArrayList<>();
-        mPlayers = new ArrayList<>(4);
-        mPlayers.add(new Player("Riri"));
-        mPlayers.add(new Player("Fifi"));
-        mPlayers.add(new Player("Loulou"));
-        mPlayers.add(new Player("Toto"));
+    public TarotFourGame(Context context) {
+        super(context);
+    }
+
+    @Override
+    public int getPlayerCount() {
+        return 4;
     }
 }

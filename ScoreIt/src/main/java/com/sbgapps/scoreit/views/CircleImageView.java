@@ -124,7 +124,6 @@ public class CircleImageView extends ImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //Log.d("CircleButton", "mAnimationProgress " + mAnimationProgress);
         canvas.drawCircle(mCenterX, mCenterY, mPressedRingRadius + mAnimationProgress, mFocusPaint);
         canvas.drawCircle(mCenterX, mCenterY, mOuterRadius - mPressedRingWidth, mCirclePaint);
         super.onDraw(canvas);
@@ -149,14 +148,12 @@ public class CircleImageView extends ImageView {
     }
 
     private void hidePressedRing() {
-        //Log.d("CircleButton", "hide");
         mIsAnimated = false;
         mAnimator.setFloatValues(mPressedRingWidth, 0f);
         mAnimator.start();
     }
 
     private void showPressedRing() {
-        //Log.d("CircleButton", "show");
         mAnimator.setFloatValues(mAnimationProgress, mPressedRingWidth);
         mAnimator.start();
         mIsAnimated = true;

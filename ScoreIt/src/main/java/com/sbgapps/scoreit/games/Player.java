@@ -29,9 +29,13 @@ public class Player {
     public static final int PLAYER_3 = 2;
     public static final int PLAYER_4 = 3;
     public static final int PLAYER_5 = 4;
+    public static final int PLAYER_6 = 5;
+    public static final int PLAYER_7 = 6;
+    public static final int PLAYER_8 = 7;
+    public static final int PLAYER_COUNT = 8;
 
     @SerializedName("name")
-    private String mName;
+    protected String mName;
 
     public Player(String name) {
         mName = name;

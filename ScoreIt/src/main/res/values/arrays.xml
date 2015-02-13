@@ -17,6 +17,29 @@
 
 <resources>
 
+    <array name="player_colors">
+        <item>#FFAB40</item>
+        <item>#66A84F</item>
+        <item>#1D5FB3</item>
+        <item>#D74C6B</item>
+        <item>#8B56C8</item>
+        <item>#009688</item>
+        <item>#59B4E0</item>
+        <item>#795548</item>
+        <item>#4D4D4D</item>
+    </array>
+
+    <string-array name="player_names" translatable="false">
+        <item translatable="false">Riri</item>
+        <item translatable="false">Fifi</item>
+        <item translatable="false">Loulou</item>
+        <item translatable="false">Toto</item>
+        <item translatable="false">Titi</item>
+        <item translatable="false">Lulu</item>
+        <item translatable="false">Lili</item>
+        <item translatable="false">Tutu</item>
+    </string-array>
+
     <string-array name="edit_name_action">
         <item>@string/pick_contact</item>
         <item>@string/enter_name</item>

@@ -19,6 +19,8 @@ package com.sbgapps.scoreit.games;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
@@ -54,8 +56,10 @@ public class GameHelper {
     final private SharedPreferences mPreferences;
     final private Storage mStorage;
     final private FilesUtil mFilesUtil;
+    final private int[] mColors = new int[Player.PLAYER_COUNT + 1];
     private Game mGame;
     private int mPlayedGame;
+    private Player mPlayerTotal;
 
     public GameHelper(Activity activity) {
         mContext = activity;
@@ -63,6 +67,12 @@ public class GameHelper {
         mFilesUtil = new FilesUtil(this);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         mPlayedGame = mPreferences.getInt(KEY_SELECTED_GAME, Game.UNIVERSAL);
+
+        Resources r = activity.getResources();
+        final TypedArray ta = r.obtainTypedArray(R.array.player_colors);
+        for (int i = 0; i < mColors.length; i++)
+            mColors[i] = ta.getColor(i, 0);
+        ta.recycle();
     }
 
     public SharedPreferences getPreferences() {
@@ -195,13 +205,13 @@ public class GameHelper {
             case Game.TAROT:
                 switch (getPlayerCount()) {
                     case 3:
-                        mGame = new TarotThreeGame();
+                        mGame = new TarotThreeGame(mContext);
                         break;
                     case 4:
-                        mGame = new TarotFourGame();
+                        mGame = new TarotFourGame(mContext);
                         break;
                     case 5:
-                        mGame = new TarotFiveGame();
+                        mGame = new TarotFiveGame(mContext);
                         break;
                 }
                 break;
@@ -231,32 +241,15 @@ public class GameHelper {
 
     public Player getPlayer(int player) {
         if (player >= getPlayers().size()) {
-            return new Player(mContext.getString(R.string.total));
+            if (null == mPlayerTotal) mPlayerTotal = new Player(mContext.getString(R.string.total));
+            return mPlayerTotal;
         } else {
             return getPlayers().get(player);
         }
     }
 
     public int getPlayerColor(int player) {
-        switch (player) {
-            default:
-            case 0:
-                return mContext.getResources().getColor(R.color.color_player1);
-            case 1:
-                return mContext.getResources().getColor(R.color.color_player2);
-            case 2:
-                return mContext.getResources().getColor(R.color.color_player3);
-            case 3:
-                return mContext.getResources().getColor(R.color.color_player4);
-            case 4:
-                return mContext.getResources().getColor(R.color.color_player5);
-            case 5:
-                return mContext.getResources().getColor(R.color.color_player6);
-            case 6:
-                return mContext.getResources().getColor(R.color.color_player7);
-            case 7:
-                return mContext.getResources().getColor(R.color.color_player8);
-        }
+        return mColors[player];
     }
 
     private <T> T load(final Class<T> clazz) {

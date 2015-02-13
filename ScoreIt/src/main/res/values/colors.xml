@@ -34,13 +34,4 @@
 
     <color name="game_won">@color/color_primary</color>
     <color name="game_lost">#F44336</color>
-
-    <color name="color_player1">@color/color_accent</color>
-    <color name="color_player2">@color/color_primary</color>
-    <color name="color_player3">#1D5FB3</color>
-    <color name="color_player4">#D74C6B</color>
-    <color name="color_player5">#8B56C8</color>
-    <color name="color_player6">#009688</color>
-    <color name="color_player7">#59B4E0</color>
-    <color name="color_player8">#795548</color>
 </resources>

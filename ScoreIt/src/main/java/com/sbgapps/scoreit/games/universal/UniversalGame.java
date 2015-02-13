@@ -18,7 +18,9 @@ package com.sbgapps.scoreit.games.universal;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 
+import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.Player;
 
@@ -32,57 +34,12 @@ public class UniversalGame extends Game<UniversalLap> {
     public UniversalGame(Context context, int playerCount) {
         mLaps = new ArrayList<>();
         mPlayers = new ArrayList<>(playerCount);
+
         Resources r = context.getResources();
-        switch (playerCount) {
-            case 2:
-                mPlayers.add(new Player("Riri"));
-                mPlayers.add(new Player("Fifi"));
-                break;
-            case 3:
-                mPlayers.add(new Player("Riri"));
-                mPlayers.add(new Player("Fifi"));
-                mPlayers.add(new Player("Loulou"));
-                break;
-            case 4:
-                mPlayers.add(new Player("Riri"));
-                mPlayers.add(new Player("Fifi"));
-                mPlayers.add(new Player("Loulou"));
-                mPlayers.add(new Player("Toto"));
-                break;
-            case 5:
-                mPlayers.add(new Player("Riri"));
-                mPlayers.add(new Player("Fifi"));
-                mPlayers.add(new Player("Loulou"));
-                mPlayers.add(new Player("Toto"));
-                mPlayers.add(new Player("Titi"));
-                break;
-            case 6:
-                mPlayers.add(new Player("Riri"));
-                mPlayers.add(new Player("Fifi"));
-                mPlayers.add(new Player("Loulou"));
-                mPlayers.add(new Player("Toto"));
-                mPlayers.add(new Player("Titi"));
-                mPlayers.add(new Player("Lulu"));
-                break;
-            case 7:
-                mPlayers.add(new Player("Riri"));
-                mPlayers.add(new Player("Fifi"));
-                mPlayers.add(new Player("Loulou"));
-                mPlayers.add(new Player("Toto"));
-                mPlayers.add(new Player("Titi"));
-                mPlayers.add(new Player("Lulu"));
-                mPlayers.add(new Player("Lili"));
-                break;
-            case 8:
-                mPlayers.add(new Player("Riri"));
-                mPlayers.add(new Player("Fifi"));
-                mPlayers.add(new Player("Loulou"));
-                mPlayers.add(new Player("Toto"));
-                mPlayers.add(new Player("Titi"));
-                mPlayers.add(new Player("Lulu"));
-                mPlayers.add(new Player("Lili"));
-                mPlayers.add(new Player("Tutu"));
-                break;
-        }
+        final TypedArray names = r.obtainTypedArray(R.array.player_names);
+        for (int i = 0; i < playerCount; i++)
+            mPlayers.add(new Player(names.getString(i)));
+
+        names.recycle();
     }
 }

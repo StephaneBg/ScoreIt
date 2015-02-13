@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -230,7 +231,7 @@ public class ScoreItActivity extends BaseActivity
             outState.putBoolean("edited", mIsEdited);
             if (mIsEdited) {
                 outState.putInt("position", mGameHelper.getLaps()
-                        .indexOf(mIsEdited ? mEditedLap : mLap));
+                        .indexOf(mLap));
             }
             outState.putSerializable("lap", mLap);
         }
@@ -238,7 +239,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mEditedPlayer = savedInstanceState.getInt("editedPlayer", Player.PLAYER_NONE);
     }
@@ -407,6 +408,7 @@ public class ScoreItActivity extends BaseActivity
                     mEditedPlayer = Player.PLAYER_NONE;
                     mHeaderFragment.update();
                 }
+                cursor.close();
                 break;
 
             case REQ_SAVED_GAME:

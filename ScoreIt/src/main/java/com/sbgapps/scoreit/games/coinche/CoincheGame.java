@@ -30,9 +30,12 @@ import java.util.ArrayList;
  */
 public class CoincheGame extends Game<CoincheLap> {
 
+    public final static int NB_PLAYERS = 2;
+
     public CoincheGame(Context context) {
         mLaps = new ArrayList<>();
-        mPlayers = new ArrayList<>(2);
+        mPlayers = new ArrayList<>(NB_PLAYERS);
+
         Resources r = context.getResources();
         mPlayers.add(new Player(r.getString(R.string.them)));
         mPlayers.add(new Player(r.getString(R.string.us)));
