@@ -18,17 +18,16 @@ package com.sbgapps.scoreit.games.tarot;
 
 import android.content.Context;
 
+import com.sbgapps.scoreit.games.Game;
+
 /**
  * Created by sbaiget on 24/06/2014.
  */
-public class TarotThreeGame extends TarotGame<TarotThreeLap> {
+public class TarotThreeGame extends Game<TarotThreeLap> {
+
+    public final static int NB_PLAYERS = 3;
 
     public TarotThreeGame(Context context) {
-        super(context);
-    }
-
-    @Override
-    public int getPlayerCount() {
-        return 3;
+        super(context, NB_PLAYERS);
     }
 }

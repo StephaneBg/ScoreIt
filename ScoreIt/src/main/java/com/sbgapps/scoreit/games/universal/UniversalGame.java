@@ -17,14 +17,8 @@
 package com.sbgapps.scoreit.games.universal;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
 
-import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Game;
-import com.sbgapps.scoreit.games.Player;
-
-import java.util.ArrayList;
 
 /**
  * Created by sbaiget on 24/06/2014.
@@ -32,14 +26,6 @@ import java.util.ArrayList;
 public class UniversalGame extends Game<UniversalLap> {
 
     public UniversalGame(Context context, int playerCount) {
-        mLaps = new ArrayList<>();
-        mPlayers = new ArrayList<>(playerCount);
-
-        Resources r = context.getResources();
-        final TypedArray names = r.obtainTypedArray(R.array.player_names);
-        for (int i = 0; i < playerCount; i++)
-            mPlayers.add(new Player(names.getString(i)));
-
-        names.recycle();
+        super(context, playerCount);
     }
 }

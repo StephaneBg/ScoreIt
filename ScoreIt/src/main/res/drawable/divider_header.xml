@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright (c) 2015 SBG Apps
   ~
@@ -15,12 +14,8 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<com.sbgapps.scoreit.views.EmptyRecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:choiceMode="singleChoice"
-    android:listSelector="#00000000"
-    android:scrollbars="none"
-    android:divider="@null"/>
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <size android:height="2dp"/>
+    <solid android:color="@color/divider"/>
+</shape>

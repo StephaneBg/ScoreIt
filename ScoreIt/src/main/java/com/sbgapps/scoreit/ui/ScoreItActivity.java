@@ -88,6 +88,8 @@ public class ScoreItActivity extends BaseActivity
     FloatingActionButton mActionButton;
     @InjectView(R.id.lap_container)
     ObservableScrollView mLapContainer;
+    @InjectView(R.id.empty_view)
+    View mEmptyView;
     FrameLayout mGraphContainer;
 
     private ActionBarDrawerToggle mDrawerToggle;
@@ -113,6 +115,10 @@ public class ScoreItActivity extends BaseActivity
 
     public int getCurrentGame() {
         return mCurrentGame;
+    }
+
+    public View getEmptyView() {
+        return mEmptyView;
     }
 
     @Override

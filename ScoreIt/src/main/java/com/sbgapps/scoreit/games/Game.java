@@ -16,8 +16,14 @@
 
 package com.sbgapps.scoreit.games;
 
-import com.google.gson.annotations.SerializedName;
+import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 
+import com.google.gson.annotations.SerializedName;
+import com.sbgapps.scoreit.R;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +41,12 @@ public abstract class Game<T extends Lap> {
     @SerializedName("players")
     protected List<Player> mPlayers;
 
+    public Game(Context context, int playerCount) {
+        mLaps = new ArrayList<>();
+        mPlayers = new ArrayList<>(playerCount);
+        initPlayers(context, playerCount);
+    }
+
     public List<T> getLaps() {
         return mLaps;
     }
@@ -47,5 +59,14 @@ public abstract class Game<T extends Lap> {
         for (Lap lap : mLaps) {
             lap.computeScores();
         }
+    }
+
+    protected void initPlayers(Context context, int playerCount) {
+        Resources r = context.getResources();
+        final TypedArray names = r.obtainTypedArray(R.array.player_names);
+        for (int i = 0; i < playerCount; i++)
+            mPlayers.add(new Player(names.getString(i)));
+
+        names.recycle();
     }
 }

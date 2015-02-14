@@ -35,7 +35,7 @@ public class Player {
     public static final int PLAYER_COUNT = 8;
 
     @SerializedName("name")
-    protected String mName;
+    private String mName;
 
     public Player(String name) {
         mName = name;
