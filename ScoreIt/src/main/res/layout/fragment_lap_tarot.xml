@@ -75,7 +75,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:orientation="horizontal"
@@ -86,6 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_margin="8dp"
                 android:background="@drawable/btn_toggle_selector"
                 android:textOff="@string/petit"
                 android:textOn="@string/petit"/>
@@ -95,8 +95,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_margin="8dp"
                 android:background="@drawable/btn_toggle_selector"
                 android:textOff="@string/twentyone"
                 android:textOn="@string/twentyone"/>
@@ -106,6 +105,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_margin="8dp"
                 android:background="@drawable/btn_toggle_selector"
                 android:textOff="@string/excuse"
                 android:textOn="@string/excuse"/>

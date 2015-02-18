@@ -17,77 +17,46 @@
 
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
         android:color="?android:colorControlHighlight">
-
-    <item
-        android:id="@android:id/mask"
-        android:drawable="@color/white"/>
     <item>
         <selector>
-            <item
-                android:state_checked="true"
-                android:state_window_focused="false"
-                android:state_enabled="true"
-                android:drawable="@drawable/btn_toggle_on"/>
-
-            <item
-                android:state_checked="true"
-                android:state_window_focused="false"
-                android:state_enabled="false"
-                android:drawable="@drawable/btn_toggle_disabled"/>
-
-            <item
-                android:state_checked="true"
-                android:state_pressed="true"
-                android:drawable="@drawable/btn_toggle_on_pressed"/>
-
-            <item
-                android:state_checked="true"
-                android:state_focused="true"
-                android:state_enabled="true"
-                android:drawable="@drawable/btn_toggle_on"/>
-
-            <item
-                android:state_checked="true"
-                android:state_enabled="true"
-                android:drawable="@drawable/btn_toggle_on"/>
-
-            <item
-                android:state_checked="true"
-                android:state_focused="true"
-                android:drawable="@drawable/btn_toggle_on"/>
-
-            <item
-                android:state_checked="true"
-                android:drawable="@drawable/btn_toggle_on"/>
-
-            <item
-                android:state_window_focused="false"
-                android:state_enabled="true"
-                android:drawable="@drawable/btn_toggle_off"/>
-
-            <item
-                android:state_window_focused="false"
-                android:state_enabled="false"
-                android:drawable="@drawable/btn_toggle_disabled"/>
-
+            <!-- Pressed / Not checked -->
             <item
                 android:state_pressed="true"
-                android:drawable="@drawable/btn_toggle_off_pressed"/>
+                android:state_checked="false"
+                android:drawable="@drawable/btn_toggle_off">
+                <set>
+                    <objectAnimator
+                        android:propertyName="translationZ"
+                        android:duration="@android:integer/config_shortAnimTime"
+                        android:valueTo="8dp"
+                        android:valueType="floatType"/>
+                </set>
+            </item>
 
+            <!-- Pressed / Checked -->
             <item
-                android:state_focused="true"
-                android:state_enabled="true"
-                android:drawable="@drawable/btn_toggle_off"/>
+                android:state_pressed="true"
+                android:state_checked="true"
+                android:drawable="@drawable/btn_toggle_on">
+                <set>
+                    <objectAnimator
+                        android:propertyName="translationZ"
+                        android:duration="@android:integer/config_shortAnimTime"
+                        android:valueTo="8dp"
+                        android:valueType="floatType"/>
+                </set>
+            </item>
 
+            <!-- Not pressed / Checked -->
             <item
-                android:state_enabled="true"
-                android:drawable="@drawable/btn_toggle_off"/>
+                android:state_pressed="false"
+                android:state_checked="true"
+                android:drawable="@drawable/btn_toggle_on"/>
 
+            <!-- Not pressed / Not checked -->
             <item
-                android:state_focused="true"
-                android:drawable="@drawable/btn_toggle_off"/>
-
-            <item
+                android:state_pressed="false"
+                android:state_checked="false"
                 android:drawable="@drawable/btn_toggle_off"/>
         </selector>
     </item>
