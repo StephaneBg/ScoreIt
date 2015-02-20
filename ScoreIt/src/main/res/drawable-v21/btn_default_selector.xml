@@ -18,40 +18,40 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
         android:color="?android:colorControlHighlight">
 
-    <item
-        android:id="@android:id/mask"
-        android:drawable="@color/white"/>
     <item>
         <selector>
+            <!-- Disabled -->
             <item
-                android:state_window_focused="false"
-                android:state_enabled="true"
-                android:drawable="@drawable/btn_default_normal"/>
-
-            <item
-                android:state_window_focused="false"
                 android:state_enabled="false"
                 android:drawable="@drawable/btn_default_disabled"/>
 
+            <!--  Enabled / Not pressed-->
+            <item
+                android:state_enabled="true"
+                android:state_pressed="false"
+                android:drawable="@drawable/btn_default_normal">
+                <set>
+                    <objectAnimator
+                        android:propertyName="translationZ"
+                        android:duration="@android:integer/config_shortAnimTime"
+                        android:valueTo="0dp"
+                        android:valueType="floatType"/>
+                </set>
+            </item>
+
+            <!--  Enabled / Pressed-->
             <item
                 android:state_pressed="true"
-                android:drawable="@drawable/btn_default_pressed"/>
-
-            <item
-                android:state_focused="true"
                 android:state_enabled="true"
-                android:drawable="@drawable/btn_default_pressed"/>
-
-            <item
-                android:state_enabled="true"
-                android:drawable="@drawable/btn_default_normal"/>
-
-            <item
-                android:state_focused="true"
-                android:drawable="@drawable/btn_default_disabled"/>
-
-            <item
-                android:drawable="@drawable/btn_default_disabled"/>
+                android:drawable="@drawable/btn_default_pressed">
+                <set>
+                    <objectAnimator
+                        android:propertyName="translationZ"
+                        android:duration="@android:integer/config_shortAnimTime"
+                        android:valueTo="8dp"
+                        android:valueType="floatType"/>
+                </set>
+            </item>
         </selector>
     </item>
 </ripple>
