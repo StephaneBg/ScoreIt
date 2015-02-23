@@ -65,7 +65,7 @@
             android:id="@+id/btn_switch"
             android:layout_width="@dimen/circle_btn"
             android:layout_height="@dimen/circle_btn"
-            android:background="@drawable/btn_round_selector_accent"
+            android:background="@drawable/btn_round_selector"
             android:src="@drawable/ic_action_switch"/>
 
         <LinearLayout
