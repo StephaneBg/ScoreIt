@@ -129,9 +129,6 @@ public class ScoreItActivity extends BaseActivity
         ButterKnife.inject(this);
         mGraphContainer = (FrameLayout) findViewById(R.id.graph_container);
 
-        if (Utils.hasLollipopApi())
-            getToolbar().setElevation(Utils.dpToPx(4, getResources()));
-
         mGameHelper = new GameHelper(this);
         mGameHelper.loadLaps();
         mCurrentGame = mGameHelper.getPlayedGame();

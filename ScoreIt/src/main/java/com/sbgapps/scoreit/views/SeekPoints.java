@@ -21,6 +21,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
@@ -38,9 +39,9 @@ public class SeekPoints extends FrameLayout {
     @InjectView(R.id.seekarc_points)
     SeekArc mSeekBarPoints;
     @InjectView(R.id.btn_minus)
-    CircleImageView mButtonMinus;
+    ImageButton mButtonMinus;
     @InjectView(R.id.btn_plus)
-    CircleImageView mButtonPlus;
+    ImageButton mButtonPlus;
 
     private OnProgressChangedListener mListener;
     private int mProgress;

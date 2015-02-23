@@ -20,13 +20,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
-import com.sbgapps.scoreit.views.CircleTextView;
 import com.sbgapps.scoreit.numberpicker.NumberPickerBuilder;
 import com.sbgapps.scoreit.numberpicker.NumberPickerDialogFragment;
 
@@ -39,7 +39,7 @@ import java.util.List;
 public class UniversalLapFragment extends LapFragment
         implements NumberPickerDialogFragment.NumberPickerDialogHandler {
 
-    final List<CircleTextView> mPoints = new ArrayList<>();
+    final List<TextView> mPoints = new ArrayList<>();
 
     @Override
     public UniversalLap getLap() {
@@ -63,16 +63,15 @@ public class UniversalLapFragment extends LapFragment
     }
 
     private void initView(View view, final int position) {
-        CircleTextView cv;
         Player player = getGameHelper().getPlayer(position);
 
-        TextView name = (TextView) view.findViewById(R.id.tv_name);
-        name.setText(player.getName());
+        TextView tv = (TextView) view.findViewById(R.id.tv_name);
+        tv.setText(player.getName());
 
-        cv = (CircleTextView) view.findViewById(R.id.points);
-        mPoints.add(cv);
-        cv.setText(Integer.toString(getLap().getScore(position)));
-        cv.setOnClickListener(new View.OnClickListener() {
+        tv = (TextView) view.findViewById(R.id.points);
+        mPoints.add(tv);
+        tv.setText(Integer.toString(getLap().getScore(position)));
+        tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NumberPickerBuilder npb = new NumberPickerBuilder()
@@ -83,48 +82,48 @@ public class UniversalLapFragment extends LapFragment
             }
         });
 
-        cv = (CircleTextView) view.findViewById(R.id.btn_plus);
-        cv.setOnClickListener(new View.OnClickListener() {
+        Button btn = (Button) view.findViewById(R.id.btn_plus);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, 1);
                 updatePoints(position);
             }
         });
-        cv = (CircleTextView) view.findViewById(R.id.btn_plus_10);
-        cv.setOnClickListener(new View.OnClickListener() {
+        btn = (Button) view.findViewById(R.id.btn_plus_10);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, 10);
                 updatePoints(position);
             }
         });
-        cv = (CircleTextView) view.findViewById(R.id.btn_plus_100);
-        cv.setOnClickListener(new View.OnClickListener() {
+        btn = (Button) view.findViewById(R.id.btn_plus_100);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, 100);
                 updatePoints(position);
             }
         });
-        cv = (CircleTextView) view.findViewById(R.id.btn_minus);
-        cv.setOnClickListener(new View.OnClickListener() {
+        btn = (Button) view.findViewById(R.id.btn_minus);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, -1);
                 updatePoints(position);
             }
         });
-        cv = (CircleTextView) view.findViewById(R.id.btn_minus_10);
-        cv.setOnClickListener(new View.OnClickListener() {
+        btn = (Button) view.findViewById(R.id.btn_minus_10);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, -10);
                 updatePoints(position);
             }
         });
-        cv = (CircleTextView) view.findViewById(R.id.btn_minus_100);
-        cv.setOnClickListener(new View.OnClickListener() {
+        btn = (Button) view.findViewById(R.id.btn_minus_100);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, -100);

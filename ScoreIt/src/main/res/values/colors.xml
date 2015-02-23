@@ -25,6 +25,7 @@
     <color name="color_accent_dark">#E49839</color>
 
     <color name="gray_light">#E4E4E4</color>
+    <color name="gray_pressed">#CCCCCC</color>
     <color name="gray_dark">#4D4D4D</color>
 
     <color name="divider">#10000000</color>

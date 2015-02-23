@@ -25,22 +25,32 @@
     android:orientation="vertical"
     tools:context="ScoreItActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFF"
+        android:elevation="4dp">
 
-    <com.astuetz.PagerSlidingTabStrip
-        android:id="@+id/sliding_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:textColor="@color/white"
-        app:pstsIndicatorColor="@color/white"
-        app:pstsTabBackground="?attr/selectableItemBackground"/>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+        <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/sliding_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:textColor="#AAFFFFFF"
+            app:pstsTextColorSelected="@color/white"
+            app:pstsIndicatorColor="@color/white"
+            app:pstsTabBackground="?attr/selectableItemBackground"/>
+    </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

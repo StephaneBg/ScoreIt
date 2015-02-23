@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright (c) 2015 SBG Apps
   ~
@@ -15,27 +14,23 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
+
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
         android:color="?android:colorControlHighlight">
 
     <item>
         <selector>
-            <!-- Disabled -->
-            <item
-                android:state_enabled="false"
-                android:drawable="@drawable/btn_default_disabled"/>
-
             <!--  Enabled / Not pressed-->
             <item
                 android:state_enabled="true"
                 android:state_pressed="false"
-                android:drawable="@drawable/btn_default_normal"/>
+                android:drawable="@drawable/btn_round_normal_accent"/>
 
             <!--  Enabled / Pressed-->
             <item
                 android:state_pressed="true"
                 android:state_enabled="true"
-                android:drawable="@drawable/btn_default_pressed"/>
+                android:drawable="@drawable/btn_round_normal_accent"/>
         </selector>
     </item>
 </ripple>

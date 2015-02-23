@@ -21,22 +21,6 @@
         <attr name="isDialog" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="CircleImageView">
-        <attr name="cb_color" format="color"/>
-        <attr name="cb_pressed_color" format="color"/>
-        <attr name="cb_disabled_color" format="color"/>
-        <attr name="cb_shadow_color" format="color"/>
-        <attr name="cb_pressedRingWidth" format="dimension"/>
-    </declare-styleable>
-
-    <declare-styleable name="CircleTextView">
-        <attr name="ct_color" format="color"/>
-        <attr name="ct_pressed_color" format="color"/>
-        <attr name="ct_disabled_color" format="color"/>
-        <attr name="ct_shadow_color" format="color"/>
-        <attr name="ct_pressedRingWidth" format="dimension"/>
-    </declare-styleable>
-
     <declare-styleable name="SeekArc">
         <attr name="thumbOffset" format="dimension"/>
         <attr name="max" format="integer"/>

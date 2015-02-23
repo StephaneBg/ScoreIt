@@ -19,6 +19,7 @@ package com.sbgapps.scoreit.views;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -46,7 +47,7 @@ public class BelotePoints extends LinearLayout
     @InjectView(R.id.player2_points)
     TextView mPlayer2Points;
     @InjectView(R.id.btn_switch)
-    CircleImageView mSwitchBtn;
+    ImageButton mSwitchBtn;
     @InjectView(R.id.group_score)
     ToggleGroup mScoreGroup;
     @InjectView(R.id.seekbar_points)

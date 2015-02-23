@@ -23,29 +23,13 @@
             <item
                 android:state_pressed="true"
                 android:state_checked="false"
-                android:drawable="@drawable/btn_toggle_off">
-                <set>
-                    <objectAnimator
-                        android:propertyName="translationZ"
-                        android:duration="@android:integer/config_shortAnimTime"
-                        android:valueTo="8dp"
-                        android:valueType="floatType"/>
-                </set>
-            </item>
+                android:drawable="@drawable/btn_toggle_off"/>
 
             <!-- Pressed / Checked -->
             <item
                 android:state_pressed="true"
                 android:state_checked="true"
-                android:drawable="@drawable/btn_toggle_on">
-                <set>
-                    <objectAnimator
-                        android:propertyName="translationZ"
-                        android:duration="@android:integer/config_shortAnimTime"
-                        android:valueTo="8dp"
-                        android:valueType="floatType"/>
-                </set>
-            </item>
+                android:drawable="@drawable/btn_toggle_on"/>
 
             <!-- Not pressed / Checked -->
             <item

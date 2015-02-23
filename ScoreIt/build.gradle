@@ -70,7 +70,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.anjlab.android.iab.v3:library:1.0.19'
     compile 'com.jakewharton:butterknife:6.0.0'
-    compile 'com.jpardogo.materialtabstrip:library:1.0.8'
+    compile 'com.jpardogo.materialtabstrip:library:1.0.9'
     compile 'com.melnykov:floatingactionbutton:1.1.0'
     compile 'com.afollestad:material-dialogs:0.6.1.5'
     compile 'com.github.mrengineer13:snackbar:1.0.0'
