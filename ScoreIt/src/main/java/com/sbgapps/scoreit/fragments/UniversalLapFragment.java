@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,7 +40,7 @@ import java.util.List;
 public class UniversalLapFragment extends LapFragment
         implements NumberPickerDialogFragment.NumberPickerDialogHandler {
 
-    final List<TextView> mPoints = new ArrayList<>();
+    final List<EditText> mPoints = new ArrayList<>();
 
     @Override
     public UniversalLap getLap() {
@@ -68,10 +69,12 @@ public class UniversalLapFragment extends LapFragment
         TextView tv = (TextView) view.findViewById(R.id.tv_name);
         tv.setText(player.getName());
 
-        tv = (TextView) view.findViewById(R.id.points);
-        mPoints.add(tv);
-        tv.setText(Integer.toString(getLap().getScore(position)));
-        tv.setOnClickListener(new View.OnClickListener() {
+        EditText et = (EditText) view.findViewById(R.id.points);
+        et.setText(Integer.toString(getLap().getScore(position)));
+        mPoints.add(et);
+
+        View click = view.findViewById(R.id.points_click);
+        click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NumberPickerBuilder npb = new NumberPickerBuilder()

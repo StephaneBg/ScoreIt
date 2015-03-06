@@ -88,8 +88,6 @@ public class ScoreItActivity extends BaseActivity
     FloatingActionButton mActionButton;
     @InjectView(R.id.lap_container)
     ObservableScrollView mLapContainer;
-    @InjectView(R.id.empty_view)
-    View mEmptyView;
     FrameLayout mGraphContainer;
 
     private ActionBarDrawerToggle mDrawerToggle;
@@ -117,13 +115,8 @@ public class ScoreItActivity extends BaseActivity
         return mCurrentGame;
     }
 
-    public View getEmptyView() {
-        return mEmptyView;
-    }
-
     @Override
-    @SuppressWarnings("NewApi")
-    protected void onCreate(Bundle savedInstanceState) {
+   protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ButterKnife.inject(this);

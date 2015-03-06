@@ -32,7 +32,6 @@ import com.sbgapps.scoreit.adapters.UniversalScoreAdapter;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.ui.ScoreItActivity;
-import com.sbgapps.scoreit.views.EmptyRecyclerView;
 import com.sbgapps.scoreit.views.RevealView;
 
 /**
@@ -55,9 +54,8 @@ public class ScoreListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_score_list, null);
 
-        EmptyRecyclerView recyclerView = (EmptyRecyclerView) view.findViewById(android.R.id.list);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(android.R.id.list);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setEmptyView(activity.getEmptyView());
 
         mManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mManager);

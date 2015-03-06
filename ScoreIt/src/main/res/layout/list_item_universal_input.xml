@@ -49,8 +49,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="-1"
-                android:gravity="center"
-                android:background="@drawable/btn_round_selector"/>
+                android:textColor="@color/gray_dark"
+                android:background="@drawable/btn_round_selector"
+                android:stateListAnimator="@null"/>
 
             <Button
                 android:id="@+id/btn_minus_10"
@@ -59,8 +60,9 @@
                 android:layout_margin="4dp"
                 android:layout_toRightOf="@id/btn_minus"
                 android:text="-10"
-                android:gravity="center"
-                android:background="@drawable/btn_round_selector"/>
+                android:textColor="@color/gray_dark"
+                android:background="@drawable/btn_round_selector"
+                android:stateListAnimator="@null"/>
 
             <Button
                 android:id="@+id/btn_minus_100"
@@ -70,8 +72,9 @@
                 android:layout_below="@id/btn_minus_10"
                 android:layout_toRightOf="@id/btn_minus"
                 android:text="-100"
-                android:gravity="center"
-                android:background="@drawable/btn_round_selector"/>
+                android:textColor="@color/gray_dark"
+                android:background="@drawable/btn_round_selector"
+                android:stateListAnimator="@null"/>
         </RelativeLayout>
 
         <com.sbgapps.scoreit.views.MaxWidthFrameLayout
@@ -80,14 +83,20 @@
             app:maxWidth="96dp"
             android:layout_weight="1">
 
-            <TextView
+            <EditText
                 android:id="@+id/points"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="@dimen/font_display_1"
                 android:textColor="@color/color_accent"
+                android:inputType="none"
                 tools:text="128"/>
+
+            <FrameLayout
+                android:id="@+id/points_click"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </com.sbgapps.scoreit.views.MaxWidthFrameLayout>
 
         <RelativeLayout
@@ -100,8 +109,9 @@
                 android:layout_height="@dimen/circle_btn"
                 android:layout_margin="4dp"
                 android:text="+10"
-                android:gravity="center"
-                android:background="@drawable/btn_round_selector"/>
+                android:textColor="@color/gray_dark"
+                android:background="@drawable/btn_round_selector"
+                android:stateListAnimator="@null"/>
 
             <Button
                 android:id="@+id/btn_plus"
@@ -111,8 +121,9 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/btn_plus_10"
                 android:text="+1"
-                android:gravity="center"
-                android:background="@drawable/btn_round_selector"/>
+                android:textColor="@color/gray_dark"
+                android:background="@drawable/btn_round_selector"
+                android:stateListAnimator="@null"/>
 
             <Button
                 android:id="@+id/btn_plus_100"
@@ -121,8 +132,9 @@
                 android:layout_margin="4dp"
                 android:layout_below="@id/btn_plus_10"
                 android:text="+100"
-                android:gravity="center"
-                android:background="@drawable/btn_round_selector"/>
+                android:textColor="@color/gray_dark"
+                android:background="@drawable/btn_round_selector"
+                android:stateListAnimator="@null"/>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

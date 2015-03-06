@@ -18,5 +18,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="oval">
     <corners android:radius="2dp"/>
-    <solid android:color="@color/color_accent"/>
+    <solid android:color="@color/gray_light"/>
 </shape>
