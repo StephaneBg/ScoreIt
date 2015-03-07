@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-
-
 apply plugin: 'com.android.application'
 
 android {
@@ -67,13 +65,13 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:cardview-v7:21.0.3'
     compile 'com.android.support:recyclerview-v7:21.0.3'
-    compile 'com.google.code.gson:gson:2.3'
-    compile 'com.anjlab.android.iab.v3:library:1.0.20'
-    compile 'com.jakewharton:butterknife:6.0.0'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.anjlab.android.iab.v3:library:1.0.22'
+    compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.jpardogo.materialtabstrip:library:1.0.9'
     compile 'com.melnykov:floatingactionbutton:1.2.0'
-    compile 'com.afollestad:material-dialogs:0.6.3.1'
+    compile 'com.afollestad:material-dialogs:0.6.3.5'
     compile 'com.github.mrengineer13:snackbar:1.1.0'
-    compile 'com.db.williamchart:library:1.7.0'
+    compile 'com.diogobernardino:williamchart:1.7.0'
     compile 'com.sromku.simple.storage:library:1.0.0'
 }
