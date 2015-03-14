@@ -30,8 +30,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:textColor="@color/white"
         android:elevation="4dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:textColor="#AAFFFFFF"
+        app:pstsTextColorSelected="@color/white"
         app:pstsIndicatorColor="@color/white"
         app:pstsTabBackground="?attr/selectableItemBackground"/>
 
