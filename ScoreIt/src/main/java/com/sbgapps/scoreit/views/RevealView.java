@@ -36,11 +36,11 @@ public class RevealView extends FrameLayout {
     private RevealViewListener mRevealViewListener;
 
     public RevealView(Context context) {
-        this(context, null);
+        super(context);
     }
 
     public RevealView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
     }
 
     public RevealView(Context context, AttributeSet attrs, int defStyleAttr) {

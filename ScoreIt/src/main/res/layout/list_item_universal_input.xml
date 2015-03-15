@@ -79,24 +79,17 @@
 
         <com.sbgapps.scoreit.views.MaxWidthFrameLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:maxWidth="96dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:maxWidth="96dp">
 
-            <EditText
+            <com.sbgapps.scoreit.views.RingTextView
                 android:id="@+id/points"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="@dimen/font_display_1"
-                android:textColor="@color/color_accent"
-                android:inputType="none"
                 tools:text="128"/>
-
-            <FrameLayout
-                android:id="@+id/points_click"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
         </com.sbgapps.scoreit.views.MaxWidthFrameLayout>
 
         <RelativeLayout
