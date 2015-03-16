@@ -38,7 +38,6 @@ public abstract class BaseActivity extends ActionBarActivity {
     private Toolbar mToolbar;
 
     @Override
-    @SuppressWarnings("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());

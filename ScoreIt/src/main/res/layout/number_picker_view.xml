@@ -27,36 +27,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-            <com.sbgapps.scoreit.numberpicker.NumberView
-                android:id="@+id/number_text"
-                android:layout_width="0dp"
+        <com.sbgapps.scoreit.numberpicker.NumberView
+            android:id="@+id/number_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:baselineAligned="false">
+
+            <TextView
+                android:id="@+id/minus_label"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:baselineAligned="false">
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/margin_default"
+                android:singleLine="true"
+                android:ellipsize="none"
+                android:textSize="@dimen/font_display_2"
+                android:fontFamily="sans-serif-light"
+                android:layout_gravity="center_vertical"
+                tools:text="-"/>
 
-                <TextView
-                    android:id="@+id/minus_label"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_default"
-                    android:singleLine="true"
-                    android:ellipsize="none"
-                    android:textSize="@dimen/font_display_2"
-                    android:fontFamily="sans-serif-light"
-                    android:layout_gravity="center_vertical"
-                    tools:text="-"/>
-
-                <TextView
-                    android:id="@+id/number"
-                    android:textSize="@dimen/font_number_picker"
-                    android:fontFamily="sans-serif-light"
-                    android:singleLine="true"
-                    android:ellipsize="none"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    tools:text="256"/>
-
-            </com.sbgapps.scoreit.numberpicker.NumberView>
+            <TextView
+                android:id="@+id/number"
+                android:textSize="@dimen/font_number_picker"
+                android:fontFamily="sans-serif-light"
+                android:singleLine="true"
+                android:ellipsize="none"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                tools:text="256"/>
+        </com.sbgapps.scoreit.numberpicker.NumberView>
 
         <ImageButton
             android:id="@+id/delete"

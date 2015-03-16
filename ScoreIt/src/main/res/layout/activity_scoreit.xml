@@ -61,8 +61,9 @@
             android:background="@color/white">
 
             <com.cesards.cropimageview.CropImageView
+                android:id="@+id/drawer_cover"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="1dp"
                 android:src="@drawable/nav_drawer_cover"
                 android:layout_marginBottom="@dimen/margin_default"
                 android:clickable="true"

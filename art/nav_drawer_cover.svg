@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   inkscape:export-filename="D:\Projects\ScoreItProject\ScoreIt\src\main\res\drawable-xxhdpi\nav_drawer_cover.png"
+   inkscape:export-filename="D:\Perso\AndroidStudioProjects\ScoreItProject\ScoreIt\src\main\res\drawable-xxhdpi\nav_drawer_cover.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
    sodipodi:docname="nav_drawer_cover.svg">
@@ -175,15 +175,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="180.38231"
-     inkscape:cy="362.58356"
+     inkscape:zoom="2.0014091"
+     inkscape:cx="325.79994"
+     inkscape:cy="189.32159"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="962"
-     inkscape:window-x="-8"
+     inkscape:window-width="1440"
+     inkscape:window-height="878"
+     inkscape:window-x="1358"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
@@ -219,7 +219,7 @@
        sodipodi:rx="410"
        sodipodi:ry="410"
        d="m 448.57143,793.79077 c 0,226.43673 -183.56325,410.00003 -410,410.00003 -226.43675,0 -410,-183.5633 -410,-410.00003 0,-226.43675 183.56325,-410 410,-410 226.43675,0 410,183.56325 410,410 z"
-       transform="matrix(1.097561,0,0,1.097561,300.93596,-58.749637)" />
+       transform="matrix(1.1668719,0,0,1.1668719,298.26254,-113.76801)" />
     <path
        sodipodi:type="arc"
        style="opacity:0.1;fill:#000000;fill-opacity:1;stroke:none"
@@ -470,40 +470,6 @@
          width="45.602684"
          id="rect5715-5-0-9-1-2-7-7"
          style="fill:#ffc45d;fill-opacity:1;stroke:none" />
-    </g>
-    <g
-       id="g5264"
-       transform="matrix(1.2410714,0,0,1.2410714,-106.65013,-214.66065)">
-      <text
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="D:\Projects\ScoreItProject\art\feature_graphic.png"
-         sodipodi:linespacing="125%"
-         id="text2983-5-3"
-         y="914.672"
-         x="377.67349"
-         style="font-size:105.22799683px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Impact;-inkscape-font-specification:Impact"
-         xml:space="preserve"><tspan
-           style="font-size:105.22799683px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Light"
-           y="914.672"
-           x="377.67349"
-           id="tspan2985-2-8"
-           sodipodi:role="line">ScoreIt</tspan></text>
-      <text
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="D:\Projects\ScoreItProject\art\feature_graphic.png"
-         sodipodi:linespacing="125%"
-         id="text2983-1-6-7"
-         y="955.57819"
-         x="380.76315"
-         style="font-size:36.02660751px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Impact;-inkscape-font-specification:Impact"
-         xml:space="preserve"><tspan
-           style="font-size:36.02660751px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Ultra-Light"
-           y="955.57819"
-           x="380.76315"
-           id="tspan2985-7-1-4"
-           sodipodi:role="line">Simple Score Keeper</tspan></text>
     </g>
   </g>
 </svg>

@@ -41,9 +41,11 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -193,7 +195,7 @@ public class ScoreItActivity extends BaseActivity
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        DrawerLayout.LayoutParams lp = (DrawerLayout.LayoutParams) mNavigationDrawer.getLayoutParams();
+        DrawerLayout.LayoutParams dlp = (DrawerLayout.LayoutParams) mNavigationDrawer.getLayoutParams();
 
         TypedValue tv = new TypedValue();
         int actionBarHeight;
@@ -205,11 +207,16 @@ public class ScoreItActivity extends BaseActivity
             Point size = new Point();
             display.getSize(size);
             width = size.x - actionBarHeight;
-            lp.width = Math.min(width, maxWidth);
+            dlp.width = Math.min(width, maxWidth);
         } else {
-            lp.width = getResources().getDimensionPixelSize(R.dimen.navigation_drawer_min_width);
+            dlp.width = getResources().getDimensionPixelSize(R.dimen.navigation_drawer_min_width);
         }
-        mNavigationDrawer.setLayoutParams(lp);
+        mNavigationDrawer.setLayoutParams(dlp);
+
+        View cover = findViewById(R.id.drawer_cover);
+        LinearLayout.LayoutParams llp = (LinearLayout.LayoutParams) cover.getLayoutParams();
+        llp.height = dlp.width * 9 / 16;
+        cover.setLayoutParams(llp);
     }
 
     private void initActionButton() {
