@@ -64,7 +64,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center"
-            android:src="@drawable/ic_backspace"
+            android:src="@drawable/ic_content_backspace"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/delete"
             android:layout_height="match_parent"/>
