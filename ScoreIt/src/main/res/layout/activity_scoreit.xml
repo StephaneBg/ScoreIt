@@ -44,11 +44,34 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <com.sbgapps.scoreit.views.ScrimInsetsFrameLayout
         android:id="@+id/navigation_drawer"
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:fitsSystemWindows="true"
-        android:layout_gravity="start"/>
+        android:layout_gravity="start"
+        android:elevation="4dp"
+        app:insetForeground="#4000">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <com.cesards.cropimageview.CropImageView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:src="@drawable/nav_drawer_cover"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:clickable="true"
+                app:crop="bottomLeft"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/drawer_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </com.sbgapps.scoreit.views.ScrimInsetsFrameLayout>
 </android.support.v4.widget.DrawerLayout>

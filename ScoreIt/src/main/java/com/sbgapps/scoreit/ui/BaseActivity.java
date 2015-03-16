@@ -64,23 +64,6 @@ public abstract class BaseActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public int calculateDrawerWidth() {
-        TypedValue tv = new TypedValue();
-        int actionBarHeight;
-        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
-            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-            int maxWidth = getResources().getDimensionPixelSize(R.dimen.navigation_drawer_max_width);
-            Display display = getWindowManager().getDefaultDisplay();
-            int width;
-            Point size = new Point();
-            display.getSize(size);
-            width = size.x - actionBarHeight;
-            return Math.min(width, maxWidth);
-        } else {
-            return getResources().getDimensionPixelSize(R.dimen.navigation_drawer_min_width);
-        }
-    }
-
     private void setupFauxDialog() {
         TypedValue tv = new TypedValue();
         boolean isDialog = getTheme().resolveAttribute(R.attr.isDialog, tv, true) && (0 != tv.data);

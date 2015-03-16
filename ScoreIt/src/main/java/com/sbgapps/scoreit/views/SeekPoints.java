@@ -47,17 +47,22 @@ public class SeekPoints extends FrameLayout {
     private int mProgress;
 
     public SeekPoints(Context context) {
-        this(context, null);
+        super(context);
+        init();
     }
 
     public SeekPoints(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        init();
     }
 
     public SeekPoints(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        init();
+    }
 
-        LayoutInflater inflater = (LayoutInflater) context
+    private void init() {
+        LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.seek_points, this, true);
         ButterKnife.inject(this);

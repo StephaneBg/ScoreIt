@@ -19,7 +19,7 @@
 
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
@@ -27,6 +27,6 @@
 
     <style name="Theme.Adaptive" parent="AppTheme.Base">
         <item name="isDialog">false</item>
-        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/color_primary_dark</item>
     </style>
 </resources>

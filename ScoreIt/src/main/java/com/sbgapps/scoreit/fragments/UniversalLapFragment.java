@@ -30,6 +30,7 @@ import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
 import com.sbgapps.scoreit.numberpicker.NumberPickerBuilder;
 import com.sbgapps.scoreit.numberpicker.NumberPickerDialogFragment;
+import com.sbgapps.scoreit.views.RingTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ import java.util.List;
 public class UniversalLapFragment extends LapFragment
         implements NumberPickerDialogFragment.NumberPickerDialogHandler {
 
-    final List<EditText> mPoints = new ArrayList<>();
+    final List<TextView> mPoints = new ArrayList<>();
 
     @Override
     public UniversalLap getLap() {
@@ -69,12 +70,11 @@ public class UniversalLapFragment extends LapFragment
         TextView tv = (TextView) view.findViewById(R.id.tv_name);
         tv.setText(player.getName());
 
-        EditText et = (EditText) view.findViewById(R.id.points);
-        et.setText(Integer.toString(getLap().getScore(position)));
-        mPoints.add(et);
+        tv = (RingTextView) view.findViewById(R.id.points);
+        tv.setText(Integer.toString(getLap().getScore(position)));
+        mPoints.add(tv);
 
-        View click = view.findViewById(R.id.points_click);
-        click.setOnClickListener(new View.OnClickListener() {
+        tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NumberPickerBuilder npb = new NumberPickerBuilder()

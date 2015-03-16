@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
@@ -34,6 +35,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,7 +70,6 @@ import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.games.tarot.TarotFourLap;
 import com.sbgapps.scoreit.games.tarot.TarotThreeLap;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
-import com.sbgapps.scoreit.utils.Utils;
 
 import java.util.List;
 
@@ -81,7 +83,9 @@ public class ScoreItActivity extends BaseActivity
     private static final int REQ_SAVED_GAME = 2;
 
     @InjectView(R.id.navigation_drawer)
-    RecyclerView mNavigationDrawer;
+    View mNavigationDrawer;
+    @InjectView(R.id.drawer_list)
+    RecyclerView mDrawerList;
     @InjectView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
     @InjectView(R.id.fab)
@@ -116,7 +120,7 @@ public class ScoreItActivity extends BaseActivity
     }
 
     @Override
-   protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ButterKnife.inject(this);
@@ -163,10 +167,10 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void initDrawer() {
-        mNavigationDrawer.setClipToPadding(false);
-        mNavigationDrawer.setLayoutManager(new LinearLayoutManager(this));
-        mNavigationDrawer.setAdapter(new NavigationDrawerAdapter(this));
-        mNavigationDrawer.setHasFixedSize(true);
+        mDrawerList.setClipToPadding(false);
+        mDrawerList.setLayoutManager(new LinearLayoutManager(this));
+        mDrawerList.setAdapter(new NavigationDrawerAdapter(this));
+        mDrawerList.setHasFixedSize(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -190,9 +194,22 @@ public class ScoreItActivity extends BaseActivity
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         DrawerLayout.LayoutParams lp = (DrawerLayout.LayoutParams) mNavigationDrawer.getLayoutParams();
-        lp.width = calculateDrawerWidth();
+
+        TypedValue tv = new TypedValue();
+        int actionBarHeight;
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+            int maxWidth = getResources().getDimensionPixelSize(R.dimen.navigation_drawer_max_width);
+            Display display = getWindowManager().getDefaultDisplay();
+            int width;
+            Point size = new Point();
+            display.getSize(size);
+            width = size.x - actionBarHeight;
+            lp.width = Math.min(width, maxWidth);
+        } else {
+            lp.width = getResources().getDimensionPixelSize(R.dimen.navigation_drawer_min_width);
+        }
         mNavigationDrawer.setLayoutParams(lp);
-        mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.color_primary));
     }
 
     private void initActionButton() {
@@ -327,8 +344,8 @@ public class ScoreItActivity extends BaseActivity
 
         int before = mCurrentGame;
         mCurrentGame = game;
-        mNavigationDrawer.getAdapter().notifyItemChanged(before);
-        mNavigationDrawer.getAdapter().notifyItemChanged(mCurrentGame);
+        mDrawerList.getAdapter().notifyItemChanged(before);
+        mDrawerList.getAdapter().notifyItemChanged(mCurrentGame);
 
         switch (game) {
             default:

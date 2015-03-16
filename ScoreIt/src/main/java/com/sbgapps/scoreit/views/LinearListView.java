@@ -41,7 +41,7 @@ public class LinearListView extends LinearLayout {
 	};
 
 	public LinearListView(Context context) {
-		this(context, null);
+        super(context);
 	}
 
 	public LinearListView(Context context, AttributeSet attrs) {
