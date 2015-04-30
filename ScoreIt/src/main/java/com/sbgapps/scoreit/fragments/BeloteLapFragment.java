@@ -26,11 +26,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.BeloteBonus;
 import com.sbgapps.scoreit.games.belote.BeloteLap;
-import com.sbgapps.scoreit.views.BelotePoints;
+import com.sbgapps.scoreit.views.SeekPoints;
+import com.sbgapps.scoreit.views.ToggleGroup;
 
 import java.util.List;
 
@@ -40,10 +43,24 @@ import butterknife.InjectView;
 /**
  * Created by sbaiget on 01/11/13.
  */
-public class BeloteLapFragment extends GenericBeloteLapFragment {
+public class BeloteLapFragment extends GenericBeloteLapFragment
+        implements SeekPoints.OnProgressChangedListener {
 
-    @InjectView(R.id.input_points)
-    BelotePoints mInputPoints;
+    @InjectView(R.id.player1_name)
+    TextView mPlayer1Name;
+    @InjectView(R.id.player2_name)
+    TextView mPlayer2Name;
+    @InjectView(R.id.player1_points)
+    TextView mPlayer1Points;
+    @InjectView(R.id.player2_points)
+    TextView mPlayer2Points;
+    @InjectView(R.id.btn_switch)
+    ImageButton mSwitchBtn;
+    @InjectView(R.id.group_score)
+    ToggleGroup mScoreGroup;
+    @InjectView(R.id.seekbar_points)
+    SeekPoints mSeekPoints;
+
     @InjectView(R.id.ll_bonuses)
     LinearLayout mBonuses;
     @InjectView(R.id.btn_add_bonus)
@@ -61,7 +78,59 @@ public class BeloteLapFragment extends GenericBeloteLapFragment {
 
         if(null == getLap()) return view;
 
-        mInputPoints.init(this);
+        mPlayer1Name.setText(getGameHelper().getPlayer(Player.PLAYER_1).getName());
+        mPlayer2Name.setText(getGameHelper().getPlayer(Player.PLAYER_2).getName());
+
+        mSwitchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Player.PLAYER_1 == getLap().getScorer()) {
+                    getLap().setScorer(Player.PLAYER_2);
+                } else {
+                    getLap().setScorer(Player.PLAYER_1);
+                }
+                displayScores();
+            }
+        });
+
+        mScoreGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(ToggleGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.btn_score:
+                        mSeekPoints.setVisibility(View.VISIBLE);
+                        getLap().setPoints(110);
+                        mSeekPoints.setPoints(110, "110");
+                        break;
+                    case R.id.btn_inside:
+                        mSeekPoints.setVisibility(View.GONE);
+                        getLap().setPoints(160);
+                        break;
+                    case R.id.btn_capot:
+                        mSeekPoints.setVisibility(View.GONE);
+                        getLap().setPoints(250);
+                        break;
+                }
+                displayScores();
+            }
+        });
+
+        int points = getLap().getPoints();
+        if (160 == points) {
+            mScoreGroup.check(R.id.btn_inside);
+            mSeekPoints.setVisibility(View.GONE);
+        } else if (250 == points) {
+            mScoreGroup.check(R.id.btn_capot);
+            mSeekPoints.setVisibility(View.GONE);
+        } else {
+            mScoreGroup.check(R.id.btn_score);
+        }
+        mSeekPoints.init(
+                points,
+                162,
+                Integer.toString(points));
+        mSeekPoints.setOnProgressChangedListener(this);
+        displayScores();
 
         mButtonBonus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +201,13 @@ public class BeloteLapFragment extends GenericBeloteLapFragment {
         mButtonBonus.setEnabled(bonuses.size() < 3);
     }
 
+    @Override
+    public String onProgressChanged(SeekPoints seekPoints, int progress) {
+        getLap().setPoints(progress);
+        displayScores();
+        return Integer.toString(progress);
+    }
+
     private ArrayAdapter<BeloteBonusItem> getBonusArrayAdapter() {
         final ArrayAdapter<BeloteBonusItem> announceItemArrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
@@ -144,6 +220,12 @@ public class BeloteLapFragment extends GenericBeloteLapFragment {
         announceItemArrayAdapter.add(new BeloteBonusItem(BeloteBonus.BONUS_FOUR_NINE));
         announceItemArrayAdapter.add(new BeloteBonusItem(BeloteBonus.BONUS_FOUR_JACK));
         return announceItemArrayAdapter;
+    }
+
+    private void displayScores() {
+        getLap().computePoints();
+        mPlayer1Points.setText(Integer.toString(getLap().getScore(Player.PLAYER_1)));
+        mPlayer2Points.setText(Integer.toString(getLap().getScore(Player.PLAYER_2)));
     }
 
     class BeloteBonusItem {

@@ -26,14 +26,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.coinche.CoincheBonus;
 import com.sbgapps.scoreit.games.coinche.CoincheLap;
-import com.sbgapps.scoreit.views.BelotePoints;
 import com.sbgapps.scoreit.views.SeekPoints;
 import com.sbgapps.scoreit.views.ToggleGroup;
 
@@ -50,12 +49,35 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
 
     @InjectView(R.id.bidder_group)
     ToggleGroup mBidderGroup;
-    @InjectView(R.id.input_bid)
-    SeekPoints mBid;
+    @InjectView(R.id.tv_bid)
+    TextView mBid;
+    @InjectView(R.id.btn_bid_minus_10)
+    Button mButtonBidMinusTen;
+    @InjectView(R.id.btn_bid_minus_100)
+    Button mButtonBidMinusHundred;
+    @InjectView(R.id.btn_bid_plus_10)
+    Button mButtonBidPlusTen;
+    @InjectView(R.id.btn_bid_plus_100)
+    Button mButtonBidPlusHundred;
+
     @InjectView(R.id.spinner_coinche)
     Spinner mCoincheSpinner;
-    @InjectView(R.id.input_points)
-    BelotePoints mInputPoints;
+
+    @InjectView(R.id.player1_name)
+    TextView mPlayer1Name;
+    @InjectView(R.id.player2_name)
+    TextView mPlayer2Name;
+    @InjectView(R.id.player1_points)
+    TextView mPlayer1Points;
+    @InjectView(R.id.player2_points)
+    TextView mPlayer2Points;
+    @InjectView(R.id.btn_switch)
+    ImageButton mSwitchBtn;
+    @InjectView(R.id.group_score)
+    ToggleGroup mScoreGroup;
+    @InjectView(R.id.seekbar_points)
+    SeekPoints mSeekPoints;
+
     @InjectView(R.id.ll_bonuses)
     LinearLayout mBonuses;
     @InjectView(R.id.btn_add_bonus)
@@ -96,6 +118,46 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
             }
         });
 
+        ToggleButton btn = (ToggleButton) view.findViewById(R.id.btn_player_1);
+        String name = getGameHelper().getPlayer(Player.PLAYER_1).getName();
+        btn.setText(name);
+        btn.setTextOn(name);
+        btn.setTextOff(name);
+        btn = (ToggleButton) view.findViewById(R.id.btn_player_2);
+        name = getGameHelper().getPlayer(Player.PLAYER_2).getName();
+        btn.setText(name);
+        btn.setTextOn(name);
+        btn.setTextOff(name);
+
+        int bid = getLap().getBid();
+        mBid.setText(Integer.toString(bid));
+
+        stepBid(0);
+        mButtonBidMinusTen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stepBid(-10);
+            }
+        });
+        mButtonBidMinusHundred.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stepBid(-100);
+            }
+        });
+        mButtonBidPlusTen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stepBid(10);
+            }
+        });
+        mButtonBidPlusHundred.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stepBid(100);
+            }
+        });
+
         ArrayAdapter<CoincheItem> coincheAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
         coincheAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -116,23 +178,59 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
             }
         });
 
-        GameHelper gh = getGameHelper();
-        ToggleButton btn = (ToggleButton) view.findViewById(R.id.btn_player_1);
-        String name = gh.getPlayer(Player.PLAYER_1).getName();
-        btn.setText(name);
-        btn.setTextOn(name);
-        btn.setTextOff(name);
-        btn = (ToggleButton) view.findViewById(R.id.btn_player_2);
-        name = gh.getPlayer(Player.PLAYER_2).getName();
-        btn.setText(name);
-        btn.setTextOn(name);
-        btn.setTextOff(name);
+        mPlayer1Name.setText(getGameHelper().getPlayer(Player.PLAYER_1).getName());
+        mPlayer2Name.setText(getGameHelper().getPlayer(Player.PLAYER_2).getName());
 
-        int bid = getLap().getBid();
-        mBid.init(getProgressFromBid(bid), 8, Integer.toString(bid));
-        mBid.setOnProgressChangedListener(this);
+        mSwitchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Player.PLAYER_1 == getLap().getScorer()) {
+                    getLap().setScorer(Player.PLAYER_2);
+                } else {
+                    getLap().setScorer(Player.PLAYER_1);
+                }
+                displayScores();
+            }
+        });
 
-        mInputPoints.init(this);
+        mScoreGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(ToggleGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.btn_score:
+                        mSeekPoints.setVisibility(View.VISIBLE);
+                        getLap().setPoints(110);
+                        mSeekPoints.setPoints(110, "110");
+                        break;
+                    case R.id.btn_inside:
+                        mSeekPoints.setVisibility(View.GONE);
+                        getLap().setPoints(160);
+                        break;
+                    case R.id.btn_capot:
+                        mSeekPoints.setVisibility(View.GONE);
+                        getLap().setPoints(250);
+                        break;
+                }
+                displayScores();
+            }
+        });
+
+        int points = getLap().getPoints();
+        if (160 == points) {
+            mScoreGroup.check(R.id.btn_inside);
+            mSeekPoints.setVisibility(View.GONE);
+        } else if (250 == points) {
+            mScoreGroup.check(R.id.btn_capot);
+            mSeekPoints.setVisibility(View.GONE);
+        } else {
+            mScoreGroup.check(R.id.btn_score);
+        }
+        mSeekPoints.init(
+                points,
+                162,
+                Integer.toString(points));
+        mSeekPoints.setOnProgressChangedListener(this);
+        displayScores();
 
         mButtonBonus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,11 +245,27 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         return view;
     }
 
+    private void stepBid(int increment) {
+        int bid = getLap().stepBid(increment);
+        mBid.setText(Integer.toString(bid));
+
+        mButtonBidMinusTen.setEnabled(bid >= 90);
+        mButtonBidMinusHundred.setEnabled(bid >= 180);
+        mButtonBidPlusTen.setEnabled(bid <= 990);
+        mButtonBidPlusHundred.setEnabled(bid <= 900);
+    }
+
     @Override
     public String onProgressChanged(SeekPoints seekPoints, int progress) {
-        int bid = getBidFromProgress(progress);
-        getLap().setBid(bid);
-        return Integer.toString(bid);
+        getLap().setPoints(progress);
+        displayScores();
+        return Integer.toString(progress);
+    }
+
+    private void displayScores() {
+        getLap().computePoints();
+        mPlayer1Points.setText(Integer.toString(getLap().getScore(Player.PLAYER_1)));
+        mPlayer2Points.setText(Integer.toString(getLap().getScore(Player.PLAYER_2)));
     }
 
     private void addBonus(CoincheBonus coincheBonus) {
@@ -222,22 +336,6 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_FOUR_NINE));
         bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_FOUR_JACK));
         return bonusArrayAdapter;
-    }
-
-    private int getProgressFromBid(int bid) {
-        if (250 == bid) {
-            return 8;
-        } else {
-            return (bid - 80) / 10;
-        }
-    }
-
-    private int getBidFromProgress(int progress) {
-        if (8 == progress) {
-            return 250;
-        } else {
-            return (10 * progress + 80);
-        }
     }
 
     class CoincheBonusItem {

@@ -16,15 +16,12 @@
 
 package com.sbgapps.scoreit.ui;
 
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.Display;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
@@ -33,7 +30,7 @@ import com.sbgapps.scoreit.R;
 /**
  * Created by Stéphane on 31/07/2014.
  */
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
 

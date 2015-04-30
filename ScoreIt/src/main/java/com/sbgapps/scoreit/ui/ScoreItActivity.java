@@ -19,6 +19,7 @@ package com.sbgapps.scoreit.ui;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -33,6 +34,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -41,14 +43,12 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.mrengineer13.snackbar.SnackBar;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ObservableScrollView;
@@ -661,13 +661,11 @@ public class ScoreItActivity extends BaseActivity
     }
 
     private void showClearDialogActionChoices() {
-        new MaterialDialog.Builder(this)
-                .title(getString(R.string.current_game))
-                .titleColorRes(R.color.color_primary)
-                .items(getResources().getStringArray(R.array.clear_actions))
-                .itemsCallback(new MaterialDialog.ListCallback() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.current_game)
+                .setItems(R.array.clear_actions, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                    public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             default:
                             case 0:
@@ -687,17 +685,16 @@ public class ScoreItActivity extends BaseActivity
                         }
                     }
                 })
+                .create()
                 .show();
     }
 
     private void showEditNameActionChoices() {
-        new MaterialDialog.Builder(this)
-                .title(getString(R.string.edit_name))
-                .titleColorRes(R.color.color_primary)
-                .items(getResources().getStringArray(R.array.edit_name_action))
-                .itemsCallback(new MaterialDialog.ListCallback() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.edit_name)
+                .setItems(R.array.edit_name_action, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                    public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             default:
                             case 0:
@@ -711,17 +708,16 @@ public class ScoreItActivity extends BaseActivity
                         }
                     }
                 })
+                .create()
                 .show();
     }
 
     private void showLoadActionChoices() {
-        new MaterialDialog.Builder(this)
-                .title(getString(R.string.current_game))
-                .titleColorRes(R.color.color_primary)
-                .items(getResources().getStringArray(R.array.load_actions))
-                .itemsCallback(new MaterialDialog.ListCallback() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.current_game)
+                .setItems(R.array.load_actions, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                    public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             default:
                             case 0:
@@ -733,6 +729,7 @@ public class ScoreItActivity extends BaseActivity
                         }
                     }
                 })
+                .create()
                 .show();
     }
 
@@ -747,18 +744,17 @@ public class ScoreItActivity extends BaseActivity
                 break;
         }
 
-        new MaterialDialog.Builder(this)
-                .title(getString(R.string.player_number))
-                .titleColorRes(R.color.color_primary)
-                .items(players)
-                .itemsCallback(new MaterialDialog.ListCallback() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.player_number)
+                .setItems(players, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                    public void onClick(DialogInterface dialog, int which) {
                         mGameHelper.setPlayerCount(which);
                         invalidateOptionsMenu();
                         reloadFragments(true);
                     }
                 })
+                .create()
                 .show();
     }
 
@@ -766,17 +762,12 @@ public class ScoreItActivity extends BaseActivity
         View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
         final EditText editText = (EditText) view.findViewById(R.id.edit_text);
 
-        new MaterialDialog.Builder(this)
-                .title(R.string.edit_name)
-                .titleColorRes(R.color.color_primary)
-                .customView(view, false)
-                .positiveText(R.string.ok)
-                .positiveColorRes(R.color.color_primary)
-                .negativeText(R.string.cancel)
-                .negativeColorRes(R.color.gray_dark)
-                .callback(new MaterialDialog.ButtonCallback() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.edit_name)
+                .setView(view)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
+                    public void onClick(DialogInterface dialog, int which) {
                         String name = editText.getText().toString();
                         if (!name.isEmpty()) {
                             mGameHelper.getPlayer(mEditedPlayer).setName(name);
@@ -786,7 +777,8 @@ public class ScoreItActivity extends BaseActivity
                         }
                     }
                 })
-                .build()
+                .setNegativeButton(R.string.cancel, null)
+                .create()
                 .show();
     }
 
@@ -794,17 +786,12 @@ public class ScoreItActivity extends BaseActivity
         View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
         final EditText editText = (EditText) view.findViewById(R.id.edit_text);
 
-        new MaterialDialog.Builder(this)
-                .title(R.string.filename)
-                .titleColorRes(R.color.color_primary)
-                .customView(view, false)
-                .positiveText(R.string.ok)
-                .positiveColorRes(R.color.color_primary)
-                .negativeText(R.string.cancel)
-                .negativeColorRes(R.color.gray_dark)
-                .callback(new MaterialDialog.ButtonCallback() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.filename)
+                .setView(view)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
+                    public void onClick(DialogInterface dialog, int which) {
                         String file = editText.getText().toString();
                         mGameHelper.saveGame(file);
                         mGameHelper.createGame();
@@ -815,7 +802,8 @@ public class ScoreItActivity extends BaseActivity
                         }
                     }
                 })
-                .build()
+                .setNegativeButton(R.string.cancel, null)
+                .create()
                 .show();
     }
 

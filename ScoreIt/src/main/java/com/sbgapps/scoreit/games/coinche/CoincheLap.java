@@ -172,4 +172,8 @@ public class CoincheLap extends GenericBeloteLap {
     public Lap copy() {
         return new CoincheLap(mScorer, mPoints, mBidder, mBid, mCoinche, mBonuses);
     }
+
+    public int stepBid(int points) {
+        return mBid += points;
+    }
 }

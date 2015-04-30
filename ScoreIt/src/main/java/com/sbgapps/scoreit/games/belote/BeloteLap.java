@@ -46,9 +46,8 @@ public class BeloteLap extends GenericBeloteLap {
 
     @Override
     public void computeScores() {
-        mIsDone = (160 != mPoints);
-
         computePoints();
+        mIsDone = (160 != mPoints);
 
         // Bonuses
         for (BeloteBonus bonus : mBonuses) {

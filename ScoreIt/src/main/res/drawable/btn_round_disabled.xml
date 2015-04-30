@@ -15,20 +15,8 @@
   ~ limitations under the License.
   -->
 
-<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-        android:color="?android:colorControlHighlight">
-
-    <item>
-        <selector>
-            <!--  Disabled -->
-            <item
-                android:state_enabled="false"
-                android:drawable="@drawable/btn_round_disabled"/>
-
-            <!--  Enabled -->
-            <item
-                android:state_enabled="true"
-                android:drawable="@drawable/btn_round_normal"/>
-        </selector>
-    </item>
-</ripple>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="oval">
+    <corners android:radius="2dp"/>
+    <solid android:color="@color/transparent"/>
+</shape>

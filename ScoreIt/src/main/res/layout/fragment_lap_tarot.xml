@@ -116,7 +116,7 @@
             android:text="@string/points"/>
 
         <com.sbgapps.scoreit.views.SeekPoints
-            android:id="@+id/input_points"
+            android:id="@+id/tv_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"/>

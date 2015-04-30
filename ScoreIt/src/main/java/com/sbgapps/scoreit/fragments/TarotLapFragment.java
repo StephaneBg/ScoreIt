@@ -59,7 +59,7 @@ public class TarotLapFragment extends LapFragment
     ToggleButton mTwentyOne;
     @InjectView(R.id.checkbox_excuse)
     ToggleButton mExcuse;
-    @InjectView(R.id.input_points)
+    @InjectView(R.id.tv_points)
     SeekPoints mPoints;
     @InjectView(R.id.ll_bonuses)
     LinearLayout mBonuses;
