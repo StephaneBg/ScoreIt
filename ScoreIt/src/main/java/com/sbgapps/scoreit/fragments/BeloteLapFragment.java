@@ -33,7 +33,6 @@ import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.BeloteBonus;
 import com.sbgapps.scoreit.games.belote.BeloteLap;
 import com.sbgapps.scoreit.views.SeekPoints;
-import com.sbgapps.scoreit.views.ToggleGroup;
 
 import java.util.List;
 
@@ -56,8 +55,6 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
     TextView mPlayer2Points;
     @InjectView(R.id.btn_switch)
     ImageButton mSwitchBtn;
-    @InjectView(R.id.group_score)
-    ToggleGroup mScoreGroup;
     @InjectView(R.id.seekbar_points)
     SeekPoints mSeekPoints;
 
@@ -76,7 +73,7 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
         View view = inflater.inflate(R.layout.fragment_lap_belote, null);
         ButterKnife.inject(this, view);
 
-        if(null == getLap()) return view;
+        if (null == getLap()) return view;
 
         mPlayer1Name.setText(getGameHelper().getPlayer(Player.PLAYER_1).getName());
         mPlayer2Name.setText(getGameHelper().getPlayer(Player.PLAYER_2).getName());
@@ -93,42 +90,12 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
             }
         });
 
-        mScoreGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(ToggleGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.btn_score:
-                        mSeekPoints.setVisibility(View.VISIBLE);
-                        getLap().setPoints(110);
-                        mSeekPoints.setPoints(110, "110");
-                        break;
-                    case R.id.btn_inside:
-                        mSeekPoints.setVisibility(View.GONE);
-                        getLap().setPoints(160);
-                        break;
-                    case R.id.btn_capot:
-                        mSeekPoints.setVisibility(View.GONE);
-                        getLap().setPoints(250);
-                        break;
-                }
-                displayScores();
-            }
-        });
-
-        int points = getLap().getPoints();
-        if (160 == points) {
-            mScoreGroup.check(R.id.btn_inside);
-            mSeekPoints.setVisibility(View.GONE);
-        } else if (250 == points) {
-            mScoreGroup.check(R.id.btn_capot);
-            mSeekPoints.setVisibility(View.GONE);
-        } else {
-            mScoreGroup.check(R.id.btn_score);
-        }
+        int p = getLap().getPoints();
+        p = pointsToProgress(p);
         mSeekPoints.init(
-                points,
-                162,
-                Integer.toString(points));
+                p,
+                161,
+                Integer.toString(p));
         mSeekPoints.setOnProgressChangedListener(this);
         displayScores();
 
@@ -143,6 +110,28 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
         }
 
         return view;
+    }
+
+    private int progressToPoints(int progress) {
+        switch (progress) {
+            default:
+                return progress;
+            case 158:
+                return 160;
+            case 159:
+                return 250;
+        }
+    }
+
+    private int pointsToProgress(int points) {
+        switch (points) {
+            default:
+                return points;
+            case 160:
+                return 158;
+            case 250:
+                return 159;
+        }
     }
 
     private void addBonus(BeloteBonus beloteBonus) {
@@ -203,9 +192,10 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
 
     @Override
     public String onProgressChanged(SeekPoints seekPoints, int progress) {
-        getLap().setPoints(progress);
+        int points = progressToPoints(progress);
+        getLap().setPoints(points);
         displayScores();
-        return Integer.toString(progress);
+        return Integer.toString(points);
     }
 
     private ArrayAdapter<BeloteBonusItem> getBonusArrayAdapter() {

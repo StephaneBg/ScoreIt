@@ -135,6 +135,6 @@ public class SeekPoints extends FrameLayout {
 
     public interface OnProgressChangedListener {
 
-        public String onProgressChanged(SeekPoints seekPoints, int progress);
+        String onProgressChanged(SeekPoints seekPoints, int progress);
     }
 }

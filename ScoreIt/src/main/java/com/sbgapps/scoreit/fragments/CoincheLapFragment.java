@@ -73,8 +73,6 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
     TextView mPlayer2Points;
     @InjectView(R.id.btn_switch)
     ImageButton mSwitchBtn;
-    @InjectView(R.id.group_score)
-    ToggleGroup mScoreGroup;
     @InjectView(R.id.seekbar_points)
     SeekPoints mSeekPoints;
 
@@ -193,42 +191,12 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
             }
         });
 
-        mScoreGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(ToggleGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.btn_score:
-                        mSeekPoints.setVisibility(View.VISIBLE);
-                        getLap().setPoints(110);
-                        mSeekPoints.setPoints(110, "110");
-                        break;
-                    case R.id.btn_inside:
-                        mSeekPoints.setVisibility(View.GONE);
-                        getLap().setPoints(160);
-                        break;
-                    case R.id.btn_capot:
-                        mSeekPoints.setVisibility(View.GONE);
-                        getLap().setPoints(250);
-                        break;
-                }
-                displayScores();
-            }
-        });
-
-        int points = getLap().getPoints();
-        if (160 == points) {
-            mScoreGroup.check(R.id.btn_inside);
-            mSeekPoints.setVisibility(View.GONE);
-        } else if (250 == points) {
-            mScoreGroup.check(R.id.btn_capot);
-            mSeekPoints.setVisibility(View.GONE);
-        } else {
-            mScoreGroup.check(R.id.btn_score);
-        }
+        int p = getLap().getPoints();
+        p = pointsToProgress(p);
         mSeekPoints.init(
-                points,
-                162,
-                Integer.toString(points));
+                p,
+                160,
+                Integer.toString(p));
         mSeekPoints.setOnProgressChangedListener(this);
         displayScores();
 
@@ -257,9 +225,36 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
 
     @Override
     public String onProgressChanged(SeekPoints seekPoints, int progress) {
-        getLap().setPoints(progress);
+        int points = progressToPoints(progress);
+        getLap().setPoints(points);
         displayScores();
-        return Integer.toString(progress);
+        return Integer.toString(points);
+    }
+
+    private int progressToPoints(int progress) {
+        switch (progress) {
+            default:
+                return progress;
+            case 158:
+                return 160;
+            case 159:
+                return 250;
+            case 160:
+                return 500;
+        }
+    }
+
+    private int pointsToProgress(int points) {
+        switch (points) {
+            default:
+                return points;
+            case 160:
+                return 158;
+            case 250:
+                return 159;
+            case 500:
+                return 160;
+        }
     }
 
     private void displayScores() {

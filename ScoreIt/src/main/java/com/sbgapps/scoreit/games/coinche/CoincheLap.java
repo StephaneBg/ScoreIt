@@ -95,6 +95,26 @@ public class CoincheLap extends GenericBeloteLap {
     }
 
     @Override
+    public void computePoints() {
+        int[] points = new int[2];
+        if (mPoints >= 158) {
+            points[0] = mPoints;
+            points[1] = 0;
+        } else {
+            points[0] = ((mPoints + 5) / 10) * 10;
+            points[1] = (((162 - mPoints) + 5) / 10) * 10;
+        }
+
+        if (Player.PLAYER_1 == getScorer()) {
+            mScores[Player.PLAYER_1] = points[0];
+            mScores[Player.PLAYER_2] = points[1];
+        } else {
+            mScores[Player.PLAYER_1] = points[1];
+            mScores[Player.PLAYER_2] = points[0];
+        }
+    }
+
+    @Override
     public void computeScores() {
         computePoints();
 

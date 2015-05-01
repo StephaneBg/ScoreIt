@@ -23,6 +23,7 @@
     android:orientation="vertical">
 
     <View
+        tools:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/scrollview_padding"/>
 
@@ -109,48 +110,6 @@
                     tools:text="40"/>
             </LinearLayout>
         </LinearLayout>
-
-        <com.sbgapps.scoreit.views.ToggleGroup
-            android:id="@+id/group_score"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
-                android:id="@+id/btn_score"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:layout_margin="8dp"
-                android:background="@drawable/btn_toggle_selector"
-                android:textOn="@string/score"
-                android:textOff="@string/score"/>
-
-            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
-                android:id="@+id/btn_inside"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_margin="8dp"
-                android:background="@drawable/btn_toggle_selector"
-                android:textOn="@string/inside"
-                android:textOff="@string/inside"/>
-
-            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
-                android:id="@+id/btn_capot"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="8dp"
-                android:background="@drawable/btn_toggle_selector"
-                android:textOn="@string/capot"
-                android:textOff="@string/capot"/>
-        </com.sbgapps.scoreit.views.ToggleGroup>
 
         <com.sbgapps.scoreit.views.SeekPoints
             android:id="@+id/seekbar_points"

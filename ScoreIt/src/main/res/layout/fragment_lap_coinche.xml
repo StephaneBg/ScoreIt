@@ -24,6 +24,7 @@
     android:orientation="vertical">
 
     <View
+        tools:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/scrollview_padding"/>
 
@@ -136,7 +137,7 @@
             style="@style/SubHeader"
             android:text="@string/coinche"/>
 
-        <Spinner
+        <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_coinche"
             android:layout_width="match_parent"
             android:layout_height="@dimen/widget_height"
@@ -215,77 +216,35 @@
             </LinearLayout>
         </LinearLayout>
 
-        <com.sbgapps.scoreit.views.ToggleGroup
-            android:id="@+id/group_score"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
-                android:id="@+id/btn_score"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:layout_margin="8dp"
-                android:background="@drawable/btn_toggle_selector"
-                android:textOn="@string/score"
-                android:textOff="@string/score"/>
-
-            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
-                android:id="@+id/btn_inside"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_margin="8dp"
-                android:background="@drawable/btn_toggle_selector"
-                android:textOn="@string/inside"
-                android:textOff="@string/inside"/>
-
-            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
-                android:id="@+id/btn_capot"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="8dp"
-                android:background="@drawable/btn_toggle_selector"
-                android:textOn="@string/capot"
-                android:textOff="@string/capot"/>
-        </com.sbgapps.scoreit.views.ToggleGroup>
-
         <com.sbgapps.scoreit.views.SeekPoints
             android:id="@+id/seekbar_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-    </LinearLayout>
 
-    <TextView
-        style="@style/SubHeader"
-        android:text="@string/announces"/>
+        <TextView
+            style="@style/SubHeader"
+            android:text="@string/announces"/>
 
-    <LinearLayout
-        android:id="@+id/ll_bonuses"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:animateLayoutChanges="true"
-        android:divider="?android:listDivider"
-        android:orientation="vertical"
-        android:showDividers="middle">
-
-        <Button
-            android:id="@+id/btn_add_bonus"
-            style="?android:borderlessButtonStyle"
+        <LinearLayout
+            android:id="@+id/ll_bonuses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
-            android:text="@string/add"
-            android:textAllCaps="true"/>
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:animateLayoutChanges="true"
+            android:divider="?android:listDivider"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <Button
+                android:id="@+id/btn_add_bonus"
+                style="?android:borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_default"
+                android:text="@string/add"
+                android:textAllCaps="true"/>
+        </LinearLayout>
     </LinearLayout>
 
     <View

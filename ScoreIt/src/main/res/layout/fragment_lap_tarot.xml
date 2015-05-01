@@ -17,11 +17,13 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <View
+        tools:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/scrollview_padding"/>
 
@@ -42,7 +44,7 @@
             style="@style/SubHeader"
             android:text="@string/scorer"/>
 
-        <Spinner
+        <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_taker"
             android:layout_width="match_parent"
             android:layout_height="@dimen/widget_height"
@@ -60,7 +62,7 @@
             style="@style/SubHeader"
             android:text="@string/bidding"/>
 
-        <Spinner
+        <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_bid"
             android:layout_width="match_parent"
             android:layout_height="@dimen/widget_height"
