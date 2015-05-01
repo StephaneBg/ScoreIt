@@ -27,14 +27,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.coinche.CoincheBonus;
 import com.sbgapps.scoreit.games.coinche.CoincheLap;
 import com.sbgapps.scoreit.views.SeekPoints;
-import com.sbgapps.scoreit.views.ToggleGroup;
 
 import java.util.List;
 
@@ -47,18 +45,10 @@ import butterknife.InjectView;
 public class CoincheLapFragment extends GenericBeloteLapFragment
         implements SeekPoints.OnProgressChangedListener {
 
-    @InjectView(R.id.bidder_group)
-    ToggleGroup mBidderGroup;
-    @InjectView(R.id.tv_bid)
-    TextView mBid;
-    @InjectView(R.id.btn_bid_minus_10)
-    Button mButtonBidMinusTen;
-    @InjectView(R.id.btn_bid_minus_100)
-    Button mButtonBidMinusHundred;
-    @InjectView(R.id.btn_bid_plus_10)
-    Button mButtonBidPlusTen;
-    @InjectView(R.id.btn_bid_plus_100)
-    Button mButtonBidPlusHundred;
+    @InjectView(R.id.spinner_bidder)
+    Spinner mBidderSpinner;
+    @InjectView(R.id.seekbar_bid)
+    SeekPoints mSeekBid;
 
     @InjectView(R.id.spinner_coinche)
     Spinner mCoincheSpinner;
@@ -93,68 +83,31 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
 
         if (null == getLap()) return view;
 
-        switch (getLap().getBidder()) {
-            case Player.PLAYER_1:
-                mBidderGroup.check(R.id.btn_player_1);
-                break;
-            case Player.PLAYER_2:
-                mBidderGroup.check(R.id.btn_player_2);
-                break;
-        }
-
-        mBidderGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
+        ArrayAdapter<PlayerItem> bidAdapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item);
+        bidAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bidAdapter.add(new PlayerItem(Player.PLAYER_1));
+        bidAdapter.add(new PlayerItem(Player.PLAYER_2));
+        mBidderSpinner.setAdapter(bidAdapter);
+        mBidderSpinner.setSelection(getLap().getBidder());
+        mBidderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onCheckedChanged(ToggleGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.btn_player_1:
-                        getLap().setBidder(Player.PLAYER_1);
-                        break;
-                    case R.id.btn_player_2:
-                        getLap().setBidder(Player.PLAYER_2);
-                        break;
-                }
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getLap().setBidder(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
-        ToggleButton btn = (ToggleButton) view.findViewById(R.id.btn_player_1);
-        String name = getGameHelper().getPlayer(Player.PLAYER_1).getName();
-        btn.setText(name);
-        btn.setTextOn(name);
-        btn.setTextOff(name);
-        btn = (ToggleButton) view.findViewById(R.id.btn_player_2);
-        name = getGameHelper().getPlayer(Player.PLAYER_2).getName();
-        btn.setText(name);
-        btn.setTextOn(name);
-        btn.setTextOff(name);
-
-        int bid = getLap().getBid();
-        mBid.setText(Integer.toString(bid));
-
-        stepBid(0);
-        mButtonBidMinusTen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stepBid(-10);
-            }
-        });
-        mButtonBidMinusHundred.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stepBid(-100);
-            }
-        });
-        mButtonBidPlusTen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stepBid(10);
-            }
-        });
-        mButtonBidPlusHundred.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stepBid(100);
-            }
-        });
+        int b = getLap().getBid();
+        mSeekBid.init(
+                bidToProgress(b),
+                90,
+                Integer.toString(b));
+        mSeekBid.setOnProgressChangedListener(this);
 
         ArrayAdapter<CoincheItem> coincheAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
@@ -192,10 +145,9 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         });
 
         int p = getLap().getPoints();
-        p = pointsToProgress(p);
         mSeekPoints.init(
-                p,
-                160,
+                pointsToProgress(p),
+                155,
                 Integer.toString(p));
         mSeekPoints.setOnProgressChangedListener(this);
         displayScores();
@@ -213,33 +165,29 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         return view;
     }
 
-    private void stepBid(int increment) {
-        int bid = getLap().stepBid(increment);
-        mBid.setText(Integer.toString(bid));
-
-        mButtonBidMinusTen.setEnabled(bid >= 90);
-        mButtonBidMinusHundred.setEnabled(bid >= 180);
-        mButtonBidPlusTen.setEnabled(bid <= 990);
-        mButtonBidPlusHundred.setEnabled(bid <= 900);
-    }
-
     @Override
     public String onProgressChanged(SeekPoints seekPoints, int progress) {
-        int points = progressToPoints(progress);
-        getLap().setPoints(points);
-        displayScores();
-        return Integer.toString(points);
+        if (seekPoints.equals(mSeekPoints)) {
+            int points = progressToPoints(progress);
+            getLap().setPoints(points);
+            displayScores();
+            return Integer.toString(points);
+        } else {
+            int bid = progressToBid(progress);
+            getLap().setBid(bid);
+            return Integer.toString(bid);
+        }
     }
 
     private int progressToPoints(int progress) {
         switch (progress) {
             default:
-                return progress;
-            case 158:
+                return progress + 5;
+            case 153:
                 return 160;
-            case 159:
+            case 154:
                 return 250;
-            case 160:
+            case 155:
                 return 500;
         }
     }
@@ -247,14 +195,22 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
     private int pointsToProgress(int points) {
         switch (points) {
             default:
-                return points;
+                return points - 5;
             case 160:
-                return 158;
+                return 153;
             case 250:
-                return 159;
+                return 154;
             case 500:
-                return 160;
+                return 155;
         }
+    }
+
+    private int progressToBid(int progress) {
+        return progress * 10 + 100;
+    }
+
+    private int bidToProgress(int bid) {
+        return (bid - 100) / 10;
     }
 
     private void displayScores() {

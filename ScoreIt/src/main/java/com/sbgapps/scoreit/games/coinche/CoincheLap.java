@@ -53,7 +53,7 @@ public class CoincheLap extends GenericBeloteLap {
 
     public CoincheLap() {
         this(Player.PLAYER_1, 100, Player.PLAYER_1,
-                100, COINCHE_NONE, new ArrayList<CoincheBonus>());
+                140, COINCHE_NONE, new ArrayList<CoincheBonus>());
     }
 
     public int getBidder() {
@@ -191,9 +191,5 @@ public class CoincheLap extends GenericBeloteLap {
     @Override
     public Lap copy() {
         return new CoincheLap(mScorer, mPoints, mBidder, mBid, mCoinche, mBonuses);
-    }
-
-    public int stepBid(int points) {
-        return mBid += points;
     }
 }

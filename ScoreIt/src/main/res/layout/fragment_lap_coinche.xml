@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,127 +14,51 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <View
-        tools:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/scrollview_padding"/>
+        android:layout_height="@dimen/scrollview_padding"
+        tools:visibility="gone" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:background="@drawable/top_shadow"/>
+        android:background="@drawable/top_shadow" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@color/white"
+        android:orientation="vertical"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/bidding"/>
+            android:text="@string/bidding" />
 
-        <com.sbgapps.scoreit.views.ToggleGroup
-            android:id="@+id/bidder_group"
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner_bidder"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_height="@dimen/widget_height"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin">
+            android:layout_marginRight="@dimen/activity_horizontal_margin" />
 
-            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
-                android:id="@+id/btn_player_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="8dp"
-                android:checked="true"
-                android:background="@drawable/btn_toggle_selector"
-                tools:textOn="@string/them"/>
 
-            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
-                android:id="@+id/btn_player_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="8dp"
-                android:background="@drawable/btn_toggle_selector"
-                tools:textOff="@string/us"/>
-        </com.sbgapps.scoreit.views.ToggleGroup>
-
-        <LinearLayout
+        <com.sbgapps.scoreit.views.SeekPoints
+            android:id="@+id/seekbar_bid"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_bid_minus_10"
-                android:layout_width="@dimen/circle_btn"
-                android:layout_height="@dimen/circle_btn"
-                android:text="-10"
-                android:textColor="@color/gray_dark"
-                android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"/>
-
-            <Button
-                android:id="@+id/btn_bid_minus_100"
-                android:layout_width="@dimen/circle_btn"
-                android:layout_height="@dimen/circle_btn"
-                android:layout_margin="4dp"
-                android:text="-100"
-                android:textColor="@color/gray_dark"
-                android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"/>
-
-            <com.sbgapps.scoreit.views.MaxWidthFrameLayout
-                android:layout_width="0dp"
-                android:layout_height="96dp"
-                android:layout_weight="1"
-                app:maxWidth="96dp">
-
-                <com.sbgapps.scoreit.views.RingTextView
-                    android:id="@+id/tv_bid"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textSize="@dimen/font_display_1"
-                    tools:text="120"/>
-            </com.sbgapps.scoreit.views.MaxWidthFrameLayout>
-
-            <Button
-                android:id="@+id/btn_bid_plus_100"
-                android:layout_width="@dimen/circle_btn"
-                android:layout_height="@dimen/circle_btn"
-                android:layout_margin="4dp"
-                android:text="+100"
-                android:textColor="@color/gray_dark"
-                android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"/>
-
-            <Button
-                android:id="@+id/btn_bid_plus_10"
-                android:layout_width="@dimen/circle_btn"
-                android:layout_height="@dimen/circle_btn"
-                android:text="+10"
-                android:textColor="@color/gray_dark"
-                android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"/>
-        </LinearLayout>
+            android:layout_height="wrap_content" />
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/coinche"/>
+            android:text="@string/coinche" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_coinche"
@@ -143,35 +66,35 @@
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            android:layout_marginRight="@dimen/activity_horizontal_margin" />
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/points"/>
+            android:text="@string/points" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/player1_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:gravity="center"
                     android:textSize="@dimen/font_headline"
-                    tools:text="Them"/>
+                    tools:text="Them" />
 
                 <TextView
                     android:id="@+id/player1_points"
@@ -179,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="@dimen/font_headline"
-                    tools:text="120"/>
+                    tools:text="120" />
             </LinearLayout>
 
             <ImageButton
@@ -187,24 +110,24 @@
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:background="@drawable/btn_round_selector"
-                android:tint="@color/gray_dark"
-                android:src="@drawable/ic_action_switch"/>
+                android:src="@drawable/ic_action_switch"
+                android:tint="@color/gray_dark" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/player2_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:gravity="center"
                     android:textSize="@dimen/font_headline"
-                    tools:text="Us"/>
+                    tools:text="Us" />
 
                 <TextView
                     android:id="@+id/player2_points"
@@ -212,18 +135,18 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="@dimen/font_headline"
-                    tools:text="40"/>
+                    tools:text="40" />
             </LinearLayout>
         </LinearLayout>
 
         <com.sbgapps.scoreit.views.SeekPoints
             android:id="@+id/seekbar_points"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/announces"/>
+            android:text="@string/announces" />
 
         <LinearLayout
             android:id="@+id/ll_bonuses"
@@ -243,12 +166,12 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_default"
                 android:text="@string/add"
-                android:textAllCaps="true"/>
+                android:textAllCaps="true" />
         </LinearLayout>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 </LinearLayout>

@@ -250,8 +250,8 @@ public class ScoreItActivity extends BaseActivity
         if (null != mLap) {
             outState.putBoolean("edited", mIsEdited);
             if (mIsEdited) {
-                outState.putInt("position", mGameHelper.getLaps()
-                        .indexOf(mLap));
+                int idx = mGameHelper.getLaps().indexOf(mEditedLap);
+                outState.putInt("position", idx);
             }
             outState.putSerializable("lap", mLap);
         }

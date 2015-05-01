@@ -91,10 +91,9 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
         });
 
         int p = getLap().getPoints();
-        p = pointsToProgress(p);
         mSeekPoints.init(
-                p,
-                161,
+                pointsToProgress(p),
+                154,
                 Integer.toString(p));
         mSeekPoints.setOnProgressChangedListener(this);
         displayScores();
@@ -115,10 +114,10 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
     private int progressToPoints(int progress) {
         switch (progress) {
             default:
-                return progress;
-            case 158:
+                return progress + 5;
+            case 153:
                 return 160;
-            case 159:
+            case 154:
                 return 250;
         }
     }
@@ -126,11 +125,11 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
     private int pointsToProgress(int points) {
         switch (points) {
             default:
-                return points;
+                return points - 5;
             case 160:
-                return 158;
+                return 153;
             case 250:
-                return 159;
+                return 154;
         }
     }
 

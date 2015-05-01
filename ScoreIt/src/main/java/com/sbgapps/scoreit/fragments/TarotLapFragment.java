@@ -59,8 +59,8 @@ public class TarotLapFragment extends LapFragment
     ToggleButton mTwentyOne;
     @InjectView(R.id.checkbox_excuse)
     ToggleButton mExcuse;
-    @InjectView(R.id.tv_points)
-    SeekPoints mPoints;
+    @InjectView(R.id.seekbar_points)
+    SeekPoints mSeekPoints;
     @InjectView(R.id.ll_bonuses)
     LinearLayout mBonuses;
     @InjectView(R.id.btn_add_bonus)
@@ -142,8 +142,8 @@ public class TarotLapFragment extends LapFragment
         });
 
         int points = getLap().getPoints();
-        mPoints.init(points, 91, Integer.toString(points));
-        mPoints.setOnProgressChangedListener(this);
+        mSeekPoints.init(points, 91, Integer.toString(points));
+        mSeekPoints.setOnProgressChangedListener(this);
 
         mPetit.setChecked((getLap().getOudlers() & TarotLap.OUDLER_PETIT_MSK)
                 == TarotLap.OUDLER_PETIT_MSK);

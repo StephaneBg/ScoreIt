@@ -16,29 +16,28 @@
   ~ limitations under the License.
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.sbgapps.scoreit">
+    package="com.sbgapps.scoreit">
 
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="com.android.vending.BILLING"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:supportsRtl="false">
+        android:label="@string/app_name">
 
         <activity
             android:name=".ui.ScoreItActivity"
             android:theme="@style/Theme.ScoreIt">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
             <meta-data
                 android:name="com.google.android.backup.api_key"
-                android:value="AEdPqrEAAAAIFCoVtKuiOisDPQmo0wutqKoed5sWnHLkLY7GaQ"/>
+                android:value="AEdPqrEAAAAIFCoVtKuiOisDPQmo0wutqKoed5sWnHLkLY7GaQ" />
         </activity>
 
         <activity
@@ -47,7 +46,7 @@
             android:theme="@style/Theme.Adaptive">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.ScoreItActivity"/>
+                android:value=".ui.ScoreItActivity" />
         </activity>
 
         <activity
@@ -56,7 +55,7 @@
             android:theme="@style/Theme.Adaptive">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.ScoreItActivity"/>
+                android:value=".ui.ScoreItActivity" />
         </activity>
 
         <activity
@@ -65,7 +64,7 @@
             android:theme="@style/Theme.Dialog">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.ScoreItActivity"/>
+                android:value=".ui.ScoreItActivity" />
         </activity>
     </application>
 </manifest>
