@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,58 +14,58 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <View
-        tools:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/scrollview_padding"/>
+        android:layout_height="@dimen/scrollview_padding"
+        tools:visibility="gone" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:background="@drawable/top_shadow"/>
+        android:background="@drawable/top_shadow" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:animateLayoutChanges="true"
         android:background="@color/white"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_hor_margin"
+        android:paddingRight="@dimen/activity_hor_margin">
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/points"/>
+            android:text="@string/points" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/player1_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:gravity="center"
                     android:textSize="@dimen/font_headline"
-                    tools:text="Them"/>
+                    tools:text="Them" />
 
                 <TextView
                     android:id="@+id/player1_points"
@@ -74,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="@dimen/font_headline"
-                    tools:text="120"/>
+                    tools:text="120" />
             </LinearLayout>
 
             <ImageButton
@@ -82,24 +81,24 @@
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:background="@drawable/btn_round_selector"
-                android:tint="@color/gray_dark"
-                android:src="@drawable/ic_action_switch"/>
+                android:src="@drawable/ic_action_switch"
+                android:tint="@color/gray_dark" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/player2_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:gravity="center"
                     android:textSize="@dimen/font_headline"
-                    tools:text="Us"/>
+                    tools:text="Us" />
 
                 <TextView
                     android:id="@+id/player2_points"
@@ -107,25 +106,67 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="@dimen/font_headline"
-                    tools:text="40"/>
+                    tools:text="40" />
             </LinearLayout>
         </LinearLayout>
+
+        <com.sbgapps.scoreit.views.ToggleGroup
+            android:id="@+id/group_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_hor_margin"
+            android:layout_marginRight="@dimen/activity_hor_margin">
+
+            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
+                android:id="@+id/btn_score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_toggle_selector"
+                android:checked="true"
+                android:textOff="@string/score"
+                android:textOn="@string/score" />
+
+            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
+                android:id="@+id/btn_inside"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="@dimen/activity_hor_margin"
+                android:layout_marginRight="@dimen/activity_hor_margin"
+                android:layout_weight="1"
+                android:background="@drawable/btn_toggle_selector"
+                android:textOff="@string/inside"
+                android:textOn="@string/inside" />
+
+            <com.sbgapps.scoreit.views.NonUncheckableToggleButton
+                android:id="@+id/btn_capot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_toggle_selector"
+                android:textOff="@string/capot"
+                android:textOn="@string/capot" />
+        </com.sbgapps.scoreit.views.ToggleGroup>
 
         <com.sbgapps.scoreit.views.SeekPoints
             android:id="@+id/seekbar_points"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/announces"/>
+            android:text="@string/announces" />
 
         <LinearLayout
             android:id="@+id/ll_bonuses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_hor_margin"
+            android:layout_marginRight="@dimen/activity_hor_margin"
             android:animateLayoutChanges="true"
             android:divider="?android:listDivider"
             android:orientation="vertical"
@@ -138,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_default"
                 android:text="@string/add"
-                android:textAllCaps="true"/>
+                android:textAllCaps="true" />
         </LinearLayout>
     </LinearLayout>
 
@@ -146,5 +187,5 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/white"/>
+        android:background="@color/white" />
 </LinearLayout>

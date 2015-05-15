@@ -37,8 +37,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:paddingLeft="@dimen/activity_hor_margin"
+        android:paddingRight="@dimen/activity_hor_margin">
 
         <TextView
             style="@style/SubHeader"
@@ -49,8 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            android:layout_marginLeft="@dimen/activity_hor_margin"
+            android:layout_marginRight="@dimen/activity_hor_margin"/>
 
         <ViewStub
             android:id="@+id/viewstub_partner"
@@ -67,8 +67,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            android:layout_marginLeft="@dimen/activity_hor_margin"
+            android:layout_marginRight="@dimen/activity_hor_margin"/>
 
         <TextView
             style="@style/SubHeader"
@@ -77,8 +77,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_hor_margin"
+            android:layout_marginLeft="@dimen/activity_hor_margin"
             android:orientation="horizontal"
             android:baselineAligned="false">
 
@@ -131,8 +131,8 @@
             android:id="@+id/ll_bonuses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_hor_margin"
+            android:layout_marginRight="@dimen/activity_hor_margin"
             android:animateLayoutChanges="true"
             android:divider="?android:listDivider"
             android:orientation="vertical"

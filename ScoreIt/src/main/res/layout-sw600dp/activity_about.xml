@@ -30,7 +30,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_hor_margin"
         android:textColor="#AAFFFFFF"
         app:pstsIndicatorColor="@color/white"
         app:pstsTabBackground="?attr/selectableItemBackground"

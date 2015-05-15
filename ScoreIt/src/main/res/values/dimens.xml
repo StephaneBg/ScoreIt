@@ -19,7 +19,7 @@
 <resources>
 
     <!-- Margin -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_hor_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="margin_default">8dp</dimen>
     <dimen name="fab_margin_top">140dp</dimen>

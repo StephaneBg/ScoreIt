@@ -33,6 +33,7 @@ import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.belote.BeloteBonus;
 import com.sbgapps.scoreit.games.belote.BeloteLap;
 import com.sbgapps.scoreit.views.SeekPoints;
+import com.sbgapps.scoreit.views.ToggleGroup;
 
 import java.util.List;
 
@@ -55,6 +56,8 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
     TextView mPlayer2Points;
     @InjectView(R.id.btn_switch)
     ImageButton mSwitchBtn;
+    @InjectView(R.id.group_score)
+    ToggleGroup mScoreGroup;
     @InjectView(R.id.seekbar_points)
     SeekPoints mSeekPoints;
 
@@ -91,9 +94,32 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
         });
 
         int p = getLap().getPoints();
+
+        mScoreGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(ToggleGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.btn_score:
+                        mSeekPoints.setVisibility(View.VISIBLE);
+                        getLap().setPoints(110);
+                        mSeekPoints.setPoints(110, "110");
+                        break;
+                    case R.id.btn_inside:
+                        mSeekPoints.setVisibility(View.GONE);
+                        getLap().setPoints(160);
+                        break;
+                    case R.id.btn_capot:
+                        mSeekPoints.setVisibility(View.GONE);
+                        getLap().setPoints(250);
+                        break;
+                }
+                displayScores();
+            }
+        });
+
         mSeekPoints.init(
                 pointsToProgress(p),
-                154,
+                152,
                 Integer.toString(p));
         mSeekPoints.setOnProgressChangedListener(this);
         displayScores();
@@ -112,25 +138,11 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
     }
 
     private int progressToPoints(int progress) {
-        switch (progress) {
-            default:
-                return progress + 5;
-            case 153:
-                return 160;
-            case 154:
-                return 250;
-        }
+        return progress + 5;
     }
 
     private int pointsToProgress(int points) {
-        switch (points) {
-            default:
-                return points - 5;
-            case 160:
-                return 153;
-            case 250:
-                return 154;
-        }
+        return points - 5;
     }
 
     private void addBonus(BeloteBonus beloteBonus) {

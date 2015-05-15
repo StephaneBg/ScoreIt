@@ -70,7 +70,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.jpardogo.materialtabstrip:library:1.0.9'
     compile 'com.melnykov:floatingactionbutton:1.3.0'
-    compile 'com.github.mrengineer13:snackbar:1.1.0'
+    compile 'com.github.mrengineer13:snackbar:1.2.0'
     compile 'com.diogobernardino:williamchart:1.7.0'
     compile 'com.cesards.android:cropimageview:1.0.1'
     compile 'com.sromku.simple.storage:library:1.0.0'

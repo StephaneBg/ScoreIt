@@ -94,7 +94,7 @@ public class SeekArc extends View {
                 res.getColor(R.color.color_primary));
         int thumbColor = a.getColor(R.styleable.SeekArc_thumbColor,
                 res.getColor(R.color.color_accent));
-        mThumbRadius = a.getDimension(R.styleable.SeekArc_thumbRadius, Utils.dpToPx(9, res));
+        mThumbRadius = a.getDimension(R.styleable.SeekArc_thumbRadius, Utils.dpToPx(12, res));
 
         mArcPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mArcPaint.setColor(arcColor);
