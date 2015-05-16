@@ -31,6 +31,7 @@
         android:background="@drawable/top_shadow" />
 
     <LinearLayout
+        android:id="@+id/ll_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
@@ -161,26 +162,14 @@
             style="@style/SubHeader"
             android:text="@string/announces" />
 
-        <LinearLayout
-            android:id="@+id/ll_bonuses"
+        <Button
+            android:id="@+id/btn_add_bonus"
+            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_hor_margin"
-            android:layout_marginRight="@dimen/activity_hor_margin"
-            android:animateLayoutChanges="true"
-            android:divider="?android:listDivider"
-            android:orientation="vertical"
-            android:showDividers="middle">
-
-            <Button
-                android:id="@+id/btn_add_bonus"
-                style="?android:borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:text="@string/add"
-                android:textAllCaps="true" />
-        </LinearLayout>
+            android:layout_margin="@dimen/margin_default"
+            android:text="@string/add"
+            android:textAllCaps="true" />
     </LinearLayout>
 
     <View

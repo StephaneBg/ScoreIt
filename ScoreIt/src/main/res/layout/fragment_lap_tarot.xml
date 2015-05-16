@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,34 +14,34 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <View
-        tools:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/scrollview_padding"/>
+        android:layout_height="@dimen/scrollview_padding"
+        tools:visibility="gone" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:background="@drawable/top_shadow"/>
+        android:background="@drawable/top_shadow" />
 
     <LinearLayout
+        android:id="@+id/ll_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@color/white"
+        android:orientation="vertical"
         android:paddingLeft="@dimen/activity_hor_margin"
         android:paddingRight="@dimen/activity_hor_margin">
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/scorer"/>
+            android:text="@string/scorer" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_taker"
@@ -50,17 +49,17 @@
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_hor_margin"
-            android:layout_marginRight="@dimen/activity_hor_margin"/>
+            android:layout_marginRight="@dimen/activity_hor_margin" />
 
         <ViewStub
             android:id="@+id/viewstub_partner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout="@layout/stub_partner"/>
+            android:layout="@layout/stub_partner" />
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/bidding"/>
+            android:text="@string/bidding" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_bid"
@@ -68,90 +67,78 @@
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_hor_margin"
-            android:layout_marginRight="@dimen/activity_hor_margin"/>
+            android:layout_marginRight="@dimen/activity_hor_margin" />
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/oudlers"/>
+            android:text="@string/oudlers" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/activity_hor_margin"
             android:layout_marginLeft="@dimen/activity_hor_margin"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:layout_marginRight="@dimen/activity_hor_margin"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
             <ToggleButton
                 android:id="@+id/checkbox_petit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_margin="8dp"
+                android:layout_weight="1"
                 android:background="@drawable/btn_toggle_selector"
                 android:textOff="@string/petit"
-                android:textOn="@string/petit"/>
+                android:textOn="@string/petit" />
 
             <ToggleButton
                 android:id="@+id/checkbox_twenty_one"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_margin="8dp"
+                android:layout_weight="1"
                 android:background="@drawable/btn_toggle_selector"
                 android:textOff="@string/twentyone"
-                android:textOn="@string/twentyone"/>
+                android:textOn="@string/twentyone" />
 
             <ToggleButton
                 android:id="@+id/checkbox_excuse"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_margin="8dp"
+                android:layout_weight="1"
                 android:background="@drawable/btn_toggle_selector"
                 android:textOff="@string/excuse"
-                android:textOn="@string/excuse"/>
+                android:textOn="@string/excuse" />
         </LinearLayout>
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/points"/>
+            android:text="@string/points" />
 
         <com.sbgapps.scoreit.views.SeekPoints
             android:id="@+id/seekbar_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+            android:layout_marginBottom="@dimen/activity_vertical_margin" />
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/bonuses"/>
+            android:text="@string/bonuses" />
 
-        <LinearLayout
-            android:id="@+id/ll_bonuses"
+        <Button
+            android:id="@+id/btn_add_bonus"
+            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_hor_margin"
-            android:layout_marginRight="@dimen/activity_hor_margin"
-            android:animateLayoutChanges="true"
-            android:divider="?android:listDivider"
-            android:orientation="vertical"
-            android:showDividers="middle|end">
-
-            <Button
-                android:id="@+id/btn_add_bonus"
-                style="?android:borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:text="@string/add"
-                android:textAllCaps="true"/>
-        </LinearLayout>
+            android:layout_margin="@dimen/margin_default"
+            android:text="@string/add"
+            android:textAllCaps="true" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/white"/>
+        android:background="@color/white" />
 </LinearLayout>

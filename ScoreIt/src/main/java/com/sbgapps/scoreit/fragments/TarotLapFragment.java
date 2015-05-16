@@ -49,6 +49,8 @@ import butterknife.InjectView;
 public class TarotLapFragment extends LapFragment
         implements SeekPoints.OnProgressChangedListener {
 
+    @InjectView(R.id.ll_container)
+    LinearLayout mContainer;
     @InjectView(R.id.spinner_taker)
     Spinner mTaker;
     @InjectView(R.id.spinner_bid)
@@ -61,8 +63,6 @@ public class TarotLapFragment extends LapFragment
     ToggleButton mExcuse;
     @InjectView(R.id.seekbar_points)
     SeekPoints mSeekPoints;
-    @InjectView(R.id.ll_bonuses)
-    LinearLayout mBonuses;
     @InjectView(R.id.btn_add_bonus)
     Button mButtonBonus;
     Spinner mPartner;
@@ -225,14 +225,14 @@ public class TarotLapFragment extends LapFragment
         final TarotBonus bonus = tarotBonus;
 
         final View view = getActivity().getLayoutInflater()
-                .inflate(R.layout.list_item_bonus, mBonuses, false);
+                .inflate(R.layout.list_item_bonus, mContainer, false);
         ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_announce);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().getBonuses().remove(bonus);
                 mButtonBonus.setEnabled(getLap().getBonuses().size() < 3);
-                mBonuses.removeView(view);
+                mContainer.removeView(view);
             }
         });
 
@@ -267,8 +267,8 @@ public class TarotLapFragment extends LapFragment
             }
         });
 
-        int pos = mBonuses.getChildCount() - 1;
-        mBonuses.addView(view, pos);
+        int pos = mContainer.getChildCount() - 1;
+        mContainer.addView(view, pos);
         mButtonBonus.setEnabled(bonuses.size() < 3);
     }
 

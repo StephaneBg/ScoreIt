@@ -45,14 +45,14 @@ import butterknife.InjectView;
 public class CoincheLapFragment extends GenericBeloteLapFragment
         implements SeekPoints.OnProgressChangedListener {
 
+    @InjectView(R.id.ll_container)
+    LinearLayout mContainer;
     @InjectView(R.id.spinner_bidder)
     Spinner mBidderSpinner;
     @InjectView(R.id.seekbar_bid)
     SeekPoints mSeekBid;
-
     @InjectView(R.id.spinner_coinche)
     Spinner mCoincheSpinner;
-
     @InjectView(R.id.player1_name)
     TextView mPlayer1Name;
     @InjectView(R.id.player2_name)
@@ -65,9 +65,6 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
     ImageButton mSwitchBtn;
     @InjectView(R.id.seekbar_points)
     SeekPoints mSeekPoints;
-
-    @InjectView(R.id.ll_bonuses)
-    LinearLayout mBonuses;
     @InjectView(R.id.btn_add_bonus)
     Button mButtonBonus;
 
@@ -228,14 +225,14 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         final CoincheBonus bonus = coincheBonus;
 
         final View view = getActivity().getLayoutInflater()
-                .inflate(R.layout.list_item_bonus, mBonuses, false);
+                .inflate(R.layout.list_item_bonus, mContainer, false);
         ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_announce);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().getBonuses().remove(bonus);
                 mButtonBonus.setEnabled(getLap().getBonuses().size() < 3);
-                mBonuses.removeView(view);
+                mContainer.removeView(view);
             }
         });
 
@@ -270,8 +267,8 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
             }
         });
 
-        int pos = mBonuses.getChildCount() - 1;
-        mBonuses.addView(view, pos);
+        int pos = mContainer.getChildCount() - 1;
+        mContainer.addView(view, pos);
         mButtonBonus.setEnabled(bonuses.size() < 3);
     }
 
