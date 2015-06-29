@@ -17,27 +17,21 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="ScoreItActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="ScoreItActivity">
 
-    <com.astuetz.PagerSlidingTabStrip
-        android:id="@+id/sliding_tabs"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:paddingLeft="@dimen/activity_hor_margin"
-        android:textColor="#AAFFFFFF"
-        app:pstsIndicatorColor="@color/white"
-        app:pstsTabBackground="?attr/selectableItemBackground"
-        app:pstsTextColorSelected="@color/white" />
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/white"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -36,12 +36,9 @@ import com.sbgapps.scoreit.games.tarot.TarotBid;
 import com.sbgapps.scoreit.games.tarot.TarotBonus;
 import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.games.tarot.TarotLap;
-import com.sbgapps.scoreit.views.SeekPoints;
+import com.sbgapps.scoreit.widget.SeekPoints;
 
 import java.util.List;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by sbaiget on 07/12/13.
@@ -49,21 +46,13 @@ import butterknife.InjectView;
 public class TarotLapFragment extends LapFragment
         implements SeekPoints.OnProgressChangedListener {
 
-    @InjectView(R.id.ll_container)
     LinearLayout mContainer;
-    @InjectView(R.id.spinner_taker)
     Spinner mTaker;
-    @InjectView(R.id.spinner_bid)
     Spinner mBid;
-    @InjectView(R.id.checkbox_petit)
     ToggleButton mPetit;
-    @InjectView(R.id.checkbox_twenty_one)
     ToggleButton mTwentyOne;
-    @InjectView(R.id.checkbox_excuse)
     ToggleButton mExcuse;
-    @InjectView(R.id.seekbar_points)
     SeekPoints mSeekPoints;
-    @InjectView(R.id.btn_add_bonus)
     Button mButtonBonus;
     Spinner mPartner;
 
@@ -75,9 +64,17 @@ public class TarotLapFragment extends LapFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap_tarot, null);
-        ButterKnife.inject(this, view);
 
-        if(null == getLap()) return view;
+        mContainer = (LinearLayout) view.findViewById(R.id.ll_container);
+        mTaker = (Spinner) view.findViewById(R.id.spinner_taker);
+        mBid = (Spinner) view.findViewById(R.id.spinner_bid);
+        mPetit = (ToggleButton) view.findViewById(R.id.checkbox_petit);
+        mTwentyOne = (ToggleButton) view.findViewById(R.id.checkbox_twenty_one);
+        mExcuse = (ToggleButton) view.findViewById(R.id.checkbox_excuse);
+        mSeekPoints = (SeekPoints) view.findViewById(R.id.seekbar_points);
+        mButtonBonus = (Button) view.findViewById(R.id.btn_add_bonus);
+
+        if (null == getLap()) return view;
 
         mTaker.setAdapter(getPlayerArrayAdapter());
         mTaker.setSelection(getLap().getTaker());
@@ -93,7 +90,7 @@ public class TarotLapFragment extends LapFragment
             }
         });
 
-        if (getGameHelper().getPlayerCount() == 5) {
+        if (5 == getGameHelper().getPlayerCount()) {
             ViewStub stub = (ViewStub) view.findViewById(R.id.viewstub_partner);
             View v = stub.inflate();
             final ArrayAdapter<PlayerItem> partnerItemArrayAdapter = new ArrayAdapter<>(getActivity(),

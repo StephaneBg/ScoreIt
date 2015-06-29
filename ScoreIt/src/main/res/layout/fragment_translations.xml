@@ -24,7 +24,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-    <com.sbgapps.scoreit.views.MaxWidthFrameLayout
+    <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:maxWidth="420dp">
@@ -34,11 +34,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/default_small_padding"
             android:background="@drawable/btn_default_selector"
-            android:drawableLeft="@drawable/ic_action_translate"
+            android:drawableLeft="@drawable/ic_translate_white_24dp"
             android:text="@string/help_translate"
             android:textColor="@color/white"/>
-    </com.sbgapps.scoreit.views.MaxWidthFrameLayout>
+    </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

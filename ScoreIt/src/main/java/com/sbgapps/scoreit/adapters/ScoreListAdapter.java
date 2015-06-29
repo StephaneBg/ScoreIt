@@ -26,8 +26,8 @@ import com.sbgapps.scoreit.ui.ScoreItActivity;
 import com.sbgapps.scoreit.fragments.ScoreListFragment;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
-import com.sbgapps.scoreit.views.LinearListView;
-import com.sbgapps.scoreit.views.RevealView;
+import com.sbgapps.scoreit.widget.LinearListView;
+import com.sbgapps.scoreit.widget.RevealView;
 
 /**
  * Created by sbaiget on 23/11/13.

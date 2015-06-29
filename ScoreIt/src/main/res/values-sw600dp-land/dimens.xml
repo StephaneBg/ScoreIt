@@ -26,7 +26,7 @@
     <!-- Fonts -->
 
     <!-- Height -->
-    <dimen name="header_height">168dp</dimen>
+    <dimen name="header_height">144dp</dimen>
 
     <!-- Width -->
 </resources>

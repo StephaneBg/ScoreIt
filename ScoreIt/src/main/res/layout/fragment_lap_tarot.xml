@@ -14,21 +14,10 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/scrollview_padding"
-        tools:visibility="gone" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@drawable/top_shadow" />
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/ll_container"
@@ -41,7 +30,7 @@
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/scorer" />
+            android:text="@string/scorer"/>
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_taker"
@@ -49,17 +38,17 @@
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_hor_margin"
-            android:layout_marginRight="@dimen/activity_hor_margin" />
+            android:layout_marginRight="@dimen/activity_hor_margin"/>
 
         <ViewStub
             android:id="@+id/viewstub_partner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout="@layout/stub_partner" />
+            android:layout="@layout/stub_partner"/>
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/bidding" />
+            android:text="@string/bidding"/>
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_bid"
@@ -67,11 +56,11 @@
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_hor_margin"
-            android:layout_marginRight="@dimen/activity_hor_margin" />
+            android:layout_marginRight="@dimen/activity_hor_margin"/>
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/oudlers" />
+            android:text="@string/oudlers"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,7 +78,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_toggle_selector"
                 android:textOff="@string/petit"
-                android:textOn="@string/petit" />
+                android:textOn="@string/petit"/>
 
             <ToggleButton
                 android:id="@+id/checkbox_twenty_one"
@@ -99,7 +88,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_toggle_selector"
                 android:textOff="@string/twentyone"
-                android:textOn="@string/twentyone" />
+                android:textOn="@string/twentyone"/>
 
             <ToggleButton
                 android:id="@+id/checkbox_excuse"
@@ -109,22 +98,22 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_toggle_selector"
                 android:textOff="@string/excuse"
-                android:textOn="@string/excuse" />
+                android:textOn="@string/excuse"/>
         </LinearLayout>
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/points" />
+            android:text="@string/points"/>
 
-        <com.sbgapps.scoreit.views.SeekPoints
+        <com.sbgapps.scoreit.widget.SeekPoints
             android:id="@+id/seekbar_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin" />
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/bonuses" />
+            android:text="@string/bonuses"/>
 
         <Button
             android:id="@+id/btn_add_bonus"
@@ -133,12 +122,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:text="@string/add"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"/>
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/white" />
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

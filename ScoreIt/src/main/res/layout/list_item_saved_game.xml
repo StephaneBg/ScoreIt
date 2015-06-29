@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 
-<com.sbgapps.scoreit.views.RevealView
+<com.sbgapps.scoreit.widget.RevealView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/reveal"
@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/delete"
             android:background="?attr/selectableItemBackground"
-            android:src="@drawable/ic_action_delete"
+            android:src="@drawable/ic_delete_white_24dp"
             android:text="@string/cancel"/>
     </FrameLayout>
 
@@ -51,4 +51,4 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </FrameLayout>
-</com.sbgapps.scoreit.views.RevealView>
+</com.sbgapps.scoreit.widget.RevealView>

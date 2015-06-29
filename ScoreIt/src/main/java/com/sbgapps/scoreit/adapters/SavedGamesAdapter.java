@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ui.SavedGamesActivity;
-import com.sbgapps.scoreit.views.RevealView;
+import com.sbgapps.scoreit.widget.RevealView;
 
 /**
  * Created by sbaiget on 06/02/2015.

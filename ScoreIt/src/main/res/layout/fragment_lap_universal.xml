@@ -15,32 +15,14 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <View
-        tools:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/scrollview_padding"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@drawable/top_shadow"/>
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/ll_players"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/white"/>
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.adapters.HeaderAdapter;
-import com.sbgapps.scoreit.views.LinearListView;
+import com.sbgapps.scoreit.widget.LinearListView;
 
 /**
  * Created by sbaiget on 24/12/13.

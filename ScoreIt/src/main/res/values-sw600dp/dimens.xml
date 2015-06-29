@@ -31,7 +31,7 @@
 
     <!-- Height -->
     <dimen name="widget_height">72dp</dimen>
-    <dimen name="header_height">224dp</dimen>
+    <dimen name="header_height">172dp</dimen>
 
     <!-- Width -->
     <dimen name="navigation_drawer_max_width">320dp</dimen>

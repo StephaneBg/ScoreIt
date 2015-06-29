@@ -20,22 +20,22 @@
 
     <item
         android:id="@+id/menu_count"
-        android:icon="@drawable/ic_action_player_count"
+        android:icon="@drawable/ic_people_white_24dp"
         app:showAsAction="always"
         android:title="@string/player_number"/>
     <item
         android:id="@+id/menu_clear"
-        android:icon="@drawable/ic_action_clear"
+        android:icon="@drawable/ic_autorenew_white_24dp"
         app:showAsAction="always"
         android:title="@string/clear"/>
     <item
         android:id="@+id/menu_save"
-        android:icon="@drawable/ic_menu_backup"
+        android:icon="@drawable/ic_save_white_24dp"
         app:showAsAction="ifRoom"
         android:title="@string/saved_games"/>
     <item
         android:id="@+id/menu_view"
-        android:icon="@drawable/ic_action_view"
+        android:icon="@drawable/ic_visibility_white_24dp"
         app:showAsAction="ifRoom"
         android:title="@string/view"/>
     <item

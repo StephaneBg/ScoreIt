@@ -87,14 +87,6 @@ public class GameHelper {
         return mPlayedGame;
     }
 
-    public Storage getStorage() {
-        return mStorage;
-    }
-
-    public FilesUtil getFilesUtil() {
-        return mFilesUtil;
-    }
-
     public void setPlayedGame(int playedGame) {
         saveGame();
         mPlayedGame = playedGame;
@@ -103,6 +95,14 @@ public class GameHelper {
                 .putInt(KEY_SELECTED_GAME, playedGame)
                 .apply();
         loadLaps();
+    }
+
+    public Storage getStorage() {
+        return mStorage;
+    }
+
+    public FilesUtil getFilesUtil() {
+        return mFilesUtil;
     }
 
     public void saveGame() {
@@ -117,22 +117,6 @@ public class GameHelper {
 
     public int getPlayerCount() {
         return getPlayerCount(false);
-    }
-
-    public int getPlayerCount(boolean withTotal) {
-        switch (mPlayedGame) {
-            default:
-                // Belote and Coinche
-                return 2;
-            case Game.UNIVERSAL:
-                int count = mPreferences.getInt(KEY_UNIVERSAL_PLAYER_CNT, 5);
-                if (withTotal && mPreferences.getBoolean(KEY_UNIVERSAL_TOTAL, false)) {
-                    count++;
-                }
-                return count;
-            case Game.TAROT:
-                return mPreferences.getInt(KEY_TAROT_PLAYER_CNT, 5);
-        }
     }
 
     public void setPlayerCount(int count) {
@@ -155,6 +139,22 @@ public class GameHelper {
                         .apply();
                 loadLaps();
                 break;
+        }
+    }
+
+    public int getPlayerCount(boolean withTotal) {
+        switch (mPlayedGame) {
+            default:
+                // Belote and Coinche
+                return 2;
+            case Game.UNIVERSAL:
+                int count = mPreferences.getInt(KEY_UNIVERSAL_PLAYER_CNT, 5);
+                if (withTotal && mPreferences.getBoolean(KEY_UNIVERSAL_TOTAL, false)) {
+                    count++;
+                }
+                return count;
+            case Game.TAROT:
+                return mPreferences.getInt(KEY_TAROT_PLAYER_CNT, 5);
         }
     }
 
@@ -223,8 +223,10 @@ public class GameHelper {
         mGame.getLaps().add(lap);
     }
 
-    public void removeLap(Lap lap) {
+    public int removeLap(Lap lap) {
+        int p = mGame.getLaps().indexOf(lap);
         mGame.getLaps().remove(lap);
+        return p;
     }
 
     public void deleteAll() {

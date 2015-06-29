@@ -32,12 +32,9 @@ import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.coinche.CoincheBonus;
 import com.sbgapps.scoreit.games.coinche.CoincheLap;
-import com.sbgapps.scoreit.views.SeekPoints;
+import com.sbgapps.scoreit.widget.SeekPoints;
 
 import java.util.List;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by sbaiget on 29/01/14.
@@ -45,27 +42,16 @@ import butterknife.InjectView;
 public class CoincheLapFragment extends GenericBeloteLapFragment
         implements SeekPoints.OnProgressChangedListener {
 
-    @InjectView(R.id.ll_container)
     LinearLayout mContainer;
-    @InjectView(R.id.spinner_bidder)
     Spinner mBidderSpinner;
-    @InjectView(R.id.seekbar_bid)
     SeekPoints mSeekBid;
-    @InjectView(R.id.spinner_coinche)
     Spinner mCoincheSpinner;
-    @InjectView(R.id.player1_name)
     TextView mPlayer1Name;
-    @InjectView(R.id.player2_name)
     TextView mPlayer2Name;
-    @InjectView(R.id.player1_points)
     TextView mPlayer1Points;
-    @InjectView(R.id.player2_points)
     TextView mPlayer2Points;
-    @InjectView(R.id.btn_switch)
     ImageButton mSwitchBtn;
-    @InjectView(R.id.seekbar_points)
     SeekPoints mSeekPoints;
-    @InjectView(R.id.btn_add_bonus)
     Button mButtonBonus;
 
     @Override
@@ -76,7 +62,18 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap_coinche, null);
-        ButterKnife.inject(this, view);
+
+        mContainer = (LinearLayout) view.findViewById(R.id.ll_container);
+        mBidderSpinner = (Spinner) view.findViewById(R.id.spinner_bidder);
+        mSeekBid = (SeekPoints) view.findViewById(R.id.seekbar_bid);
+        mCoincheSpinner = (Spinner) view.findViewById(R.id.spinner_coinche);
+        mPlayer1Name = (TextView) view.findViewById(R.id.player1_name);
+        mPlayer2Name = (TextView) view.findViewById(R.id.player2_name);
+        mPlayer1Points = (TextView) view.findViewById(R.id.player1_points);
+        mPlayer2Points = (TextView) view.findViewById(R.id.player2_points);
+        mSwitchBtn = (ImageButton) view.findViewById(R.id.btn_switch);
+        mSeekPoints = (SeekPoints) view.findViewById(R.id.seekbar_points);
+        mButtonBonus = (Button) view.findViewById(R.id.btn_add_bonus);
 
         if (null == getLap()) return view;
 

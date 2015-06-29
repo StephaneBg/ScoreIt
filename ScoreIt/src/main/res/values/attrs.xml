@@ -42,8 +42,4 @@
     <declare-styleable name="MaxWidthFrameLayout">
         <attr name="maxWidth" format="dimension"/>
     </declare-styleable>
-
-    <declare-styleable name="ScrimInsetsView">
-        <attr name="insetForeground" format="reference|color"/>
-    </declare-styleable>
 </resources>

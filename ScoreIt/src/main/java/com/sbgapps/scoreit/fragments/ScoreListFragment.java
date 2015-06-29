@@ -32,7 +32,7 @@ import com.sbgapps.scoreit.adapters.UniversalScoreAdapter;
 import com.sbgapps.scoreit.games.Game;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.ui.ScoreItActivity;
-import com.sbgapps.scoreit.views.RevealView;
+import com.sbgapps.scoreit.widget.RevealView;
 
 /**
  * Created by sbaiget on 11/11/13.
@@ -40,6 +40,7 @@ import com.sbgapps.scoreit.views.RevealView;
 public class ScoreListFragment extends Fragment {
 
     public static final String TAG = ScoreListFragment.class.getName();
+
     private ScoreListAdapter mAdapter;
     private LinearLayoutManager mManager;
 
@@ -60,7 +61,7 @@ public class ScoreListFragment extends Fragment {
         mManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mManager);
 
-        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 closeAllItems();

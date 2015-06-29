@@ -17,13 +17,13 @@
 package com.sbgapps.scoreit.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.fragments.InfoFragment;
 import com.sbgapps.scoreit.fragments.TranslationsFragment;
@@ -42,8 +42,8 @@ public class AboutActivity extends BaseActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(sectionsPagerAdapter);
 
-        PagerSlidingTabStrip slidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
-        slidingTabLayout.setViewPager(viewPager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
