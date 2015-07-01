@@ -23,7 +23,7 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:textSize">@dimen/font_headline</item>
-        <item name="android:layout_marginRight">@dimen/activity_hor_margin</item>
-        <item name="android:layout_marginLeft">@dimen/activity_hor_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
     </style>
 </resources>

@@ -42,16 +42,6 @@ public class TranslationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_translations, container, false);
 
-        Button iv = (Button) view.findViewById(R.id.btn_translate);
-        iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://crowdin.net/project/score-it"));
-                startActivity(intent);
-            }
-        });
-
         ListView listView = (ListView) view.findViewById(android.R.id.list);
 
         String[] from = new String[]{"language", "translator"};

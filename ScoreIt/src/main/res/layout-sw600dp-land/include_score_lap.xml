@@ -44,7 +44,7 @@
                 android:layout_height="@dimen/header_height"/>
 
             <FrameLayout
-                android:id="@+id/score_lap"
+                android:id="@+id/score_lap_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>

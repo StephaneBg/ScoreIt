@@ -27,8 +27,8 @@
         android:animateLayoutChanges="true"
         android:background="@color/white"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/activity_hor_margin"
-        android:paddingRight="@dimen/activity_hor_margin">
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
 
         <TextView
             style="@style/SubHeader"
@@ -106,8 +106,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_hor_margin"
-            android:layout_marginRight="@dimen/activity_hor_margin">
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin">
 
             <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
                 android:id="@+id/btn_score"
@@ -125,8 +125,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:layout_marginLeft="@dimen/activity_hor_margin"
-                android:layout_marginRight="@dimen/activity_hor_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_weight="1"
                 android:background="@drawable/btn_toggle_selector"
                 android:textOff="@string/inside"

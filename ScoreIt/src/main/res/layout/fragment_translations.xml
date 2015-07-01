@@ -16,55 +16,8 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<ListView
+    android:id="@android:id/list"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
-
-    <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:maxWidth="420dp">
-
-        <Button
-            android:id="@+id/btn_translate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/default_small_padding"
-            android:background="@drawable/btn_default_selector"
-            android:drawableLeft="@drawable/ic_translate_white_24dp"
-            android:text="@string/help_translate"
-            android:textColor="@color/white"/>
-    </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_height"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/language"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/translator"
-            android:textStyle="bold"/>
-    </LinearLayout>
-
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
+    android:layout_height="match_parent"/>

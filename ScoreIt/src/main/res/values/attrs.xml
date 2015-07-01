@@ -35,10 +35,6 @@
         <attr name="touchable" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="LineGraph">
-        <attr name="lineAxisColor" format="color"/>
-    </declare-styleable>
-
     <declare-styleable name="MaxWidthFrameLayout">
         <attr name="maxWidth" format="dimension"/>
     </declare-styleable>

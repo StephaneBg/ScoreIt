@@ -113,6 +113,15 @@ public class InfoFragment extends Fragment {
             }
         });
 
+        btn = (Button) view.findViewById(R.id.btn_translate);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://crowdin.net/project/score-it"));
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }

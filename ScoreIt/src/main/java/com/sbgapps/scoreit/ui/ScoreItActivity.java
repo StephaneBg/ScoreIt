@@ -16,9 +16,6 @@
 
 package com.sbgapps.scoreit.ui;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,13 +29,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Interpolator;
 import android.widget.EditText;
 
 import com.sbgapps.scoreit.R;
@@ -65,12 +67,15 @@ import java.util.List;
 
 public class ScoreItActivity extends BaseActivity {
 
+    private static final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
+
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_SAVED_GAME = 2;
 
     private DrawerLayout mDrawerLayout;
     private FloatingActionButton mActionButton;
     private View mGraphContainer;
+    private View mScoreLapContainer;
 
     private GameHelper mGameHelper;
     private int mEditedPlayer = Player.PLAYER_NONE;
@@ -96,6 +101,7 @@ public class ScoreItActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mGraphContainer = findViewById(R.id.graph_container);
+        mScoreLapContainer = findViewById(R.id.score_lap_container);
 
         mGameHelper = new GameHelper(this);
         mGameHelper.loadLaps();
@@ -103,9 +109,9 @@ public class ScoreItActivity extends BaseActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
         setTitle();
 
-        reloadFragments(false);
-
-        if (null != savedInstanceState) {
+        if (null == savedInstanceState) {
+            loadFragments(false);
+        } else {
             mLap = (Lap) savedInstanceState.getSerializable("lap");
             mIsEdited = savedInstanceState.getBoolean("edited");
             if (mIsEdited) {
@@ -114,10 +120,8 @@ public class ScoreItActivity extends BaseActivity {
             }
         }
 
-        if (null != mLap) setActionButtonColor();
-
-        initDrawer();
-        initActionButton();
+        setupDrawer();
+        setupActionButton();
     }
 
     @Override
@@ -162,7 +166,7 @@ public class ScoreItActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initDrawer() {
+    private void setupDrawer() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
@@ -196,7 +200,8 @@ public class ScoreItActivity extends BaseActivity {
                 });
     }
 
-    private void initActionButton() {
+    private void setupActionButton() {
+        if (null != mLap) setActionButtonColor();
         mActionButton = (FloatingActionButton) findViewById(R.id.fab);
         mActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,12 +228,18 @@ public class ScoreItActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        if (null == mLap) {
+            getMenuInflater().inflate(R.menu.main, menu);
+            return true;
+        } else {
+            return super.onCreateOptionsMenu(menu);
+        }
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        if (null != mLap) return true;
+
         int lapCnt = mGameHelper.getLaps().size();
         int game = mGameHelper.getPlayedGame();
 
@@ -262,9 +273,9 @@ public class ScoreItActivity extends BaseActivity {
         mIsEdited = false;
 
         setTitle();
-        setActionButtonProperties(true);
+        animateActionButton();
         invalidateOptionsMenu();
-        reloadFragments(true);
+        loadFragments(true);
     }
 
     private void setTitle() {
@@ -321,13 +332,9 @@ public class ScoreItActivity extends BaseActivity {
             mLap = null;
             mEditedLap = null;
             mIsEdited = false;
-            setActionButtonProperties(true);
-            super.onBackPressed();
-        } else if (!isTablet() && null != mScoreGraphFragment) {
-            switchScoreViews();
-        } else {
-            super.onBackPressed();
+            animateActionButton();
         }
+        super.onBackPressed();
     }
 
     @Override
@@ -366,7 +373,7 @@ public class ScoreItActivity extends BaseActivity {
 
         invalidateOptionsMenu();
 
-        mSnackBar = Snackbar.make(mDrawerLayout, R.string.deleted_lap, Snackbar.LENGTH_LONG);
+        mSnackBar = Snackbar.make(mScoreLapContainer, R.string.deleted_lap, Snackbar.LENGTH_LONG);
         mSnackBar.setAction(R.string.undo, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -393,7 +400,10 @@ public class ScoreItActivity extends BaseActivity {
         showEditNameActionChoices();
     }
 
-    public void reloadFragments(boolean anim) {
+    private void loadFragments(boolean anim) {
+        getSupportFragmentManager().popBackStackImmediate(null,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
         mHeaderFragment = null;
         mScoreListFragment = null;
         mScoreGraphFragment = null;
@@ -403,12 +413,12 @@ public class ScoreItActivity extends BaseActivity {
         if (isTablet()) showScoreGraphFragment(anim);
     }
 
-    public void switchScoreViews() {
+    private void switchScoreViews() {
         if (null == mScoreGraphFragment) {
             showScoreGraphFragment(true);
         } else {
-            showScoreListFragment(true);
             mScoreGraphFragment = null;
+            onBackPressed();
         }
     }
 
@@ -457,7 +467,7 @@ public class ScoreItActivity extends BaseActivity {
             mLap = lap.copy();
         }
         showLapFragment();
-        setActionButtonProperties(true);
+        animateActionButton();
     }
 
     private void showScoreScene() {
@@ -470,10 +480,11 @@ public class ScoreItActivity extends BaseActivity {
             mGameHelper.addLap(mLap);
         }
         mLap = null;
-        setActionButtonProperties(true);
+        animateActionButton();
         update();
     }
 
+    @SuppressWarnings("deprecation")
     private void setActionButtonColor() {
         Resources res = getResources();
         if (null == mLap) {
@@ -487,39 +498,23 @@ public class ScoreItActivity extends BaseActivity {
         }
     }
 
-    public void setActionButtonProperties(boolean animate) {
-        if (animate) {
-            ObjectAnimator scaleX = ObjectAnimator.ofFloat(mActionButton, "scaleX", 0f);
-            ObjectAnimator scaleY = ObjectAnimator.ofFloat(mActionButton, "scaleY", 0f);
-            AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.addListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    setActionButtonColor();
-                    ObjectAnimator scaleX = ObjectAnimator.ofFloat(mActionButton, "scaleX", 1f);
-                    ObjectAnimator scaleY = ObjectAnimator.ofFloat(mActionButton, "scaleY", 1f);
-                    AnimatorSet animatorSet = new AnimatorSet();
-                    animatorSet.play(scaleX).with(scaleY);
-                    animatorSet.start();
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-
-                }
-            });
-            animatorSet.play(scaleX).with(scaleY);
-            animatorSet.start();
+    public void animateActionButton() {
+        if (View.VISIBLE == mActionButton.getVisibility()) {
+            ViewCompat.animate(mActionButton).scaleX(0.0F).scaleY(0.0F).alpha(0.0F)
+                    .setInterpolator(INTERPOLATOR).withLayer()
+                    .setListener(new ViewPropertyAnimatorListenerAdapter() {
+                        public void onAnimationEnd(View view) {
+                            mActionButton.setVisibility(View.GONE);
+                            animateActionButton();
+                        }
+                    })
+                    .start();
+        } else {
+            setActionButtonColor();
+            mActionButton.setVisibility(View.VISIBLE);
+            ViewCompat.animate(mActionButton).scaleX(1.0F).scaleY(1.0F).alpha(1.0F)
+                    .setInterpolator(INTERPOLATOR).withLayer().setListener(null)
+                    .start();
         }
     }
 
@@ -630,7 +625,7 @@ public class ScoreItActivity extends BaseActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         mGameHelper.setPlayerCount(which);
                         invalidateOptionsMenu();
-                        reloadFragments(true);
+                        loadFragments(true);
                     }
                 })
                 .create()
@@ -702,7 +697,7 @@ public class ScoreItActivity extends BaseActivity {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        ft.replace(R.id.score_lap, mScoreListFragment, ScoreListFragment.TAG);
+        ft.replace(R.id.score_lap_container, mScoreListFragment, ScoreListFragment.TAG);
         ft.commit();
     }
 
@@ -710,11 +705,12 @@ public class ScoreItActivity extends BaseActivity {
         if (null == mScoreGraphFragment)
             mScoreGraphFragment = new ScoreGraphFragment();
 
+        int id = isTablet() ? R.id.graph_container : R.id.score_lap_container;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        int id = isTablet() ? R.id.graph_container : R.id.score_lap;
-        ft.replace(id, mScoreGraphFragment, ScoreGraphFragment.TAG);
-        ft.commit();
+        ft.replace(id, mScoreGraphFragment, ScoreGraphFragment.TAG)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void showLapFragment() {
@@ -737,7 +733,7 @@ public class ScoreItActivity extends BaseActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.score_lap, fragment, LapFragment.TAG)
+                .replace(R.id.score_lap_container, fragment, LapFragment.TAG)
                 .commit();
     }
 }

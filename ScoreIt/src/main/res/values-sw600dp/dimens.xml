@@ -19,7 +19,7 @@
 <resources>
 
     <!-- Margin -->
-    <dimen name="activity_hor_margin">24dp</dimen>
+    <dimen name="activity_horizontal_margin">24dp</dimen>
     <dimen name="fab_margin_top">196dp</dimen>
 
     <!-- Padding -->
