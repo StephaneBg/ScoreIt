@@ -99,7 +99,7 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         int b = getLap().getBid();
         mSeekBid.init(
                 bidToProgress(b),
-                90,
+                92,
                 Integer.toString(b));
         mSeekBid.setOnProgressChangedListener(this);
 
@@ -200,11 +200,11 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
     }
 
     private int progressToBid(int progress) {
-        return progress * 10 + 100;
+        return progress * 10 + 80;
     }
 
     private int bidToProgress(int bid) {
-        return (bid - 100) / 10;
+        return (bid - 80) / 10;
     }
 
     private void displayScores() {

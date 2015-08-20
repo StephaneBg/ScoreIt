@@ -75,7 +75,7 @@ public class ScoreItActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
     private FloatingActionButton mActionButton;
     private View mGraphContainer;
-    private View mScoreLapContainer;
+    private View mMainContainer;
 
     private GameHelper mGameHelper;
     private int mEditedPlayer = Player.PLAYER_NONE;
@@ -101,10 +101,10 @@ public class ScoreItActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mGraphContainer = findViewById(R.id.graph_container);
-        mScoreLapContainer = findViewById(R.id.score_lap_container);
+        mMainContainer = findViewById(R.id.main_container);
 
         mGameHelper = new GameHelper(this);
-        mGameHelper.loadLaps();
+        mGameHelper.loadGame();
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
         setTitle();
@@ -118,6 +118,12 @@ public class ScoreItActivity extends BaseActivity {
                 int position = savedInstanceState.getInt("position");
                 mEditedLap = mGameHelper.getLaps().get(position);
             }
+            mHeaderFragment = (HeaderFragment) getSupportFragmentManager()
+                    .findFragmentByTag(HeaderFragment.TAG);
+            mScoreListFragment = (ScoreListFragment) getSupportFragmentManager()
+                    .findFragmentByTag(ScoreListFragment.TAG);
+            mScoreGraphFragment = (ScoreGraphFragment) getSupportFragmentManager()
+                    .findFragmentByTag(ScoreGraphFragment.TAG);
         }
 
         setupDrawer();
@@ -198,11 +204,12 @@ public class ScoreItActivity extends BaseActivity {
                         return true;
                     }
                 });
+        navigationView.getMenu().getItem(getGameHelper().getPlayedGame()).setChecked(true);
     }
 
     private void setupActionButton() {
-        if (null != mLap) setActionButtonColor();
         mActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        if (null != mLap) setActionButtonColor();
         mActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -318,7 +325,7 @@ public class ScoreItActivity extends BaseActivity {
                 break;
 
             case REQ_SAVED_GAME:
-                mGameHelper.loadLaps();
+                mGameHelper.loadGame();
                 invalidateOptionsMenu();
                 update();
                 break;
@@ -373,7 +380,7 @@ public class ScoreItActivity extends BaseActivity {
 
         invalidateOptionsMenu();
 
-        mSnackBar = Snackbar.make(mScoreLapContainer, R.string.deleted_lap, Snackbar.LENGTH_LONG);
+        mSnackBar = Snackbar.make(mMainContainer, R.string.deleted_lap, Snackbar.LENGTH_LONG);
         mSnackBar.setAction(R.string.undo, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -401,9 +408,6 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     private void loadFragments(boolean anim) {
-        getSupportFragmentManager().popBackStackImmediate(null,
-                FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
         mHeaderFragment = null;
         mScoreListFragment = null;
         mScoreGraphFragment = null;
@@ -417,19 +421,23 @@ public class ScoreItActivity extends BaseActivity {
         if (null == mScoreGraphFragment) {
             showScoreGraphFragment(true);
         } else {
+            showScoreListFragment(true);
             mScoreGraphFragment = null;
-            onBackPressed();
         }
     }
 
     public void update() {
         if (null != mHeaderFragment)
             mHeaderFragment.update();
-        if (null != mScoreListFragment && mScoreListFragment.isVisible())
+        if (null != mScoreListFragment)
             mScoreListFragment.update();
-        if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible())
-            mScoreGraphFragment.update();
-        showScoreListFragment(true);
+        if (isTablet()) {
+            if (null != mScoreGraphFragment)
+                mScoreGraphFragment.update();
+        } else {
+            getSupportFragmentManager()
+                    .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
     }
 
     private void showLapScene(Lap lap) {
@@ -697,7 +705,7 @@ public class ScoreItActivity extends BaseActivity {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        ft.replace(R.id.score_lap_container, mScoreListFragment, ScoreListFragment.TAG);
+        ft.replace(R.id.main_container, mScoreListFragment, ScoreListFragment.TAG);
         ft.commit();
     }
 
@@ -705,12 +713,11 @@ public class ScoreItActivity extends BaseActivity {
         if (null == mScoreGraphFragment)
             mScoreGraphFragment = new ScoreGraphFragment();
 
-        int id = isTablet() ? R.id.graph_container : R.id.score_lap_container;
+        int id = isTablet() ? R.id.graph_container : R.id.main_container;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        ft.replace(id, mScoreGraphFragment, ScoreGraphFragment.TAG)
-                .addToBackStack(null)
-                .commit();
+        ft.replace(id, mScoreGraphFragment, ScoreGraphFragment.TAG);
+        ft.commit();
     }
 
     private void showLapFragment() {
@@ -733,7 +740,8 @@ public class ScoreItActivity extends BaseActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.score_lap_container, fragment, LapFragment.TAG)
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .replace(R.id.main_container, fragment, LapFragment.TAG)
                 .commit();
     }
 }

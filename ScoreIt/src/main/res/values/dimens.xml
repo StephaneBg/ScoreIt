@@ -53,5 +53,4 @@
     <dimen name="dialog_width">480dp</dimen>
 
     <dimen name="circle_btn">56dp</dimen>
-    <dimen name="line_thickness">2dp</dimen>
 </resources>

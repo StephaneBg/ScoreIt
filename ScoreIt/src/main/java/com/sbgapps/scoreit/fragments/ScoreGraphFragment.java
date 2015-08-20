@@ -16,7 +16,6 @@
 
 package com.sbgapps.scoreit.fragments;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,11 +27,12 @@ import com.db.chart.view.LineChartView;
 import com.db.chart.view.XController;
 import com.db.chart.view.YController;
 import com.db.chart.view.animation.Animation;
-import com.db.chart.view.animation.easing.cubic.CubicEaseOut;
+import com.db.chart.view.animation.easing.CubicEase;
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.ui.ScoreItActivity;
 import com.sbgapps.scoreit.games.GameHelper;
 import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.ui.ScoreItActivity;
+import com.sbgapps.scoreit.utils.Utils;
 
 public class ScoreGraphFragment extends Fragment {
 
@@ -61,29 +61,32 @@ public class ScoreGraphFragment extends Fragment {
         final GameHelper gameHelper = getGameHelper();
         final int lapCnt = gameHelper.getLaps().size();
         mChartView.reset();
-        mChartView.setVisibility((0 == lapCnt) ? View.INVISIBLE : View.VISIBLE);
+        //mChartView.setVisibility((0 == lapCnt) ? View.INVISIBLE : View.VISIBLE);
         if (0 == lapCnt) return;
 
-        final Resources resources = getActivity().getResources();
         int score;
         for (int player = 0; player < gameHelper.getPlayerCount(); player++) {
             LineSet set = new LineSet();
-            set.setLineColor(gameHelper.getPlayerColor(player));
-            set.setLineThickness(resources.getDimension(R.dimen.line_thickness));
-            set.setDots(true);
-            set.setDotsColor(gameHelper.getPlayerColor(player));
             set.addPoint("", 0);
             score = 0;
             for (Lap lap : gameHelper.getLaps()) {
                 score += lap.getScore(player);
                 set.addPoint("", score);
             }
+
+            set.setColor(gameHelper.getPlayerColor(player))
+                    .setThickness(Utils.dpToPx(2, getResources()))
+                    .setDotsStrokeThickness(Utils.dpToPx(2, getResources()))
+                    .setDotsStrokeColor(gameHelper.getPlayerColor(player))
+                    .setDotsColor(getResources().getColor(R.color.white))
+                    .setDotsRadius(Utils.dpToPx(4, getResources()));
+
             mChartView.addData(set);
         }
 
         mChartView.show(new Animation()
-                .setEasing(new CubicEaseOut())
-                .setOverlap(0.8f)
+                .setEasing(new CubicEase())
+                .setOverlap(0.8f, null)
                 .setStartPoint(-1f, 0f)
                 .setAlpha(1)
                 .setDuration(getActivity().getResources().getInteger(R.integer.anim_medium_time)));

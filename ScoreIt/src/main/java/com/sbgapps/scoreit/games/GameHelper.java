@@ -94,7 +94,7 @@ public class GameHelper {
                 .edit()
                 .putInt(KEY_SELECTED_GAME, playedGame)
                 .apply();
-        loadLaps();
+        loadGame();
     }
 
     public Storage getStorage() {
@@ -129,7 +129,7 @@ public class GameHelper {
                         .edit()
                         .putInt(KEY_UNIVERSAL_PLAYER_CNT, count + 2)
                         .apply();
-                loadLaps();
+                loadGame();
                 break;
             case Game.TAROT:
                 saveGame();
@@ -137,7 +137,7 @@ public class GameHelper {
                         .edit()
                         .putInt(KEY_TAROT_PLAYER_CNT, count + 3)
                         .apply();
-                loadLaps();
+                loadGame();
                 break;
         }
     }
@@ -158,7 +158,7 @@ public class GameHelper {
         }
     }
 
-    public void loadLaps() {
+    public void loadGame() {
         switch (mPlayedGame) {
             default:
             case Game.UNIVERSAL:
