@@ -152,9 +152,9 @@ public class CoincheLap extends GenericBeloteLap {
             counterPts = mScores[Player.PLAYER_1];
         }
 
-        if ((bidderPts >= mBid) && (bidderPts > counterPts)) {
+        mIsDone = (bidderPts >= mBid) && (bidderPts > counterPts);
+        if (mIsDone) {
             // Deal succeeded
-            mIsDone = true;
             bidderPts += mBid;
             switch (mCoinche) {
                 case COINCHE_COINCHE:
@@ -166,7 +166,6 @@ public class CoincheLap extends GenericBeloteLap {
             }
         } else {
             // Deal failed
-            mIsDone = false;
             bidderPts = 0;
             counterPts = (250 == mBid) ? 500 : (160 + mBid);
             switch (mCoinche) {

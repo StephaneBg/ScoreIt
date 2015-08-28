@@ -98,7 +98,8 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
                     case R.id.btn_score:
                         mSeekPoints.setVisibility(View.VISIBLE);
                         getLap().setPoints(110);
-                        mSeekPoints.setPoints(110, "110");
+                        mSeekPoints.setProgress(110, true);
+                        mSeekPoints.setPoints("110");
                         break;
                     case R.id.btn_inside:
                         mSeekPoints.setVisibility(View.GONE);
@@ -113,11 +114,10 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
             }
         });
 
-        mSeekPoints.init(
-                pointsToProgress(p),
-                152,
-                Integer.toString(p));
-        mSeekPoints.setOnProgressChangedListener(this);
+        mSeekPoints.setMax(pointsToProgress(157))
+                .setProgress(pointsToProgress(p))
+                .setPoints(Integer.toString(p))
+                .setOnProgressChangedListener(this);
         displayScores();
 
         mButtonBonus.setOnClickListener(new View.OnClickListener() {

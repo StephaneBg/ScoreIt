@@ -97,11 +97,10 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         });
 
         int b = getLap().getBid();
-        mSeekBid.init(
-                bidToProgress(b),
-                92,
-                Integer.toString(b));
-        mSeekBid.setOnProgressChangedListener(this);
+        mSeekBid.setMax(bidToProgress(1000))
+                .setProgress(bidToProgress(b))
+                .setPoints(Integer.toString(b))
+                .setOnProgressChangedListener(this);
 
         ArrayAdapter<CoincheItem> coincheAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
@@ -139,11 +138,10 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         });
 
         int p = getLap().getPoints();
-        mSeekPoints.init(
-                pointsToProgress(p),
-                155,
-                Integer.toString(p));
-        mSeekPoints.setOnProgressChangedListener(this);
+        mSeekPoints.setMax(pointsToProgress(500))
+                .setProgress(pointsToProgress(p))
+                .setPoints(Integer.toString(p))
+                .setOnProgressChangedListener(this);
         displayScores();
 
         mButtonBonus.setOnClickListener(new View.OnClickListener() {
@@ -200,11 +198,11 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
     }
 
     private int progressToBid(int progress) {
-        return progress * 10 + 80;
+        return progress * 10 + 90;
     }
 
     private int bidToProgress(int bid) {
-        return (bid - 80) / 10;
+        return (bid - 90) / 10;
     }
 
     private void displayScores() {

@@ -32,7 +32,7 @@ import com.sbgapps.scoreit.R;
 public class SeekPoints extends FrameLayout {
 
     TextView mPointsTv;
-    SeekArc mSeekBarPoints;
+    SeekArc mSeekArc;
     ImageButton mButtonMinus;
     ImageButton mButtonPlus;
 
@@ -60,24 +60,9 @@ public class SeekPoints extends FrameLayout {
         inflater.inflate(R.layout.seek_points, this, true);
 
         mPointsTv = (TextView) findViewById(R.id.tv_points);
-        mSeekBarPoints = (SeekArc) findViewById(R.id.seekarc_points);
+        mSeekArc = (SeekArc) findViewById(R.id.seekarc_points);
         mButtonMinus = (ImageButton) findViewById(R.id.btn_minus);
         mButtonPlus = (ImageButton) findViewById(R.id.btn_plus);
-    }
-
-    public void setPoints(int progress, String points) {
-        mProgress = progress;
-        mSeekBarPoints.setProgress(mProgress);
-        mPointsTv.setText(points);
-    }
-
-    public void setOnProgressChangedListener(OnProgressChangedListener listener) {
-        mListener = listener;
-    }
-
-    public void init(int progress, int max, String points) {
-        mProgress = progress;
-        mPointsTv.setText(points);
 
         mButtonMinus.setOnClickListener(new OnClickListener() {
             @Override
@@ -92,16 +77,14 @@ public class SeekPoints extends FrameLayout {
         mButtonPlus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mProgress < mSeekBarPoints.getMax()) {
+                if (mProgress < mSeekArc.getMax()) {
                     mProgress++;
                     manageProgress(true);
                 }
             }
         });
 
-        mSeekBarPoints.setMax(max);
-        mSeekBarPoints.setProgress(progress, false);
-        mSeekBarPoints.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener() {
+        mSeekArc.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener() {
             @Override
             public void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser) {
                 if (fromUser) {
@@ -122,12 +105,39 @@ public class SeekPoints extends FrameLayout {
         });
     }
 
-    public void manageProgress(boolean fromButton) {
+    public SeekPoints setPoints(String points) {
+        mPointsTv.setText(points);
+        return this;
+    }
+
+    public SeekPoints setOnProgressChangedListener(OnProgressChangedListener listener) {
+        mListener = listener;
+        return this;
+    }
+
+    public SeekPoints setProgress(int progress) {
+        mProgress = progress;
+        mSeekArc.setProgress(progress, false);
+        return this;
+    }
+
+    public SeekPoints setProgress(int progress, boolean animate) {
+        mProgress = progress;
+        mSeekArc.setProgress(progress, animate);
+        return this;
+    }
+
+    public SeekPoints setMax(int max) {
+        mSeekArc.setMax(max);
+        return this;
+    }
+
+    private void manageProgress(boolean fromButton) {
         String points = mListener.onProgressChanged(this, mProgress);
-        if (fromButton) mSeekBarPoints.setProgress(mProgress);
+        if (fromButton) mSeekArc.setProgress(mProgress);
         mPointsTv.setText(points);
         mButtonMinus.setEnabled(mProgress > 0);
-        mButtonPlus.setEnabled(mProgress < mSeekBarPoints.getMax());
+        mButtonPlus.setEnabled(mProgress < mSeekArc.getMax());
     }
 
     public interface OnProgressChangedListener {

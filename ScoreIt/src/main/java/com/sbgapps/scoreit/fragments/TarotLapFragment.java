@@ -139,8 +139,10 @@ public class TarotLapFragment extends LapFragment
         });
 
         int points = getLap().getPoints();
-        mSeekPoints.init(points, 91, Integer.toString(points));
-        mSeekPoints.setOnProgressChangedListener(this);
+        mSeekPoints.setMax(91)
+                .setProgress(points)
+                .setPoints(Integer.toString(points))
+                .setOnProgressChangedListener(this);
 
         mPetit.setChecked((getLap().getOudlers() & TarotLap.OUDLER_PETIT_MSK)
                 == TarotLap.OUDLER_PETIT_MSK);
