@@ -100,7 +100,7 @@
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:background="@drawable/btn_round_selector"
-                android:src="@drawable/ic_swap_horiz_white_24dp"
+                android:src="@drawable/ic_swap_horiz_24dp"
                 android:tint="@color/gray_dark"/>
 
             <LinearLayout

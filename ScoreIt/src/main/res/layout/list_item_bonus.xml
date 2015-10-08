@@ -52,6 +52,6 @@
         android:layout_alignParentRight="true"
         android:background="?attr/selectableItemBackground"
         android:layout_alignTop="@+id/spinner_announce"
-        android:src="@drawable/ic_cancel_black_24dp"
+        android:src="@drawable/ic_cancel_24dp"
         android:tint="@color/gray_dark"/>
 </RelativeLayout>

@@ -34,7 +34,7 @@
         android:layout_height="@dimen/circle_btn"
         android:background="@drawable/btn_round_selector"
         android:tint="@color/gray_dark"
-        android:src="@drawable/ic_minus"/>
+        android:src="@drawable/ic_minus_24dp"/>
 
     <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
         android:layout_width="0dp"
@@ -63,5 +63,5 @@
         android:layout_height="@dimen/circle_btn"
         android:background="@drawable/btn_round_selector"
         android:tint="@color/gray_dark"
-        android:src="@drawable/ic_plus"/>
+        android:src="@drawable/ic_plus_24dp"/>
 </LinearLayout>

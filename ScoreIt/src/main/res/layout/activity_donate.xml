@@ -19,27 +19,33 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/activity_vertical_margin"
+    android:background="?colorAccent"
     android:orientation="vertical">
 
     <Button
         android:id="@+id/btn_donate_coffee"
+        style="?borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_default_selector"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/margin_default"
+        android:drawableLeft="@drawable/ic_donate_coffee_24dp"
         android:onClick="onDonateCoffee"
         android:text="@string/donate_coffee"
-        android:textColor="@color/white"
-        android:drawableLeft="@drawable/ic_donate_coffee"/>
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/btn_donate_beer"
+        style="?borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/margin_default"
+        android:drawableLeft="@drawable/ic_beer_24dp"
         android:onClick="onDonateBeer"
-        android:background="@drawable/btn_default_selector"
         android:text="@string/donate_beer"
-        android:textColor="@color/white"
-        android:drawableLeft="@drawable/ic_donate_beer"/>
+        android:textColor="@color/white"/>
 </LinearLayout>

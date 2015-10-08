@@ -5,19 +5,19 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_universal"
-            android:icon="@drawable/ic_drawer_universal"
+            android:icon="@drawable/ic_medal_24dp"
             android:title="@string/universal"/>
         <item
             android:id="@+id/nav_tarot"
-            android:icon="@drawable/ic_drawer_tarot"
+            android:icon="@drawable/ic_hat_24dp"
             android:title="@string/tarot"/>
         <item
             android:id="@+id/nav_belote"
-            android:icon="@drawable/ic_drawer_belote"
+            android:icon="@drawable/ic_crown_24dp"
             android:title="@string/belote"/>
         <item
             android:id="@+id/nav_coinche"
-            android:icon="@drawable/ic_drawer_coinche"
+            android:icon="@drawable/ic_megaphone_24dp"
             android:title="@string/coinche"/>
     </group>
 
@@ -26,11 +26,11 @@
         android:checkableBehavior="none">
         <item
             android:id="@+id/nav_donate"
-            android:icon="@drawable/ic_drawer_donate"
+            android:icon="@drawable/ic_heart_24dp"
             android:title="@string/donate"/>
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_drawer_about"
+            android:icon="@drawable/ic_info_outline_24dp"
             android:title="@string/about"/>
     </group>
 </menu>

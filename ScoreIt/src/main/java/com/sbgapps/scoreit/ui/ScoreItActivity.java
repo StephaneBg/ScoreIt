@@ -116,7 +116,7 @@ public class ScoreItActivity extends BaseActivity {
 
         ActionBar ab = getSupportActionBar();
         if (null != ab) {
-            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+            ab.setHomeAsUpIndicator(R.drawable.ic_menu_24dp);
         }
         setTitle();
 
@@ -525,11 +525,11 @@ public class ScoreItActivity extends BaseActivity {
     private void setActionButtonColor() {
         Resources res = getResources();
         if (null == mLap) {
-            mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_create_white_24dp));
+            mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_create_24dp));
             mActionButton.setBackgroundTintList(
                     getResources().getColorStateList(R.color.fab_add_selector));
         } else {
-            mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_done_white_24dp));
+            mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_done_24dp));
             mActionButton.setBackgroundTintList(
                     getResources().getColorStateList(R.color.fab_confirm_selector));
         }
