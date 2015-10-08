@@ -19,9 +19,10 @@
     <color name="white">#FFF</color>
     <color name="transparent">#00000000</color>
 
-    <color name="color_primary">#66A84F</color>
-    <color name="color_primary_dark">#5B9646</color>
-    <color name="color_accent">#FFAB40</color>
+    <color name="color_primary">#4CAF50</color>
+    <color name="color_primary_dark">#388E3C</color>
+    <color name="color_primary_400">#66BB6A</color>
+    <color name="color_accent">#FF9800</color>
     <color name="color_accent_dark">#E49839</color>
 
     <color name="gray_light">#F4F4F4</color>
@@ -29,9 +30,6 @@
     <color name="gray_dark">#4D4D4D</color>
 
     <color name="divider">#10000000</color>
-
-    <color name="nav_drawer_item">#404040</color>
-    <color name="nav_drawer_activated_bg">#F4F4F4</color>
 
     <color name="game_won">#66A84F</color>
     <color name="game_lost">#DA5241</color>

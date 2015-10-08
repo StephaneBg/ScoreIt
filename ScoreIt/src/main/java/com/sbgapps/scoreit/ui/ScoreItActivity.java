@@ -16,9 +16,13 @@
 
 package com.sbgapps.scoreit.ui;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -28,14 +32,17 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,6 +78,7 @@ public class ScoreItActivity extends BaseActivity {
 
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_SAVED_GAME = 2;
+    private static final int REQ_PERM_READ_CONTACTS = 3;
 
     private DrawerLayout mDrawerLayout;
     private FloatingActionButton mActionButton;
@@ -106,7 +114,10 @@ public class ScoreItActivity extends BaseActivity {
         mGameHelper = new GameHelper(this);
         mGameHelper.loadGame();
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+        ActionBar ab = getSupportActionBar();
+        if (null != ab) {
+            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+        }
         setTitle();
 
         if (null == savedInstanceState) {
@@ -302,7 +313,10 @@ public class ScoreItActivity extends BaseActivity {
                 title = getString(R.string.tarot);
                 break;
         }
-        getSupportActionBar().setTitle(title);
+        ActionBar ab = getSupportActionBar();
+        if (null != ab) {
+            ab.setTitle(title);
+        }
     }
 
     @Override
@@ -314,6 +328,7 @@ public class ScoreItActivity extends BaseActivity {
             case REQ_PICK_CONTACT:
                 Cursor cursor = getContentResolver().query(data.getData(),
                         new String[]{ContactsContract.Contacts.DISPLAY_NAME}, null, null, null);
+                if (null == cursor) break;
                 if (cursor.moveToFirst()) {
                     int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                     name = cursor.getString(columnIndex);
@@ -364,10 +379,24 @@ public class ScoreItActivity extends BaseActivity {
         if (Player.PLAYER_NONE != mEditedPlayer) outState.putInt("editedPlayer", mEditedPlayer);
     }
 
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQ_PERM_READ_CONTACTS: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    pickContact();
+                }
+            }
+        }
+    }
+
     public void editLap(Lap lap) {
         showLapScene(lap);
     }
 
+    @SuppressLint("deprecation")
     public void removeLap(final Lap lap) {
         final int position = mGameHelper.removeLap(lap);
 
@@ -398,7 +427,7 @@ public class ScoreItActivity extends BaseActivity {
                 invalidateOptionsMenu();
             }
         })
-                .setActionTextColor(getResources().getColorStateList(R.color.sb_text_color))
+                .setActionTextColor(ColorStateList.valueOf(getResources().getColor(R.color.color_accent)))
                 .show();
     }
 
@@ -580,9 +609,15 @@ public class ScoreItActivity extends BaseActivity {
                         switch (which) {
                             default:
                             case 0:
-                                Intent intent = new Intent(Intent.ACTION_PICK,
-                                        ContactsContract.Contacts.CONTENT_URI);
-                                startActivityForResult(intent, REQ_PICK_CONTACT);
+                                if (ContextCompat.checkSelfPermission(ScoreItActivity.this,
+                                        Manifest.permission.READ_CONTACTS)
+                                        != PackageManager.PERMISSION_GRANTED) {
+                                    ActivityCompat.requestPermissions(ScoreItActivity.this,
+                                            new String[]{Manifest.permission.READ_CONTACTS},
+                                            REQ_PERM_READ_CONTACTS);
+                                } else {
+                                    pickContact();
+                                }
                                 break;
                             case 1:
                                 showEditNameDialog();
@@ -592,6 +627,12 @@ public class ScoreItActivity extends BaseActivity {
                 })
                 .create()
                 .show();
+    }
+
+    private void pickContact() {
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                ContactsContract.Contacts.CONTENT_URI);
+        startActivityForResult(intent, REQ_PICK_CONTACT);
     }
 
     private void showLoadActionChoices() {

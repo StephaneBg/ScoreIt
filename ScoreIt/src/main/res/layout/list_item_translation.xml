@@ -18,21 +18,27 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/widget_height"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:background="@color/color_primary_400">
 
     <TextView
         android:id="@+id/language"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="@color/white"
+        tools:text="Name"/>
 
     <TextView
         android:id="@+id/translator"
         android:layout_width="0dp"
+        android:textColor="@color/white"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center"/>
+        android:gravity="center"
+        tools:text="Language"/>
 </LinearLayout>

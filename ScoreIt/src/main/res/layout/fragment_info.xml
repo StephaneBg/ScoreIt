@@ -20,6 +20,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_primary_400"
     android:fillViewport="true">
 
     <LinearLayout
@@ -41,8 +42,8 @@
             android:id="@+id/version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/gray_dark"
+            android:textColor="@color/white"
+            android:textSize="@dimen/abc_text_size_large_material"
             tools:text="ScoreIt 0.0.0"/>
 
         <TextView
@@ -50,14 +51,14 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:text="Stéphane Baiget"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/gray_dark"
+            android:textColor="@color/white"
+            android:textSize="@dimen/abc_text_size_medium_material"
             tools:ignore="HardcodedText"/>
 
         <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:maxWidth="420dp">
+            app:maxWidth="320dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,55 +68,51 @@
 
                 <Button
                     android:id="@+id/btn_rate"
+                    style="?borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_default_selector"
                     android:drawableLeft="@drawable/ic_star_white_24dp"
-                    android:paddingLeft="@dimen/default_small_padding"
                     android:text="@string/rate_app"
                     android:textColor="@color/white"/>
 
                 <Button
                     android:id="@+id/btn_share"
+                    style="?borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:background="@drawable/btn_default_selector"
                     android:drawableLeft="@drawable/ic_share_white_24dp"
-                    android:paddingLeft="@dimen/default_small_padding"
                     android:text="@string/share_app"
                     android:textColor="@color/white"/>
 
                 <Button
                     android:id="@+id/btn_community"
+                    style="?borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:background="@drawable/btn_default_selector"
                     android:drawableLeft="@drawable/ic_google_plus"
                     android:text="@string/plus_community"
                     android:textColor="@color/white"/>
 
                 <Button
                     android:id="@+id/btn_contact"
+                    style="?borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:background="@drawable/btn_default_selector"
                     android:drawableLeft="@drawable/ic_email_white_24dp"
-                    android:paddingLeft="@dimen/default_small_padding"
                     android:text="@string/contact_developer"
                     android:textColor="@color/white"/>
 
                 <Button
                     android:id="@+id/btn_translate"
+                    style="?borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:background="@drawable/btn_default_selector"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:drawableLeft="@drawable/ic_translate_white_24dp"
-                    android:paddingLeft="@dimen/default_small_padding"
                     android:text="@string/help_translate"
                     android:textColor="@color/white"/>
             </LinearLayout>
