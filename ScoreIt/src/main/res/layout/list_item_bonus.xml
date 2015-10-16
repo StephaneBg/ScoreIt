@@ -21,7 +21,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/margin_default"
+    android:layout_marginBottom="@dimen/default_margin"
     android:gravity="center_horizontal"
     android:orientation="horizontal"
     tools:context="ScoreItActivity">
@@ -30,7 +30,7 @@
         android:id="@+id/spinner_announce"
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_height"
-        android:layout_marginTop="@dimen/margin_default"
+        android:layout_marginTop="@dimen/default_margin"
         android:layout_toLeftOf="@+id/btn_remove_announce"/>
 
     <Spinner
@@ -44,13 +44,12 @@
 
     <ImageButton
         android:id="@+id/btn_remove_announce"
-        style="?android:borderlessButtonStyle"
+        style="?borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/spinner_player"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:background="?attr/selectableItemBackground"
         android:layout_alignTop="@+id/spinner_announce"
         android:src="@drawable/ic_cancel_24dp"
         android:tint="@color/gray_dark"/>

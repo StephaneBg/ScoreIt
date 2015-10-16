@@ -427,7 +427,8 @@ public class ScoreItActivity extends BaseActivity {
                 invalidateOptionsMenu();
             }
         })
-                .setActionTextColor(ColorStateList.valueOf(getResources().getColor(R.color.color_accent)))
+                .setActionTextColor(ColorStateList.valueOf(
+                        getResources().getColor(R.color.color_accent)))
                 .show();
     }
 
@@ -527,11 +528,11 @@ public class ScoreItActivity extends BaseActivity {
         if (null == mLap) {
             mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_create_24dp));
             mActionButton.setBackgroundTintList(
-                    getResources().getColorStateList(R.color.fab_add_selector));
+                    ColorStateList.valueOf(getResources().getColor(R.color.color_accent)));
         } else {
             mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_done_24dp));
             mActionButton.setBackgroundTintList(
-                    getResources().getColorStateList(R.color.fab_confirm_selector));
+                    ColorStateList.valueOf(getResources().getColor(R.color.color_primary)));
         }
     }
 

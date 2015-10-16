@@ -24,11 +24,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.codetroopers.betterpickers.numberpicker.NumberPickerBuilder;
+import com.codetroopers.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.games.Player;
 import com.sbgapps.scoreit.games.universal.UniversalLap;
-import com.sbgapps.scoreit.numberpicker.NumberPickerBuilder;
-import com.sbgapps.scoreit.numberpicker.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.widget.RingTextView;
 
 import java.util.ArrayList;
@@ -78,6 +78,7 @@ public class UniversalLapFragment extends LapFragment
             public void onClick(View v) {
                 NumberPickerBuilder npb = new NumberPickerBuilder()
                         .setFragmentManager(UniversalLapFragment.this.getFragmentManager())
+                        .setStyleResId(R.style.BetterPickerTheme)
                         .setTargetFragment(UniversalLapFragment.this)
                         .setReference(position);
                 npb.show();
@@ -134,13 +135,13 @@ public class UniversalLapFragment extends LapFragment
         });
     }
 
-    @Override
-    public void onDialogNumberSet(int reference, int number) {
-        getLap().setScore(reference, number);
-        updatePoints(reference);
-    }
-
     private void updatePoints(int position) {
         mPoints.get(position).setText(Integer.toString(getLap().getScore(position)));
+    }
+
+    @Override
+    public void onDialogNumberSet(int reference, int number, double decimal, boolean isNegative, double fullNumber) {
+        getLap().setScore(reference, number);
+        updatePoints(reference);
     }
 }

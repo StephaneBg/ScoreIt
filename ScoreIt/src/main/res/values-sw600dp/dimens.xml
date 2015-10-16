@@ -25,14 +25,9 @@
     <!-- Padding -->
     <dimen name="scrollview_padding">220dp</dimen>
 
-    <!-- Fonts -->
-    <dimen name="font_number_picker">60sp</dimen>
-    <dimen name="font_dialpad">45sp</dimen>
-
     <!-- Height -->
     <dimen name="widget_height">72dp</dimen>
     <dimen name="header_height">172dp</dimen>
 
     <!-- Width -->
-    <dimen name="navigation_drawer_max_width">320dp</dimen>
 </resources>

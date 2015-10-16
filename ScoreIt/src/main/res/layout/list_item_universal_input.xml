@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textSize="@dimen/font_display_1"
+                android:textSize="34sp"
                 tools:text="128"/>
         </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
 

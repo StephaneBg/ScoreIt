@@ -42,8 +42,8 @@
         android:id="@+id/marker"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/margin_default"
-        android:layout_marginRight="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
         android:background="?attr/colorPrimary"/>
 
     <TextView

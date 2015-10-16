@@ -26,4 +26,10 @@
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
     </style>
+
+    <style name="BetterPickerTheme">
+        <item name="bpDialogBackground">@color/color_primary_400</item>
+        <item name="bpTextColor">@color/white</item>
+        <item name="bpDividerColor">@color/transparent</item>
+    </style>
 </resources>

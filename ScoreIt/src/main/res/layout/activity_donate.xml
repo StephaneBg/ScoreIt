@@ -19,7 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?colorAccent"
+    android:background="@color/color_primary_400"
     android:orientation="vertical">
 
     <Button
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/margin_default"
+        android:layout_marginTop="@dimen/default_margin"
         android:drawableLeft="@drawable/ic_donate_coffee_24dp"
         android:onClick="onDonateCoffee"
         android:text="@string/donate_coffee"
@@ -40,10 +40,10 @@
         style="?borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginBottom="@dimen/default_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/margin_default"
+        android:layout_marginTop="@dimen/default_margin"
         android:drawableLeft="@drawable/ic_beer_24dp"
         android:onClick="onDonateBeer"
         android:text="@string/donate_beer"

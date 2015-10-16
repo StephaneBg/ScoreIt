@@ -21,34 +21,21 @@
     <!-- Margin -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="margin_default">8dp</dimen>
+    <dimen name="default_margin">16dp</dimen>
 
     <!-- Padding -->
-    <dimen name="padding_default">4dp</dimen>
-    <dimen name="default_small_padding">8dp</dimen>
-    <dimen name="scrollview_padding">164dp</dimen>
+    <dimen name="default_padding">8dp</dimen>
 
     <!-- Fonts -->
-    <dimen name="font_number_picker">54sp</dimen>
-    <dimen name="font_display_2">45sp</dimen>
-    <dimen name="font_dialpad">40sp</dimen>
-    <dimen name="font_display_1">34sp</dimen>
     <dimen name="font_headline">24sp</dimen>
-    <dimen name="font_nav_drawer_item">14sp</dimen>
-    <dimen name="font_subhead">14sp</dimen>
-    <dimen name="font_button">14sp</dimen>
 
     <!-- Height -->
     <dimen name="list_item_height">64dp</dimen>
-    <dimen name="list_item_nav_drawer">48dp</dimen>
     <dimen name="widget_height">48dp</dimen>
     <dimen name="dialog_max_height">720dp</dimen>
     <dimen name="header_height">128dp</dimen>
 
     <!-- Width -->
-    <dimen name="navigation_drawer_min_width">240dp</dimen>
-    <dimen name="navigation_drawer_max_width">280dp</dimen>
     <dimen name="dialog_width">480dp</dimen>
-
     <dimen name="circle_btn">56dp</dimen>
 </resources>

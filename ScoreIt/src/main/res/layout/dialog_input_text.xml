@@ -21,14 +21,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding_default"
+    android:padding="@dimen/default_padding"
     tools:context="ScoreItActivity">
 
     <EditText
         android:id="@+id/edit_text"
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_height"
-        android:layout_margin="@dimen/margin_default"
+        android:layout_margin="@dimen/default_margin"
         android:imeOptions="actionDone"
         android:inputType="textCapSentences"/>
 </FrameLayout>

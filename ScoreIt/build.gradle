@@ -69,5 +69,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.anjlab.android.iab.v3:library:1.0.27'
     compile 'com.diogobernardino:williamchart:2.0.1'
+    compile 'com.code-troopers.betterpickers:library:2.1.0'
     compile 'com.sromku.simple.storage:library:1.0.0'
 }

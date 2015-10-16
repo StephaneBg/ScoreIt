@@ -143,7 +143,7 @@
             style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
+            android:layout_margin="@dimen/default_margin"
             android:text="@string/add"
             android:textAllCaps="true"/>
     </LinearLayout>
