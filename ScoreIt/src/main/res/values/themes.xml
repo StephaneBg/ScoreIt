@@ -16,15 +16,14 @@
 
 <resources>
 
-    <style name="Theme.ScoreIt" parent="AppTheme.Base">
-        <item name="android:windowBackground">@color/white</item>
-    </style>
+    <style name="Theme.ScoreIt" parent="AppTheme.Base" />
 
     <style name="Theme.Adaptive" parent="AppTheme.Base">
         <item name="isDialog">false</item>
     </style>
 
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/white</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>

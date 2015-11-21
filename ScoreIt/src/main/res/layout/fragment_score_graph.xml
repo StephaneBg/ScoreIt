@@ -14,16 +14,10 @@
   ~ limitations under the License.
   -->
 
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.db.chart.view.LineChartView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/line_chart"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.db.chart.view.LineChartView
-        android:id="@+id/line_chart"
-        android:layout_width="match_parent"
-        android:layout_height="384dp"
-        android:padding="16dp"
-        app:chart_axisColor="@color/gray_dark"/>
-</android.support.v4.widget.NestedScrollView>
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    app:chart_axisColor="@color/gray_dark" />
