@@ -58,12 +58,12 @@ public class ScoreGraphFragment extends Fragment {
     }
 
     public void update() {
-        final GameHelper gameHelper = getGameHelper();
-        final int lapCnt = gameHelper.getLaps().size();
-        mChartView.reset();
-        //mChartView.setVisibility((0 == lapCnt) ? View.INVISIBLE : View.VISIBLE);
+        GameHelper gameHelper = getGameHelper();
+        int lapCnt = gameHelper.getLaps().size();
+        mChartView.setVisibility((0 == lapCnt) ? View.INVISIBLE : View.VISIBLE);
         if (0 == lapCnt) return;
 
+        mChartView.reset();
         int score;
         for (int player = 0; player < gameHelper.getPlayerCount(); player++) {
             LineSet set = new LineSet();

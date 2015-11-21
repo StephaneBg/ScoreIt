@@ -14,9 +14,9 @@
   ~ limitations under the License.
   -->
 
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <item
         android:id="@+id/menu_count"
@@ -27,20 +27,24 @@
         android:id="@+id/menu_clear"
         android:icon="@drawable/ic_autorenew_24dp"
         app:showAsAction="always"
+        tools:showAsAction="always"
         android:title="@string/clear"/>
     <item
         android:id="@+id/menu_save"
         android:icon="@drawable/ic_save_24dp"
         app:showAsAction="ifRoom"
+        tools:showAsAction="always"
         android:title="@string/saved_games"/>
     <item
         android:id="@+id/menu_view"
-        android:icon="@drawable/ic_visibility_24dp"
+        android:icon="@drawable/ic_graph_line_24dp"
         app:showAsAction="ifRoom"
+        tools:showAsAction="always"
         android:title="@string/view"/>
     <item
         android:id="@+id/menu_total"
         android:icon="@drawable/ic_sigma_24dp"
         app:showAsAction="ifRoom"
+        tools:showAsAction="always"
         android:title="@string/show_total"/>
 </menu>

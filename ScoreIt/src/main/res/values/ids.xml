@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +15,6 @@
   -->
 
 <resources>
-    <item name="numbers_key" type="id"/>
-    <item name="front" type="id"/>
-    <item name="back" type="id"/>
+  <item name="front" type="id" />
+    <item name="back" type="id" />
 </resources>

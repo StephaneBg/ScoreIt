@@ -158,7 +158,7 @@ public class ScoreItActivity extends BaseActivity {
                 return true;
 
             case R.id.menu_view:
-                switchScoreViews();
+                switchScoreViews(item);
                 return true;
 
             case R.id.menu_count:
@@ -190,19 +190,22 @@ public class ScoreItActivity extends BaseActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
                         switch (menuItem.getItemId()) {
                             case R.id.nav_universal:
                                 onGameSelected(Game.UNIVERSAL);
+                                menuItem.setChecked(true);
                                 break;
                             case R.id.nav_tarot:
                                 onGameSelected(Game.TAROT);
+                                menuItem.setChecked(true);
                                 break;
                             case R.id.nav_belote:
                                 onGameSelected(Game.BELOTE);
+                                menuItem.setChecked(true);
                                 break;
                             case R.id.nav_coinche:
                                 onGameSelected(Game.COINCHE);
+                                menuItem.setChecked(true);
                                 break;
                             case R.id.nav_donate:
                                 startActivity(new Intent(ScoreItActivity.this, DonateActivity.class));
@@ -264,6 +267,9 @@ public class ScoreItActivity extends BaseActivity {
         MenuItem item;
         item = menu.findItem(R.id.menu_view);
         item.setVisible(!isTablet() && 0 != lapCnt);
+        if (!isTablet()) {
+            //if(null != mScoreGraphFragment && mScoreGraphFragment.)
+        }
 
         item = menu.findItem(R.id.menu_clear);
         item.setVisible(0 != lapCnt);
@@ -447,27 +453,23 @@ public class ScoreItActivity extends BaseActivity {
         if (isTablet()) showScoreGraphFragment(anim);
     }
 
-    private void switchScoreViews() {
+    private void switchScoreViews(MenuItem item) {
         if (null == mScoreGraphFragment) {
+            item.setIcon(R.drawable.ic_list_24dp);
             showScoreGraphFragment(true);
         } else {
+            item.setIcon(R.drawable.ic_graph_line_24dp);
             showScoreListFragment(true);
             mScoreGraphFragment = null;
         }
     }
 
     public void update() {
-        if (null != mHeaderFragment)
-            mHeaderFragment.update();
-        if (null != mScoreListFragment)
-            mScoreListFragment.update();
-        if (isTablet()) {
-            if (null != mScoreGraphFragment)
-                mScoreGraphFragment.update();
-        } else {
-            getSupportFragmentManager()
-                    .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
+        if (null != mHeaderFragment) mHeaderFragment.update();
+        if (null != mScoreListFragment) mScoreListFragment.update();
+        if (null != mScoreGraphFragment) mScoreGraphFragment.update();
+        getSupportFragmentManager()
+                .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     private void showLapScene(Lap lap) {

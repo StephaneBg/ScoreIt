@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,19 +17,11 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--  Disabled -->
-    <item
-        android:state_enabled="false"
-        android:drawable="@drawable/btn_round_disabled"/>
+    <item android:drawable="@drawable/btn_round_disabled" android:state_enabled="false" />
 
     <!--  Enabled / Not pressed -->
-    <item
-        android:state_enabled="true"
-        android:state_pressed="false"
-        android:drawable="@drawable/btn_round_normal"/>
+    <item android:drawable="@drawable/btn_round_normal" android:state_enabled="true" android:state_pressed="false" />
 
     <!--  Enabled / Pressed -->
-    <item
-        android:state_pressed="true"
-        android:state_enabled="true"
-        android:drawable="@drawable/btn_round_pressed"/>
+    <item android:drawable="@drawable/btn_round_pressed" android:state_enabled="true" android:state_pressed="true" />
 </selector>
