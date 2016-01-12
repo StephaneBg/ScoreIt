@@ -54,7 +54,7 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            minifyEnabled false
+            minifyEnabled true
             debuggable false
             jniDebuggable false
         }
@@ -68,8 +68,8 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
 
     compile 'com.google.code.gson:gson:2.4'
-    compile 'com.anjlab.android.iab.v3:library:1.0.27'
+    compile 'com.anjlab.android.iab.v3:library:1.0.30'
     compile 'com.diogobernardino:williamchart:2.1'
-    compile 'com.code-troopers.betterpickers:library:2.2.1'
+    compile 'com.code-troopers.betterpickers:library:2.2.2'
     compile 'com.sromku.simple.storage:library:1.0.0'
 }
