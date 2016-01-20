@@ -198,11 +198,11 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
     }
 
     private int progressToBid(int progress) {
-        return progress * 10 + 90;
+        return progress * 10 + 80;
     }
 
     private int bidToProgress(int bid) {
-        return (bid - 90) / 10;
+        return (bid - 80) / 10;
     }
 
     private void displayScores() {
