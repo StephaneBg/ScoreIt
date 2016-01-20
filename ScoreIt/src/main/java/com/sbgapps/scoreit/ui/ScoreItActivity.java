@@ -266,9 +266,15 @@ public class ScoreItActivity extends BaseActivity {
 
         MenuItem item;
         item = menu.findItem(R.id.menu_view);
-        item.setVisible(!isTablet() && 0 != lapCnt);
         if (!isTablet()) {
-            //if(null != mScoreGraphFragment && mScoreGraphFragment.)
+            item.setVisible(0 != lapCnt);
+            if (null != mScoreGraphFragment) {
+                item.setIcon(R.drawable.ic_list_24dp);
+            } else {
+                item.setIcon(R.drawable.ic_graph_line_24dp);
+            }
+        } else {
+            item.setVisible(false);
         }
 
         item = menu.findItem(R.id.menu_clear);
@@ -462,6 +468,7 @@ public class ScoreItActivity extends BaseActivity {
             showScoreListFragment(true);
             mScoreGraphFragment = null;
         }
+        invalidateOptionsMenu();
     }
 
     public void update() {

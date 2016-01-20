@@ -17,7 +17,6 @@
 package com.sbgapps.scoreit.adapters;
 
 import android.content.res.Resources;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +35,8 @@ import com.sbgapps.scoreit.games.tarot.TarotLap;
  */
 public class TarotScoreAdapter extends ScoreListAdapter<TarotScoreAdapter.ViewHolder> {
 
-    public final Typeface mTypeface;
-
     public TarotScoreAdapter(ScoreListFragment fragment) {
         super(fragment);
-        mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "Roboto-Medium.ttf");
     }
 
     public static class ViewHolder extends ScoreListAdapter.ViewHolder {
@@ -58,9 +54,7 @@ public class TarotScoreAdapter extends ScoreListAdapter<TarotScoreAdapter.ViewHo
     public TarotScoreAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.list_item_score_tarot, viewGroup, false);
-        ViewHolder vh = new ViewHolder(v);
-        vh.mSummary.setTypeface(mTypeface);
-        return vh;
+        return new ViewHolder(v);
     }
 
     @Override

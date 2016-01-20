@@ -27,7 +27,6 @@ android {
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
         versionName project.VERSION_NAME
         versionCode Integer.parseInt(project.VERSION_CODE)
-        generatedDensities = ['xxhdpi']
     }
 
     compileOptions {
@@ -69,7 +68,8 @@ dependencies {
 
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.anjlab.android.iab.v3:library:1.0.30'
-    compile 'com.diogobernardino:williamchart:2.1'
+    compile 'com.diogobernardino:williamchart:2.2'
     compile 'com.code-troopers.betterpickers:library:2.2.2'
-    compile 'com.sromku.simple.storage:library:1.0.0'
+    compile 'com.sromku:simple-storage:1.2.0'
+    //compile 'com.github.supervital:swipenumberpicker:1.0.1'
 }
