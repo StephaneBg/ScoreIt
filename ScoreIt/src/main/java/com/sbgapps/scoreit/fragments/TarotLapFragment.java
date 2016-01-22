@@ -31,12 +31,12 @@ import android.widget.Spinner;
 import android.widget.ToggleButton;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.tarot.TarotBid;
-import com.sbgapps.scoreit.games.tarot.TarotBonus;
-import com.sbgapps.scoreit.games.tarot.TarotFiveLap;
-import com.sbgapps.scoreit.games.tarot.TarotLap;
-import com.sbgapps.scoreit.widget.SeekPoints;
+import com.sbgapps.scoreit.models.Player;
+import com.sbgapps.scoreit.models.tarot.TarotBid;
+import com.sbgapps.scoreit.models.tarot.TarotBonus;
+import com.sbgapps.scoreit.models.tarot.TarotFiveLap;
+import com.sbgapps.scoreit.models.tarot.TarotLap;
+import com.sbgapps.scoreit.views.widgets.SeekPoints;
 
 import java.util.List;
 

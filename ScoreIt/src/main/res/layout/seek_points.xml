@@ -36,13 +36,13 @@
         android:src="@drawable/ic_minus_24dp"
         android:tint="@color/gray_dark"/>
 
-    <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
+    <com.sbgapps.scoreit.views.widgets.MaxWidthFrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         app:maxWidth="160dp">
 
-        <com.sbgapps.scoreit.widget.SeekArc
+        <com.sbgapps.scoreit.views.widgets.SeekArc
             android:id="@+id/seekarc_points"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,7 +55,7 @@
             android:layout_gravity="center"
             android:textSize="34sp"
             tools:text="48"/>
-    </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
+    </com.sbgapps.scoreit.views.widgets.MaxWidthFrameLayout>
 
     <ImageButton
         android:id="@+id/btn_plus"

@@ -27,9 +27,9 @@ import android.widget.TextView;
 import com.codetroopers.betterpickers.numberpicker.NumberPickerBuilder;
 import com.codetroopers.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.universal.UniversalLap;
-import com.sbgapps.scoreit.widget.RingTextView;
+import com.sbgapps.scoreit.models.Player;
+import com.sbgapps.scoreit.models.universal.UniversalLap;
+import com.sbgapps.scoreit.views.widgets.RingTextView;
 
 import java.util.ArrayList;
 import java.util.List;

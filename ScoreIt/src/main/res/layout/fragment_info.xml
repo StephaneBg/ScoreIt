@@ -54,7 +54,7 @@
             android:textSize="@dimen/abc_text_size_medium_material"
             tools:ignore="HardcodedText"/>
 
-        <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
+        <com.sbgapps.scoreit.views.widgets.MaxWidthFrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:maxWidth="320dp">
@@ -115,6 +115,6 @@
                     android:text="@string/help_translate"
                     android:textColor="@color/white"/>
             </LinearLayout>
-        </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
+        </com.sbgapps.scoreit.views.widgets.MaxWidthFrameLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

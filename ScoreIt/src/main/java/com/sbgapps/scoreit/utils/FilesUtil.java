@@ -18,8 +18,7 @@ package com.sbgapps.scoreit.utils;
 
 import android.content.SharedPreferences;
 
-import com.sbgapps.scoreit.games.Game;
-import com.sbgapps.scoreit.games.GameHelper;
+import com.sbgapps.scoreit.models.Game;
 import com.sromku.simple.storage.Storage;
 import com.sromku.simple.storage.helpers.OrderType;
 
@@ -32,9 +31,9 @@ import java.util.List;
  */
 public class FilesUtil {
 
-    final private GameHelper mGameHelper;
+    final private Constants.GameHelper mGameHelper;
 
-    public FilesUtil(GameHelper gameHelper) {
+    public FilesUtil(Constants.GameHelper gameHelper) {
         mGameHelper = gameHelper;
     }
 
