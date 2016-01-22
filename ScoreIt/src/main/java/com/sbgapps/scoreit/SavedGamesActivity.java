@@ -23,7 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.sbgapps.scoreit.utils.Constants;
+import com.sbgapps.scoreit.utils.GameHelper;
 
 import java.util.List;
 
@@ -41,8 +41,8 @@ public class SavedGamesActivity extends BaseActivity {
             actionBar.setTitle(getString(R.string.saved_games));
         }
 
-        final Constants.GameHelper gameHelper = new Constants.GameHelper(this);
-        final List<String> games = gameHelper.getFilesUtil().getSavedFiles();
+        final GameHelper gameHelper = new GameHelper(this);
+        final List<String> games = gameHelper.getFileUtils().getSavedFiles();
 
         ListView listView = (ListView) findViewById(android.R.id.list);
         listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, games));
@@ -50,7 +50,7 @@ public class SavedGamesActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String game = games.get(position);
-                gameHelper.getFilesUtil().setPlayedFile(game);
+                gameHelper.getFileUtils().setPlayedFile(game);
                 setResult(RESULT_OK);
                 finish();
             }

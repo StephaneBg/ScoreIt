@@ -67,7 +67,7 @@ import com.sbgapps.scoreit.models.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.models.tarot.TarotFourLap;
 import com.sbgapps.scoreit.models.tarot.TarotThreeLap;
 import com.sbgapps.scoreit.models.universal.UniversalLap;
-import com.sbgapps.scoreit.utils.Constants;
+import com.sbgapps.scoreit.utils.GameHelper;
 
 import java.util.List;
 
@@ -84,7 +84,7 @@ public class ScoreItActivity extends BaseActivity {
     private View mGraphContainer;
     private View mMainContainer;
 
-    private Constants.GameHelper mGameHelper;
+    private GameHelper mGameHelper;
     private int mEditedPlayer = Player.PLAYER_NONE;
     private Lap mLap;
     private Lap mEditedLap;
@@ -95,7 +95,7 @@ public class ScoreItActivity extends BaseActivity {
     private ScoreGraphFragment mScoreGraphFragment;
     private HeaderFragment mHeaderFragment;
 
-    public Constants.GameHelper getGameHelper() {
+    public GameHelper getGameHelper() {
         return mGameHelper;
     }
 
@@ -110,7 +110,7 @@ public class ScoreItActivity extends BaseActivity {
         mGraphContainer = findViewById(R.id.graph_container);
         mMainContainer = findViewById(R.id.main_container);
 
-        mGameHelper = new Constants.GameHelper(this);
+        mGameHelper = new GameHelper(this);
         mGameHelper.loadGame();
 
         ActionBar ab = getSupportActionBar();
@@ -165,7 +165,7 @@ public class ScoreItActivity extends BaseActivity {
                 return true;
 
             case R.id.menu_save:
-                if (mGameHelper.getFilesUtil().isDefaultFile()) {
+                if (mGameHelper.getFileUtils().isDefaultFile()) {
                     showLoadActionChoices();
                 } else {
                     startSavedGamesActivity();
@@ -174,8 +174,8 @@ public class ScoreItActivity extends BaseActivity {
 
             case R.id.menu_total:
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-                boolean show = sp.getBoolean(Constants.GameHelper.KEY_UNIVERSAL_TOTAL, false);
-                sp.edit().putBoolean(Constants.GameHelper.KEY_UNIVERSAL_TOTAL, !show).apply();
+                boolean show = sp.getBoolean(GameHelper.KEY_UNIVERSAL_TOTAL, false);
+                sp.edit().putBoolean(GameHelper.KEY_UNIVERSAL_TOTAL, !show).apply();
                 update();
                 return true;
         }
@@ -283,7 +283,7 @@ public class ScoreItActivity extends BaseActivity {
         item.setVisible(Game.UNIVERSAL == game || Game.TAROT == game);
 
         item = menu.findItem(R.id.menu_save);
-        List<String> files = mGameHelper.getFilesUtil().getSavedFiles();
+        List<String> files = mGameHelper.getFileUtils().getSavedFiles();
         item.setVisible(0 != files.size());
 
         item = menu.findItem(R.id.menu_total);
@@ -592,7 +592,7 @@ public class ScoreItActivity extends BaseActivity {
                                 dismissAll();
                                 break;
                             case 1:
-                                if (mGameHelper.getFilesUtil().isDefaultFile()) {
+                                if (mGameHelper.getFileUtils().isDefaultFile()) {
                                     showSaveFileDialog(false);
                                 } else {
                                     if (null != mSnackBar) mSnackBar.dismiss();

@@ -31,7 +31,7 @@ import com.db.chart.view.animation.easing.CubicEase;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.ScoreItActivity;
-import com.sbgapps.scoreit.utils.Constants;
+import com.sbgapps.scoreit.utils.GameHelper;
 import com.sbgapps.scoreit.utils.Utils;
 
 public class ScoreGraphFragment extends Fragment {
@@ -40,7 +40,7 @@ public class ScoreGraphFragment extends Fragment {
 
     private LineChartView mChartView;
 
-    public Constants.GameHelper getGameHelper() {
+    public GameHelper getGameHelper() {
         return ((ScoreItActivity) getActivity()).getGameHelper();
     }
 
@@ -58,7 +58,7 @@ public class ScoreGraphFragment extends Fragment {
     }
 
     public void update() {
-        Constants.GameHelper gameHelper = getGameHelper();
+        GameHelper gameHelper = getGameHelper();
         int lapCnt = gameHelper.getLaps().size();
         mChartView.setVisibility((0 == lapCnt) ? View.INVISIBLE : View.VISIBLE);
         if (0 == lapCnt) return;

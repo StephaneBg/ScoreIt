@@ -28,7 +28,7 @@ import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.models.Game;
 import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.models.Player;
-import com.sbgapps.scoreit.utils.Constants;
+import com.sbgapps.scoreit.utils.GameHelper;
 
 /**
  * Created by Stéphane on 16/07/2014.
@@ -37,7 +37,7 @@ public class HeaderAdapter extends BaseAdapter {
 
     private final ScoreItActivity mActivity;
     private final LayoutInflater mInflater;
-    private final Constants.GameHelper mGameHelper;
+    private final GameHelper mGameHelper;
 
     public HeaderAdapter(Activity activity) {
         mActivity = (ScoreItActivity) activity;
