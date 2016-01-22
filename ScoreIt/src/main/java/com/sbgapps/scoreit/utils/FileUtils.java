@@ -29,11 +29,11 @@ import java.util.List;
 /**
  * Created by Stéphane on 09/07/2014.
  */
-public class FilesUtil {
+public class FileUtils {
 
-    final private Constants.GameHelper mGameHelper;
+    final private GameHelper mGameHelper;
 
-    public FilesUtil(Constants.GameHelper gameHelper) {
+    public FileUtils(GameHelper gameHelper) {
         mGameHelper = gameHelper;
     }
 

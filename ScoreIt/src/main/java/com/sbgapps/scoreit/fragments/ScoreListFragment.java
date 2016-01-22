@@ -25,13 +25,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.utils.GameHelper;
 import com.sbgapps.scoreit.views.adapters.GenericBeloteScoreAdapter;
 import com.sbgapps.scoreit.views.adapters.ScoreListAdapter;
 import com.sbgapps.scoreit.views.adapters.TarotScoreAdapter;
 import com.sbgapps.scoreit.views.adapters.UniversalScoreAdapter;
 import com.sbgapps.scoreit.models.Game;
 import com.sbgapps.scoreit.ScoreItActivity;
-import com.sbgapps.scoreit.utils.Constants;
 import com.sbgapps.scoreit.views.widgets.RevealView;
 
 /**
@@ -69,7 +69,7 @@ public class ScoreListFragment extends Fragment {
             }
         });
 
-        Constants.GameHelper gameHelper = activity.getGameHelper();
+        GameHelper gameHelper = activity.getGameHelper();
         switch (gameHelper.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
