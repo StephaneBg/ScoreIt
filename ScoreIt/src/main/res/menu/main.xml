@@ -25,7 +25,7 @@
         android:title="@string/player_number"/>
     <item
         android:id="@+id/menu_clear"
-        android:icon="@drawable/ic_autorenew_24dp"
+        android:icon="@drawable/ic_clear_all_24dp"
         app:showAsAction="always"
         tools:showAsAction="always"
         android:title="@string/clear"/>
