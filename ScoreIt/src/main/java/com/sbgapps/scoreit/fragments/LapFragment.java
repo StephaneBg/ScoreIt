@@ -19,9 +19,9 @@ package com.sbgapps.scoreit.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.sbgapps.scoreit.ui.ScoreItActivity;
-import com.sbgapps.scoreit.games.GameHelper;
-import com.sbgapps.scoreit.games.Lap;
+import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.models.Lap;
+import com.sbgapps.scoreit.utils.Constants;
 
 /**
  * Created by sbaiget on 08/01/14.
@@ -36,7 +36,7 @@ public class LapFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    public GameHelper getGameHelper() {
+    public Constants.GameHelper getGameHelper() {
         return ((ScoreItActivity) getActivity()).getGameHelper();
     }
 

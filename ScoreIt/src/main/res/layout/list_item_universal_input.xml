@@ -76,20 +76,20 @@
                 android:stateListAnimator="@null"/>
         </RelativeLayout>
 
-        <com.sbgapps.scoreit.widget.MaxWidthFrameLayout
+        <com.sbgapps.scoreit.views.widgets.MaxWidthFrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:maxWidth="96dp">
 
-            <com.sbgapps.scoreit.widget.RingTextView
+            <com.sbgapps.scoreit.views.widgets.RingTextView
                 android:id="@+id/points"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="34sp"
                 tools:text="128"/>
-        </com.sbgapps.scoreit.widget.MaxWidthFrameLayout>
+        </com.sbgapps.scoreit.views.widgets.MaxWidthFrameLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"

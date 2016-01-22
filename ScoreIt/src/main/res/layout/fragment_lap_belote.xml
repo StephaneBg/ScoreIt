@@ -99,7 +99,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <com.sbgapps.scoreit.widget.ToggleGroup
+        <com.sbgapps.scoreit.views.widgets.ToggleGroup
             android:id="@+id/group_score"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin">
 
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
+            <com.sbgapps.scoreit.views.widgets.NonUncheckableToggleButton
                 android:id="@+id/btn_score"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                 android:textOff="@string/score"
                 android:textOn="@string/score"/>
 
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
+            <com.sbgapps.scoreit.views.widgets.NonUncheckableToggleButton
                 android:id="@+id/btn_inside"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
                 android:textOff="@string/inside"
                 android:textOn="@string/inside"/>
 
-            <com.sbgapps.scoreit.widget.NonUncheckableToggleButton
+            <com.sbgapps.scoreit.views.widgets.NonUncheckableToggleButton
                 android:id="@+id/btn_capot"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -139,9 +139,9 @@
                 android:background="@drawable/btn_toggle_selector"
                 android:textOff="@string/capot"
                 android:textOn="@string/capot"/>
-        </com.sbgapps.scoreit.widget.ToggleGroup>
+        </com.sbgapps.scoreit.views.widgets.ToggleGroup>
 
-        <com.sbgapps.scoreit.widget.SeekPoints
+        <com.sbgapps.scoreit.views.widgets.SeekPoints
             android:id="@+id/seekbar_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

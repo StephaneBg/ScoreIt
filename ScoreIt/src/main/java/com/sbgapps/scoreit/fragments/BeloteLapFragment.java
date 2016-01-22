@@ -29,11 +29,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.belote.BeloteBonus;
-import com.sbgapps.scoreit.games.belote.BeloteLap;
-import com.sbgapps.scoreit.widget.SeekPoints;
-import com.sbgapps.scoreit.widget.ToggleGroup;
+import com.sbgapps.scoreit.models.Player;
+import com.sbgapps.scoreit.models.belote.BeloteBonus;
+import com.sbgapps.scoreit.models.belote.BeloteLap;
+import com.sbgapps.scoreit.views.widgets.SeekPoints;
+import com.sbgapps.scoreit.views.widgets.ToggleGroup;
 
 import java.util.List;
 

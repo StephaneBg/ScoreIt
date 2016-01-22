@@ -25,14 +25,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.adapters.GenericBeloteScoreAdapter;
-import com.sbgapps.scoreit.adapters.ScoreListAdapter;
-import com.sbgapps.scoreit.adapters.TarotScoreAdapter;
-import com.sbgapps.scoreit.adapters.UniversalScoreAdapter;
-import com.sbgapps.scoreit.games.Game;
-import com.sbgapps.scoreit.games.GameHelper;
-import com.sbgapps.scoreit.ui.ScoreItActivity;
-import com.sbgapps.scoreit.widget.RevealView;
+import com.sbgapps.scoreit.views.adapters.GenericBeloteScoreAdapter;
+import com.sbgapps.scoreit.views.adapters.ScoreListAdapter;
+import com.sbgapps.scoreit.views.adapters.TarotScoreAdapter;
+import com.sbgapps.scoreit.views.adapters.UniversalScoreAdapter;
+import com.sbgapps.scoreit.models.Game;
+import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.utils.Constants;
+import com.sbgapps.scoreit.views.widgets.RevealView;
 
 /**
  * Created by sbaiget on 11/11/13.
@@ -69,7 +69,7 @@ public class ScoreListFragment extends Fragment {
             }
         });
 
-        GameHelper gameHelper = activity.getGameHelper();
+        Constants.GameHelper gameHelper = activity.getGameHelper();
         switch (gameHelper.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:

@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 
-<com.sbgapps.scoreit.widget.RevealView
+<com.sbgapps.scoreit.views.widgets.RevealView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/reveal"
     android:layout_width="match_parent"
@@ -29,7 +29,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/list_selector_score">
 
-        <com.sbgapps.scoreit.widget.LinearListView
+        <com.sbgapps.scoreit.views.widgets.LinearListView
             android:id="@+id/list_score"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -41,4 +41,4 @@
             android:layout_width="6dp"
             android:layout_height="match_parent"/>
     </FrameLayout>
-</com.sbgapps.scoreit.widget.RevealView>
+</com.sbgapps.scoreit.views.widgets.RevealView>

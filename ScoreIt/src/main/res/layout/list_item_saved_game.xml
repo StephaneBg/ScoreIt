@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 
-<com.sbgapps.scoreit.widget.RevealView
+<com.sbgapps.scoreit.views.widgets.RevealView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/reveal"
@@ -51,4 +51,4 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </FrameLayout>
-</com.sbgapps.scoreit.widget.RevealView>
+</com.sbgapps.scoreit.views.widgets.RevealView>

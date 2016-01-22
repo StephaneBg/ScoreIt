@@ -29,10 +29,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.games.Player;
-import com.sbgapps.scoreit.games.coinche.CoincheBonus;
-import com.sbgapps.scoreit.games.coinche.CoincheLap;
-import com.sbgapps.scoreit.widget.SeekPoints;
+import com.sbgapps.scoreit.models.Player;
+import com.sbgapps.scoreit.models.coinche.CoincheBonus;
+import com.sbgapps.scoreit.models.coinche.CoincheLap;
+import com.sbgapps.scoreit.views.widgets.SeekPoints;
 
 import java.util.List;
 

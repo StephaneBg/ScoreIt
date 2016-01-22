@@ -41,7 +41,7 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
 
-        <com.sbgapps.scoreit.widget.SeekPoints
+        <com.sbgapps.scoreit.views.widgets.SeekPoints
             android:id="@+id/seekbar_bid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -129,7 +129,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <com.sbgapps.scoreit.widget.SeekPoints
+        <com.sbgapps.scoreit.views.widgets.SeekPoints
             android:id="@+id/seekbar_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
