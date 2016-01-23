@@ -29,16 +29,16 @@ import com.db.chart.view.YController;
 import com.db.chart.view.animation.Animation;
 import com.db.chart.view.animation.easing.CubicEase;
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.utils.GameHelper;
 import com.sbgapps.scoreit.utils.Utils;
 
-public class ScoreGraphFragment extends Fragment {
+public class ScoreChartFragment extends Fragment {
 
-    public static final String TAG = ScoreGraphFragment.class.getName();
+    public static final String TAG = ScoreChartFragment.class.getName();
 
-    private LineChartView mChartView;
+    private ViewGroup mContainer;
 
     public GameHelper getGameHelper() {
         return ((ScoreItActivity) getActivity()).getGameHelper();
@@ -47,23 +47,21 @@ public class ScoreGraphFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_score_graph, null);
-        mChartView = (LineChartView) view.findViewById(R.id.line_chart);
-        mChartView.setXLabels(XController.LabelPosition.NONE);
-        mChartView.setYLabels(YController.LabelPosition.NONE);
-        mChartView.setXAxis(false);
-        mChartView.setYAxis(false);
-
-        return view;
+        mContainer = (ViewGroup) inflater.inflate(R.layout.fragment_score_chart, null);
+        init();
+        return mContainer;
     }
 
-    public void update() {
+    public void init() {
         GameHelper gameHelper = getGameHelper();
-        int lapCnt = gameHelper.getLaps().size();
-        mChartView.setVisibility((0 == lapCnt) ? View.INVISIBLE : View.VISIBLE);
-        if (0 == lapCnt) return;
+        if (0 == gameHelper.getLaps().size()) return;
 
-        mChartView.reset();
+        LineChartView chartView = new LineChartView(getActivity());
+        chartView.setXLabels(XController.LabelPosition.NONE);
+        chartView.setYLabels(YController.LabelPosition.NONE);
+        chartView.setXAxis(false);
+        chartView.setYAxis(false);
+
         int score;
         for (int player = 0; player < gameHelper.getPlayerCount(); player++) {
             LineSet set = new LineSet();
@@ -81,10 +79,12 @@ public class ScoreGraphFragment extends Fragment {
                     .setDotsColor(getResources().getColor(R.color.white))
                     .setDotsRadius(Utils.dpToPx(4, getResources()));
 
-            mChartView.addData(set);
+            chartView.addData(set);
         }
 
-        mChartView.show(new Animation()
+        mContainer.addView(chartView);
+
+        chartView.show(new Animation()
                 .setEasing(new CubicEase())
                 .setOverlap(0.8f, null)
                 .setStartPoint(-1f, 0f)
@@ -95,6 +95,6 @@ public class ScoreGraphFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        update();
+        init();
     }
 }

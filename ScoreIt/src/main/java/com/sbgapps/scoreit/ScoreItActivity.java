@@ -17,7 +17,6 @@
 package com.sbgapps.scoreit;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,7 +53,7 @@ import com.sbgapps.scoreit.fragments.BeloteLapFragment;
 import com.sbgapps.scoreit.fragments.CoincheLapFragment;
 import com.sbgapps.scoreit.fragments.HeaderFragment;
 import com.sbgapps.scoreit.fragments.LapFragment;
-import com.sbgapps.scoreit.fragments.ScoreGraphFragment;
+import com.sbgapps.scoreit.fragments.ScoreChartFragment;
 import com.sbgapps.scoreit.fragments.ScoreListFragment;
 import com.sbgapps.scoreit.fragments.TarotLapFragment;
 import com.sbgapps.scoreit.fragments.UniversalLapFragment;
@@ -89,10 +88,11 @@ public class ScoreItActivity extends BaseActivity {
     private Lap mLap;
     private Lap mEditedLap;
     private boolean mIsEdited = false;
+    private boolean mIsChartDisplayed = false;
     private Snackbar mSnackBar;
 
     private ScoreListFragment mScoreListFragment;
-    private ScoreGraphFragment mScoreGraphFragment;
+    private ScoreChartFragment mScoreChartFragment;
     private HeaderFragment mHeaderFragment;
 
     public GameHelper getGameHelper() {
@@ -107,7 +107,7 @@ public class ScoreItActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mGraphContainer = findViewById(R.id.graph_container);
+        mGraphContainer = findViewById(R.id.chart_container);
         mMainContainer = findViewById(R.id.main_container);
 
         mGameHelper = new GameHelper(this);
@@ -119,21 +119,28 @@ public class ScoreItActivity extends BaseActivity {
         }
         setTitle();
 
-        if (null == savedInstanceState) {
-            loadFragments(false);
-        } else {
+        if (null != savedInstanceState) {
             mLap = (Lap) savedInstanceState.getSerializable("lap");
             mIsEdited = savedInstanceState.getBoolean("edited");
             if (mIsEdited) {
                 int position = savedInstanceState.getInt("position");
                 mEditedLap = mGameHelper.getLaps().get(position);
             }
+            mIsChartDisplayed = savedInstanceState.getBoolean("chartShown");
+
             mHeaderFragment = (HeaderFragment) getSupportFragmentManager()
                     .findFragmentByTag(HeaderFragment.TAG);
             mScoreListFragment = (ScoreListFragment) getSupportFragmentManager()
                     .findFragmentByTag(ScoreListFragment.TAG);
-            mScoreGraphFragment = (ScoreGraphFragment) getSupportFragmentManager()
-                    .findFragmentByTag(ScoreGraphFragment.TAG);
+        } else {
+            if (isTablet()) {
+                showHeaderFragment(false);
+                showScoreChartFragment(false);
+                showScoreListFragment(false);
+            } else {
+                showHeaderFragment(false);
+                showScoreListFragment(false);
+            }
         }
 
         setupDrawer();
@@ -157,7 +164,7 @@ public class ScoreItActivity extends BaseActivity {
                 return true;
 
             case R.id.menu_view:
-                switchScoreViews(item);
+                switchScoreViews();
                 return true;
 
             case R.id.menu_count:
@@ -180,6 +187,51 @@ public class ScoreItActivity extends BaseActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (null == mLap) {
+            getMenuInflater().inflate(R.menu.main, menu);
+            return true;
+        } else {
+            return super.onCreateOptionsMenu(menu);
+        }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (null != mLap) return true;
+
+        int lapCnt = mGameHelper.getLaps().size();
+        int game = mGameHelper.getPlayedGame();
+
+        MenuItem item;
+        item = menu.findItem(R.id.menu_view);
+        if (isTablet() || 0 == lapCnt) {
+            item.setVisible(false);
+        } else {
+            if (mIsChartDisplayed) {
+                item.setIcon(R.drawable.ic_list_24dp);
+            } else {
+                item.setIcon(R.drawable.ic_graph_line_24dp);
+            }
+        }
+
+        item = menu.findItem(R.id.menu_clear);
+        item.setVisible(0 != lapCnt);
+
+        item = menu.findItem(R.id.menu_count);
+        item.setVisible(Game.UNIVERSAL == game || Game.TAROT == game);
+
+        item = menu.findItem(R.id.menu_save);
+        List<String> files = mGameHelper.getFileUtils().getSavedFiles();
+        item.setVisible(0 != files.size());
+
+        item = menu.findItem(R.id.menu_total);
+        item.setVisible(Game.UNIVERSAL == game);
+
+        return true;
     }
 
     private void setupDrawer() {
@@ -241,55 +293,24 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (null != mLap) {
+            outState.putBoolean("edited", mIsEdited);
+            if (mIsEdited) {
+                int idx = mGameHelper.getLaps().indexOf(mEditedLap);
+                outState.putInt("position", idx);
+            }
+            outState.putSerializable("lap", mLap);
+        }
+        if (Player.PLAYER_NONE != mEditedPlayer) outState.putInt("editedPlayer", mEditedPlayer);
+        outState.putBoolean("chartShown", mIsChartDisplayed);
+    }
+
+    @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mEditedPlayer = savedInstanceState.getInt("editedPlayer", Player.PLAYER_NONE);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (null == mLap) {
-            getMenuInflater().inflate(R.menu.main, menu);
-            return true;
-        } else {
-            return super.onCreateOptionsMenu(menu);
-        }
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        if (null != mLap) return true;
-
-        int lapCnt = mGameHelper.getLaps().size();
-        int game = mGameHelper.getPlayedGame();
-
-        MenuItem item;
-        item = menu.findItem(R.id.menu_view);
-        if (!isTablet()) {
-            item.setVisible(0 != lapCnt);
-            if (null != mScoreGraphFragment) {
-                item.setIcon(R.drawable.ic_list_24dp);
-            } else {
-                item.setIcon(R.drawable.ic_graph_line_24dp);
-            }
-        } else {
-            item.setVisible(false);
-        }
-
-        item = menu.findItem(R.id.menu_clear);
-        item.setVisible(0 != lapCnt);
-
-        item = menu.findItem(R.id.menu_count);
-        item.setVisible(Game.UNIVERSAL == game || Game.TAROT == game);
-
-        item = menu.findItem(R.id.menu_save);
-        List<String> files = mGameHelper.getFileUtils().getSavedFiles();
-        item.setVisible(0 != files.size());
-
-        item = menu.findItem(R.id.menu_total);
-        item.setVisible(Game.UNIVERSAL == game);
-
-        return true;
     }
 
     private void onGameSelected(int game) {
@@ -304,7 +325,7 @@ public class ScoreItActivity extends BaseActivity {
         setTitle();
         animateActionButton();
         invalidateOptionsMenu();
-        loadFragments(true);
+        reloadUi();
     }
 
     private void setTitle() {
@@ -377,20 +398,6 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (null != mLap) {
-            outState.putBoolean("edited", mIsEdited);
-            if (mIsEdited) {
-                int idx = mGameHelper.getLaps().indexOf(mEditedLap);
-                outState.putInt("position", idx);
-            }
-            outState.putSerializable("lap", mLap);
-        }
-        if (Player.PLAYER_NONE != mEditedPlayer) outState.putInt("editedPlayer", mEditedPlayer);
-    }
-
-    @Override
     public void onRequestPermissionsResult(
             int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -407,7 +414,6 @@ public class ScoreItActivity extends BaseActivity {
         showLapScene(lap);
     }
 
-    @SuppressLint("deprecation")
     public void removeLap(final Lap lap) {
         final int position = mGameHelper.removeLap(lap);
 
@@ -415,8 +421,8 @@ public class ScoreItActivity extends BaseActivity {
             mHeaderFragment.update();
         if (null != mScoreListFragment && mScoreListFragment.isVisible())
             mScoreListFragment.getListAdapter().notifyItemRemoved(position);
-        if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible())
-            mScoreGraphFragment.update();
+        if (null != mScoreChartFragment && mScoreChartFragment.isVisible())
+            mScoreChartFragment.init();
 
         invalidateOptionsMenu();
 
@@ -433,8 +439,8 @@ public class ScoreItActivity extends BaseActivity {
                     mHeaderFragment.update();
                 if (null != mScoreListFragment && mScoreListFragment.isVisible())
                     mScoreListFragment.getListAdapter().notifyItemInserted(position);
-                if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible())
-                    mScoreGraphFragment.update();
+                if (null != mScoreChartFragment && mScoreChartFragment.isVisible())
+                    mScoreChartFragment.init();
                 invalidateOptionsMenu();
             }
         })
@@ -448,32 +454,27 @@ public class ScoreItActivity extends BaseActivity {
         showEditNameActionChoices();
     }
 
-    private void loadFragments(boolean anim) {
-        mHeaderFragment = null;
-        mScoreListFragment = null;
-        mScoreGraphFragment = null;
-
-        showHeaderFragment(anim);
-        showScoreListFragment(anim);
-        if (isTablet()) showScoreGraphFragment(anim);
+    private void reloadUi() {
+        showHeaderFragment(true);
+        showScoreListFragment(true);
+        if (isTablet()) showScoreChartFragment(true);
     }
 
-    private void switchScoreViews(MenuItem item) {
-        if (null == mScoreGraphFragment) {
-            item.setIcon(R.drawable.ic_list_24dp);
-            showScoreGraphFragment(true);
-        } else {
-            item.setIcon(R.drawable.ic_graph_line_24dp);
+    private void switchScoreViews() {
+        if (mIsChartDisplayed) {
             showScoreListFragment(true);
-            mScoreGraphFragment = null;
+            mScoreChartFragment = null;
+        } else {
+            showScoreChartFragment(true);
         }
+        mIsChartDisplayed = !mIsChartDisplayed;
         invalidateOptionsMenu();
     }
 
     public void update() {
         if (null != mHeaderFragment) mHeaderFragment.update();
         if (null != mScoreListFragment) mScoreListFragment.update();
-        if (null != mScoreGraphFragment) mScoreGraphFragment.update();
+        if(null != mScoreChartFragment) mScoreChartFragment.init();
         getSupportFragmentManager()
                 .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
@@ -569,8 +570,8 @@ public class ScoreItActivity extends BaseActivity {
         mHeaderFragment.update();
         if (null != mScoreListFragment && mScoreListFragment.isVisible())
             mScoreListFragment.getListAdapter().notifyDataSetChanged();
-        if (null != mScoreGraphFragment && mScoreGraphFragment.isVisible()) {
-            mScoreGraphFragment.update();
+        if (null != mScoreChartFragment && mScoreChartFragment.isVisible()) {
+            mScoreChartFragment.init();
         }
         invalidateOptionsMenu();
     }
@@ -683,7 +684,7 @@ public class ScoreItActivity extends BaseActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         mGameHelper.setPlayerCount(which);
                         invalidateOptionsMenu();
-                        loadFragments(true);
+                        reloadUi();
                     }
                 })
                 .create()
@@ -740,8 +741,7 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     private void showHeaderFragment(boolean anim) {
-        if (null == mHeaderFragment)
-            mHeaderFragment = new HeaderFragment();
+        mHeaderFragment = new HeaderFragment();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
@@ -750,8 +750,7 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     private void showScoreListFragment(boolean anim) {
-        if (null == mScoreListFragment)
-            mScoreListFragment = new ScoreListFragment();
+        mScoreListFragment = new ScoreListFragment();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
@@ -759,14 +758,13 @@ public class ScoreItActivity extends BaseActivity {
         ft.commit();
     }
 
-    private void showScoreGraphFragment(boolean anim) {
-        if (null == mScoreGraphFragment)
-            mScoreGraphFragment = new ScoreGraphFragment();
+    private void showScoreChartFragment(boolean anim) {
+        mScoreChartFragment = new ScoreChartFragment();
 
-        int id = isTablet() ? R.id.graph_container : R.id.main_container;
+        int id = isTablet() ? R.id.chart_container : R.id.main_container;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        ft.replace(id, mScoreGraphFragment, ScoreGraphFragment.TAG);
+        ft.replace(id, mScoreChartFragment, ScoreChartFragment.TAG);
         ft.commit();
     }
 
