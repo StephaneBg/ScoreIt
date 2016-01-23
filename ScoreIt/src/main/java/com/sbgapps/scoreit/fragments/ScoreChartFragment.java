@@ -22,23 +22,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.db.chart.model.LineSet;
-import com.db.chart.view.LineChartView;
-import com.db.chart.view.XController;
-import com.db.chart.view.YController;
-import com.db.chart.view.animation.Animation;
-import com.db.chart.view.animation.easing.CubicEase;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.utils.GameHelper;
-import com.sbgapps.scoreit.utils.Utils;
+import com.sbgapps.scoreit.views.widgets.LineChart;
 
 public class ScoreChartFragment extends Fragment {
 
     public static final String TAG = ScoreChartFragment.class.getName();
 
-    private ViewGroup mContainer;
+    private LineChart mGraph;
+    private int[] mScores;
+    private int mX;
 
     public GameHelper getGameHelper() {
         return ((ScoreItActivity) getActivity()).getGameHelper();
@@ -47,54 +43,53 @@ public class ScoreChartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mContainer = (ViewGroup) inflater.inflate(R.layout.fragment_score_chart, null);
-        init();
-        return mContainer;
+        View view = inflater.inflate(R.layout.fragment_score_chart, null);
+        mGraph = (LineChart) view.findViewById(R.id.line_chart);
+        return view;
     }
 
-    public void init() {
-        GameHelper gameHelper = getGameHelper();
-        if (0 == gameHelper.getLaps().size()) return;
+    public void update() {
+        final GameHelper gameHelper = getGameHelper();
+        final int lapCnt = gameHelper.getLaps().size();
 
-        LineChartView chartView = new LineChartView(getActivity());
-        chartView.setXLabels(XController.LabelPosition.NONE);
-        chartView.setYLabels(YController.LabelPosition.NONE);
-        chartView.setXAxis(false);
-        chartView.setYAxis(false);
-
-        int score;
-        for (int player = 0; player < gameHelper.getPlayerCount(); player++) {
-            LineSet set = new LineSet();
-            set.addPoint("", 0);
-            score = 0;
-            for (Lap lap : gameHelper.getLaps()) {
-                score += lap.getScore(player);
-                set.addPoint("", score);
-            }
-
-            set.setColor(gameHelper.getPlayerColor(player))
-                    .setThickness(Utils.dpToPx(2, getResources()))
-                    .setDotsStrokeThickness(Utils.dpToPx(2, getResources()))
-                    .setDotsStrokeColor(gameHelper.getPlayerColor(player))
-                    .setDotsColor(getResources().getColor(R.color.white))
-                    .setDotsRadius(Utils.dpToPx(4, getResources()));
-
-            chartView.addData(set);
+        if (0 == lapCnt) {
+            mGraph.setVisibility(View.INVISIBLE);
+            return;
+        } else {
+            mGraph.setVisibility(View.VISIBLE);
         }
 
-        mContainer.addView(chartView);
+        mGraph.removeAllLines();
+        LineChart.LinePoint p = new LineChart.LinePoint(mX = 0, 0);
+        int color;
+        for (int i = 0; i < gameHelper.getPlayerCount(); i++) {
+            LineChart.LineSet line = new LineChart.LineSet();
+            color = gameHelper.getPlayerColor(i);
+            line.setColor(color);
+            line.addPoint(p);
+            mGraph.addLine(line);
+        }
 
-        chartView.show(new Animation()
-                .setEasing(new CubicEase())
-                .setOverlap(0.8f, null)
-                .setStartPoint(-1f, 0f)
-                .setAlpha(1)
-                .setDuration(getActivity().getResources().getInteger(R.integer.anim_medium_time)));
+        mScores = new int[gameHelper.getPlayerCount()];
+        for (int i = 0; i < lapCnt; i++) {
+            Lap lap = gameHelper.getLaps().get(i);
+            addLap(lap);
+        }
+    }
+
+    public void addLap(Lap lap) {
+        mX++;
+        GameHelper gh = getGameHelper();
+        for (int player = 0; player < gh.getPlayerCount(); player++) {
+            mScores[player] += lap.getScore(player);
+            LineChart.LinePoint p = new LineChart.LinePoint(mX, mScores[player]);
+            mGraph.addPointToLine(player, p);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        init();
+        update();
     }
 }

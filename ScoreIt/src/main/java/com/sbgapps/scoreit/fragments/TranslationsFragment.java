@@ -16,22 +16,16 @@
 
 package com.sbgapps.scoreit.fragments;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Stéphane on 15/11/2014.
@@ -42,25 +36,44 @@ public class TranslationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_translations, container, false);
 
-        ListView listView = (ListView) view.findViewById(android.R.id.list);
-
-        String[] from = new String[]{"language", "translator"};
-        int[] to = new int[]{R.id.language, R.id.translator};
-
-        List<HashMap<String, String>> data = new ArrayList<>();
-        HashMap<String, String> map;
-        String[] l = getResources().getStringArray(R.array.languages);
-        String[] t = getResources().getStringArray(R.array.translators);
-        for (int i = 0; i < l.length; i++) {
-            map = new HashMap<>();
-            map.put("language", l[i]);
-            map.put("translator", t[i]);
-            data.add(map);
-        }
-
-        listView.setAdapter(new SimpleAdapter(getActivity(),
-                data, R.layout.list_item_translation, from, to));
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(android.R.id.list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(new TranslationsAdapter());
 
         return view;
+    }
+
+    private class TranslationsAdapter extends RecyclerView.Adapter<TranslationViewHolder> {
+
+        @Override
+        public TranslationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.list_item_translation, parent, false);
+            return new TranslationViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(TranslationViewHolder holder, int position) {
+            holder.translator.setText(getResources().getStringArray(R.array.translators)[position]);
+            holder.language.setText(getResources().getStringArray(R.array.languages)[position]);
+        }
+
+        @Override
+        public int getItemCount() {
+            return getResources().getStringArray(R.array.translators).length;
+        }
+    }
+
+    private static class TranslationViewHolder extends RecyclerView.ViewHolder {
+
+        TextView translator;
+        TextView language;
+
+        public TranslationViewHolder(View itemView) {
+            super(itemView);
+            translator = (TextView) itemView.findViewById(R.id.translator);
+            language = (TextView) itemView.findViewById(R.id.language);
+        }
     }
 }

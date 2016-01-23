@@ -13,8 +13,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<com.db.chart.view.LineChartView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sbgapps.scoreit.views.widgets.LineChart xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/line_chart"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp" />
+    android:padding="16dp"
+    app:lineAxisColor="@color/gray_light" />
