@@ -54,7 +54,7 @@ public abstract class ScoreListAdapter<E extends ScoreListAdapter.ViewHolder> ex
 
     @Override
     public void onBindViewHolder(final E viewHolder, int i) {
-        final Lap lap = getGameHelper().getLaps().get(i);
+        final Lap lap = getGameHelper().getLaps().get(viewHolder.getAdapterPosition());
         viewHolder.mDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

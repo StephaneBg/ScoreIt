@@ -14,13 +14,15 @@
   ~ limitations under the License.
   -->
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <com.db.chart.view.LineChartView
+    <com.sbgapps.scoreit.views.widgets.LineChart
         android:id="@+id/line_chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp" />
+        android:padding="16dp"
+        app:lineAxisColor="@color/gray_light" />
 </android.support.v4.widget.NestedScrollView>

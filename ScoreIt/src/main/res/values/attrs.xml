@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,24 +17,28 @@
 <resources>
 
     <declare-styleable name="AdaptiveTheme">
-        <attr name="isDialog" format="boolean"/>
+        <attr name="isDialog" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="SeekArc">
-        <attr name="thumbOffset" format="dimension"/>
-        <attr name="max" format="integer"/>
-        <attr name="progressWidth" format="dimension"/>
-        <attr name="arcWidth" format="dimension"/>
-        <attr name="progress" format="integer"/>
-        <attr name="arcColor" format="color"/>
-        <attr name="progressColor" format="color"/>
-        <attr name="thumbColor" format="color"/>
-        <attr name="thumbRadius" format="dimension"/>
-        <attr name="clockwise" format="boolean"/>
-        <attr name="touchable" format="boolean"/>
+        <attr name="thumbOffset" format="dimension" />
+        <attr name="max" format="integer" />
+        <attr name="progressWidth" format="dimension" />
+        <attr name="arcWidth" format="dimension" />
+        <attr name="progress" format="integer" />
+        <attr name="arcColor" format="color" />
+        <attr name="progressColor" format="color" />
+        <attr name="thumbColor" format="color" />
+        <attr name="thumbRadius" format="dimension" />
+        <attr name="clockwise" format="boolean" />
+        <attr name="touchable" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="MaxWidthFrameLayout">
-        <attr name="maxWidth" format="dimension"/>
+        <attr name="maxWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="LineChart">
+        <attr name="lineAxisColor" format="color" />
     </declare-styleable>
 </resources>

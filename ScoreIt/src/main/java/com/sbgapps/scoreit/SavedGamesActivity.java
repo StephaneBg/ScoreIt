@@ -18,10 +18,12 @@ package com.sbgapps.scoreit;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sbgapps.scoreit.utils.GameHelper;
 
@@ -32,6 +34,9 @@ import java.util.List;
  */
 public class SavedGamesActivity extends BaseActivity {
 
+    private GameHelper mGameHelper;
+    private List<String> mGames;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,24 +46,56 @@ public class SavedGamesActivity extends BaseActivity {
             actionBar.setTitle(getString(R.string.saved_games));
         }
 
-        final GameHelper gameHelper = new GameHelper(this);
-        final List<String> games = gameHelper.getFileUtils().getSavedFiles();
+        mGameHelper = new GameHelper(this);
+        mGames = mGameHelper.getFileUtils().getSavedFiles();
 
-        ListView listView = (ListView) findViewById(android.R.id.list);
-        listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, games));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String game = games.get(position);
-                gameHelper.getFileUtils().setPlayedFile(game);
-                setResult(RESULT_OK);
-                finish();
-            }
-        });
+        RecyclerView recyclerView = (RecyclerView) findViewById(android.R.id.list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new SaveAdapter());
     }
 
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_saved_games;
+    }
+
+    private class SaveAdapter extends RecyclerView.Adapter<SaveViewHolder> {
+
+        @Override
+        public SaveViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext())
+                    .inflate(android.R.layout.simple_list_item_1, parent, false);
+            return new SaveViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(final SaveViewHolder holder, int position) {
+            holder.game.setText(mGames.get(position));
+            holder.game.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String game = mGames.get(holder.getAdapterPosition());
+                    mGameHelper.getFileUtils().setPlayedFile(game);
+                    setResult(RESULT_OK);
+                    finish();
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return mGames.size();
+        }
+    }
+
+    private static class SaveViewHolder extends RecyclerView.ViewHolder {
+
+        TextView game;
+
+        public SaveViewHolder(View itemView) {
+            super(itemView);
+            game = (TextView) itemView.findViewById(android.R.id.text1);
+        }
     }
 }

@@ -24,7 +24,6 @@ dependencies {
 
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.anjlab.android.iab.v3:library:1.0.30'
-    compile 'com.diogobernardino:williamchart:2.2'
     compile 'com.code-troopers.betterpickers:library:2.2.2'
     compile 'com.sromku:simple-storage:1.2.0'
 }
@@ -85,16 +84,32 @@ android {
     }
 }
 
+// Get location of adb
+Properties localProperties = new Properties()
+try {
+    localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+catch (ex) {
+    throw new InvalidUserDataException("You should define the path to your Android SDK as a " +
+            "property `sdk.dir` in local.properties on the project root."
+    )
+}
+def adb = localProperties.getProperty('sdk.dir') + '/platform-tools/adb'
+
 task runDebug(dependsOn: 'installDebug') {
     description 'Runs the debug-flavour of the app on the connected device'
     doLast {
-        exec{commandLine "$adb", "shell", "am", "start", "-n", "com.sbgapps.scoreit/.MainActivity"}
+        exec {
+            commandLine "$adb", "shell", "am", "start", "-n", "com.sbgapps.scoreit/.ScoreItActivity"
+        }
     }
 }
 
 task runRelease(dependsOn: 'installRelease') {
     description 'Runs the release-flavour of the app on the connected device'
     doLast {
-        exec{commandLine "$adb", "shell", "am", "start", "-n", "com.sbgapps.scoreit/.MainActivity"}
+        exec {
+            commandLine "$adb", "shell", "am", "start", "-n", "com.sbgapps.scoreit/.ScoreItActivity"
+        }
     }
 }
