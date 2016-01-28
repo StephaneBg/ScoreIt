@@ -16,6 +16,7 @@
   ~ limitations under the License.
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.sbgapps.scoreit">
 
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
@@ -24,7 +25,8 @@
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name">
+        android:label="@string/app_name"
+        tools:replace="android:allowBackup">
 
         <activity
             android:name=".ScoreItActivity"

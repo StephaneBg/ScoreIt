@@ -15,9 +15,10 @@
   -->
 
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                                            xmlns:tools="http://schemas.android.com/tools"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            tools:context=".ScoreItActivity">
 
     <LinearLayout
         android:id="@+id/ll_container"
@@ -29,7 +30,7 @@
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/bidding" />
+            android:text="@string/bidding"/>
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_bidder"
@@ -37,17 +38,17 @@
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin" />
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
 
         <com.sbgapps.scoreit.views.widgets.SeekPoints
             android:id="@+id/seekbar_bid"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/coinche" />
+            android:text="@string/coinche"/>
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_coinche"
@@ -55,11 +56,11 @@
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin" />
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/points" />
+            android:text="@string/points"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,7 +84,7 @@
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:gravity="center"
                     android:textSize="@dimen/font_headline"
-                    tools:text="Them" />
+                    tools:text="Them"/>
 
                 <TextView
                     android:id="@+id/player1_points"
@@ -91,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="@dimen/font_headline"
-                    tools:text="120" />
+                    tools:text="120"/>
             </LinearLayout>
 
             <ImageButton
@@ -100,7 +101,7 @@
                 android:layout_height="@dimen/circle_btn"
                 android:background="@drawable/btn_round_selector"
                 android:src="@drawable/ic_swap_horiz_24dp"
-                android:tint="@color/gray_dark" />
+                android:tint="@color/gray_dark"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -116,7 +117,7 @@
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:gravity="center"
                     android:textSize="@dimen/font_headline"
-                    tools:text="Us" />
+                    tools:text="Us"/>
 
                 <TextView
                     android:id="@+id/player2_points"
@@ -124,18 +125,18 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="@dimen/font_headline"
-                    tools:text="40" />
+                    tools:text="40"/>
             </LinearLayout>
         </LinearLayout>
 
         <com.sbgapps.scoreit.views.widgets.SeekPoints
             android:id="@+id/seekbar_points"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
         <TextView
             style="@style/SubHeader"
-            android:text="@string/announces" />
+            android:text="@string/announces"/>
 
         <Button
             android:id="@+id/btn_add_bonus"
@@ -144,6 +145,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:text="@string/add"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

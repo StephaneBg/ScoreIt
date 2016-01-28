@@ -46,7 +46,7 @@
         android:layout_marginRight="@dimen/default_margin"
         android:background="?attr/colorPrimary"/>
 
-    <TextView
+    <com.aprilapps.countingtextview.CountingTextView
         android:id="@+id/score"
         android:layout_width="match_parent"
         android:layout_height="0dp"
