@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.aprilapps.countingtextview.CountingTextView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.models.Game;
@@ -73,7 +74,13 @@ public class HeaderAdapter extends BaseAdapter {
 
             h = new ViewHolder();
             h.name = (TextView) convertView.findViewById(R.id.name);
-            h.score = (TextView) convertView.findViewById(R.id.score);
+            h.score = (CountingTextView) convertView.findViewById(R.id.score);
+            h.score.setFormatter(new CountingTextView.ValueFormatter() {
+                @Override
+                public String formatValue(float value) {
+                    return String.format("%.0f", value);
+                }
+            });
             h.marker = convertView.findViewById(R.id.marker);
             convertView.setTag(h);
         } else {
@@ -92,7 +99,7 @@ public class HeaderAdapter extends BaseAdapter {
         }
 
         h.name.setText(info.mPlayer.getName());
-        h.score.setText(Integer.toString(info.mScore));
+        h.score.setValue(info.mScore);
         h.score.setTextColor(mGameHelper.getPlayerColor(position));
 
         int mod = -1;
@@ -106,7 +113,7 @@ public class HeaderAdapter extends BaseAdapter {
 
     private static class ViewHolder {
         TextView name;
-        TextView score;
+        CountingTextView score;
         View marker;
     }
 

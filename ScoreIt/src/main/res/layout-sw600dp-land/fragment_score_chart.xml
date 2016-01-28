@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<!--
   ~ Copyright (c) 2015 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,9 +14,9 @@
   ~ limitations under the License.
   -->
 <com.sbgapps.scoreit.views.widgets.LineChart xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/line_chart"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    app:lineAxisColor="@color/gray_light" />
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:id="@+id/line_chart"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:layout_margin="@dimen/default_margin"
+                                             app:lineAxisColor="@color/gray_light"/>

@@ -326,6 +326,7 @@ public class ScoreItActivity extends BaseActivity {
 
         setTitle();
         animateActionButton();
+        mIsChartDisplayed = false;
         invalidateOptionsMenu();
         reloadUi();
     }
@@ -423,7 +424,7 @@ public class ScoreItActivity extends BaseActivity {
             mHeaderFragment.update();
         if (null != mScoreListFragment && mScoreListFragment.isVisible())
             mScoreListFragment.getListAdapter().notifyItemRemoved(position);
-        if (null != mScoreChartFragment)
+        if (null != mScoreChartFragment && mScoreChartFragment.isVisible())
             mScoreChartFragment.update();
 
         invalidateOptionsMenu();
@@ -441,7 +442,7 @@ public class ScoreItActivity extends BaseActivity {
                     mHeaderFragment.update();
                 if (null != mScoreListFragment && mScoreListFragment.isVisible())
                     mScoreListFragment.getListAdapter().notifyItemInserted(position);
-                if (null != mScoreChartFragment)
+                if (null != mScoreChartFragment && mScoreChartFragment.isVisible())
                     mScoreChartFragment.update();
                 invalidateOptionsMenu();
             }
@@ -475,8 +476,10 @@ public class ScoreItActivity extends BaseActivity {
 
     public void updateFragments() {
         if (null != mHeaderFragment) mHeaderFragment.update();
-        if (null != mScoreListFragment) mScoreListFragment.update();
-        if (null != mScoreChartFragment) mScoreChartFragment.update();
+        if (null != mScoreListFragment && mScoreListFragment.isVisible())
+            mScoreListFragment.update();
+        if (null != mScoreChartFragment && mScoreChartFragment.isVisible())
+            mScoreChartFragment.update();
         try {
             getSupportFragmentManager()
                     .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);

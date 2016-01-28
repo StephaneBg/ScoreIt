@@ -21,7 +21,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_primary_400"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:context=".AboutActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
