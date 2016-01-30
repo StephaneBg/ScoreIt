@@ -80,7 +80,7 @@ public class ScoreItActivity extends BaseActivity {
 
     private DrawerLayout mDrawerLayout;
     private FloatingActionButton mActionButton;
-    private View mGraphContainer;
+    private View mChartContainer;
     private View mMainContainer;
 
     private GameHelper mGameHelper;
@@ -107,7 +107,7 @@ public class ScoreItActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mGraphContainer = findViewById(R.id.chart_container);
+        mChartContainer = findViewById(R.id.chart_container);
         mMainContainer = findViewById(R.id.main_container);
 
         mGameHelper = new GameHelper(this);
@@ -126,7 +126,8 @@ public class ScoreItActivity extends BaseActivity {
                 int position = savedInstanceState.getInt("position");
                 mEditedLap = mGameHelper.getLaps().get(position);
             }
-            mIsChartDisplayed = savedInstanceState.getBoolean("chartShown");
+            mIsChartDisplayed = savedInstanceState.getBoolean("chartDisplayed");
+            boolean wasTablet = savedInstanceState.getBoolean("wasTablet");
 
             mHeaderFragment = (HeaderFragment) getSupportFragmentManager()
                     .findFragmentByTag(HeaderFragment.TAG);
@@ -134,6 +135,26 @@ public class ScoreItActivity extends BaseActivity {
                     .findFragmentByTag(ScoreListFragment.TAG);
             mScoreChartFragment = (ScoreChartFragment) getSupportFragmentManager()
                     .findFragmentByTag(ScoreChartFragment.TAG);
+
+            if (!wasTablet && isTablet()) {
+                if (null != mScoreChartFragment) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .detach(mScoreChartFragment)
+                            .commit();
+                    if (null == mLap) {
+                        showScoreListFragment(false);
+                    }
+                }
+                showScoreChartFragment(false);
+            } else if (wasTablet && !isTablet()) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .detach(mScoreChartFragment)
+                        .commit();
+                mScoreChartFragment = null;
+                mIsChartDisplayed = false;
+            }
         } else {
             if (isTablet()) {
                 showHeaderFragment(false);
@@ -291,7 +312,7 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     public boolean isTablet() {
-        return (null != mGraphContainer);
+        return (null != mChartContainer);
     }
 
     @Override
@@ -305,7 +326,8 @@ public class ScoreItActivity extends BaseActivity {
             outState.putSerializable("lap", mLap);
         }
         if (Player.PLAYER_NONE != mEditedPlayer) outState.putInt("editedPlayer", mEditedPlayer);
-        outState.putBoolean("chartShown", mIsChartDisplayed);
+        outState.putBoolean("chartDisplayed", mIsChartDisplayed);
+        outState.putBoolean("wasTablet", isTablet());
         super.onSaveInstanceState(outState);
     }
 
@@ -384,14 +406,19 @@ public class ScoreItActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        invalidateOptionsMenu();
         if (null != mLap) {
             mLap = null;
             mEditedLap = null;
             mIsEdited = false;
             animateActionButton();
         }
+        invalidateOptionsMenu();
         super.onBackPressed();
+        if (mIsChartDisplayed && !isTablet()) {
+            if (null == mScoreChartFragment) showScoreChartFragment(true);
+        } else if (null == mScoreListFragment) {
+            showScoreListFragment(true);
+        }
     }
 
     @Override
@@ -476,8 +503,11 @@ public class ScoreItActivity extends BaseActivity {
 
     public void updateFragments() {
         if (null != mHeaderFragment) mHeaderFragment.update();
-        if (null != mScoreListFragment && mScoreListFragment.isVisible())
-            mScoreListFragment.update();
+        if (null != mScoreListFragment) {
+            if (mScoreListFragment.isVisible()) mScoreListFragment.update();
+        } else if (isTablet()) {
+            showScoreListFragment(true);
+        }
         if (null != mScoreChartFragment && mScoreChartFragment.isVisible())
             mScoreChartFragment.update();
         try {
