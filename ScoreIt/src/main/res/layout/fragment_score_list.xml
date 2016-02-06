@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
-  ~ Copyright (c) 2015 SBG Apps
+  ~ Copyright (c) 2016 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -20,4 +19,4 @@
     android:id="@android:id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none" />
+    android:scrollbars="none"/>
