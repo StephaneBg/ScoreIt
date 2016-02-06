@@ -14,25 +14,30 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <resources>
 
-    <style name="Theme.ScoreIt" parent="AppTheme.Base" />
-
-    <style name="Theme.Adaptive" parent="AppTheme.Base">
-        <item name="isDialog">false</item>
-    </style>
-
-    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <item name="android:windowBackground">@color/white</item>
-        <item name="android:windowContentOverlay">@null</item>
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
     </style>
 
-    <style name="Theme.Dialog" parent="Theme.AppCompat.Light.Dialog">
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.Adaptive">
+        <item name="android:windowBackground">@color/color_primary_400</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="isDialog">false</item>
+    </style>
+
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@color/color_primary_400</item>
+        <item name="android:textColor">@color/white</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/color_primary</item>
@@ -52,4 +57,8 @@
     <style name="AlertDialogNegativeButton" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/gray_dark</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>

@@ -52,14 +52,9 @@ public class ScoreChartFragment extends Fragment {
         final GameHelper gameHelper = getGameHelper();
         final int lapCnt = gameHelper.getLaps().size();
 
-        if (0 == lapCnt) {
-            mGraph.setVisibility(View.INVISIBLE);
-            return;
-        } else {
-            mGraph.setVisibility(View.VISIBLE);
-        }
-
         mGraph.removeAllLines();
+        if (0 == lapCnt) return;
+
         LineChart.LinePoint p = new LineChart.LinePoint(mX = 0, 0);
         int color;
         for (int i = 0; i < gameHelper.getPlayerCount(); i++) {

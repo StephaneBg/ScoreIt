@@ -81,7 +81,7 @@ public class ScoreItActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
     private FloatingActionButton mActionButton;
     private View mChartContainer;
-    private View mMainContainer;
+    private View mCoordinator;
 
     private GameHelper mGameHelper;
     private int mEditedPlayer = Player.PLAYER_NONE;
@@ -108,7 +108,7 @@ public class ScoreItActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mChartContainer = findViewById(R.id.chart_container);
-        mMainContainer = findViewById(R.id.main_container);
+        mCoordinator = findViewById(R.id.coordinator);
 
         mGameHelper = new GameHelper(this);
         mGameHelper.loadGame();
@@ -456,7 +456,7 @@ public class ScoreItActivity extends BaseActivity {
 
         invalidateOptionsMenu();
 
-        mSnackBar = Snackbar.make(mMainContainer, R.string.deleted_lap, Snackbar.LENGTH_LONG);
+        mSnackBar = Snackbar.make(mCoordinator, R.string.deleted_lap, Snackbar.LENGTH_LONG);
         mSnackBar.setAction(R.string.undo, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
