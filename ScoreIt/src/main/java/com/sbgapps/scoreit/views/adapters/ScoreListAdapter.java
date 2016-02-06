@@ -25,7 +25,7 @@ import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.fragments.ScoreListFragment;
 import com.sbgapps.scoreit.models.Lap;
-import com.sbgapps.scoreit.utils.GameHelper;
+import com.sbgapps.scoreit.models.GameManager;
 import com.sbgapps.scoreit.views.widgets.LinearListView;
 import com.sbgapps.scoreit.views.widgets.RevealView;
 
@@ -84,8 +84,8 @@ public abstract class ScoreListAdapter<E extends ScoreListAdapter.ViewHolder> ex
         return getGameHelper().getLaps().size();
     }
 
-    public GameHelper getGameHelper() {
-        return getActivity().getGameHelper();
+    public GameManager getGameHelper() {
+        return getActivity().getGameManager();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

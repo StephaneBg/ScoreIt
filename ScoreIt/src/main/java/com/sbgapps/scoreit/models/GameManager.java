@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.utils;
+package com.sbgapps.scoreit.models;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,6 +34,7 @@ import com.sbgapps.scoreit.models.tarot.TarotFiveGame;
 import com.sbgapps.scoreit.models.tarot.TarotFourGame;
 import com.sbgapps.scoreit.models.tarot.TarotThreeGame;
 import com.sbgapps.scoreit.models.universal.UniversalGame;
+import com.sbgapps.scoreit.utils.FileUtils;
 import com.sromku.simple.storage.SimpleStorage;
 import com.sromku.simple.storage.Storage;
 
@@ -47,7 +48,7 @@ import java.util.List;
 /**
  * Created by sbaiget on 01/11/13.
  */
-public class GameHelper {
+public class GameManager {
 
     public static final String KEY_SELECTED_GAME = "selected_game";
     public static final String KEY_UNIVERSAL_PLAYER_CNT = "universal_player_count";
@@ -63,7 +64,7 @@ public class GameHelper {
     private int mPlayedGame;
     private Player mPlayerTotal;
 
-    public GameHelper(Activity activity) {
+    public GameManager(Activity activity) {
         mContext = activity;
         mStorage = SimpleStorage.getInternalStorage(mContext);
         mFileUtils = new FileUtils(this);

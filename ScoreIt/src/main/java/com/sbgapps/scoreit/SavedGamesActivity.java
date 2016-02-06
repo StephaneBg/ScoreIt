@@ -25,7 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sbgapps.scoreit.utils.GameHelper;
+import com.sbgapps.scoreit.models.GameManager;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class SavedGamesActivity extends BaseActivity {
 
-    private GameHelper mGameHelper;
+    private GameManager mGameManager;
     private List<String> mGames;
 
     @Override
@@ -46,8 +46,8 @@ public class SavedGamesActivity extends BaseActivity {
             actionBar.setTitle(getString(R.string.saved_games));
         }
 
-        mGameHelper = new GameHelper(this);
-        mGames = mGameHelper.getFileUtils().getSavedFiles();
+        mGameManager = new GameManager(this);
+        mGames = mGameManager.getFileUtils().getSavedFiles();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(android.R.id.list);
         recyclerView.setHasFixedSize(true);
@@ -76,7 +76,7 @@ public class SavedGamesActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     String game = mGames.get(holder.getAdapterPosition());
-                    mGameHelper.getFileUtils().setPlayedFile(game);
+                    mGameManager.getFileUtils().setPlayedFile(game);
                     setResult(RESULT_OK);
                     finish();
                 }

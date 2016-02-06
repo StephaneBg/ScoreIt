@@ -29,7 +29,7 @@ import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.models.Game;
 import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.models.Player;
-import com.sbgapps.scoreit.utils.GameHelper;
+import com.sbgapps.scoreit.models.GameManager;
 
 /**
  * Created by Stéphane on 16/07/2014.
@@ -38,26 +38,26 @@ public class HeaderAdapter extends BaseAdapter {
 
     private final ScoreItActivity mActivity;
     private final LayoutInflater mInflater;
-    private final GameHelper mGameHelper;
+    private final GameManager mGameManager;
 
     public HeaderAdapter(Activity activity) {
         mActivity = (ScoreItActivity) activity;
         mInflater = LayoutInflater.from(mActivity);
-        mGameHelper = mActivity.getGameHelper();
+        mGameManager = mActivity.getGameManager();
     }
 
     @Override
     public int getCount() {
-        return mGameHelper.getPlayerCount(true);
+        return mGameManager.getPlayerCount(true);
     }
 
     @Override
     public Info getItem(int position) {
         int score = 0;
-        for (Lap lap : mGameHelper.getLaps()) {
+        for (Lap lap : mGameManager.getLaps()) {
             score += lap.getScore(position);
         }
-        return new Info(mGameHelper.getPlayer(position), score);
+        return new Info(mGameManager.getPlayer(position), score);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class HeaderAdapter extends BaseAdapter {
 
         final Info info = getItem(position);
 
-        if (position < mGameHelper.getPlayers().size()) {
+        if (position < mGameManager.getPlayers().size()) {
             h.name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -100,12 +100,12 @@ public class HeaderAdapter extends BaseAdapter {
 
         h.name.setText(info.mPlayer.getName());
         h.score.setValue(info.mScore);
-        h.score.setTextColor(mGameHelper.getPlayerColor(position));
+        h.score.setTextColor(mGameManager.getPlayerColor(position));
 
         int mod = -1;
-        if (Game.BELOTE != mGameHelper.getPlayedGame()
-                && Game.COINCHE != mGameHelper.getPlayedGame())
-            mod = mGameHelper.getLaps().size() % mGameHelper.getPlayerCount();
+        if (Game.BELOTE != mGameManager.getPlayedGame()
+                && Game.COINCHE != mGameManager.getPlayedGame())
+            mod = mGameManager.getLaps().size() % mGameManager.getPlayerCount();
         h.marker.setVisibility(position == mod ? View.VISIBLE : View.INVISIBLE);
 
         return convertView;

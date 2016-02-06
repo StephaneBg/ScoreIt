@@ -28,6 +28,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.ToggleButton;
 
 import com.sbgapps.scoreit.R;
@@ -76,7 +77,7 @@ public class TarotLapFragment extends LapFragment
 
         if (null == getLap()) return view;
 
-        mTaker.setAdapter(getPlayerArrayAdapter());
+        mTaker.setAdapter(getPlayerAdapter());
         mTaker.setSelection(getLap().getTaker());
         mTaker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -93,16 +94,8 @@ public class TarotLapFragment extends LapFragment
         if (5 == getGameHelper().getPlayerCount()) {
             ViewStub stub = (ViewStub) view.findViewById(R.id.viewstub_partner);
             View v = stub.inflate();
-            final ArrayAdapter<PlayerItem> partnerItemArrayAdapter = new ArrayAdapter<>(getActivity(),
-                    android.R.layout.simple_spinner_item);
-            partnerItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_1));
-            partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_2));
-            partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_3));
-            partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_4));
-            partnerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_5));
             mPartner = (Spinner) v.findViewById(R.id.spinner_partner);
-            mPartner.setAdapter(partnerItemArrayAdapter);
+            mPartner.setAdapter(getPartnerAdapter());
             mPartner.setSelection(((TarotFiveLap) getLap()).getPartner());
             mPartner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -117,14 +110,7 @@ public class TarotLapFragment extends LapFragment
             });
         }
 
-        final ArrayAdapter<BidItem> bidItemArrayAdapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_spinner_item);
-        bidItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        bidItemArrayAdapter.add(new BidItem(TarotBid.BID_PRISE));
-        bidItemArrayAdapter.add(new BidItem(TarotBid.BID_GARDE));
-        bidItemArrayAdapter.add(new BidItem(TarotBid.BID_GARDE_SANS));
-        bidItemArrayAdapter.add(new BidItem(TarotBid.BID_GARDE_CONTRE));
-        mBid.setAdapter(bidItemArrayAdapter);
+        mBid.setAdapter(getBidAdapter());
         mBid.setSelection(getLap().getBid().get());
         mBid.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -236,7 +222,7 @@ public class TarotLapFragment extends LapFragment
         });
 
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner_announce);
-        spinner.setAdapter(getBonusArrayAdapter());
+        spinner.setAdapter(getBonusAdapter());
         spinner.setSelection(bonus.get());
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -251,8 +237,7 @@ public class TarotLapFragment extends LapFragment
         });
 
         spinner = (Spinner) view.findViewById(R.id.spinner_player);
-        ArrayAdapter<PlayerItem> aa = getPlayerArrayAdapter();
-        spinner.setAdapter(aa);
+        spinner.setAdapter(getPlayerAdapter());
         spinner.setSelection(bonus.getPlayer());
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -271,37 +256,60 @@ public class TarotLapFragment extends LapFragment
         mButtonBonus.setEnabled(bonuses.size() < 3);
     }
 
-    private ArrayAdapter<PlayerItem> getPlayerArrayAdapter() {
-        ArrayAdapter<PlayerItem> playerItemArrayAdapter = new ArrayAdapter<>(getActivity(),
+    private SpinnerAdapter getPlayerAdapter() {
+        ArrayAdapter<PlayerItem> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
-        playerItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_1));
-        playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_2));
-        playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_3));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.add(new PlayerItem(Player.PLAYER_1));
+        adapter.add(new PlayerItem(Player.PLAYER_2));
+        adapter.add(new PlayerItem(Player.PLAYER_3));
         switch (getGameHelper().getPlayerCount()) {
             case 4:
-                playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_4));
+                adapter.add(new PlayerItem(Player.PLAYER_4));
                 break;
             case 5:
-                playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_4));
-                playerItemArrayAdapter.add(new PlayerItem(Player.PLAYER_5));
+                adapter.add(new PlayerItem(Player.PLAYER_4));
+                adapter.add(new PlayerItem(Player.PLAYER_5));
                 break;
         }
-        return playerItemArrayAdapter;
+        return adapter;
     }
 
-    private ArrayAdapter<TarotBonusItem> getBonusArrayAdapter() {
-        final ArrayAdapter<TarotBonusItem> announceItemArrayAdapter = new ArrayAdapter<>(getActivity(),
+    private SpinnerAdapter getBidAdapter() {
+        ArrayAdapter<BidItem> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
-        announceItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_PETIT_AU_BOUT));
-        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_SIMPLE));
-        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_DOUBLE));
-        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_TRIPLE));
-        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_NON_ANNONCE));
-        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE));
-        announceItemArrayAdapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE));
-        return announceItemArrayAdapter;
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.add(new BidItem(TarotBid.BID_PRISE));
+        adapter.add(new BidItem(TarotBid.BID_GARDE));
+        adapter.add(new BidItem(TarotBid.BID_GARDE_SANS));
+        adapter.add(new BidItem(TarotBid.BID_GARDE_CONTRE));
+        return adapter;
+    }
+
+    private SpinnerAdapter getPartnerAdapter() {
+        ArrayAdapter<PlayerItem> adapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.add(new PlayerItem(Player.PLAYER_1));
+        adapter.add(new PlayerItem(Player.PLAYER_2));
+        adapter.add(new PlayerItem(Player.PLAYER_3));
+        adapter.add(new PlayerItem(Player.PLAYER_4));
+        adapter.add(new PlayerItem(Player.PLAYER_5));
+        return adapter;
+    }
+
+    private SpinnerAdapter getBonusAdapter() {
+        ArrayAdapter<TarotBonusItem> adapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.add(new TarotBonusItem(TarotBonus.BONUS_PETIT_AU_BOUT));
+        adapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_SIMPLE));
+        adapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_DOUBLE));
+        adapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_TRIPLE));
+        adapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_NON_ANNONCE));
+        adapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE));
+        adapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE));
+        return adapter;
     }
 
     @Override
