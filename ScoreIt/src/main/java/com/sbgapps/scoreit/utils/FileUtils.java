@@ -19,6 +19,7 @@ package com.sbgapps.scoreit.utils;
 import android.content.SharedPreferences;
 
 import com.sbgapps.scoreit.models.Game;
+import com.sbgapps.scoreit.models.GameManager;
 import com.sromku.simple.storage.Storage;
 import com.sromku.simple.storage.helpers.OrderType;
 
@@ -31,27 +32,27 @@ import java.util.List;
  */
 public class FileUtils {
 
-    final private GameHelper mGameHelper;
+    final private GameManager mGameManager;
 
-    public FileUtils(GameHelper gameHelper) {
-        mGameHelper = gameHelper;
+    public FileUtils(GameManager gameManager) {
+        mGameManager = gameManager;
     }
 
     public Storage getStorage() {
-        return mGameHelper.getStorage();
+        return mGameManager.getStorage();
     }
 
     public File getPlayedFile() {
-        String fileName = mGameHelper.getPreferences().getString(getKey(), "default");
+        String fileName = mGameManager.getPreferences().getString(getKey(), "default");
         return getStorage().getFile(getDirectory(), fileName);
     }
 
     public boolean isDefaultFile() {
-        return mGameHelper.getPreferences().getString(getKey(), "default").equals("default");
+        return mGameManager.getPreferences().getString(getKey(), "default").equals("default");
     }
 
     public void setPlayedFile(String fileName) {
-        SharedPreferences.Editor editor = mGameHelper.getPreferences().edit();
+        SharedPreferences.Editor editor = mGameManager.getPreferences().edit();
         editor.putString(getKey(), fileName);
         editor.apply();
     }
@@ -75,10 +76,10 @@ public class FileUtils {
 
     private String getDirectory() {
         String dir;
-        switch (mGameHelper.getPlayedGame()) {
+        switch (mGameManager.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
-                dir = "universal_" + mGameHelper.getPlayerCount();
+                dir = "universal_" + mGameManager.getPlayerCount();
                 break;
             case Game.BELOTE:
                 dir = "belote";
@@ -87,7 +88,7 @@ public class FileUtils {
                 dir = "coinche_2";
                 break;
             case Game.TAROT:
-                dir = "tarot_" + mGameHelper.getPlayerCount();
+                dir = "tarot_" + mGameManager.getPlayerCount();
                 break;
         }
         if (!getStorage().isDirectoryExists(dir)) {
@@ -98,10 +99,10 @@ public class FileUtils {
 
     private String getKey() {
         String key;
-        switch (mGameHelper.getPlayedGame()) {
+        switch (mGameManager.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
-                key = "universal_" + mGameHelper.getPlayerCount() + "_file";
+                key = "universal_" + mGameManager.getPlayerCount() + "_file";
                 break;
             case Game.BELOTE:
                 key = "belote_file";
@@ -110,7 +111,7 @@ public class FileUtils {
                 key = "coinche_file";
                 break;
             case Game.TAROT:
-                key = "tarot_" + mGameHelper.getPlayerCount() + "_file";
+                key = "tarot_" + mGameManager.getPlayerCount() + "_file";
                 break;
         }
         return key;

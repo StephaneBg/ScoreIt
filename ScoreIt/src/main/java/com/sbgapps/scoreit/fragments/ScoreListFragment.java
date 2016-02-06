@@ -25,7 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.utils.GameHelper;
+import com.sbgapps.scoreit.models.GameManager;
 import com.sbgapps.scoreit.views.adapters.GenericBeloteScoreAdapter;
 import com.sbgapps.scoreit.views.adapters.ScoreListAdapter;
 import com.sbgapps.scoreit.views.adapters.TarotScoreAdapter;
@@ -69,8 +69,8 @@ public class ScoreListFragment extends Fragment {
             }
         });
 
-        GameHelper gameHelper = activity.getGameHelper();
-        switch (gameHelper.getPlayedGame()) {
+        GameManager gameManager = activity.getGameManager();
+        switch (gameManager.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
                 mAdapter = new UniversalScoreAdapter(this);

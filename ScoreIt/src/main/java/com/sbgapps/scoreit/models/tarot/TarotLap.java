@@ -173,17 +173,18 @@ public abstract class TarotLap implements Lap {
     }
 
     public int getPoigneeBonus() {
+        int pts = 0;
         for (TarotBonus bonus : getBonuses()) {
             switch (bonus.get()) {
                 case TarotBonus.BONUS_POIGNEE_SIMPLE:
-                    return 20;
+                    pts += 20;
                 case TarotBonus.BONUS_POIGNEE_DOUBLE:
-                    return 30;
+                    pts += 30;
                 case TarotBonus.BONUS_POIGNEE_TRIPLE:
-                    return 40;
+                    pts += 40;
             }
         }
-        return 0;
+        return pts;
     }
 
     public int getChelemBonus() {

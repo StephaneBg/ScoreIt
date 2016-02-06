@@ -25,7 +25,7 @@ import android.view.ViewGroup;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.models.Lap;
-import com.sbgapps.scoreit.utils.GameHelper;
+import com.sbgapps.scoreit.models.GameManager;
 import com.sbgapps.scoreit.views.widgets.LineChart;
 
 public class ScoreChartFragment extends Fragment {
@@ -36,8 +36,8 @@ public class ScoreChartFragment extends Fragment {
     private int[] mScores;
     private int mX;
 
-    public GameHelper getGameHelper() {
-        return ((ScoreItActivity) getActivity()).getGameHelper();
+    public GameManager getGameHelper() {
+        return ((ScoreItActivity) getActivity()).getGameManager();
     }
 
     @Override
@@ -49,32 +49,32 @@ public class ScoreChartFragment extends Fragment {
     }
 
     public void update() {
-        final GameHelper gameHelper = getGameHelper();
-        final int lapCnt = gameHelper.getLaps().size();
+        final GameManager gameManager = getGameHelper();
+        final int lapCnt = gameManager.getLaps().size();
 
         mGraph.removeAllLines();
         if (0 == lapCnt) return;
 
         LineChart.LinePoint p = new LineChart.LinePoint(mX = 0, 0);
         int color;
-        for (int i = 0; i < gameHelper.getPlayerCount(); i++) {
+        for (int i = 0; i < gameManager.getPlayerCount(); i++) {
             LineChart.LineSet line = new LineChart.LineSet();
-            color = gameHelper.getPlayerColor(i);
+            color = gameManager.getPlayerColor(i);
             line.setColor(color);
             line.addPoint(p);
             mGraph.addLine(line);
         }
 
-        mScores = new int[gameHelper.getPlayerCount()];
+        mScores = new int[gameManager.getPlayerCount()];
         for (int i = 0; i < lapCnt; i++) {
-            Lap lap = gameHelper.getLaps().get(i);
+            Lap lap = gameManager.getLaps().get(i);
             addLap(lap);
         }
     }
 
     public void addLap(Lap lap) {
         mX++;
-        GameHelper gh = getGameHelper();
+        GameManager gh = getGameHelper();
         for (int player = 0; player < gh.getPlayerCount(); player++) {
             mScores[player] += lap.getScore(player);
             LineChart.LinePoint p = new LineChart.LinePoint(mX, mScores[player]);

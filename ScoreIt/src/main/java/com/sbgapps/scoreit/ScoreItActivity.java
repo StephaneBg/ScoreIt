@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -58,6 +57,7 @@ import com.sbgapps.scoreit.fragments.ScoreListFragment;
 import com.sbgapps.scoreit.fragments.TarotLapFragment;
 import com.sbgapps.scoreit.fragments.UniversalLapFragment;
 import com.sbgapps.scoreit.models.Game;
+import com.sbgapps.scoreit.models.GameManager;
 import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.models.Player;
 import com.sbgapps.scoreit.models.belote.BeloteLap;
@@ -66,7 +66,6 @@ import com.sbgapps.scoreit.models.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.models.tarot.TarotFourLap;
 import com.sbgapps.scoreit.models.tarot.TarotThreeLap;
 import com.sbgapps.scoreit.models.universal.UniversalLap;
-import com.sbgapps.scoreit.utils.GameHelper;
 
 import java.util.List;
 
@@ -81,9 +80,8 @@ public class ScoreItActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
     private FloatingActionButton mActionButton;
     private View mChartContainer;
-    private View mCoordinator;
 
-    private GameHelper mGameHelper;
+    private GameManager mGameManager;
     private int mEditedPlayer = Player.PLAYER_NONE;
     private Lap mLap;
     private Lap mEditedLap;
@@ -95,8 +93,8 @@ public class ScoreItActivity extends BaseActivity {
     private ScoreChartFragment mScoreChartFragment;
     private HeaderFragment mHeaderFragment;
 
-    public GameHelper getGameHelper() {
-        return mGameHelper;
+    public GameManager getGameManager() {
+        return mGameManager;
     }
 
     public Lap getLap() {
@@ -108,10 +106,9 @@ public class ScoreItActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mChartContainer = findViewById(R.id.chart_container);
-        mCoordinator = findViewById(R.id.coordinator);
 
-        mGameHelper = new GameHelper(this);
-        mGameHelper.loadGame();
+        mGameManager = new GameManager(this);
+        mGameManager.loadGame();
 
         ActionBar ab = getSupportActionBar();
         if (null != ab) {
@@ -124,7 +121,7 @@ public class ScoreItActivity extends BaseActivity {
             mIsEdited = savedInstanceState.getBoolean("edited");
             if (mIsEdited) {
                 int position = savedInstanceState.getInt("position");
-                mEditedLap = mGameHelper.getLaps().get(position);
+                mEditedLap = mGameManager.getLaps().get(position);
             }
             mIsChartDisplayed = savedInstanceState.getBoolean("chartDisplayed");
             boolean wasTablet = savedInstanceState.getBoolean("wasTablet");
@@ -195,7 +192,7 @@ public class ScoreItActivity extends BaseActivity {
                 return true;
 
             case R.id.menu_save:
-                if (mGameHelper.getFileUtils().isDefaultFile()) {
+                if (mGameManager.getFileUtils().isDefaultFile()) {
                     showLoadActionChoices();
                 } else {
                     startSavedGamesActivity();
@@ -204,8 +201,8 @@ public class ScoreItActivity extends BaseActivity {
 
             case R.id.menu_total:
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-                boolean show = sp.getBoolean(GameHelper.KEY_UNIVERSAL_TOTAL, false);
-                sp.edit().putBoolean(GameHelper.KEY_UNIVERSAL_TOTAL, !show).apply();
+                boolean show = sp.getBoolean(GameManager.KEY_UNIVERSAL_TOTAL, false);
+                sp.edit().putBoolean(GameManager.KEY_UNIVERSAL_TOTAL, !show).apply();
                 updateFragments();
                 return true;
         }
@@ -226,8 +223,8 @@ public class ScoreItActivity extends BaseActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (null != mLap) return true;
 
-        int lapCnt = mGameHelper.getLaps().size();
-        int game = mGameHelper.getPlayedGame();
+        int lapCnt = mGameManager.getLaps().size();
+        int game = mGameManager.getPlayedGame();
 
         MenuItem item;
         item = menu.findItem(R.id.menu_view);
@@ -248,7 +245,7 @@ public class ScoreItActivity extends BaseActivity {
         item.setVisible(Game.UNIVERSAL == game || Game.TAROT == game);
 
         item = menu.findItem(R.id.menu_save);
-        List<String> files = mGameHelper.getFileUtils().getSavedFiles();
+        List<String> files = mGameManager.getFileUtils().getSavedFiles();
         item.setVisible(0 != files.size());
 
         item = menu.findItem(R.id.menu_total);
@@ -292,7 +289,7 @@ public class ScoreItActivity extends BaseActivity {
                         return true;
                     }
                 });
-        navigationView.getMenu().getItem(getGameHelper().getPlayedGame()).setChecked(true);
+        navigationView.getMenu().getItem(getGameManager().getPlayedGame()).setChecked(true);
     }
 
     private void setupActionButton() {
@@ -320,7 +317,7 @@ public class ScoreItActivity extends BaseActivity {
         if (null != mLap) {
             outState.putBoolean("edited", mIsEdited);
             if (mIsEdited) {
-                int idx = mGameHelper.getLaps().indexOf(mEditedLap);
+                int idx = mGameManager.getLaps().indexOf(mEditedLap);
                 outState.putInt("position", idx);
             }
             outState.putSerializable("lap", mLap);
@@ -338,9 +335,9 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     private void onGameSelected(int game) {
-        if (mGameHelper.getPlayedGame() == game) return;
+        if (mGameManager.getPlayedGame() == game) return;
 
-        mGameHelper.setPlayedGame(game);
+        mGameManager.setPlayedGame(game);
 
         mLap = null;
         mEditedLap = null;
@@ -355,7 +352,7 @@ public class ScoreItActivity extends BaseActivity {
 
     private void setTitle() {
         String title;
-        switch (mGameHelper.getPlayedGame()) {
+        switch (mGameManager.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
                 title = getString(R.string.universal);
@@ -389,7 +386,7 @@ public class ScoreItActivity extends BaseActivity {
                 if (cursor.moveToFirst()) {
                     int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                     name = cursor.getString(columnIndex);
-                    mGameHelper.getPlayer(mEditedPlayer).setName(name.split(" ")[0]);
+                    mGameManager.getPlayer(mEditedPlayer).setName(name.split(" ")[0]);
                     mEditedPlayer = Player.PLAYER_NONE;
                     mHeaderFragment.update();
                 }
@@ -397,7 +394,7 @@ public class ScoreItActivity extends BaseActivity {
                 break;
 
             case REQ_SAVED_GAME:
-                mGameHelper.loadGame();
+                mGameManager.loadGame();
                 invalidateOptionsMenu();
                 updateFragments();
                 break;
@@ -424,7 +421,7 @@ public class ScoreItActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mGameHelper.saveGame();
+        mGameManager.saveGame();
     }
 
     @Override
@@ -445,7 +442,7 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     public void removeLap(final Lap lap) {
-        final int position = mGameHelper.removeLap(lap);
+        final int position = mGameManager.removeLap(lap);
 
         if (null != mHeaderFragment)
             mHeaderFragment.update();
@@ -456,15 +453,16 @@ public class ScoreItActivity extends BaseActivity {
 
         invalidateOptionsMenu();
 
-        mSnackBar = Snackbar.make(mCoordinator, R.string.deleted_lap, Snackbar.LENGTH_LONG);
+        mSnackBar = Snackbar.make(findViewById(R.id.coordinator),
+                R.string.deleted_lap, Snackbar.LENGTH_LONG);
         mSnackBar.setAction(R.string.undo, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int p = position;
-                if (p > mGameHelper.getLaps().size())
-                    p = mGameHelper.getLaps().size();
+                if (p > mGameManager.getLaps().size())
+                    p = mGameManager.getLaps().size();
 
-                mGameHelper.getLaps().add(p, lap);
+                mGameManager.getLaps().add(p, lap);
                 if (null != mHeaderFragment)
                     mHeaderFragment.update();
                 if (null != mScoreListFragment && mScoreListFragment.isVisible())
@@ -475,7 +473,7 @@ public class ScoreItActivity extends BaseActivity {
             }
         })
                 .setActionTextColor(ColorStateList.valueOf(
-                        getResources().getColor(R.color.color_accent)))
+                        ContextCompat.getColor(this, R.color.color_accent)))
                 .show();
     }
 
@@ -514,6 +512,7 @@ public class ScoreItActivity extends BaseActivity {
             getSupportFragmentManager()
                     .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } catch (IllegalStateException ex) {
+            // No frgament was added
         }
     }
 
@@ -521,10 +520,10 @@ public class ScoreItActivity extends BaseActivity {
         if (null != mSnackBar) mSnackBar.dismiss();
 
         if (null == lap) {
-            switch (mGameHelper.getPlayedGame()) {
+            switch (mGameManager.getPlayedGame()) {
                 default:
                 case Game.UNIVERSAL:
-                    mLap = new UniversalLap(mGameHelper.getPlayerCount());
+                    mLap = new UniversalLap(mGameManager.getPlayerCount());
                     break;
                 case Game.BELOTE:
                     mLap = new BeloteLap();
@@ -533,7 +532,7 @@ public class ScoreItActivity extends BaseActivity {
                     mLap = new CoincheLap();
                     break;
                 case Game.TAROT:
-                    switch (mGameHelper.getPlayerCount()) {
+                    switch (mGameManager.getPlayerCount()) {
                         case 3:
                             mLap = new TarotThreeLap();
                             break;
@@ -562,24 +561,24 @@ public class ScoreItActivity extends BaseActivity {
             mIsEdited = false;
         } else {
             mLap.computeScores();
-            mGameHelper.addLap(mLap);
+            mGameManager.addLap(mLap);
         }
         mLap = null;
         animateActionButton();
         updateFragments();
     }
 
-    @SuppressWarnings("deprecation")
     private void setActionButtonColor() {
-        Resources res = getResources();
         if (null == mLap) {
-            mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_create_24dp));
+            mActionButton.setImageDrawable(
+                    ContextCompat.getDrawable(this, R.drawable.ic_create_24dp));
             mActionButton.setBackgroundTintList(
-                    ColorStateList.valueOf(getResources().getColor(R.color.color_accent)));
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.color_accent)));
         } else {
-            mActionButton.setImageDrawable(res.getDrawable(R.drawable.ic_done_24dp));
+            mActionButton.setImageDrawable(
+                    ContextCompat.getDrawable(this, R.drawable.ic_done_24dp));
             mActionButton.setBackgroundTintList(
-                    ColorStateList.valueOf(getResources().getColor(R.color.color_primary)));
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.color_primary)));
         }
     }
 
@@ -604,7 +603,7 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     private void dismissAll() {
-        mGameHelper.deleteAll();
+        mGameManager.deleteAll();
         mHeaderFragment.update();
         if (null != mScoreListFragment) mScoreListFragment.update();
         if (null != mScoreChartFragment) mScoreChartFragment.update();
@@ -628,12 +627,12 @@ public class ScoreItActivity extends BaseActivity {
                                 dismissAll();
                                 break;
                             case 1:
-                                if (mGameHelper.getFileUtils().isDefaultFile()) {
+                                if (mGameManager.getFileUtils().isDefaultFile()) {
                                     showSaveFileDialog(false);
                                 } else {
                                     if (null != mSnackBar) mSnackBar.dismiss();
-                                    mGameHelper.saveGame();
-                                    mGameHelper.createGame();
+                                    mGameManager.saveGame();
+                                    mGameManager.createGame();
                                     invalidateOptionsMenu();
                                     updateFragments();
                                 }
@@ -703,7 +702,7 @@ public class ScoreItActivity extends BaseActivity {
 
     public void showPlayerCountDialog() {
         String[] players;
-        switch (mGameHelper.getPlayedGame()) {
+        switch (mGameManager.getPlayedGame()) {
             default:
                 players = new String[]{"2", "3", "4", "5", "6", "7", "8"};
                 break;
@@ -717,7 +716,7 @@ public class ScoreItActivity extends BaseActivity {
                 .setItems(players, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mGameHelper.setPlayerCount(which);
+                        mGameManager.setPlayerCount(which);
                         invalidateOptionsMenu();
                         reloadUi();
                     }
@@ -738,7 +737,7 @@ public class ScoreItActivity extends BaseActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String name = editText.getText().toString();
                         if (!name.isEmpty()) {
-                            mGameHelper.getPlayer(mEditedPlayer).setName(name);
+                            mGameManager.getPlayer(mEditedPlayer).setName(name);
                             mEditedPlayer = Player.PLAYER_NONE;
                             mHeaderFragment.update();
                             if (mScoreListFragment.isVisible()) mScoreListFragment.update();
@@ -761,8 +760,8 @@ public class ScoreItActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String file = editText.getText().toString();
-                        mGameHelper.saveGame(file);
-                        mGameHelper.createGame();
+                        mGameManager.saveGame(file);
+                        mGameManager.createGame();
                         if (load) {
                             startSavedGamesActivity();
                         } else {
@@ -806,7 +805,7 @@ public class ScoreItActivity extends BaseActivity {
 
     private void showLapFragment() {
         Fragment fragment;
-        switch (mGameHelper.getPlayedGame()) {
+        switch (mGameManager.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
                 fragment = new UniversalLapFragment();
