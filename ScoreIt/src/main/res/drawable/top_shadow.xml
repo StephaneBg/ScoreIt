@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
   ~ Copyright (c) 2016 SBG Apps
   ~
@@ -15,19 +16,11 @@
   ~ limitations under the License.
   -->
 
-<resources>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar.Adaptive">
-        <item name="android:statusBarColor">@color/color_primary_dark</item>
-        <item name="android:windowBackground">@color/color_primary_400</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="isDialog">false</item>
-    </style>
-</resources>
+    <gradient
+        android:endColor="@android:color/transparent"
+        android:startColor="#20000000"
+        android:angle="-90"/>
+</shape>

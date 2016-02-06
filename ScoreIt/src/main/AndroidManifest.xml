@@ -30,7 +30,7 @@
 
         <activity
             android:name=".ScoreItActivity"
-            android:theme="@style/Theme.ScoreIt">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -41,7 +41,7 @@
         <activity
             android:name=".SavedGamesActivity"
             android:parentActivityName=".ScoreItActivity"
-            android:theme="@style/Theme.Adaptive">
+            android:theme="@style/AppTheme.NoActionBar.Adaptive">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ScoreItActivity"/>
@@ -50,7 +50,7 @@
         <activity
             android:name=".AboutActivity"
             android:parentActivityName=".ScoreItActivity"
-            android:theme="@style/Theme.Adaptive">
+            android:theme="@style/AppTheme.NoActionBar.Adaptive">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ScoreItActivity"/>
@@ -59,7 +59,7 @@
         <activity
             android:name=".DonateActivity"
             android:parentActivityName=".ScoreItActivity"
-            android:theme="@style/Theme.Dialog">
+            android:theme="@style/AppTheme.Dialog">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ScoreItActivity"/>

@@ -16,10 +16,11 @@
   -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_primary_400"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".DonateActivity">
 
     <Button
         android:id="@+id/btn_donate_coffee"
@@ -31,8 +32,7 @@
         android:layout_marginTop="@dimen/default_margin"
         android:drawableLeft="@drawable/ic_donate_coffee_24dp"
         android:onClick="onDonateCoffee"
-        android:text="@string/donate_coffee"
-        android:textColor="@color/white"/>
+        android:text="@string/donate_coffee"/>
 
     <Button
         android:id="@+id/btn_donate_beer"
@@ -45,6 +45,5 @@
         android:layout_marginTop="@dimen/default_margin"
         android:drawableLeft="@drawable/ic_beer_24dp"
         android:onClick="onDonateBeer"
-        android:text="@string/donate_beer"
-        android:textColor="@color/white"/>
+        android:text="@string/donate_beer"/>
 </LinearLayout>
