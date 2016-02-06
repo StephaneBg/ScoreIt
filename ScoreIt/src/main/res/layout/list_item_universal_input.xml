@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
-  ~ Copyright (c) 2015 SBG Apps
+  ~ Copyright (c) 2016 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,7 +14,6 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -32,9 +30,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -44,13 +42,13 @@
                 android:id="@+id/btn_minus"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
-                android:layout_margin="4dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="-1"
-                android:textColor="@color/gray_dark"
+                android:layout_margin="4dp"
                 android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"/>
+                android:stateListAnimator="@null"
+                android:text="-1"
+                android:textColor="@color/gray_dark"/>
 
             <Button
                 android:id="@+id/btn_minus_10"
@@ -58,22 +56,22 @@
                 android:layout_height="@dimen/circle_btn"
                 android:layout_margin="4dp"
                 android:layout_toRightOf="@id/btn_minus"
-                android:text="-10"
-                android:textColor="@color/gray_dark"
                 android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"/>
+                android:stateListAnimator="@null"
+                android:text="-10"
+                android:textColor="@color/gray_dark"/>
 
             <Button
                 android:id="@+id/btn_minus_100"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
-                android:layout_margin="4dp"
                 android:layout_below="@id/btn_minus_10"
+                android:layout_margin="4dp"
                 android:layout_toRightOf="@id/btn_minus"
-                android:text="-100"
-                android:textColor="@color/gray_dark"
                 android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"/>
+                android:stateListAnimator="@null"
+                android:text="-100"
+                android:textColor="@color/gray_dark"/>
         </RelativeLayout>
 
         <com.sbgapps.scoreit.views.widgets.MaxWidthFrameLayout
@@ -100,33 +98,33 @@
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_margin="4dp"
-                android:text="+10"
-                android:textColor="@color/gray_dark"
                 android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"/>
+                android:stateListAnimator="@null"
+                android:text="+10"
+                android:textColor="@color/gray_dark"/>
 
             <Button
                 android:id="@+id/btn_plus"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
-                android:layout_margin="4dp"
                 android:layout_centerVertical="true"
+                android:layout_margin="4dp"
                 android:layout_toRightOf="@id/btn_plus_10"
-                android:text="+1"
-                android:textColor="@color/gray_dark"
                 android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"/>
+                android:stateListAnimator="@null"
+                android:text="+1"
+                android:textColor="@color/gray_dark"/>
 
             <Button
                 android:id="@+id/btn_plus_100"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
-                android:layout_margin="4dp"
                 android:layout_below="@id/btn_plus_10"
-                android:text="+100"
-                android:textColor="@color/gray_dark"
+                android:layout_margin="4dp"
                 android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"/>
+                android:stateListAnimator="@null"
+                android:text="+100"
+                android:textColor="@color/gray_dark"/>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
