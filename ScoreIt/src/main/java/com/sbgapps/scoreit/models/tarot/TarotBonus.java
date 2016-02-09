@@ -17,12 +17,15 @@
 package com.sbgapps.scoreit.models.tarot;
 
 import android.content.Context;
+import android.support.annotation.IntDef;
 
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.models.Player;
 
 import java.io.Serializable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by sbaiget on 23/06/2014.
@@ -37,6 +40,7 @@ public class TarotBonus implements Serializable {
     public static final int BONUS_CHELEM_ANNONCE_REALISE = 5;
     public static final int BONUS_CHELEM_ANNONCE_NON_REALISE = 6;
 
+    @TarotBonusValues
     @SerializedName("bonus")
     private int mBonus;
     @SerializedName("player")
@@ -46,16 +50,16 @@ public class TarotBonus implements Serializable {
         this(BONUS_PETIT_AU_BOUT);
     }
 
-    public TarotBonus(int bonus) {
+    public TarotBonus(@TarotBonusValues int bonus) {
         this(bonus, Player.PLAYER_1);
     }
 
-    public TarotBonus(int bonus, int player) {
+    public TarotBonus(@TarotBonusValues int bonus, int player) {
         mBonus = bonus;
         mPlayer = player;
     }
 
-    public static String getLitteralBonus(Context context, int bonus) {
+    public static String getLiteralBonus(Context context, @TarotBonusValues int bonus) {
         switch (bonus) {
             case TarotBonus.BONUS_PETIT_AU_BOUT:
                 return context.getString(R.string.petit_au_bout);
@@ -75,11 +79,12 @@ public class TarotBonus implements Serializable {
         return null;
     }
 
+    @TarotBonusValues
     public int get() {
         return mBonus;
     }
 
-    public void set(int bonus) {
+    public void set(@TarotBonusValues int bonus) {
         mBonus = bonus;
     }
 
@@ -89,5 +94,11 @@ public class TarotBonus implements Serializable {
 
     public void setPlayer(int player) {
         mPlayer = player;
+    }
+
+    @IntDef({BONUS_PETIT_AU_BOUT, BONUS_POIGNEE_SIMPLE, BONUS_POIGNEE_DOUBLE, BONUS_POIGNEE_TRIPLE,
+            BONUS_CHELEM_NON_ANNONCE, BONUS_CHELEM_ANNONCE_REALISE, BONUS_CHELEM_ANNONCE_NON_REALISE})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface TarotBonusValues {
     }
 }

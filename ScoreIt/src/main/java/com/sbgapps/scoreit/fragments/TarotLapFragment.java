@@ -39,8 +39,6 @@ import com.sbgapps.scoreit.models.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.models.tarot.TarotLap;
 import com.sbgapps.scoreit.views.widgets.SeekPoints;
 
-import java.util.List;
-
 /**
  * Created by sbaiget on 07/12/13.
  */
@@ -183,51 +181,29 @@ public class TarotLapFragment extends LapFragment
     }
 
     private void addBonus(TarotBonus tarotBonus) {
-        List<TarotBonus> bonuses = getLap().getBonuses();
+        final View view = getActivity().getLayoutInflater()
+                .inflate(R.layout.list_item_bonus, mContainer, false);
+
+        Spinner spinner = (Spinner) view.findViewById(R.id.spinner_bonus);
+        SpinnerAdapter sa = getBonusAdapter();
         if (null == tarotBonus) {
-            boolean petit = false;
-            boolean poignee = false;
-            boolean chelem = false;
-            for (TarotBonus bonus : bonuses) {
-                if (bonus.get() == TarotBonus.BONUS_PETIT_AU_BOUT) {
-                    petit = true;
-                } else if (bonus.get() == TarotBonus.BONUS_POIGNEE_SIMPLE ||
-                        bonus.get() == TarotBonus.BONUS_POIGNEE_DOUBLE ||
-                        bonus.get() == TarotBonus.BONUS_POIGNEE_TRIPLE) {
-                    poignee = true;
-                } else if (bonus.get() == TarotBonus.BONUS_CHELEM_NON_ANNONCE ||
-                        bonus.get() == TarotBonus.BONUS_CHELEM_ANNONCE_REALISE ||
-                        bonus.get() == TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE) {
-                    chelem = true;
-                }
-            }
-            tarotBonus = !petit ? new TarotBonus(TarotBonus.BONUS_PETIT_AU_BOUT) :
-                    !poignee ? new TarotBonus(TarotBonus.BONUS_POIGNEE_SIMPLE) :
-                            !chelem ? new TarotBonus(TarotBonus.BONUS_CHELEM_NON_ANNONCE) : null;
-            if (null == tarotBonus) return;
-            bonuses.add(tarotBonus);
+            tarotBonus = new TarotBonus(((BonusItem) sa.getItem(0)).mBonus);
+            getLap().getBonuses().add(tarotBonus);
         }
         final TarotBonus bonus = tarotBonus;
 
-        final View view = getActivity().getLayoutInflater()
-                .inflate(R.layout.list_item_bonus, mContainer, false);
-        ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_announce);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getLap().getBonuses().remove(bonus);
-                mButtonBonus.setEnabled(getLap().getBonuses().size() < 3);
-                mContainer.removeView(view);
+        spinner.setAdapter(sa);
+        for (int i = 0; i < sa.getCount(); i++) {
+            if (bonus.get() == ((BonusItem) sa.getItem(i)).mBonus) {
+                spinner.setSelection(i);
+                break;
             }
-        });
-
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinner_announce);
-        spinner.setAdapter(getBonusAdapter());
-        spinner.setSelection(bonus.get());
+        }
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                bonus.set(position);
+                BonusItem item = (BonusItem) parent.getAdapter().getItem(position);
+                bonus.set(item.mBonus);
             }
 
             @Override
@@ -253,7 +229,18 @@ public class TarotLapFragment extends LapFragment
 
         int pos = mContainer.getChildCount() - 1;
         mContainer.addView(view, pos);
-        mButtonBonus.setEnabled(bonuses.size() < 3);
+        mButtonBonus.setEnabled(getLap().getBonuses().size() < 3);
+
+        ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_announce);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLap().getBonuses().remove(bonus);
+                mButtonBonus.setEnabled(getLap().getBonuses().size() < 3);
+                mContainer.removeView(view);
+            }
+        });
+
     }
 
     private SpinnerAdapter getPlayerAdapter() {
@@ -299,16 +286,29 @@ public class TarotLapFragment extends LapFragment
     }
 
     private SpinnerAdapter getBonusAdapter() {
-        ArrayAdapter<TarotBonusItem> adapter = new ArrayAdapter<>(getActivity(),
+        ArrayAdapter<BonusItem> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter.add(new TarotBonusItem(TarotBonus.BONUS_PETIT_AU_BOUT));
-        adapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_SIMPLE));
-        adapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_DOUBLE));
-        adapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_TRIPLE));
-        adapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_NON_ANNONCE));
-        adapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE));
-        adapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE));
+
+        if (!getLap().hasBonus(TarotBonus.BONUS_PETIT_AU_BOUT))
+            adapter.add(new BonusItem(TarotBonus.BONUS_PETIT_AU_BOUT));
+
+        if (!getLap().hasBonus(TarotBonus.BONUS_POIGNEE_DOUBLE)
+                && !getLap().hasBonus(TarotBonus.BONUS_POIGNEE_TRIPLE)) {
+            adapter.add(new BonusItem(TarotBonus.BONUS_POIGNEE_SIMPLE));
+            if (!getLap().hasBonus(TarotBonus.BONUS_POIGNEE_SIMPLE)) {
+                adapter.add(new BonusItem(TarotBonus.BONUS_POIGNEE_DOUBLE));
+                adapter.add(new BonusItem(TarotBonus.BONUS_POIGNEE_TRIPLE));
+            }
+        }
+
+        if (!getLap().hasBonus(TarotBonus.BONUS_CHELEM_NON_ANNONCE)
+                && !getLap().hasBonus(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE)
+                && !getLap().hasBonus(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE)) {
+            adapter.add(new BonusItem(TarotBonus.BONUS_CHELEM_NON_ANNONCE));
+            adapter.add(new BonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE));
+            adapter.add(new BonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE));
+        }
         return adapter;
     }
 
@@ -320,29 +320,31 @@ public class TarotLapFragment extends LapFragment
 
     class BidItem {
 
+        @TarotBid.TarotBidValues
         final int mBid;
 
-        BidItem(int bid) {
+        BidItem(@TarotBid.TarotBidValues int bid) {
             mBid = bid;
         }
 
         @Override
         public String toString() {
-            return TarotBid.getLitteralBid(getActivity(), mBid);
+            return TarotBid.getLiteralBid(getActivity(), mBid);
         }
     }
 
-    class TarotBonusItem {
+    class BonusItem {
 
+        @TarotBonus.TarotBonusValues
         final int mBonus;
 
-        TarotBonusItem(int bonus) {
+        BonusItem(@TarotBonus.TarotBonusValues int bonus) {
             mBonus = bonus;
         }
 
         @Override
         public String toString() {
-            return TarotBonus.getLitteralBonus(getActivity(), mBonus);
+            return TarotBonus.getLiteralBonus(getActivity(), mBonus);
         }
     }
 }

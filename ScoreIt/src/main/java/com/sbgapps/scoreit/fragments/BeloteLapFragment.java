@@ -161,7 +161,7 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
             }
         });
 
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinner_announce);
+        Spinner spinner = (Spinner) view.findViewById(R.id.spinner_bonus);
         spinner.setAdapter(getBonusArrayAdapter());
         spinner.setSelection(bonus.get());
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
