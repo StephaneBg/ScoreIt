@@ -30,7 +30,7 @@ public abstract class TarotLap implements Lap {
     public static final int OUDLER_PETIT_MSK = 1;
     public static final int OUDLER_EXCUSE_MSK = 2;
     public static final int OUDLER_21_MSK = 4;
-    protected transient int[] mScores;
+
     @SerializedName("taker")
     protected int mTaker;
     @SerializedName("bid")
@@ -41,6 +41,8 @@ public abstract class TarotLap implements Lap {
     protected int mOudlers;
     @SerializedName("bonuses")
     protected List<TarotBonus> mBonuses;
+
+    protected transient int[] mScores;
     private transient boolean mIsDone = true;
 
     protected TarotLap(int taker, TarotBid bid, int points, int oudlers, List<TarotBonus> bonuses) {
@@ -114,6 +116,13 @@ public abstract class TarotLap implements Lap {
         if (null == mScores) {
             mScores = new int[getPlayerCount()];
         }
+    }
+
+    public boolean hasBonus(int bonus) {
+        for (TarotBonus tarotBonus : getBonuses()) {
+            if (bonus == tarotBonus.get()) return true;
+        }
+        return false;
     }
 
     abstract public int getPlayerCount();

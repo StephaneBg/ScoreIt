@@ -77,11 +77,11 @@ public class TarotScoreAdapter extends ScoreListAdapter<TarotScoreAdapter.ViewHo
             if (partner != taker)
                 summary += " & " + getGameHelper().getPlayer(partner).getName();
         }
-        summary += " • " + TarotBid.getLitteralBid(getActivity(), lap.getBid().get());
+        summary += " • " + TarotBid.getLiteralBid(getActivity(), lap.getBid().get());
         for (TarotBonus bonus : lap.getBonuses()) {
             if (bonus.getPlayer() == taker ||
                     bonus.getPlayer() == partner) {
-                summary += " • " + TarotBonus.getLitteralBonus(getActivity(), bonus.get());
+                summary += " • " + TarotBonus.getLiteralBonus(getActivity(), bonus.get());
             }
         }
         viewHolder.mSummary.setText(summary);

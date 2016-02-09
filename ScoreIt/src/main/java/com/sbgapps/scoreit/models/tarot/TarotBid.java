@@ -17,11 +17,14 @@
 package com.sbgapps.scoreit.models.tarot;
 
 import android.content.Context;
+import android.support.annotation.IntDef;
 
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.R;
 
 import java.io.Serializable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by Stéphane on 29/07/2014.
@@ -33,6 +36,7 @@ public class TarotBid implements Serializable {
     public static final int BID_GARDE_SANS = 2;
     public static final int BID_GARDE_CONTRE = 3;
 
+    @TarotBidValues
     @SerializedName("bid")
     private int mBid;
 
@@ -40,11 +44,11 @@ public class TarotBid implements Serializable {
         this(BID_PRISE);
     }
 
-    public TarotBid(int bid) {
+    public TarotBid(@TarotBidValues int bid) {
         mBid = bid;
     }
 
-    public static String getLitteralBid(Context context, int bid) {
+    public static String getLiteralBid(Context context, @TarotBidValues int bid) {
         switch (bid) {
             case BID_PRISE:
                 return context.getString(R.string.take);
@@ -58,11 +62,17 @@ public class TarotBid implements Serializable {
         return null;
     }
 
+    @TarotBidValues
     public int get() {
         return mBid;
     }
 
-    public void set(int bid) {
+    public void set(@TarotBidValues int bid) {
         mBid = bid;
+    }
+
+    @IntDef({BID_PRISE, BID_GARDE, BID_GARDE_SANS, BID_GARDE_CONTRE})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface TarotBidValues {
     }
 }
