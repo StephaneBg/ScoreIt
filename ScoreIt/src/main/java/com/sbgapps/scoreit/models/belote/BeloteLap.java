@@ -19,6 +19,7 @@ package com.sbgapps.scoreit.models.belote;
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.models.Player;
+import com.sbgapps.scoreit.models.tarot.TarotBonus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +97,13 @@ public class BeloteLap extends GenericBeloteLap {
                     break;
             }
         }
+    }
+
+    public boolean hasBonus(int bonus) {
+        for (BeloteBonus beloteBonus : getBonuses()) {
+            if (bonus == beloteBonus.get()) return true;
+        }
+        return false;
     }
 
     @Override

@@ -29,7 +29,6 @@ import com.codetroopers.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.models.Player;
 import com.sbgapps.scoreit.models.universal.UniversalLap;
-import com.sbgapps.scoreit.views.widgets.RingTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,13 +48,12 @@ public class UniversalLapFragment extends LapFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_lap_universal, null);
-        if (null == getLap()) return view;
+        View view = inflater.inflate(R.layout.fragment_lap_universal, container, false);
 
         LinearLayout ll = (LinearLayout) view.findViewById(R.id.ll_players);
 
         for (int i = 0; i < getGameHelper().getPlayerCount(); i++) {
-            View input = inflater.inflate(R.layout.list_item_universal_input, null);
+            View input = inflater.inflate(R.layout.list_item_universal_input, ll, false);
             initView(input, i);
             ll.addView(input);
         }
@@ -69,7 +67,7 @@ public class UniversalLapFragment extends LapFragment
         TextView tv = (TextView) view.findViewById(R.id.tv_name);
         tv.setText(player.getName());
 
-        tv = (RingTextView) view.findViewById(R.id.points);
+        tv = (Button) view.findViewById(R.id.points);
         tv.setText(Integer.toString(getLap().getScore(position)));
         mPoints.add(tv);
 

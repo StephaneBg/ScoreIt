@@ -33,7 +33,7 @@
             style="@style/SubHeader"
             android:text="@string/bidding"/>
 
-        <android.support.v7.widget.AppCompatSpinner
+        <Spinner
             android:id="@+id/spinner_bidder"
             android:layout_width="match_parent"
             android:layout_height="@dimen/widget_height"
@@ -51,7 +51,7 @@
             style="@style/SubHeader"
             android:text="@string/coinche"/>
 
-        <android.support.v7.widget.AppCompatSpinner
+        <Spinner
             android:id="@+id/spinner_coinche"
             android:layout_width="match_parent"
             android:layout_height="@dimen/widget_height"

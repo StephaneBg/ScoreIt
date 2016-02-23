@@ -28,6 +28,7 @@
 
     <!-- Fonts -->
     <dimen name="font_headline">24sp</dimen>
+    <dimen name="font_subheading">16sp</dimen>
 
     <!-- Height -->
     <dimen name="list_item_height">64dp</dimen>

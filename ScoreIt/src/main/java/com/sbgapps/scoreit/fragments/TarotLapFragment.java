@@ -16,7 +16,9 @@
 
 package com.sbgapps.scoreit.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.sbgapps.scoreit.R;
@@ -62,7 +65,7 @@ public class TarotLapFragment extends LapFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_lap_tarot, null);
+        View view = inflater.inflate(R.layout.fragment_lap_tarot, container, false);
 
         mContainer = (LinearLayout) view.findViewById(R.id.ll_container);
         mTaker = (Spinner) view.findViewById(R.id.spinner_taker);
@@ -171,76 +174,69 @@ public class TarotLapFragment extends LapFragment
         mButtonBonus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addBonus(null);
+                showBonusDialog();
             }
         });
         for (TarotBonus bonus : getLap().getBonuses()) {
-            addBonus(bonus);
+            addBonusView(bonus);
         }
+        manageBonusButton();
+
         return view;
     }
 
-    private void addBonus(TarotBonus tarotBonus) {
+    private void showBonusDialog() {
+        View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_add_bonus, null);
+        final Spinner spinnerBonus = (Spinner) view.findViewById(R.id.spinner_bonus);
+        spinnerBonus.setAdapter(getBonusAdapter());
+        final Spinner spinnerPlayer = (Spinner) view.findViewById(R.id.spinner_player);
+        spinnerPlayer.setAdapter(getPlayerAdapter());
+
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.bonuses)
+                .setView(view)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        TarotBonus bonus = new TarotBonus(
+                                ((TarotBonusItem) spinnerBonus.getSelectedItem()).mBonus,
+                                spinnerPlayer.getSelectedItemPosition());
+                        getLap().getBonuses().add(bonus);
+                        addBonusView(bonus);
+                        manageBonusButton();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .create()
+                .show();
+    }
+
+    private void addBonusView(final TarotBonus bonus) {
         final View view = getActivity().getLayoutInflater()
                 .inflate(R.layout.list_item_bonus, mContainer, false);
 
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinner_bonus);
-        SpinnerAdapter sa = getBonusAdapter();
-        if (null == tarotBonus) {
-            tarotBonus = new TarotBonus(((BonusItem) sa.getItem(0)).mBonus);
-            getLap().getBonuses().add(tarotBonus);
-        }
-        final TarotBonus bonus = tarotBonus;
+        TextView tv = (TextView) view.findViewById(R.id.tv_bonus);
+        tv.setText(TarotBonus.getLiteralBonus(getContext(), bonus.get()));
 
-        spinner.setAdapter(sa);
-        for (int i = 0; i < sa.getCount(); i++) {
-            if (bonus.get() == ((BonusItem) sa.getItem(i)).mBonus) {
-                spinner.setSelection(i);
-                break;
-            }
-        }
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        tv = (TextView) view.findViewById(R.id.tv_player);
+        tv.setText(getGameHelper().getPlayer(bonus.getPlayer()).getName());
+
+        ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_bonus);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                BonusItem item = (BonusItem) parent.getAdapter().getItem(position);
-                bonus.set(item.mBonus);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        spinner = (Spinner) view.findViewById(R.id.spinner_player);
-        spinner.setAdapter(getPlayerAdapter());
-        spinner.setSelection(bonus.getPlayer());
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                bonus.setPlayer(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                getLap().getBonuses().remove(bonus);
+                mContainer.removeView(view);
+                manageBonusButton();
             }
         });
 
         int pos = mContainer.getChildCount() - 1;
         mContainer.addView(view, pos);
+    }
+
+    private void manageBonusButton() {
         mButtonBonus.setEnabled(getLap().getBonuses().size() < 3);
-
-        ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_announce);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getLap().getBonuses().remove(bonus);
-                mButtonBonus.setEnabled(getLap().getBonuses().size() < 3);
-                mContainer.removeView(view);
-            }
-        });
-
     }
 
     private SpinnerAdapter getPlayerAdapter() {
@@ -263,13 +259,13 @@ public class TarotLapFragment extends LapFragment
     }
 
     private SpinnerAdapter getBidAdapter() {
-        ArrayAdapter<BidItem> adapter = new ArrayAdapter<>(getActivity(),
+        ArrayAdapter<TarotBidItem> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter.add(new BidItem(TarotBid.BID_PRISE));
-        adapter.add(new BidItem(TarotBid.BID_GARDE));
-        adapter.add(new BidItem(TarotBid.BID_GARDE_SANS));
-        adapter.add(new BidItem(TarotBid.BID_GARDE_CONTRE));
+        adapter.add(new TarotBidItem(TarotBid.BID_PRISE));
+        adapter.add(new TarotBidItem(TarotBid.BID_GARDE));
+        adapter.add(new TarotBidItem(TarotBid.BID_GARDE_SANS));
+        adapter.add(new TarotBidItem(TarotBid.BID_GARDE_CONTRE));
         return adapter;
     }
 
@@ -286,30 +282,34 @@ public class TarotLapFragment extends LapFragment
     }
 
     private SpinnerAdapter getBonusAdapter() {
-        ArrayAdapter<BonusItem> adapter = new ArrayAdapter<>(getActivity(),
+        ArrayAdapter<TarotBonusItem> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         if (!getLap().hasBonus(TarotBonus.BONUS_PETIT_AU_BOUT))
-            adapter.add(new BonusItem(TarotBonus.BONUS_PETIT_AU_BOUT));
+            adapter.add(new TarotBonusItem(TarotBonus.BONUS_PETIT_AU_BOUT));
 
         if (!getLap().hasBonus(TarotBonus.BONUS_POIGNEE_DOUBLE)
                 && !getLap().hasBonus(TarotBonus.BONUS_POIGNEE_TRIPLE)) {
-            adapter.add(new BonusItem(TarotBonus.BONUS_POIGNEE_SIMPLE));
+            adapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_SIMPLE));
             if (!getLap().hasBonus(TarotBonus.BONUS_POIGNEE_SIMPLE)) {
-                adapter.add(new BonusItem(TarotBonus.BONUS_POIGNEE_DOUBLE));
-                adapter.add(new BonusItem(TarotBonus.BONUS_POIGNEE_TRIPLE));
+                adapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_DOUBLE));
+                adapter.add(new TarotBonusItem(TarotBonus.BONUS_POIGNEE_TRIPLE));
             }
         }
 
         if (!getLap().hasBonus(TarotBonus.BONUS_CHELEM_NON_ANNONCE)
                 && !getLap().hasBonus(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE)
                 && !getLap().hasBonus(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE)) {
-            adapter.add(new BonusItem(TarotBonus.BONUS_CHELEM_NON_ANNONCE));
-            adapter.add(new BonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE));
-            adapter.add(new BonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE));
+            adapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_NON_ANNONCE));
+            adapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_REALISE));
+            adapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE));
         }
         return adapter;
+    }
+
+    private int getBonus(Object item) {
+        return ((TarotBonusItem) item).mBonus;
     }
 
     @Override
@@ -318,12 +318,12 @@ public class TarotLapFragment extends LapFragment
         return Integer.toString(progress);
     }
 
-    class BidItem {
+    class TarotBidItem {
 
         @TarotBid.TarotBidValues
         final int mBid;
 
-        BidItem(@TarotBid.TarotBidValues int bid) {
+        TarotBidItem(@TarotBid.TarotBidValues int bid) {
             mBid = bid;
         }
 
@@ -333,12 +333,12 @@ public class TarotLapFragment extends LapFragment
         }
     }
 
-    class BonusItem {
+    class TarotBonusItem {
 
         @TarotBonus.TarotBonusValues
         final int mBonus;
 
-        BonusItem(@TarotBonus.TarotBonusValues int bonus) {
+        TarotBonusItem(@TarotBonus.TarotBonusValues int bonus) {
             mBonus = bonus;
         }
 

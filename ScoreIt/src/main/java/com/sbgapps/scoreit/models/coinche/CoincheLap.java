@@ -187,6 +187,13 @@ public class CoincheLap extends GenericBeloteLap {
         }
     }
 
+    public boolean hasBonus(int bonus) {
+        for (CoincheBonus coincheBonus : getBonuses()) {
+            if (bonus == coincheBonus.get()) return true;
+        }
+        return false;
+    }
+
     @Override
     public Lap copy() {
         return new CoincheLap(mScorer, mPoints, mBidder, mBid, mCoinche, mBonuses);
