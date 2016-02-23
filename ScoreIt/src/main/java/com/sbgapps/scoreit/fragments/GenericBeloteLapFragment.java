@@ -30,7 +30,7 @@ public class GenericBeloteLapFragment extends LapFragment {
         return (GenericBeloteLap) super.getLap();
     }
 
-    protected ArrayAdapter<PlayerItem> getPlayerArrayAdapter() {
+    protected ArrayAdapter<PlayerItem> getPlayerAdapter() {
         ArrayAdapter<PlayerItem> playerItemArrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
         playerItemArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

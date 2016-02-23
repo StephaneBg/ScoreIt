@@ -16,7 +16,9 @@
 
 package com.sbgapps.scoreit.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +32,10 @@ import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.models.Player;
+import com.sbgapps.scoreit.models.belote.BeloteBonus;
 import com.sbgapps.scoreit.models.coinche.CoincheBonus;
 import com.sbgapps.scoreit.models.coinche.CoincheLap;
 import com.sbgapps.scoreit.views.widgets.SeekPoints;
-
-import java.util.List;
 
 /**
  * Created by sbaiget on 29/01/14.
@@ -61,7 +62,7 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_lap_coinche, null);
+        View view = inflater.inflate(R.layout.fragment_lap_coinche, container, false);
 
         mContainer = (LinearLayout) view.findViewById(R.id.ll_container);
         mBidderSpinner = (Spinner) view.findViewById(R.id.spinner_bidder);
@@ -147,12 +148,13 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         mButtonBonus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addBonus(null);
+                showBonusDialog();
             }
         });
         for (CoincheBonus bonus : getLap().getBonuses()) {
-            addBonus(bonus);
+            addBonusView(bonus);
         }
+        manageBonusButton();
 
         return view;
     }
@@ -211,73 +213,80 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         mPlayer2Points.setText(Integer.toString(getLap().getScore(Player.PLAYER_2)));
     }
 
-    private void addBonus(CoincheBonus coincheBonus) {
-        List<CoincheBonus> bonuses = getLap().getBonuses();
-        if (null == coincheBonus) {
-            coincheBonus = new CoincheBonus();
-            bonuses.add(coincheBonus);
-        }
-        final CoincheBonus bonus = coincheBonus;
+    private void showBonusDialog() {
+        View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_add_bonus, null);
+        final Spinner spinnerBonus = (Spinner) view.findViewById(R.id.spinner_bonus);
+        spinnerBonus.setAdapter(getBonusAdapter());
+        final Spinner spinnerPlayer = (Spinner) view.findViewById(R.id.spinner_player);
+        spinnerPlayer.setAdapter(getPlayerAdapter());
 
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.bonuses)
+                .setView(view)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        CoincheBonus bonus = new CoincheBonus(
+                                ((CoincheBonusItem) spinnerBonus.getSelectedItem()).mBonus,
+                                spinnerPlayer.getSelectedItemPosition());
+                        getLap().getBonuses().add(bonus);
+                        addBonusView(bonus);
+                        manageBonusButton();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .create()
+                .show();
+    }
+
+    private void addBonusView(final CoincheBonus bonus) {
         final View view = getActivity().getLayoutInflater()
                 .inflate(R.layout.list_item_bonus, mContainer, false);
-        ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_announce);
+
+        TextView tv = (TextView) view.findViewById(R.id.tv_bonus);
+        tv.setText(BeloteBonus.getLiteralBonus(getContext(), bonus.get()));
+
+        tv = (TextView) view.findViewById(R.id.tv_player);
+        tv.setText(getGameHelper().getPlayer(bonus.getPlayer()).getName());
+
+        ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_bonus);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().getBonuses().remove(bonus);
-                mButtonBonus.setEnabled(getLap().getBonuses().size() < 3);
                 mContainer.removeView(view);
-            }
-        });
-
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinner_bonus);
-        spinner.setAdapter(getBonusArrayAdapter());
-        spinner.setSelection(bonus.get());
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                bonus.set(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        spinner = (Spinner) view.findViewById(R.id.spinner_player);
-        ArrayAdapter<PlayerItem> aa = getPlayerArrayAdapter();
-        spinner.setAdapter(aa);
-        spinner.setSelection(bonus.getPlayer());
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                bonus.setPlayer(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+                manageBonusButton();
             }
         });
 
         int pos = mContainer.getChildCount() - 1;
         mContainer.addView(view, pos);
-        mButtonBonus.setEnabled(bonuses.size() < 3);
     }
 
-    private ArrayAdapter<CoincheBonusItem> getBonusArrayAdapter() {
+    private void manageBonusButton() {
+        mButtonBonus.setEnabled(getLap().getBonuses().size() < 7);
+    }
+
+
+    private ArrayAdapter<CoincheBonusItem> getBonusAdapter() {
         ArrayAdapter<CoincheBonusItem> bonusArrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
         bonusArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_BELOTE));
-        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_RUN_3));
-        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_RUN_4));
-        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_RUN_5));
-        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_FOUR_NORMAL));
-        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_FOUR_NINE));
-        bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_FOUR_JACK));
+
+        if (!getLap().hasBonus(CoincheBonus.BONUS_BELOTE))
+            bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_BELOTE));
+        if (!getLap().hasBonus(CoincheBonus.BONUS_RUN_3))
+            bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_RUN_3));
+        if (!getLap().hasBonus(CoincheBonus.BONUS_RUN_4))
+            bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_RUN_4));
+        if (!getLap().hasBonus(CoincheBonus.BONUS_RUN_5))
+            bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_RUN_5));
+        if (!getLap().hasBonus(CoincheBonus.BONUS_FOUR_NORMAL))
+            bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_FOUR_NORMAL));
+        if (!getLap().hasBonus(CoincheBonus.BONUS_FOUR_NINE))
+            bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_FOUR_NINE));
+        if (!getLap().hasBonus(CoincheBonus.BONUS_FOUR_JACK))
+            bonusArrayAdapter.add(new CoincheBonusItem(CoincheBonus.BONUS_FOUR_JACK));
         return bonusArrayAdapter;
     }
 
@@ -291,7 +300,7 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
 
         @Override
         public String toString() {
-            return CoincheBonus.getLitteralBonus(getActivity(), mBonus);
+            return CoincheBonus.getLiteralBonus(getActivity(), mBonus);
         }
     }
 

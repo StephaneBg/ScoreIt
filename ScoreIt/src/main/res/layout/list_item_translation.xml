@@ -20,7 +20,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/widget_height"
     android:orientation="horizontal"
-    tools:background="@color/color_primary_400">
+    tools:context=".AboutActivity">
 
     <TextView
         android:id="@+id/language"

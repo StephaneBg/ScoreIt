@@ -55,7 +55,7 @@ public class BeloteBonus implements Serializable {
         mPlayer = player;
     }
 
-    public static String getLitteralBonus(Context context, int bonus) {
+    public static String getLiteralBonus(Context context, int bonus) {
         switch (bonus) {
             case BeloteBonus.BONUS_BELOTE:
                 return context.getString(R.string.belote);

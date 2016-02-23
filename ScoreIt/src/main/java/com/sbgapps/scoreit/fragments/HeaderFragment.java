@@ -42,7 +42,7 @@ public class HeaderFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_header, null);
+        View view = inflater.inflate(R.layout.fragment_header, container, false);
 
         LinearListView listView = (LinearListView) view.findViewById(R.id.list_header);
         mAdapter = new HeaderAdapter(getActivity());

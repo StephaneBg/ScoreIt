@@ -24,7 +24,8 @@
     android:gravity="center"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin">
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context=".ScoreItActivity">
 
     <ImageButton
         android:id="@+id/btn_minus"

@@ -25,13 +25,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.models.Game;
 import com.sbgapps.scoreit.models.GameManager;
 import com.sbgapps.scoreit.views.adapters.GenericBeloteScoreAdapter;
 import com.sbgapps.scoreit.views.adapters.ScoreListAdapter;
 import com.sbgapps.scoreit.views.adapters.TarotScoreAdapter;
 import com.sbgapps.scoreit.views.adapters.UniversalScoreAdapter;
-import com.sbgapps.scoreit.models.Game;
-import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.views.widgets.RevealView;
 
 /**
@@ -49,11 +49,8 @@ public class ScoreListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        ScoreItActivity activity = (ScoreItActivity) getActivity();
-
-        View view = inflater.inflate(R.layout.fragment_score_list, null);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_score_list, container, false);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(android.R.id.list);
         recyclerView.setHasFixedSize(true);
@@ -69,7 +66,7 @@ public class ScoreListFragment extends Fragment {
             }
         });
 
-        GameManager gameManager = activity.getGameManager();
+        GameManager gameManager = ((ScoreItActivity) getActivity()).getGameManager();
         switch (gameManager.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:

@@ -24,8 +24,8 @@ import android.view.ViewGroup;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
-import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.models.GameManager;
+import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.views.widgets.LineChart;
 
 public class ScoreChartFragment extends Fragment {
@@ -41,9 +41,8 @@ public class ScoreChartFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_score_chart, null);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_score_chart, container, false);
         mGraph = (LineChart) view.findViewById(R.id.line_chart);
         return view;
     }

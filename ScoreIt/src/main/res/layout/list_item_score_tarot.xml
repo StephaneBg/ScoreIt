@@ -19,7 +19,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/reveal"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_height">
+    android:layout_height="@dimen/list_item_height"
+    tools:context=".ScoreItActivity">
 
     <include layout="@layout/include_back_score_list"/>
 

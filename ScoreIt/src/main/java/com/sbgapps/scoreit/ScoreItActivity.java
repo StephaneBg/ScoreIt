@@ -234,7 +234,7 @@ public class ScoreItActivity extends BaseActivity {
             if (mIsChartDisplayed) {
                 item.setIcon(R.drawable.ic_list_24dp);
             } else {
-                item.setIcon(R.drawable.ic_graph_line_24dp);
+                item.setIcon(R.drawable.ic_show_chart_24px);
             }
         }
 

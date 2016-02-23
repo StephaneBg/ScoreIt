@@ -16,11 +16,11 @@
   -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ScoreItActivity">
 
     <TextView
         android:id="@+id/tv_name"
@@ -74,20 +74,13 @@
                 android:textColor="@color/gray_dark"/>
         </RelativeLayout>
 
-        <com.sbgapps.scoreit.views.widgets.MaxWidthFrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:maxWidth="96dp">
-
-            <com.sbgapps.scoreit.views.widgets.RingTextView
-                android:id="@+id/points"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="34sp"
-                tools:text="128"/>
-        </com.sbgapps.scoreit.views.widgets.MaxWidthFrameLayout>
+        <Button
+            android:id="@+id/points"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_headline"
+            tools:text="128"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"

@@ -16,9 +16,11 @@
   -->
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/score"
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:gravity="center"
-    android:singleLine="true"/>
+    android:singleLine="true"
+    tools:context=".ScoreItActivity"/>
