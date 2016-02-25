@@ -18,22 +18,23 @@ package com.sbgapps.scoreit.views.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.CheckBox;
 import android.widget.ToggleButton;
 
 /**
  * Created by Stéphane on 14/10/2014.
  */
-public class NonUncheckableToggleButton extends ToggleButton {
+public class NonUncheckableCheckBox extends CheckBox {
 
-    public NonUncheckableToggleButton(Context context, AttributeSet attrs, int defStyle) {
+    public NonUncheckableCheckBox(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
-    public NonUncheckableToggleButton(Context context, AttributeSet attrs) {
+    public NonUncheckableCheckBox(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public NonUncheckableToggleButton(Context context) {
+    public NonUncheckableCheckBox(Context context) {
         super(context);
     }
 

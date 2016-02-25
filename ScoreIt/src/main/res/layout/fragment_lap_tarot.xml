@@ -23,12 +23,12 @@
         android:id="@+id/ll_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
         android:animateLayoutChanges="true"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/default_margin">
+        android:orientation="vertical">
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Headline"
+            style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
@@ -49,7 +49,7 @@
             android:layout="@layout/stub_partner" />
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Headline"
+            style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
@@ -64,50 +64,35 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin" />
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Headline"
+            style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
             android:text="@string/oudlers" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/checkbox_petit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@string/petit" />
 
-            <ToggleButton
-                android:id="@+id/checkbox_petit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:textOff="@string/petit"
-                android:textOn="@string/petit" />
+        <CheckBox
+            android:id="@+id/checkbox_twenty_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@string/twentyone" />
 
-            <ToggleButton
-                android:id="@+id/checkbox_twenty_one"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:textOff="@string/twentyone"
-                android:textOn="@string/twentyone" />
-
-            <ToggleButton
-                android:id="@+id/checkbox_excuse"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:textOff="@string/excuse"
-                android:textOn="@string/excuse" />
-        </LinearLayout>
+        <CheckBox
+            android:id="@+id/checkbox_excuse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@string/excuse" />
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Headline"
+            style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
@@ -120,7 +105,7 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin" />
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Headline"
+            style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"

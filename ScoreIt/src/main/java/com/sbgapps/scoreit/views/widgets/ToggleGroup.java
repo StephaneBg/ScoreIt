@@ -137,8 +137,8 @@ public class ToggleGroup extends LinearLayout {
     private void setCheckedStateForView(int viewId, boolean checked) {
         View checkedView = findViewById(viewId);
         if (checkedView != null) {
-            if (checkedView instanceof NonUncheckableToggleButton) {
-                ((NonUncheckableToggleButton) checkedView).forceSetChecked(checked);
+            if (checkedView instanceof NonUncheckableCheckBox) {
+                ((NonUncheckableCheckBox) checkedView).forceSetChecked(checked);
             } else if (checkedView instanceof ToggleButton) {
                 ((ToggleButton) checkedView).setChecked(checked);
             }
