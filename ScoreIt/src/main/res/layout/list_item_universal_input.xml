@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,18 +13,21 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".ScoreItActivity">
+    android:layout_margin="@dimen/default_margin"
+    tools:context=".ScoreItActivity"
+    tools:ignore="hardCodedText">
 
     <TextView
         android:id="@+id/tv_name"
-        style="@style/SubHeader"
-        tools:text="Name"/>
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Name" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,89 +37,80 @@
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/btn_minus"
+                style="@style/BorderlessColoredButton"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_margin="4dp"
-                android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"
-                android:text="-1"
-                android:textColor="@color/gray_dark"/>
+                android:text="-1" />
 
             <Button
                 android:id="@+id/btn_minus_10"
+                style="@style/BorderlessColoredButton"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_margin="4dp"
                 android:layout_toRightOf="@id/btn_minus"
-                android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"
-                android:text="-10"
-                android:textColor="@color/gray_dark"/>
+                android:text="-10" />
 
             <Button
                 android:id="@+id/btn_minus_100"
+                style="@style/BorderlessColoredButton"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_below="@id/btn_minus_10"
                 android:layout_margin="4dp"
                 android:layout_toRightOf="@id/btn_minus"
-                android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"
-                android:text="-100"
-                android:textColor="@color/gray_dark"/>
+                android:text="-100" />
         </RelativeLayout>
 
         <Button
             android:id="@+id/points"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="?borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_headline"
-            tools:text="128"/>
+            android:fontFamily="sans-serif-thin"
+            android:textSize="@dimen/text_size_display_1"
+            tools:text="128" />
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/btn_plus_10"
+                style="@style/BorderlessColoredButton"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_margin="4dp"
-                android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"
-                android:text="+10"
-                android:textColor="@color/gray_dark"/>
+                android:text="+10" />
 
             <Button
                 android:id="@+id/btn_plus"
+                style="@style/BorderlessColoredButton"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_centerVertical="true"
                 android:layout_margin="4dp"
                 android:layout_toRightOf="@id/btn_plus_10"
-                android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"
-                android:text="+1"
-                android:textColor="@color/gray_dark"/>
+                android:text="+1" />
 
             <Button
                 android:id="@+id/btn_plus_100"
+                style="@style/BorderlessColoredButton"
                 android:layout_width="@dimen/circle_btn"
                 android:layout_height="@dimen/circle_btn"
                 android:layout_below="@id/btn_plus_10"
                 android:layout_margin="4dp"
-                android:background="@drawable/btn_round_selector"
-                android:stateListAnimator="@null"
-                android:text="+100"
-                android:textColor="@color/gray_dark"/>
+                android:text="+100" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
