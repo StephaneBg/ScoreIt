@@ -28,7 +28,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Headline"
+            style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
@@ -51,7 +51,7 @@
 
                 <TextView
                     android:id="@+id/player1_name"
-                    style="@style/LargeThinText"
+                    style="@style/TextAppearance.AppCompat.Display1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -59,7 +59,7 @@
 
                 <TextView
                     android:id="@+id/player1_points"
-                    style="@style/LargeThinText"
+                    style="@style/TextAppearance.AppCompat.Display1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="120" />
@@ -68,8 +68,8 @@
             <ImageButton
                 android:id="@+id/btn_switch"
                 style="?attr/borderlessButtonStyle"
-                android:layout_width="@dimen/circle_btn"
-                android:layout_height="@dimen/circle_btn"
+                android:layout_width="@dimen/btn_score_width"
+                android:layout_height="@dimen/btn_score_width"
                 android:src="@drawable/ic_swap_horiz_24dp"
                 android:tint="?colorAccent" />
 
@@ -82,7 +82,7 @@
 
                 <TextView
                     android:id="@+id/player2_name"
-                    style="@style/LargeThinText"
+                    style="@style/TextAppearance.AppCompat.Display1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -90,7 +90,7 @@
 
                 <TextView
                     android:id="@+id/player2_points"
-                    style="@style/LargeThinText"
+                    style="@style/TextAppearance.AppCompat.Display1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="40" />
@@ -105,17 +105,16 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin">
 
-            <com.sbgapps.scoreit.views.widgets.NonUncheckableToggleButton
+            <com.sbgapps.scoreit.views.widgets.NonUncheckableCheckBox
                 android:id="@+id/btn_score"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:checked="true"
-                android:textOff="@string/score"
-                android:textOn="@string/score" />
+                android:text="@string/score" />
 
-            <com.sbgapps.scoreit.views.widgets.NonUncheckableToggleButton
+            <com.sbgapps.scoreit.views.widgets.NonUncheckableCheckBox
                 android:id="@+id/btn_inside"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -123,17 +122,15 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_weight="1"
-                android:textOff="@string/inside"
-                android:textOn="@string/inside" />
+                android:text="@string/inside" />
 
-            <com.sbgapps.scoreit.views.widgets.NonUncheckableToggleButton
+            <com.sbgapps.scoreit.views.widgets.NonUncheckableCheckBox
                 android:id="@+id/btn_capot"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:textOff="@string/capot"
-                android:textOn="@string/capot" />
+                android:text="@string/capot" />
         </com.sbgapps.scoreit.views.widgets.ToggleGroup>
 
         <com.sbgapps.scoreit.views.widgets.SeekPoints
@@ -142,7 +139,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Headline"
+            style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"

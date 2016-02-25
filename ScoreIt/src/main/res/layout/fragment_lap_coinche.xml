@@ -28,7 +28,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Headline"
+            style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Headline"
+            style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
@@ -64,7 +64,7 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin" />
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Headline"
+            style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
@@ -87,7 +87,7 @@
 
                 <TextView
                     android:id="@+id/player1_name"
-                    style="@style/LargeThinText"
+                    style="@style/TextAppearance.AppCompat.Display1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -95,7 +95,7 @@
 
                 <TextView
                     android:id="@+id/player1_points"
-                    style="@style/LargeThinText"
+                    style="@style/TextAppearance.AppCompat.Display1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="120" />
@@ -104,8 +104,8 @@
             <ImageButton
                 android:id="@+id/btn_switch"
                 style="?attr/borderlessButtonStyle"
-                android:layout_width="@dimen/circle_btn"
-                android:layout_height="@dimen/circle_btn"
+                android:layout_width="@dimen/btn_score_width"
+                android:layout_height="@dimen/btn_score_width"
                 android:src="@drawable/ic_swap_horiz_24dp"
                 android:tint="?colorAccent" />
 
@@ -118,7 +118,7 @@
 
                 <TextView
                     android:id="@+id/player2_name"
-                    style="@style/LargeThinText"
+                    style="@style/TextAppearance.AppCompat.Display1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -126,7 +126,7 @@
 
                 <TextView
                     android:id="@+id/player2_points"
-                    style="@style/LargeThinText"
+                    style="@style/TextAppearance.AppCompat.Display1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="40" />
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Headline"
+            style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"

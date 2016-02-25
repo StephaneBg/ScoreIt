@@ -28,8 +28,8 @@
     <ImageButton
         android:id="@+id/btn_minus"
         style="?attr/borderlessButtonStyle"
-        android:layout_width="@dimen/circle_btn"
-        android:layout_height="@dimen/circle_btn"
+        android:layout_width="@dimen/btn_score_width"
+        android:layout_height="@dimen/btn_score_width"
         android:src="@drawable/ic_minus_24dp"
         android:tint="?colorAccent" />
 
@@ -47,7 +47,7 @@
 
         <TextView
             android:id="@+id/tv_points"
-            style="@style/LargeThinText"
+            style="@style/TextAppearance.AppCompat.Display1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -57,8 +57,8 @@
     <ImageButton
         android:id="@+id/btn_plus"
         style="?attr/borderlessButtonStyle"
-        android:layout_width="@dimen/circle_btn"
-        android:layout_height="@dimen/circle_btn"
+        android:layout_width="@dimen/btn_score_width"
+        android:layout_height="@dimen/btn_score_width"
         android:src="@drawable/ic_plus_24dp"
         android:tint="?colorAccent" />
 </LinearLayout>

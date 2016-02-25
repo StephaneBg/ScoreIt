@@ -22,9 +22,8 @@
         <item name="bpDividerColor">@color/transparent</item>
     </style>
 
-    <style name="LargeThinText" parent="TextAppearance.AppCompat">
-        <item name="android:fontFamily">sans-serif-thin</item>
-        <item name="android:textSize">@dimen/text_size_display_1</item>
+    <style name="Headline" parent="TextAppearance.AppCompat.Headline">
+        <item name="android:textColor">?colorPrimary</item>
     </style>
 
     <style name="BorderlessColoredButton" parent="Widget.AppCompat.Button.Borderless">

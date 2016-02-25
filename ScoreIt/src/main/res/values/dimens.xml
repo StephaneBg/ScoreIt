@@ -42,5 +42,5 @@
 
     <!-- Width -->
     <dimen name="dialog_width">480dp</dimen>
-    <dimen name="circle_btn">56dp</dimen>
+    <dimen name="btn_score_width">56dp</dimen>
 </resources>
