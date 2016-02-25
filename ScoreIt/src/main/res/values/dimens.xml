@@ -27,8 +27,12 @@
     <dimen name="default_padding">8dp</dimen>
 
     <!-- Fonts -->
-    <dimen name="font_headline">24sp</dimen>
-    <dimen name="font_subheading">16sp</dimen>
+    <dimen name="text_size_display_4">112sp</dimen>
+    <dimen name="text_size_display_3">56sp</dimen>
+    <dimen name="text_size_display_2">45sp</dimen>
+    <dimen name="text_size_display_1">34sp</dimen>
+    <dimen name="text_size_headline">24sp</dimen>
+    <dimen name="text_size_title">20sp</dimen>
 
     <!-- Height -->
     <dimen name="list_item_height">64dp</dimen>

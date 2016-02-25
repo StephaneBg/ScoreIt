@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +13,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,8 +21,11 @@
     tools:context="ScoreItActivity">
 
     <TextView
-        style="@style/SubHeader"
-        android:text="@string/partner"/>
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:text="@string/partner" />
 
     <Spinner
         android:id="@+id/spinner_partner"
@@ -32,5 +33,5 @@
         android:layout_height="@dimen/widget_height"
         android:layout_marginBottom="@dimen/default_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+        android:layout_marginRight="@dimen/activity_horizontal_margin" />
 </LinearLayout>
