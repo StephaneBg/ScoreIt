@@ -26,6 +26,7 @@ import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -51,9 +52,9 @@ public class TarotLapFragment extends LapFragment
     LinearLayout mContainer;
     Spinner mTaker;
     Spinner mBid;
-    ToggleButton mPetit;
-    ToggleButton mTwentyOne;
-    ToggleButton mExcuse;
+    CheckBox mPetit;
+    CheckBox mTwentyOne;
+    CheckBox mExcuse;
     SeekPoints mSeekPoints;
     Button mButtonBonus;
     Spinner mPartner;
@@ -70,9 +71,9 @@ public class TarotLapFragment extends LapFragment
         mContainer = (LinearLayout) view.findViewById(R.id.ll_container);
         mTaker = (Spinner) view.findViewById(R.id.spinner_taker);
         mBid = (Spinner) view.findViewById(R.id.spinner_bid);
-        mPetit = (ToggleButton) view.findViewById(R.id.checkbox_petit);
-        mTwentyOne = (ToggleButton) view.findViewById(R.id.checkbox_twenty_one);
-        mExcuse = (ToggleButton) view.findViewById(R.id.checkbox_excuse);
+        mPetit = (CheckBox) view.findViewById(R.id.checkbox_petit);
+        mTwentyOne = (CheckBox) view.findViewById(R.id.checkbox_twenty_one);
+        mExcuse = (CheckBox) view.findViewById(R.id.checkbox_excuse);
         mSeekPoints = (SeekPoints) view.findViewById(R.id.seekbar_points);
         mButtonBonus = (Button) view.findViewById(R.id.btn_add_bonus);
 

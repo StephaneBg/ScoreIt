@@ -70,26 +70,35 @@
             android:layout_marginBottom="@dimen/default_margin"
             android:text="@string/oudlers" />
 
-        <CheckBox
-            android:id="@+id/checkbox_petit"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/petit" />
+            android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/checkbox_twenty_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/twentyone" />
+            <CheckBox
+                android:id="@+id/checkbox_petit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/petit" />
 
-        <CheckBox
-            android:id="@+id/checkbox_excuse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/excuse" />
+            <CheckBox
+                android:id="@+id/checkbox_twenty_one"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/twentyone" />
+
+            <CheckBox
+                android:id="@+id/checkbox_excuse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/excuse" />
+        </LinearLayout>
 
         <TextView
             style="@style/Headline"

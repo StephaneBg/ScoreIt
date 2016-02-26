@@ -21,9 +21,9 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.ToggleButton;
 
 
 public class ToggleGroup extends LinearLayout {
@@ -86,8 +86,8 @@ public class ToggleGroup extends LinearLayout {
 
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
-        if (child instanceof ToggleButton) {
-            final ToggleButton button = (ToggleButton) child;
+        if (child instanceof CheckBox) {
+            final CheckBox button = (CheckBox) child;
             if (button.isChecked()) {
                 mProtectFromCheckedChange = true;
                 if (mCheckedId != -1) {
@@ -139,8 +139,8 @@ public class ToggleGroup extends LinearLayout {
         if (checkedView != null) {
             if (checkedView instanceof NonUncheckableCheckBox) {
                 ((NonUncheckableCheckBox) checkedView).forceSetChecked(checked);
-            } else if (checkedView instanceof ToggleButton) {
-                ((ToggleButton) checkedView).setChecked(checked);
+            } else if (checkedView instanceof CheckBox) {
+                ((CheckBox) checkedView).setChecked(checked);
             }
         }
     }
@@ -310,14 +310,14 @@ public class ToggleGroup extends LinearLayout {
          * {@inheritDoc}
          */
         public void onChildViewAdded(View parent, View child) {
-            if (parent == ToggleGroup.this && child instanceof ToggleButton) {
+            if (parent == ToggleGroup.this && child instanceof CheckBox) {
                 int id = child.getId();
                 // generates an id if it's missing
                 if (id == View.NO_ID) {
                     id = child.hashCode();
                     child.setId(id);
                 }
-                ((ToggleButton) child).setOnCheckedChangeListener(mChildOnCheckedChangeListener);
+                ((CheckBox) child).setOnCheckedChangeListener(mChildOnCheckedChangeListener);
             }
 
             if (mOnHierarchyChangeListener != null) {
@@ -329,9 +329,8 @@ public class ToggleGroup extends LinearLayout {
          * {@inheritDoc}
          */
         public void onChildViewRemoved(View parent, View child) {
-            if (parent == ToggleGroup.this && child instanceof ToggleButton) {
-                ((ToggleButton) child).setOnCheckedChangeListener(null);
-                // ((RadioButton) child).setOnCheckedChangeWidgetListener(null);
+            if (parent == ToggleGroup.this && child instanceof CheckBox) {
+                ((CheckBox) child).setOnCheckedChangeListener(null);
             }
 
             if (mOnHierarchyChangeListener != null) {

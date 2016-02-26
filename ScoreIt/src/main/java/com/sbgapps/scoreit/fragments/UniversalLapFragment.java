@@ -67,8 +67,8 @@ public class UniversalLapFragment extends LapFragment
         TextView tv = (TextView) view.findViewById(R.id.tv_name);
         tv.setText(player.getName());
 
-        tv = (Button) view.findViewById(R.id.points);
-        tv.setText(Integer.toString(getLap().getScore(position)));
+        tv = (TextView) view.findViewById(R.id.points);
+        tv.setText(String.format("%d", getLap().getScore(position)));
         tv.setTextColor(getGameHelper().getPlayerColor(position));
         mPoints.add(tv);
 
