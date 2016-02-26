@@ -87,7 +87,7 @@
 
                 <TextView
                     android:id="@+id/player1_name"
-                    style="@style/TextAppearance.AppCompat.Display1"
+                    style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -95,7 +95,7 @@
 
                 <TextView
                     android:id="@+id/player1_points"
-                    style="@style/TextAppearance.AppCompat.Display1"
+                    style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="120" />
@@ -118,7 +118,7 @@
 
                 <TextView
                     android:id="@+id/player2_name"
-                    style="@style/TextAppearance.AppCompat.Display1"
+                    style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -126,7 +126,7 @@
 
                 <TextView
                     android:id="@+id/player2_points"
-                    style="@style/TextAppearance.AppCompat.Display1"
+                    style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="40" />

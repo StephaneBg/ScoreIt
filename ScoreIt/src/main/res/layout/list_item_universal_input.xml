@@ -29,87 +29,75 @@
         android:layout_height="wrap_content"
         tools:text="Name" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <Button
-                android:id="@+id/btn_minus"
-                style="@style/BorderlessColoredButton"
-                android:layout_width="@dimen/btn_score_width"
-                android:layout_height="@dimen/btn_score_width"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="4dp"
-                android:text="-1" />
-
-            <Button
-                android:id="@+id/btn_minus_10"
-                style="@style/BorderlessColoredButton"
-                android:layout_width="@dimen/btn_score_width"
-                android:layout_height="@dimen/btn_score_width"
-                android:layout_margin="4dp"
-                android:layout_toRightOf="@id/btn_minus"
-                android:text="-10" />
-
-            <Button
-                android:id="@+id/btn_minus_100"
-                style="@style/BorderlessColoredButton"
-                android:layout_width="@dimen/btn_score_width"
-                android:layout_height="@dimen/btn_score_width"
-                android:layout_below="@id/btn_minus_10"
-                android:layout_margin="4dp"
-                android:layout_toRightOf="@id/btn_minus"
-                android:text="-100" />
-        </RelativeLayout>
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/points"
-            style="@style/TextAppearance.AppCompat.Display1"
+            style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:minHeight="96dp"
+            android:minWidth="96dp"
+            android:padding="16dp"
             tools:text="128" />
 
-        <RelativeLayout
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/btn_minus"
+            style="@style/BorderlessColoredButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_below="@+id/btn_minus_10"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_toRightOf="@+id/points"
+            android:text="-1" />
 
-            <Button
-                android:id="@+id/btn_plus_10"
-                style="@style/BorderlessColoredButton"
-                android:layout_width="@dimen/btn_score_width"
-                android:layout_height="@dimen/btn_score_width"
-                android:layout_margin="4dp"
-                android:text="+10" />
+        <Button
+            android:id="@+id/btn_minus_10"
+            style="@style/BorderlessColoredButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/points"
+            android:text="-10" />
 
-            <Button
-                android:id="@+id/btn_plus"
-                style="@style/BorderlessColoredButton"
-                android:layout_width="@dimen/btn_score_width"
-                android:layout_height="@dimen/btn_score_width"
-                android:layout_centerVertical="true"
-                android:layout_margin="4dp"
-                android:layout_toRightOf="@id/btn_plus_10"
-                android:text="+1" />
+        <Button
+            android:id="@+id/btn_minus_100"
+            style="@style/BorderlessColoredButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_minus"
+            android:layout_toRightOf="@+id/points"
+            android:text="-100" />
 
-            <Button
-                android:id="@+id/btn_plus_100"
-                style="@style/BorderlessColoredButton"
-                android:layout_width="@dimen/btn_score_width"
-                android:layout_height="@dimen/btn_score_width"
-                android:layout_below="@id/btn_plus_10"
-                android:layout_margin="4dp"
-                android:text="+100" />
-        </RelativeLayout>
-    </LinearLayout>
+        <Button
+            android:id="@+id/btn_plus_10"
+            style="@style/BorderlessColoredButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/points"
+            android:text="+10" />
+
+        <Button
+            android:id="@+id/btn_plus"
+            style="@style/BorderlessColoredButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_plus_10"
+            android:layout_marginRight="@dimen/default_margin"
+            android:layout_toLeftOf="@+id/points"
+            android:text="+1" />
+
+        <Button
+            android:id="@+id/btn_plus_100"
+            style="@style/BorderlessColoredButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_plus"
+            android:layout_toLeftOf="@+id/points"
+            android:text="+100" />
+    </RelativeLayout>
 </LinearLayout>

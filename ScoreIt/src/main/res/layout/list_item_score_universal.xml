@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,27 +13,33 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<com.sbgapps.scoreit.views.widgets.RevealView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sbgapps.scoreit.views.widgets.RevealView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/reveal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_height"
     tools:context=".ScoreItActivity">
 
-    <include layout="@layout/include_back_score_list"/>
+    <include layout="@layout/include_back_score_list" />
 
     <FrameLayout
-        android:id="@id/front"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/list_selector_score">
+        android:background="@color/white"
+        tools:visibility="gone">
 
-        <com.sbgapps.scoreit.views.widgets.LinearListView
-            android:id="@+id/list_score"
+        <FrameLayout
+            android:id="@id/front"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:baselineAligned="false"
-            android:orientation="horizontal"/>
+            android:background="?attr/selectableItemBackground">
+
+            <com.sbgapps.scoreit.views.widgets.LinearListView
+                android:id="@+id/list_score"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:baselineAligned="false"
+                android:orientation="horizontal" />
+        </FrameLayout>
     </FrameLayout>
 </com.sbgapps.scoreit.views.widgets.RevealView>
