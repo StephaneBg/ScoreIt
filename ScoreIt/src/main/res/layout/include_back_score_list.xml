@@ -44,6 +44,6 @@
         android:layout_weight="1"
         android:background="?attr/selectableItemBackground"
         android:contentDescription="@string/edit"
-        android:src="@drawable/ic_create_24dp"
+        android:src="@drawable/ic_edit_24dp"
         android:text="@string/done"/>
 </LinearLayout>
