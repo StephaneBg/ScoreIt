@@ -571,7 +571,7 @@ public class ScoreItActivity extends BaseActivity {
     private void setActionButtonColor() {
         if (null == mLap) {
             mActionButton.setImageDrawable(
-                    ContextCompat.getDrawable(this, R.drawable.ic_create_24dp));
+                    ContextCompat.getDrawable(this, R.drawable.ic_plus_24dp));
             mActionButton.setBackgroundTintList(
                     ColorStateList.valueOf(ContextCompat.getColor(this, R.color.color_accent)));
         } else {

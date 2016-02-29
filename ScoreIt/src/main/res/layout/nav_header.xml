@@ -22,5 +22,13 @@
         android:layout_marginBottom="@dimen/default_margin"
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
-        android:src="@drawable/ic_app_hi_res" />
+        android:src="@drawable/ic_app_nav" />
+
+    <TextView
+        style="@style/Base.TextAppearance.AppCompat.Large.Inverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/logo"
+        android:layout_toRightOf="@id/logo"
+        android:text="@string/app_name" />
 </android.support.percent.PercentRelativeLayout>
