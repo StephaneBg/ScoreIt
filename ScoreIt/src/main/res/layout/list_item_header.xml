@@ -27,13 +27,13 @@
 
     <TextView
         android:id="@+id/name"
+        style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="?attr/selectableItemBackground"
         android:gravity="center"
         android:singleLine="true"
-        android:textSize="@dimen/text_size_headline"
         tools:text="Hub"/>
 
     <View
@@ -46,12 +46,12 @@
 
     <com.aprilapps.countingtextview.CountingTextView
         android:id="@+id/score"
+        style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:singleLine="true"
-        android:textSize="@dimen/text_size_headline"
         tools:text="120"/>
 </LinearLayout>

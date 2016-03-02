@@ -18,6 +18,7 @@
 
     <style name="AppTheme.NoActionBar.Adaptive" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowBackground">@color/color_primary_400</item>
+        <item name="android:textColorPrimary">@color/white</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="isDialog">true</item>

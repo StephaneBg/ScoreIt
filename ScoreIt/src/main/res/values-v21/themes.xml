@@ -27,7 +27,7 @@
     <style name="AppTheme.NoActionBar.Adaptive">
         <item name="android:statusBarColor">@color/color_primary_dark</item>
         <item name="android:windowBackground">@color/color_primary_400</item>
-        <item name="android:textColor">@color/white</item>
         <item name="isDialog">false</item>
+        <item name="android:textColorPrimary">@color/white</item>
     </style>
 </resources>

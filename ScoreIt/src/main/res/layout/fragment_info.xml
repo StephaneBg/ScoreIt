@@ -34,80 +34,68 @@
             android:layout_height="128dp"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:gravity="bottom"
-            app:srcCompat="@drawable/ic_app_hi_res"
-            android:text="@string/app_name"/>
+            android:text="@string/app_name"
+            app:srcCompat="@drawable/ic_app_hi_res"/>
 
         <TextView
             android:id="@+id/version"
+            style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/abc_text_size_large_material"
             tools:text="ScoreIt 0.0.0"/>
 
         <TextView
+            style="@style/TextAppearance.AppCompat.Medium.Inverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:singleLine="true"
             android:text="Stéphane Baiget"
-            android:textSize="@dimen/abc_text_size_medium_material"
             tools:ignore="HardcodedText"/>
 
-        <com.sbgapps.scoreit.views.widgets.MaxWidthFrameLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_rate"
+            style="?borderlessButtonStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:maxWidth="320dp">
+            android:minWidth="@dimen/btn_info_min_width"
+            android:text="@string/rate_app"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_vertical_margin"
-                android:orientation="vertical">
+        <Button
+            android:id="@+id/btn_share"
+            style="?borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:minWidth="@dimen/btn_info_min_width"
+            android:text="@string/share_app"/>
 
-                <Button
-                    android:id="@+id/btn_rate"
-                    style="?borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_star_24dp"
-                    android:text="@string/rate_app"/>
+        <Button
+            android:id="@+id/btn_community"
+            style="?borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:minWidth="@dimen/btn_info_min_width"
+            android:text="@string/plus_community"/>
 
-                <Button
-                    android:id="@+id/btn_share"
-                    style="?borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:drawableLeft="@drawable/ic_share_24dp"
-                    android:text="@string/share_app"/>
+        <Button
+            android:id="@+id/btn_contact"
+            style="?borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:minWidth="@dimen/btn_info_min_width"
+            android:text="@string/contact_developer"/>
 
-                <Button
-                    android:id="@+id/btn_community"
-                    style="?borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:drawableLeft="@drawable/ic_google_plus_24dp"
-                    android:text="@string/plus_community"/>
-
-                <Button
-                    android:id="@+id/btn_contact"
-                    style="?borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:drawableLeft="@drawable/ic_mail_24dp"
-                    android:text="@string/contact_developer"/>
-
-                <Button
-                    android:id="@+id/btn_translate"
-                    style="?borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:drawableLeft="@drawable/ic_translate_24dp"
-                    android:text="@string/help_translate"/>
-            </LinearLayout>
-        </com.sbgapps.scoreit.views.widgets.MaxWidthFrameLayout>
+        <Button
+            android:id="@+id/btn_translate"
+            style="?borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:minWidth="@dimen/btn_info_min_width"
+            android:text="@string/help_translate"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
