@@ -56,11 +56,20 @@
         android:layout_gravity="end|bottom"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_plus_24dp"
-        app:backgroundTint="?colorAccent"
         app:borderWidth="0dp"
         app:elevation="4dp"
         app:layout_behavior="com.sbgapps.scoreit.views.widgets.ScrollAwareFabBehavior"
         app:pressedTranslationZ="8dp"
         app:rippleColor="@color/white" />
+
+    <FrameLayout
+        android:id="@+id/chart_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/header_height"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:fitsSystemWindows="true"
+        app:behavior_hideable="true"
+        app:layout_behavior="@string/bottom_sheet_behavior" />
 </android.support.design.widget.CoordinatorLayout>

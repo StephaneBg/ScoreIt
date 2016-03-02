@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +13,8 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/back"
     android:layout_width="wrap_content"
@@ -33,8 +32,8 @@
         android:layout_weight="1"
         android:background="?attr/selectableItemBackground"
         android:contentDescription="@string/delete"
-        android:src="@drawable/ic_delete_24dp"
-        android:text="@string/cancel"/>
+        android:text="@string/cancel"
+        app:srcCompat="@drawable/ic_delete_24dp" />
 
     <ImageButton
         android:id="@+id/action_edit"
@@ -44,6 +43,6 @@
         android:layout_weight="1"
         android:background="?attr/selectableItemBackground"
         android:contentDescription="@string/edit"
-        android:src="@drawable/ic_edit_24dp"
-        android:text="@string/done"/>
+        android:text="@string/done"
+        app:srcCompat="@drawable/ic_edit_24dp" />
 </LinearLayout>

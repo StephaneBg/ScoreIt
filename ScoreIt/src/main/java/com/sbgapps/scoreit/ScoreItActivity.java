@@ -27,6 +27,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -79,14 +81,14 @@ public class ScoreItActivity extends BaseActivity {
 
     private DrawerLayout mDrawerLayout;
     private FloatingActionButton mActionButton;
-    private View mChartContainer;
+    private BottomSheetBehavior mBottomSheetBehavior;
+    private AppBarLayout mAppBarLayout;
 
     private GameManager mGameManager;
     private int mEditedPlayer = Player.PLAYER_NONE;
     private Lap mLap;
     private Lap mEditedLap;
     private boolean mIsEdited = false;
-    private boolean mIsChartDisplayed = false;
     private Snackbar mSnackBar;
 
     private ScoreListFragment mScoreListFragment;
@@ -105,7 +107,20 @@ public class ScoreItActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mChartContainer = findViewById(R.id.chart_container);
+        mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        mBottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.chart_container));
+        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (BottomSheetBehavior.STATE_COLLAPSED == newState)
+                    mAppBarLayout.setExpanded(true);
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
 
         mGameManager = new GameManager(this);
         mGameManager.loadGame();
@@ -123,8 +138,6 @@ public class ScoreItActivity extends BaseActivity {
                 int position = savedInstanceState.getInt("position");
                 mEditedLap = mGameManager.getLaps().get(position);
             }
-            mIsChartDisplayed = savedInstanceState.getBoolean("chartDisplayed");
-            boolean wasTablet = savedInstanceState.getBoolean("wasTablet");
 
             mHeaderFragment = (HeaderFragment) getSupportFragmentManager()
                     .findFragmentByTag(HeaderFragment.TAG);
@@ -132,35 +145,10 @@ public class ScoreItActivity extends BaseActivity {
                     .findFragmentByTag(ScoreListFragment.TAG);
             mScoreChartFragment = (ScoreChartFragment) getSupportFragmentManager()
                     .findFragmentByTag(ScoreChartFragment.TAG);
-
-            if (!wasTablet && isTablet()) {
-                if (null != mScoreChartFragment) {
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .detach(mScoreChartFragment)
-                            .commit();
-                    if (null == mLap) {
-                        showScoreListFragment(false);
-                    }
-                }
-                showScoreChartFragment(false);
-            } else if (wasTablet && !isTablet()) {
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .detach(mScoreChartFragment)
-                        .commit();
-                mScoreChartFragment = null;
-                mIsChartDisplayed = false;
-            }
         } else {
-            if (isTablet()) {
-                showHeaderFragment(false);
-                showScoreChartFragment(false);
-                showScoreListFragment(false);
-            } else {
-                showHeaderFragment(false);
-                showScoreListFragment(false);
-            }
+            showHeaderFragment(false);
+            showScoreListFragment(false);
+            showScoreChartFragment(false);
         }
 
         setupDrawer();
@@ -183,8 +171,9 @@ public class ScoreItActivity extends BaseActivity {
                 showClearDialogActionChoices();
                 return true;
 
-            case R.id.menu_view:
-                switchScoreViews();
+            case R.id.menu_chart:
+                mAppBarLayout.setExpanded(false);
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 return true;
 
             case R.id.menu_count:
@@ -227,16 +216,8 @@ public class ScoreItActivity extends BaseActivity {
         int game = mGameManager.getPlayedGame();
 
         MenuItem item;
-        item = menu.findItem(R.id.menu_view);
-        if (isTablet() || 0 == lapCnt) {
-            item.setVisible(false);
-        } else {
-            if (mIsChartDisplayed) {
-                item.setIcon(R.drawable.ic_list_24dp);
-            } else {
-                item.setIcon(R.drawable.ic_show_chart_24px);
-            }
-        }
+        item = menu.findItem(R.id.menu_chart);
+        item.setVisible(!isTablet() && 0 != lapCnt);
 
         item = menu.findItem(R.id.menu_clear);
         item.setVisible(0 != lapCnt);
@@ -294,7 +275,7 @@ public class ScoreItActivity extends BaseActivity {
 
     private void setupActionButton() {
         mActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        if (null != mLap) setActionButtonColor();
+        setActionButtonColor();
         mActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -309,7 +290,7 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     public boolean isTablet() {
-        return (null != mChartContainer);
+        return (null == mBottomSheetBehavior);
     }
 
     @Override
@@ -323,8 +304,6 @@ public class ScoreItActivity extends BaseActivity {
             outState.putSerializable("lap", mLap);
         }
         if (Player.PLAYER_NONE != mEditedPlayer) outState.putInt("editedPlayer", mEditedPlayer);
-        outState.putBoolean("chartDisplayed", mIsChartDisplayed);
-        outState.putBoolean("wasTablet", isTablet());
         super.onSaveInstanceState(outState);
     }
 
@@ -345,7 +324,6 @@ public class ScoreItActivity extends BaseActivity {
 
         setTitle();
         animateActionButton();
-        mIsChartDisplayed = false;
         invalidateOptionsMenu();
         reloadUi();
     }
@@ -403,18 +381,20 @@ public class ScoreItActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (null != mLap) {
-            mLap = null;
-            mEditedLap = null;
-            mIsEdited = false;
-            animateActionButton();
-        }
-        invalidateOptionsMenu();
-        super.onBackPressed();
-        if (mIsChartDisplayed && !isTablet()) {
-            if (null == mScoreChartFragment) showScoreChartFragment(true);
-        } else if (null == mScoreListFragment) {
-            showScoreListFragment(true);
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawers();
+        } else if (BottomSheetBehavior.STATE_EXPANDED == mBottomSheetBehavior.getState()) {
+            mAppBarLayout.setExpanded(true);
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        } else {
+            if (null != mLap) {
+                mLap = null;
+                mEditedLap = null;
+                mIsEdited = false;
+                animateActionButton();
+            }
+            invalidateOptionsMenu();
+            super.onBackPressed();
         }
     }
 
@@ -485,39 +465,27 @@ public class ScoreItActivity extends BaseActivity {
     private void reloadUi() {
         showHeaderFragment(true);
         showScoreListFragment(true);
-        if (isTablet()) showScoreChartFragment(true);
-    }
-
-    private void switchScoreViews() {
-        if (mIsChartDisplayed) {
-            showScoreListFragment(true);
-            mScoreChartFragment = null;
-        } else {
-            showScoreChartFragment(true);
-        }
-        mIsChartDisplayed = !mIsChartDisplayed;
-        invalidateOptionsMenu();
+        showScoreChartFragment(true);
     }
 
     public void updateFragments() {
         if (null != mHeaderFragment) mHeaderFragment.update();
-        if (null != mScoreListFragment) {
-            if (mScoreListFragment.isVisible()) mScoreListFragment.update();
-        } else if (isTablet()) {
-            showScoreListFragment(true);
-        }
+        if (null != mScoreListFragment && mScoreListFragment.isVisible())
+            mScoreListFragment.update();
         if (null != mScoreChartFragment && mScoreChartFragment.isVisible())
             mScoreChartFragment.update();
+
         try {
             getSupportFragmentManager()
                     .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } catch (IllegalStateException ex) {
-            // No frgament was added
+            // No fragment was added
         }
     }
 
     private void showLapScene(Lap lap) {
         if (null != mSnackBar) mSnackBar.dismiss();
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
         if (null == lap) {
             switch (mGameManager.getPlayedGame()) {
@@ -796,10 +764,9 @@ public class ScoreItActivity extends BaseActivity {
     private void showScoreChartFragment(boolean anim) {
         mScoreChartFragment = new ScoreChartFragment();
 
-        int id = isTablet() ? R.id.chart_container : R.id.main_container;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        ft.replace(id, mScoreChartFragment, ScoreChartFragment.TAG);
+        ft.replace(R.id.chart_container, mScoreChartFragment, ScoreChartFragment.TAG);
         ft.commit();
     }
 
