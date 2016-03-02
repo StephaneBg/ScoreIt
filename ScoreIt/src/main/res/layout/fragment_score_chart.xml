@@ -14,19 +14,13 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<android.support.v4.widget.NestedScrollView
+<com.sbgapps.scoreit.views.widgets.LineChart
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/line_chart"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/default_margin"
-    android:fillViewport="true"
-    tools:context=".ScoreItActivity">
-
-    <com.sbgapps.scoreit.views.widgets.LineChart
-        android:id="@+id/line_chart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:lineAxisColor="@color/gray_light"/>
-</android.support.v4.widget.NestedScrollView>
+    app:lineAxisColor="@color/gray_light"
+    tools:context=".ScoreItActivity"/>

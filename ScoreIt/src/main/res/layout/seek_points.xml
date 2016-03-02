@@ -30,8 +30,8 @@
         style="?attr/borderlessButtonStyle"
         android:layout_width="@dimen/btn_score_width"
         android:layout_height="@dimen/btn_score_width"
-        android:src="@drawable/ic_minus_24dp"
-        android:tint="?colorAccent" />
+        android:tint="?colorAccent"
+        app:srcCompat="@drawable/ic_minus_24dp" />
 
     <com.sbgapps.scoreit.views.widgets.MaxWidthFrameLayout
         android:layout_width="0dp"
@@ -59,6 +59,6 @@
         style="?attr/borderlessButtonStyle"
         android:layout_width="@dimen/btn_score_width"
         android:layout_height="@dimen/btn_score_width"
-        android:src="@drawable/ic_plus_24dp"
-        android:tint="?colorAccent" />
+        android:tint="?colorAccent"
+        app:srcCompat="@drawable/ic_plus_24dp" />
 </LinearLayout>

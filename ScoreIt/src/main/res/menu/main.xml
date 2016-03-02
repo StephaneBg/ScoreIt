@@ -36,8 +36,8 @@
         tools:showAsAction="always"
         android:title="@string/saved_games"/>
     <item
-        android:id="@+id/menu_view"
-        android:icon="@drawable/ic_show_chart_24px"
+        android:id="@+id/menu_chart"
+        android:icon="@drawable/ic_show_chart_24dp"
         app:showAsAction="ifRoom"
         tools:showAsAction="always"
         android:title="@string/view"/>
