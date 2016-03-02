@@ -35,6 +35,42 @@
             android:layout_marginBottom="@dimen/default_margin"
             android:text="@string/points" />
 
+        <com.sbgapps.scoreit.views.widgets.ToggleGroup
+            android:id="@+id/group_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+            <com.sbgapps.scoreit.views.widgets.NonUncheckableCheckBox
+                android:id="@+id/btn_score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="@string/score" />
+
+            <com.sbgapps.scoreit.views.widgets.NonUncheckableCheckBox
+                android:id="@+id/btn_inside"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
+                android:text="@string/inside" />
+
+            <com.sbgapps.scoreit.views.widgets.NonUncheckableCheckBox
+                android:id="@+id/btn_capot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="@string/capot" />
+        </com.sbgapps.scoreit.views.widgets.ToggleGroup>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,43 +134,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <com.sbgapps.scoreit.views.widgets.ToggleGroup
-            android:id="@+id/group_score"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin">
-
-            <com.sbgapps.scoreit.views.widgets.NonUncheckableCheckBox
-                android:id="@+id/btn_score"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="@string/score" />
-
-            <com.sbgapps.scoreit.views.widgets.NonUncheckableCheckBox
-                android:id="@+id/btn_inside"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_weight="1"
-                android:text="@string/inside" />
-
-            <com.sbgapps.scoreit.views.widgets.NonUncheckableCheckBox
-                android:id="@+id/btn_capot"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:text="@string/capot" />
-        </com.sbgapps.scoreit.views.widgets.ToggleGroup>
-
-        <com.sbgapps.scoreit.views.widgets.SeekPoints
+     <com.sbgapps.scoreit.views.widgets.SeekPoints
             android:id="@+id/seekbar_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

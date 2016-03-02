@@ -36,8 +36,9 @@
         <attr name="touchable" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="MaxWidthFrameLayout">
-        <attr name="maxWidth" format="dimension"/>
+    <declare-styleable name="BoundedView">
+        <attr name="bounded_width" format="dimension"/>
+        <attr name="bounded_height" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="LineChart">

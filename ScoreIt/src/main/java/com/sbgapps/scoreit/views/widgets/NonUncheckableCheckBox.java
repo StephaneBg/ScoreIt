@@ -17,6 +17,7 @@
 package com.sbgapps.scoreit.views.widgets;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.util.AttributeSet;
 import android.widget.CheckBox;
 import android.widget.ToggleButton;
@@ -24,7 +25,7 @@ import android.widget.ToggleButton;
 /**
  * Created by Stéphane on 14/10/2014.
  */
-public class NonUncheckableCheckBox extends CheckBox {
+public class NonUncheckableCheckBox extends AppCompatCheckBox {
 
     public NonUncheckableCheckBox(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

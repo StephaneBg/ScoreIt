@@ -14,10 +14,10 @@
   ~ limitations under the License.
   -->
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ScoreItActivity">
+                                            xmlns:tools="http://schemas.android.com/tools"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            tools:context=".ScoreItActivity">
 
     <LinearLayout
         android:id="@+id/ll_container"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/scorer" />
+            android:text="@string/scorer"/>
 
         <Spinner
             android:id="@+id/spinner_taker"
@@ -40,20 +40,20 @@
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin" />
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
         <ViewStub
             android:id="@+id/viewstub_partner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout="@layout/stub_partner" />
+            android:layout="@layout/stub_partner"/>
 
         <TextView
             style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/bidding" />
+            android:text="@string/bidding"/>
 
         <Spinner
             android:id="@+id/spinner_bid"
@@ -61,53 +61,64 @@
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin" />
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
         <TextView
             style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/oudlers" />
+            android:text="@string/oudlers"/>
 
-        <CheckBox
-            android:id="@+id/checkbox_petit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/petit" />
-
-        <CheckBox
-            android:id="@+id/checkbox_twenty_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/twentyone" />
-
-        <CheckBox
-            android:id="@+id/checkbox_excuse"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/excuse" />
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkbox_petit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/petit"/>
+
+            <CheckBox
+                android:id="@+id/checkbox_twenty_one"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/twentyone"/>
+
+            <CheckBox
+                android:id="@+id/checkbox_excuse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/excuse"/>
+        </LinearLayout>
 
         <TextView
             style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/points" />
+            android:text="@string/points"/>
 
         <com.sbgapps.scoreit.views.widgets.SeekPoints
             android:id="@+id/seekbar_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin" />
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
 
         <TextView
             style="@style/Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/bonuses" />
+            android:text="@string/bonuses"/>
 
         <Button
             android:id="@+id/btn_add_bonus"
@@ -116,6 +127,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:text="@string/add"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
