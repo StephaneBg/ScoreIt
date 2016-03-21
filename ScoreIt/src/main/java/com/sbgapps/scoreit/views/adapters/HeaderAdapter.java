@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit.views.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +66,7 @@ public class HeaderAdapter extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder h;
@@ -74,13 +76,7 @@ public class HeaderAdapter extends BaseAdapter {
 
             h = new ViewHolder();
             h.name = (TextView) convertView.findViewById(R.id.name);
-            h.score = (CountingTextView) convertView.findViewById(R.id.score);
-            h.score.setFormatter(new CountingTextView.ValueFormatter() {
-                @Override
-                public String formatValue(float value) {
-                    return String.format("%.0f", value);
-                }
-            });
+            h.score = (TextView) convertView.findViewById(R.id.score);
             h.marker = convertView.findViewById(R.id.marker);
             convertView.setTag(h);
         } else {
@@ -99,7 +95,7 @@ public class HeaderAdapter extends BaseAdapter {
         }
 
         h.name.setText(info.mPlayer.getName());
-        h.score.setValue(info.mScore);
+        h.score.setText(Integer.toString(info.mScore));
         h.score.setTextColor(mGameManager.getPlayerColor(position));
 
         int mod = -1;
@@ -113,7 +109,7 @@ public class HeaderAdapter extends BaseAdapter {
 
     private static class ViewHolder {
         TextView name;
-        CountingTextView score;
+        TextView score;
         View marker;
     }
 

@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -47,7 +48,7 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
     TextView mPlayer2Name;
     TextView mPlayer1Points;
     TextView mPlayer2Points;
-    ImageButton mSwitchBtn;
+    ImageView mSwitchBtn;
     ToggleGroup mScoreGroup;
     SeekPoints mSeekPoints;
     Button mButtonBonus;
@@ -68,7 +69,7 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
         mPlayer2Name = (TextView) view.findViewById(R.id.player2_name);
         mPlayer1Points = (TextView) view.findViewById(R.id.player1_points);
         mPlayer2Points = (TextView) view.findViewById(R.id.player2_points);
-        mSwitchBtn = (ImageButton) view.findViewById(R.id.btn_switch);
+        mSwitchBtn = (ImageView) view.findViewById(R.id.btn_switch);
         mScoreGroup = (ToggleGroup) view.findViewById(R.id.group_score);
         mSeekPoints = (SeekPoints) view.findViewById(R.id.seekbar_points);
         mButtonBonus = (Button) view.findViewById(R.id.btn_add_bonus);

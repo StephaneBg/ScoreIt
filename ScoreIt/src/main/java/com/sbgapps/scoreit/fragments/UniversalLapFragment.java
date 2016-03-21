@@ -16,11 +16,11 @@
 
 package com.sbgapps.scoreit.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -61,6 +61,7 @@ public class UniversalLapFragment extends LapFragment
         return view;
     }
 
+    @SuppressLint("SetTextI18n")
     private void initView(View view, final int position) {
         Player player = getGameHelper().getPlayer(position);
 
@@ -68,7 +69,7 @@ public class UniversalLapFragment extends LapFragment
         tv.setText(player.getName());
 
         tv = (TextView) view.findViewById(R.id.points);
-        tv.setText(String.format("%d", getLap().getScore(position)));
+        tv.setText(Integer.toString(getLap().getScore(position)));
         tv.setTextColor(getGameHelper().getPlayerColor(position));
         mPoints.add(tv);
 
@@ -84,48 +85,48 @@ public class UniversalLapFragment extends LapFragment
             }
         });
 
-        Button btn = (Button) view.findViewById(R.id.btn_plus);
-        btn.setOnClickListener(new View.OnClickListener() {
+        tv = (TextView) view.findViewById(R.id.btn_plus);
+        tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, 1);
                 updatePoints(position);
             }
         });
-        btn = (Button) view.findViewById(R.id.btn_plus_10);
-        btn.setOnClickListener(new View.OnClickListener() {
+        tv = (TextView) view.findViewById(R.id.btn_plus_10);
+        tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, 10);
                 updatePoints(position);
             }
         });
-        btn = (Button) view.findViewById(R.id.btn_plus_100);
-        btn.setOnClickListener(new View.OnClickListener() {
+        tv = (TextView) view.findViewById(R.id.btn_plus_100);
+        tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, 100);
                 updatePoints(position);
             }
         });
-        btn = (Button) view.findViewById(R.id.btn_minus);
-        btn.setOnClickListener(new View.OnClickListener() {
+        tv = (TextView) view.findViewById(R.id.btn_minus);
+        tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, -1);
                 updatePoints(position);
             }
         });
-        btn = (Button) view.findViewById(R.id.btn_minus_10);
-        btn.setOnClickListener(new View.OnClickListener() {
+        tv = (TextView) view.findViewById(R.id.btn_minus_10);
+        tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, -10);
                 updatePoints(position);
             }
         });
-        btn = (Button) view.findViewById(R.id.btn_minus_100);
-        btn.setOnClickListener(new View.OnClickListener() {
+        tv = (TextView) view.findViewById(R.id.btn_minus_100);
+        tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, -100);
@@ -134,6 +135,7 @@ public class UniversalLapFragment extends LapFragment
         });
     }
 
+    @SuppressLint("SetTextI18n")
     private void updatePoints(int position) {
         mPoints.get(position).setText(Integer.toString(getLap().getScore(position)));
     }
