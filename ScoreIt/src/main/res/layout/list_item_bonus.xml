@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/btn_remove_bonus"
-        android:padding="@dimen/default_padding"
+        android:padding="@dimen/small_padding"
         tools:text="Petit" />
 
     <TextView
@@ -39,7 +39,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@id/tv_bonus"
         android:layout_toLeftOf="@+id/btn_remove_bonus"
-        android:padding="@dimen/default_padding"
+        android:padding="@dimen/small_padding"
         tools:text="Toto" />
 
     <ImageButton

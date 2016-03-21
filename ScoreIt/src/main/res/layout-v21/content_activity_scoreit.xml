@@ -60,8 +60,7 @@
         app:borderWidth="0dp"
         app:elevation="4dp"
         app:layout_behavior="com.sbgapps.scoreit.views.widgets.ScrollAwareFabBehavior"
-        app:pressedTranslationZ="8dp"
-        app:rippleColor="@color/white"/>
+        app:pressedTranslationZ="8dp"/>
 
     <FrameLayout
         android:id="@+id/chart_container"

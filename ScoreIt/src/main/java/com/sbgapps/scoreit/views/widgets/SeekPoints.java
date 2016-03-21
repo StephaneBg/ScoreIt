@@ -21,7 +21,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
@@ -33,8 +33,8 @@ public class SeekPoints extends FrameLayout {
 
     TextView mPointsTv;
     SeekArc mSeekArc;
-    ImageButton mButtonMinus;
-    ImageButton mButtonPlus;
+    ImageView mButtonMinus;
+    ImageView mButtonPlus;
 
     private OnProgressChangedListener mListener;
     private int mProgress;
@@ -61,8 +61,8 @@ public class SeekPoints extends FrameLayout {
 
         mPointsTv = (TextView) findViewById(R.id.tv_points);
         mSeekArc = (SeekArc) findViewById(R.id.seekarc_points);
-        mButtonMinus = (ImageButton) findViewById(R.id.btn_minus);
-        mButtonPlus = (ImageButton) findViewById(R.id.btn_plus);
+        mButtonMinus = (ImageView) findViewById(R.id.btn_minus);
+        mButtonPlus = (ImageView) findViewById(R.id.btn_plus);
 
         mButtonMinus.setOnClickListener(new OnClickListener() {
             @Override

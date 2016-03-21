@@ -26,6 +26,10 @@
         <item name="android:textColor">?colorPrimary</item>
     </style>
 
+    <style name="TextAppearance.Button" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textColor">?colorAccent</item>
+    </style>
+
     <style name="BorderlessColoredButton" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:textColor">?colorAccent</item>
     </style>

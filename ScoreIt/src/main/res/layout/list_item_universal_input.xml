@@ -35,69 +35,93 @@
 
         <TextView
             android:id="@+id/points"
-            style="@style/TextAppearance.AppCompat.Large"
+            style="@style/TextAppearance.AppCompat.Display1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="?attr/selectableItemBackground"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:gravity="center"
             android:minHeight="96dp"
             android:minWidth="96dp"
             android:padding="16dp"
             tools:text="128"/>
 
-        <Button
+        <TextView
             android:id="@+id/btn_minus"
-            style="@style/BorderlessColoredButton"
+            style="@style/TextAppearance.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_minus_10"
             android:layout_marginRight="@dimen/default_margin"
             android:layout_toLeftOf="@+id/points"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:minHeight="@dimen/btn_score_size"
+            android:minWidth="@dimen/btn_score_size"
             android:text="-1"/>
 
-        <Button
+        <TextView
             android:id="@+id/btn_minus_10"
-            style="@style/BorderlessColoredButton"
+            style="@style/TextAppearance.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/points"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:minHeight="@dimen/btn_score_size"
+            android:minWidth="@dimen/btn_score_size"
             android:text="-10"/>
 
-        <Button
+        <TextView
             android:id="@+id/btn_minus_100"
-            style="@style/BorderlessColoredButton"
+            style="@style/TextAppearance.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_minus"
             android:layout_toLeftOf="@+id/points"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:minHeight="@dimen/btn_score_size"
+            android:minWidth="@dimen/btn_score_size"
             android:text="-100"/>
 
-        <Button
+        <TextView
             android:id="@+id/btn_plus_10"
-            style="@style/BorderlessColoredButton"
+            style="@style/TextAppearance.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/points"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:minHeight="@dimen/btn_score_size"
+            android:minWidth="@dimen/btn_score_size"
             android:text="+10"/>
 
-        <Button
+        <TextView
             android:id="@+id/btn_plus"
-            style="@style/BorderlessColoredButton"
+            style="@style/TextAppearance.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_plus_10"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_toRightOf="@+id/points"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:minHeight="@dimen/btn_score_size"
+            android:minWidth="@dimen/btn_score_size"
             android:text="+1"/>
 
-        <Button
+        <TextView
             android:id="@+id/btn_plus_100"
-            style="@style/BorderlessColoredButton"
+            style="@style/TextAppearance.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/btn_plus"
             android:layout_toRightOf="@+id/points"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:minHeight="@dimen/btn_score_size"
+            android:minWidth="@dimen/btn_score_size"
             android:text="+100"/>
     </RelativeLayout>
 </LinearLayout>
