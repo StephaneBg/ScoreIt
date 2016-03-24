@@ -154,7 +154,7 @@ public class ScoreItActivity extends BaseActivity {
                 return true;
 
             case R.id.menu_chart:
-                showChartSheet();
+                showChartSheet(true);
                 return true;
 
             case R.id.menu_count:
@@ -324,15 +324,13 @@ public class ScoreItActivity extends BaseActivity {
 
     private void onGameSelected(int game) {
         if (mGameManager.getPlayedGame() == game) return;
-        if (isPhone() && mBottomSheetBehavior.isHideable())
-            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
         mGameManager.setPlayedGame(game);
-
         mLap = null;
         mEditedLap = null;
         mIsEdited = false;
 
+        showChartSheet(false);
         setTitle();
         animateActionButton();
         invalidateOptionsMenu();
@@ -395,8 +393,7 @@ public class ScoreItActivity extends BaseActivity {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawers();
         } else if (isPhone() && BottomSheetBehavior.STATE_EXPANDED == mBottomSheetBehavior.getState()) {
-            mAppBarLayout.setExpanded(true);
-            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            showChartSheet(false);
         } else {
             if (null != mLap) {
                 mLap = null;
@@ -500,7 +497,7 @@ public class ScoreItActivity extends BaseActivity {
 
     private void showLapScene(Lap lap) {
         if (null != mSnackBar) mSnackBar.dismiss();
-        if (isPhone()) mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        showChartSheet(false);
 
         if (null == lap) {
             switch (mGameManager.getPlayedGame()) {
@@ -812,11 +809,17 @@ public class ScoreItActivity extends BaseActivity {
                 .commit();
     }
 
-    private void showChartSheet() {
+    private void showChartSheet(boolean show) {
         if (!isPhone()) return;
 
-        mAppBarLayout.setExpanded(false);
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        mActionButton.hide();
+        mAppBarLayout.setExpanded(!show);
+        if (show) {
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            mActionButton.hide();
+        } else {
+            if (BottomSheetBehavior.STATE_COLLAPSED != mBottomSheetBehavior.getState())
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            mActionButton.show();
+        }
     }
 }
