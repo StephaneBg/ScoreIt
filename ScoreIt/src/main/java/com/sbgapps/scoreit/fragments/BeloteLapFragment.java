@@ -30,12 +30,14 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.roughike.swipeselector.OnSwipeItemSelectedListener;
+import com.roughike.swipeselector.SwipeItem;
+import com.roughike.swipeselector.SwipeSelector;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.models.Player;
 import com.sbgapps.scoreit.models.belote.BeloteBonus;
 import com.sbgapps.scoreit.models.belote.BeloteLap;
 import com.sbgapps.scoreit.views.widgets.SeekPoints;
-import com.sbgapps.scoreit.views.widgets.ToggleGroup;
 
 /**
  * Created by sbaiget on 01/11/13.
@@ -49,7 +51,7 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
     TextView mPlayer1Points;
     TextView mPlayer2Points;
     ImageView mSwitchBtn;
-    ToggleGroup mScoreGroup;
+    SwipeSelector mScoreSelector;
     SeekPoints mSeekPoints;
     Button mButtonBonus;
 
@@ -70,7 +72,7 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
         mPlayer1Points = (TextView) view.findViewById(R.id.player1_points);
         mPlayer2Points = (TextView) view.findViewById(R.id.player2_points);
         mSwitchBtn = (ImageView) view.findViewById(R.id.btn_switch);
-        mScoreGroup = (ToggleGroup) view.findViewById(R.id.group_score);
+        mScoreSelector = (SwipeSelector) view.findViewById(R.id.selector_score);
         mSeekPoints = (SeekPoints) view.findViewById(R.id.seekbar_points);
         mButtonBonus = (Button) view.findViewById(R.id.btn_add_bonus);
 
@@ -91,21 +93,25 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
 
         int p = getLap().getPoints();
 
-        mScoreGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
+        mScoreSelector.setItems(
+                new SwipeItem(0, (String) getResources().getText(R.string.score), null),
+                new SwipeItem(1, (String) getResources().getText(R.string.inside), null),
+                new SwipeItem(2, (String) getResources().getText(R.string.capot), null));
+        mScoreSelector.setOnItemSelectedListener(new OnSwipeItemSelectedListener() {
             @Override
-            public void onCheckedChanged(ToggleGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.btn_score:
+            public void onItemSelected(SwipeItem item) {
+                switch ((int) item.value) {
+                    case 0:
                         mSeekPoints.setVisibility(View.VISIBLE);
                         getLap().setPoints(110);
                         mSeekPoints.setProgress(110, true);
                         mSeekPoints.setPoints("110");
                         break;
-                    case R.id.btn_inside:
+                    case 1:
                         mSeekPoints.setVisibility(View.GONE);
                         getLap().setPoints(160);
                         break;
-                    case R.id.btn_capot:
+                    case 2:
                         mSeekPoints.setVisibility(View.GONE);
                         getLap().setPoints(250);
                         break;
