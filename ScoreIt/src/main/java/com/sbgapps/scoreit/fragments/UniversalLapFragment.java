@@ -70,7 +70,6 @@ public class UniversalLapFragment extends LapFragment
 
         tv = (TextView) view.findViewById(R.id.points);
         tv.setText(Integer.toString(getLap().getScore(position)));
-        tv.setTextColor(getGameHelper().getPlayerColor(position));
         mPoints.add(tv);
 
         tv.setOnClickListener(new View.OnClickListener() {

@@ -14,26 +14,28 @@
   ~ limitations under the License.
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="160dp"
-              android:baselineAligned="false"
-              android:gravity="center"
-              android:orientation="horizontal"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin"
-              tools:context=".ScoreItActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:baselineAligned="false"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context=".ScoreItActivity">
 
     <ImageView
         android:id="@+id/btn_minus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
+        android:minHeight="@dimen/btn_score_size"
+        android:minWidth="@dimen/btn_score_size"
         android:padding="@dimen/big_padding"
         android:tint="?colorAccent"
         app:srcCompat="@drawable/ic_minus_24dp"
-        tools:src="@drawable/ic_minus_24dp"/>
+        tools:src="@drawable/ic_minus_24dp" />
 
     <com.sbgapps.scoreit.views.widgets.BoundedFrameLayout
         android:layout_width="0dp"
@@ -45,7 +47,7 @@
             android:id="@+id/seekarc_points"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="30dp"/>
+            android:padding="30dp" />
 
         <TextView
             android:id="@+id/tv_points"
@@ -53,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            tools:text="48"/>
+            tools:text="48" />
     </com.sbgapps.scoreit.views.widgets.BoundedFrameLayout>
 
     <ImageView
@@ -61,8 +63,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
+        android:minHeight="@dimen/btn_score_size"
+        android:minWidth="@dimen/btn_score_size"
         android:padding="@dimen/big_padding"
         android:tint="?colorAccent"
         app:srcCompat="@drawable/ic_plus_24dp"
-        tools:src="@drawable/ic_plus_24dp"/>
+        tools:src="@drawable/ic_plus_24dp" />
 </LinearLayout>

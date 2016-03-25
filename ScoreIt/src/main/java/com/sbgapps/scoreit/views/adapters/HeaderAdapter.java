@@ -24,13 +24,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.aprilapps.countingtextview.CountingTextView;
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.models.Game;
+import com.sbgapps.scoreit.models.GameManager;
 import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.models.Player;
-import com.sbgapps.scoreit.models.GameManager;
 
 /**
  * Created by Stéphane on 16/07/2014.
