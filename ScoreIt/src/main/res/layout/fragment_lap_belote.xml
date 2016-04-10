@@ -29,7 +29,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/Headline"
+            style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             app:swipe_indicatorActiveColor="?colorAccent"
-            app:swipe_indicatorInActiveColor="@color/gray_light"
+            app:swipe_indicatorInActiveColor="@color/light_grey"
             app:swipe_titleTextAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <LinearLayout
@@ -115,7 +115,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            style="@style/Headline"
+            style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"

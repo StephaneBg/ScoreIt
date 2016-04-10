@@ -51,6 +51,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/tv_bonus"
-        android:tint="@color/gray_dark"
+        android:tint="@color/dark_grey"
         app:srcCompat="@drawable/ic_cancel_24dp" />
 </RelativeLayout>

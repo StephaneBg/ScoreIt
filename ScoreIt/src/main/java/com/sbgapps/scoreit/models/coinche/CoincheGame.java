@@ -34,10 +34,11 @@ public class CoincheGame extends Game<CoincheLap> {
         super(context, NB_PLAYERS);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void initPlayers(Context context, int playerCount) {
         Resources r = context.getResources();
-        mPlayers.add(new Player(r.getString(R.string.them)));
-        mPlayers.add(new Player(r.getString(R.string.us)));
+        mPlayers.add(new Player(r.getString(R.string.them), r.getColor(R.color.md_green_600)));
+        mPlayers.add(new Player(r.getString(R.string.us), r.getColor(R.color.md_orange_600)));
     }
 }

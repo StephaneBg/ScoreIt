@@ -16,6 +16,8 @@
 
 package com.sbgapps.scoreit.models;
 
+import android.support.annotation.ColorInt;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -36,9 +38,12 @@ public class Player {
 
     @SerializedName("name")
     private String mName;
+    @SerializedName("color")
+    private int mColor;
 
-    public Player(String name) {
+    public Player(String name, @ColorInt int color) {
         mName = name;
+        mColor = color;
     }
 
     public String getName() {
@@ -47,6 +52,15 @@ public class Player {
 
     public void setName(String name) {
         mName = name;
+    }
+
+    @ColorInt
+    public int getColor() {
+        return mColor;
+    }
+
+    public void setColor(@ColorInt int color) {
+        mColor = color;
     }
 
     @Override

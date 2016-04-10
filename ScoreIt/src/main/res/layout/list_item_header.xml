@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="?attr/selectableItemBackground"
+        android:background="?selectableItemBackgroundBorderless"
         android:gravity="center"
         android:singleLine="true"
         tools:text="Hub"/>
@@ -42,7 +42,7 @@
         android:layout_height="1dp"
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
-        android:background="?attr/colorPrimary"/>
+        android:background="?colorPrimary"/>
 
     <TextView
         android:id="@+id/score"
@@ -50,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="?selectableItemBackgroundBorderless"
         android:gravity="center"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:singleLine="true"

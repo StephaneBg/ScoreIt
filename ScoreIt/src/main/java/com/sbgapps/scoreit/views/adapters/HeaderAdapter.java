@@ -18,6 +18,7 @@ package com.sbgapps.scoreit.views.adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.support.annotation.ColorInt;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import com.sbgapps.scoreit.models.Game;
 import com.sbgapps.scoreit.models.GameManager;
 import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.models.Player;
+import com.thebluealliance.spectrum.SpectrumDialog;
 
 /**
  * Created by Stéphane on 16/07/2014.
@@ -92,10 +94,24 @@ public class HeaderAdapter extends BaseAdapter {
                 }
             });
         }
-
         h.name.setText(info.mPlayer.getName());
+
         h.score.setText(Integer.toString(info.mScore));
         h.score.setTextColor(mGameManager.getPlayerColor(position));
+        h.score.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new SpectrumDialog.Builder(mActivity)
+                        .setColors(R.array.player_colors)
+                        .setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
+                            @Override
+                            public void onColorSelected(boolean positiveResult, @ColorInt int color) {
+                                mGameManager.setPlayerColor(position, color);
+                                mActivity.updateFragments();
+                            }
+                        }).build().show(mActivity.getSupportFragmentManager(), null);
+            }
+        });
 
         int mod = -1;
         if (Game.BELOTE != mGameManager.getPlayedGame()

@@ -89,7 +89,7 @@ public class SeekArc extends View {
         mClockwise = a.getBoolean(R.styleable.SeekArc_clockwise, mClockwise);
         mTouchable = a.getBoolean(R.styleable.SeekArc_touchable, mTouchable);
         int arcColor = a.getColor(R.styleable.SeekArc_arcColor,
-                res.getColor(R.color.gray_light));
+                res.getColor(R.color.light_grey));
         int progressColor = a.getColor(R.styleable.SeekArc_progressColor,
                 res.getColor(R.color.color_primary));
         int thumbColor = a.getColor(R.styleable.SeekArc_thumbColor,
