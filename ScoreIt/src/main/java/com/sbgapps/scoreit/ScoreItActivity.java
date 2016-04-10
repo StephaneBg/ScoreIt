@@ -29,7 +29,6 @@ import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -69,6 +68,7 @@ import com.sbgapps.scoreit.models.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.models.tarot.TarotFourLap;
 import com.sbgapps.scoreit.models.tarot.TarotThreeLap;
 import com.sbgapps.scoreit.models.universal.UniversalLap;
+import com.wunderlist.slidinglayer.SlidingLayer;
 
 import java.util.List;
 
@@ -82,8 +82,8 @@ public class ScoreItActivity extends BaseActivity {
 
     private DrawerLayout mDrawerLayout;
     private FloatingActionButton mActionButton;
-    private BottomSheetBehavior mBottomSheetBehavior;
     private AppBarLayout mAppBarLayout;
+    private SlidingLayer mSlidingLayer;
 
     private GameManager mGameManager;
     private int mEditedPlayer = Player.PLAYER_NONE;
@@ -109,6 +109,7 @@ public class ScoreItActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        mSlidingLayer = (SlidingLayer) findViewById(R.id.chart_container);
 
         mGameManager = new GameManager(this);
         mGameManager.loadGame();
@@ -134,12 +135,21 @@ public class ScoreItActivity extends BaseActivity {
         setupActionBar();
         setupDrawer();
         setupActionButton();
-        setupBottomSheet();
+        setupChartPane();
     }
 
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_scoreit;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isPhone()) {
+            mSlidingLayer.closeLayer(false);
+            mAppBarLayout.setExpanded(true);
+        }
     }
 
     @Override
@@ -274,32 +284,43 @@ public class ScoreItActivity extends BaseActivity {
         });
     }
 
-    private void setupBottomSheet() {
-        try {
-            mBottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.chart_container));
-        } catch (IllegalArgumentException e) {
-            // Tablet layout
-            return;
-        }
+    public void setupChartPane() {
+        if (isPhone()) {
+            mSlidingLayer.setOnInteractListener(new SlidingLayer.OnInteractListener() {
+                @Override
+                public void onOpen() {
 
-        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (BottomSheetBehavior.STATE_COLLAPSED == newState) {
-                    mAppBarLayout.setExpanded(true);
-                    mActionButton.show();
                 }
-            }
 
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                @Override
+                public void onShowPreview() {
 
-            }
-        });
+                }
+
+                @Override
+                public void onClose() {
+                }
+
+                @Override
+                public void onOpened() {
+
+                }
+
+                @Override
+                public void onPreviewShowed() {
+
+                }
+
+                @Override
+                public void onClosed() {
+                    mAppBarLayout.setExpanded(true);
+                }
+            });
+        }
     }
 
     public boolean isPhone() {
-        return null != mBottomSheetBehavior;
+        return null != mSlidingLayer;
     }
 
     @Override
@@ -392,7 +413,7 @@ public class ScoreItActivity extends BaseActivity {
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawers();
-        } else if (isPhone() && BottomSheetBehavior.STATE_EXPANDED == mBottomSheetBehavior.getState()) {
+        } else if (isPhone() && mSlidingLayer.isOpened()) {
             showChartSheet(false);
         } else {
             if (null != mLap) {
@@ -814,11 +835,10 @@ public class ScoreItActivity extends BaseActivity {
 
         mAppBarLayout.setExpanded(!show);
         if (show) {
-            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            mSlidingLayer.openLayer(true);
             mActionButton.hide();
         } else {
-            if (BottomSheetBehavior.STATE_COLLAPSED != mBottomSheetBehavior.getState())
-                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            mSlidingLayer.closeLayer(true);
             mActionButton.show();
         }
     }
