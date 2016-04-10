@@ -51,11 +51,11 @@
     </style>
 
     <style name="AlertDialogPositiveButton" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
-        <item name="android:textColor">@color/color_primary</item>
+        <item name="android:textColor">@color/color_accent</item>
     </style>
 
     <style name="AlertDialogNegativeButton" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
-        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:textColor">@color/dark_grey</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>

@@ -16,18 +16,14 @@
 
 package com.sbgapps.scoreit.models;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
+import android.support.annotation.ColorInt;
 
 import com.google.gson.Gson;
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.models.Game;
-import com.sbgapps.scoreit.models.Lap;
-import com.sbgapps.scoreit.models.Player;
 import com.sbgapps.scoreit.models.belote.BeloteGame;
 import com.sbgapps.scoreit.models.coinche.CoincheGame;
 import com.sbgapps.scoreit.models.tarot.TarotFiveGame;
@@ -59,23 +55,16 @@ public class GameManager {
     final private SharedPreferences mPreferences;
     final private Storage mStorage;
     final private FileUtils mFileUtils;
-    final private int[] mColors = new int[Player.PLAYER_COUNT + 1];
     private Game mGame;
     private int mPlayedGame;
     private Player mPlayerTotal;
 
-    public GameManager(Activity activity) {
-        mContext = activity;
+    public GameManager(Context context) {
+        mContext = context;
         mStorage = SimpleStorage.getInternalStorage(mContext);
         mFileUtils = new FileUtils(this);
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         mPlayedGame = mPreferences.getInt(KEY_SELECTED_GAME, Game.UNIVERSAL);
-
-        Resources r = activity.getResources();
-        final TypedArray ta = r.obtainTypedArray(R.array.player_colors);
-        for (int i = 0; i < mColors.length; i++)
-            mColors[i] = ta.getColor(i, 0);
-        ta.recycle();
     }
 
     public SharedPreferences getPreferences() {
@@ -189,6 +178,8 @@ public class GameManager {
         }
         if (null == mGame) {
             createGame();
+        } else {
+            assertPlayerColors();
         }
         mGame.initScores();
     }
@@ -222,6 +213,7 @@ public class GameManager {
         mFileUtils.setPlayedFile("default");
     }
 
+    @SuppressWarnings("unchecked")
     public void addLap(Lap lap) {
         mGame.getLaps().add(lap);
     }
@@ -236,25 +228,43 @@ public class GameManager {
         mGame.getLaps().clear();
     }
 
+    @SuppressWarnings("unchecked")
     public List<Lap> getLaps() {
         return mGame.getLaps();
     }
 
+    @SuppressWarnings("unchecked")
     public List<Player> getPlayers() {
         return mGame.getPlayers();
     }
 
+    @SuppressWarnings("deprecation")
     public Player getPlayer(int player) {
         if (player >= getPlayers().size()) {
-            if (null == mPlayerTotal) mPlayerTotal = new Player(mContext.getString(R.string.total));
+            if (null == mPlayerTotal) mPlayerTotal = new Player(mContext.getString(R.string.total),
+                    mContext.getResources().getColor(R.color.md_lime_600));
             return mPlayerTotal;
         } else {
             return getPlayers().get(player);
         }
     }
 
+    @ColorInt
     public int getPlayerColor(int player) {
-        return mColors[player];
+        if (player >= getPlayers().size()) {
+            return mPlayerTotal.getColor();
+        } else {
+            return getPlayers().get(player).getColor();
+        }
+    }
+
+    public void setPlayerColor(int player, @ColorInt int color) {
+        if (player >= getPlayers().size()) {
+            mPlayerTotal.setColor(color);
+        } else {
+            getPlayers().get(player).setColor(color);
+        }
+
     }
 
     private <T> T load(final Class<T> clazz) {
@@ -280,5 +290,16 @@ public class GameManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void assertPlayerColors() {
+        int i = 0;
+        final TypedArray colors = mContext.getResources().obtainTypedArray(R.array.player_colors);
+        for (Player player : getPlayers()) {
+            if (0 == player.getColor())
+                player.setColor(colors.getColor(i, 0));
+            i++;
+        }
+        colors.recycle();
     }
 }

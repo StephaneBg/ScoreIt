@@ -63,7 +63,7 @@
             android:id="@+id/chart_container"
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/header_container"
-            android:background="@color/gray_light"
+            android:background="@color/light_grey"
             app:layout_widthPercent="30%" />
 
         <View

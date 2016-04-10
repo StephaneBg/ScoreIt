@@ -16,18 +16,23 @@
 
 apply plugin: 'com.android.application'
 
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
 dependencies {
-    compile 'com.android.support:support-v4:23.2.1'
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:recyclerview-v7:23.2.1'
-    compile 'com.android.support:design:23.2.1'
-    compile 'com.android.support:percent:23.2.1'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:percent:23.3.0'
 
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.anjlab.android.iab.v3:library:1.0.31'
-    compile 'com.code-troopers.betterpickers:library:2.5.1'
+    compile 'com.code-troopers.betterpickers:library:2.5.2'
     compile 'com.sromku:simple-storage:1.2.0'
     compile 'com.roughike:swipe-selector:1.0.6'
+    compile 'com.thebluealliance:spectrum:0.2.1'
 }
 
 android {

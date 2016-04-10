@@ -29,7 +29,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/Headline"
+            style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            style="@style/Headline"
+            style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
@@ -65,7 +65,7 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin" />
 
         <TextView
-            style="@style/Headline"
+            style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
@@ -142,7 +142,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            style="@style/Headline"
+            style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"

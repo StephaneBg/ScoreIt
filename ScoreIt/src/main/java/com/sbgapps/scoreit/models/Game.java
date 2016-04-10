@@ -64,9 +64,11 @@ public abstract class Game<T extends Lap> {
     protected void initPlayers(Context context, int playerCount) {
         Resources r = context.getResources();
         final TypedArray names = r.obtainTypedArray(R.array.player_names);
+        final TypedArray colors = r.obtainTypedArray(R.array.player_colors);
         for (int i = 0; i < playerCount; i++)
-            mPlayers.add(new Player(names.getString(i)));
+            mPlayers.add(new Player(names.getString(i), colors.getColor(i, 0)));
 
         names.recycle();
+        colors.recycle();
     }
 }

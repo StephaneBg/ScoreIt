@@ -22,5 +22,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/default_margin"
-    app:lineAxisColor="@color/gray_light"
+    app:lineAxisColor="@color/light_grey"
     tools:context=".ScoreItActivity"/>
