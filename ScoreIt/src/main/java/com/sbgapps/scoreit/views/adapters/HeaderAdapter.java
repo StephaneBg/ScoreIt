@@ -31,6 +31,7 @@ import com.sbgapps.scoreit.models.Game;
 import com.sbgapps.scoreit.models.GameManager;
 import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.models.Player;
+import com.sbgapps.scoreit.models.belote.GenericBeloteLap;
 import com.thebluealliance.spectrum.SpectrumDialog;
 
 /**
@@ -56,8 +57,14 @@ public class HeaderAdapter extends BaseAdapter {
     @Override
     public Info getItem(int position) {
         int score = 0;
+        boolean rounded = mGameManager.getPlayedGame() == Game.BELOTE
+                && mGameManager.getPreferences().getBoolean(GameManager.KEY_BELOTE_ROUND, false);
         for (Lap lap : mGameManager.getLaps()) {
-            score += lap.getScore(position);
+            if (rounded) {
+                score += GenericBeloteLap.getRoundedScore(lap.getScore(position));
+            } else {
+                score += lap.getScore(position);
+            }
         }
         return new Info(mGameManager.getPlayer(position), score);
     }
@@ -103,6 +110,7 @@ public class HeaderAdapter extends BaseAdapter {
             public void onClick(View v) {
                 new SpectrumDialog.Builder(mActivity)
                         .setColors(R.array.player_colors)
+                        .setTitle(null)
                         .setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
                             @Override
                             public void onColorSelected(boolean positiveResult, @ColorInt int color) {

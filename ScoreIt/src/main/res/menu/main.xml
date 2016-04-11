@@ -33,8 +33,13 @@
         android:title="@string/clear"
         app:showAsAction="ifRoom"/>
     <item
+        android:id="@+id/menu_round"
+        android:icon="@drawable/ic_crop_free_24dp"
+        android:title="@string/menu_round_scores"
+        app:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/menu_save"
-        android:icon="@drawable/ic_save_24dp"
+        android:icon="@drawable/ic_unarchive_24dp"
         android:title="@string/saved_games"
         app:showAsAction="ifRoom"/>
     <item

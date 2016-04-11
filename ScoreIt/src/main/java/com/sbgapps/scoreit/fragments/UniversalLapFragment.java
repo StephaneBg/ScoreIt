@@ -139,6 +139,7 @@ public class UniversalLapFragment extends LapFragment
         mPoints.get(position).setText(Integer.toString(getLap().getScore(position)));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onDialogNumberSet(int reference, int number, double decimal, boolean isNegative, double fullNumber) {
         getLap().setScore(reference, number);

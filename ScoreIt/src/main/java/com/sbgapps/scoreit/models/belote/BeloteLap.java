@@ -19,7 +19,6 @@ package com.sbgapps.scoreit.models.belote;
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.models.Player;
-import com.sbgapps.scoreit.models.tarot.TarotBonus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,15 +47,15 @@ public class BeloteLap extends GenericBeloteLap {
     @Override
     public void computePoints() {
         int[] points = new int[2];
-        if (160 == mPoints) {
-            points[0] = 160;
+        if ((160 == mPoints) || (162 == mPoints)) {
+            points[0] = 162;
             points[1] = 0;
         } else if (250 == mPoints) {
             points[0] = 250;
             points[1] = 0;
         } else {
-            points[0] = ((mPoints + 5) / 10) * 10;
-            points[1] = (((162 - mPoints) + 5) / 10) * 10;
+            points[0] = mPoints;
+            points[1] = (162 - mPoints);
         }
 
         if (Player.PLAYER_1 == getScorer()) {
@@ -71,7 +70,7 @@ public class BeloteLap extends GenericBeloteLap {
     @Override
     public void computeScores() {
         computePoints();
-        mIsDone = (160 != mPoints);
+        mIsDone = (160 != mPoints) && (162 != mPoints);
 
         // Bonuses
         for (BeloteBonus bonus : mBonuses) {

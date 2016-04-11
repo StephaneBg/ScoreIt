@@ -23,11 +23,11 @@ import java.io.Serializable;
  */
 public interface Lap extends Serializable {
 
-    public int getScore(int player);
+    int getScore(int player);
 
-    public void computeScores();
+    void computeScores();
 
-    public void set(Lap lap);
+    void set(Lap lap);
 
-    public Lap copy();
+    Lap copy();
 }

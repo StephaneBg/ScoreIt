@@ -50,6 +50,7 @@ public class GenericBeloteScoreAdapter extends ScoreListAdapter<GenericBeloteSco
         return new ViewHolder(v);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onBindViewHolder(GenericBeloteScoreAdapter.ViewHolder viewHolder, int i) {
         super.onBindViewHolder(viewHolder, i);
@@ -57,7 +58,7 @@ public class GenericBeloteScoreAdapter extends ScoreListAdapter<GenericBeloteSco
         final GenericBeloteLap lap = (GenericBeloteLap) getGameHelper().getLaps().get(i);
         final Resources res = getActivity().getResources();
 
-        viewHolder.mLinearListView.setAdapter(new LapRowAdapter(this, lap));
+        viewHolder.mLinearListView.setAdapter(new BeloteLapRowAdapter(this, lap));
         viewHolder.mMaker.setBackgroundColor(lap.isDone() ? res.getColor(R.color.game_won)
                 : res.getColor(R.color.game_lost));
     }

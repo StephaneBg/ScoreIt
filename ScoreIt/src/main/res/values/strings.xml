@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright (c) 2016 SBG Apps
   ~
@@ -15,11 +14,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <resources>
 
     <string name="app_name" translatable="false">Score It</string>
-    <string name="score">Score</string>
+    <string name="belote_swipe_item_score">Score</string>
     <string name="belote">Belote</string>
     <string name="coinche">Coinche</string>
     <string name="surcoinche">Sur-coinche</string>
@@ -44,6 +42,7 @@
     <string name="filename">Filename</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
+    <string name="menu_round_scores">Round scores</string>
     <string name="view">Switch view</string>
     <string name="show_total">Show total</string>
     <string name="total">Total</string>
@@ -111,6 +110,5 @@
     <string name="language_spanish">Spanish</string>
     <string name="language_italian">Italian</string>
     <string name="language_arabic">Arabic</string>
-    <!--<string name="language_portuguese">Portuguese</string>-->
     <string name="plus_community">Google+ community</string>
 </resources>

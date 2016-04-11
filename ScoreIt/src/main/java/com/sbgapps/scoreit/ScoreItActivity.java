@@ -154,6 +154,7 @@ public class ScoreItActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        SharedPreferences sp;
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
@@ -161,6 +162,13 @@ public class ScoreItActivity extends BaseActivity {
 
             case R.id.menu_clear:
                 showClearDialogActionChoices();
+                return true;
+
+            case R.id.menu_round:
+                sp = PreferenceManager.getDefaultSharedPreferences(this);
+                boolean round = sp.getBoolean(GameManager.KEY_BELOTE_ROUND, false);
+                sp.edit().putBoolean(GameManager.KEY_BELOTE_ROUND, !round).apply();
+                updateFragments();
                 return true;
 
             case R.id.menu_chart:
@@ -180,7 +188,7 @@ public class ScoreItActivity extends BaseActivity {
                 return true;
 
             case R.id.menu_total:
-                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+                sp = PreferenceManager.getDefaultSharedPreferences(this);
                 boolean show = sp.getBoolean(GameManager.KEY_UNIVERSAL_TOTAL, false);
                 sp.edit().putBoolean(GameManager.KEY_UNIVERSAL_TOTAL, !show).apply();
                 updateFragments();
@@ -212,6 +220,9 @@ public class ScoreItActivity extends BaseActivity {
 
         item = menu.findItem(R.id.menu_clear);
         item.setVisible(0 != lapCnt);
+
+        item = menu.findItem(R.id.menu_round);
+        item.setVisible(Game.BELOTE == game);
 
         item = menu.findItem(R.id.menu_count);
         item.setVisible(Game.UNIVERSAL == game || Game.TAROT == game);
@@ -314,6 +325,7 @@ public class ScoreItActivity extends BaseActivity {
                 @Override
                 public void onClosed() {
                     mAppBarLayout.setExpanded(true);
+                    mActionButton.show();
                 }
             });
         }
@@ -453,11 +465,10 @@ public class ScoreItActivity extends BaseActivity {
     public void removeLap(final Lap lap) {
         final int position = mGameManager.removeLap(lap);
 
-        if (null != mHeaderFragment)
-            mHeaderFragment.update();
-        if (null != mScoreListFragment && mScoreListFragment.isVisible())
+        mHeaderFragment.update();
+        if (mScoreListFragment.isVisible())
             mScoreListFragment.getListAdapter().notifyItemRemoved(position);
-        if (null != mScoreChartFragment && mScoreChartFragment.isVisible())
+        if (mScoreChartFragment.isVisible())
             mScoreChartFragment.update();
 
         invalidateOptionsMenu();
@@ -472,11 +483,10 @@ public class ScoreItActivity extends BaseActivity {
                     p = mGameManager.getLaps().size();
 
                 mGameManager.getLaps().add(p, lap);
-                if (null != mHeaderFragment)
-                    mHeaderFragment.update();
-                if (null != mScoreListFragment && mScoreListFragment.isVisible())
+                mHeaderFragment.update();
+                if (mScoreListFragment.isVisible())
                     mScoreListFragment.getListAdapter().notifyItemInserted(position);
-                if (null != mScoreChartFragment && mScoreChartFragment.isVisible())
+                if (mScoreChartFragment.isVisible())
                     mScoreChartFragment.update();
                 invalidateOptionsMenu();
             }
@@ -502,18 +512,11 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     public void updateFragments() {
-        if (null != mHeaderFragment) mHeaderFragment.update();
-        if (null != mScoreListFragment && mScoreListFragment.isVisible())
+        mHeaderFragment.update();
+        if (mScoreListFragment.isVisible())
             mScoreListFragment.update();
-        if (null != mScoreChartFragment && mScoreChartFragment.isVisible())
+        if (mScoreChartFragment.isVisible())
             mScoreChartFragment.update();
-
-        try {
-            getSupportFragmentManager()
-                    .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        } catch (IllegalStateException ex) {
-            // No fragment was added
-        }
     }
 
     private void showLapScene(Lap lap) {
@@ -567,6 +570,7 @@ public class ScoreItActivity extends BaseActivity {
         mLap = null;
         animateActionButton();
         updateFragments();
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     private void setActionButtonColor() {
@@ -606,8 +610,8 @@ public class ScoreItActivity extends BaseActivity {
     private void dismissAll() {
         mGameManager.deleteAll();
         mHeaderFragment.update();
-        if (null != mScoreListFragment) mScoreListFragment.update();
-        if (null != mScoreChartFragment) mScoreChartFragment.update();
+        mScoreListFragment.update();
+        mScoreChartFragment.update();
         invalidateOptionsMenu();
     }
 
