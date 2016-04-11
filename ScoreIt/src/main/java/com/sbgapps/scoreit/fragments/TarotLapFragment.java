@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -186,6 +187,7 @@ public class TarotLapFragment extends LapFragment
         return view;
     }
 
+    @SuppressLint("InflateParams")
     private void showBonusDialog() {
         View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_add_bonus, null);
         final Spinner spinnerBonus = (Spinner) view.findViewById(R.id.spinner_bonus);
@@ -307,10 +309,6 @@ public class TarotLapFragment extends LapFragment
             adapter.add(new TarotBonusItem(TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE));
         }
         return adapter;
-    }
-
-    private int getBonus(Object item) {
-        return ((TarotBonusItem) item).mBonus;
     }
 
     @Override

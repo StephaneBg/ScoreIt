@@ -22,19 +22,23 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.models.Game;
+import com.sbgapps.scoreit.models.GameManager;
 import com.sbgapps.scoreit.models.Lap;
+import com.sbgapps.scoreit.models.belote.GenericBeloteLap;
 
 /**
  * Created by Stéphane on 29/07/2014.
  */
-public class LapRowAdapter extends BaseAdapter {
+public class BeloteLapRowAdapter extends LapRowAdapter {
 
-    protected final ScoreListAdapter mScoreAdapter;
-    protected final Lap mLap;
+    private final boolean mRounded;
 
-    LapRowAdapter(ScoreListAdapter adapter, Lap lap) {
-        mScoreAdapter = adapter;
-        mLap = lap;
+    BeloteLapRowAdapter(ScoreListAdapter adapter, Lap lap) {
+        super(adapter, lap);
+        mRounded = mScoreAdapter.getGameHelper().getPlayedGame() == Game.BELOTE
+                && mScoreAdapter.getGameHelper().getPreferences()
+                .getBoolean(GameManager.KEY_BELOTE_ROUND, false);
     }
 
     @Override
@@ -44,7 +48,11 @@ public class LapRowAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return mLap.getScore(position);
+        if (mRounded) {
+            return GenericBeloteLap.getRoundedScore(mLap.getScore(position));
+        } else {
+            return mLap.getScore(position);
+        }
     }
 
     @Override

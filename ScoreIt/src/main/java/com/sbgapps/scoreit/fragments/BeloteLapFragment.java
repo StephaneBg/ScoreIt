@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -94,7 +95,7 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
         int p = getLap().getPoints();
 
         mScoreSelector.setItems(
-                new SwipeItem(0, (String) getResources().getText(R.string.score), null),
+                new SwipeItem(0, (String) getResources().getText(R.string.belote_swipe_item_score), null),
                 new SwipeItem(1, (String) getResources().getText(R.string.inside), null),
                 new SwipeItem(2, (String) getResources().getText(R.string.capot), null));
         mScoreSelector.setOnItemSelectedListener(new OnSwipeItemSelectedListener() {
@@ -109,7 +110,7 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
                         break;
                     case 1:
                         mSeekPoints.setVisibility(View.GONE);
-                        getLap().setPoints(160);
+                        getLap().setPoints(162);
                         break;
                     case 2:
                         mSeekPoints.setVisibility(View.GONE);
@@ -156,6 +157,7 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
         return points - 5;
     }
 
+    @SuppressLint("InflateParams")
     private void showBonusDialog() {
         View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_add_bonus, null);
         final Spinner spinnerBonus = (Spinner) view.findViewById(R.id.spinner_bonus);
@@ -232,6 +234,7 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
         return announceItemArrayAdapter;
     }
 
+    @SuppressLint("SetTextI18n")
     private void displayScores() {
         getLap().computePoints();
         mPlayer1Points.setText(Integer.toString(getLap().getScore(Player.PLAYER_1)));

@@ -50,6 +50,7 @@ public class GameManager {
     public static final String KEY_UNIVERSAL_PLAYER_CNT = "universal_player_count";
     public static final String KEY_TAROT_PLAYER_CNT = "tarot_player_count";
     public static final String KEY_UNIVERSAL_TOTAL = "universal_show_total";
+    public static final String KEY_BELOTE_ROUND = "belote_round_score";
 
     final private Context mContext;
     final private SharedPreferences mPreferences;
@@ -107,10 +108,6 @@ public class GameManager {
         save(file);
     }
 
-    public int getPlayerCount() {
-        return getPlayerCount(false);
-    }
-
     public void setPlayerCount(int count) {
         switch (mPlayedGame) {
             default:
@@ -132,6 +129,10 @@ public class GameManager {
                 loadGame();
                 break;
         }
+    }
+
+    public int getPlayerCount() {
+        return getPlayerCount(false);
     }
 
     public int getPlayerCount(boolean withTotal) {

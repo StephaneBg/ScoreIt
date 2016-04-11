@@ -69,4 +69,14 @@ public abstract class GenericBeloteLap implements Lap {
     }
 
     abstract public void computePoints();
+
+    public static int getRoundedScore(int score) {
+        if ((162 == score) || (160 == score)) {
+            return 160;
+        } else if (250 == score) {
+            return score;
+        } else {
+            return ((score + 5) / 10) * 10;
+        }
+    }
 }

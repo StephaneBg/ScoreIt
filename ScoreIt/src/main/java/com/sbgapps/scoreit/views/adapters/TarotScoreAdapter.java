@@ -57,6 +57,7 @@ public class TarotScoreAdapter extends ScoreListAdapter<TarotScoreAdapter.ViewHo
         return new ViewHolder(v);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onBindViewHolder(TarotScoreAdapter.ViewHolder viewHolder, int i) {
         super.onBindViewHolder(viewHolder, i);
