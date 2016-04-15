@@ -34,7 +34,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.models.Player;
@@ -196,9 +195,9 @@ public class TarotLapFragment extends LapFragment
         spinnerPlayer.setAdapter(getPlayerAdapter());
 
         new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.bonuses)
+                .setTitle(R.string.tarot_header_bonuses)
                 .setView(view)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.button_action_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         TarotBonus bonus = new TarotBonus(
@@ -209,7 +208,7 @@ public class TarotLapFragment extends LapFragment
                         manageBonusButton();
                     }
                 })
-                .setNegativeButton(R.string.cancel, null)
+                .setNegativeButton(R.string.button_action_cancel, null)
                 .create()
                 .show();
     }

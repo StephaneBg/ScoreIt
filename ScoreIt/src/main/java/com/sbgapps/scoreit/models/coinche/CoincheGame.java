@@ -38,7 +38,7 @@ public class CoincheGame extends Game<CoincheLap> {
     @Override
     protected void initPlayers(Context context, int playerCount) {
         Resources r = context.getResources();
-        mPlayers.add(new Player(r.getString(R.string.them), r.getColor(R.color.md_green_600)));
-        mPlayers.add(new Player(r.getString(R.string.us), r.getColor(R.color.md_orange_600)));
+        mPlayers.add(new Player(r.getString(R.string.coinche_first_team_default_name), r.getColor(R.color.md_green_600)));
+        mPlayers.add(new Player(r.getString(R.string.coinche_second_team_default_name), r.getColor(R.color.md_orange_600)));
     }
 }

@@ -38,7 +38,7 @@ public class BeloteGame extends Game<BeloteLap> {
     @Override
     protected void initPlayers(Context context, int playerCount) {
         Resources r = context.getResources();
-        mPlayers.add(new Player(r.getString(R.string.them), r.getColor(R.color.md_green_600)));
-        mPlayers.add(new Player(r.getString(R.string.us), r.getColor(R.color.md_orange_600)));
+        mPlayers.add(new Player(r.getString(R.string.belote_first_team_default_name), r.getColor(R.color.md_green_600)));
+        mPlayers.add(new Player(r.getString(R.string.belote_second_team_default_name), r.getColor(R.color.md_orange_600)));
     }
 }

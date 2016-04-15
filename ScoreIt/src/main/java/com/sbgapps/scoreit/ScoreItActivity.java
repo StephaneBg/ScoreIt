@@ -375,16 +375,16 @@ public class ScoreItActivity extends BaseActivity {
         switch (mGameManager.getPlayedGame()) {
             default:
             case Game.UNIVERSAL:
-                title = getString(R.string.universal);
+                title = getString(R.string.title_game_universal);
                 break;
             case Game.BELOTE:
-                title = getString(R.string.belote);
+                title = getString(R.string.title_game_belote);
                 break;
             case Game.COINCHE:
-                title = getString(R.string.coinche);
+                title = getString(R.string.title_game_coinche);
                 break;
             case Game.TAROT:
-                title = getString(R.string.tarot);
+                title = getString(R.string.title_game_tarot);
                 break;
         }
         ActionBar ab = getSupportActionBar();
@@ -474,8 +474,8 @@ public class ScoreItActivity extends BaseActivity {
         invalidateOptionsMenu();
 
         mSnackBar = Snackbar.make(findViewById(R.id.coordinator),
-                R.string.deleted_lap, Snackbar.LENGTH_LONG);
-        mSnackBar.setAction(R.string.undo, new View.OnClickListener() {
+                R.string.snackbar_msg_on_lap_deleted, Snackbar.LENGTH_LONG);
+        mSnackBar.setAction(R.string.snackbar_action_on_lap_deleted, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int p = position;
@@ -622,8 +622,8 @@ public class ScoreItActivity extends BaseActivity {
 
     private void showClearDialogActionChoices() {
         new AlertDialog.Builder(this)
-                .setTitle(R.string.current_game)
-                .setItems(R.array.clear_actions, new DialogInterface.OnClickListener() {
+                .setTitle(R.string.dialog_title_current_game)
+                .setItems(R.array.dialog_clear_actions, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
@@ -651,8 +651,8 @@ public class ScoreItActivity extends BaseActivity {
 
     private void showEditNameActionChoices() {
         new AlertDialog.Builder(this)
-                .setTitle(R.string.edit_name)
-                .setItems(R.array.edit_name_action, new DialogInterface.OnClickListener() {
+                .setTitle(R.string.dialog_title_edit_name)
+                .setItems(R.array.dialog_edit_name_actions, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
@@ -686,8 +686,8 @@ public class ScoreItActivity extends BaseActivity {
 
     private void showLoadActionChoices() {
         new AlertDialog.Builder(this)
-                .setTitle(R.string.current_game)
-                .setItems(R.array.load_actions, new DialogInterface.OnClickListener() {
+                .setTitle(R.string.dialog_title_current_game)
+                .setItems(R.array.dialog_game_actions, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
@@ -717,7 +717,7 @@ public class ScoreItActivity extends BaseActivity {
         }
 
         new AlertDialog.Builder(this)
-                .setTitle(R.string.player_number)
+                .setTitle(R.string.dialog_title_player_number)
                 .setItems(players, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -736,9 +736,9 @@ public class ScoreItActivity extends BaseActivity {
         final EditText editText = (EditText) view.findViewById(R.id.edit_text);
 
         new AlertDialog.Builder(this)
-                .setTitle(R.string.edit_name)
+                .setTitle(R.string.dialog_title_edit_name)
                 .setView(view)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.button_action_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String name = editText.getText().toString();
@@ -750,7 +750,7 @@ public class ScoreItActivity extends BaseActivity {
                         }
                     }
                 })
-                .setNegativeButton(R.string.cancel, null)
+                .setNegativeButton(R.string.button_action_cancel, null)
                 .create()
                 .show();
     }
@@ -761,9 +761,9 @@ public class ScoreItActivity extends BaseActivity {
         final EditText editText = (EditText) view.findViewById(R.id.edit_text);
 
         new AlertDialog.Builder(this)
-                .setTitle(R.string.filename)
+                .setTitle(R.string.dialog_title_filename)
                 .setView(view)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.button_action_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String file = editText.getText().toString();
@@ -777,7 +777,7 @@ public class ScoreItActivity extends BaseActivity {
                         }
                     }
                 })
-                .setNegativeButton(R.string.cancel, null)
+                .setNegativeButton(R.string.button_action_cancel, null)
                 .create()
                 .show();
     }

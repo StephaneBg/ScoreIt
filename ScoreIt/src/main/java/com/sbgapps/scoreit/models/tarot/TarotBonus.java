@@ -62,19 +62,19 @@ public class TarotBonus implements Serializable {
     public static String getLiteralBonus(Context context, @TarotBonusValues int bonus) {
         switch (bonus) {
             case TarotBonus.BONUS_PETIT_AU_BOUT:
-                return context.getString(R.string.petit_au_bout);
+                return context.getString(R.string.tarot_bonus_petit_au_bout);
             case TarotBonus.BONUS_POIGNEE_SIMPLE:
-                return context.getString(R.string.poignee_simple);
+                return context.getString(R.string.tarot_bonus_simple_poignee);
             case TarotBonus.BONUS_POIGNEE_DOUBLE:
-                return context.getString(R.string.poignee_double);
+                return context.getString(R.string.tarot_bonus_double_poignee);
             case TarotBonus.BONUS_POIGNEE_TRIPLE:
-                return context.getString(R.string.poignee_triple);
+                return context.getString(R.string.tarot_bonus_triple_poignee);
             case TarotBonus.BONUS_CHELEM_NON_ANNONCE:
-                return context.getString(R.string.chelem_non_annonce);
+                return context.getString(R.string.tarot_bonus_slam_not_announced);
             case TarotBonus.BONUS_CHELEM_ANNONCE_REALISE:
-                return context.getString(R.string.chelem_annonce_realise);
+                return context.getString(R.string.tarot_bonus_slam_announced_not_done);
             case TarotBonus.BONUS_CHELEM_ANNONCE_NON_REALISE:
-                return context.getString(R.string.chelem_annonce_non_realise);
+                return context.getString(R.string.tarot_bonus_slam_announced_done);
         }
         return null;
     }

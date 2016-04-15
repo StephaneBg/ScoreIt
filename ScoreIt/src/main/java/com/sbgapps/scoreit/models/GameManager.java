@@ -242,7 +242,7 @@ public class GameManager {
     @SuppressWarnings("deprecation")
     public Player getPlayer(int player) {
         if (player >= getPlayers().size()) {
-            if (null == mPlayerTotal) mPlayerTotal = new Player(mContext.getString(R.string.total),
+            if (null == mPlayerTotal) mPlayerTotal = new Player(mContext.getString(R.string.universal_total_points),
                     mContext.getResources().getColor(R.color.md_lime_600));
             return mPlayerTotal;
         } else {

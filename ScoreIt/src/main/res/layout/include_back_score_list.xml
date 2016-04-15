@@ -31,8 +31,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="?attr/selectableItemBackground"
-        android:contentDescription="@string/delete"
-        android:text="@string/cancel"
+        android:contentDescription="@string/content_description_delete"
         app:srcCompat="@drawable/ic_delete_24dp" />
 
     <ImageButton
@@ -42,7 +41,6 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="?attr/selectableItemBackground"
-        android:contentDescription="@string/edit"
-        android:text="@string/done"
+        android:contentDescription="@string/content_description_edit"
         app:srcCompat="@drawable/ic_edit_24dp" />
 </LinearLayout>

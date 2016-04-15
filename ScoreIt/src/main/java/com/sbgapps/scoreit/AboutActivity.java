@@ -46,7 +46,7 @@ public class AboutActivity extends BaseActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
-            actionBar.setTitle(getString(R.string.about));
+            actionBar.setTitle(getString(R.string.drawer_about));
         }
     }
 
@@ -87,9 +87,9 @@ public class AboutActivity extends BaseActivity {
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return getString(R.string.application).toUpperCase(l);
+                    return getString(R.string.tab_title_application).toUpperCase(l);
                 case 1:
-                    return getString(R.string.translations).toUpperCase(l);
+                    return getString(R.string.tab_title_translations).toUpperCase(l);
             }
             return null;
         }

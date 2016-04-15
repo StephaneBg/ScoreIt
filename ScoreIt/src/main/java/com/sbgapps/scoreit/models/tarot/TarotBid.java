@@ -51,13 +51,13 @@ public class TarotBid implements Serializable {
     public static String getLiteralBid(Context context, @TarotBidValues int bid) {
         switch (bid) {
             case BID_PRISE:
-                return context.getString(R.string.take);
+                return context.getString(R.string.tarot_bid_take);
             case BID_GARDE:
-                return context.getString(R.string.guard);
+                return context.getString(R.string.tarot_bid_guard);
             case BID_GARDE_CONTRE:
-                return context.getString(R.string.guard_against);
+                return context.getString(R.string.tarot_bid_guard_against_kitty);
             case BID_GARDE_SANS:
-                return context.getString(R.string.guard_without);
+                return context.getString(R.string.tarot_bid_guard_without_kitty);
         }
         return null;
     }
