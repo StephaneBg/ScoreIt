@@ -22,19 +22,19 @@
         <item
             android:id="@+id/nav_universal"
             android:icon="@drawable/ic_puzzle_24dp"
-            android:title="@string/universal" />
+            android:title="@string/drawer_game_universal" />
         <item
             android:id="@+id/nav_tarot"
             android:icon="@drawable/ic_hat_24dp"
-            android:title="@string/tarot" />
+            android:title="@string/drawer_game_tarot" />
         <item
             android:id="@+id/nav_belote"
             android:icon="@drawable/ic_crown_24dp"
-            android:title="@string/belote" />
+            android:title="@string/drawer_game_belote" />
         <item
             android:id="@+id/nav_coinche"
             android:icon="@drawable/ic_messenger_24dp"
-            android:title="@string/coinche" />
+            android:title="@string/drawer_game_coinche" />
     </group>
 
     <group
@@ -43,10 +43,10 @@
         <item
             android:id="@+id/nav_donate"
             android:icon="@drawable/ic_heart_24dp"
-            android:title="@string/donate" />
+            android:title="@string/drawer_donate" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_24dp"
-            android:title="@string/about" />
+            android:title="@string/drawer_about" />
     </group>
 </menu>

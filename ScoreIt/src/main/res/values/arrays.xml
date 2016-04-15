@@ -45,19 +45,19 @@
         <item translatable="false">Tutu</item>
     </string-array>
 
-    <string-array name="edit_name_action">
-        <item>@string/pick_contact</item>
-        <item>@string/enter_name</item>
+    <string-array name="dialog_edit_name_actions">
+        <item>@string/dialog_action_pick_contact</item>
+        <item>@string/dialog_action_enter_name</item>
     </string-array>
 
-    <string-array name="clear_actions">
-        <item>@string/reset_scores</item>
-        <item>@string/save_create</item>
+    <string-array name="dialog_clear_actions">
+        <item>@string/dialog_action_game_reset</item>
+        <item>@string/dialog_action_game_create</item>
     </string-array>
 
-    <string-array name="load_actions">
-        <item>@string/discard</item>
-        <item>@string/save_load</item>
+    <string-array name="dialog_game_actions">
+        <item>@string/dialog_action_game_discard</item>
+        <item>@string/dialog_action_game_load</item>
     </string-array>
 
     <string-array name="languages">

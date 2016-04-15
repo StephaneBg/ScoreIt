@@ -43,7 +43,7 @@ public class SavedGamesActivity extends BaseActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
-            actionBar.setTitle(getString(R.string.saved_games));
+            actionBar.setTitle(getString(R.string.title_activity_saved_games));
         }
 
         mGameManager = new GameManager(this);

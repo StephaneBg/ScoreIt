@@ -99,7 +99,7 @@ public class InfoFragment extends Fragment {
                         "http://play.google.com/store/apps/details?id="
                                 + getActivity().getPackageName()
                 );
-                startActivity(Intent.createChooser(intent, getString(R.string.share)));
+                startActivity(intent);
             }
         });
 

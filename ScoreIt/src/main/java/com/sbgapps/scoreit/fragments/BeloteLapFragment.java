@@ -96,8 +96,8 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
 
         mScoreSelector.setItems(
                 new SwipeItem(0, (String) getResources().getText(R.string.belote_swipe_item_score), null),
-                new SwipeItem(1, (String) getResources().getText(R.string.inside), null),
-                new SwipeItem(2, (String) getResources().getText(R.string.capot), null));
+                new SwipeItem(1, (String) getResources().getText(R.string.belote_swipe_item_inside), null),
+                new SwipeItem(2, (String) getResources().getText(R.string.belote_swipe_item_capot), null));
         mScoreSelector.setOnItemSelectedListener(new OnSwipeItemSelectedListener() {
             @Override
             public void onItemSelected(SwipeItem item) {
@@ -166,9 +166,9 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
         spinnerPlayer.setAdapter(getPlayerAdapter());
 
         new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.bonuses)
+                .setTitle(R.string.tarot_header_bonuses)
                 .setView(view)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.button_action_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         BeloteBonus bonus = new BeloteBonus(
@@ -179,7 +179,7 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
                         manageBonusButton();
                     }
                 })
-                .setNegativeButton(R.string.cancel, null)
+                .setNegativeButton(R.string.button_action_cancel, null)
                 .create()
                 .show();
     }

@@ -42,10 +42,6 @@ public class CoincheBonus implements Serializable {
     @SerializedName("player")
     private int mPlayer;
 
-    public CoincheBonus() {
-        this(BONUS_BELOTE);
-    }
-
     public CoincheBonus(int bonus) {
         this(bonus, Player.PLAYER_1);
     }
@@ -58,19 +54,19 @@ public class CoincheBonus implements Serializable {
     public static String getLiteralBonus(Context context, int bonus) {
         switch (bonus) {
             case BONUS_BELOTE:
-                return context.getString(R.string.belote);
+                return context.getString(R.string.coinche_bonus_belote);
             case BONUS_RUN_3:
-                return context.getString(R.string.run_3);
+                return context.getString(R.string.coinche_bonus_run_3);
             case BONUS_RUN_4:
-                return context.getString(R.string.run_4);
+                return context.getString(R.string.coinche_bonus_run_4);
             case BONUS_RUN_5:
-                return context.getString(R.string.run_5);
+                return context.getString(R.string.coinche_bonus_run_5);
             case BONUS_FOUR_NORMAL:
-                return context.getString(R.string.normal_four);
+                return context.getString(R.string.coinche_bonus_normal_four);
             case BONUS_FOUR_NINE:
-                return context.getString(R.string.nine_four);
+                return context.getString(R.string.coinche_bonus_nine_four);
             case BONUS_FOUR_JACK:
-                return context.getString(R.string.jack_four);
+                return context.getString(R.string.coinche_bonus_jack_four);
         }
         return null;
     }

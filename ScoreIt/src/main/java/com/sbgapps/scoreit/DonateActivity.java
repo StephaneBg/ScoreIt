@@ -108,11 +108,11 @@ public class DonateActivity extends BaseActivity
 
     private void manageDonations() {
         if (mBillingProcessor.isPurchased(PRODUCT_DONATE_COFFEE)) {
-            mCoffeeBtn.setText(getString(R.string.bought_coffee));
+            mCoffeeBtn.setText(getString(R.string.button_donate_coffee_donated));
             mCoffeeBtn.setEnabled(false);
         }
         if (mBillingProcessor.isPurchased(PRODUCT_DONATE_BEER)) {
-            mBeerBtn.setText(getString(R.string.bought_beer));
+            mBeerBtn.setText(getString(R.string.button_donate_beer_donated));
             mBeerBtn.setEnabled(false);
         }
     }

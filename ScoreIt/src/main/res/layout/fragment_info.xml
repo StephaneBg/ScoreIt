@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="@dimen/btn_info_min_width"
-            android:text="@string/rate_app"/>
+            android:text="@string/button_rate_app"/>
 
         <Button
             android:id="@+id/btn_share"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:minWidth="@dimen/btn_info_min_width"
-            android:text="@string/share_app"/>
+            android:text="@string/button_share_app"/>
 
         <Button
             android:id="@+id/btn_community"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:minWidth="@dimen/btn_info_min_width"
-            android:text="@string/plus_community"/>
+            android:text="@string/button_join_community"/>
 
         <Button
             android:id="@+id/btn_contact"
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:minWidth="@dimen/btn_info_min_width"
-            android:text="@string/contact_developer"/>
+            android:text="@string/button_contact_developer"/>
 
         <Button
             android:id="@+id/btn_translate"
@@ -95,6 +95,6 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:minWidth="@dimen/btn_info_min_width"
-            android:text="@string/help_translate"/>
+            android:text="@string/button_help_translate"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

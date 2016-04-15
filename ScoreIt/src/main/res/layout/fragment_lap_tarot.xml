@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (c) 2016 SBG Apps
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +14,13 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                                            xmlns:tools="http://schemas.android.com/tools"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            tools:context=".ScoreItActivity">
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ScoreItActivity"
+    >
 
     <LinearLayout
         android:id="@+id/ll_container"
@@ -25,14 +28,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
         android:animateLayoutChanges="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <TextView
             style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/scorer"/>
+            android:text="@string/tarot_header_scorer"
+            />
 
         <Spinner
             android:id="@+id/spinner_taker"
@@ -40,20 +45,23 @@
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            />
 
         <ViewStub
             android:id="@+id/viewstub_partner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout="@layout/stub_partner"/>
+            android:layout="@layout/stub_partner"
+            />
 
         <TextView
             style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/bidding"/>
+            android:text="@string/tarot_header_bid"
+            />
 
         <Spinner
             android:id="@+id/spinner_bid"
@@ -61,14 +69,16 @@
             android:layout_height="@dimen/widget_height"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            />
 
         <TextView
             style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/oudlers"/>
+            android:text="@string/tarot_header_oudlers"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,28 +86,32 @@
             android:layout_marginBottom="@dimen/default_margin"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginRight="@dimen/default_margin"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <CheckBox
                 android:id="@+id/checkbox_petit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/petit"/>
+                android:text="@string/tarot_oudler_petit"
+                />
 
             <CheckBox
                 android:id="@+id/checkbox_twenty_one"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/twentyone"/>
+                android:text="@string/tarot_oudler_twentyone"
+                />
 
             <CheckBox
                 android:id="@+id/checkbox_excuse"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/excuse"/>
+                android:text="@string/tarot_oudler_excuse"
+                />
         </LinearLayout>
 
         <TextView
@@ -105,20 +119,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/points"/>
+            android:text="@string/tarot_header_points"
+            />
 
         <com.sbgapps.scoreit.views.widgets.SeekPoints
             android:id="@+id/seekbar_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            />
 
         <TextView
             style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/bonuses"/>
+            android:text="@string/tarot_header_bonuses"
+            />
 
         <Button
             android:id="@+id/btn_add_bonus"
@@ -126,7 +143,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
-            android:text="@string/add"
-            android:textAllCaps="true"/>
+            android:text="@string/button_action_add"
+            android:textAllCaps="true"
+            />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

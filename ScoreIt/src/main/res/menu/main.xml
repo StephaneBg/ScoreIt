@@ -20,31 +20,31 @@
     <item
         android:id="@+id/menu_count"
         android:icon="@drawable/ic_people_24dp"
-        android:title="@string/player_number"
+        android:title="@string/dialog_title_player_number"
         app:showAsAction="always"/>
     <item
         android:id="@+id/menu_chart"
         android:icon="@drawable/ic_show_chart_24dp"
-        android:title="@string/view"
+        android:title="@string/menu_action_show_chart"
         app:showAsAction="always"/>
     <item
         android:id="@+id/menu_clear"
         android:icon="@drawable/ic_clear_all_24dp"
-        android:title="@string/clear"
+        android:title="@string/menu_action_clear"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_round"
         android:icon="@drawable/ic_crop_free_24dp"
-        android:title="@string/menu_round_scores"
+        android:title="@string/menu_action_round_scores"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_save"
         android:icon="@drawable/ic_unarchive_24dp"
-        android:title="@string/saved_games"
+        android:title="@string/title_activity_saved_games"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_total"
         android:icon="@drawable/ic_sigma_24dp"
-        android:title="@string/show_total"
+        android:title="@string/menu_action_show_totals"
         app:showAsAction="ifRoom"/>
 </menu>

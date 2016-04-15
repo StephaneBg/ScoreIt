@@ -225,9 +225,9 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
         spinnerPlayer.setAdapter(getPlayerAdapter());
 
         new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.bonuses)
+                .setTitle(R.string.tarot_header_bonuses)
                 .setView(view)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.button_action_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         CoincheBonus bonus = new CoincheBonus(
@@ -238,7 +238,7 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
                         manageBonusButton();
                     }
                 })
-                .setNegativeButton(R.string.cancel, null)
+                .setNegativeButton(R.string.button_action_cancel, null)
                 .create()
                 .show();
     }
@@ -321,11 +321,11 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
             switch (mCoinche) {
                 default:
                 case CoincheLap.COINCHE_NONE:
-                    return getActivity().getString(R.string.none);
+                    return getActivity().getString(R.string.coinche_coinche_none);
                 case CoincheLap.COINCHE_COINCHE:
-                    return getActivity().getString(R.string.coinche);
+                    return getActivity().getString(R.string.coinche_coinche_coinche);
                 case CoincheLap.COINCHE_SURCOINCHE:
-                    return getActivity().getString(R.string.surcoinche);
+                    return getActivity().getString(R.string.coinche_coinche_surcoinche);
             }
         }
     }
