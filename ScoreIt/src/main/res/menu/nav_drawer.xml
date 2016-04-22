@@ -43,7 +43,7 @@
         <item
             android:id="@+id/nav_donate"
             android:icon="@drawable/ic_heart_24dp"
-            android:title="@string/drawer_donate" />
+            android:title="@string/drawer_thank" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_24dp"

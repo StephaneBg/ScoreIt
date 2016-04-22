@@ -33,7 +33,7 @@
     <string name="drawer_game_tarot">Tarot</string>
     <string name="drawer_game_belote">Belote</string>
     <string name="drawer_game_coinche">Coinche</string>
-    <string name="drawer_donate">Donate</string>
+    <string name="drawer_thank">Thank</string>
     <string name="drawer_about">About</string>
 
     <!-- Belote -->
@@ -109,7 +109,7 @@
     <string name="dialog_action_enter_name">Enter name</string>
     <string name="dialog_action_pick_contact">Pick contact</string>
 
-    <!-- Menu -->
+    <!-- Snackbar -->
     <string name="snackbar_msg_on_lap_deleted">Lap deleted</string>
     <string name="snackbar_action_on_lap_deleted">Undo</string>
 
