@@ -16,9 +16,6 @@
   -->
 <resources>
 
-    <!-- Application -->
-    <string name="app_name_subtitle"></string>
-
     <!-- Activity and toolbar titles -->
     <string name="title_activity_saved_games">الطروح المسجلة</string>
     <string name="title_activity_about">عن التطبيق</string>
@@ -33,7 +30,6 @@
     <string name="drawer_game_tarot">التارو</string>
     <string name="drawer_game_universal">عادي</string>
     <string name="drawer_about">عن التطبيق</string>
-    <string name="drawer_donate">تبرع</string>
 
     <!-- Belote -->
     <string name="belote_swipe_item_inside">ما جابهاش</string>
@@ -108,7 +104,7 @@
     <string name="dialog_action_game_load">سجل و حمل</string>
     <string name="dialog_title_filename">اسم</string>
 
-    <!-- Menu -->
+    <!-- Snackbar -->
     <string name="snackbar_msg_on_lap_deleted">تم الحذف</string>
     <string name="snackbar_action_on_lap_deleted">ارجع</string>
 
@@ -129,10 +125,6 @@
     <!-- Menu -->
     <string name="menu_action_clear">افسخ</string>
     <string name="menu_action_show_totals">إظهار المجموع</string>
-    <string name="menu_action_hide_totals"></string>
-    <string name="menu_action_round_scores"></string>
-    <string name="menu_action_actual_scores"></string>
-    <string name="menu_action_show_chart"></string>
 
     <!-- Content descriptions -->
     <string name="content_description_delete">افسخ</string>
