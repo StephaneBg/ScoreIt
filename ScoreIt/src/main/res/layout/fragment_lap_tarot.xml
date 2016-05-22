@@ -80,39 +80,29 @@
             android:text="@string/tarot_header_oudlers"
             />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/checkbox_petit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_margin"
-            android:orientation="horizontal"
-            >
+            android:text="@string/tarot_oudler_petit"
+            />
 
-            <CheckBox
-                android:id="@+id/checkbox_petit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tarot_oudler_petit"
-                />
+        <CheckBox
+            android:id="@+id/checkbox_twenty_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@string/tarot_oudler_twentyone"
+            />
 
-            <CheckBox
-                android:id="@+id/checkbox_twenty_one"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tarot_oudler_twentyone"
-                />
-
-            <CheckBox
-                android:id="@+id/checkbox_excuse"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tarot_oudler_excuse"
-                />
-        </LinearLayout>
+        <CheckBox
+            android:id="@+id/checkbox_excuse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@string/tarot_oudler_excuse"
+            />
 
         <TextView
             style="@style/Header"
@@ -131,7 +121,7 @@
 
         <TextView
             style="@style/Header"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
             android:text="@string/tarot_header_bonuses"

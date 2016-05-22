@@ -222,7 +222,14 @@ public class ScoreItActivity extends BaseActivity {
         item.setVisible(0 != lapCnt);
 
         item = menu.findItem(R.id.menu_round);
-        item.setVisible(Game.BELOTE == game);
+        if (Game.BELOTE == game) {
+            item.setVisible(true);
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+            boolean round = sp.getBoolean(GameManager.KEY_BELOTE_ROUND, false);
+            item.setTitle(round ? R.string.menu_action_actual_scores : R.string.menu_action_round_scores);
+        } else {
+            item.setVisible(false);
+        }
 
         item = menu.findItem(R.id.menu_count);
         item.setVisible(Game.UNIVERSAL == game || Game.TAROT == game);
@@ -248,35 +255,37 @@ public class ScoreItActivity extends BaseActivity {
     private void setupDrawer() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.nav_universal:
-                                onGameSelected(Game.UNIVERSAL);
-                                break;
-                            case R.id.nav_tarot:
-                                onGameSelected(Game.TAROT);
-                                break;
-                            case R.id.nav_belote:
-                                onGameSelected(Game.BELOTE);
-                                break;
-                            case R.id.nav_coinche:
-                                onGameSelected(Game.COINCHE);
-                                break;
-                            case R.id.nav_donate:
-                                startActivity(new Intent(ScoreItActivity.this, DonateActivity.class));
-                                break;
-                            case R.id.nav_about:
-                                startActivity(new Intent(ScoreItActivity.this, AboutActivity.class));
-                                break;
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(
+                    new NavigationView.OnNavigationItemSelectedListener() {
+                        @Override
+                        public boolean onNavigationItemSelected(MenuItem menuItem) {
+                            switch (menuItem.getItemId()) {
+                                case R.id.nav_universal:
+                                    onGameSelected(Game.UNIVERSAL);
+                                    break;
+                                case R.id.nav_tarot:
+                                    onGameSelected(Game.TAROT);
+                                    break;
+                                case R.id.nav_belote:
+                                    onGameSelected(Game.BELOTE);
+                                    break;
+                                case R.id.nav_coinche:
+                                    onGameSelected(Game.COINCHE);
+                                    break;
+                                case R.id.nav_donate:
+                                    startActivity(new Intent(ScoreItActivity.this, DonateActivity.class));
+                                    break;
+                                case R.id.nav_about:
+                                    startActivity(new Intent(ScoreItActivity.this, AboutActivity.class));
+                                    break;
+                            }
+                            mDrawerLayout.closeDrawers();
+                            return true;
                         }
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }
-                });
-        navigationView.getMenu().getItem(getGameManager().getPlayedGame()).setChecked(true);
+                    });
+            navigationView.getMenu().getItem(getGameManager().getPlayedGame()).setChecked(true);
+        }
     }
 
     private void setupActionButton() {
@@ -300,32 +309,28 @@ public class ScoreItActivity extends BaseActivity {
             mSlidingLayer.setOnInteractListener(new SlidingLayer.OnInteractListener() {
                 @Override
                 public void onOpen() {
-
                 }
 
                 @Override
                 public void onShowPreview() {
-
                 }
 
                 @Override
                 public void onClose() {
+                    mAppBarLayout.setExpanded(true);
+                    mActionButton.show();
                 }
 
                 @Override
                 public void onOpened() {
-
                 }
 
                 @Override
                 public void onPreviewShowed() {
-
                 }
 
                 @Override
                 public void onClosed() {
-                    mAppBarLayout.setExpanded(true);
-                    mActionButton.show();
                 }
             });
         }
@@ -473,27 +478,30 @@ public class ScoreItActivity extends BaseActivity {
 
         invalidateOptionsMenu();
 
-        mSnackBar = Snackbar.make(findViewById(R.id.coordinator),
-                R.string.snackbar_msg_on_lap_deleted, Snackbar.LENGTH_LONG);
-        mSnackBar.setAction(R.string.snackbar_action_on_lap_deleted, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int p = position;
-                if (p > mGameManager.getLaps().size())
-                    p = mGameManager.getLaps().size();
+        View view = findViewById(R.id.coordinator);
+        if (view != null) {
+            mSnackBar = Snackbar.make(view,
+                    R.string.snackbar_msg_on_lap_deleted, Snackbar.LENGTH_LONG);
+            mSnackBar.setAction(R.string.snackbar_action_on_lap_deleted, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int p = position;
+                    if (p > mGameManager.getLaps().size())
+                        p = mGameManager.getLaps().size();
 
-                mGameManager.getLaps().add(p, lap);
-                mHeaderFragment.update();
-                if (mScoreListFragment.isVisible())
-                    mScoreListFragment.getListAdapter().notifyItemInserted(position);
-                if (mScoreChartFragment.isVisible())
-                    mScoreChartFragment.update();
-                invalidateOptionsMenu();
-            }
-        })
-                .setActionTextColor(ColorStateList.valueOf(
-                        ContextCompat.getColor(this, R.color.color_accent)))
-                .show();
+                    mGameManager.getLaps().add(p, lap);
+                    mHeaderFragment.update();
+                    if (mScoreListFragment.isVisible())
+                        mScoreListFragment.getListAdapter().notifyItemInserted(position);
+                    if (mScoreChartFragment.isVisible())
+                        mScoreChartFragment.update();
+                    invalidateOptionsMenu();
+                }
+            })
+                    .setActionTextColor(ColorStateList.valueOf(
+                            ContextCompat.getColor(this, R.color.color_accent)))
+                    .show();
+        }
     }
 
     public void editName(int player) {

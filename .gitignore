@@ -28,3 +28,6 @@ local.properties
 # Gradle
 build/
 .gradle
+
+#GMS
+google-services.json
