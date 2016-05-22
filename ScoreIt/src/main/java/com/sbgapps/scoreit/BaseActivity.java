@@ -19,6 +19,7 @@ package com.sbgapps.scoreit;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -31,6 +32,10 @@ import com.sbgapps.scoreit.R;
  * Created by Stéphane on 31/07/2014.
  */
 public abstract class BaseActivity extends AppCompatActivity {
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
     private Toolbar mToolbar;
 
