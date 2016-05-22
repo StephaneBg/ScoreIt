@@ -16,26 +16,6 @@
 
 apply plugin: 'com.android.application'
 
-repositories {
-    maven { url "https://jitpack.io" }
-}
-
-dependencies {
-    compile 'com.android.support:support-v4:23.3.0'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:recyclerview-v7:23.3.0'
-    compile 'com.android.support:design:23.3.0'
-    compile 'com.android.support:percent:23.3.0'
-
-    compile 'com.google.code.gson:gson:2.4'
-    compile 'com.anjlab.android.iab.v3:library:1.0.31'
-    compile 'com.code-troopers.betterpickers:library:2.5.2'
-    compile 'com.sromku:simple-storage:1.2.0'
-    compile 'com.roughike:swipe-selector:1.0.6'
-    compile 'com.thebluealliance:spectrum:0.2.1'
-    compile 'com.wunderlist:sliding-layer:1.2.5'
-}
-
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
     buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
@@ -71,11 +51,6 @@ android {
     }
 
     buildTypes {
-        debug {
-            minifyEnabled false
-            applicationIdSuffix '.debug'
-            versionNameSuffix '-DEBUG'
-        }
         release {
             signingConfig signingConfigs.release
             minifyEnabled true
@@ -93,32 +68,24 @@ android {
     }
 }
 
-// Get location of adb
-Properties localProperties = new Properties()
-try {
-    localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
-}
-catch (ex) {
-    throw new InvalidUserDataException("You should define the path to your Android SDK as a " +
-            "property `sdk.dir` in local.properties on the project root."
-    )
-}
-def adb = localProperties.getProperty('sdk.dir') + '/platform-tools/adb'
+dependencies {
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:percent:23.4.0'
 
-task runDebug(dependsOn: 'installDebug') {
-    description 'Runs the debug-flavour of the app on the connected device'
-    doLast {
-        exec {
-            commandLine "$adb", "shell", "am", "start", "-n", "com.sbgapps.scoreit/.ScoreItActivity"
-        }
-    }
+    compile 'com.google.firebase:firebase-core:9.0.0'
+    compile 'com.google.firebase:firebase-crash:9.0.0'
+
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.anjlab.android.iab.v3:library:1.0.31'
+    compile 'com.code-troopers.betterpickers:library:2.5.2'
+    compile 'com.sromku:simple-storage:1.2.0'
+    compile 'com.roughike:swipe-selector:1.0.6'
+    compile 'com.thebluealliance:spectrum:0.2.1'
+    compile 'com.wunderlist:sliding-layer:1.2.5'
+    compile 'com.roughike:swipe-selector:1.0.6'
 }
 
-task runRelease(dependsOn: 'installRelease') {
-    description 'Runs the release-flavour of the app on the connected device'
-    doLast {
-        exec {
-            commandLine "$adb", "shell", "am", "start", "-n", "com.sbgapps.scoreit/.ScoreItActivity"
-        }
-    }
-}
+apply plugin: 'com.google.gms.google-services'

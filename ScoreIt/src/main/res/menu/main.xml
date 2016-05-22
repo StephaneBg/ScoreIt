@@ -33,11 +33,6 @@
         android:title="@string/menu_action_clear"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/menu_round"
-        android:icon="@drawable/ic_crop_free_24dp"
-        android:title="@string/menu_action_round_scores"
-        app:showAsAction="ifRoom"/>
-    <item
         android:id="@+id/menu_save"
         android:icon="@drawable/ic_unarchive_24dp"
         android:title="@string/title_activity_saved_games"
@@ -47,4 +42,8 @@
         android:icon="@drawable/ic_sigma_24dp"
         android:title="@string/menu_action_show_totals"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/menu_round"
+        android:title="@string/menu_action_round_scores"
+        app:showAsAction="never"/>
 </menu>
