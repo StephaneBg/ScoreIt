@@ -63,7 +63,7 @@
         app:pressedTranslationZ="8dp"/>
 
     <com.wunderlist.slidinglayer.SlidingLayer
-        android:id="@+id/chart_container"
+        android:id="@+id/sliding_layer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/header_height"

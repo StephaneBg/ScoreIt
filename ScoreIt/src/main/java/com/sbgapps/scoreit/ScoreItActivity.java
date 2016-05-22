@@ -109,7 +109,7 @@ public class ScoreItActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
-        mSlidingLayer = (SlidingLayer) findViewById(R.id.chart_container);
+        mSlidingLayer = (SlidingLayer) findViewById(R.id.sliding_layer);
 
         mGameManager = new GameManager(this);
         mGameManager.loadGame();
@@ -813,7 +813,8 @@ public class ScoreItActivity extends BaseActivity {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (anim) ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        ft.replace(R.id.chart_container, mScoreChartFragment, ScoreChartFragment.TAG);
+        ft.replace(isPhone() ? R.id.sliding_layer : R.id.chart_container,
+                mScoreChartFragment, ScoreChartFragment.TAG);
         ft.commit();
     }
 
