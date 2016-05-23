@@ -70,3 +70,12 @@
 -keepclassmembers class * {
     @com.squareup.picasso.** *;
 }
+
+# Ensure annotations are kept for runtime use.
+-keepattributes *Annotation*
+# Don't remove any GreenRobot classes
+-keep class org.greenrobot.** {*;}
+# Don't remove any methods that have the @Subscribe annotation
+-keepclassmembers class ** {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
