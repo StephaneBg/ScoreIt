@@ -67,7 +67,7 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
 
         if (null == getLap()) return view;
 
-        mContainer = (LinearLayout) view.findViewById(R.id.ll_container);
+        mContainer = (LinearLayout) view.findViewById(R.id.bonus_container);
         mPlayer1Name = (TextView) view.findViewById(R.id.player1_name);
         mPlayer2Name = (TextView) view.findViewById(R.id.player2_name);
         mPlayer1Points = (TextView) view.findViewById(R.id.player1_points);

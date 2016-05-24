@@ -28,6 +28,7 @@
     <!-- Height -->
     <dimen name="widget_height">72dp</dimen>
     <dimen name="header_height">172dp</dimen>
+    <dimen name="chart_height">192dp</dimen>
 
     <!-- Width -->
 </resources>

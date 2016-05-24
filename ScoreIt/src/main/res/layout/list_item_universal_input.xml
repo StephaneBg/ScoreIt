@@ -14,116 +14,134 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/default_margin"
+    android:layout_marginBottom="@dimen/small_margin"
     android:orientation="vertical"
     tools:context=".ScoreItActivity"
-    tools:ignore="hardCodedText">
+    tools:ignore="hardCodedText"
+    >
 
-    <TextView
-        android:id="@+id/tv_name"
-        style="@style/Header"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Name"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_margin="@dimen/default_margin"
+        android:orientation="vertical"
+        >
 
         <TextView
-            android:id="@+id/points"
-            style="@style/TextAppearance.AppCompat.Display1"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_name"
+            style="@style/Header"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:gravity="center"
-            android:minHeight="96dp"
-            android:minWidth="96dp"
-            android:padding="16dp"
-            tools:text="128"/>
+            tools:text="Name"
+            />
 
-        <TextView
-            android:id="@+id/btn_minus"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_minus_10"
-            android:layout_marginRight="@dimen/default_margin"
-            android:layout_toLeftOf="@+id/points"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:gravity="center"
-            android:minHeight="@dimen/btn_score_size"
-            android:minWidth="@dimen/btn_score_size"
-            android:text="-1"/>
+            >
 
-        <TextView
-            android:id="@+id/btn_minus_10"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/points"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:gravity="center"
-            android:minHeight="@dimen/btn_score_size"
-            android:minWidth="@dimen/btn_score_size"
-            android:text="-10"/>
+            <TextView
+                android:id="@+id/points"
+                style="@style/TextAppearance.AppCompat.Display1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:minHeight="96dp"
+                android:minWidth="96dp"
+                android:padding="16dp"
+                tools:text="128"
+                />
 
-        <TextView
-            android:id="@+id/btn_minus_100"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_minus"
-            android:layout_toLeftOf="@+id/points"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:gravity="center"
-            android:minHeight="@dimen/btn_score_size"
-            android:minWidth="@dimen/btn_score_size"
-            android:text="-100"/>
+            <TextView
+                android:id="@+id/btn_minus"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_minus_10"
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_toLeftOf="@+id/points"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:minHeight="@dimen/btn_score_size"
+                android:minWidth="@dimen/btn_score_size"
+                android:text="-1"
+                />
 
-        <TextView
-            android:id="@+id/btn_plus_10"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/points"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:gravity="center"
-            android:minHeight="@dimen/btn_score_size"
-            android:minWidth="@dimen/btn_score_size"
-            android:text="+10"/>
+            <TextView
+                android:id="@+id/btn_minus_10"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/points"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:minHeight="@dimen/btn_score_size"
+                android:minWidth="@dimen/btn_score_size"
+                android:text="-10"
+                />
 
-        <TextView
-            android:id="@+id/btn_plus"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_plus_10"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_toRightOf="@+id/points"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:gravity="center"
-            android:minHeight="@dimen/btn_score_size"
-            android:minWidth="@dimen/btn_score_size"
-            android:text="+1"/>
+            <TextView
+                android:id="@+id/btn_minus_100"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_minus"
+                android:layout_toLeftOf="@+id/points"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:minHeight="@dimen/btn_score_size"
+                android:minWidth="@dimen/btn_score_size"
+                android:text="-100"
+                />
 
-        <TextView
-            android:id="@+id/btn_plus_100"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_plus"
-            android:layout_toRightOf="@+id/points"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:gravity="center"
-            android:minHeight="@dimen/btn_score_size"
-            android:minWidth="@dimen/btn_score_size"
-            android:text="+100"/>
-    </RelativeLayout>
-</LinearLayout>
+            <TextView
+                android:id="@+id/btn_plus_10"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/points"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:minHeight="@dimen/btn_score_size"
+                android:minWidth="@dimen/btn_score_size"
+                android:text="+10"
+                />
+
+            <TextView
+                android:id="@+id/btn_plus"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_plus_10"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_toRightOf="@+id/points"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:minHeight="@dimen/btn_score_size"
+                android:minWidth="@dimen/btn_score_size"
+                android:text="+1"
+                />
+
+            <TextView
+                android:id="@+id/btn_plus_100"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_plus"
+                android:layout_toRightOf="@+id/points"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:minHeight="@dimen/btn_score_size"
+                android:minWidth="@dimen/btn_score_size"
+                android:text="+100"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
