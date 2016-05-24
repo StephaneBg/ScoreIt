@@ -22,6 +22,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="default_margin">16dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
 
     <!-- Padding -->
     <dimen name="small_padding">8dp</dimen>
@@ -45,4 +46,5 @@
     <dimen name="dialog_width">480dp</dimen>
     <dimen name="btn_score_size">56dp</dimen>
     <dimen name="btn_info_min_width">256dp</dimen>
+    <dimen name="spinner_min_width">192dp</dimen>
 </resources>

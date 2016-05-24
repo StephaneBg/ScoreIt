@@ -68,7 +68,7 @@ public class TarotLapFragment extends LapFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap_tarot, container, false);
 
-        mContainer = (LinearLayout) view.findViewById(R.id.ll_container);
+        mContainer = (LinearLayout) view.findViewById(R.id.bonus_container);
         mTaker = (Spinner) view.findViewById(R.id.spinner_taker);
         mBid = (Spinner) view.findViewById(R.id.spinner_bid);
         mPetit = (CheckBox) view.findViewById(R.id.checkbox_petit);

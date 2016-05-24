@@ -66,7 +66,7 @@ public class CoincheLapFragment extends GenericBeloteLapFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap_coinche, container, false);
 
-        mContainer = (LinearLayout) view.findViewById(R.id.ll_container);
+        mContainer = (LinearLayout) view.findViewById(R.id.bonus_container);
         mBidderSpinner = (Spinner) view.findViewById(R.id.spinner_bidder);
         mSeekBid = (SeekPoints) view.findViewById(R.id.seekbar_bid);
         mCoincheSpinner = (Spinner) view.findViewById(R.id.spinner_coinche);
