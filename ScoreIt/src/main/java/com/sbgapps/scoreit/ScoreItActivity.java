@@ -166,8 +166,17 @@ public class ScoreItActivity extends BaseActivity {
 
             case R.id.menu_round:
                 sp = PreferenceManager.getDefaultSharedPreferences(this);
-                boolean round = sp.getBoolean(GameManager.KEY_BELOTE_ROUND, false);
-                sp.edit().putBoolean(GameManager.KEY_BELOTE_ROUND, !round).apply();
+                boolean round;
+                switch (getGameManager().getPlayedGame()) {
+                    case Game.BELOTE:
+                        round = sp.getBoolean(GameManager.KEY_BELOTE_ROUND, false);
+                        sp.edit().putBoolean(GameManager.KEY_BELOTE_ROUND, !round).apply();
+                        break;
+                    case Game.COINCHE:
+                        round = sp.getBoolean(GameManager.KEY_COINCHE_ROUND, false);
+                        sp.edit().putBoolean(GameManager.KEY_COINCHE_ROUND, !round).apply();
+                        break;
+                }
                 updateFragments();
                 return true;
 
@@ -222,13 +231,22 @@ public class ScoreItActivity extends BaseActivity {
         item.setVisible(0 != lapCnt);
 
         item = menu.findItem(R.id.menu_round);
-        if (Game.BELOTE == game) {
-            item.setVisible(true);
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-            boolean round = sp.getBoolean(GameManager.KEY_BELOTE_ROUND, false);
-            item.setTitle(round ? R.string.menu_action_actual_scores : R.string.menu_action_round_scores);
-        } else {
-            item.setVisible(false);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean round;
+        switch (game) {
+            default:
+                item.setVisible(false);
+                break;
+            case Game.BELOTE:
+                round = sp.getBoolean(GameManager.KEY_BELOTE_ROUND, false);
+                item.setTitle(round ? R.string.menu_action_actual_scores :
+                        R.string.menu_action_round_scores);
+                break;
+            case Game.COINCHE:
+                round = sp.getBoolean(GameManager.KEY_COINCHE_ROUND, false);
+                item.setTitle(round ? R.string.menu_action_actual_scores :
+                        R.string.menu_action_round_scores);
+                break;
         }
 
         item = menu.findItem(R.id.menu_count);

@@ -57,10 +57,8 @@ public class HeaderAdapter extends BaseAdapter {
     @Override
     public Info getItem(int position) {
         int score = 0;
-        boolean rounded = mGameManager.getPlayedGame() == Game.BELOTE
-                && mGameManager.getPreferences().getBoolean(GameManager.KEY_BELOTE_ROUND, false);
         for (Lap lap : mGameManager.getLaps()) {
-            if (rounded) {
+            if (mGameManager.isRounded()) {
                 score += GenericBeloteLap.getRoundedScore(lap.getScore(position));
             } else {
                 score += lap.getScore(position);
