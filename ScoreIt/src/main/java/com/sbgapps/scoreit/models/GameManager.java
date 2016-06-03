@@ -51,6 +51,7 @@ public class GameManager {
     public static final String KEY_TAROT_PLAYER_CNT = "tarot_player_count";
     public static final String KEY_UNIVERSAL_TOTAL = "universal_show_total";
     public static final String KEY_BELOTE_ROUND = "belote_round_score";
+    public static final String KEY_COINCHE_ROUND = "coinche_round_score";
 
     final private Context mContext;
     final private SharedPreferences mPreferences;
@@ -242,8 +243,9 @@ public class GameManager {
     @SuppressWarnings("deprecation")
     public Player getPlayer(int player) {
         if (player >= getPlayers().size()) {
-            if (null == mPlayerTotal) mPlayerTotal = new Player(mContext.getString(R.string.universal_total_points),
-                    mContext.getResources().getColor(R.color.md_lime_600));
+            if (null == mPlayerTotal)
+                mPlayerTotal = new Player(mContext.getString(R.string.universal_total_points),
+                        mContext.getResources().getColor(R.color.md_lime_600));
             return mPlayerTotal;
         } else {
             return getPlayers().get(player);
@@ -302,5 +304,16 @@ public class GameManager {
             i++;
         }
         colors.recycle();
+    }
+
+    public boolean isRounded() {
+        switch (mPlayedGame) {
+            default:
+                return false;
+            case Game.BELOTE:
+                return getPreferences().getBoolean(GameManager.KEY_BELOTE_ROUND, false);
+            case Game.COINCHE:
+                return getPreferences().getBoolean(GameManager.KEY_COINCHE_ROUND, false);
+        }
     }
 }

@@ -101,6 +101,6 @@ public class RevealView extends FrameLayout {
     }
 
     public interface RevealViewListener {
-        public void onViewRevealed(RevealView revealView);
+        void onViewRevealed(RevealView revealView);
     }
 }

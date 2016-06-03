@@ -18,12 +18,9 @@ package com.sbgapps.scoreit.views.adapters;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.models.Game;
-import com.sbgapps.scoreit.models.GameManager;
 import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.models.belote.GenericBeloteLap;
 
@@ -36,9 +33,7 @@ public class BeloteLapRowAdapter extends LapRowAdapter {
 
     BeloteLapRowAdapter(ScoreListAdapter adapter, Lap lap) {
         super(adapter, lap);
-        mRounded = mScoreAdapter.getGameHelper().getPlayedGame() == Game.BELOTE
-                && mScoreAdapter.getGameHelper().getPreferences()
-                .getBoolean(GameManager.KEY_BELOTE_ROUND, false);
+        mRounded = mScoreAdapter.getGameHelper().isRounded();
     }
 
     @Override

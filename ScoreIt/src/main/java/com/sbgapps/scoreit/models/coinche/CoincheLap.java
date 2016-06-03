@@ -101,8 +101,8 @@ public class CoincheLap extends GenericBeloteLap {
             points[0] = mPoints;
             points[1] = 0;
         } else {
-            points[0] = ((mPoints + 5) / 10) * 10;
-            points[1] = (((162 - mPoints) + 5) / 10) * 10;
+            points[0] = mPoints;
+            points[1] = 162 - mPoints;
         }
 
         if (Player.PLAYER_1 == getScorer()) {

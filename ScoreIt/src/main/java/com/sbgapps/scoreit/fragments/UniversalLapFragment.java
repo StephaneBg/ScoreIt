@@ -56,6 +56,12 @@ public class UniversalLapFragment extends LapFragment
             View input = inflater.inflate(R.layout.list_item_universal_input, ll, false);
             initView(input, i);
             ll.addView(input);
+
+            if (i == getGameHelper().getPlayerCount() - 1) {
+                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)
+                        ll.getChildAt(i).getLayoutParams();
+                lp.bottomMargin = 0;
+            }
         }
 
         return view;
