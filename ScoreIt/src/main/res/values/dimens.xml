@@ -46,5 +46,4 @@
     <dimen name="dialog_width">480dp</dimen>
     <dimen name="btn_score_size">56dp</dimen>
     <dimen name="btn_info_min_width">256dp</dimen>
-    <dimen name="spinner_min_width">192dp</dimen>
 </resources>

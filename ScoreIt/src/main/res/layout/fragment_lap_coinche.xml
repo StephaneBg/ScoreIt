@@ -26,214 +26,164 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
         android:orientation="vertical"
         >
 
-        <android.support.v7.widget.CardView
+        <TextView
+            style="@style/Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@string/coinche_header_bid"
+            />
+
+        <Spinner
+            android:id="@+id/spinner_bidder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/small_margin"
-            >
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_margin"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    style="@style/Header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/default_margin"
-                    android:text="@string/coinche_header_bid"
-                    />
-
-                <Spinner
-                    android:id="@+id/spinner_bidder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/default_margin"
-                    android:layout_marginLeft="@dimen/default_margin"
-                    android:minWidth="@dimen/spinner_min_width"
-                    />
-
-                <com.sbgapps.scoreit.views.widgets.SeekPoints
-                    android:id="@+id/seekbar_bid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
+        <com.sbgapps.scoreit.views.widgets.SeekPoints
+            android:id="@+id/seekbar_bid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/small_margin"
-            >
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_margin"
-                android:orientation="vertical"
-                >
+        <TextView
+            style="@style/Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@string/coinche_header_coinche"
+            />
 
-                <TextView
-                    style="@style/Header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/default_margin"
-                    android:text="@string/coinche_header_coinche"
-                    />
-
-                <Spinner
-                    android:id="@+id/spinner_coinche"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/default_margin"
-                    android:minWidth="@dimen/spinner_min_width"
-                    />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
+        <Spinner
+            android:id="@+id/spinner_coinche"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            />
+
+        <TextView
+            style="@style/Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@string/coinche_header_points"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
             >
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/player1_name"
+                style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_toLeftOf="@+id/btn_switch"
+                android:gravity="center_horizontal"
+                tools:text="@string/belote_first_team_default_name"
+                />
+
+            <TextView
+                android:id="@+id/player1_points"
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/btn_switch"
+                android:gravity="center_horizontal"
+                tools:text="120"
+                />
+
+            <ImageView
+                android:id="@+id/btn_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:layout_margin="@dimen/default_margin"
-                android:orientation="vertical"
-                >
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="@dimen/big_padding"
+                android:tint="?colorAccent"
+                app:srcCompat="@drawable/ic_swap_horiz_24dp"
+                />
 
-                <TextView
-                    style="@style/Header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/default_margin"
-                    android:text="@string/coinche_header_points"
-                    />
+            <TextView
+                android:id="@+id/player2_name"
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_toRightOf="@+id/btn_switch"
+                android:gravity="center_horizontal"
+                tools:text="@string/belote_second_team_default_name"
+                />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:baselineAligned="false"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
+            <TextView
+                android:id="@+id/player2_points"
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/btn_switch"
+                android:gravity="center_horizontal"
+                tools:text="40"
+                />
+        </RelativeLayout>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:id="@+id/player1_name"
-                            style="@style/TextAppearance.AppCompat.Large"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/activity_vertical_margin"
-                            tools:text="@string/coinche_first_team_default_name"
-                            />
-
-                        <TextView
-                            android:id="@+id/player1_points"
-                            style="@style/TextAppearance.AppCompat.Large"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            tools:text="120"
-                            />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/btn_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:padding="@dimen/big_padding"
-                        android:tint="?colorAccent"
-                        app:srcCompat="@drawable/ic_swap_horiz_24dp"
-                        tools:src="@drawable/ic_swap_horiz_24dp"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:id="@+id/player2_name"
-                            style="@style/TextAppearance.AppCompat.Large"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/activity_vertical_margin"
-                            tools:text="@string/coinche_second_team_default_name"
-                            />
-
-                        <TextView
-                            android:id="@+id/player2_points"
-                            style="@style/TextAppearance.AppCompat.Large"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            tools:text="40"
-                            />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <com.sbgapps.scoreit.views.widgets.SeekPoints
-                    android:id="@+id/seekbar_points"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
+        <com.sbgapps.scoreit.views.widgets.SeekPoints
+            android:id="@+id/seekbar_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            >
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            />
 
-            <LinearLayout
-                android:id="@+id/bonus_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_margin"
-                android:animateLayoutChanges="true"
-                android:orientation="vertical"
-                >
+        <TextView
+            style="@style/Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@string/coinche_header_announces"
+            />
 
-                <TextView
-                    style="@style/Header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/default_margin"
-                    android:text="@string/coinche_header_announces"
-                    />
-
-                <Button
-                    android:id="@+id/btn_add_bonus"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_action_add"
-                    />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+        <Button
+            android:id="@+id/btn_add_bonus"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:text="@string/button_action_add"
+            />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

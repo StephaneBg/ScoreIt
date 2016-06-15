@@ -29,6 +29,7 @@ import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -68,6 +69,7 @@ import com.sbgapps.scoreit.models.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.models.tarot.TarotFourLap;
 import com.sbgapps.scoreit.models.tarot.TarotThreeLap;
 import com.sbgapps.scoreit.models.universal.UniversalLap;
+import com.sbgapps.scoreit.views.widgets.ScrollAwareFABBehavior;
 import com.wunderlist.slidinglayer.SlidingLayer;
 
 import java.util.List;
@@ -75,6 +77,7 @@ import java.util.List;
 public class ScoreItActivity extends BaseActivity {
 
     private static final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
+    private static final ScrollAwareFABBehavior FAB_BEHAVIOUR = new ScrollAwareFABBehavior();
 
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_SAVED_GAME = 2;
@@ -580,6 +583,11 @@ public class ScoreItActivity extends BaseActivity {
             mEditedLap = lap;
             mLap = lap.copy();
         }
+
+        CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) mActionButton.getLayoutParams();
+        p.setBehavior(null);
+        mActionButton.setLayoutParams(p);
+
         showLapFragment();
         animateActionButton();
     }
@@ -593,6 +601,11 @@ public class ScoreItActivity extends BaseActivity {
             mLap.computeScores();
             mGameManager.addLap(mLap);
         }
+
+        CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) mActionButton.getLayoutParams();
+        p.setBehavior(FAB_BEHAVIOUR);
+        mActionButton.setLayoutParams(p);
+
         mLap = null;
         animateActionButton();
         updateFragments();
