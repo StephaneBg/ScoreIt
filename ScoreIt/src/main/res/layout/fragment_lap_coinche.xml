@@ -16,7 +16,6 @@
   -->
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -127,8 +126,8 @@
                 android:layout_margin="@dimen/default_margin"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="@dimen/big_padding"
+                android:src="@drawable/ic_swap_horiz_24dp"
                 android:tint="?colorAccent"
-                app:srcCompat="@drawable/ic_swap_horiz_24dp"
                 />
 
             <TextView

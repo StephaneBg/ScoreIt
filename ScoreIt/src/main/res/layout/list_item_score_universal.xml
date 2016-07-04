@@ -20,7 +20,8 @@
     android:id="@+id/reveal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_height"
-    tools:context=".ScoreItActivity">
+    tools:context=".ScoreItActivity"
+    >
 
     <include layout="@layout/include_back_score_list"/>
 
@@ -29,19 +30,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:visibility="gone">
+        tools:visibility="gone"
+        >
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/selectableItemBackground">
+            android:background="?attr/selectableItemBackground"
+            >
 
             <com.sbgapps.scoreit.views.widgets.LinearListView
                 android:id="@+id/list_score"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:baselineAligned="false"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal"
+                />
         </FrameLayout>
     </FrameLayout>
 </com.sbgapps.scoreit.views.widgets.RevealView>
