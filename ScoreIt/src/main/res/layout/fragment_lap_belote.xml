@@ -93,8 +93,8 @@
                 android:layout_margin="@dimen/default_margin"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="@dimen/big_padding"
+                android:src="@drawable/ic_swap_horiz_24dp"
                 android:tint="?colorAccent"
-                app:srcCompat="@drawable/ic_swap_horiz_24dp"
                 />
 
             <TextView
@@ -144,8 +144,8 @@
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/default_margin"
             android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginRight="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"

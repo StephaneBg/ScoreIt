@@ -28,38 +28,7 @@ import android.util.TypedValue;
 /**
  * Created by Stéphane on 14/10/2014.
  */
-public class Utils {
-
-    public static int shiftColorDown(int color) {
-        float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        hsv[2] *= 0.9f; // value component
-        return Color.HSVToColor(hsv);
-    }
-
-    public static int shiftColorUp(int color) {
-        float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        hsv[2] *= 1.1f; // value component
-        return Color.HSVToColor(hsv);
-    }
-
-    public static Drawable createSelector(int color) {
-        ShapeDrawable darkerCircle = new ShapeDrawable(new OvalShape());
-        darkerCircle.getPaint().setColor(translucentColor(shiftColorDown(color)));
-        StateListDrawable stateListDrawable = new StateListDrawable();
-        stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, darkerCircle);
-        return stateListDrawable;
-    }
-
-    public static int translucentColor(int color) {
-        final float factor = 0.7f;
-        int alpha = Math.round(Color.alpha(color) * factor);
-        int red = Color.red(color);
-        int green = Color.green(color);
-        int blue = Color.blue(color);
-        return Color.argb(alpha, red, green, blue);
-    }
+public class DimensionsHelper {
 
     public static int dpToPx(float dp, Resources resources) {
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
@@ -70,9 +39,5 @@ public class Utils {
     public static int spToPx(int textSizeSp, Resources resources) {
         final float density = resources.getDisplayMetrics().density;
         return (int) (0.5f + density * textSizeSp);
-    }
-
-    public static boolean hasLollipopApi() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 }

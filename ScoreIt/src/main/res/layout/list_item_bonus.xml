@@ -13,8 +13,8 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -22,7 +22,8 @@
     android:layout_marginRight="@dimen/default_margin"
     android:gravity="center_horizontal"
     android:orientation="horizontal"
-    tools:context="ScoreItActivity">
+    tools:context="ScoreItActivity"
+    >
 
     <TextView
         android:id="@+id/tv_bonus"
@@ -30,7 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/btn_remove_bonus"
         android:padding="@dimen/small_padding"
-        tools:text="Petit" />
+        tools:text="Petit"
+        />
 
     <TextView
         android:id="@+id/tv_player"
@@ -40,7 +42,8 @@
         android:layout_below="@id/tv_bonus"
         android:layout_toLeftOf="@+id/btn_remove_bonus"
         android:padding="@dimen/small_padding"
-        tools:text="Toto" />
+        tools:text="Toto"
+        />
 
     <ImageButton
         android:id="@+id/btn_remove_bonus"
@@ -51,6 +54,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/tv_bonus"
+        android:src="@drawable/ic_cancel_24dp"
         android:tint="@color/dark_grey"
-        app:srcCompat="@drawable/ic_cancel_24dp" />
+        />
 </RelativeLayout>

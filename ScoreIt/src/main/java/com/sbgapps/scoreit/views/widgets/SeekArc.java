@@ -28,7 +28,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.utils.Utils;
+import com.sbgapps.scoreit.utils.DimensionsHelper;
 
 /**
  * SeekArc.java
@@ -94,18 +94,18 @@ public class SeekArc extends View {
                 res.getColor(R.color.color_primary));
         int thumbColor = a.getColor(R.styleable.SeekArc_thumbColor,
                 res.getColor(R.color.color_accent));
-        mThumbRadius = a.getDimension(R.styleable.SeekArc_thumbRadius, Utils.dpToPx(12, res));
+        mThumbRadius = a.getDimension(R.styleable.SeekArc_thumbRadius, DimensionsHelper.dpToPx(12, res));
 
         mArcPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mArcPaint.setColor(arcColor);
         mArcPaint.setStyle(Paint.Style.STROKE);
-        int width = (int) a.getDimension(R.styleable.SeekArc_progressWidth, Utils.dpToPx(6, res));
+        int width = (int) a.getDimension(R.styleable.SeekArc_progressWidth, DimensionsHelper.dpToPx(6, res));
         mArcPaint.setStrokeWidth(width);
 
         mProgressPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mProgressPaint.setColor(progressColor);
         mProgressPaint.setStyle(Paint.Style.STROKE);
-        width = (int) a.getDimension(R.styleable.SeekArc_arcWidth, Utils.dpToPx(6, res));
+        width = (int) a.getDimension(R.styleable.SeekArc_arcWidth, DimensionsHelper.dpToPx(6, res));
         mProgressPaint.setStrokeWidth(width);
 
         mThumbPaint = new Paint(Paint.ANTI_ALIAS_FLAG);

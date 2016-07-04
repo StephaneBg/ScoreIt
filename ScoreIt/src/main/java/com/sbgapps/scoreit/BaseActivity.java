@@ -33,10 +33,6 @@ import com.sbgapps.scoreit.R;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    static {
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    }
-
     private Toolbar mToolbar;
 
     @Override
