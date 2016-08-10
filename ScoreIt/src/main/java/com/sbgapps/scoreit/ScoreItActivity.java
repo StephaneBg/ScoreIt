@@ -586,7 +586,6 @@ public class ScoreItActivity extends BaseActivity {
 
         CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) mActionButton.getLayoutParams();
         p.setBehavior(null);
-        mActionButton.setLayoutParams(p);
 
         showLapFragment();
         animateActionButton();
@@ -604,7 +603,6 @@ public class ScoreItActivity extends BaseActivity {
 
         CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) mActionButton.getLayoutParams();
         p.setBehavior(FAB_BEHAVIOUR);
-        mActionButton.setLayoutParams(p);
 
         mLap = null;
         animateActionButton();

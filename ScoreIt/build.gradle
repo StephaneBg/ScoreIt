@@ -70,14 +70,11 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:24.0.0'
-    compile 'com.android.support:appcompat-v7:24.0.0'
-    compile 'com.android.support:recyclerview-v7:24.0.0'
-    compile 'com.android.support:design:24.0.0'
-    compile 'com.android.support:percent:24.0.0'
-
-    compile 'com.google.firebase:firebase-core:9.0.0'
-//    compile 'com.google.firebase:firebase-crash:9.0.0'
+    compile 'com.android.support:support-v4:24.1.1'
+    compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.android.support:recyclerview-v7:24.1.1'
+    compile 'com.android.support:design:24.1.1'
+    compile 'com.android.support:percent:24.1.1'
 
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.anjlab.android.iab.v3:library:1.0.31'
@@ -91,5 +88,3 @@ dependencies {
 
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
 }
-
-apply plugin: 'com.google.gms.google-services'
