@@ -20,7 +20,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
-		classpath 'com.google.gms:google-services:3.0.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     }
 }
@@ -36,7 +35,7 @@ ext {
     minSdkVersion = 16
     targetSdkVersion = 24
     compileSdkVersion = 24
-    buildToolsVersion = '24.0.0'
+    buildToolsVersion = '24.0.1'
     sourceCompatibilityVersion = JavaVersion.VERSION_1_7
     targetCompatibilityVersion = JavaVersion.VERSION_1_7
 }
