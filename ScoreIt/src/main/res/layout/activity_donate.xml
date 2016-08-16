@@ -20,30 +20,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".DonateActivity">
+    android:padding="@dimen/margin_padding_size_medium"
+    tools:context=".DonateActivity"
+    >
 
     <Button
         android:id="@+id/btn_donate_coffee"
         style="?borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/margin_padding_size_medium"
         android:drawableLeft="@drawable/wrapper_ic_donate_coffee"
         android:onClick="onDonateCoffee"
-        android:text="@string/button_donate_coffee"/>
+        android:text="@string/button_donate_coffee"
+        />
 
     <Button
         android:id="@+id/btn_donate_beer"
         style="?borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/default_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/default_margin"
         android:drawableLeft="@drawable/wrapper_ic_donate_beer"
         android:onClick="onDonateBeer"
-        android:text="@string/button_donate_beer"/>
+        android:text="@string/button_donate_beer"
+        />
 </LinearLayout>

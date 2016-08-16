@@ -31,7 +31,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 51
-        versionName '3.8'
+        versionName '4.0'
         vectorDrawables.generatedDensities = ['hdpi', 'xxhdpi']
     }
 
@@ -80,10 +80,10 @@ dependencies {
     compile 'com.anjlab.android.iab.v3:library:1.0.31'
     compile 'com.code-troopers.betterpickers:library:2.5.5'
     compile 'com.sromku:simple-storage:1.2.0'
-    compile 'com.roughike:swipe-selector:1.0.6'
     compile 'com.thebluealliance:spectrum:0.2.1'
     compile 'com.wunderlist:sliding-layer:1.2.5'
-    compile 'com.roughike:swipe-selector:1.0.6'
+//    compile 'com.roughike:swipe-selector:1.0.6'
+    compile 'com.github.StephaneBg:SwipeSelector:485dcb0'
     compile 'com.jakewharton:butterknife:8.1.0'
 
     apt 'com.jakewharton:butterknife-compiler:8.1.0'

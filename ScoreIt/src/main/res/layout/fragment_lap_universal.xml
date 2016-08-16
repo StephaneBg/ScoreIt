@@ -19,11 +19,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScoreItActivity">
+    tools:context=".ScoreItActivity"
+    >
 
     <LinearLayout
         android:id="@+id/ll_players"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"/>
+        android:divider="@drawable/divider"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        />
 </android.support.v4.widget.NestedScrollView>

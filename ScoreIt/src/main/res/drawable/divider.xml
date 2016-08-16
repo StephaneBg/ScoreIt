@@ -14,19 +14,11 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources>
-    <color name="white">@color/md_white_1000</color>
-    <color name="transparent">#00000000</color>
-    <color name="divider_color">#1F000000</color>
 
-    <color name="color_primary">@color/md_green_500</color>
-    <color name="color_primary_dark">@color/md_green_700</color>
-    <color name="color_primary_400">@color/md_green_400</color>
-    <color name="color_accent">@color/md_orange_500</color>
-
-    <color name="light_grey">@color/md_grey_100</color>
-    <color name="dark_grey">@color/md_grey_800</color>
-
-    <color name="game_won">@color/md_green_400</color>
-    <color name="game_lost">@color/md_red_400</color>
-</resources>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size
+        android:width="1dp"
+        android:height="1dp"
+        />
+    <solid android:color="@color/divider_color"/>
+</shape>
