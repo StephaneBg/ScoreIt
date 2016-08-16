@@ -25,132 +25,165 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
+        android:divider="@drawable/divider"
         android:orientation="vertical"
+        android:showDividers="middle"
         >
 
-        <TextView
-            style="@style/Header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/tarot_header_scorer"
-            />
-
-        <Spinner
-            android:id="@+id/spinner_taker"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            />
+            android:orientation="vertical"
+            android:padding="@dimen/margin_padding_size_medium"
+            >
+
+            <TextView
+                style="@style/Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_padding_size_medium"
+                android:text="@string/tarot_header_scorer"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_taker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_padding_size_medium"
+                android:layout_marginRight="@dimen/margin_padding_size_medium"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                />
+        </LinearLayout>
 
         <ViewStub
             android:id="@+id/viewstub_partner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/small_margin"
             android:layout="@layout/stub_partner"
             />
 
-        <TextView
-            style="@style/Header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/tarot_header_bid"
-            />
-
-        <Spinner
-            android:id="@+id/spinner_bid"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            />
+            android:orientation="vertical"
+            android:padding="@dimen/margin_padding_size_medium"
+            >
 
-        <TextView
-            style="@style/Header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/tarot_header_oudlers"
-            />
+            <TextView
+                style="@style/Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_padding_size_medium"
+                android:text="@string/tarot_header_bid"
+                />
 
-        <CheckBox
-            android:id="@+id/checkbox_petit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            android:text="@string/tarot_oudler_petit"
-            />
+            <Spinner
+                android:id="@+id/spinner_bid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_padding_size_medium"
+                android:layout_marginRight="@dimen/margin_padding_size_medium"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                />
+        </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/checkbox_twenty_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            android:text="@string/tarot_oudler_twentyone"
-            />
-
-        <CheckBox
-            android:id="@+id/checkbox_excuse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            android:text="@string/tarot_oudler_excuse"
-            />
-
-        <TextView
-            style="@style/Header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/tarot_header_points"
-            />
-
-        <com.sbgapps.scoreit.views.widgets.SeekPoints
-            android:id="@+id/seekbar_points"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            />
+            android:orientation="vertical"
+            android:padding="@dimen/margin_padding_size_medium"
+            >
 
-        <TextView
-            style="@style/Header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/tarot_header_bonuses"
-            />
+            <TextView
+                style="@style/Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_padding_size_medium"
+                android:text="@string/tarot_header_oudlers"
+                />
 
-        <Button
-            android:id="@+id/btn_add_bonus"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            <CheckBox
+                android:id="@+id/checkbox_petit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_padding_size_medium"
+                android:layout_marginLeft="@dimen/margin_padding_size_medium"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                android:text="@string/tarot_oudler_petit"
+                />
+
+            <CheckBox
+                android:id="@+id/checkbox_twenty_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_padding_size_medium"
+                android:layout_marginLeft="@dimen/margin_padding_size_medium"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                android:text="@string/tarot_oudler_twentyone"
+                />
+
+            <CheckBox
+                android:id="@+id/checkbox_excuse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_padding_size_medium"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                android:text="@string/tarot_oudler_excuse"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            android:text="@string/button_action_add"
-            />
+            android:orientation="vertical"
+            android:padding="@dimen/margin_padding_size_medium"
+            >
+
+            <TextView
+                style="@style/Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_padding_size_medium"
+                android:text="@string/tarot_header_points"
+                />
+
+            <com.sbgapps.scoreit.views.widgets.SeekPoints
+                android:id="@+id/seekbar_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_padding_size_medium"
+                android:layout_marginRight="@dimen/margin_padding_size_medium"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bonus_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_padding_size_medium"
+            >
+
+            <TextView
+                style="@style/Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_padding_size_medium"
+                android:text="@string/tarot_header_bonuses"
+                />
+
+            <Button
+                android:id="@+id/btn_add_bonus"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_padding_size_medium"
+                android:layout_marginRight="@dimen/margin_padding_size_medium"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                android:text="@string/button_action_add"
+                />
+        </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -18,83 +18,92 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fillViewport="true"
-    tools:context=".AboutActivity">
+    tools:context=".AboutActivity"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/margin_padding_size_medium"
+        >
 
         <ImageView
             android:layout_width="128dp"
             android:layout_height="128dp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:gravity="bottom"
             android:src="@drawable/ic_app_hi_res"
-            android:text="@string/app_name"/>
+            android:text="@string/app_name"
+            />
 
         <TextView
             android:id="@+id/version"
             style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="ScoreIt 0.0.0"/>
+            tools:text="ScoreIt 0.0.0"
+            />
 
         <TextView
             style="@style/TextAppearance.AppCompat.Medium.Inverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/margin_padding_size_medium"
             android:singleLine="true"
             android:text="Stéphane Baiget"
-            tools:ignore="HardcodedText"/>
+            tools:ignore="HardcodedText"
+            />
 
         <Button
             android:id="@+id/btn_rate"
             style="?borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_padding_size_medium"
             android:minWidth="@dimen/btn_info_min_width"
-            android:text="@string/button_rate_app"/>
+            android:text="@string/button_rate_app"
+            />
 
         <Button
             android:id="@+id/btn_share"
             style="?borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/margin_padding_size_medium"
             android:minWidth="@dimen/btn_info_min_width"
-            android:text="@string/button_share_app"/>
+            android:text="@string/button_share_app"
+            />
 
         <Button
             android:id="@+id/btn_community"
             style="?borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/margin_padding_size_medium"
             android:minWidth="@dimen/btn_info_min_width"
-            android:text="@string/button_join_community"/>
+            android:text="@string/button_join_community"
+            />
 
         <Button
             android:id="@+id/btn_contact"
             style="?borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/margin_padding_size_medium"
             android:minWidth="@dimen/btn_info_min_width"
-            android:text="@string/button_contact_developer"/>
+            android:text="@string/button_contact_developer"
+            />
 
         <Button
             android:id="@+id/btn_translate"
             style="?borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:minWidth="@dimen/btn_info_min_width"
-            android:text="@string/button_help_translate"/>
+            android:text="@string/button_help_translate"
+            />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

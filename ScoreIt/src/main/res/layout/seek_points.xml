@@ -23,8 +23,6 @@
     android:baselineAligned="false"
     android:gravity="center"
     android:orientation="horizontal"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context=".ScoreItActivity"
     >
 
@@ -35,7 +33,7 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:minHeight="@dimen/btn_score_size"
         android:minWidth="@dimen/btn_score_size"
-        android:padding="@dimen/big_padding"
+        android:padding="@dimen/margin_padding_size_medium"
         android:src="@drawable/ic_minus_24dp"
         android:tint="?colorAccent"
         />
@@ -71,7 +69,7 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:minHeight="@dimen/btn_score_size"
         android:minWidth="@dimen/btn_score_size"
-        android:padding="@dimen/big_padding"
+        android:padding="@dimen/margin_padding_size_medium"
         android:src="@drawable/ic_plus_24dp"
         android:tint="?colorAccent"
         />

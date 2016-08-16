@@ -18,15 +18,10 @@
 
 <resources>
 
-    <!-- Margin -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="default_margin">16dp</dimen>
-    <dimen name="small_margin">8dp</dimen>
-
-    <!-- Padding -->
-    <dimen name="small_padding">8dp</dimen>
-    <dimen name="big_padding">16dp</dimen>
+    <!-- Margin / Padding-->
+    <dimen name="margin_padding_size_small">8dp</dimen>
+    <dimen name="margin_padding_size_medium">16dp</dimen>
+    <dimen name="margin_padding_size_large">32dp</dimen>
 
     <!-- Fonts -->
     <dimen name="text_size_display_4">112sp</dimen>

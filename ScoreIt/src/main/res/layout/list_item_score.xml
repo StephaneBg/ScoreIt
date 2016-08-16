@@ -23,4 +23,5 @@
     android:layout_weight="1"
     android:gravity="center"
     android:singleLine="true"
-    tools:context=".ScoreItActivity"/>
+    tools:context=".ScoreItActivity"
+    />
