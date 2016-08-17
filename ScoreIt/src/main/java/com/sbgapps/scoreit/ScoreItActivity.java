@@ -192,7 +192,7 @@ public class ScoreItActivity extends BaseActivity {
                 return true;
 
             case R.id.menu_save:
-                if (mGameManager.getFileUtils().isDefaultFile()) {
+                if (mGameManager.getFileHelper().isDefaultFile()) {
                     showLoadActionChoices();
                 } else {
                     startSavedGamesActivity();
@@ -256,7 +256,7 @@ public class ScoreItActivity extends BaseActivity {
         item.setVisible(Game.UNIVERSAL == game || Game.TAROT == game);
 
         item = menu.findItem(R.id.menu_save);
-        List<String> files = mGameManager.getFileUtils().getSavedFiles();
+        List<String> files = mGameManager.getFileHelper().getSavedFiles();
         item.setVisible(0 != files.size());
 
         item = menu.findItem(R.id.menu_total);
@@ -669,7 +669,7 @@ public class ScoreItActivity extends BaseActivity {
                                 dismissAll();
                                 break;
                             case 1:
-                                if (mGameManager.getFileUtils().isDefaultFile()) {
+                                if (mGameManager.getFileHelper().isDefaultFile()) {
                                     showSaveFileDialog(false);
                                 } else {
                                     if (null != mSnackBar) mSnackBar.dismiss();

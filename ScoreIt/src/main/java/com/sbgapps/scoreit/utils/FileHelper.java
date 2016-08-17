@@ -30,11 +30,11 @@ import java.util.List;
 /**
  * Created by Stéphane on 09/07/2014.
  */
-public class FileUtils {
+public class FileHelper {
 
     final private GameManager mGameManager;
 
-    public FileUtils(GameManager gameManager) {
+    public FileHelper(GameManager gameManager) {
         mGameManager = gameManager;
     }
 

@@ -30,8 +30,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 51
-        versionName '4.0'
+        versionCode 52
+        versionName '4.0.1'
         vectorDrawables.generatedDensities = ['hdpi', 'xxhdpi']
     }
 
@@ -70,11 +70,11 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:24.1.1'
-    compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.android.support:recyclerview-v7:24.1.1'
-    compile 'com.android.support:design:24.1.1'
-    compile 'com.android.support:percent:24.1.1'
+    compile "com.android.support:support-v4:$supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
+    compile "com.android.support:percent:$supportLibraryVersion"
 
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.anjlab.android.iab.v3:library:1.0.31'
@@ -82,8 +82,7 @@ dependencies {
     compile 'com.sromku:simple-storage:1.2.0'
     compile 'com.thebluealliance:spectrum:0.2.1'
     compile 'com.wunderlist:sliding-layer:1.2.5'
-//    compile 'com.roughike:swipe-selector:1.0.6'
-    compile 'com.github.StephaneBg:SwipeSelector:485dcb0'
+    compile 'com.github.StephaneBg:SwipeSelector:1.0'
     compile 'com.jakewharton:butterknife:8.1.0'
 
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
