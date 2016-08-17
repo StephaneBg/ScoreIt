@@ -47,7 +47,7 @@ public class SavedGamesActivity extends BaseActivity {
         }
 
         mGameManager = new GameManager(this);
-        mGames = mGameManager.getFileUtils().getSavedFiles();
+        mGames = mGameManager.getFileHelper().getSavedFiles();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(android.R.id.list);
         recyclerView.setHasFixedSize(true);
@@ -76,7 +76,7 @@ public class SavedGamesActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     String game = mGames.get(holder.getAdapterPosition());
-                    mGameManager.getFileUtils().setPlayedFile(game);
+                    mGameManager.getFileHelper().setPlayedFile(game);
                     setResult(RESULT_OK);
                     finish();
                 }
