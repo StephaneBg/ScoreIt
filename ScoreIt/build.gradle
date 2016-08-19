@@ -15,7 +15,6 @@
  */
 
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 
 android {
 
@@ -42,7 +41,6 @@ android {
         release {
             if (signingFile.exists()) {
                 signingProperties.load(signingFile.newInputStream())
-
                 storeFile file(signingProperties["store.file"])
                 storePassword signingProperties["store.password"]
                 keyAlias signingProperties["key.alias"]
@@ -83,7 +81,4 @@ dependencies {
     compile 'com.thebluealliance:spectrum:0.2.1'
     compile 'com.wunderlist:sliding-layer:1.2.5'
     compile 'com.github.StephaneBg:SwipeSelector:1.0'
-    compile 'com.jakewharton:butterknife:8.1.0'
-
-    apt 'com.jakewharton:butterknife-compiler:8.1.0'
 }

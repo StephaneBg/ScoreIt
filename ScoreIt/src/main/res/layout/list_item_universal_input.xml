@@ -19,7 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_padding_size_medium"
+    android:padding="@dimen/margin_padding_size_medium"
     android:orientation="vertical"
     tools:context=".ScoreItActivity"
     tools:ignore="hardCodedText"
