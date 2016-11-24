@@ -30,6 +30,8 @@ import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.models.Player;
 import com.sbgapps.scoreit.models.universal.UniversalLap;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,7 @@ import java.util.List;
  * Created by sbaiget on 02/02/14.
  */
 public class UniversalLapFragment extends LapFragment
-        implements NumberPickerDialogFragment.NumberPickerDialogHandler {
+        implements NumberPickerDialogFragment.NumberPickerDialogHandlerV2 {
 
     final List<TextView> mPoints = new ArrayList<>();
 
@@ -139,10 +141,9 @@ public class UniversalLapFragment extends LapFragment
         mPoints.get(position).setText(Integer.toString(getLap().getScore(position)));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public void onDialogNumberSet(int reference, int number, double decimal, boolean isNegative, double fullNumber) {
-        getLap().setScore(reference, number);
+    public void onDialogNumberSet(int reference, BigInteger number, double decimal, boolean isNegative, BigDecimal fullNumber) {
+        getLap().setScore(reference, number.intValue());
         updatePoints(reference);
     }
 }
