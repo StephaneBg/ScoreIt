@@ -74,11 +74,11 @@ dependencies {
     compile "com.android.support:design:$supportLibraryVersion"
     compile "com.android.support:percent:$supportLibraryVersion"
 
-    compile 'com.google.code.gson:gson:2.4'
-    compile 'com.anjlab.android.iab.v3:library:1.0.31'
-    compile 'com.code-troopers.betterpickers:library:2.5.5'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.anjlab.android.iab.v3:library:1.0.36'
+    compile 'com.code-troopers.betterpickers:library:3.0.1'
     compile 'com.sromku:simple-storage:1.2.0'
-    compile 'com.thebluealliance:spectrum:0.2.1'
+    compile 'com.thebluealliance:spectrum:0.6.0'
     compile 'com.wunderlist:sliding-layer:1.2.5'
     compile 'com.github.StephaneBg:SwipeSelector:1.0'
 }

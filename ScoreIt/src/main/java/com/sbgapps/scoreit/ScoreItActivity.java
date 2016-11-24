@@ -69,7 +69,7 @@ import com.sbgapps.scoreit.models.tarot.TarotFiveLap;
 import com.sbgapps.scoreit.models.tarot.TarotFourLap;
 import com.sbgapps.scoreit.models.tarot.TarotThreeLap;
 import com.sbgapps.scoreit.models.universal.UniversalLap;
-import com.sbgapps.scoreit.views.widgets.ScrollAwareFABBehavior;
+import com.sbgapps.scoreit.views.widgets.ScrollAwareFabBehavior;
 import com.wunderlist.slidinglayer.SlidingLayer;
 
 import java.util.List;
@@ -77,7 +77,7 @@ import java.util.List;
 public class ScoreItActivity extends BaseActivity {
 
     private static final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
-    private static final ScrollAwareFABBehavior FAB_BEHAVIOUR = new ScrollAwareFABBehavior();
+    private static final ScrollAwareFabBehavior FAB_BEHAVIOUR = new ScrollAwareFabBehavior();
 
     private static final int REQ_PICK_CONTACT = 1;
     private static final int REQ_SAVED_GAME = 2;
