@@ -280,7 +280,7 @@ public class ScoreItActivity extends BaseActivity {
             navigationView.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener() {
                         @Override
-                        public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                             switch (menuItem.getItemId()) {
                                 case R.id.nav_universal:
                                     onGameSelected(Game.UNIVERSAL);

@@ -38,7 +38,7 @@ public class FileHelper {
         mGameManager = gameManager;
     }
 
-    public Storage getStorage() {
+    private Storage getStorage() {
         return mGameManager.getStorage();
     }
 

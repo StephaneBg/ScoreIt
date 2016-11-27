@@ -53,15 +53,7 @@ public class DonateActivity extends BaseActivity
 
         mBillingProcessor = new BillingProcessor(this, INAPP_KEY, this);
 
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.width = Math.min(
-                getResources().getDimensionPixelSize(R.dimen.dialog_width),
-                dm.widthPixels * 3 / 4);
-        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        params.alpha = 1.0f;
-        params.dimAmount = 0.5f;
-        getWindow().setAttributes(params);
+        setupWindow();
     }
 
     public void onDonateCoffee(View view) {
@@ -126,5 +118,17 @@ public class DonateActivity extends BaseActivity
     public void onBillingInitialized() {
         mReadyToPurchase = true;
         manageDonations();
+    }
+
+    private void setupWindow() {
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.width = Math.min(
+                getResources().getDimensionPixelSize(R.dimen.dialog_width),
+                dm.widthPixels * 3 / 4);
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        params.alpha = 1.0f;
+        params.dimAmount = 0.5f;
+        getWindow().setAttributes(params);
     }
 }

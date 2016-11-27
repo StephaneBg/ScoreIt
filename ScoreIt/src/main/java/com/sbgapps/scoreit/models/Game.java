@@ -47,15 +47,15 @@ public abstract class Game<T extends Lap> {
         initPlayers(context, playerCount);
     }
 
-    public List<T> getLaps() {
+    List<T> getLaps() {
         return mLaps;
     }
 
-    public List<Player> getPlayers() {
+    List<Player> getPlayers() {
         return mPlayers;
     }
 
-    public void initScores() {
+    void initScores() {
         for (Lap lap : mLaps) {
             lap.computeScores();
         }
