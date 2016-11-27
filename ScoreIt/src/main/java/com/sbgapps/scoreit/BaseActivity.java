@@ -19,14 +19,11 @@ package com.sbgapps.scoreit;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.WindowManager;
-
-import com.sbgapps.scoreit.R;
 
 /**
  * Created by Stéphane on 31/07/2014.
@@ -43,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null) setSupportActionBar(mToolbar);
 
-        setupFauxDialog();
+        setupDialog();
     }
 
     public Toolbar getToolbar() {
@@ -61,7 +58,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupFauxDialog() {
+    private void setupDialog() {
         TypedValue tv = new TypedValue();
         boolean isDialog = getTheme().resolveAttribute(R.attr.isDialog, tv, true) && (0 != tv.data);
         if (isDialog) {
@@ -77,7 +74,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             getWindow().setAttributes(params);
         }
 
-        if (null != mToolbar) {
+        if (null != getSupportActionBar()) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(!isDialog);
             getSupportActionBar().setHomeButtonEnabled(!isDialog);
         }

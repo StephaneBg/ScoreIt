@@ -17,12 +17,6 @@
 package com.sbgapps.scoreit.utils;
 
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.StateListDrawable;
-import android.graphics.drawable.shapes.OvalShape;
-import android.os.Build;
 import android.util.TypedValue;
 
 /**

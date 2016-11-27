@@ -46,9 +46,9 @@ import java.util.List;
  */
 public class GameManager {
 
-    public static final String KEY_SELECTED_GAME = "selected_game";
-    public static final String KEY_UNIVERSAL_PLAYER_CNT = "universal_player_count";
-    public static final String KEY_TAROT_PLAYER_CNT = "tarot_player_count";
+    private static final String KEY_SELECTED_GAME = "selected_game";
+    private static final String KEY_UNIVERSAL_PLAYER_CNT = "universal_player_count";
+    private static final String KEY_TAROT_PLAYER_CNT = "tarot_player_count";
     public static final String KEY_UNIVERSAL_TOTAL = "universal_show_total";
     public static final String KEY_BELOTE_ROUND = "belote_round_score";
     public static final String KEY_COINCHE_ROUND = "coinche_round_score";

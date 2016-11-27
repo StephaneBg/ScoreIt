@@ -42,9 +42,7 @@ public class SavedGamesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         ActionBar actionBar = getSupportActionBar();
-        if (null != actionBar) {
-            actionBar.setTitle(getString(R.string.title_activity_saved_games));
-        }
+        if (null != actionBar) actionBar.setTitle(getString(R.string.title_activity_saved_games));
 
         mGameManager = new GameManager(this);
         mGames = mGameManager.getFileHelper().getSavedFiles();
@@ -93,7 +91,7 @@ public class SavedGamesActivity extends BaseActivity {
 
         TextView game;
 
-        public SaveViewHolder(View itemView) {
+        SaveViewHolder(View itemView) {
             super(itemView);
             game = (TextView) itemView.findViewById(android.R.id.text1);
         }

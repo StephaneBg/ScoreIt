@@ -57,7 +57,7 @@ public class AboutActivity extends BaseActivity {
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
