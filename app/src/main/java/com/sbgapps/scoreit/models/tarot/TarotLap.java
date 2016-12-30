@@ -187,10 +187,13 @@ public abstract class TarotLap implements Lap {
             switch (bonus.get()) {
                 case TarotBonus.BONUS_POIGNEE_SIMPLE:
                     pts += 20;
+                    break;
                 case TarotBonus.BONUS_POIGNEE_DOUBLE:
                     pts += 30;
+                    break;
                 case TarotBonus.BONUS_POIGNEE_TRIPLE:
                     pts += 40;
+                    break;
             }
         }
         return pts;
