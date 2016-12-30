@@ -32,20 +32,15 @@ android {
         versionCode 53
         versionName '4.0.2'
         vectorDrawables.generatedDensities = ['hdpi', 'xxhdpi']
+        buildConfigField("String", "INAPP_KEY", rootProject.ext.inAppKey)
     }
 
     signingConfigs {
-        def signingFile = file("signing.properties")
-        def signingProperties = new Properties()
-
         release {
-            if (signingFile.exists()) {
-                signingProperties.load(signingFile.newInputStream())
-                storeFile file(signingProperties["store.file"])
-                storePassword signingProperties["store.password"]
-                keyAlias signingProperties["key.alias"]
-                keyPassword signingProperties["key.password"]
-            }
+            storeFile file(rootProject.ext.scoreItSigning.storeFilePath)
+            storePassword rootProject.ext.scoreItSigning.storePassword
+            keyAlias rootProject.ext.scoreItSigning.keyAlias
+            keyPassword rootProject.ext.scoreItSigning.keyPassword
         }
     }
 
