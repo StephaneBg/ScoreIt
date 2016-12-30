@@ -24,3 +24,7 @@ local.properties
 # Gradle
 build/
 .gradle
+
+# Signing
+key
+signing.gradle

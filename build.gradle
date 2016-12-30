@@ -34,8 +34,8 @@ ext {
     minSdkVersion = 16
     targetSdkVersion = 24
     compileSdkVersion = 24
-    buildToolsVersion = '25.0.1'
-    supportLibraryVersion = '25.0.1'
+    buildToolsVersion = '25.0.2'
+    supportLibraryVersion = '25.1.0'
     sourceCompatibilityVersion = JavaVersion.VERSION_1_7
     targetCompatibilityVersion = JavaVersion.VERSION_1_7
 }
@@ -43,3 +43,5 @@ ext {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+apply from: "./signing.gradle"

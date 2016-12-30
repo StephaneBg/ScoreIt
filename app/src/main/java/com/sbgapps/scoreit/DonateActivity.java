@@ -27,13 +27,12 @@ import android.widget.Button;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
-import com.sbgapps.scoreit.utils.IabKey;
 
 /**
  * Created by sbaiget on 30/01/2015.
  */
 public class DonateActivity extends BaseActivity
-        implements BillingProcessor.IBillingHandler, IabKey {
+        implements BillingProcessor.IBillingHandler {
 
     static final String LOG_TAG = "billing";
 
@@ -51,7 +50,7 @@ public class DonateActivity extends BaseActivity
         mCoffeeBtn = (Button) findViewById(R.id.btn_donate_coffee);
         mBeerBtn = (Button) findViewById(R.id.btn_donate_beer);
 
-        mBillingProcessor = new BillingProcessor(this, INAPP_KEY, this);
+        mBillingProcessor = new BillingProcessor(this, BuildConfig.INAPP_KEY, this);
 
         setupWindow();
     }
@@ -64,7 +63,6 @@ public class DonateActivity extends BaseActivity
     public void onDonateBeer(View view) {
         if (mReadyToPurchase)
             mBillingProcessor.purchase(DonateActivity.this, PRODUCT_DONATE_BEER);
-
     }
 
     @Override
