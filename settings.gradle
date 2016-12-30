@@ -14,4 +14,6 @@
  * limitations under the License.
  */
 
-include ':ScoreIt'
+include ':scoreit'
+
+project(':scoreit').projectDir = new File('app')
