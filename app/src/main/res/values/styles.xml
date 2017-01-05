@@ -23,7 +23,7 @@
         <item name="bpDividerColor">@color/transparent</item>
     </style>
 
-    <style name="Header" parent="TextAppearance.AppCompat.Subhead">
-        <item name="android:textColor">?colorPrimary</item>
+    <style name="Header" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/md_grey_600</item>
     </style>
 </resources>

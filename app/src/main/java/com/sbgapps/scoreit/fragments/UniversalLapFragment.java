@@ -94,6 +94,14 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
+        tv = (TextView) view.findViewById(R.id.btn_plus_5);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLap().stepScore(position, 5);
+                updatePoints(position);
+            }
+        });
         tv = (TextView) view.findViewById(R.id.btn_plus_10);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +123,14 @@ public class UniversalLapFragment extends LapFragment
             @Override
             public void onClick(View v) {
                 getLap().stepScore(position, -1);
+                updatePoints(position);
+            }
+        });
+        tv = (TextView) view.findViewById(R.id.btn_minus_5);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLap().stepScore(position, -5);
                 updatePoints(position);
             }
         });
