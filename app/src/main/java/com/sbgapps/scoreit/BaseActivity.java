@@ -58,6 +58,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public boolean isFirstRun(Bundle savedInstanceState) {
+        return null == savedInstanceState;
+    }
+
     private void setupDialog() {
         TypedValue tv = new TypedValue();
         boolean isDialog = getTheme().resolveAttribute(R.attr.isDialog, tv, true) && (0 != tv.data);

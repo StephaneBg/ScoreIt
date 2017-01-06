@@ -55,7 +55,7 @@ public class AboutActivity extends BaseActivity {
         return R.layout.activity_about;
     }
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    private class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         SectionsPagerAdapter(FragmentManager fm) {
             super(fm);

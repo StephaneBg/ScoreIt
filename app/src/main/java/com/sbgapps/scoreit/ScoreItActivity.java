@@ -117,7 +117,9 @@ public class ScoreItActivity extends BaseActivity {
         mGameManager = new GameManager(this);
         mGameManager.loadGame();
 
-        if (null != savedInstanceState) {
+        if (isFirstRun(savedInstanceState)) {
+            reloadUi(false);
+        } else {
             mLap = (Lap) savedInstanceState.getSerializable("lap");
             mIsEdited = savedInstanceState.getBoolean("edited");
             if (mIsEdited) {
@@ -131,8 +133,6 @@ public class ScoreItActivity extends BaseActivity {
                     .findFragmentByTag(ScoreListFragment.TAG);
             mScoreChartFragment = (ScoreChartFragment) getSupportFragmentManager()
                     .findFragmentByTag(ScoreChartFragment.TAG);
-        } else {
-            reloadUi(false);
         }
 
         setupActionBar();
@@ -320,7 +320,7 @@ public class ScoreItActivity extends BaseActivity {
                 } else {
                     showScoreScene();
                 }
-                invalidateOptionsMenu();
+                supportInvalidateOptionsMenu();
             }
         });
     }
@@ -392,7 +392,7 @@ public class ScoreItActivity extends BaseActivity {
         showChartSheet(false);
         setTitle();
         animateActionButton();
-        invalidateOptionsMenu();
+        supportInvalidateOptionsMenu();
         reloadUi();
     }
 
@@ -441,7 +441,7 @@ public class ScoreItActivity extends BaseActivity {
 
             case REQ_SAVED_GAME:
                 mGameManager.loadGame();
-                invalidateOptionsMenu();
+                supportInvalidateOptionsMenu();
                 updateFragments();
                 break;
         }
@@ -460,7 +460,7 @@ public class ScoreItActivity extends BaseActivity {
                 mIsEdited = false;
                 animateActionButton();
             }
-            invalidateOptionsMenu();
+            supportInvalidateOptionsMenu();
             super.onBackPressed();
         }
     }
@@ -497,7 +497,7 @@ public class ScoreItActivity extends BaseActivity {
         if (mScoreChartFragment.isVisible())
             mScoreChartFragment.update();
 
-        invalidateOptionsMenu();
+        supportInvalidateOptionsMenu();
 
         View view = findViewById(R.id.coordinator);
         if (view != null) {
@@ -516,7 +516,7 @@ public class ScoreItActivity extends BaseActivity {
                         mScoreListFragment.getListAdapter().notifyItemInserted(position);
                     if (mScoreChartFragment.isVisible())
                         mScoreChartFragment.update();
-                    invalidateOptionsMenu();
+                    supportInvalidateOptionsMenu();
                 }
             })
                     .setActionTextColor(ColorStateList.valueOf(
@@ -649,7 +649,7 @@ public class ScoreItActivity extends BaseActivity {
         mHeaderFragment.update();
         mScoreListFragment.update();
         mScoreChartFragment.update();
-        invalidateOptionsMenu();
+        supportInvalidateOptionsMenu();
     }
 
     private void startSavedGamesActivity() {
@@ -675,7 +675,7 @@ public class ScoreItActivity extends BaseActivity {
                                     if (null != mSnackBar) mSnackBar.dismiss();
                                     mGameManager.saveGame();
                                     mGameManager.createGame();
-                                    invalidateOptionsMenu();
+                                    supportInvalidateOptionsMenu();
                                     updateFragments();
                                 }
                                 break;
@@ -759,7 +759,7 @@ public class ScoreItActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mGameManager.setPlayerCount(which);
-                        invalidateOptionsMenu();
+                        supportInvalidateOptionsMenu();
                         reloadUi();
                     }
                 })
