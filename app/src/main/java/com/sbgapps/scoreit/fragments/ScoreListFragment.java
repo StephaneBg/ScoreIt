@@ -32,6 +32,7 @@ import com.sbgapps.scoreit.views.adapters.GenericBeloteScoreAdapter;
 import com.sbgapps.scoreit.views.adapters.ScoreListAdapter;
 import com.sbgapps.scoreit.views.adapters.TarotScoreAdapter;
 import com.sbgapps.scoreit.views.adapters.UniversalScoreAdapter;
+import com.sbgapps.scoreit.views.widgets.EmptyRecyclerView;
 import com.sbgapps.scoreit.views.widgets.RevealView;
 
 /**
@@ -52,8 +53,9 @@ public class ScoreListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score_list, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(android.R.id.list);
+        EmptyRecyclerView recyclerView = (EmptyRecyclerView) view.findViewById(android.R.id.list);
         recyclerView.setHasFixedSize(true);
+        recyclerView.setEmptyView(view.findViewById(R.id.img_empty));
 
         mManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mManager);
