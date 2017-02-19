@@ -1,21 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (c) 2016 SBG Apps
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~    http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
 <resources>
-
     <!-- Application -->
     <string name="app_name" translatable="false">Score It</string>
     <string name="app_name_subtitle">Score keeper</string>
@@ -35,67 +18,6 @@
     <string name="drawer_game_coinche">Coinche</string>
     <string name="drawer_thank">Thank</string>
     <string name="drawer_about">About</string>
-
-    <!-- Belote -->
-    <string name="belote_swipe_item_score">Score</string>
-    <string name="belote_swipe_item_inside">Inside</string>
-    <string name="belote_swipe_item_capot">Capot</string>
-    <string name="belote_header_points">Points</string>
-    <string name="belote_header_bonuses">Bonuses</string>
-    <string name="belote_header_announces">Announces</string>
-    <string name="belote_first_team_default_name">Them</string>
-    <string name="belote_second_team_default_name">Us</string>
-    <string name="belote_bonus_belote">Belote</string>
-    <string name="belote_bonus_run_3">Run of 3 cards</string>
-    <string name="belote_bonus_run_4">Run of 4 cards</string>
-    <string name="belote_bonus_run_5">Run of 5 cards</string>
-    <string name="belote_bonus_normal_four">Four of a kind - King, Queen and 10</string>
-    <string name="belote_bonus_nine_four">Four of a kind - 9</string>
-    <string name="belote_bonus_jack_four">Four of a kind - Jack</string>
-
-    <!-- Coinche -->
-    <string name="coinche_header_bid">Bid</string>
-    <string name="coinche_header_coinche">Coinche</string>
-    <string name="coinche_header_points">Points</string>
-    <string name="coinche_header_bonuses">Bonuses</string>
-    <string name="coinche_header_announces">Announces</string>
-    <string name="coinche_coinche_none">None</string>
-    <string name="coinche_coinche_coinche">Coinche</string>
-    <string name="coinche_coinche_surcoinche">Sur-coinche</string>
-    <string name="coinche_first_team_default_name">Them</string>
-    <string name="coinche_second_team_default_name">Us</string>
-    <string name="coinche_bonus_belote">Belote</string>
-    <string name="coinche_bonus_run_3">Run of 3 cards</string>
-    <string name="coinche_bonus_run_4">Run of 4 cards</string>
-    <string name="coinche_bonus_run_5">Run of 5 cards</string>
-    <string name="coinche_bonus_normal_four">Four of a kind - King, Queen and 10</string>
-    <string name="coinche_bonus_nine_four">Four of a kind - 9</string>
-    <string name="coinche_bonus_jack_four">Four of a kind - Jack</string>
-
-    <!-- Tarot -->
-    <string name="tarot_header_scorer">Taker</string>
-    <string name="tarot_header_partner">Partner</string>
-    <string name="tarot_header_bid">Bid</string>
-    <string name="tarot_header_oudlers">Oudlers</string>
-    <string name="tarot_header_points">Points</string>
-    <string name="tarot_header_bonuses">Bonuses</string>
-    <string name="tarot_oudler_excuse">Excuse</string>
-    <string name="tarot_oudler_petit">Petit</string>
-    <string name="tarot_oudler_twentyone">21</string>
-    <string name="tarot_bid_take">Take</string>
-    <string name="tarot_bid_guard">Guard</string>
-    <string name="tarot_bid_guard_without_kitty">Guard without the kitty</string>
-    <string name="tarot_bid_guard_against_kitty">Guard against the kitty</string>
-    <string name="tarot_bonus_simple_poignee">Simple poignée</string>
-    <string name="tarot_bonus_double_poignee">Double poignée</string>
-    <string name="tarot_bonus_triple_poignee">Triple poignée</string>
-    <string name="tarot_bonus_petit_au_bout">Petit au bout</string>
-    <string name="tarot_bonus_slam_not_announced">Slam not announced</string>
-    <string name="tarot_bonus_slam_announced_not_done">Slam announced - Not done</string>
-    <string name="tarot_bonus_slam_announced_done">Slam announced - Done</string>
-
-    <!-- Universal -->
-    <string name="universal_total_points">Total</string>
 
     <!-- Dialog -->
     <string name="dialog_title_current_game">Current game</string>

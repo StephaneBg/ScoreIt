@@ -21,13 +21,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".ScoreItActivity"
+    tools:context=".MainActivity"
     >
 
     <ImageView
         android:id="@+id/bkgd"
         android:scaleType="centerCrop"
-        android:src="@drawable/background_header"
+        android:src="@drawable/triangle_pattern"
         app:layout_aspectRatio="178%"
         app:layout_widthPercent="100%"
         />

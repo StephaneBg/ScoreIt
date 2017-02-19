@@ -1,0 +1,39 @@
+ext {
+    // Versions
+    supportVersion = "25.1.1"
+    rxAndroidVersion = "1.2.1"
+    mosbyVersion = "2.0.1"
+    butterknifeVersion = "8.4.0"
+
+    // Packages
+    supportPackage = 'com.android.support'
+    retrofitPackage = 'com.squareup.retrofit2'
+    reactivePackage = 'io.reactivex'
+    jakeWhartonPackage = 'com.jakewharton'
+    mosbyPackage = 'com.hannesdorfmann.mosby'
+
+    supportDependencies = [
+            appCompat        : buildDependency(supportPackage, 'appcompat-v7', supportVersion),
+            design           : buildDependency(supportPackage, 'design', supportVersion),
+            recyclerView     : buildDependency(supportPackage, 'recyclerview-v7', supportVersion),
+            cardView         : buildDependency(supportPackage, 'cardview-v7', supportVersion),
+            supportAnnotation: buildDependency(supportPackage, 'support-annotations', supportVersion),
+            palette          : buildDependency(supportPackage, 'palette-v7', supportVersion),
+            percent          : buildDependency(supportPackage, 'percent', supportVersion)
+    ]
+
+    rxDependencies = [
+            rxAndroid: buildDependency(reactivePackage, 'rxandroid', rxAndroidVersion)
+    ]
+
+    butterknifeDependencies = [
+            butterknife        : buildDependency(jakeWhartonPackage, 'butterknife', butterknifeVersion),
+            butterknifeCompiler: buildDependency(jakeWhartonPackage, 'butterknife-compiler', butterknifeVersion)
+    ]
+
+    mosby = buildDependency(mosbyPackage, 'mvp', mosbyVersion)
+}
+
+String buildDependency(String pack, String dependency, String version) {
+    return "${pack}:${dependency}:${version}"
+}

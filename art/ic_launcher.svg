@@ -14,11 +14,11 @@
    height="192"
    id="svg5145"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="ic_launcher.svg"
-   inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_hi_res.png"
-   inkscape:export-xdpi="202.5"
-   inkscape:export-ydpi="202.5">
+   inkscape:export-filename="D:\Projects\ScoreItProject\ScoreIt\src\main\res\drawable-xxxhdpi\ic_launcher.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs5147">
     <linearGradient
@@ -650,14 +650,13 @@
        x1="54.787395"
        y1="892.90009"
        x2="184"
-       y2="1022.1127"
-       gradientTransform="matrix(0.9926148,0,0,0.94519869,0.70535337,52.545041)" />
+       y2="1022.1127" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient6006-6"
        id="linearGradient3282"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.9926148,0,0,0.94519869,-82.674296,52.544978)"
+       gradientTransform="translate(-84.000005,-6.6382812e-5)"
        x1="54.787395"
        y1="892.90009"
        x2="184"
@@ -670,18 +669,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.2539029"
-     inkscape:cx="72.782393"
-     inkscape:cy="139.9815"
+     inkscape:zoom="3.0881348"
+     inkscape:cx="120.31673"
+     inkscape:cy="75.838697"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1280"
-     inkscape:window-height="961"
-     inkscape:window-x="-8"
+     inkscape:window-height="1002"
+     inkscape:window-x="1272"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1"
-     showguides="false" />
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata5150">
     <rdf:RDF>
@@ -690,7 +688,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -708,201 +706,234 @@
        y="898.71417"
        rx="6"
        ry="6"
-       transform="matrix(0.98591742,0,0,0.84450965,1.5326965,155.59757)" />
+       transform="matrix(1,0,0,1.036956,0,-38.078086)" />
     <rect
        style="fill:#ececec;fill-opacity:1;stroke:none"
        id="rect5153-8"
-       width="174.70021"
-       height="120.98544"
-       x="8.6462717"
-       y="894.1142"
-       rx="12"
-       ry="12"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       width="176"
+       height="128"
+       x="8"
+       y="890.36218"
+       rx="6"
+       ry="6" />
     <rect
        style="fill:#e4e4e4;fill-opacity:1;stroke:none"
        id="rect5153"
-       width="174.70021"
-       height="120.98544"
-       x="8.6462717"
-       y="897.89496"
-       rx="12"
-       ry="12"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       width="176"
+       height="128"
+       x="8"
+       y="894.36218"
+       rx="6"
+       ry="6" />
     <path
        sodipodi:nodetypes="ssccssccs"
        inkscape:connector-curvature="0"
        style="opacity:0.2;fill:url(#linearGradient3282);fill-opacity:1;stroke:none"
-       d="m 23.169795,905.45652 c -3.64518,-0.10263 -6.582604,2.71002 -6.582604,6.07628 l 1.985229,98.3682 9.429841,8.9795 65.381968,0 c 3.646768,0 6.582605,-2.71 6.582605,-6.0764 l 0,-96.26506 -9.653507,-9.19212 z"
-       id="rect5663-8-4-8"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       d="M 22.63158,902.36211 C 18.95928,902.25353 16,905.22925 16,908.79068 l 2,104.07152 9.5,9.5 65.86842,0 c 3.6739,0 6.63158,-2.8671 6.63158,-6.4286 l 0,-101.84642 -9.72533,-9.72507 z"
+       id="rect5663-8-4-8" />
     <rect
        style="fill:#e4e4e4;fill-opacity:1;stroke:none"
        id="rect6014-6"
-       width="60.011139"
-       height="11.696238"
-       x="23.341133"
-       y="908.55243"
-       rx="5.9556885"
-       ry="5.6711922"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       width="60.45763"
+       height="12.374369"
+       x="22.804193"
+       y="905.63751"
+       rx="6"
+       ry="6" />
     <path
        inkscape:connector-curvature="0"
        style="fill:#ff9800;fill-opacity:1;stroke:none"
-       d="m 22.542879,905.45659 c -3.299451,0 -5.955688,2.52935 -5.955688,5.6712 l 0,94.51991 c 0,3.1418 2.656237,5.6712 5.955688,5.6712 l 63.527348,0 c 3.299451,0 5.955688,-2.5294 5.955688,-5.6712 l 0,-94.51991 c 0,-3.14185 -2.656237,-5.6712 -5.955688,-5.6712 l -63.527348,0 z m 7.196457,3.78079 11.911378,0 c 1.099817,0 1.98523,0.84312 1.98523,1.89041 l 0,1.89039 c 0,1.04728 -0.885413,1.89039 -1.98523,1.89039 l -11.911378,0 c -1.099817,0 -1.985229,-0.84311 -1.985229,-1.89039 l 0,-1.89039 c 0,-1.04729 0.885412,-1.89041 1.985229,-1.89041 z m 35.734134,0 11.911377,0 c 1.099817,0 1.98523,0.84312 1.98523,1.89041 l 0,1.89039 c 0,1.04728 -0.885413,1.89039 -1.98523,1.89039 l -11.911377,0 c -1.099818,0 -1.98523,-0.84311 -1.98523,-1.89039 l 0,-1.89039 c 0,-1.04729 0.885412,-1.89041 1.98523,-1.89041 z"
-       id="rect5663"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       d="m 22,902.36218 c -3.324,0 -6,2.676 -6,6 l 0,100.00002 c 0,3.324 2.676,6 6,6 l 64,0 c 3.324,0 6,-2.676 6,-6 l 0,-100.00002 c 0,-3.324 -2.676,-6 -6,-6 l -64,0 z m 7.25,4 12,0 c 1.108,0 2,0.892 2,2 l 0,2 c 0,1.108 -0.892,2 -2,2 l -12,0 c -1.108,0 -2,-0.892 -2,-2 l 0,-2 c 0,-1.108 0.892,-2 2,-2 z m 36,0 12,0 c 1.108,0 2,0.892 2,2 l 0,2 c 0,1.108 -0.892,2 -2,2 l -12,0 c -1.108,0 -2,-0.892 -2,-2 l 0,-2 c 0,-1.108 0.892,-2 2,-2 z"
+       id="rect5663" />
     <rect
        style="fill:#8c8c8c;fill-opacity:1;stroke:none"
        id="rect5765-6"
-       width="13.896607"
-       height="17.013577"
-       x="28.746721"
-       y="891.27863"
-       rx="1.9852296"
-       ry="1.8903974"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       width="14"
+       height="18"
+       x="28.25"
+       y="887.36218"
+       rx="2"
+       ry="2" />
     <rect
        style="fill:#848484;fill-opacity:1;stroke:none"
        id="rect5765"
-       width="13.896607"
-       height="17.013577"
-       x="28.746721"
-       y="895.05939"
-       rx="1.9852296"
-       ry="1.8903974"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       width="14"
+       height="18"
+       x="28.25"
+       y="891.36218"
+       rx="2"
+       ry="2" />
     <rect
        style="fill:#8c8c8c;fill-opacity:1;stroke:none"
        id="rect5765-6-2"
-       width="13.896607"
-       height="17.013577"
-       x="64.480858"
-       y="891.27863"
-       rx="1.9852296"
-       ry="1.8903974"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       width="14"
+       height="18"
+       x="64.25"
+       y="887.36218"
+       rx="2"
+       ry="2" />
     <rect
        style="fill:#848484;fill-opacity:1;stroke:none"
        id="rect5765-4"
-       width="13.896607"
-       height="17.013577"
-       x="64.480858"
-       y="895.05939"
-       rx="1.9852296"
-       ry="1.8903974"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       width="14"
+       height="18"
+       x="64.25"
+       y="891.36218"
+       rx="2"
+       ry="2" />
     <path
        sodipodi:nodetypes="ssccssccs"
        inkscape:connector-curvature="0"
        style="opacity:0.2;fill:url(#linearGradient3273);fill-opacity:1;stroke:none"
-       d="m 106.54944,905.45659 c -3.64518,-0.10263 -6.582606,2.71002 -6.582606,6.07628 l 1.985226,98.36813 9.42985,8.9795 65.38196,0 c 3.64677,0 6.5826,-2.71 6.5826,-6.0764 l 0,-96.26506 -9.6535,-9.19205 z"
-       id="rect5663-8-4"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       d="M 106.63158,902.36218 C 102.95928,902.2536 100,905.22932 100,908.79075 l 2,104.07145 9.5,9.5 65.86842,0 c 3.6739,0 6.63158,-2.8671 6.63158,-6.4286 l 0,-101.84642 -9.72533,-9.725 z"
+       id="rect5663-8-4" />
     <rect
        style="fill:#e4e4e4;fill-opacity:1;stroke:none"
        id="rect6014"
-       width="60.011139"
-       height="11.696238"
-       x="106.68993"
-       y="907.88409"
-       rx="5.9556885"
-       ry="5.6711922"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       width="60.45763"
+       height="12.374369"
+       x="106.77312"
+       y="904.93042"
+       rx="6"
+       ry="6" />
     <path
        inkscape:connector-curvature="0"
        style="fill:#ff9800;fill-opacity:1;stroke:none"
-       d="m 105.92252,905.45657 c -3.29945,0 -5.955686,2.52935 -5.955686,5.6712 l 0,94.51993 c 0,3.1418 2.656236,5.6712 5.955686,5.6712 l 63.52735,0 c 3.29945,0 5.95569,-2.5294 5.95569,-5.6712 l 0,-94.51993 c 0,-3.14185 -2.65624,-5.6712 -5.95569,-5.6712 l -63.52735,0 z m 7.19646,3.78079 11.91138,0 c 1.09982,0 1.98523,0.84313 1.98523,1.89041 l 0,1.89039 c 0,1.04728 -0.88541,1.8904 -1.98523,1.8904 l -11.91138,0 c -1.09982,0 -1.98523,-0.84312 -1.98523,-1.8904 l 0,-1.89039 c 0,-1.04728 0.88541,-1.89041 1.98523,-1.89041 z m 35.73413,0 11.91138,0 c 1.09982,0 1.98523,0.84313 1.98523,1.89041 l 0,1.89039 c 0,1.04728 -0.88541,1.8904 -1.98523,1.8904 l -11.91138,0 c -1.09982,0 -1.98522,-0.84312 -1.98522,-1.8904 l 0,-1.89039 c 0,-1.04728 0.8854,-1.89041 1.98522,-1.89041 z"
-       id="rect5663-8"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       d="m 106,902.36216 c -3.324,0 -6,2.676 -6,6 l 0,100.00004 c 0,3.324 2.676,6 6,6 l 64,0 c 3.324,0 6,-2.676 6,-6 l 0,-100.00004 c 0,-3.324 -2.676,-6 -6,-6 l -64,0 z m 7.25,4 12,0 c 1.108,0 2,0.892 2,2 l 0,2 c 0,1.108 -0.892,2 -2,2 l -12,0 c -1.108,0 -2,-0.892 -2,-2 l 0,-2 c 0,-1.108 0.892,-2 2,-2 z m 36,0 12,0 c 1.108,0 2,0.892 2,2 l 0,2 c 0,1.108 -0.892,2 -2,2 l -12,0 c -1.108,0 -2,-0.892 -2,-2 l 0,-2 c 0,-1.108 0.892,-2 2,-2 z"
+       id="rect5663-8" />
     <rect
        style="fill:#8c8c8c;fill-opacity:1;stroke:none"
        id="rect5765-6-1"
-       width="13.896607"
-       height="17.013577"
-       x="112.12637"
-       y="891.27863"
-       rx="1.9852296"
-       ry="1.8903974"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       width="14"
+       height="18"
+       x="112.25"
+       y="887.36218"
+       rx="2"
+       ry="2" />
     <rect
        style="fill:#848484;fill-opacity:1;stroke:none"
        id="rect5765-3"
-       width="13.896607"
-       height="17.013577"
-       x="112.12637"
-       y="895.05939"
-       rx="1.9852296"
-       ry="1.8903974"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       width="14"
+       height="18"
+       x="112.25"
+       y="891.36218"
+       rx="2"
+       ry="2" />
     <rect
        style="fill:#8c8c8c;fill-opacity:1;stroke:none"
        id="rect5765-6-2-9"
-       width="13.896607"
-       height="17.013577"
-       x="147.8605"
-       y="891.27863"
-       rx="1.9852296"
-       ry="1.8903974"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       width="14"
+       height="18"
+       x="148.25"
+       y="887.36218"
+       rx="2"
+       ry="2" />
     <rect
        style="fill:#848484;fill-opacity:1;stroke:none"
        id="rect5765-4-3"
-       width="13.896607"
-       height="17.013577"
-       x="147.8605"
-       y="895.05939"
-       rx="1.9852296"
-       ry="1.8903974"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
-    <path
-       style="fill:#fcaf3e;fill-opacity:1;stroke:none"
-       d="m 118.648,943.38942 c -1.91773,0 -3.4618,1.48537 -3.4618,3.33206 l 0,3.3338 c 0,1.8467 1.54407,3.33379 3.4618,3.33379 l 31.1528,0 0,9.99966 -31.1528,0 c -1.91773,0 -3.4618,1.48709 -3.4618,3.33379 l 0,3.3338 c 0,0.16177 0.0265,0.31633 0.0494,0.47183 -0.023,0.17633 -0.0494,0.35206 -0.0494,0.53554 l 0,16.98064 0,2.0113 c 0,1.8467 1.54407,3.33379 3.4618,3.33379 l 38.0764,0 c 1.91772,0 3.4618,-1.48709 3.4618,-3.33379 l 0,-3.3338 c 0,-1.84669 -1.54408,-3.33206 -3.4618,-3.33206 l -31.15451,0 0,-10.00138 31.15451,0 c 1.91772,0 3.4618,-1.48537 3.4618,-3.33207 l 0,-3.3338 c 0,-0.27395 -0.0431,-0.53597 -0.10728,-0.79039 0.0641,-0.25443 0.10728,-0.51645 0.10728,-0.7904 l 0,-15.00035 c 0,-0.0148 -0.005,-0.0283 -0.005,-0.043 2e-4,-0.0147 0.005,-0.0283 0.005,-0.043 l 0,-3.33379 c 0,-1.8467 -1.54408,-3.33207 -3.4618,-3.33207 l -38.0764,0 z"
+       width="14"
+       height="18"
+       x="148.25"
+       y="891.36218"
+       rx="2"
+       ry="2" />
+    <rect
+       style="fill:#ffc45d;fill-opacity:1;stroke:none"
        id="rect5715-50-1-8"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
-    <path
-       style="fill:#fcaf3e;fill-opacity:1;stroke:none"
-       d="m 35.268223,943.38952 c -1.917648,0 -3.46167,1.48537 -3.46167,3.33207 l 0,3.33379 c 0,0.0148 0.0049,0.0283 0.0051,0.043 -1.98e-4,0.0147 -0.0051,0.0283 -0.0051,0.043 l 0,15.00035 c 0,0.27391 0.04316,0.536 0.107273,0.7904 -0.06411,0.2544 -0.107273,0.51648 -0.107273,0.7904 l 0,3.33379 c 0,1.8467 1.544022,3.33207 3.46167,3.33207 l 31.153322,0 0,10.00138 -31.153322,0 c -1.917648,0 -3.46167,1.48537 -3.46167,3.33206 l 0,3.3338 c 0,1.8467 1.544022,3.33379 3.46167,3.33379 l 38.07666,0 c 1.917648,0 3.46167,-1.48709 3.46167,-3.33379 l 0,-3.3338 0,-16.66551 0,-3.33379 c 0,-1.8467 -1.544022,-3.3338 -3.46167,-3.3338 l -31.153322,0 0,-9.99965 31.153322,0 c 1.917648,0 3.46167,-1.4871 3.46167,-3.3338 l 0,-3.33379 c 0,-1.8467 -1.544022,-3.33207 -3.46167,-3.33207 l -38.07666,0 z"
+       width="52"
+       height="12"
+       x="112"
+       y="985.5094"
+       rx="4"
+       ry="4" />
+    <rect
+       style="fill:#ffc45d;fill-opacity:1;stroke:none"
+       id="rect5715-6-9-8-2"
+       width="52"
+       height="12"
+       x="112"
+       y="961.5094"
+       rx="4"
+       ry="4" />
+    <rect
+       style="fill:#ffc45d;fill-opacity:1;stroke:none"
+       id="rect5715-5-0-9-9"
+       width="52"
+       height="12"
+       x="112"
+       y="937.5094"
+       rx="4"
+       ry="4" />
+    <rect
+       style="fill:#ffc45d;fill-opacity:1;stroke:none"
+       id="rect5715-5-0-9-1-1"
+       width="26"
+       height="12"
+       x="941.61194"
+       y="-164"
+       transform="matrix(0,1,-1,0,0,0)"
+       rx="4"
+       ry="4" />
+    <rect
+       style="fill:#ffc45d;fill-opacity:1;stroke:none"
+       id="rect5715-5-0-9-1-2-3"
+       width="29.434631"
+       height="12"
+       x="966.18951"
+       y="-124"
+       transform="matrix(0,1,-1,0,0,0)"
+       rx="4.5284047"
+       ry="4" />
+    <rect
+       style="fill:#ffc45d;fill-opacity:1;stroke:none"
        id="rect5715-50-1-4-9"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="D:\Projects\ScoreIt\app\src\main\res\drawable-xxhdpi\ic_app_nav.png"
-       inkscape:export-xdpi="148.11694"
-       inkscape:export-ydpi="148.11694" />
+       width="52"
+       height="12"
+       x="-80"
+       y="985.5094"
+       transform="scale(-1,1)"
+       rx="4"
+       ry="4" />
+    <rect
+       style="fill:#ffc45d;fill-opacity:1;stroke:none"
+       id="rect5715-6-9-8-1-8"
+       width="52"
+       height="12"
+       x="-80"
+       y="961.5094"
+       transform="scale(-1,1)"
+       rx="4"
+       ry="4" />
+    <rect
+       style="fill:#ffc45d;fill-opacity:1;stroke:none"
+       id="rect5715-5-0-9-13-4"
+       width="52"
+       height="12"
+       x="-80"
+       y="937.5094"
+       transform="scale(-1,1)"
+       rx="4"
+       ry="4" />
+    <rect
+       style="fill:#ffc45d;fill-opacity:1;stroke:none"
+       id="rect5715-5-0-9-1-8-0"
+       width="26"
+       height="12"
+       x="941.61194"
+       y="28"
+       transform="matrix(0,1,1,0,0,0)"
+       rx="4"
+       ry="4" />
+    <rect
+       style="fill:#ffc45d;fill-opacity:1;stroke:none"
+       id="rect5715-5-0-9-1-2-7-7"
+       width="30.92297"
+       height="12"
+       x="964.70117"
+       y="68"
+       transform="matrix(0,1,1,0,0,0)"
+       rx="4.75738"
+       ry="4" />
     <g
        transform="translate(408.64042,-234.52299)"
        id="g3212-1"

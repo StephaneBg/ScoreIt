@@ -25,6 +25,6 @@ local.properties
 build/
 .gradle
 
-# Signing
+# Keys
 key
 signing.gradle
