@@ -27,7 +27,7 @@
     <ImageView
         android:id="@+id/bkgd"
         android:scaleType="centerCrop"
-        android:src="@drawable/triangle_pattern"
+        android:src="@mipmap/triangle_pattern"
         app:layout_aspectRatio="178%"
         app:layout_widthPercent="100%"
         />
