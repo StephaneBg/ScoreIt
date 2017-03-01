@@ -18,7 +18,6 @@ package com.sbgapps.scoreit.core.model.belote;
 
 
 import com.sbgapps.scoreit.core.model.Lap;
-import com.sbgapps.scoreit.core.model.utils.GameHelper;
 
 /**
  * Created by sbaiget on 11/10/13.
@@ -57,8 +56,8 @@ public abstract class BaseBeloteLap implements Lap {
     }
 
     @Override
-    public int getScore(int player) {
-        return GameHelper.isRounded() ? getRoundedScore(mScores[player]) : mScores[player];
+    public int getScore(int player, boolean rounded) {
+        return rounded ? getRoundedScore(mScores[player]) : mScores[player];
     }
 
     abstract public void computePoints();

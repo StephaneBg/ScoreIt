@@ -21,10 +21,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(rootProject.ext.scoreItSigning.storeFilePath)
-            storePassword rootProject.ext.scoreItSigning.storePassword
-            keyAlias rootProject.ext.scoreItSigning.keyAlias
-            keyPassword rootProject.ext.scoreItSigning.keyPassword
+            storeFile file(scoreItSigning.storeFilePath)
+            storePassword scoreItSigning.storePassword
+            keyAlias scoreItSigning.keyAlias
+            keyPassword scoreItSigning.keyPassword
         }
     }
 
@@ -58,11 +58,18 @@ android {
 
 dependencies {
     compile project(':scoreit-core')
+
     compile supportDependencies.appCompat
     compile supportDependencies.design
     compile supportDependencies.percent
     compile supportDependencies.recyclerView
-    compile mosby
+
+    compile rxDependencies.rxJava
+    compile rxDependencies.rxAndroid
+
     compile butterknifeDependencies.butterknife
     annotationProcessor butterknifeDependencies.butterknifeCompiler
+
+    compile mosby
+    compile chroma
 }

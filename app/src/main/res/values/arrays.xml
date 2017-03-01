@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="dialog_edit_name_actions">
+        <item>@string/dialog_action_pick_contact</item>
+        <item>@string/dialog_action_enter_name</item>
+    </string-array>
+</resources>

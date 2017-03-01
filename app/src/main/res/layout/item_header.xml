@@ -39,12 +39,12 @@
         />
 
     <View
-        android:id="@+id/marker"
+        android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="@dimen/margin_padding_size_medium"
         android:layout_marginRight="@dimen/margin_padding_size_medium"
-        android:background="?colorPrimaryDark"
+        android:background="?colorPrimary"
         />
 
     <TextView

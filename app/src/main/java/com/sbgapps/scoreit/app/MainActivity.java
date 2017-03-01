@@ -11,14 +11,14 @@ import android.view.MenuItem;
 
 import com.sbgapps.scoreit.app.base.BaseActivity;
 import com.sbgapps.scoreit.app.header.HeaderFragment;
-import com.sbgapps.scoreit.app.model.GameModel;
 import com.sbgapps.scoreit.app.utils.ActivityUtils;
 import com.sbgapps.scoreit.core.model.Game;
-import com.sbgapps.scoreit.core.model.utils.GameHelper;
 
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity {
+
+    GameManager mGameManager;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -31,14 +31,12 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mGameManager = ScoreItApp.getGameManager();
+
         setupActionBar();
         setupDrawer();
 
-        GameModel.init();
-
         if (isFirstRun(savedInstanceState)) {
-            GameHelper.init(this);
-
             FragmentManager fragmentManager = getSupportFragmentManager();
             ActivityUtils.replaceFragmentToActivity(fragmentManager,
                     HeaderFragment.newInstance(), R.id.container_header);
@@ -101,7 +99,7 @@ public class MainActivity extends BaseActivity {
                     mDrawerLayout.closeDrawers();
                     return true;
                 });
-        mNavigationView.getMenu().getItem(GameHelper.getPlayedGame()).setChecked(true);
+        mNavigationView.getMenu().getItem(mGameManager.getPlayedGame()).setChecked(true);
     }
 
     private void onGameSelected(@Game.Games int game) {

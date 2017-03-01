@@ -1,16 +1,22 @@
 ext {
     // Versions
     supportVersion = "25.1.1"
-    rxAndroidVersion = "1.2.1"
+    rxJavaVersion = "2.0.6"
+    rxAndroidVersion = "2.0.1"
     mosbyVersion = "2.0.1"
     butterknifeVersion = "8.4.0"
+    daggerVersion = "2.9"
+    javaxAnnotationVersion = "1.0"
+    chromaVersion = "1.0.2"
 
     // Packages
     supportPackage = 'com.android.support'
-    retrofitPackage = 'com.squareup.retrofit2'
-    reactivePackage = 'io.reactivex'
-    jakeWhartonPackage = 'com.jakewharton'
+    reactivePackage = 'io.reactivex.rxjava2'
     mosbyPackage = 'com.hannesdorfmann.mosby'
+    jakeWhartonPackage = 'com.jakewharton'
+    daggerPackage = 'com.google.dagger'
+    javaxAnnotationPackage = 'javax.annotation'
+    chromaPackage = 'me.priyesh'
 
     supportDependencies = [
             appCompat        : buildDependency(supportPackage, 'appcompat-v7', supportVersion),
@@ -23,15 +29,24 @@ ext {
     ]
 
     rxDependencies = [
+            rxJava   : buildDependency(reactivePackage, 'rxjava', rxJavaVersion),
             rxAndroid: buildDependency(reactivePackage, 'rxandroid', rxAndroidVersion)
     ]
+
+    mosby = buildDependency(mosbyPackage, 'mvp', mosbyVersion)
 
     butterknifeDependencies = [
             butterknife        : buildDependency(jakeWhartonPackage, 'butterknife', butterknifeVersion),
             butterknifeCompiler: buildDependency(jakeWhartonPackage, 'butterknife-compiler', butterknifeVersion)
     ]
 
-    mosby = buildDependency(mosbyPackage, 'mvp', mosbyVersion)
+    daggerDependencies = [
+            dagger        : buildDependency(daggerPackage, 'dagger', daggerVersion),
+            daggerCompiler: buildDependency(daggerPackage, 'dagger-compiler', daggerVersion),
+            annotations   : buildDependency(javaxAnnotationPackage, 'jsr250-api', javaxAnnotationVersion)
+    ]
+
+    chroma = buildDependency(chromaPackage, 'chroma', chromaVersion)
 }
 
 String buildDependency(String pack, String dependency, String version) {

@@ -44,7 +44,7 @@ public class UniversalLap implements Lap {
     }
 
     @Override
-    public int getScore(int player) {
+    public int getScore(int player, boolean rounded) {
         if (player >= mScores.length) {
             int total = 0;
             for (int i : mScores) total += i;

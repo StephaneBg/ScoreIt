@@ -21,7 +21,7 @@ package com.sbgapps.scoreit.core.model;
  */
 public interface Lap extends Cloneable {
 
-    int getScore(int player);
+    int getScore(int player, boolean rounded);
 
     void computeScores();
 }

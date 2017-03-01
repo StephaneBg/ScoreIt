@@ -55,8 +55,8 @@ public class Game {
         return mPlayers.get(player);
     }
 
-    public int getScore(@Player.Players int player) {
-        return GameHelper.getScore(mLaps, player);
+    public int getScore(@Player.Players int player, boolean rounded) {
+        return GameHelper.getScore(mLaps, player, rounded);
     }
 
     private void initScores() {

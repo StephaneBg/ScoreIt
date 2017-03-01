@@ -94,7 +94,7 @@ public abstract class TarotLap implements Lap {
     }
 
     @Override
-    public int getScore(int player) {
+    public int getScore(int player, boolean rounded) {
         return mScores[player];
     }
 
