@@ -7,7 +7,7 @@ ext {
     butterknifeVersion = "8.4.0"
     daggerVersion = "2.9"
     javaxAnnotationVersion = "1.0"
-    chromaVersion = "1.0.2"
+    chromaVersion = "1.7"
 
     // Packages
     supportPackage = 'com.android.support'
@@ -16,7 +16,7 @@ ext {
     jakeWhartonPackage = 'com.jakewharton'
     daggerPackage = 'com.google.dagger'
     javaxAnnotationPackage = 'javax.annotation'
-    chromaPackage = 'me.priyesh'
+    chromaPackage = 'com.github.Kunzisoft'
 
     supportDependencies = [
             appCompat        : buildDependency(supportPackage, 'appcompat-v7', supportVersion),
@@ -46,7 +46,7 @@ ext {
             annotations   : buildDependency(javaxAnnotationPackage, 'jsr250-api', javaxAnnotationVersion)
     ]
 
-    chroma = buildDependency(chromaPackage, 'chroma', chromaVersion)
+    chroma = buildDependency(chromaPackage, 'AndroidClearChroma', chromaVersion)
 }
 
 String buildDependency(String pack, String dependency, String version) {

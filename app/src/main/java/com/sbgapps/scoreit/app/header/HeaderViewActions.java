@@ -18,4 +18,10 @@ interface HeaderViewActions extends MvpView {
     void setColor(@Player.Players int player, @ColorInt int color);
 
     void setIndicator(@Player.Players int player);
+
+    void setupPlayerCount(int count);
+
+    void showColorSelectorDialog(@ColorInt int initialColor);
+
+    void showNameActionsDialog();
 }

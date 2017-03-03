@@ -18,20 +18,17 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.sbgapps.scoreit.app.GameManager;
+import com.kunzisoft.androidclearchroma.ChromaDialog;
+import com.kunzisoft.androidclearchroma.colormode.ColorMode;
+import com.kunzisoft.androidclearchroma.listener.OnColorSelectedListener;
 import com.sbgapps.scoreit.app.R;
-import com.sbgapps.scoreit.app.ScoreItApp;
 import com.sbgapps.scoreit.app.base.BaseFragment;
 import com.sbgapps.scoreit.app.utils.LinearListHelper;
-import com.sbgapps.scoreit.core.model.Game;
-import com.sbgapps.scoreit.core.model.Player;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.priyesh.chroma.ChromaDialog;
-import me.priyesh.chroma.ColorMode;
 
 /**
  * Created by sbaiget on 21/12/2016.
@@ -42,35 +39,28 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
 
     private static final int REQ_CODE_PERMISSION_CONTACTS = 100;
     private static final int REQ_CODE_RESULT_CONTACT = 101;
-    private static final String EXTRA_EDITED_PLAYER = "EditedPlayer";
 
     @BindView(R.id.ll_header)
     LinearLayout mHeaderContainer;
     ArrayList<HeaderItemHolder> mItems;
-
-    GameManager mGameManager;
 
     public static HeaderFragment newInstance() {
         return new HeaderFragment();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mGameManager = ScoreItApp.getGameManager();
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getPresenter().start();
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void setupPlayerCount(int count) {
         HeaderLinearListHelper helper = new HeaderLinearListHelper();
         mItems = helper.populateItems(
                 mHeaderContainer,
                 R.layout.item_header,
-                mGameManager.getPlayerCount());
-
-        getPresenter().setup();
+                count);
     }
 
     @Override
@@ -81,28 +71,28 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
     @Override
     @NonNull
     public HeaderPresenter createPresenter() {
-        return new HeaderPresenter(mGameManager);
+        return new HeaderPresenter();
     }
 
     @Override
-    public void setName(@Player.Players int player, String name) {
+    public void setName(int player, String name) {
         mItems.get(player).mName.setText(name);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void setScore(@Player.Players int player, int score) {
+    public void setScore(int player, int score) {
         mItems.get(player).mScore.setText(Integer.toString(score));
     }
 
     @Override
-    public void setColor(@Player.Players int player, @ColorInt int color) {
+    public void setColor(int player, @ColorInt int color) {
         mItems.get(player).mScore.setTextColor(color);
     }
 
     @SuppressWarnings("WrongConstant")
     @Override
-    public void setIndicator(@Player.Players int player) {
+    public void setIndicator(int player) {
         for (int i = 0; i < mItems.size(); i++) {
             mItems.get(i).mIndicator.setVisibility(i == player ? View.VISIBLE : View.INVISIBLE);
         }
@@ -119,10 +109,8 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
             if (cursor.moveToFirst()) {
                 int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                 String name = cursor.getString(columnIndex);
-                int player = data.getIntExtra(EXTRA_EDITED_PLAYER, Player.PLAYER_1);
                 name = name.split(" ")[0];
-                getGame().getPlayer(player).setName(name);
-                setName(player, name);
+                getPresenter().onNameSelected(name);
             }
             cursor.close();
         }
@@ -130,44 +118,48 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (REQ_CODE_PERMISSION_CONTACTS == requestCode &&
-                grantResults.length > 0 &&
-                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            pickContact(Player.PLAYER_1);
+        if (REQ_CODE_PERMISSION_CONTACTS == requestCode
+                && grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            pickContact();
         }
     }
 
-    private void showColorSelectorDialog(@Player.Players int player) {
+    @Override
+    public void showColorSelectorDialog(@ColorInt int initialColor) {
         new ChromaDialog.Builder()
-                .initialColor(getGame().getPlayer(player).getColor())
+                .initialColor(initialColor)
                 .colorMode(ColorMode.RGB)
-                .onColorSelected(color -> {
-                    getGame().getPlayer(player).setColor(color);
-                    setColor(player, color);
+                .setOnColorSelectedListener(new OnColorSelectedListener() {
+                    @Override
+                    public void onPositiveButtonClick(@ColorInt int color) {
+                        getPresenter().onColorSelected(color);
+                    }
+
+                    @Override
+                    public void onNegativeButtonClick(@ColorInt int color) {
+                    }
                 })
                 .create()
-                .show(getChildFragmentManager(), "ColorDialog");
+                .show(getFragmentManager(), "ColorDialog");
     }
 
-    private void showNameActionsDialog(@Player.Players int player) {
+    @Override
+    public void showNameActionsDialog() {
         new AlertDialog.Builder(getContext())
                 .setTitle(R.string.dialog_title_edit_name)
                 .setItems(R.array.dialog_edit_name_actions, (dialog, which) -> {
                     switch (which) {
                         default:
                         case 0:
-                            if (ContextCompat.checkSelfPermission(getContext(),
-                                    Manifest.permission.READ_CONTACTS)
-                                    != PackageManager.PERMISSION_GRANTED) {
-                                requestPermissions(
-                                        new String[]{Manifest.permission.READ_CONTACTS},
-                                        REQ_CODE_PERMISSION_CONTACTS);
+                            if (isContactPermissionGranted()) {
+                                pickContact();
                             } else {
-                                pickContact(player);
+                                requestContactPermission();
                             }
                             break;
                         case 1:
-                            showEditNameDialog(player);
+                            showEditNameDialog();
                             break;
                     }
                 })
@@ -175,53 +167,49 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
                 .show();
     }
 
-    private void pickContact(@Player.Players int player) {
+    private void pickContact() {
         Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        intent.putExtra(EXTRA_EDITED_PLAYER, player);
         startActivityForResult(intent, REQ_CODE_RESULT_CONTACT);
     }
 
-    private void showEditNameDialog(@Player.Players int player) {
-//        View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_input_text, null);
-//        final EditText editText = (EditText) view.findViewById(R.id.edit_text);
-//
-//        new AlertDialog.Builder(getContext())
-//                .setTitle(R.string.dialog_title_edit_name)
-//                .setView(view)
-//                .setPositiveButton(R.string.button_action_ok, (dialog, which) -> {
-//                    String name = editText.getText().toString();
-//                    if (!name.isEmpty()) {
-//                        getGame().getPlayer(which).setName(name);
-//                        getView().setName(player, name);
-//                        mEditedPlayer = Player.PLAYER_NONE;
-//                        mHeaderFragment.update();
-//                        if (mScoreListFragment.isVisible()) mScoreListFragment.update();
-//                    }
-//                })
-//                .setNegativeButton(R.string.button_action_cancel, null)
-//                .create()
-//                .show();
+    private boolean isContactPermissionGranted() {
+        return ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS)
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestContactPermission() {
+        requestPermissions(new String[]{Manifest.permission.READ_CONTACTS},
+                REQ_CODE_PERMISSION_CONTACTS);
+    }
+
+    private void showEditNameDialog() {
+        View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_edit_name, null);
+        final EditText editText = ButterKnife.findById(view, R.id.edit_text);
+
+        new AlertDialog.Builder(getContext())
+                .setTitle(R.string.dialog_title_edit_name)
+                .setView(view)
+                .setPositiveButton(R.string.button_action_ok, (dialog, which) -> {
+                    String name = editText.getText().toString();
+                    if (!name.isEmpty()) getPresenter().onNameSelected(name);
+                })
+                .setNegativeButton(R.string.button_action_cancel, null)
+                .create()
+                .show();
     }
 
     private class HeaderLinearListHelper extends LinearListHelper<HeaderItemHolder> {
 
         @Override
-        public HeaderItemHolder onCreateItem(View view) {
-            return new HeaderItemHolder(view);
-        }
-
-        @Override
-        public void onBindItem(HeaderItemHolder item, int player) {
-            item.mName.setOnClickListener(l -> showNameActionsDialog(player));
-            item.mScore.setOnClickListener(l -> showColorSelectorDialog(player));
+        public HeaderFragment.HeaderItemHolder onCreateItem(View view, int player) {
+            HeaderFragment.HeaderItemHolder item = new HeaderFragment.HeaderItemHolder(view);
+            item.mName.setOnClickListener(l -> getPresenter().onNameSelectionStarted(player));
+            item.mScore.setOnClickListener(l -> getPresenter().onColorSelectionStarted(player));
+            return item;
         }
     }
 
-    private Game getGame() {
-        return mGameManager.getGame();
-    }
-
-    class HeaderItemHolder {
+    static class HeaderItemHolder {
 
         @BindView(R.id.name)
         TextView mName;

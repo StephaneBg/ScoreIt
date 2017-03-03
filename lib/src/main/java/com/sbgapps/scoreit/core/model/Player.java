@@ -27,7 +27,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 public class Player {
 
-    //    public static final int PLAYER_NONE = -1;
+    public static final int PLAYER_NONE = -1;
     public static final int PLAYER_1 = 0;
     public static final int PLAYER_2 = 1;
     public static final int PLAYER_3 = 2;
@@ -37,7 +37,6 @@ public class Player {
     public static final int PLAYER_7 = 6;
     public static final int PLAYER_8 = 7;
     public static final int PLAYER_TOTAL = 8;
-//    public static final int PLAYER_COUNT = 8;
 
     private String mName;
     @ColorInt
@@ -71,7 +70,7 @@ public class Player {
     }
 
     @IntDef({PLAYER_1, PLAYER_2, PLAYER_3, PLAYER_4, PLAYER_5,
-            PLAYER_6, PLAYER_7, PLAYER_8, PLAYER_TOTAL})
+            PLAYER_6, PLAYER_7, PLAYER_8, PLAYER_TOTAL, PLAYER_NONE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Players {
     }

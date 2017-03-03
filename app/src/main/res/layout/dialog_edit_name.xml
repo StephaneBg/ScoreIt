@@ -14,14 +14,21 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources>
-    <color name="white">#FFFFFFFF</color>
-    <color name="divider_color">#1F000000</color>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_padding_size_small"
+    tools:context=".MainActivity"
+    >
 
-    <color name="color_primary">#669900</color>
-    <color name="color_primary_dark">#5B8900</color>
-    <color name="color_accent">#ED861F</color>
-
-    <color name="game_won">#66BB6A</color>
-    <color name="game_lost">#EF5350</color>
-</resources>
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding_size_medium"
+        android:imeOptions="actionDone"
+        android:inputType="textCapSentences"
+        />
+</FrameLayout>

@@ -19,8 +19,7 @@ public abstract class LinearListHelper<T> {
 
         for (int i = 0; i < count; i++) {
             View view = inflater.inflate(resId, parent, false);
-            T item = onCreateItem(view);
-            onBindItem(item, i);
+            T item = onCreateItem(view, i);
             items.add(item);
             parent.addView(view);
         }
@@ -28,7 +27,5 @@ public abstract class LinearListHelper<T> {
         return items;
     }
 
-    abstract public T onCreateItem(View view);
-
-    abstract public void onBindItem(T item, int index);
+    abstract public T onCreateItem(View view, int player);
 }
