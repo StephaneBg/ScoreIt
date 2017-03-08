@@ -3,7 +3,6 @@ package com.sbgapps.scoreit.app.header;
 import android.support.annotation.ColorInt;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
-import com.sbgapps.scoreit.core.model.Player;
 
 /**
  * Created by sbaiget on 21/12/2016.
@@ -11,13 +10,13 @@ import com.sbgapps.scoreit.core.model.Player;
 
 interface HeaderViewActions extends MvpView {
 
-    void setName(@Player.Players int player, String name);
+    void setName(int player, String name);
 
-    void setScore(@Player.Players int player, int score);
+    void setScore(int player, int score);
 
-    void setColor(@Player.Players int player, @ColorInt int color);
+    void setColor(int player, @ColorInt int color);
 
-    void setIndicator(@Player.Players int player);
+    void setIndicator(int player);
 
     void setupPlayerCount(int count);
 

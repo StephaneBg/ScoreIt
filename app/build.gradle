@@ -63,6 +63,7 @@ dependencies {
     compile supportDependencies.design
     compile supportDependencies.percent
     compile supportDependencies.recyclerView
+    compile constraintLayout
 
     compile rxDependencies.rxJava
     compile rxDependencies.rxAndroid
@@ -72,4 +73,5 @@ dependencies {
 
     compile mosby
     compile chroma
+    compile numberPicker
 }

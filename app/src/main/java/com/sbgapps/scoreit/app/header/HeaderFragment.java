@@ -35,8 +35,9 @@ import butterknife.ButterKnife;
  */
 
 public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresenter>
-        implements HeaderViewActions {
+        implements HeaderViewActions, OnColorSelectedListener {
 
+    private static final String TAG_FRAGMENT_COLOR = "ColorDialog";
     private static final int REQ_CODE_PERMISSION_CONTACTS = 100;
     private static final int REQ_CODE_RESULT_CONTACT = 101;
 
@@ -130,18 +131,9 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
         new ChromaDialog.Builder()
                 .initialColor(initialColor)
                 .colorMode(ColorMode.RGB)
-                .setOnColorSelectedListener(new OnColorSelectedListener() {
-                    @Override
-                    public void onPositiveButtonClick(@ColorInt int color) {
-                        getPresenter().onColorSelected(color);
-                    }
-
-                    @Override
-                    public void onNegativeButtonClick(@ColorInt int color) {
-                    }
-                })
+                .setOnColorSelectedListener(this)
                 .create()
-                .show(getFragmentManager(), "ColorDialog");
+                .show(getChildFragmentManager(), TAG_FRAGMENT_COLOR);
     }
 
     @Override
@@ -198,6 +190,15 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
                 .show();
     }
 
+    @Override
+    public void onPositiveButtonClick(@ColorInt int color) {
+        getPresenter().onColorSelected(color);
+    }
+
+    @Override
+    public void onNegativeButtonClick(@ColorInt int color) {
+    }
+
     private class HeaderLinearListHelper extends LinearListHelper<HeaderItemHolder> {
 
         @Override
@@ -209,7 +210,7 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
         }
     }
 
-    static class HeaderItemHolder {
+    private static class HeaderItemHolder {
 
         @BindView(R.id.name)
         TextView mName;

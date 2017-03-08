@@ -1,6 +1,7 @@
 ext {
     // Versions
     supportVersion = "25.1.1"
+    constraintVersion = "1.0.1"
     rxJavaVersion = "2.0.6"
     rxAndroidVersion = "2.0.1"
     mosbyVersion = "2.0.1"
@@ -8,15 +9,18 @@ ext {
     daggerVersion = "2.9"
     javaxAnnotationVersion = "1.0"
     chromaVersion = "1.7"
+    numberPickerVersion = "1.0"
 
     // Packages
     supportPackage = 'com.android.support'
+    constraintPackage = 'com.android.support.constraint'
     reactivePackage = 'io.reactivex.rxjava2'
     mosbyPackage = 'com.hannesdorfmann.mosby'
     jakeWhartonPackage = 'com.jakewharton'
     daggerPackage = 'com.google.dagger'
     javaxAnnotationPackage = 'javax.annotation'
     chromaPackage = 'com.github.Kunzisoft'
+    numberPickerPackage = 'com.github.StephaneBg'
 
     supportDependencies = [
             appCompat        : buildDependency(supportPackage, 'appcompat-v7', supportVersion),
@@ -27,6 +31,8 @@ ext {
             palette          : buildDependency(supportPackage, 'palette-v7', supportVersion),
             percent          : buildDependency(supportPackage, 'percent', supportVersion)
     ]
+
+    constraintLayout = buildDependency(constraintPackage, 'constraint-layout', constraintVersion)
 
     rxDependencies = [
             rxJava   : buildDependency(reactivePackage, 'rxjava', rxJavaVersion),
@@ -47,6 +53,8 @@ ext {
     ]
 
     chroma = buildDependency(chromaPackage, 'AndroidClearChroma', chromaVersion)
+
+    numberPicker = buildDependency(numberPickerPackage, 'SimpleNumberPicker', numberPickerVersion)
 }
 
 String buildDependency(String pack, String dependency, String version) {
