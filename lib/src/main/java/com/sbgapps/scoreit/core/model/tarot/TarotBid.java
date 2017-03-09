@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2016 SBG Apps
+ * Copyright 2017 Stéphane Baiget
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,9 +24,6 @@ import com.sbgapps.scoreit.core.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/**
- * Created by Stéphane on 29/07/2014.
- */
 public class TarotBid {
 
     public static final int BID_PRISE = 0;
@@ -44,15 +41,6 @@ public class TarotBid {
         mBid = bid;
     }
 
-    @TarotBids
-    public int get() {
-        return mBid;
-    }
-
-    public void set(@TarotBids int bid) {
-        mBid = bid;
-    }
-
     public static String getBid(Context context, @TarotBids int bid) {
         switch (bid) {
             case BID_PRISE:
@@ -65,6 +53,15 @@ public class TarotBid {
                 return context.getString(R.string.tarot_bid_guard_without_kitty);
         }
         return null;
+    }
+
+    @TarotBids
+    public int get() {
+        return mBid;
+    }
+
+    public void set(@TarotBids int bid) {
+        mBid = bid;
     }
 
     @IntDef({BID_PRISE, BID_GARDE, BID_GARDE_SANS, BID_GARDE_CONTRE})

@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2016 SBG Apps
+ * Copyright 2017 Stéphane Baiget
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,9 +25,6 @@ import com.sbgapps.scoreit.core.model.Player;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/**
- * Created by Stéphane on 21/08/2014.
- */
 public class CoincheBonus {
 
     public static final int BONUS_BELOTE = 0;
@@ -50,23 +47,6 @@ public class CoincheBonus {
         mPlayer = player;
     }
 
-    @CoincheBonuses
-    public int get() {
-        return mBonus;
-    }
-
-    public void set(@CoincheBonuses int bonus) {
-        mBonus = bonus;
-    }
-
-    public int getPlayer() {
-        return mPlayer;
-    }
-
-    public void setPlayer(int player) {
-        mPlayer = player;
-    }
-
     public static String getName(Context context, @CoincheBonuses int bonus) {
         switch (bonus) {
             case BONUS_BELOTE:
@@ -85,6 +65,23 @@ public class CoincheBonus {
                 return context.getString(R.string.coinche_bonus_jack_four);
         }
         return null;
+    }
+
+    @CoincheBonuses
+    public int get() {
+        return mBonus;
+    }
+
+    public void set(@CoincheBonuses int bonus) {
+        mBonus = bonus;
+    }
+
+    public int getPlayer() {
+        return mPlayer;
+    }
+
+    public void setPlayer(int player) {
+        mPlayer = player;
     }
 
     @IntDef({BONUS_BELOTE, BONUS_RUN_3, BONUS_RUN_4, BONUS_RUN_5,

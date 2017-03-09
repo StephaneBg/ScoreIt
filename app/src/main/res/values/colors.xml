@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
-  ~ Copyright (c) 2016 SBG Apps
+  ~ Copyright 2017 Stéphane Baiget
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
   ~ You may obtain a copy of the License at
   ~
-  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~ http://www.apache.org/licenses/LICENSE-2.0
   ~
   ~ Unless required by applicable law or agreed to in writing, software
   ~ distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +18,8 @@
 <resources>
     <color name="white">#FFFFFFFF</color>
     <color name="divider_color">#1F000000</color>
+    <color name="light_grey">#F5F5F5</color>
+    <color name="dark_grey">#424242</color>
 
     <color name="color_primary">#669900</color>
     <color name="color_primary_dark">#5B8900</color>

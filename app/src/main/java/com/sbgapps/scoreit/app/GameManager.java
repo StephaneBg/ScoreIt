@@ -1,3 +1,19 @@
+/*
+ * Copyright 2017 Stéphane Baiget
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.sbgapps.scoreit.app;
 
 import android.content.Context;
@@ -10,10 +26,6 @@ import com.sbgapps.scoreit.core.model.Player;
 import com.sbgapps.scoreit.core.model.universal.UniversalGame;
 
 import java.util.ArrayList;
-
-/**
- * Created by sbaiget on 28/12/2016.
- */
 
 public class GameManager {
 
@@ -42,17 +54,6 @@ public class GameManager {
         return mGame;
     }
 
-    @SuppressWarnings("WrongConstant")
-    @Game.Games
-    public int getPlayedGame() {
-        //return getPreferences().getInt(KEY_PLAYED_GAME, Game.UNIVERSAL);
-        return Game.UNIVERSAL;
-    }
-
-    public void setPlayedGame(@Game.Games int game) {
-        getPreferences().edit().putInt(KEY_PLAYED_GAME, game).apply();
-    }
-
     public int getPlayerCount() {
         switch (getPlayedGame()) {
             case Game.BELOTE:
@@ -65,6 +66,21 @@ public class GameManager {
             case Game.TAROT:
                 return getPreferences().getInt(KEY_TAROT_PLAYER_CNT, 5);
         }
+    }
+
+    @SuppressWarnings("WrongConstant")
+    @Game.Games
+    public int getPlayedGame() {
+        //return getPreferences().getInt(KEY_PLAYED_GAME, Game.UNIVERSAL);
+        return Game.UNIVERSAL;
+    }
+
+    public void setPlayedGame(@Game.Games int game) {
+        getPreferences().edit().putInt(KEY_PLAYED_GAME, game).apply();
+    }
+
+    private SharedPreferences getPreferences() {
+        return PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
     public boolean isRounded() {
@@ -90,9 +106,5 @@ public class GameManager {
             case Game.UNIVERSAL:
                 return getPreferences().getBoolean(KEY_UNIVERSAL_TOTAL, false);
         }
-    }
-
-    private SharedPreferences getPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 }

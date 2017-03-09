@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2016 SBG Apps
+ * Copyright 2017 Stéphane Baiget
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,9 +21,6 @@ import com.sbgapps.scoreit.core.model.Player;
 
 import java.util.ArrayList;
 
-/**
- * Created by sbaiget on 07/12/13.
- */
 public class TarotFourLap extends TarotLap {
 
     public TarotFourLap() {
@@ -35,11 +32,6 @@ public class TarotFourLap extends TarotLap {
     }
 
     @Override
-    public int getPlayerCount() {
-        return TarotFourGame.NB_PLAYERS;
-    }
-
-    @Override
     public void computeScores() {
         super.computeScores();
         final int result = getResult();
@@ -47,5 +39,10 @@ public class TarotFourLap extends TarotLap {
         mScores[Player.PLAYER_2] = (Player.PLAYER_2 == mTaker) ? 3 * result : -result;
         mScores[Player.PLAYER_3] = (Player.PLAYER_3 == mTaker) ? 3 * result : -result;
         mScores[Player.PLAYER_4] = (Player.PLAYER_4 == mTaker) ? 3 * result : -result;
+    }
+
+    @Override
+    public int getPlayerCount() {
+        return TarotFourGame.NB_PLAYERS;
     }
 }

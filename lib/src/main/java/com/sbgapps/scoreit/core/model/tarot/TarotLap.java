@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2016 SBG Apps
+ * Copyright 2017 Stéphane Baiget
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,9 +22,6 @@ import com.sbgapps.scoreit.core.model.Lap;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by sbaiget on 07/12/13.
- */
 public abstract class TarotLap implements Lap {
 
     public static final int OUDLER_NONE_MSK = 0;
@@ -77,16 +74,12 @@ public abstract class TarotLap implements Lap {
         return mBid;
     }
 
-    public void setBid(int bid) {
-        mBid.set(bid);
-    }
-
     public void setBid(TarotBid bid) {
         mBid = bid;
     }
 
-    public List<TarotBonus> getBonuses() {
-        return mBonuses;
+    public void setBid(int bid) {
+        mBid.set(bid);
     }
 
     public boolean isDone() {
@@ -105,6 +98,8 @@ public abstract class TarotLap implements Lap {
         }
     }
 
+    abstract public int getPlayerCount();
+
     public boolean hasBonus(int bonus) {
         for (TarotBonus tarotBonus : getBonuses()) {
             if (bonus == tarotBonus.get()) return true;
@@ -112,7 +107,9 @@ public abstract class TarotLap implements Lap {
         return false;
     }
 
-    abstract public int getPlayerCount();
+    public List<TarotBonus> getBonuses() {
+        return mBonuses;
+    }
 
     public int getResult() {
         int points;
@@ -156,15 +153,18 @@ public abstract class TarotLap implements Lap {
         return points;
     }
 
-    public int getPetitBonus() {
-        for (TarotBonus bonus : getBonuses()) {
-            if (TarotBonus.BONUS_PETIT_AU_BOUT == bonus.get()) {
-                int petit = (mTaker == bonus.getPlayer()) ? 10 : -10;
-                petit *= getCoefficient();
-                return petit;
-            }
+    private int getCoefficient() {
+        switch (mBid.get()) {
+            default:
+            case TarotBid.BID_PRISE:
+                return 1;
+            case TarotBid.BID_GARDE:
+                return 2;
+            case TarotBid.BID_GARDE_SANS:
+                return 4;
+            case TarotBid.BID_GARDE_CONTRE:
+                return 6;
         }
-        return 0;
     }
 
     public int getPoigneeBonus() {
@@ -183,6 +183,17 @@ public abstract class TarotLap implements Lap {
             }
         }
         return pts;
+    }
+
+    public int getPetitBonus() {
+        for (TarotBonus bonus : getBonuses()) {
+            if (TarotBonus.BONUS_PETIT_AU_BOUT == bonus.get()) {
+                int petit = (mTaker == bonus.getPlayer()) ? 10 : -10;
+                petit *= getCoefficient();
+                return petit;
+            }
+        }
+        return 0;
     }
 
     public int getChelemBonus() {
@@ -209,19 +220,5 @@ public abstract class TarotLap implements Lap {
         } catch (CloneNotSupportedException e) {
         }
         return lap;
-    }
-
-    private int getCoefficient() {
-        switch (mBid.get()) {
-            default:
-            case TarotBid.BID_PRISE:
-                return 1;
-            case TarotBid.BID_GARDE:
-                return 2;
-            case TarotBid.BID_GARDE_SANS:
-                return 4;
-            case TarotBid.BID_GARDE_CONTRE:
-                return 6;
-        }
     }
 }

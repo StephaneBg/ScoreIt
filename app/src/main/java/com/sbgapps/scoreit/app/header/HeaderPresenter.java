@@ -1,3 +1,19 @@
+/*
+ * Copyright 2017 Stéphane Baiget
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.sbgapps.scoreit.app.header;
 
 import android.support.annotation.ColorInt;
@@ -7,10 +23,6 @@ import com.sbgapps.scoreit.app.GameManager;
 import com.sbgapps.scoreit.app.ScoreItApp;
 import com.sbgapps.scoreit.core.model.Game;
 import com.sbgapps.scoreit.core.model.Player;
-
-/**
- * Created by sbaiget on 21/12/2016.
- */
 
 class HeaderPresenter extends MvpBasePresenter<HeaderViewActions> {
 
@@ -45,6 +57,10 @@ class HeaderPresenter extends MvpBasePresenter<HeaderViewActions> {
         mEditedPlayer = Player.PLAYER_NONE;
     }
 
+    private Game getGame() {
+        return mGameManager.getGame();
+    }
+
     void onColorSelectionStarted(@Player.Players int player) {
         mEditedPlayer = player;
         getView().showColorSelectorDialog(getGame().getPlayer(player).getColor());
@@ -54,9 +70,5 @@ class HeaderPresenter extends MvpBasePresenter<HeaderViewActions> {
         getGame().getPlayer(mEditedPlayer).setColor(color);
         getView().setColor(mEditedPlayer, color);
         mEditedPlayer = Player.PLAYER_NONE;
-    }
-
-    private Game getGame() {
-        return mGameManager.getGame();
     }
 }

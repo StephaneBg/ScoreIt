@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2016 SBG Apps
+ * Copyright 2017 Stéphane Baiget
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,9 +21,6 @@ import com.sbgapps.scoreit.core.model.belote.BaseBeloteLap;
 
 import java.util.ArrayList;
 
-/**
- * Created by sbaiget on 11/11/13.
- */
 public class CoincheLap extends BaseBeloteLap {
 
     public static final int COINCHE_NONE = 0;
@@ -35,6 +32,11 @@ public class CoincheLap extends BaseBeloteLap {
     protected int mCoinche;
     protected ArrayList<CoincheBonus> mBonuses;
 
+    public CoincheLap() {
+        this(Player.PLAYER_1, 100, Player.PLAYER_1,
+                140, COINCHE_NONE, new ArrayList<CoincheBonus>());
+    }
+
     public CoincheLap(int taker, int points, int bidder,
                       int bid, int coinche, ArrayList<CoincheBonus> bonuses) {
         super(taker, points);
@@ -42,11 +44,6 @@ public class CoincheLap extends BaseBeloteLap {
         mBid = bid;
         mCoinche = coinche;
         mBonuses = bonuses;
-    }
-
-    public CoincheLap() {
-        this(Player.PLAYER_1, 100, Player.PLAYER_1,
-                140, COINCHE_NONE, new ArrayList<CoincheBonus>());
     }
 
     public int getBidder() {
@@ -71,30 +68,6 @@ public class CoincheLap extends BaseBeloteLap {
 
     public void setCoinche(int coinche) {
         mCoinche = coinche;
-    }
-
-    public ArrayList<CoincheBonus> getBonuses() {
-        return mBonuses;
-    }
-
-    @Override
-    public void computePoints() {
-        int[] points = new int[2];
-        if (mPoints >= 158) {
-            points[0] = mPoints;
-            points[1] = 0;
-        } else {
-            points[0] = mPoints;
-            points[1] = 162 - mPoints;
-        }
-
-        if (Player.PLAYER_1 == getScorer()) {
-            mScores[Player.PLAYER_1] = points[0];
-            mScores[Player.PLAYER_2] = points[1];
-        } else {
-            mScores[Player.PLAYER_1] = points[1];
-            mScores[Player.PLAYER_2] = points[0];
-        }
     }
 
     @Override
@@ -170,11 +143,35 @@ public class CoincheLap extends BaseBeloteLap {
         }
     }
 
+    @Override
+    public void computePoints() {
+        int[] points = new int[2];
+        if (mPoints >= 158) {
+            points[0] = mPoints;
+            points[1] = 0;
+        } else {
+            points[0] = mPoints;
+            points[1] = 162 - mPoints;
+        }
+
+        if (Player.PLAYER_1 == getScorer()) {
+            mScores[Player.PLAYER_1] = points[0];
+            mScores[Player.PLAYER_2] = points[1];
+        } else {
+            mScores[Player.PLAYER_1] = points[1];
+            mScores[Player.PLAYER_2] = points[0];
+        }
+    }
+
     public boolean hasBonus(int bonus) {
         for (CoincheBonus coincheBonus : getBonuses()) {
             if (bonus == coincheBonus.get()) return true;
         }
         return false;
+    }
+
+    public ArrayList<CoincheBonus> getBonuses() {
+        return mBonuses;
     }
 
     @Override

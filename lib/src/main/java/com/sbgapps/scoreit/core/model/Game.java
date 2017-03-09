@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2016 SBG Apps
+ * Copyright 2017 Stéphane Baiget
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,9 +24,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 
-/**
- * Created by sbaiget on 26/06/2014.
- */
 public class Game {
 
     public static final int UNIVERSAL = 0;
@@ -43,6 +40,10 @@ public class Game {
         initScores();
     }
 
+    private void initScores() {
+        for (Lap lap : mLaps) lap.computeScores();
+    }
+
     public ArrayList<? extends Lap> getLaps() {
         return mLaps;
     }
@@ -57,10 +58,6 @@ public class Game {
 
     public int getScore(@Player.Players int player, boolean rounded) {
         return GameHelper.getScore(mLaps, player, rounded);
-    }
-
-    private void initScores() {
-        for (Lap lap : mLaps) lap.computeScores();
     }
 
     @IntDef({UNIVERSAL, TAROT, BELOTE, COINCHE})

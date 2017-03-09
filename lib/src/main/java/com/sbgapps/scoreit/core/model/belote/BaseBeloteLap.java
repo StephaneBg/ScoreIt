@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2016 SBG Apps
+ * Copyright 2017 Stéphane Baiget
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,9 +19,6 @@ package com.sbgapps.scoreit.core.model.belote;
 
 import com.sbgapps.scoreit.core.model.Lap;
 
-/**
- * Created by sbaiget on 11/10/13.
- */
 public abstract class BaseBeloteLap implements Lap {
 
     protected boolean mIsDone;
@@ -60,8 +57,6 @@ public abstract class BaseBeloteLap implements Lap {
         return rounded ? getRoundedScore(mScores[player]) : mScores[player];
     }
 
-    abstract public void computePoints();
-
     private int getRoundedScore(int score) {
         if (162 == score) {
             return 160;
@@ -71,4 +66,6 @@ public abstract class BaseBeloteLap implements Lap {
             return ((score + 5) / 10) * 10;
         }
     }
+
+    abstract public void computePoints();
 }

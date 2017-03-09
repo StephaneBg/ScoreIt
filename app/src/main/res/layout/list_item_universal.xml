@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
-  ~ Copyright (c) 2016 SBG Apps
+  ~ Copyright 2017 Stéphane Baiget
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
   ~ You may obtain a copy of the License at
   ~
-  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~ http://www.apache.org/licenses/LICENSE-2.0
   ~
   ~ Unless required by applicable law or agreed to in writing, software
   ~ distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,12 +31,12 @@
         style="@style/Header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        tools:text="Name"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Name"
         />
 
 
@@ -58,17 +59,17 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:gravity="center"
         android:text="+5"
+        app:layout_constraintLeft_toRightOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
         tools:layout_conversion_absoluteHeight="48dp"
         tools:layout_conversion_absoluteWidth="68dp"
         tools:layout_conversion_absoluteX="116dp"
         tools:layout_conversion_absoluteY="40dp"
-        app:layout_constraintLeft_toRightOf="@+id/linearLayout"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
         />
 
     <TextView
@@ -76,17 +77,17 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:gravity="center"
         android:text="+10"
+        app:layout_constraintLeft_toRightOf="@+id/btn_plus_5"
+        app:layout_constraintTop_toTopOf="@+id/btn_plus_5"
         tools:layout_conversion_absoluteHeight="48dp"
         tools:layout_conversion_absoluteWidth="68dp"
         tools:layout_conversion_absoluteX="200dp"
         tools:layout_conversion_absoluteY="40dp"
-        app:layout_constraintLeft_toRightOf="@+id/btn_plus_5"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintTop_toTopOf="@+id/btn_plus_5"
         />
 
     <TextView
@@ -94,21 +95,21 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:gravity="center"
         android:text="+100"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/btn_plus_10"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_plus_10"
         tools:layout_conversion_absoluteHeight="48dp"
         tools:layout_conversion_absoluteWidth="68dp"
         tools:layout_conversion_absoluteX="284dp"
         tools:layout_conversion_absoluteY="40dp"
-        app:layout_constraintLeft_toRightOf="@+id/btn_plus_10"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintTop_toTopOf="@+id/btn_plus_10"
-        app:layout_constraintHorizontal_bias="0.0"
         />
 
 
@@ -117,18 +118,18 @@
         style="@style/TextAppearance.AppCompat.Display1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:gravity="center"
         android:minHeight="96dp"
         android:minWidth="96dp"
+        app:layout_constraintTop_toBottomOf="@+id/btn_plus_5"
         tools:layout_conversion_absoluteHeight="96dp"
         tools:layout_conversion_absoluteWidth="96dp"
         tools:layout_conversion_absoluteX="144dp"
         tools:layout_conversion_absoluteY="88dp"
         tools:layout_editor_absoluteX="144dp"
         tools:text="128"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/btn_plus_5"
         />
 
 
@@ -137,6 +138,7 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:gravity="center"
         android:text="-100"
@@ -144,9 +146,8 @@
         tools:layout_conversion_absoluteWidth="68dp"
         tools:layout_conversion_absoluteX="32dp"
         tools:layout_conversion_absoluteY="184dp"
-        android:layout_marginStart="8dp"
-        tools:layout_editor_absoluteY="183dp"
         tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="183dp"
         />
 
     <TextView
@@ -154,6 +155,7 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:gravity="center"
         android:text="-10"
@@ -161,9 +163,8 @@
         tools:layout_conversion_absoluteWidth="68dp"
         tools:layout_conversion_absoluteX="116dp"
         tools:layout_conversion_absoluteY="184dp"
-        android:layout_marginStart="8dp"
-        tools:layout_editor_absoluteY="178dp"
         tools:layout_editor_absoluteX="104dp"
+        tools:layout_editor_absoluteY="178dp"
         />
 
     <TextView
@@ -171,6 +172,7 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:gravity="center"
         android:text="-5"
@@ -178,9 +180,8 @@
         tools:layout_conversion_absoluteWidth="68dp"
         tools:layout_conversion_absoluteX="200dp"
         tools:layout_conversion_absoluteY="184dp"
-        android:layout_marginStart="8dp"
-        tools:layout_editor_absoluteY="173dp"
         tools:layout_editor_absoluteX="200dp"
+        tools:layout_editor_absoluteY="173dp"
         />
 
     <TextView
@@ -188,6 +189,8 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:gravity="center"
         android:text="-1"
@@ -195,9 +198,7 @@
         tools:layout_conversion_absoluteWidth="68dp"
         tools:layout_conversion_absoluteX="284dp"
         tools:layout_conversion_absoluteY="184dp"
-        tools:layout_editor_absoluteY="173dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         tools:layout_editor_absoluteX="296dp"
+        tools:layout_editor_absoluteY="173dp"
         />
 </android.support.constraint.ConstraintLayout>

@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2016 SBG Apps
+ * Copyright 2017 Stéphane Baiget
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,9 +22,6 @@ import android.support.annotation.IntDef;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/**
- * Created by sbaiget on 30/06/2014.
- */
 public class Player {
 
     public static final int PLAYER_NONE = -1;
@@ -47,14 +44,6 @@ public class Player {
         mColor = color;
     }
 
-    public String getName() {
-        return mName;
-    }
-
-    public void setName(String name) {
-        mName = name;
-    }
-
     @ColorInt
     public int getColor() {
         return mColor;
@@ -67,6 +56,14 @@ public class Player {
     @Override
     public String toString() {
         return getName();
+    }
+
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String name) {
+        mName = name;
     }
 
     @IntDef({PLAYER_1, PLAYER_2, PLAYER_3, PLAYER_4, PLAYER_5,

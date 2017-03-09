@@ -1,3 +1,19 @@
+/*
+ * Copyright 2017 Stéphane Baiget
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.sbgapps.scoreit.app.header;
 
 import android.Manifest;
@@ -30,10 +46,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by sbaiget on 21/12/2016.
- */
-
 public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresenter>
         implements HeaderViewActions, OnColorSelectedListener {
 
@@ -50,23 +62,14 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
     }
 
     @Override
+    protected int getLayoutResource() {
+        return R.layout.fragment_header;
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getPresenter().start();
-    }
-
-    @Override
-    public void setupPlayerCount(int count) {
-        HeaderLinearListHelper helper = new HeaderLinearListHelper();
-        mItems = helper.populateItems(
-                mHeaderContainer,
-                R.layout.item_header,
-                count);
-    }
-
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_header;
     }
 
     @Override
@@ -99,31 +102,13 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
         }
     }
 
-    @SuppressWarnings("WrongConstant")
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (Activity.RESULT_OK != resultCode && REQ_CODE_RESULT_CONTACT == requestCode) {
-            Cursor cursor = getContext().getContentResolver().query(data.getData(),
-                    new String[]{ContactsContract.Contacts.DISPLAY_NAME}, null, null, null);
-            if (null == cursor) return;
-
-            if (cursor.moveToFirst()) {
-                int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-                String name = cursor.getString(columnIndex);
-                name = name.split(" ")[0];
-                getPresenter().onNameSelected(name);
-            }
-            cursor.close();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (REQ_CODE_PERMISSION_CONTACTS == requestCode
-                && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            pickContact();
-        }
+    public void setupPlayerCount(int count) {
+        HeaderLinearListHelper helper = new HeaderLinearListHelper();
+        mItems = helper.populateItems(
+                mHeaderContainer,
+                R.layout.list_item_header,
+                count);
     }
 
     @Override
@@ -159,11 +144,6 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
                 .show();
     }
 
-    private void pickContact() {
-        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        startActivityForResult(intent, REQ_CODE_RESULT_CONTACT);
-    }
-
     private boolean isContactPermissionGranted() {
         return ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS)
                 == PackageManager.PERMISSION_GRANTED;
@@ -190,6 +170,38 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
                 .show();
     }
 
+    @SuppressWarnings("WrongConstant")
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Activity.RESULT_OK != resultCode && REQ_CODE_RESULT_CONTACT == requestCode) {
+            Cursor cursor = getContext().getContentResolver().query(data.getData(),
+                    new String[]{ContactsContract.Contacts.DISPLAY_NAME}, null, null, null);
+            if (null == cursor) return;
+
+            if (cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+                String name = cursor.getString(columnIndex);
+                name = name.split(" ")[0];
+                getPresenter().onNameSelected(name);
+            }
+            cursor.close();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (REQ_CODE_PERMISSION_CONTACTS == requestCode
+                && grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            pickContact();
+        }
+    }
+
+    private void pickContact() {
+        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+        startActivityForResult(intent, REQ_CODE_RESULT_CONTACT);
+    }
+
     @Override
     public void onPositiveButtonClick(@ColorInt int color) {
         getPresenter().onColorSelected(color);
@@ -199,18 +211,7 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
     public void onNegativeButtonClick(@ColorInt int color) {
     }
 
-    private class HeaderLinearListHelper extends LinearListHelper<HeaderItemHolder> {
-
-        @Override
-        public HeaderFragment.HeaderItemHolder onCreateItem(View view, int player) {
-            HeaderFragment.HeaderItemHolder item = new HeaderFragment.HeaderItemHolder(view);
-            item.mName.setOnClickListener(l -> getPresenter().onNameSelectionStarted(player));
-            item.mScore.setOnClickListener(l -> getPresenter().onColorSelectionStarted(player));
-            return item;
-        }
-    }
-
-    private static class HeaderItemHolder {
+    static class HeaderItemHolder {
 
         @BindView(R.id.name)
         TextView mName;
@@ -221,6 +222,17 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
 
         HeaderItemHolder(View item) {
             ButterKnife.bind(this, item);
+        }
+    }
+
+    private class HeaderLinearListHelper extends LinearListHelper<HeaderItemHolder> {
+
+        @Override
+        public HeaderFragment.HeaderItemHolder onCreateItem(View view, int player) {
+            HeaderFragment.HeaderItemHolder item = new HeaderFragment.HeaderItemHolder(view);
+            item.mName.setOnClickListener(l -> getPresenter().onNameSelectionStarted(player));
+            item.mScore.setOnClickListener(l -> getPresenter().onColorSelectionStarted(player));
+            return item;
         }
     }
 }

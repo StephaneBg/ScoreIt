@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2016 SBG Apps
+ * Copyright 2017 Stéphane Baiget
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,9 +19,6 @@ package com.sbgapps.scoreit.core.model.universal;
 
 import com.sbgapps.scoreit.core.model.Lap;
 
-/**
- * Created by sbaiget on 06/02/14.
- */
 public class UniversalLap implements Lap {
 
     private final int[] mScores;
@@ -32,11 +29,6 @@ public class UniversalLap implements Lap {
 
     public UniversalLap(int[] scores) {
         mScores = scores;
-    }
-
-    @Override
-    public void computeScores() {
-        // Nothing to do!
     }
 
     public void setScore(int player, int score) {
@@ -51,6 +43,11 @@ public class UniversalLap implements Lap {
             return total;
         }
         return mScores[player];
+    }
+
+    @Override
+    public void computeScores() {
+        // Nothing to do!
     }
 
     public void stepScore(int player, int step) {

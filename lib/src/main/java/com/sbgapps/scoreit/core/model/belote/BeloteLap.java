@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2016 SBG Apps
+ * Copyright 2017 Stéphane Baiget
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,47 +20,17 @@ import com.sbgapps.scoreit.core.model.Player;
 
 import java.util.ArrayList;
 
-/**
- * Created by sbaiget on 11/11/13.
- */
 public class BeloteLap extends BaseBeloteLap {
 
     protected ArrayList<BeloteBonus> mBonuses;
-
-    public BeloteLap(int scorer, int points, ArrayList<BeloteBonus> bonuses) {
-        super(scorer, points);
-        mBonuses = bonuses;
-    }
 
     public BeloteLap() {
         this(Player.PLAYER_1, 81, new ArrayList<BeloteBonus>());
     }
 
-    public ArrayList<BeloteBonus> getBonuses() {
-        return mBonuses;
-    }
-
-    @Override
-    public void computePoints() {
-        int[] points = new int[2];
-        if (162 == mPoints) {
-            points[0] = 162;
-            points[1] = 0;
-        } else if (250 == mPoints) {
-            points[0] = 250;
-            points[1] = 0;
-        } else {
-            points[0] = mPoints;
-            points[1] = (162 - mPoints);
-        }
-
-        if (Player.PLAYER_1 == getScorer()) {
-            mScores[Player.PLAYER_1] = points[0];
-            mScores[Player.PLAYER_2] = points[1];
-        } else {
-            mScores[Player.PLAYER_1] = points[1];
-            mScores[Player.PLAYER_2] = points[0];
-        }
+    public BeloteLap(int scorer, int points, ArrayList<BeloteBonus> bonuses) {
+        super(scorer, points);
+        mBonuses = bonuses;
     }
 
     @Override
@@ -93,11 +63,38 @@ public class BeloteLap extends BaseBeloteLap {
         }
     }
 
+    @Override
+    public void computePoints() {
+        int[] points = new int[2];
+        if (162 == mPoints) {
+            points[0] = 162;
+            points[1] = 0;
+        } else if (250 == mPoints) {
+            points[0] = 250;
+            points[1] = 0;
+        } else {
+            points[0] = mPoints;
+            points[1] = (162 - mPoints);
+        }
+
+        if (Player.PLAYER_1 == getScorer()) {
+            mScores[Player.PLAYER_1] = points[0];
+            mScores[Player.PLAYER_2] = points[1];
+        } else {
+            mScores[Player.PLAYER_1] = points[1];
+            mScores[Player.PLAYER_2] = points[0];
+        }
+    }
+
     public boolean hasBonus(int bonus) {
         for (BeloteBonus beloteBonus : getBonuses()) {
             if (bonus == beloteBonus.get()) return true;
         }
         return false;
+    }
+
+    public ArrayList<BeloteBonus> getBonuses() {
+        return mBonuses;
     }
 
     @Override

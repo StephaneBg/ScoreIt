@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2016 SBG Apps
+ * Copyright 2017 Stéphane Baiget
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,9 +21,6 @@ import com.sbgapps.scoreit.core.model.Player;
 
 import java.util.ArrayList;
 
-/**
- * Created by sbaiget on 07/12/13.
- */
 public class TarotFiveLap extends TarotLap {
 
     private int mPartner;
@@ -43,11 +40,6 @@ public class TarotFiveLap extends TarotLap {
 
     public void setPartner(int partner) {
         mPartner = partner;
-    }
-
-    @Override
-    public int getPlayerCount() {
-        return TarotFiveGame.NB_PLAYERS;
     }
 
     @Override
@@ -72,6 +64,11 @@ public class TarotFiveLap extends TarotLap {
             mScores[Player.PLAYER_4] = (Player.PLAYER_4 == mTaker) ? 4 * score : -score;
             mScores[Player.PLAYER_5] = (Player.PLAYER_5 == mTaker) ? 4 * score : -score;
         }
+    }
+
+    @Override
+    public int getPlayerCount() {
+        return TarotFiveGame.NB_PLAYERS;
     }
 
     @Override
