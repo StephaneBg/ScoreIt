@@ -32,7 +32,7 @@ android {
         targetSdkVersion targetSdk
         versionCode 154
         versionName '5.0.0'
-        vectorDrawables.generatedDensities = ['hdpi', 'xxhdpi']
+        vectorDrawables.useSupportLibrary = true
     }
 
     signingConfigs {

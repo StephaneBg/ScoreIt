@@ -35,8 +35,8 @@
         android:minHeight="@dimen/btn_score_size"
         android:minWidth="@dimen/btn_score_size"
         android:padding="@dimen/margin_padding_size_medium"
-        android:src="@drawable/ic_minus_white_24dp"
         android:tint="?colorAccent"
+        app:srcCompat="@drawable/ic_minus_white_24dp"
         />
 
     <com.sbgapps.scoreit.app.widgets.BoundedFrameLayout
@@ -71,7 +71,7 @@
         android:minHeight="@dimen/btn_score_size"
         android:minWidth="@dimen/btn_score_size"
         android:padding="@dimen/margin_padding_size_medium"
-        android:src="@drawable/ic_plus_white_24dp"
         android:tint="?colorAccent"
+        app:srcCompat="@drawable/ic_plus_white_24dp"
         />
 </LinearLayout>

@@ -98,8 +98,8 @@
                     android:layout_centerInParent="true"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="@dimen/margin_padding_size_large"
-                    android:src="@drawable/ic_swap_horiz_white_24dp"
                     android:tint="?colorAccent"
+                    app:srcCompat="@drawable/ic_swap_horiz_white_24dp"
                     />
 
                 <TextView

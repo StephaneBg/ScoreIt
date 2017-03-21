@@ -20,5 +20,5 @@
     android:id="@+id/chart"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/snp_margin_padding_size_medium"
+    android:padding="@dimen/margin_padding_size_medium"
     />

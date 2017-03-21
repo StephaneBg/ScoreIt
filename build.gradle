@@ -16,10 +16,10 @@ allprojects {
 }
 
 ext {
-    minSdkVersion = 21
-    targetSdkVersion = 25
-    compileSdkVersion = 25
-    buildToolsVersion = "25.0.2"
+    minSdk = 21
+    targetSdk = 25
+    compileSdk = 25
+    buildTools = "25.0.2"
 }
 
 task clean(type: Delete) {

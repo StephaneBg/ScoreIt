@@ -1,6 +1,6 @@
 ext {
     // Versions
-    supportVersion = "25.1.1"
+    supportVersion = "25.2.0"
     constraintVersion = "1.0.1"
     rxJavaVersion = "2.0.6"
     rxAndroidVersion = "2.0.1"
@@ -10,6 +10,8 @@ ext {
     javaxAnnotationVersion = "1.0"
     chromaVersion = "1.7"
     numberPickerVersion = "1.0"
+    williamChartVersion = "2.4.0"
+    swipeSelectorVersion = "1.0.6"
 
     // Packages
     supportPackage = 'com.android.support'
@@ -21,7 +23,10 @@ ext {
     javaxAnnotationPackage = 'javax.annotation'
     chromaPackage = 'com.github.Kunzisoft'
     numberPickerPackage = 'com.github.StephaneBg'
+    williamChartPackage = 'com.diogobernardino'
+    swipeSelectorPackage = 'com.roughike'
 
+    // Dependencies
     supportDependencies = [
             appCompat        : buildDependency(supportPackage, 'appcompat-v7', supportVersion),
             design           : buildDependency(supportPackage, 'design', supportVersion),
@@ -55,6 +60,10 @@ ext {
     chroma = buildDependency(chromaPackage, 'AndroidClearChroma', chromaVersion)
 
     numberPicker = buildDependency(numberPickerPackage, 'SimpleNumberPicker', numberPickerVersion)
+
+    williamChart = buildDependency(williamChartPackage, 'williamchart', williamChartVersion)
+
+    swipeSelector = buildDependency(swipeSelectorPackage, 'swipe-selector', swipeSelectorVersion)
 }
 
 String buildDependency(String pack, String dependency, String version) {
