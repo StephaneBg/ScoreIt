@@ -27,8 +27,8 @@ import com.sbgapps.scoreit.app.utils.LinearListHelper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UniversalFragment extends BaseFragment<UniversalViewActions, UniversalPresenter>
-        implements UniversalViewActions {
+public class UniversalFragment extends BaseFragment<UniversalView, UniversalPresenter>
+        implements UniversalView {
 
     @Override
     protected int getLayoutResource() {

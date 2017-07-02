@@ -14,11 +14,9 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.core.model;
+package com.sbgapps.scoreit.app.chart;
 
-public interface Lap extends Cloneable {
+import com.hannesdorfmann.mosby3.mvp.MvpView;
 
-    int getScore(int player, boolean rounded);
-
-    void computeScores();
+interface ChartView extends MvpView {
 }

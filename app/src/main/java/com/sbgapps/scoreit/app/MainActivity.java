@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity {
         mNavigationView.getMenu().getItem(mGameManager.getPlayedGame()).setChecked(true);
     }
 
-    private void onGameSelected(@Game.Games int game) {
+    private void onGameSelected(int game) {
 
     }
 

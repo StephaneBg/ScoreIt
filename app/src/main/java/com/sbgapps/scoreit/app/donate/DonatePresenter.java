@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit.app.donate;
 
-import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
+import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
-class DonatePresenter extends MvpBasePresenter<DonateViewActions> {
+class DonatePresenter extends MvpBasePresenter<DonateView> {
 }

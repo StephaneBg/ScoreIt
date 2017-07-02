@@ -46,8 +46,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresenter>
-        implements HeaderViewActions, OnColorSelectedListener {
+public class HeaderFragment extends BaseFragment<HeaderView, HeaderPresenter>
+        implements HeaderView, OnColorSelectedListener {
 
     private static final String TAG_FRAGMENT_COLOR = "ColorDialog";
     private static final int REQ_CODE_PERMISSION_CONTACTS = 100;
@@ -116,7 +116,6 @@ public class HeaderFragment extends BaseFragment<HeaderViewActions, HeaderPresen
         new ChromaDialog.Builder()
                 .initialColor(initialColor)
                 .colorMode(ColorMode.RGB)
-                .setOnColorSelectedListener(this)
                 .create()
                 .show(getChildFragmentManager(), TAG_FRAGMENT_COLOR);
     }

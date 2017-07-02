@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.coinche;
+package com.sbgapps.scoreit.app.universal;
 
-import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.hannesdorfmann.mosby3.mvp.MvpView;
 
-interface CoincheViewActions extends MvpView {
+interface UniversalView extends MvpView {
+
+    void setupPlayerCount(int count);
 }

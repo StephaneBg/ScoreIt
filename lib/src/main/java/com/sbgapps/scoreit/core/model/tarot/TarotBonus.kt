@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.core.model.tarot;
-
-import com.sbgapps.scoreit.core.model.Game;
-import com.sbgapps.scoreit.core.model.Player;
-
-import java.util.ArrayList;
+package com.sbgapps.scoreit.core.model.tarot
 
 
-public class TarotFourGame extends Game {
+import com.sbgapps.scoreit.core.model.Player
 
-    public final static int NB_PLAYERS = 4;
+class TarotBonus(val bonus: Int = BONUS_PETIT_AU_BOUT, val player: Int = Player.PLAYER_1) {
 
-    public TarotFourGame(ArrayList<Player> players, ArrayList<TarotFourLap> laps) {
-        super(players, laps);
+    companion object {
+
+        const val BONUS_PETIT_AU_BOUT = 0
+        const val BONUS_POIGNEE_SIMPLE = 1
+        const val BONUS_POIGNEE_DOUBLE = 2
+        const val BONUS_POIGNEE_TRIPLE = 3
+        const val BONUS_CHELEM_NON_ANNONCE = 4
+        const val BONUS_CHELEM_ANNONCE_REALISE = 5
+        const val BONUS_CHELEM_ANNONCE_NON_REALISE = 6
     }
 }

@@ -16,11 +16,11 @@
 
 package com.sbgapps.scoreit.app.belote;
 
-import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
+import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 import com.sbgapps.scoreit.app.GameManager;
 import com.sbgapps.scoreit.app.ScoreItApp;
 
-class BelotePresenter extends MvpBasePresenter<BeloteViewActions> {
+class BelotePresenter extends MvpBasePresenter<BeloteView> {
 
     final private GameManager mGameManager;
 

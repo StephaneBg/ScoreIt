@@ -21,8 +21,8 @@ import android.support.annotation.NonNull;
 import com.sbgapps.scoreit.app.R;
 import com.sbgapps.scoreit.app.base.BaseFragment;
 
-public class DonateFragment extends BaseFragment<DonateViewActions, DonatePresenter>
-        implements DonateViewActions {
+public class DonateFragment extends BaseFragment<DonateView, DonatePresenter>
+        implements DonateView {
 
     @Override
     protected int getLayoutResource() {

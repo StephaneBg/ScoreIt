@@ -18,16 +18,15 @@ package com.sbgapps.scoreit.app.header;
 
 import android.support.annotation.ColorInt;
 
-import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
+import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 import com.sbgapps.scoreit.app.GameManager;
 import com.sbgapps.scoreit.app.ScoreItApp;
 import com.sbgapps.scoreit.core.model.Game;
 import com.sbgapps.scoreit.core.model.Player;
 
-class HeaderPresenter extends MvpBasePresenter<HeaderViewActions> {
+class HeaderPresenter extends MvpBasePresenter<HeaderView> {
 
     final private GameManager mGameManager;
-    @Player.Players
     private int mEditedPlayer = Player.PLAYER_NONE;
 
     HeaderPresenter() {
@@ -46,7 +45,7 @@ class HeaderPresenter extends MvpBasePresenter<HeaderViewActions> {
         getView().setIndicator(Player.PLAYER_2);
     }
 
-    void onNameSelectionStarted(@Player.Players int player) {
+    void onNameSelectionStarted(int player) {
         mEditedPlayer = player;
         getView().showNameActionsDialog();
     }
@@ -61,7 +60,7 @@ class HeaderPresenter extends MvpBasePresenter<HeaderViewActions> {
         return mGameManager.getGame();
     }
 
-    void onColorSelectionStarted(@Player.Players int player) {
+    void onColorSelectionStarted(int player) {
         mEditedPlayer = player;
         getView().showColorSelectorDialog(getGame().getPlayer(player).getColor());
     }

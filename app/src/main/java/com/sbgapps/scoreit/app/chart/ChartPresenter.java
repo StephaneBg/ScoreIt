@@ -16,11 +16,11 @@
 
 package com.sbgapps.scoreit.app.chart;
 
-import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
+import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 import com.sbgapps.scoreit.app.GameManager;
 import com.sbgapps.scoreit.app.ScoreItApp;
 
-class ChartPresenter extends MvpBasePresenter<ChartViewActions> {
+class ChartPresenter extends MvpBasePresenter<ChartView> {
 
     final private GameManager mGameManager;
 

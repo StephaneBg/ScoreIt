@@ -14,9 +14,27 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.donate;
+package com.sbgapps.scoreit.core.model
 
-import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.sbgapps.scoreit.core.model.utils.GameHelper
 
-interface DonateViewActions extends MvpView {
+open class Game(val players: ArrayList<Player>, val laps: ArrayList<out Lap>) {
+
+    init {
+        initScores()
+    }
+
+    private fun initScores() = laps.forEach { lap -> lap.computeScores() }
+
+    fun getPlayer(player: Int): Player = players[player]
+
+    fun getScore(player: Int, rounded: Boolean): Int = GameHelper.getScore(laps, player, rounded)
+
+    companion object {
+
+        const val UNIVERSAL = 0
+        const val TAROT = 1
+        const val BELOTE = 2
+        const val COINCHE = 3
+    }
 }

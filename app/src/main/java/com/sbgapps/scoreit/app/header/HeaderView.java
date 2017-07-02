@@ -14,19 +14,25 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.core.model.coinche;
+package com.sbgapps.scoreit.app.header;
 
+import android.support.annotation.ColorInt;
 
-import com.sbgapps.scoreit.core.model.Game;
-import com.sbgapps.scoreit.core.model.Player;
+import com.hannesdorfmann.mosby3.mvp.MvpView;
 
-import java.util.ArrayList;
+interface HeaderView extends MvpView {
 
-public class CoincheGame extends Game {
+    void setName(int player, String name);
 
-    public final static int NB_PLAYERS = 2;
+    void setScore(int player, int score);
 
-    public CoincheGame(ArrayList<Player> players, ArrayList<CoincheLap> laps) {
-        super(players, laps);
-    }
+    void setColor(int player, @ColorInt int color);
+
+    void setIndicator(int player);
+
+    void setupPlayerCount(int count);
+
+    void showColorSelectorDialog(@ColorInt int initialColor);
+
+    void showNameActionsDialog();
 }

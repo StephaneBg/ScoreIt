@@ -14,19 +14,9 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.core.model.tarot;
+package com.sbgapps.scoreit.app.coinche;
 
-import com.sbgapps.scoreit.core.model.Game;
-import com.sbgapps.scoreit.core.model.Player;
+import com.hannesdorfmann.mosby3.mvp.MvpView;
 
-import java.util.ArrayList;
-
-
-public class TarotThreeGame extends Game {
-
-    public final static int NB_PLAYERS = 3;
-
-    public TarotThreeGame(ArrayList<Player> players, ArrayList<TarotThreeLap> laps) {
-        super(players, laps);
-    }
+interface CoincheView extends MvpView {
 }

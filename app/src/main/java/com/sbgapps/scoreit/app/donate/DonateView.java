@@ -14,19 +14,9 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.core.model.tarot;
+package com.sbgapps.scoreit.app.donate;
 
+import com.hannesdorfmann.mosby3.mvp.MvpView;
 
-import com.sbgapps.scoreit.core.model.Game;
-import com.sbgapps.scoreit.core.model.Player;
-
-import java.util.ArrayList;
-
-public class TarotFiveGame extends Game {
-
-    public final static int NB_PLAYERS = 5;
-
-    public TarotFiveGame(ArrayList<Player> players, ArrayList<TarotFiveLap> laps) {
-        super(players, laps);
-    }
+interface DonateView extends MvpView {
 }

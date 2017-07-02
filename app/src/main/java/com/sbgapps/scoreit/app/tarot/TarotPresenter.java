@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit.app.tarot;
 
-import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
+import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 import com.sbgapps.scoreit.app.GameManager;
 import com.sbgapps.scoreit.app.ScoreItApp;
 

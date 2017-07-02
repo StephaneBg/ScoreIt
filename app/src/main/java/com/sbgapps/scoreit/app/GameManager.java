@@ -69,13 +69,12 @@ public class GameManager {
     }
 
     @SuppressWarnings("WrongConstant")
-    @Game.Games
     public int getPlayedGame() {
         //return getPreferences().getInt(KEY_PLAYED_GAME, Game.UNIVERSAL);
         return Game.UNIVERSAL;
     }
 
-    public void setPlayedGame(@Game.Games int game) {
+    public void setPlayedGame(int game) {
         getPreferences().edit().putInt(KEY_PLAYED_GAME, game).apply();
     }
 

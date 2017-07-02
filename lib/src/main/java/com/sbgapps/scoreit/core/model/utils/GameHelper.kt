@@ -14,9 +14,16 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.belote;
+package com.sbgapps.scoreit.core.model.utils
 
-import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.sbgapps.scoreit.core.model.Lap
+import com.sbgapps.scoreit.core.model.Player
 
-interface BeloteViewActions extends MvpView {
+import java.util.ArrayList
+
+object GameHelper {
+
+    fun getScore(laps: ArrayList<out Lap>, player: Int, rounded: Boolean): Int {
+        return laps.sumBy { it.getScore(player, rounded) }
+    }
 }

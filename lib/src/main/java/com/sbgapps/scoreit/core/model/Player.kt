@@ -14,17 +14,26 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.coinche;
+package com.sbgapps.scoreit.core.model
 
-import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
-import com.sbgapps.scoreit.app.GameManager;
-import com.sbgapps.scoreit.app.ScoreItApp;
+import android.support.annotation.ColorInt
 
-class CoinchePresenter extends MvpBasePresenter<CoincheView> {
 
-    final private GameManager mGameManager;
+class Player(var name: String, @ColorInt var color: Int) {
 
-    public CoinchePresenter() {
-        mGameManager = ScoreItApp.getGameManager();
+    override fun toString(): String = name
+
+    companion object {
+
+        const val PLAYER_NONE = -1
+        const val PLAYER_1 = 0
+        const val PLAYER_2 = 1
+        const val PLAYER_3 = 2
+        const val PLAYER_4 = 3
+        const val PLAYER_5 = 4
+        const val PLAYER_6 = 5
+        const val PLAYER_7 = 6
+        const val PLAYER_8 = 7
+        const val PLAYER_TOTAL = 8
     }
 }

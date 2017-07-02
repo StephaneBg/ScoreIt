@@ -20,10 +20,10 @@ import android.app.Application;
 
 public class ScoreItApp extends Application {
 
-    private static GameManager sGameManager;
+    private static GameManager gameManager;
 
     public static GameManager getGameManager() {
-        return sGameManager;
+        return gameManager;
     }
 
     @Override
@@ -33,6 +33,6 @@ public class ScoreItApp extends Application {
     }
 
     private void init() {
-        if (null == sGameManager) sGameManager = new GameManager(getApplicationContext());
+        if (null == gameManager) gameManager = new GameManager(getApplicationContext());
     }
 }

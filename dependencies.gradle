@@ -4,11 +4,10 @@ ext {
     constraintVersion = "1.0.1"
     rxJavaVersion = "2.0.6"
     rxAndroidVersion = "2.0.1"
-    mosbyVersion = "2.0.1"
+    mosbyVersion = "3.0.2"
     butterknifeVersion = "8.4.0"
-    daggerVersion = "2.9"
     javaxAnnotationVersion = "1.0"
-    chromaVersion = "1.7"
+    chromaVersion = "1.8"
     numberPickerVersion = "1.0"
     williamChartVersion = "2.4.0"
     swipeSelectorVersion = "1.0.6"
@@ -17,9 +16,8 @@ ext {
     supportPackage = 'com.android.support'
     constraintPackage = 'com.android.support.constraint'
     reactivePackage = 'io.reactivex.rxjava2'
-    mosbyPackage = 'com.hannesdorfmann.mosby'
+    mosbyPackage = 'com.hannesdorfmann.mosby3'
     jakeWhartonPackage = 'com.jakewharton'
-    daggerPackage = 'com.google.dagger'
     javaxAnnotationPackage = 'javax.annotation'
     chromaPackage = 'com.github.Kunzisoft'
     numberPickerPackage = 'com.github.StephaneBg'
@@ -51,12 +49,6 @@ ext {
             butterknifeCompiler: buildDependency(jakeWhartonPackage, 'butterknife-compiler', butterknifeVersion)
     ]
 
-    daggerDependencies = [
-            dagger        : buildDependency(daggerPackage, 'dagger', daggerVersion),
-            daggerCompiler: buildDependency(daggerPackage, 'dagger-compiler', daggerVersion),
-            annotations   : buildDependency(javaxAnnotationPackage, 'jsr250-api', javaxAnnotationVersion)
-    ]
-
     chroma = buildDependency(chromaPackage, 'AndroidClearChroma', chromaVersion)
 
     numberPicker = buildDependency(numberPickerPackage, 'SimpleNumberPicker', numberPickerVersion)
@@ -66,6 +58,6 @@ ext {
     swipeSelector = buildDependency(swipeSelectorPackage, 'swipe-selector', swipeSelectorVersion)
 }
 
-String buildDependency(String pack, String dependency, String version) {
+static String buildDependency(String pack, String dependency, String version) {
     return "${pack}:${dependency}:${version}"
 }

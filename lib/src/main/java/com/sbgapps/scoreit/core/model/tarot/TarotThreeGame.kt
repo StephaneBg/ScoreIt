@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.core.model.utils;
+package com.sbgapps.scoreit.core.model.tarot
 
-import com.sbgapps.scoreit.core.model.Lap;
-import com.sbgapps.scoreit.core.model.Player;
+import com.sbgapps.scoreit.core.model.Game
+import com.sbgapps.scoreit.core.model.Player
+import java.util.*
 
-import java.util.ArrayList;
 
-public class GameHelper {
+class TarotThreeGame(players: ArrayList<Player>, laps: ArrayList<TarotThreeLap>) : Game(players, laps) {
 
-    public static int getScore(ArrayList<? extends Lap> laps, @Player.Players int player, boolean rounded) {
-        int score = 0;
-        for (Lap lap : laps) {
-            score += lap.getScore(player, rounded);
-        }
-        return score;
+    companion object {
+
+        const val NB_PLAYERS = 3
     }
 }

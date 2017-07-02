@@ -14,18 +14,12 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.core.model.belote;
+package com.sbgapps.scoreit.core.model.universal
 
-import com.sbgapps.scoreit.core.model.Game;
-import com.sbgapps.scoreit.core.model.Player;
+import com.sbgapps.scoreit.core.model.Game
+import com.sbgapps.scoreit.core.model.Player
 
-import java.util.ArrayList;
+import java.util.ArrayList
 
-public class BeloteGame extends Game {
 
-    private final static int NB_PLAYERS = 2;
-
-    public BeloteGame(ArrayList<Player> players, ArrayList<BeloteLap> laps) {
-        super(players, laps);
-    }
-}
+class UniversalGame(players: ArrayList<Player>, laps: ArrayList<UniversalLap>) : Game(players, laps)

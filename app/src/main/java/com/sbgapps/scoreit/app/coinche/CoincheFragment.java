@@ -21,8 +21,8 @@ import android.support.annotation.NonNull;
 import com.sbgapps.scoreit.app.R;
 import com.sbgapps.scoreit.app.base.BaseFragment;
 
-public class CoincheFragment extends BaseFragment<CoincheViewActions, CoinchePresenter>
-        implements CoincheViewActions {
+public class CoincheFragment extends BaseFragment<CoincheView, CoinchePresenter>
+        implements CoincheView {
 
     @Override
     protected int getLayoutResource() {

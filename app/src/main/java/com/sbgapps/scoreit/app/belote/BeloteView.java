@@ -14,25 +14,9 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.header;
+package com.sbgapps.scoreit.app.belote;
 
-import android.support.annotation.ColorInt;
+import com.hannesdorfmann.mosby3.mvp.MvpView;
 
-import com.hannesdorfmann.mosby.mvp.MvpView;
-
-interface HeaderViewActions extends MvpView {
-
-    void setName(int player, String name);
-
-    void setScore(int player, int score);
-
-    void setColor(int player, @ColorInt int color);
-
-    void setIndicator(int player);
-
-    void setupPlayerCount(int count);
-
-    void showColorSelectorDialog(@ColorInt int initialColor);
-
-    void showNameActionsDialog();
+interface BeloteView extends MvpView {
 }

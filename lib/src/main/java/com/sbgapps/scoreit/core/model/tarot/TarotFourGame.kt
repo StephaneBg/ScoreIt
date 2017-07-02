@@ -14,11 +14,17 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.universal;
+package com.sbgapps.scoreit.core.model.tarot
 
-import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.sbgapps.scoreit.core.model.Game
+import com.sbgapps.scoreit.core.model.Player
+import java.util.*
 
-interface UniversalViewActions extends MvpView {
 
-    void setupPlayerCount(int count);
+class TarotFourGame(players: ArrayList<Player>, laps: ArrayList<TarotFourLap>) : Game(players, laps) {
+
+    companion object {
+
+        const val NB_PLAYERS = 4
+    }
 }

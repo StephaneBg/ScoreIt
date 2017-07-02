@@ -14,9 +14,17 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.chart;
+package com.sbgapps.scoreit.core.model.belote
 
-import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.sbgapps.scoreit.core.model.Game
+import com.sbgapps.scoreit.core.model.Player
 
-interface ChartViewActions extends MvpView {
+import java.util.ArrayList
+
+class BeloteGame(players: ArrayList<Player>, laps: ArrayList<BeloteLap>) : Game(players, laps) {
+
+    companion object {
+
+        const val NB_PLAYERS = 2
+    }
 }

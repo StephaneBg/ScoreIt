@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.coinche;
+package com.sbgapps.scoreit.core.model.tarot
 
-import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
-import com.sbgapps.scoreit.app.GameManager;
-import com.sbgapps.scoreit.app.ScoreItApp;
 
-class CoinchePresenter extends MvpBasePresenter<CoincheView> {
+import com.sbgapps.scoreit.core.model.Game
+import com.sbgapps.scoreit.core.model.Player
+import java.util.*
 
-    final private GameManager mGameManager;
+class TarotFiveGame(players: ArrayList<Player>, laps: ArrayList<TarotFiveLap>) : Game(players, laps) {
 
-    public CoinchePresenter() {
-        mGameManager = ScoreItApp.getGameManager();
+    companion object {
+
+        const val NB_PLAYERS = 5
     }
 }

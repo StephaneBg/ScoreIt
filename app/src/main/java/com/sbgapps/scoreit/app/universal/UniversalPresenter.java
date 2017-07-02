@@ -16,11 +16,11 @@
 
 package com.sbgapps.scoreit.app.universal;
 
-import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
+import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 import com.sbgapps.scoreit.app.GameManager;
 import com.sbgapps.scoreit.app.ScoreItApp;
 
-class UniversalPresenter extends MvpBasePresenter<UniversalViewActions> {
+class UniversalPresenter extends MvpBasePresenter<UniversalView> {
 
     final private GameManager mGameManager;
 

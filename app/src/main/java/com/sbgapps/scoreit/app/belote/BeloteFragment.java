@@ -21,8 +21,8 @@ import android.support.annotation.NonNull;
 import com.sbgapps.scoreit.app.R;
 import com.sbgapps.scoreit.app.base.BaseFragment;
 
-public class BeloteFragment extends BaseFragment<BeloteViewActions, BelotePresenter>
-        implements BeloteViewActions {
+public class BeloteFragment extends BaseFragment<BeloteView, BelotePresenter>
+        implements BeloteView {
 
     @Override
     protected int getLayoutResource() {

@@ -14,24 +14,27 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.chart;
+package com.sbgapps.scoreit.core.model.belote
 
-import android.support.annotation.NonNull;
 
-import com.sbgapps.scoreit.app.R;
-import com.sbgapps.scoreit.app.base.BaseFragment;
+import com.sbgapps.scoreit.core.model.Lap
 
-public class ChartFragment extends BaseFragment<ChartView, ChartPresenter>
-        implements ChartView {
+abstract class BaseBeloteLap(var scorer: Int, var points: Int) : Lap {
 
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_chart;
+    var isDone: Boolean = false
+    var scores: IntArray = IntArray(2)
+
+    override fun getScore(player: Int, rounded: Boolean): Int {
+        return if (rounded) getRoundedScore(scores[player]) else scores[player]
     }
 
-    @Override
-    @NonNull
-    public ChartPresenter createPresenter() {
-        return new ChartPresenter();
+    private fun getRoundedScore(score: Int): Int {
+        when (score) {
+            162 -> return 160
+            250 -> return score
+            else -> return (score + 5) / 10 * 10
+        }
     }
+
+    abstract fun computePoints()
 }

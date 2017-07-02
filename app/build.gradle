@@ -15,7 +15,8 @@
  */
 
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
 
@@ -75,7 +76,6 @@ android {
 dependencies {
     compile project(':scoreit-core')
 
-    compile supportDependencies.appCompat
     compile supportDependencies.design
     compile supportDependencies.percent
     compile supportDependencies.recyclerView
@@ -92,4 +92,5 @@ dependencies {
     compile numberPicker
     compile williamChart
     compile swipeSelector
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
 }

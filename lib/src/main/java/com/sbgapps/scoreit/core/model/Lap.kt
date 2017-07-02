@@ -14,17 +14,11 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.core.model.universal;
+package com.sbgapps.scoreit.core.model
 
-import com.sbgapps.scoreit.core.model.Game;
-import com.sbgapps.scoreit.core.model.Player;
+interface Lap {
 
-import java.util.ArrayList;
+    fun getScore(player: Int, rounded: Boolean): Int
 
-
-public class UniversalGame extends Game {
-
-    public UniversalGame(ArrayList<Player> players, ArrayList<UniversalLap> laps) {
-        super(players, laps);
-    }
+    fun computeScores()
 }
