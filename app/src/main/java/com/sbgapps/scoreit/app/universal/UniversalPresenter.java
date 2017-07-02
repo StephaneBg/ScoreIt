@@ -25,7 +25,7 @@ class UniversalPresenter extends MvpBasePresenter<UniversalView> {
     final private GameManager mGameManager;
 
     public UniversalPresenter() {
-        mGameManager = ScoreItApp.getGameManager();
+        mGameManager = ScoreItApp.Companion.getGameManager();
     }
 
 

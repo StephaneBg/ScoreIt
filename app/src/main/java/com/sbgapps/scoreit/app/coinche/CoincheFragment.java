@@ -25,11 +25,6 @@ public class CoincheFragment extends BaseFragment<CoincheView, CoinchePresenter>
         implements CoincheView {
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_coinche;
-    }
-
-    @Override
     @NonNull
     public CoinchePresenter createPresenter() {
         return new CoinchePresenter();

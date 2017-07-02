@@ -25,6 +25,6 @@ class TarotPresenter extends MvpBasePresenter<TarotViewActions> {
     final private GameManager mGameManager;
 
     public TarotPresenter() {
-        mGameManager = ScoreItApp.getGameManager();
+        mGameManager = ScoreItApp.Companion.getGameManager();
     }
 }

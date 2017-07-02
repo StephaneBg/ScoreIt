@@ -14,19 +14,11 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.belote;
+package com.sbgapps.scoreit.app.base
 
-import android.support.annotation.NonNull;
+import com.hannesdorfmann.mosby3.mvp.MvpFragment
+import com.hannesdorfmann.mosby3.mvp.MvpPresenter
+import com.hannesdorfmann.mosby3.mvp.MvpView
 
-import com.sbgapps.scoreit.app.R;
-import com.sbgapps.scoreit.app.base.BaseFragment;
-
-public class BeloteFragment extends BaseFragment<BeloteView, BelotePresenter>
-        implements BeloteView {
-
-    @Override
-    @NonNull
-    public BelotePresenter createPresenter() {
-        return new BelotePresenter();
-    }
+abstract class BaseFragment<V : MvpView, P : MvpPresenter<V>> : MvpFragment<V, P>() {
 }

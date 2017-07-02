@@ -14,25 +14,23 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.header;
+package com.sbgapps.scoreit.app.base
 
-import android.support.annotation.ColorInt;
+import android.os.Bundle
+import android.support.v4.app.NavUtils
+import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 
-import com.hannesdorfmann.mosby3.mvp.MvpView;
+abstract class BaseActivity : AppCompatActivity() {
 
-interface HeaderView extends MvpView {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> NavUtils.navigateUpFromSameTask(this)
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
-    void setName(int player, String name);
-
-    void setScore(int player, int score);
-
-    void setColor(int player, @ColorInt int color);
-
-    void setIndicator(int player);
-
-    void setupPlayerCount(int count);
-
-    void showColorSelectorDialog(@ColorInt int initialColor);
-
-    void showNameActionsDialog();
+    fun isNewLaunch(savedInstanceState: Bundle?): Boolean {
+        return null == savedInstanceState
+    }
 }

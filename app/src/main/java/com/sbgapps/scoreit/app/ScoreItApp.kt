@@ -14,19 +14,23 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.utils;
+package com.sbgapps.scoreit.app
 
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.app.Application
 
-public class ActivityUtils {
+class ScoreItApp : Application() {
 
-    public static void replaceFragmentToActivity(@NonNull FragmentManager fragmentManager,
-                                                 @NonNull Fragment fragment, int frameId) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(frameId, fragment);
-        transaction.commit();
+    override fun onCreate() {
+        super.onCreate()
+        initDependencies()
+    }
+
+    fun initDependencies() {
+        gameManager = GameManager(applicationContext)
+    }
+
+    companion object {
+
+        lateinit var gameManager: GameManager
     }
 }

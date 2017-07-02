@@ -25,6 +25,6 @@ class ChartPresenter extends MvpBasePresenter<ChartView> {
     final private GameManager mGameManager;
 
     public ChartPresenter() {
-        mGameManager = ScoreItApp.getGameManager();
+        mGameManager = ScoreItApp.Companion.getGameManager();
     }
 }

@@ -14,19 +14,25 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.belote;
+package com.sbgapps.scoreit.app.header
 
-import android.support.annotation.NonNull;
+import android.support.annotation.ColorInt
 
-import com.sbgapps.scoreit.app.R;
-import com.sbgapps.scoreit.app.base.BaseFragment;
+import com.hannesdorfmann.mosby3.mvp.MvpView
 
-public class BeloteFragment extends BaseFragment<BeloteView, BelotePresenter>
-        implements BeloteView {
+interface HeaderView : MvpView {
 
-    @Override
-    @NonNull
-    public BelotePresenter createPresenter() {
-        return new BelotePresenter();
-    }
+    fun setName(player: Int, name: String)
+
+    fun setScore(player: Int, score: Int)
+
+    fun setColor(player: Int, @ColorInt color: Int)
+
+    fun setIndicator(player: Int)
+
+    fun setupPlayerCount(count: Int)
+
+    fun showColorSelectorDialog(@ColorInt initialColor: Int)
+
+    fun showNameActionsDialog()
 }

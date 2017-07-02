@@ -14,24 +14,24 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.utils;
+package com.sbgapps.scoreit.app.utils
 
-import android.content.res.Resources;
-import android.util.TypedValue;
+import android.content.res.Resources
+import android.util.TypedValue
 
 /**
  * Created by Stéphane on 14/10/2014.
  */
-public class DimensionsHelper {
+object DimensionsHelper {
 
-    public static int dpToPx(float dp, Resources resources) {
-        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dp, resources.getDisplayMetrics());
-        return (int) px;
+    fun dpToPx(dp: Float, resources: Resources): Int {
+        val px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dp, resources.displayMetrics)
+        return px.toInt()
     }
 
-    public static int spToPx(int textSizeSp, Resources resources) {
-        final float density = resources.getDisplayMetrics().density;
-        return (int) (0.5f + density * textSizeSp);
+    fun spToPx(textSizeSp: Int, resources: Resources): Int {
+        val density = resources.displayMetrics.density
+        return (0.5f + density * textSizeSp).toInt()
     }
 }

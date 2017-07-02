@@ -25,6 +25,6 @@ class CoinchePresenter extends MvpBasePresenter<CoincheView> {
     final private GameManager mGameManager;
 
     public CoinchePresenter() {
-        mGameManager = ScoreItApp.getGameManager();
+        mGameManager = ScoreItApp.Companion.getGameManager();
     }
 }

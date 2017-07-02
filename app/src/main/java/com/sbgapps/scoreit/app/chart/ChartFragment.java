@@ -25,11 +25,6 @@ public class ChartFragment extends BaseFragment<ChartView, ChartPresenter>
         implements ChartView {
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_chart;
-    }
-
-    @Override
     @NonNull
     public ChartPresenter createPresenter() {
         return new ChartPresenter();

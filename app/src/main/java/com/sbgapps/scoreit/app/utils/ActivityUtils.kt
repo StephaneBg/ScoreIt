@@ -14,25 +14,18 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app;
+package com.sbgapps.scoreit.app.utils
 
-import android.app.Application;
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 
-public class ScoreItApp extends Application {
+object ActivityUtils {
 
-    private static GameManager gameManager;
-
-    public static GameManager getGameManager() {
-        return gameManager;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        init();
-    }
-
-    private void init() {
-        if (null == gameManager) gameManager = new GameManager(getApplicationContext());
+    fun replaceFragmentToActivity(fragmentManager: FragmentManager,
+                                  fragment: Fragment, frameId: Int) {
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(frameId, fragment)
+        transaction.commit()
     }
 }

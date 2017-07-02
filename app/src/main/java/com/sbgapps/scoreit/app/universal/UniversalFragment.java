@@ -31,11 +31,6 @@ public class UniversalFragment extends BaseFragment<UniversalView, UniversalPres
         implements UniversalView {
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_universal;
-    }
-
-    @Override
     @NonNull
     public UniversalPresenter createPresenter() {
         return new UniversalPresenter();

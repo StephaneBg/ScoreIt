@@ -25,6 +25,6 @@ class BelotePresenter extends MvpBasePresenter<BeloteView> {
     final private GameManager mGameManager;
 
     public BelotePresenter() {
-        mGameManager = ScoreItApp.getGameManager();
+        mGameManager = ScoreItApp.Companion.getGameManager();
     }
 }

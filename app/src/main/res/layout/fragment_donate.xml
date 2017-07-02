@@ -32,7 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_padding_size_medium"
         android:drawableLeft="@drawable/ic_coffee_white_24dp"
-        android:onClick="onDonateCoffee"
         android:text="@string/button_donate_coffee"
         />
 
@@ -42,7 +41,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_beer_white_24dp"
-        android:onClick="onDonateBeer"
         android:text="@string/button_donate_beer"
         />
 </LinearLayout>

@@ -16,10 +16,8 @@
 
 package com.sbgapps.scoreit.core.model
 
-import android.support.annotation.ColorInt
 
-
-class Player(var name: String, @ColorInt var color: Int) {
+class Player(var name: String, var color: Int) {
 
     override fun toString(): String = name
 

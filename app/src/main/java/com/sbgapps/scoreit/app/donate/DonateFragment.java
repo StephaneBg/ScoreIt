@@ -25,11 +25,6 @@ public class DonateFragment extends BaseFragment<DonateView, DonatePresenter>
         implements DonateView {
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_donate;
-    }
-
-    @Override
     @NonNull
     public DonatePresenter createPresenter() {
         return new DonatePresenter();

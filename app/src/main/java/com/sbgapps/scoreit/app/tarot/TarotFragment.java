@@ -25,11 +25,6 @@ public class TarotFragment extends BaseFragment<TarotViewActions, TarotPresenter
         implements TarotViewActions {
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_tarot;
-    }
-
-    @Override
     @NonNull
     public TarotPresenter createPresenter() {
         return new TarotPresenter();
