@@ -14,4 +14,10 @@
  * limitations under the License.
  */
 
-include ':cache', ':domain', ':ui'
+package com.sbgapps.scoreit.ui
+
+import android.support.v7.app.AppCompatActivity
+
+
+class MainActivity: AppCompatActivity() {
+}

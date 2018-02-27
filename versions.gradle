@@ -14,4 +14,26 @@
  * limitations under the License.
  */
 
-include ':cache', ':domain', ':ui'
+ext.versions = [:]
+def versions = [:]
+
+versions.kotlin = "1.2.21"
+versions.supportLibrary = '27.0.2'
+versions.constraintLayout = '1.0.2'
+versions.archLibrary = '1.1.0'
+versions.room = '1.0.0'
+versions.rx = '2.1.0'
+versions.rxAndroid = '2.0.1'
+versions.retrofit = '2.3.0'
+versions.javaxAnnotation = '1.0'
+versions.junit = '4.12'
+versions.okHttp = '3.6.0'
+versions.timber = '4.5.1'
+versions.glide = '4.1.1'
+versions.playServices = '11.6.0'
+versions.moshi = '1.5.0'
+versions.anko = '0.10.1'
+versions.imagePicker = '2.0.2'
+versions.dagger = '2.13'
+
+ext.versions = versions
