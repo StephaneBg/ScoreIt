@@ -16,20 +16,21 @@
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
 
-    compileSdkVersion compileSdk
-    buildToolsVersion buildTools
+    compileSdkVersion buildConfig.compileSdk
+    buildToolsVersion buildConfig.buildTools
 
     compileOptions {
-        sourceCompatibility sourceCompatibilityVersion
-        targetCompatibility targetCompatibilityVersion
+        sourceCompatibility buildConfig.sourceCompatibilityVersion
+        targetCompatibility buildConfig.targetCompatibilityVersion
     }
 
     defaultConfig {
-        minSdkVersion minSdk
-        targetSdkVersion targetSdk
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
         resConfigs "en", "fr"
     }
 
@@ -38,8 +39,8 @@ android {
             minifyEnabled true
             debuggable false
             jniDebuggable false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-core.pro'
-            consumerProguardFiles 'proguard-cache.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.pro'
+            consumerProguardFiles 'proguard.pro'
         }
 
         debug {
@@ -50,12 +51,12 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
-    implementation "org.jetbrains.anko:anko-appcompat-v7-commons:$versions.anko"
-    implementation "android.arch.lifecycle:extensions:$versions.archLibrary"
+    implementation project(':data')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "android.arch.persistence.room:runtime:$versions.room"
-    implementation "com.android.support:appcompat-v7:$versions.supportLibrary"
-    implementation "com.android.support:design:$versions.supportLibrary"
+    implementation "android.arch.persistence.room:rxjava2:$versions.room"
     implementation "io.reactivex.rxjava2:rxkotlin:$versions.rx"
-    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
+    implementation "com.squareup.moshi:moshi:$versions.moshi"
+
+    kapt "android.arch.persistence.room:compiler:$versions.room"
 }

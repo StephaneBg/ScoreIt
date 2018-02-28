@@ -14,30 +14,10 @@
  * limitations under the License.
  */
 
-buildscript {
+apply plugin: 'kotlin'
 
-    apply from: "./versions.gradle"
-
-    repositories {
-        jcenter()
-        google()
-    }
-
-    dependencies {
-        classpath "com.android.tools.build:gradle:3.0.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-    }
+dependencies {
+    implementation project(':domain')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rx"
 }
-
-allprojects {
-    repositories {
-        jcenter()
-        google()
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-apply from: "./signing.gradle"

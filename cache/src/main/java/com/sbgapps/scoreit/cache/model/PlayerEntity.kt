@@ -14,30 +14,20 @@
  * limitations under the License.
  */
 
-buildscript {
+package com.sbgapps.scoreit.cache.model
 
-    apply from: "./versions.gradle"
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.ForeignKey
+import android.arch.persistence.room.PrimaryKey
 
-    repositories {
-        jcenter()
-        google()
-    }
-
-    dependencies {
-        classpath "com.android.tools.build:gradle:3.0.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-        google()
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-apply from: "./signing.gradle"
+@Entity(tableName = "players",
+        foreignKeys = [(ForeignKey(entity = UniversalGameEntity::class,
+                parentColumns = arrayOf("id"),
+                childColumns = arrayOf("gameId"),
+                onDelete = ForeignKey.CASCADE))])
+data class PlayerEntity(
+        @PrimaryKey(autoGenerate = true) val id: Long? = null,
+        val gameId: Long,
+        var name: String,
+        var color: Int
+)

@@ -14,30 +14,24 @@
  * limitations under the License.
  */
 
-buildscript {
+package com.sbgapps.scoreit.cache.db
 
-    apply from: "./versions.gradle"
+import android.arch.persistence.room.*
+import com.sbgapps.scoreit.cache.model.UniversalGameEntity
+import io.reactivex.Flowable
 
-    repositories {
-        jcenter()
-        google()
-    }
+@Dao
+interface UniversalGameDao {
 
-    dependencies {
-        classpath "com.android.tools.build:gradle:3.0.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-    }
+    @Query("SELECT * FROM games")
+    fun getAllGames(): Flowable<List<UniversalGameEntity>>
+
+    @Query("SELECT * FROM games WHERE id = :id")
+    fun getGame(id: Long): Flowable<UniversalGameEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertGame(game: UniversalGameEntity)
+
+    @Query("DELETE FROM games WHERE id = :id")
+    fun deleteGame(id: Long)
 }
-
-allprojects {
-    repositories {
-        jcenter()
-        google()
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-apply from: "./signing.gradle"

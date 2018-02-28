@@ -14,30 +14,10 @@
  * limitations under the License.
  */
 
-buildscript {
+package com.sbgapps.scoreit.data.model
 
-    apply from: "./versions.gradle"
 
-    repositories {
-        jcenter()
-        google()
-    }
+class UniversalLap(val id: Long?, points: List<Int>) : ArrayList<Int>(points) {
 
-    dependencies {
-        classpath "com.android.tools.build:gradle:3.0.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-    }
+    fun getTotal() = this.sum()
 }
-
-allprojects {
-    repositories {
-        jcenter()
-        google()
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-apply from: "./signing.gradle"

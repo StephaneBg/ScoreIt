@@ -14,30 +14,24 @@
  * limitations under the License.
  */
 
-buildscript {
+package com.sbgapps.scoreit.cache.db
 
-    apply from: "./versions.gradle"
+import android.arch.persistence.room.*
+import com.sbgapps.scoreit.cache.model.PlayerEntity
+import io.reactivex.Flowable
 
-    repositories {
-        jcenter()
-        google()
-    }
+@Dao
+interface PlayerDao {
 
-    dependencies {
-        classpath "com.android.tools.build:gradle:3.0.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-    }
+    @Query("SELECT * FROM players WHERE gameId = :gameId")
+    fun getPlayers(gameId: Long): Flowable<List<PlayerEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertPlayer(player: PlayerEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertPlayers(players: List<PlayerEntity>)
+
+    @Update
+    fun updatePlayer(player: PlayerEntity)
 }
-
-allprojects {
-    repositories {
-        jcenter()
-        google()
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-apply from: "./signing.gradle"

@@ -14,30 +14,13 @@
  * limitations under the License.
  */
 
-buildscript {
+package com.sbgapps.scoreit.cache.model
 
-    apply from: "./versions.gradle"
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
-    repositories {
-        jcenter()
-        google()
-    }
-
-    dependencies {
-        classpath "com.android.tools.build:gradle:3.0.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-        google()
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-apply from: "./signing.gradle"
+@Entity(tableName = "games")
+data class UniversalGameEntity(
+        @PrimaryKey(autoGenerate = true) val id: Long? = null,
+        var name: String
+)

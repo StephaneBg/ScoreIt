@@ -14,30 +14,11 @@
  * limitations under the License.
  */
 
-buildscript {
+package com.sbgapps.scoreit.data.model
 
-    apply from: "./versions.gradle"
 
-    repositories {
-        jcenter()
-        google()
-    }
-
-    dependencies {
-        classpath "com.android.tools.build:gradle:3.0.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-        google()
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-apply from: "./signing.gradle"
+data class UniversalGame(
+        val name: String,
+        val players: List<Player>,
+        val laps: MutableList<UniversalLap>
+)

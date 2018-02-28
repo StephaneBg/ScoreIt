@@ -17,25 +17,23 @@
 //apply from: "$project.rootDir/tools/script-git-version.gradle"
 
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
 
-    compileSdkVersion compileSdk
-    buildToolsVersion buildTools
+    compileSdkVersion buildConfig.compileSdk
+    buildToolsVersion buildConfig.buildTools
 
     compileOptions {
-        sourceCompatibility sourceCompatibilityVersion
-        targetCompatibility targetCompatibilityVersion
+        sourceCompatibility buildConfig.sourceCompatibilityVersion
+        targetCompatibility buildConfig.targetCompatibilityVersion
     }
 
-    androidExtensions { experimental = true }
-
     defaultConfig {
-        minSdkVersion minSdk
-        targetSdkVersion targetSdk
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
         vectorDrawables.useSupportLibrary = true
         resConfigs "en", "fr"
     }
@@ -56,7 +54,7 @@ android {
             shrinkResources true
             debuggable false
             jniDebuggable false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-ui.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.pro'
         }
 
         debug {
@@ -90,22 +88,18 @@ android {
 }
 
 dependencies {
-    implementation project(':cache')
-    implementation project(':domain')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+    implementation project(':data')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "org.jetbrains.anko:anko-appcompat-v7-commons:$versions.anko"
-    implementation "android.arch.lifecycle:extensions:$versions.archLibrary"
-    implementation "android.arch.persistence.room:runtime:$versions.room"
-    implementation "android.arch.persistence.room:rxjava2:$versions.room"
     implementation "com.android.support:appcompat-v7:$versions.supportLibrary"
     implementation "com.android.support:recyclerview-v7:$versions.supportLibrary"
     implementation "com.android.support:cardview-v7:$versions.supportLibrary"
     implementation "com.android.support:design:$versions.supportLibrary"
     implementation "com.android.support:support-vector-drawable:$versions.supportLibrary"
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
+    implementation "android.arch.lifecycle:extensions:$versions.archLibrary"
     implementation "io.reactivex.rxjava2:rxkotlin:$versions.rx"
     implementation "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
     implementation "com.jakewharton.timber:timber:$versions.timber"
-
-    kapt "android.arch.persistence.room:compiler:$versions.room"
+    implementation "org.koin:koin-android-architecture:$versions.koin"
 }
