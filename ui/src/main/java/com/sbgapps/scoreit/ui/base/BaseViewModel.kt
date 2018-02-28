@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.ui
+package com.sbgapps.scoreit.ui.base
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.arch.lifecycle.ViewModel
+import io.reactivex.disposables.CompositeDisposable
 
+open class BaseViewModel : ViewModel() {
+    protected var disposables = CompositeDisposable()
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCleared() {
+        super.onCleared()
+        disposables.clear()
     }
 }

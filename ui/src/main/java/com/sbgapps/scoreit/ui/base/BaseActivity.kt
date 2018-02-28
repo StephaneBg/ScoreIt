@@ -14,15 +14,24 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.ui
+package com.sbgapps.scoreit.ui.base
 
-import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 
+open class BaseActivity : AppCompatActivity() {
 
-class MainActivity : AppCompatActivity() {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onUpPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    open fun onUpPressed() {
+        onBackPressed()
     }
 }

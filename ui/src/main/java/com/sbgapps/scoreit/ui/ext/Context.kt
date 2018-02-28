@@ -14,15 +14,10 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.ui
+package com.sbgapps.scoreit.ui.ext
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.content.Context
+import android.support.v4.content.ContextCompat
 
+fun Context.color(id: Int): Int = ContextCompat.getColor(this, id)
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-}

@@ -14,15 +14,10 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.ui
+package com.sbgapps.scoreit.ui.base
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+sealed class Resource<out T> constructor(val data: T?, val refresh: Boolean, val error: Throwable?)
 
-
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-}
+class Success<out T>(data: T?, refresh: Boolean = false) : Resource<T>(data, refresh, null)
+class Loading(refresh: Boolean = false) : Resource<Nothing>(null, refresh, null)
+class Error(error: Throwable?) : Resource<Nothing>(null, false, error)

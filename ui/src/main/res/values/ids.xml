@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright 2018 Stéphane Baiget
   ~
@@ -15,9 +16,19 @@
   -->
 
 <resources>
-    <!-- Application -->
-    <string name="app_name" translatable="false">Score It</string>
-    <string name="app_name_subtitle">Score keeper</string>
-
-    <string name="core_error_general">An error occurred</string>
+    <item
+        name="contentView"
+        type="id"/>
+    <item
+        name="errorView"
+        type="id"/>
+    <item
+        name="loadingView"
+        type="id"/>
+    <item
+        name="frontView"
+        type="id"/>
+    <item
+        name="backView"
+        type="id"/>
 </resources>

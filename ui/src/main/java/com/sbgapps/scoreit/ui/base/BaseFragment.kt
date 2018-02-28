@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.ui
+package com.sbgapps.scoreit.ui.base
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
+import com.sbgapps.scoreit.ui.R
 
+open class BaseFragment : Fragment() {
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    open fun getErrorMessage(throwable: Throwable?) = getString(R.string.core_error_general)
 }

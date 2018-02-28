@@ -97,6 +97,7 @@ dependencies {
     implementation "com.android.support:design:$versions.supportLibrary"
     implementation "com.android.support:support-vector-drawable:$versions.supportLibrary"
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
+    implementation "androidx.core:core-ktx:$versions.ktx"
     implementation "android.arch.lifecycle:extensions:$versions.archLibrary"
     implementation "io.reactivex.rxjava2:rxkotlin:$versions.rx"
     implementation "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"

@@ -29,6 +29,7 @@ versions.playServices = '11.6.0'
 versions.moshi = '1.5.0'
 versions.anko = '0.10.1'
 versions.koin = '0.8.2'
+versions.ktx = '0.1'
 
 ext.versions = versions
 
