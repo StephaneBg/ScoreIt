@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-include ':cache', ':data', ':ui'
+include ':cache', ':data', ':domain', ':ui'

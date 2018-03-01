@@ -88,7 +88,7 @@ android {
 }
 
 dependencies {
-    implementation project(':data')
+    implementation project(':domain')
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "org.jetbrains.anko:anko-appcompat-v7-commons:$versions.anko"
     implementation "com.android.support:appcompat-v7:$versions.supportLibrary"

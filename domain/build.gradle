@@ -14,9 +14,43 @@
  * limitations under the License.
  */
 
-apply plugin: 'kotlin'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+
+    compileSdkVersion buildConfig.compileSdk
+    buildToolsVersion buildConfig.buildTools
+
+    compileOptions {
+        sourceCompatibility buildConfig.sourceCompatibilityVersion
+        targetCompatibility buildConfig.targetCompatibilityVersion
+    }
+
+    defaultConfig {
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
+        resConfigs "en", "fr"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            debuggable false
+            jniDebuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.pro'
+            consumerProguardFiles 'proguard.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+    }
+}
 
 dependencies {
+    implementation project(':data')
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "io.reactivex.rxjava2:rxkotlin:$versions.rx"
 }
