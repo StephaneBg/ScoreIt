@@ -18,13 +18,12 @@ package com.sbgapps.scoreit.cache.db
 
 import android.arch.persistence.room.*
 import com.sbgapps.scoreit.cache.model.PlayerEntity
-import io.reactivex.Flowable
 
 @Dao
 interface PlayerDao {
 
     @Query("SELECT * FROM players WHERE gameId = :gameId")
-    fun getPlayers(gameId: Long): Flowable<List<PlayerEntity>>
+    fun getPlayers(gameId: Long): List<PlayerEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPlayer(player: PlayerEntity)

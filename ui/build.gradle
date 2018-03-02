@@ -18,6 +18,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
+
 android {
 
     compileSdkVersion buildConfig.compileSdk
@@ -86,8 +92,10 @@ android {
 
 dependencies {
     implementation project(':domain')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$versions.kotlin"
     implementation "org.jetbrains.anko:anko-appcompat-v7-commons:$versions.anko"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
     implementation "com.android.support:appcompat-v7:$versions.supportLibrary"
     implementation "com.android.support:recyclerview-v7:$versions.supportLibrary"
     implementation "com.android.support:cardview-v7:$versions.supportLibrary"
@@ -95,9 +103,7 @@ dependencies {
     implementation "com.android.support:support-vector-drawable:$versions.supportLibrary"
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
     implementation "androidx.core:core-ktx:$versions.ktx"
-    implementation "android.arch.lifecycle:extensions:$versions.archLibrary"
-    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rx"
-    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
+    implementation "android.arch.lifecycle:extensions:$versions.archLifecyle"
     implementation "com.jakewharton.timber:timber:$versions.timber"
     implementation "org.koin:koin-android-architecture:$versions.koin"
 }

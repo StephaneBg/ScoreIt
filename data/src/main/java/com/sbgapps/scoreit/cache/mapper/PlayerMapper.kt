@@ -22,7 +22,7 @@ import com.sbgapps.scoreit.domain.model.Player
 
 class PlayerMapper : Mapper<PlayerEntity, Player> {
 
-    override fun mapFromCache(cache: PlayerEntity) = Player(cache.id, cache.name, cache.color)
+    override fun mapFromCache(data: PlayerEntity) = Player(data.id, data.name, data.color)
 
     override fun mapToCache(domain: Player) = throw(IllegalArgumentException())
 

@@ -22,7 +22,7 @@ import com.sbgapps.scoreit.domain.model.UniversalLap
 
 class UniversalLapMapper : Mapper<UniversalLapEntity, UniversalLap> {
 
-    override fun mapFromCache(cache: UniversalLapEntity) = UniversalLap(cache.id, cache.points)
+    override fun mapFromCache(data: UniversalLapEntity) = UniversalLap(data.id, data.points)
 
     override fun mapToCache(domain: UniversalLap) = throw(IllegalArgumentException())
 

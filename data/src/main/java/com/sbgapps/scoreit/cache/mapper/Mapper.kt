@@ -16,9 +16,9 @@
 
 package com.sbgapps.scoreit.cache.mapper
 
-interface Mapper<Cache, Domain> {
+interface Mapper<Data, Domain> {
 
-    fun mapFromCache(cache: Cache): Domain
+    fun mapFromCache(data: Data): Domain
 
-    fun mapToCache(domain: Domain): Cache
+    fun mapToCache(domain: Domain): Data
 }

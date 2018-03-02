@@ -17,6 +17,12 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
+
 android {
 
     compileSdkVersion buildConfig.compileSdk
@@ -50,6 +56,8 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rx"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$versions.kotlin"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+    implementation "com.android.support:appcompat-v7:$versions.supportLibrary"
 }

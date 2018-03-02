@@ -14,16 +14,10 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.ui.base
+package com.sbgapps.scoreit.ui.header
 
 import android.arch.lifecycle.ViewModel
-import io.reactivex.disposables.CompositeDisposable
 
-open class BaseViewModel : ViewModel() {
-    protected var disposables = CompositeDisposable()
 
-    override fun onCleared() {
-        super.onCleared()
-        disposables.clear()
-    }
+class HeaderViewModel: ViewModel(){
 }

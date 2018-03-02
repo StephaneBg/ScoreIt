@@ -17,27 +17,23 @@
 package com.sbgapps.scoreit.domain.repository
 
 import com.sbgapps.scoreit.domain.model.Player
-import com.sbgapps.scoreit.domain.model.UniversalLap
-import io.reactivex.Completable
-import io.reactivex.Flowable
-import io.reactivex.Single
 
 
-interface GameRepository {
+interface GameRepository<Lap> {
 
-    fun getGameId(name: String): Single<Long?>
+    fun getGameId(name: String): Long
 
-    fun deleteGame(gameId: Long): Completable
+    fun deleteGame(gameId: Long)
 
-    fun getPlayers(gameId: Long): Flowable<List<Player>>
+    fun getPlayers(gameId: Long): List<Player>
 
-    fun savePlayer(gameId: Long, player: Player): Completable
+    fun savePlayer(gameId: Long, player: Player)
 
-    fun getLaps(gameId: Long): Flowable<List<UniversalLap>>
+    fun getLaps(gameId: Long): List<Lap>
 
-    fun saveLap(gameId: Long, lap: UniversalLap): Completable
+    fun saveLap(gameId: Long, lap: Lap)
 
-    fun deleteLap(gameId: Long, lap: UniversalLap): Completable
+    fun deleteLap(gameId: Long, lap: Lap)
 
-    fun clearLaps(gameId: Long): Completable
+    fun clearLaps(gameId: Long)
 }

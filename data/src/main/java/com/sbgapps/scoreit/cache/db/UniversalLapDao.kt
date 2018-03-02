@@ -18,13 +18,12 @@ package com.sbgapps.scoreit.cache.db
 
 import android.arch.persistence.room.*
 import com.sbgapps.scoreit.cache.model.UniversalLapEntity
-import io.reactivex.Flowable
 
 @Dao
 interface UniversalLapDao {
 
     @Query("SELECT * FROM laps WHERE gameId = :gameId")
-    fun getLaps(gameId: Long): Flowable<List<UniversalLapEntity>>
+    fun getLaps(gameId: Long): List<UniversalLapEntity>
 
     @Query("DELETE FROM laps WHERE gameId = :gameId")
     fun clearLaps(gameId: Long)

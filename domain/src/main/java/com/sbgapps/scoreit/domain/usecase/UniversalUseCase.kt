@@ -16,13 +16,65 @@
 
 package com.sbgapps.scoreit.domain.usecase
 
+import com.sbgapps.scoreit.domain.model.Player
+import com.sbgapps.scoreit.domain.model.UniversalLap
 import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.domain.repository.GameRepository
 
 
-class UniversalUseCase(val universalGameRepository: GameRepository,
-                       val prefsHelper: PreferencesHelper) {
+class UniversalUseCase(val universalRepo: GameRepository<UniversalLap>,
+                       val prefsHelper: PreferencesHelper)
+    : BaseUseCase() {
 
+    private var gameId: Long? = null
 
+    suspend fun deleteGame() {
+        universalRepo.deleteGame(getGameId())
+    }
 
+    suspend fun getPlayers(): List<Player> {
+        return asyncAwait {
+            universalRepo.getPlayers(getGameId())
+        }
+    }
+
+    suspend fun savePlayer(player: Player) {
+        asyncAwait {
+            universalRepo.savePlayer(getGameId(), player)
+        }
+    }
+
+    suspend fun getLaps(): List<UniversalLap> {
+        return asyncAwait {
+            universalRepo.getLaps(getGameId())
+        }
+    }
+
+    suspend fun saveLap(lap: UniversalLap) {
+        asyncAwait {
+            universalRepo.saveLap(getGameId(), lap)
+        }
+    }
+
+    suspend fun deleteLap(lap: UniversalLap) {
+        asyncAwait {
+            universalRepo.deleteLap(getGameId(), lap)
+        }
+    }
+
+    suspend fun clearLaps() {
+        asyncAwait {
+            universalRepo.clearLaps(getGameId())
+        }
+    }
+
+    private suspend fun getGameId(): Long {
+        return asyncAwait {
+            gameId ?: run {
+                val id = universalRepo.getGameId(prefsHelper.getUniversalGameName())
+                gameId = id
+                id
+            }
+        }
+    }
 }
