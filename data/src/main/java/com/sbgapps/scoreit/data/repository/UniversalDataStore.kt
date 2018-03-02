@@ -35,9 +35,9 @@ interface UniversalDataStore {
 
     fun getLaps(gameId: Long): Flowable<List<UniversalLap>>
 
-    fun saveLap(gameId: Long, lap: List<Int>): Completable
+    fun saveLap(gameId: Long, lap: UniversalLap): Completable
 
-    fun deleteLap(gameId: Long, lap: List<Int>): Completable
+    fun deleteLap(gameId: Long, lap: UniversalLap): Completable
 
     fun clearLaps(gameId: Long): Completable
 }

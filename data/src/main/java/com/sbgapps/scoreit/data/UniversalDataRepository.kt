@@ -42,7 +42,7 @@ class UniversalDataRepository(val cacheStore: UniversalDataStore,
 
     override fun getLaps(gameId: Long): Flowable<List<UniversalLap>> = cacheStore.getLaps(gameId)
 
-    override fun addLap(gameId: Long, lap: UniversalLap): Completable = cacheStore.saveLap(gameId, lapMapper.mapToData(lap))
+    override fun addLap(gameId: Long, lap: UniversalLap): Completable = cacheStore.saveLap(gameId, lap)
 
     override fun deleteLap(gameId: Long, lap: UniversalLap): Completable = cacheStore.deleteLap(gameId, lap)
 

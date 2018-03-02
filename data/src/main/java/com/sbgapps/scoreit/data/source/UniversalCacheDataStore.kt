@@ -16,15 +16,19 @@
 
 package com.sbgapps.scoreit.data.source
 
+import com.sbgapps.scoreit.data.mapper.UniversalLapDataMapper
 import com.sbgapps.scoreit.data.model.PlayerData
 import com.sbgapps.scoreit.data.repository.UniversalCache
 import com.sbgapps.scoreit.data.repository.UniversalDataStore
+import com.sbgapps.scoreit.domain.model.UniversalLap
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 
 
-class UniversalCacheDataStore(val cache: UniversalCache): UniversalDataStore {
+class UniversalCacheDataStore(val cache: UniversalCache,
+                              val lapMapper: UniversalLapDataMapper)
+    : UniversalDataStore {
 
     override fun getGameId(name: String): Single<Long?> = cache.getGameId(name)
 
@@ -35,12 +39,11 @@ class UniversalCacheDataStore(val cache: UniversalCache): UniversalDataStore {
     override fun savePlayer(gameId: Long, player: PlayerData): Completable =
             cache.savePlayer(gameId, player)
 
-    override fun getLaps(gameId: Long): Flowable<List<UniversalLap>> = cache.getLaps(gameId)
+    override fun getLaps(gameId: Long): Flowable<List<UniversalLap>> = cache.getLaps(gameId).map { it.map { lapMapper.mapFromData(it) } }
 
-    override fun saveLap(gameId: Long, lap: UniversalLap): Completable = cache.saveLap(gameId, lap)
+    override fun saveLap(gameId: Long, lap: UniversalLap): Completable = cache.saveLap(gameId, lapMapper.mapToData(lap))
 
-    override fun deleteLap(gameId: Long, lap: UniversalLap): Completable =
-            cache.deleteLap(gameId, lap)
+    override fun deleteLap(gameId: Long, lap: UniversalLap): Completable = cache.deleteLap(gameId, lapMapper.mapToData(lap))
 
     override fun clearLaps(gameId: Long): Completable = cache.clearLaps(gameId)
 }
