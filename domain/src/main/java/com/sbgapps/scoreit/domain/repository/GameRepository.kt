@@ -14,24 +14,24 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.data.repository
+package com.sbgapps.scoreit.domain.repository
 
-import com.sbgapps.scoreit.data.model.PlayerData
+import com.sbgapps.scoreit.domain.model.Player
 import com.sbgapps.scoreit.domain.model.UniversalLap
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 
 
-interface UniversalDataStore {
+interface GameRepository {
 
     fun getGameId(name: String): Single<Long?>
 
     fun deleteGame(gameId: Long): Completable
 
-    fun getPlayers(gameId: Long): Flowable<List<PlayerData>>
+    fun getPlayers(gameId: Long): Flowable<List<Player>>
 
-    fun savePlayer(gameId: Long, player: PlayerData): Completable
+    fun savePlayer(gameId: Long, player: Player): Completable
 
     fun getLaps(gameId: Long): Flowable<List<UniversalLap>>
 

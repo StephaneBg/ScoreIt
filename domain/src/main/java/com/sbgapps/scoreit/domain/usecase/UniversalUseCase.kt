@@ -17,9 +17,12 @@
 package com.sbgapps.scoreit.domain.usecase
 
 import com.sbgapps.scoreit.domain.preference.PreferencesHelper
+import com.sbgapps.scoreit.domain.repository.GameRepository
 
 
-class UniversalUseCase(val prefsHelper: PreferencesHelper) {
+class UniversalUseCase(val universalGameRepository: GameRepository,
+                       val prefsHelper: PreferencesHelper) {
+
 
 
 }

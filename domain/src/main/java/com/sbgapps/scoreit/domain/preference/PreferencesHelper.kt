@@ -17,13 +17,12 @@
 package com.sbgapps.scoreit.domain.preference
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 
 class PreferencesHelper(context: Context) {
 
-    val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     fun getUniversalGameName() = sharedPreferences.getString("UNIVERSAL_GAME_NAME", null)
 
