@@ -17,14 +17,14 @@
 package com.sbgapps.scoreit.cache.mapper
 
 import com.sbgapps.scoreit.cache.model.UniversalLapEntity
-import com.sbgapps.scoreit.data.model.UniversalLapData
+import com.sbgapps.scoreit.domain.model.UniversalLap
 
 
-class UniversalLapCacheMapper : CacheMapper<UniversalLapEntity, UniversalLapData> {
+class UniversalLapMapper : Mapper<UniversalLapEntity, UniversalLap> {
 
-    override fun mapFromCache(cache: UniversalLapEntity) = UniversalLapData(cache.id, cache.points)
+    override fun mapFromCache(cache: UniversalLapEntity) = UniversalLap(cache.id, cache.points)
 
-    override fun mapToCache(domain: UniversalLapData) = throw(IllegalArgumentException())
+    override fun mapToCache(domain: UniversalLap) = throw(IllegalArgumentException())
 
-    fun mapToCache(domain: UniversalLapData, gameId: Long) = UniversalLapEntity(domain.id, gameId, domain)
+    fun mapToCache(domain: UniversalLap, gameId: Long) = UniversalLapEntity(domain.id, gameId, domain)
 }
