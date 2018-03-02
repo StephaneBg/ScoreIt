@@ -17,4 +17,4 @@
 package com.sbgapps.scoreit.data.model
 
 
-class UniversalLap(val id: Long?, points: List<Int>) : ArrayList<Int>(points)
+class UniversalLapData(val id: Long?, points: List<Int>) : ArrayList<Int>(points)

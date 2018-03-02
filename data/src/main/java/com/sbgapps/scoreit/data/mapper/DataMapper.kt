@@ -16,9 +16,9 @@
 
 package com.sbgapps.scoreit.data.mapper
 
-interface Mapper<E, D> {
+interface DataMapper<Data, Domain> {
 
-    fun mapFromData(dataType: E): D
+    fun mapFromData(data: Data): Domain
 
-    fun mapToData(domainType: D): E
+    fun mapToData(domain: Domain): Data
 }

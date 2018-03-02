@@ -17,7 +17,7 @@
 package com.sbgapps.scoreit.data.model
 
 
-data class Player(
+data class PlayerData(
         val id: Long?,
         var name: String,
         var color: Int

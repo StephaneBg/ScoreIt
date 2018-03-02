@@ -16,41 +16,31 @@
 
 package com.sbgapps.scoreit.data.source
 
-import com.sbgapps.scoreit.data.model.Player
-import com.sbgapps.scoreit.data.model.UniversalLap
+import com.sbgapps.scoreit.data.model.PlayerData
 import com.sbgapps.scoreit.data.repository.UniversalCache
 import com.sbgapps.scoreit.data.repository.UniversalDataStore
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 
 class UniversalCacheDataStore(val cache: UniversalCache): UniversalDataStore {
 
-    override fun deleteGame(gameId: Long): Completable {
-        return cache.deleteGame(gameId)
-    }
+    override fun getGameId(name: String): Single<Long?> = cache.getGameId(name)
 
-    override fun getPlayers(gameId: Long): Flowable<List<Player>> {
-        return cache.getPlayers(gameId)
-    }
+    override fun deleteGame(gameId: Long): Completable = cache.deleteGame(gameId)
 
-    override fun savePlayer(gameId: Long, player: Player): Completable {
-        return cache.savePlayer(gameId, player)
-    }
+    override fun getPlayers(gameId: Long): Flowable<List<PlayerData>> = cache.getPlayers(gameId)
 
-    override fun getLaps(gameId: Long): Flowable<List<UniversalLap>> {
-        return cache.getLaps(gameId)
-    }
+    override fun savePlayer(gameId: Long, player: PlayerData): Completable =
+            cache.savePlayer(gameId, player)
 
-    override fun saveLap(gameId: Long, lap: UniversalLap): Completable {
-        return cache.saveLap(gameId, lap)
-    }
+    override fun getLaps(gameId: Long): Flowable<List<UniversalLap>> = cache.getLaps(gameId)
 
-    override fun deleteLap(gameId: Long, lap: UniversalLap): Completable {
-        return cache.deleteLap(gameId, lap)
-    }
+    override fun saveLap(gameId: Long, lap: UniversalLap): Completable = cache.saveLap(gameId, lap)
 
-    override fun clearLaps(gameId: Long): Completable {
-        return cache.clearLaps(gameId)
-    }
+    override fun deleteLap(gameId: Long, lap: UniversalLap): Completable =
+            cache.deleteLap(gameId, lap)
+
+    override fun clearLaps(gameId: Long): Completable = cache.clearLaps(gameId)
 }

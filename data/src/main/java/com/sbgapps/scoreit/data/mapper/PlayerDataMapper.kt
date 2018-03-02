@@ -20,9 +20,9 @@ import com.sbgapps.scoreit.data.model.PlayerData
 import com.sbgapps.scoreit.domain.model.Player
 
 
-class PlayerMapper : Mapper<PlayerData, Player> {
+class PlayerDataMapper : DataMapper<PlayerData, Player> {
 
-    override fun mapFromData(dataType: PlayerData): Player = Player(dataType.id, dataType.name, dataType.color)
+    override fun mapFromData(data: PlayerData): Player = Player(data.id, data.name, data.color)
 
-    override fun mapToData(domainType: Player): PlayerData = PlayerData(domainType.id, domainType.name, domainType.color)
+    override fun mapToData(domain: Player): PlayerData = PlayerData(domain.id, domain.name, domain.color)
 }

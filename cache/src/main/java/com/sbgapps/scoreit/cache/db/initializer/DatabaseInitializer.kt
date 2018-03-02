@@ -21,7 +21,7 @@ import com.sbgapps.scoreit.cache.model.PlayerEntity
 import com.sbgapps.scoreit.cache.model.UniversalGameEntity
 
 
-class UniversalDbInitializer(val db: UniversalDatabase) {
+class DatabaseInitializer(val db: UniversalDatabase) {
 
     fun createGame(): Long {
         val game = UniversalGameEntity(null, "Default")
