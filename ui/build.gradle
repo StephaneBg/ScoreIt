@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-//apply from: "$project.rootDir/tools/script-git-version.gradle"
-
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 

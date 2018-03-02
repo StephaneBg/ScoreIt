@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.data.model
+package com.sbgapps.scoreit.domain.model
 
 
-class UniversalLap(val id: Long?, points: List<Int>) : ArrayList<Int>(points) {
-
-    fun getTotal() = this.sum()
-}
+data class Player(
+        val id: Long?,
+        var name: String,
+        var color: Int
+)

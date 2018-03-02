@@ -50,7 +50,6 @@ android {
 }
 
 dependencies {
-    implementation project(':data')
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "io.reactivex.rxjava2:rxkotlin:$versions.rx"
 }

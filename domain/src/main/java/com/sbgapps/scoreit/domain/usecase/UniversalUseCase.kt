@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-apply plugin: 'kotlin'
+package com.sbgapps.scoreit.domain.usecase
 
-dependencies {
-    implementation project(':domain')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rx"
+import com.sbgapps.scoreit.domain.preference.PreferencesHelper
+
+
+class UniversalUseCase(val prefsHelper: PreferencesHelper) {
+
+
 }

@@ -24,13 +24,11 @@ import io.reactivex.Flowable
 
 interface UniversalDataStore {
 
-    fun clearGame(gameId: Long): Completable
+    fun deleteGame(gameId: Long): Completable
 
     fun getPlayers(gameId: Long): Flowable<List<Player>>
 
     fun savePlayer(gameId: Long, player: Player): Completable
-
-    fun savePlayers(gameId: Long, players: List<Player>): Completable
 
     fun getLaps(gameId: Long): Flowable<List<UniversalLap>>
 

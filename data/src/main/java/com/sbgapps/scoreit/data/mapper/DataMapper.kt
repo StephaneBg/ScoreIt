@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.data.model
+package com.sbgapps.scoreit.data.mapper
 
+interface Mapper<E, D> {
 
-data class UniversalGame(
-        val name: String,
-        val players: List<Player>,
-        val laps: MutableList<UniversalLap>
-)
+    fun mapFromData(dataType: E): D
+
+    fun mapToData(domainType: D): E
+}

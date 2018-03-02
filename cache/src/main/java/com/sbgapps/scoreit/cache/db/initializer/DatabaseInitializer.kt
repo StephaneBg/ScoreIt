@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.db.utils
+package com.sbgapps.scoreit.cache.db.initializer
 
 import com.sbgapps.scoreit.cache.db.UniversalDatabase
 import com.sbgapps.scoreit.cache.model.PlayerEntity
@@ -23,10 +23,11 @@ import com.sbgapps.scoreit.cache.model.UniversalGameEntity
 
 class UniversalDbInitializer(val db: UniversalDatabase) {
 
-    fun createGame() {
+    fun createGame(): Long {
         val game = UniversalGameEntity(null, "Default")
         db.gameDao().insertGame(game)
-        game.id?.let { populatePlayers(it, 4) }
+        game.id?.let { populatePlayers(it, 4) } ?: run { throw (Throwable("Cannot create game")) }
+        return game.id
     }
 
     fun populatePlayers(gameId: Long, count: Int) {

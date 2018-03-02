@@ -26,8 +26,8 @@ import io.reactivex.Flowable
 
 class UniversalCacheDataStore(val cache: UniversalCache): UniversalDataStore {
 
-    override fun clearGame(gameId: Long): Completable {
-        return cache.clearGame(gameId)
+    override fun deleteGame(gameId: Long): Completable {
+        return cache.deleteGame(gameId)
     }
 
     override fun getPlayers(gameId: Long): Flowable<List<Player>> {
@@ -36,10 +36,6 @@ class UniversalCacheDataStore(val cache: UniversalCache): UniversalDataStore {
 
     override fun savePlayer(gameId: Long, player: Player): Completable {
         return cache.savePlayer(gameId, player)
-    }
-
-    override fun savePlayers(gameId: Long, players: List<Player>): Completable {
-        return cache.savePlayers(gameId, players)
     }
 
     override fun getLaps(gameId: Long): Flowable<List<UniversalLap>> {

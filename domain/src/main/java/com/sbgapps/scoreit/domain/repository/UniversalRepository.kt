@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.data.repository
+package com.sbgapps.scoreit.domain.repository
 
-import com.sbgapps.scoreit.data.model.Player
-import com.sbgapps.scoreit.data.model.UniversalLap
+import com.sbgapps.scoreit.domain.model.Player
+import com.sbgapps.scoreit.domain.model.UniversalLap
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 
-interface UniversalCache {
+interface UniversalRepository {
+
+    fun getGameId(name: String): Single<Long?>
 
     fun deleteGame(gameId: Long): Completable
 
@@ -32,7 +35,7 @@ interface UniversalCache {
 
     fun getLaps(gameId: Long): Flowable<List<UniversalLap>>
 
-    fun saveLap(gameId: Long, lap: UniversalLap): Completable
+    fun addLap(gameId: Long, lap: UniversalLap): Completable
 
     fun deleteLap(gameId: Long, lap: UniversalLap): Completable
 

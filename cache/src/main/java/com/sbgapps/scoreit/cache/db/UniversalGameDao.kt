@@ -16,9 +16,13 @@
 
 package com.sbgapps.scoreit.cache.db
 
-import android.arch.persistence.room.*
+import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.OnConflictStrategy
+import android.arch.persistence.room.Query
 import com.sbgapps.scoreit.cache.model.UniversalGameEntity
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 @Dao
 interface UniversalGameDao {
@@ -27,7 +31,10 @@ interface UniversalGameDao {
     fun getAllGames(): Flowable<List<UniversalGameEntity>>
 
     @Query("SELECT * FROM games WHERE id = :id")
-    fun getGame(id: Long): Flowable<UniversalGameEntity>
+    fun getGame(id: Long): Single<UniversalGameEntity>
+
+    @Query("SELECT * FROM games WHERE name = :name")
+    fun getGame(name: String): Single<UniversalGameEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGame(game: UniversalGameEntity)

@@ -19,59 +19,61 @@ package com.sbgapps.scoreit.cache
 import com.sbgapps.scoreit.cache.db.PlayerDao
 import com.sbgapps.scoreit.cache.db.UniversalGameDao
 import com.sbgapps.scoreit.cache.db.UniversalLapDao
-import com.sbgapps.scoreit.cache.model.PlayerEntity
-import com.sbgapps.scoreit.cache.model.UniversalLapEntity
-import com.sbgapps.scoreit.data.model.Player
-import com.sbgapps.scoreit.data.model.UniversalLap
+import com.sbgapps.scoreit.cache.db.initializer.DatabaseInitializer
+import com.sbgapps.scoreit.cache.mapper.PlayerCacheMapper
+import com.sbgapps.scoreit.cache.mapper.UniversalLapCacheMapper
+import com.sbgapps.scoreit.data.model.PlayerData
+import com.sbgapps.scoreit.data.model.UniversalLapData
 import com.sbgapps.scoreit.data.repository.UniversalCache
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 
 class UniversalCacheImpl(val gameDao: UniversalGameDao,
                          val playerDao: PlayerDao,
-                         val lapDao: UniversalLapDao
-) : UniversalCache {
+                         val lapDao: UniversalLapDao,
+                         val playerMapper: PlayerCacheMapper,
+                         val lapMapper: UniversalLapCacheMapper,
+                         val dbInit: DatabaseInitializer)
+    : UniversalCache {
 
-    override fun clearGame(gameId: Long): Completable {
+    override fun getGameId(name: String): Single<Long?> {
+        return gameDao.getGame(name).map { it.id ?: dbInit.createGame() }
+    }
+
+    override fun deleteGame(gameId: Long): Completable {
         return Completable.defer {
             gameDao.deleteGame(gameId)
             Completable.complete()
         }
     }
 
-    override fun getPlayers(gameId: Long): Flowable<List<Player>> {
-        return playerDao.getPlayers(gameId).map { it.map { Player(it.id, it.name, it.color) } }
+    override fun getPlayers(gameId: Long): Flowable<List<PlayerData>> {
+        return playerDao.getPlayers(gameId).map { it.map { playerMapper.mapFromCache(it) } }
     }
 
-    override fun savePlayer(gameId: Long, player: Player): Completable {
+    override fun savePlayer(gameId: Long, player: PlayerData): Completable {
         return Completable.defer {
-            playerDao.insertPlayer(PlayerEntity(player.id, gameId, player.name, player.color))
+            playerDao.insertPlayer(playerMapper.mapToCache(player, gameId))
             Completable.complete()
         }
     }
 
-    override fun savePlayers(gameId: Long, players: List<Player>): Completable {
+    override fun getLaps(gameId: Long): Flowable<List<UniversalLapData>> {
+        return lapDao.getLaps(gameId).map { it.map { lapMapper.mapFromCache(it) } }
+    }
+
+    override fun saveLap(gameId: Long, lap: UniversalLapData): Completable {
         return Completable.defer {
-            playerDao.insertPlayers(players.map { PlayerEntity(it.id, gameId, it.name, it.color) })
+            lapDao.insertLap(lapMapper.mapToCache(lap, gameId))
             Completable.complete()
         }
     }
 
-    override fun getLaps(gameId: Long): Flowable<List<UniversalLap>> {
-        return lapDao.getLaps(gameId).map { it.map { UniversalLap(it.id, it.points) } }
-    }
-
-    override fun saveLap(gameId: Long, lap: UniversalLap): Completable {
+    override fun deleteLap(gameId: Long, lap: UniversalLapData): Completable {
         return Completable.defer {
-            lapDao.insertLap(UniversalLapEntity(lap.id, gameId, lap))
-            Completable.complete()
-        }
-    }
-
-    override fun deleteLap(gameId: Long, lap: UniversalLap): Completable {
-        return Completable.defer {
-            lapDao.deleteLap(UniversalLapEntity(lap.id, gameId, lap))
+            lapDao.deleteLap(lapMapper.mapToCache(lap, gameId))
             Completable.complete()
         }
     }

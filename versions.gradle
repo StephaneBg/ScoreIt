@@ -17,8 +17,8 @@
 ext.versions = [:]
 def versions = [:]
 
-versions.kotlin = "1.2.21"
-versions.supportLibrary = '27.0.2'
+versions.kotlin = '1.2.30'
+versions.supportLibrary = '27.1.0'
 versions.constraintLayout = '1.0.2'
 versions.archLibrary = '1.1.0'
 versions.room = '1.0.0'
