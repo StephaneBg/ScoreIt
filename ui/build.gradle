@@ -80,6 +80,7 @@ android {
 }
 
 dependencies {
+    implementation project(':data')
     implementation project(':domain')
     implementation Libs.kotlinStd
     implementation Libs.coroutinesCore
@@ -94,5 +95,6 @@ dependencies {
     implementation Libs.androidKtx
     implementation Libs.archExtensions
     implementation Libs.timber
-    implementation Libs.koin
+    implementation Libs.koinAndroidArch
+    implementation Libs.linearListView
 }

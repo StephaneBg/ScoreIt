@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.domain.model
+package com.sbgapps.scoreit.domain.di
 
+import com.sbgapps.scoreit.domain.preference.PreferencesHelper
+import com.sbgapps.scoreit.domain.usecase.HeaderUseCase
+import com.sbgapps.scoreit.domain.usecase.LapUseCase
+import org.koin.dsl.module.applicationContext
 
-data class Player(
-        val id: Long?,
-        var name: String,
-        var color: Int
-) {
+val domainModule = applicationContext {
 
-    override fun toString(): String = name
+    provide { PreferencesHelper(get()) }
+    provide { HeaderUseCase(get(), get()) }
+    provide { LapUseCase(get(), get()) }
 }

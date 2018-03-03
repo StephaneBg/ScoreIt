@@ -22,10 +22,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-fun View.snackBar(messageId: Int) {
-    Snackbar.make(this, messageId, Snackbar.LENGTH_LONG).show()
-}
-
 fun View.show() {
     animate()
             .setDuration(context.resources.getInteger(android.R.integer.config_shortAnimTime).toLong())

@@ -14,20 +14,11 @@
   ~ limitations under the License.
   -->
 
-<resources>
-    <item
-        name="contentView"
-        type="id"/>
-    <item
-        name="errorView"
-        type="id"/>
-    <item
-        name="loadingView"
-        type="id"/>
-    <item
-        name="frontView"
-        type="id"/>
-    <item
-        name="backView"
-        type="id"/>
-</resources>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/playerName"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:ellipsize="end"
+    />

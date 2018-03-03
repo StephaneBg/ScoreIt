@@ -55,6 +55,7 @@ dependencies {
     implementation Libs.kotlinStd
     implementation Libs.archRoom
     implementation Libs.moshi
+    implementation Libs.koinAndroid
 
     kapt Libs.archRoomCompiler
 }

@@ -16,10 +16,29 @@
 
 package com.sbgapps.scoreit.ui.header
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import com.sbgapps.scoreit.domain.model.Player
+import com.sbgapps.scoreit.domain.usecase.HeaderUseCase
 import com.sbgapps.scoreit.ui.base.BaseViewModel
 
 
-class HeaderViewModel : BaseViewModel() {
+class HeaderViewModel(private val useCase: HeaderUseCase) : BaseViewModel() {
 
+    private val players = MutableLiveData<List<Player>>()
+    private val scores = MutableLiveData<List<Int>>()
 
+    fun getPlayers(): LiveData<List<Player>> {
+        players.value ?: loadPlayers()
+        return players
+    }
+
+    private fun loadPlayers() = launchAsync { players.postValue(useCase.getPlayers()) }
+
+    fun getScores(): LiveData<List<Int>> {
+        scores.value ?: loadScores()
+        return scores
+    }
+
+    private fun loadScores() = launchAsync { scores.postValue(useCase.getScores()) }
 }

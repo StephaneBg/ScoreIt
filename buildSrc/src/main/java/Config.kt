@@ -27,6 +27,7 @@ object Versions {
     val anko = "0.10.1"
     val koin = "0.8.2"
     val androidKtx = "0.2"
+    val linearListView = "1.0.1@aar"
 }
 
 object Build {
@@ -39,7 +40,7 @@ object Android {
     val minSdkVersion = 21
     val targetSdkVersion = 27
     val compileSdkVersion = 27
-    val applicationId = "com.sbgapps.scoreit"
+    val applicationId = "com.sbgapps.scoreit.reloaded"
     val versionCode = 1
     val versionName = "0.1"
 }
@@ -63,6 +64,9 @@ object Libs {
     val androidKtx = "androidx.core:core-ktx:${Versions.androidKtx}"
 
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
-    val koin = "org.koin:koin-android-architecture:${Versions.koin}"
     val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
+    val linearListView = "com.github.frankiesardo:linearlistview:${Versions.linearListView}"
+
+    val koinAndroid = "org.koin:koin-android:${Versions.koin}"
+    val koinAndroidArch = "org.koin:koin-android-architecture:${Versions.koin}"
 }

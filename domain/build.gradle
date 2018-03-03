@@ -59,4 +59,5 @@ dependencies {
     implementation Libs.kotlinStd
     implementation Libs.coroutinesCore
     implementation Libs.appcompat
+    implementation Libs.koinAndroid
 }

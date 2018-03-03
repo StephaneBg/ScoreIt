@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit.ui.base
 
+import android.arch.lifecycle.ViewModel
 import android.support.annotation.CallSuper
 import com.sbgapps.scoreit.ui.utils.CoroutinesUtils.Companion.tryCatch
 import com.sbgapps.scoreit.ui.utils.CoroutinesUtils.Companion.tryCatchFinally
@@ -26,7 +27,7 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 
 
-open class BaseViewModel {
+open class BaseViewModel : ViewModel() {
 
     private val asyncJobs = mutableListOf<Job>()
 

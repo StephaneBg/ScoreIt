@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.domain.model
+package com.sbgapps.scoreit.ui.di
 
+import com.sbgapps.scoreit.ui.header.HeaderViewModel
+import org.koin.android.architecture.ext.viewModel
+import org.koin.dsl.module.applicationContext
 
-data class Player(
-        val id: Long?,
-        var name: String,
-        var color: Int
-) {
+val uiModule = applicationContext {
 
-    override fun toString(): String = name
+    viewModel { HeaderViewModel(get()) }
 }

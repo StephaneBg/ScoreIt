@@ -21,8 +21,8 @@ import com.sbgapps.scoreit.domain.model.UniversalLap
 import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.domain.repository.GameRepository
 
-class PlayerUseCase(val universalRepo: GameRepository<UniversalLap>,
-                    val prefsHelper: PreferencesHelper)
+class HeaderUseCase(private val universalRepo: GameRepository<UniversalLap>,
+                    private val prefsHelper: PreferencesHelper)
     : BaseUseCase() {
 
     private var gameId: Long? = null
@@ -31,11 +31,11 @@ class PlayerUseCase(val universalRepo: GameRepository<UniversalLap>,
 
     suspend fun savePlayer(player: Player) = asyncAwait { universalRepo.savePlayer(getGameId(), player) }
 
-    suspend fun getScores(): IntArray {
+    suspend fun getScores(): List<Int> {
         val laps = universalRepo.getLaps(getGameId())
-        laps.forEach { it.isTotalDisplayed = prefsHelper.isTotalDisplayed() }
+        laps.asSequence().map { it.isTotalDisplayed = prefsHelper.isTotalDisplayed() }
 
-        val scores = IntArray(laps.first().laps.size)
+        val scores = ArrayList<Int>(laps.first().laps.size)
         laps.forEach { lap ->
             scores.forEachIndexed { index, _ ->
                 scores[index] += lap[index]

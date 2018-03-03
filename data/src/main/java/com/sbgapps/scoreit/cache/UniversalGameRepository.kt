@@ -19,13 +19,12 @@ package com.sbgapps.scoreit.cache
 import com.sbgapps.scoreit.cache.db.PlayerDao
 import com.sbgapps.scoreit.cache.db.UniversalGameDao
 import com.sbgapps.scoreit.cache.db.UniversalLapDao
-import com.sbgapps.scoreit.cache.db.initializer.DatabaseInitializer
+import com.sbgapps.scoreit.cache.db.DatabaseInitializer
 import com.sbgapps.scoreit.cache.mapper.PlayerMapper
 import com.sbgapps.scoreit.cache.mapper.UniversalLapMapper
 import com.sbgapps.scoreit.domain.model.Player
 import com.sbgapps.scoreit.domain.model.UniversalLap
 import com.sbgapps.scoreit.domain.repository.GameRepository
-
 
 class UniversalGameRepository(val gameDao: UniversalGameDao,
                               val playerDao: PlayerDao,

@@ -14,13 +14,26 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.ui.ext
+package com.sbgapps.scoreit.ui
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.Transformations
+import android.app.Application
+import com.sbgapps.scoreit.cache.di.dataModule
+import com.sbgapps.scoreit.domain.di.domainModule
+import com.sbgapps.scoreit.ui.di.uiModule
+import org.koin.android.ext.android.startKoin
 
-fun <T> LiveData<T>.observe(owner: LifecycleOwner, observer: (T?) -> Unit) = observe(owner, Observer<T> { v -> observer.invoke(v) })
 
-fun <X, Y> LiveData<X>.switchMap(func: (X) -> LiveData<Y>) = Transformations.switchMap(this, func)
+class ScoreItApp : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+
+        startKoin(this,
+                listOf(
+                        dataModule,
+                        domainModule,
+                        uiModule
+                )
+        )
+    }
+}
