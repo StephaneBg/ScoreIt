@@ -52,9 +52,9 @@ android {
 
 dependencies {
     implementation project(':domain')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$versions.kotlin"
-    implementation "android.arch.persistence.room:runtime:$versions.archRoom"
-    implementation "com.squareup.moshi:moshi:$versions.moshi"
+    implementation Libs.kotlinStd
+    implementation Libs.archRoom
+    implementation Libs.moshi
 
-    kapt "android.arch.persistence.room:compiler:$versions.archRoom"
+    kapt Libs.archRoomCompiler
 }
