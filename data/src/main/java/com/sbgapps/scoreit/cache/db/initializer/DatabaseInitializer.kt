@@ -31,7 +31,8 @@ class DatabaseInitializer(val db: UniversalDatabase) {
     }
 
     fun populatePlayers(gameId: Long, count: Int) {
-        for (i in 0 until count) {
+        val _count = if (count > NAMES.size) NAMES.size else count
+        for (i in 0 until _count) {
             db.playerDao().insertPlayer(PlayerEntity(null, gameId, NAMES[i], 0x424242))
         }
     }

@@ -14,6 +14,18 @@
  * limitations under the License.
  */
 
-plugins {
-    `kotlin-dsl`
+package com.sbgapps.scoreit.ui.header
+
+import com.sbgapps.scoreit.ui.base.BaseFragment
+
+
+class HeaderFragment : BaseFragment() {
+
+
+    companion object {
+
+        fun newInstance(): HeaderFragment {
+            return HeaderFragment()
+        }
+    }
 }

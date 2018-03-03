@@ -16,7 +16,8 @@
 
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <style name="AppTheme"
+        parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
@@ -30,25 +31,30 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="AlertDialogTheme"
+        parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="buttonBarPositiveButtonStyle">@style/AlertDialogPositiveButton</item>
         <item name="buttonBarNegativeButtonStyle">@style/AlertDialogNegativeButton</item>
     </style>
 
-    <style name="AlertDialogPositiveButton" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <style name="AlertDialogPositiveButton"
+        parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/color_primary</item>
     </style>
 
-    <style name="AlertDialogNegativeButton" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <style name="AlertDialogNegativeButton"
+        parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@android:color/primary_text_dark</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
+    <style name="AppTheme.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:textColorPrimary">@color/color_primary</item>
     </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.PopupOverlay"
+        parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Header" parent="TextAppearance.AppCompat.Title">
-    </style>
+    <style name="TextAppearance.Title"
+        parent="TextAppearance.AppCompat.Title"/>
 </resources>

@@ -21,51 +21,27 @@ import com.sbgapps.scoreit.domain.model.UniversalLap
 import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.domain.repository.GameRepository
 
-
-class UniversalUseCase(val universalRepo: GameRepository<UniversalLap>,
-                       val prefsHelper: PreferencesHelper)
+class PlayerUseCase(val universalRepo: GameRepository<UniversalLap>,
+                    val prefsHelper: PreferencesHelper)
     : BaseUseCase() {
 
     private var gameId: Long? = null
 
-    suspend fun deleteGame() {
-        universalRepo.deleteGame(getGameId())
-    }
+    suspend fun getPlayers(): List<Player> = asyncAwait { universalRepo.getPlayers(getGameId()) }
 
-    suspend fun getPlayers(): List<Player> {
-        return asyncAwait {
-            universalRepo.getPlayers(getGameId())
-        }
-    }
+    suspend fun savePlayer(player: Player) = asyncAwait { universalRepo.savePlayer(getGameId(), player) }
 
-    suspend fun savePlayer(player: Player) {
-        asyncAwait {
-            universalRepo.savePlayer(getGameId(), player)
-        }
-    }
+    suspend fun getScores(): IntArray {
+        val laps = universalRepo.getLaps(getGameId())
+        laps.forEach { it.isTotalDisplayed = prefsHelper.isTotalDisplayed() }
 
-    suspend fun getLaps(): List<UniversalLap> {
-        return asyncAwait {
-            universalRepo.getLaps(getGameId())
+        val scores = IntArray(laps.first().laps.size)
+        laps.forEach { lap ->
+            scores.forEachIndexed { index, _ ->
+                scores[index] += lap[index]
+            }
         }
-    }
-
-    suspend fun saveLap(lap: UniversalLap) {
-        asyncAwait {
-            universalRepo.saveLap(getGameId(), lap)
-        }
-    }
-
-    suspend fun deleteLap(lap: UniversalLap) {
-        asyncAwait {
-            universalRepo.deleteLap(getGameId(), lap)
-        }
-    }
-
-    suspend fun clearLaps() {
-        asyncAwait {
-            universalRepo.clearLaps(getGameId())
-        }
+        return scores
     }
 
     private suspend fun getGameId(): Long {

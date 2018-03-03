@@ -16,8 +16,10 @@
 
 package com.sbgapps.scoreit.ui.header
 
-import android.arch.lifecycle.ViewModel
+import com.sbgapps.scoreit.ui.base.BaseViewModel
 
 
-class HeaderViewModel: ViewModel(){
+class HeaderViewModel : BaseViewModel() {
+
+
 }
