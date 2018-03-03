@@ -25,17 +25,17 @@ kotlin {
 
 android {
 
-    compileSdkVersion buildConfig.compileSdk
-    buildToolsVersion buildConfig.buildTools
+    buildToolsVersion Android.buildToolsVersion
+    compileSdkVersion Android.compileSdkVersion
 
     compileOptions {
-        sourceCompatibility buildConfig.sourceCompatibilityVersion
-        targetCompatibility buildConfig.targetCompatibilityVersion
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     defaultConfig {
-        minSdkVersion buildConfig.minSdk
-        targetSdkVersion buildConfig.targetSdk
+        minSdkVersion Android.minSdkVersion
+        targetSdkVersion Android.targetSdkVersion
         resConfigs "en", "fr"
     }
 

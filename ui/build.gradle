@@ -26,17 +26,19 @@ kotlin {
 
 android {
 
-    compileSdkVersion buildConfig.compileSdk
-    buildToolsVersion buildConfig.buildTools
+    buildToolsVersion Android.buildToolsVersion
+    compileSdkVersion Android.compileSdkVersion
 
     compileOptions {
-        sourceCompatibility buildConfig.sourceCompatibilityVersion
-        targetCompatibility buildConfig.targetCompatibilityVersion
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     defaultConfig {
-        minSdkVersion buildConfig.minSdk
-        targetSdkVersion buildConfig.targetSdk
+        versionCode Android.versionCode
+        versionName Android.versionName
+        minSdkVersion Android.minSdkVersion
+        targetSdkVersion Android.targetSdkVersion
         vectorDrawables.useSupportLibrary = true
         resConfigs "en", "fr"
     }
@@ -64,19 +66,6 @@ android {
             minifyEnabled false
             debuggable true
             applicationIdSuffix '.debug'
-        }
-    }
-
-    flavorDimensions "target"
-    productFlavors {
-        dev {
-            versionCode 1
-            versionName "1.0"
-        }
-
-        prod {
-            versionCode 1
-            versionName "1.0"
         }
     }
 
