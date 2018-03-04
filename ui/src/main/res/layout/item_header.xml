@@ -14,11 +14,34 @@
   ~ limitations under the License.
   -->
 
-<TextView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/playerName"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:ellipsize="end"
-    />
+    android:background="@color/color_primary"
+    android:orientation="vertical"
+    tools:layout_width="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/name"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        tools:text="Titi"
+        />
+
+    <TextView
+        android:id="@+id/score"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        tools:text="16"
+        />
+</LinearLayout>

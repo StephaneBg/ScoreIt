@@ -17,17 +17,25 @@
 package com.sbgapps.scoreit.ui
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import com.sbgapps.scoreit.ui.base.BaseActivity
 import com.sbgapps.scoreit.ui.ext.replaceFragment
 import com.sbgapps.scoreit.ui.header.HeaderFragment
+import com.sbgapps.scoreit.ui.header.UniversalViewModel
+import kotlinx.coroutines.experimental.launch
+import org.koin.android.architecture.ext.getViewModel
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        replaceFragment(R.id.headerContainer, HeaderFragment.newInstance())
+        val model = getViewModel<UniversalViewModel>()
+        launch {
+            model.init()
+        }.invokeOnCompletion {
+            replaceFragment(R.id.headerContainer, HeaderFragment.newInstance())
+        }
     }
 }

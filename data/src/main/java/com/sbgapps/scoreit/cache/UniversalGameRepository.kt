@@ -29,8 +29,12 @@ class UniversalGameRepository(val dbRepo: DatabaseRepo,
                               val dbInit: DatabaseInitializer)
     : GameRepository<UniversalLap> {
 
-    override fun getGameId(name: String): Long {
-        return dbRepo.universalDb.gameDao().getGame(name).id ?: dbInit.createGame()
+    override fun getGameId(name: String?): Long {
+        return name?.let {
+            dbRepo.universalDb.gameDao().getGame(name).id
+        } ?: run {
+            dbInit.createGame()
+        }
     }
 
     override fun deleteGame(gameId: Long) {

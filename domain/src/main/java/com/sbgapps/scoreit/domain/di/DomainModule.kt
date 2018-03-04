@@ -17,13 +17,11 @@
 package com.sbgapps.scoreit.domain.di
 
 import com.sbgapps.scoreit.domain.preference.PreferencesHelper
-import com.sbgapps.scoreit.domain.usecase.HeaderUseCase
-import com.sbgapps.scoreit.domain.usecase.LapUseCase
+import com.sbgapps.scoreit.domain.usecase.UniversalUseCase
 import org.koin.dsl.module.applicationContext
 
 val domainModule = applicationContext {
 
     provide { PreferencesHelper(get()) }
-    provide { HeaderUseCase(get(), get()) }
-    provide { LapUseCase(get(), get()) }
+    provide { UniversalUseCase(get(), get()) }
 }

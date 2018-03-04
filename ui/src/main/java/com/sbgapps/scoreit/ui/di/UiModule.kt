@@ -16,11 +16,11 @@
 
 package com.sbgapps.scoreit.ui.di
 
-import com.sbgapps.scoreit.ui.header.HeaderViewModel
+import com.sbgapps.scoreit.ui.header.UniversalViewModel
 import org.koin.android.architecture.ext.viewModel
 import org.koin.dsl.module.applicationContext
 
 val uiModule = applicationContext {
 
-    viewModel { HeaderViewModel(get()) }
+    viewModel { UniversalViewModel(get()) }
 }

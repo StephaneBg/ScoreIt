@@ -35,7 +35,7 @@ interface UniversalGameDao {
     fun getGame(name: String): UniversalGameEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertGame(game: UniversalGameEntity)
+    fun insertGame(game: UniversalGameEntity): Long
 
     @Query("DELETE FROM games WHERE id = :id")
     fun deleteGame(id: Long)

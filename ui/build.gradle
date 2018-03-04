@@ -18,11 +18,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-kotlin {
-    experimental {
-        coroutines 'enable'
-    }
-}
+kotlin { experimental { coroutines 'enable' } }
 
 android {
 

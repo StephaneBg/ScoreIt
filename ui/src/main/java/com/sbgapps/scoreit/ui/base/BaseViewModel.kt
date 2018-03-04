@@ -31,6 +31,11 @@ open class BaseViewModel : ViewModel() {
 
     private val asyncJobs = mutableListOf<Job>()
 
+    override fun onCleared() {
+        super.onCleared()
+        cleanup()
+    }
+
     @CallSuper
     @Synchronized
     protected fun launchAsync(block: suspend CoroutineScope.() -> Unit) {

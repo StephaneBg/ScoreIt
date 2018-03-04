@@ -19,15 +19,15 @@ package com.sbgapps.scoreit.cache.db
 import com.sbgapps.scoreit.cache.DatabaseRepo
 import com.sbgapps.scoreit.cache.model.PlayerEntity
 import com.sbgapps.scoreit.cache.model.UniversalGameEntity
+import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 
-
-class DatabaseInitializer(val dbRepo: DatabaseRepo) {
+class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
 
     fun createGame(): Long {
-        val game = UniversalGameEntity(null, "Default")
-        dbRepo.universalDb.gameDao().insertGame(game)
-        game.id?.let { populatePlayers(it, 4) } ?: run { throw (Throwable("Cannot create game")) }
-        return game.id
+        val game = UniversalGameEntity(name = PreferencesHelper.DEFAULT_GAME_NAME)
+        val id = dbRepo.universalDb.gameDao().insertGame(game)
+        populatePlayers(id, 4)
+        return id
     }
 
     fun populatePlayers(gameId: Long, count: Int) {

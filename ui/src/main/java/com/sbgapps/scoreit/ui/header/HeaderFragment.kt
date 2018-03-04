@@ -21,44 +21,62 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.BaseAdapter
+import android.widget.TextView
 import com.sbgapps.scoreit.domain.model.Player
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.inflate
+import kotlinx.android.synthetic.main.fragment_header.*
+import org.jetbrains.anko.find
 import org.koin.android.architecture.ext.viewModel
 
 
 class HeaderFragment : BaseFragment() {
 
-    private val model: HeaderViewModel by viewModel()
-    private lateinit var playerAdapter: ArrayAdapter<Player>
-    private lateinit var scoreAdapter: ArrayAdapter<Int>
+    private val model: UniversalViewModel by viewModel(true)
+    private val adapter = HeaderAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_header)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        header.adapter = adapter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        playerAdapter = ArrayAdapter(activity!!, R.layout.item_player, R.id.playerName)
-        model.getPlayers().observe(this, Observer {
-            playerAdapter.clear()
-            playerAdapter.addAll(it)
+        model.getPlayersAndScores().observe(this, Observer {
+            it?.let { adapter.setItems(it) }
         })
+    }
 
-        scoreAdapter = ArrayAdapter(activity!!, R.layout.item_player, R.id.playerName)
-        model.getScores().observe(this, Observer {
-            scoreAdapter.clear()
-            scoreAdapter.addAll(it)
-        })
+    inner class HeaderAdapter : BaseAdapter() {
 
-        model.getPlayers()
-        model.getScores()
+        private var items: List<Pair<Player, Int>> = emptyList()
+
+        fun setItems(items: List<Pair<Player, Int>>) {
+            this.items = items
+            notifyDataSetChanged()
+        }
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val view = convertView ?: parent.inflate(R.layout.item_header)
+
+            val (player, score) = getItem(position)
+            view.find<TextView>(R.id.name).text = player.name
+            view.find<TextView>(R.id.score).text = score.toString()
+
+            return view
+        }
+
+        override fun getItem(position: Int) = items[position]
+
+        override fun getItemId(position: Int) = position.toLong()
+
+        override fun getCount() = items.size
     }
 
     companion object {
