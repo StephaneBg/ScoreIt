@@ -16,15 +16,16 @@
 
 package com.sbgapps.scoreit.cache.db
 
+import com.sbgapps.scoreit.cache.DatabaseRepo
 import com.sbgapps.scoreit.cache.model.PlayerEntity
 import com.sbgapps.scoreit.cache.model.UniversalGameEntity
 
 
-class DatabaseInitializer(val db: UniversalDatabase) {
+class DatabaseInitializer(val dbRepo: DatabaseRepo) {
 
     fun createGame(): Long {
         val game = UniversalGameEntity(null, "Default")
-        db.gameDao().insertGame(game)
+        dbRepo.universalDb.gameDao().insertGame(game)
         game.id?.let { populatePlayers(it, 4) } ?: run { throw (Throwable("Cannot create game")) }
         return game.id
     }
@@ -32,7 +33,7 @@ class DatabaseInitializer(val db: UniversalDatabase) {
     fun populatePlayers(gameId: Long, count: Int) {
         val _count = if (count > NAMES.size) NAMES.size else count
         for (i in 0 until _count) {
-            db.playerDao().insertPlayer(PlayerEntity(null, gameId, NAMES[i], 0x424242))
+            dbRepo.universalDb.playerDao().insertPlayer(PlayerEntity(null, gameId, NAMES[i], 0x424242))
         }
     }
 

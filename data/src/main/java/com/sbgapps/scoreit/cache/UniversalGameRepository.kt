@@ -16,9 +16,6 @@
 
 package com.sbgapps.scoreit.cache
 
-import com.sbgapps.scoreit.cache.db.PlayerDao
-import com.sbgapps.scoreit.cache.db.UniversalGameDao
-import com.sbgapps.scoreit.cache.db.UniversalLapDao
 import com.sbgapps.scoreit.cache.db.DatabaseInitializer
 import com.sbgapps.scoreit.cache.mapper.PlayerMapper
 import com.sbgapps.scoreit.cache.mapper.UniversalLapMapper
@@ -26,39 +23,37 @@ import com.sbgapps.scoreit.domain.model.Player
 import com.sbgapps.scoreit.domain.model.UniversalLap
 import com.sbgapps.scoreit.domain.repository.GameRepository
 
-class UniversalGameRepository(val gameDao: UniversalGameDao,
-                              val playerDao: PlayerDao,
-                              val lapDao: UniversalLapDao,
+class UniversalGameRepository(val dbRepo: DatabaseRepo,
                               val playerMapper: PlayerMapper,
                               val lapMapper: UniversalLapMapper,
                               val dbInit: DatabaseInitializer)
     : GameRepository<UniversalLap> {
 
     override fun getGameId(name: String): Long {
-        return gameDao.getGame(name).id ?: dbInit.createGame()
+        return dbRepo.universalDb.gameDao().getGame(name).id ?: dbInit.createGame()
     }
 
     override fun deleteGame(gameId: Long) {
-        gameDao.deleteGame(gameId)
+        dbRepo.universalDb.gameDao().deleteGame(gameId)
     }
 
-    override fun getPlayers(gameId: Long): List<Player> = playerDao.getPlayers(gameId).map { playerMapper.mapFromCache(it) }
+    override fun getPlayers(gameId: Long): List<Player> = dbRepo.universalDb.playerDao().getPlayers(gameId).map { playerMapper.mapFromCache(it) }
 
     override fun savePlayer(gameId: Long, player: Player) {
-        playerDao.insertPlayer(playerMapper.mapToCache(player, gameId))
+        dbRepo.universalDb.playerDao().insertPlayer(playerMapper.mapToCache(player, gameId))
     }
 
-    override fun getLaps(gameId: Long): List<UniversalLap> = lapDao.getLaps(gameId).map { lapMapper.mapFromCache(it) }
+    override fun getLaps(gameId: Long): List<UniversalLap> = dbRepo.universalDb.lapDao().getLaps(gameId).map { lapMapper.mapFromCache(it) }
 
     override fun saveLap(gameId: Long, lap: UniversalLap) {
-        lapDao.insertLap(lapMapper.mapToCache(lap, gameId))
+        dbRepo.universalDb.lapDao().insertLap(lapMapper.mapToCache(lap, gameId))
     }
 
     override fun deleteLap(gameId: Long, lap: UniversalLap) {
-        lapDao.deleteLap(lapMapper.mapToCache(lap, gameId))
+        dbRepo.universalDb.lapDao().deleteLap(lapMapper.mapToCache(lap, gameId))
     }
 
     override fun clearLaps(gameId: Long) {
-        lapDao.clearLaps(gameId)
+        dbRepo.universalDb.lapDao().clearLaps(gameId)
     }
 }

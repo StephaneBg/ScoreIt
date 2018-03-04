@@ -40,7 +40,7 @@ object Android {
     val minSdkVersion = 21
     val targetSdkVersion = 27
     val compileSdkVersion = 27
-    val applicationId = "com.sbgapps.scoreit.reloaded"
+    val applicationId = "com.sbgapps.scoreit"
     val versionCode = 1
     val versionName = "0.1"
 }

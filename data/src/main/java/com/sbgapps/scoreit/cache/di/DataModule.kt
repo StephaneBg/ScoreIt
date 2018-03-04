@@ -16,8 +16,9 @@
 
 package com.sbgapps.scoreit.cache.di
 
+import com.sbgapps.scoreit.cache.DatabaseRepo
 import com.sbgapps.scoreit.cache.UniversalGameRepository
-import com.sbgapps.scoreit.cache.db.*
+import com.sbgapps.scoreit.cache.db.DatabaseInitializer
 import com.sbgapps.scoreit.cache.mapper.PlayerMapper
 import com.sbgapps.scoreit.cache.mapper.UniversalLapMapper
 import com.sbgapps.scoreit.domain.model.UniversalLap
@@ -29,11 +30,7 @@ val dataModule = applicationContext {
     bean { PlayerMapper() }
     bean { UniversalLapMapper() }
 
-    provide { UniversalDatabase_Impl() as UniversalDatabase }
-    provide { UniversalGameDao_Impl(get()) as UniversalGameDao }
-    provide { PlayerDao_Impl(get()) as PlayerDao }
-    provide { UniversalLapDao_Impl(get()) as UniversalLapDao }
-
+    provide { DatabaseRepo(get()) }
     provide { DatabaseInitializer(get()) }
-    provide { UniversalGameRepository(get(), get(), get(), get(), get(), get()) as GameRepository<UniversalLap> }
+    provide { UniversalGameRepository(get(), get(), get(), get()) as GameRepository<UniversalLap> }
 }
