@@ -18,6 +18,9 @@ package com.sbgapps.scoreit.ui
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.ui.base.BaseActivity
 import com.sbgapps.scoreit.ui.ext.color
 import com.sbgapps.scoreit.ui.ext.replaceFragment
@@ -29,11 +32,13 @@ import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel.Mode.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.launch
 import org.koin.android.architecture.ext.viewModel
+import org.koin.android.ext.android.inject
 
 
 class MainActivity : BaseActivity() {
 
     private val model by viewModel<UniversalViewModel>()
+    private val prefsHelper by inject<PreferencesHelper>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +52,31 @@ class MainActivity : BaseActivity() {
                 replaceFragment(R.id.lapContainer, LapListFragment.newInstance())
             }
 
+        setSupportActionBar(toolbar)
         fab.setOnClickListener { onFabClicked() }
         decorFab()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.totals -> {
+                if (prefsHelper.isTotalDisplayed) {
+                    prefsHelper.isTotalDisplayed = false
+                    item.title = getString(R.string.menu_action_show_totals)
+                } else {
+                    prefsHelper.isTotalDisplayed = true
+                    item.title = getString(R.string.menu_action_hide_totals)
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onBackPressed() {
         if (model.isOnHistoryMode()) {

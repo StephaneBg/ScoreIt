@@ -14,15 +14,8 @@
   ~ limitations under the License.
   -->
 
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+<resources>
 
-    <item
-        android:id="@+id/totals"
-        android:icon="@drawable/ic_sigma_primary_24dp"
-        android:title="@string/menu_action_show_totals"
-        app:showAsAction="always"
-        />
-</menu>
+    <!-- Universal -->
+    <string name="universal_total_points">Total</string>
+</resources>

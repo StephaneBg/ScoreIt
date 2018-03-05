@@ -94,9 +94,6 @@
     <string name="tarot_bonus_slam_announced_not_done">Slam announced - Not done</string>
     <string name="tarot_bonus_slam_announced_done">Slam announced - Done</string>
 
-    <!-- Universal -->
-    <string name="universal_total_points">Total</string>
-
     <!-- Dialog -->
     <string name="dialog_title_current_game">Current game</string>
     <string name="dialog_title_filename">Filename</string>

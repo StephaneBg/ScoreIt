@@ -19,25 +19,42 @@ package com.sbgapps.scoreit.domain.preference
 import android.content.Context
 import android.preference.PreferenceManager
 import androidx.content.edit
+import com.sbgapps.scoreit.domain.R
+import com.sbgapps.scoreit.domain.model.Player
+import timber.log.Timber
 
 
-class PreferencesHelper(context: Context) {
+class PreferencesHelper(private val context: Context) {
 
     private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    var isTotalDisplayed: Boolean
+        get() {
+            return sharedPreferences.getBoolean(KEY_UNIVERSAL_SHOW_TOTAL, false)
+        }
+        set(value) {
+            sharedPreferences.edit { putBoolean(KEY_UNIVERSAL_SHOW_TOTAL, value) }
+        }
 
     fun getUniversalGameName(): String? {
-        return sharedPreferences.getString("UNIVERSAL_GAME_NAME", null)
+        return sharedPreferences.getString(KEY_UNIVERSAL_GAME_NAME, null)
     }
 
     fun setUniversalGame(name: String) {
-        sharedPreferences.edit { putString(UNIVERSAL_GAME_NAME, name) }
+        sharedPreferences.edit { putString(KEY_UNIVERSAL_GAME_NAME, name) }
     }
 
-    fun isTotalDisplayed() = sharedPreferences.getBoolean("UNIVERSAL_SHOW_TOTAL", false)
+    fun getTotalPlayer() = Player(null, context.getString(R.string.universal_total_points), 0xFF757575.toInt())
+
+    fun onUniversalTotalChanged(block: () -> Unit) {
+        sharedPreferences.registerOnSharedPreferenceChangeListener { _, key ->
+            Timber.d("Show is total was updated")
+            if (key == KEY_UNIVERSAL_SHOW_TOTAL) block.invoke()
+        }
+    }
 
     companion object {
         const val DEFAULT_GAME_NAME = "ScoreIt"
-        const val UNIVERSAL_GAME_NAME = "UNIVERSAL_GAME_NAME"
-        const val UNIVERSAL_SHOW_TOTAL = "UNIVERSAL_SHOW_TOTAL"
+        private const val KEY_UNIVERSAL_GAME_NAME = "KEY_UNIVERSAL_GAME_NAME"
+        private const val KEY_UNIVERSAL_SHOW_TOTAL = "KEY_UNIVERSAL_SHOW_TOTAL"
     }
 }

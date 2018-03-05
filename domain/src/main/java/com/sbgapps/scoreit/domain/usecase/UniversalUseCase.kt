@@ -31,14 +31,24 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
     private lateinit var scores: MutableList<Int>
     private lateinit var laps: MutableList<UniversalLap>
 
-    fun getPlayers(): MutableList<Player> = players
+    fun getPlayers(): MutableList<Player> {
+        return if (prefsHelper.isTotalDisplayed) {
+            val _players = ArrayList(players)
+            _players.add(prefsHelper.getTotalPlayer())
+            _players
+        } else players
+    }
 
     fun getScores(): MutableList<Int> {
         computeScores()
         return scores
     }
 
-    fun getLaps(): MutableList<UniversalLap> = laps
+    fun getLaps(): MutableList<UniversalLap> {
+//        val isTotalDisplayed = prefsHelper.isTotalDisplayed
+//        laps.map { it.isTotalDisplayed = isTotalDisplayed }
+        return laps
+    }
 
     suspend fun addLap(lap: UniversalLap) {
         laps.add(lap)
@@ -53,17 +63,17 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
         val name = prefsHelper.getUniversalGameName()
         name ?: run { prefsHelper.setUniversalGame(PreferencesHelper.DEFAULT_GAME_NAME) }
         gameId = universalRepo.getGameId(name)
-
         players = universalRepo.getPlayers(gameId).toMutableList()
-
         laps = universalRepo.getLaps(gameId).toMutableList()
-        val isTotalDisplayed = prefsHelper.isTotalDisplayed()
-        laps.asSequence().map { it.isTotalDisplayed = isTotalDisplayed }
     }
 
     private fun computeScores() {
-        scores = ArrayList(players.size)
-        for (i in 0 until players.size) scores.add(0)
+        val isTotalDisplayed = prefsHelper.isTotalDisplayed
+        laps.map { it.isTotalDisplayed = isTotalDisplayed }
+
+        val count = if (isTotalDisplayed) players.size + 1 else players.size
+        scores = ArrayList(count)
+        for (i in 0 until count) scores.add(0)
 
         laps.forEach { lap ->
             lap.points.forEachIndexed { index, points ->

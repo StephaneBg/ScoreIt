@@ -46,7 +46,6 @@ class LapListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         lapRecycler.layoutManager = LinearLayoutManager(context)
-        lapRecycler.emptyView = emptyView
         lapRecycler.adapter = adapter
         lapRecycler.setHasFixedSize(true)
     }

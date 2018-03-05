@@ -20,11 +20,13 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.sbgapps.scoreit.domain.model.Player
 import com.sbgapps.scoreit.domain.model.UniversalLap
+import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.domain.usecase.UniversalUseCase
 import com.sbgapps.scoreit.ui.base.BaseViewModel
 
 
-class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel() {
+class UniversalViewModel(private val useCase: UniversalUseCase,
+                         private val prefsHelper: PreferencesHelper) : BaseViewModel() {
 
     private val players = MutableLiveData<List<Player>>()
     private val scores = MutableLiveData<List<Int>>()
@@ -34,6 +36,13 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
         private set
 
     suspend fun initGame() {
+        prefsHelper.onUniversalTotalChanged {
+            launchAsync {
+                players.postValue(useCase.getPlayers())
+                scores.postValue(useCase.getScores())
+                laps.postValue(useCase.getLaps())
+            }
+        }
         useCase.initGame()
     }
 

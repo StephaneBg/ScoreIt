@@ -16,27 +16,15 @@
 
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-    <com.sbgapps.scoreit.ui.widget.EmptyRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/lapRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/margin_padding_size_medium"
         android:clipToPadding="false"
-        />
-
-    <ImageView
-        android:id="@+id/emptyView"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_gravity="center"
-        android:tint="@color/light_grey"
-        app:srcCompat="@drawable/ic_cards_black_24dp"
-        tools:ignore="ContentDescription"
+        android:paddingTop="@dimen/margin_padding_size_medium"
         />
 </FrameLayout>

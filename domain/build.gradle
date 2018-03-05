@@ -61,4 +61,5 @@ dependencies {
     implementation Libs.appcompat
     implementation Libs.androidKtx
     implementation Libs.koinAndroid
+    implementation Libs.timber
 }
