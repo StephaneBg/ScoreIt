@@ -19,25 +19,29 @@ package com.sbgapps.scoreit.cache.db
 import android.arch.persistence.room.TypeConverter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
+import timber.log.Timber
 
 
 class LapConverter {
 
+    private val adapter = Moshi
+            .Builder()
+            .build()
+            .adapter<List<Int>>(Types.newParameterizedType(List::class.java, Int::class.javaObjectType))
+
     @TypeConverter
-    fun fromString(value: String): ArrayList<Int>? {
-        return Moshi
-                .Builder()
-                .build()
-                .adapter<ArrayList<Int>>(Types.newParameterizedType(ArrayList::class.java, Int::class.java))
-                .fromJson(value)
+    fun fromString(json: String): List<Int>? {
+        Timber.d("Converting json to list: " + json)
+        val list = adapter.fromJson(json)
+        Timber.d("Converted json is " + list)
+        return list
     }
 
     @TypeConverter
-    fun fromArrayList(list: ArrayList<Int>?): String? {
-        return Moshi
-                .Builder()
-                .build()
-                .adapter<ArrayList<Int>>(Types.newParameterizedType(ArrayList::class.java, Int::class.java))
-                .toJson(list)
+    fun fromList(list: List<Int>?): String? {
+        Timber.d("Converting list to json: " + list)
+        val json = adapter.toJson(list)
+        Timber.d("Converted list is " + json)
+        return json
     }
 }

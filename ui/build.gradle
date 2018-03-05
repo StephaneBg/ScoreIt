@@ -93,4 +93,6 @@ dependencies {
     implementation Libs.timber
     implementation Libs.koinAndroidArch
     implementation Libs.linearListView
+
+    debugImplementation Libs.debugDb
 }

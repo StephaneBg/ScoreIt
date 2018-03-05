@@ -28,6 +28,7 @@ object Versions {
     val koin = "0.9.0"
     val androidKtx = "0.2"
     val linearListView = "1.0.1@aar"
+    val debugDb = "1.0.3"
 }
 
 object Build {
@@ -69,4 +70,6 @@ object Libs {
 
     val koinAndroid = "org.koin:koin-android:${Versions.koin}"
     val koinAndroidArch = "org.koin:koin-android-architecture:${Versions.koin}"
+
+    val debugDb = "com.amitshekhar.android:debug-db:${Versions.debugDb}"
 }

@@ -28,5 +28,5 @@ import android.arch.persistence.room.PrimaryKey
 data class UniversalLapEntity(
         @PrimaryKey(autoGenerate = true) val id: Long? = null,
         val gameId: Long,
-        var points: ArrayList<Int>
+        var points: List<Int>
 )
