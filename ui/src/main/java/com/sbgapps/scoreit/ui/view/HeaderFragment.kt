@@ -22,14 +22,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.TextView
 import com.sbgapps.scoreit.domain.model.Player
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.inflate
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import kotlinx.android.synthetic.main.fragment_header.*
-import org.jetbrains.anko.find
+import kotlinx.android.synthetic.main.item_header.view.*
 import org.koin.android.architecture.ext.viewModel
 import kotlin.math.min
 
@@ -74,9 +73,12 @@ class HeaderFragment : BaseFragment() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             val view = convertView ?: parent.inflate(R.layout.item_header)
 
-            val (player, score) = getItem(position)
-            view.find<TextView>(R.id.name).text = player.name
-            view.find<TextView>(R.id.score).text = score.toString()
+            val (player, _score) = getItem(position)
+            with(view) {
+                name.text = player.name
+                name.setTextColor(player.color)
+                score.text = _score.toString()
+            }
 
             return view
         }

@@ -18,6 +18,8 @@ package com.sbgapps.scoreit.ui
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.support.annotation.ColorRes
+import android.support.annotation.DrawableRes
 import com.sbgapps.scoreit.ui.base.BaseActivity
 import com.sbgapps.scoreit.ui.ext.color
 import com.sbgapps.scoreit.ui.ext.replaceFragment
@@ -40,7 +42,7 @@ class MainActivity : BaseActivity() {
 
         if (null == savedInstanceState)
             launch {
-                model.init()
+                model.initGame()
             }.invokeOnCompletion {
                 replaceFragment(R.id.headerContainer, HeaderFragment.newInstance())
                 replaceFragment(R.id.lapContainer, LapListFragment.newInstance())
@@ -49,16 +51,27 @@ class MainActivity : BaseActivity() {
         fab.setOnClickListener { onFabClicked() }
     }
 
+    override fun onBackPressed() {
+        if (model.isOnLapEdition()) {
+            decorFab(R.color.color_accent, R.drawable.ic_add_black_24dp)
+            model.clearLapEdition()
+        }
+        super.onBackPressed()
+    }
+
     private fun onFabClicked() {
         if (model.isOnLapEdition()) {
             model.onLapEditionCompleted()
-            fab.backgroundTintList = ColorStateList.valueOf(color(R.color.color_accent))
-            fab.setImageDrawable(getDrawable(R.drawable.ic_add_black_24dp))
+            decorFab(R.color.color_accent, R.drawable.ic_add_black_24dp)
             supportFragmentManager.popBackStack()
         } else {
-            fab.backgroundTintList = ColorStateList.valueOf(color(R.color.color_primary))
-            fab.setImageDrawable(getDrawable(R.drawable.ic_done_black_24dp))
+            decorFab(R.color.color_primary, R.drawable.ic_done_black_24dp)
             replaceFragment(R.id.lapContainer, UniversalLapFragment.newInstance(), true)
         }
+    }
+
+    private fun decorFab(@ColorRes color: Int, @DrawableRes icon: Int) {
+        fab.backgroundTintList = ColorStateList.valueOf(color(color))
+        fab.setImageDrawable(getDrawable(icon))
     }
 }

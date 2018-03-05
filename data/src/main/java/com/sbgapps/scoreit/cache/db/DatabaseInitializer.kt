@@ -20,6 +20,7 @@ import com.sbgapps.scoreit.cache.DatabaseRepo
 import com.sbgapps.scoreit.cache.model.PlayerEntity
 import com.sbgapps.scoreit.cache.model.UniversalGameEntity
 import com.sbgapps.scoreit.domain.preference.PreferencesHelper
+import kotlin.math.min
 
 class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
 
@@ -31,9 +32,9 @@ class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
     }
 
     private fun populatePlayers(gameId: Long, count: Int) {
-        val _count = if (count > NAMES.size) NAMES.size else count
+        val _count = min(count, NAMES.size)
         for (i in 0 until _count) {
-            dbRepo.universalDb.playerDao().insertPlayer(PlayerEntity(null, gameId, NAMES[i], 0x424242))
+            dbRepo.universalDb.playerDao().insertPlayer(PlayerEntity(null, gameId, NAMES[i], COLORS[i]))
         }
     }
 
@@ -47,6 +48,17 @@ class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
                 "Baba",
                 "Lili",
                 "Bubu"
+        )
+
+        private val COLORS = listOf(
+                0xFFF57C00.toInt(),
+                0xFF388E3C.toInt(),
+                0xFF1976D2.toInt(),
+                0xFF7B1FA2.toInt(),
+                0xFF00796B.toInt(),
+                0xFFD32F2F.toInt(),
+                0xFF5D4037.toInt(),
+                0xFF303F9F.toInt()
         )
     }
 }

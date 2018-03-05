@@ -31,8 +31,8 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
     private val laps = MutableLiveData<MutableList<UniversalLap>>()
     private var lap = MutableLiveData<UniversalLap>()
 
-    suspend fun init() {
-        useCase.execute()
+    suspend fun initGame() {
+        useCase.initGame()
     }
 
     fun getPlayers(): LiveData<List<Player>> {
@@ -55,11 +55,15 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
             lap.value?.let { useCase.addLap(it) }
             laps.postValue(useCase.getLaps())
             scores.postValue(useCase.getScores())
-            lap.value = null
+            clearLapEdition()
         }
     }
 
     fun isOnLapEdition(): Boolean = lap.value != null
+
+    fun clearLapEdition() {
+        lap.value = null
+    }
 
     fun getLap(): LiveData<UniversalLap> {
         lap.value ?: run {

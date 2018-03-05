@@ -28,9 +28,6 @@ interface PlayerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPlayer(player: PlayerEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPlayers(players: List<PlayerEntity>)
-
     @Update
     fun updatePlayer(player: PlayerEntity)
 }

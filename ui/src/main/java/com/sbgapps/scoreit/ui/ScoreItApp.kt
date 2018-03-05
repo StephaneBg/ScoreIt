@@ -21,6 +21,7 @@ import com.sbgapps.scoreit.cache.di.dataModule
 import com.sbgapps.scoreit.domain.di.domainModule
 import com.sbgapps.scoreit.ui.di.uiModule
 import org.koin.android.ext.android.startKoin
+import org.koin.log.EmptyLogger
 import timber.log.Timber
 
 
@@ -36,7 +37,8 @@ class ScoreItApp : Application() {
                         dataModule,
                         domainModule,
                         uiModule
-                )
+                ),
+                logger = EmptyLogger()
         )
     }
 }

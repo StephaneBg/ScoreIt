@@ -49,7 +49,7 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
         TODO()
     }
 
-    suspend fun execute() {
+    suspend fun initGame() {
         val name = prefsHelper.getUniversalGameName()
         name ?: run { prefsHelper.setUniversalGame(PreferencesHelper.DEFAULT_GAME_NAME) }
         gameId = universalRepo.getGameId(name)
@@ -59,12 +59,12 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
         laps = universalRepo.getLaps(gameId).toMutableList()
         val isTotalDisplayed = prefsHelper.isTotalDisplayed()
         laps.asSequence().map { it.isTotalDisplayed = isTotalDisplayed }
-
-        scores = ArrayList(players.size)
-        for (i in 0 until players.size) scores.add(0)
     }
 
     private fun computeScores() {
+        scores = ArrayList(players.size)
+        for (i in 0 until players.size) scores.add(0)
+
         laps.forEach { lap ->
             lap.points.forEachIndexed { index, points ->
                 scores[index] += points
