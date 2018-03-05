@@ -30,6 +30,8 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
     private val scores = MutableLiveData<List<Int>>()
     private val laps = MutableLiveData<MutableList<UniversalLap>>()
     private var lap = MutableLiveData<UniversalLap>()
+    var mode: Mode = Mode.MODE_HISTORY
+        private set
 
     suspend fun initGame() {
         useCase.initGame()
@@ -50,23 +52,42 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
         return laps
     }
 
+    fun startAdditionMode() {
+        mode = Mode.MODE_ADDITION
+    }
+
+    fun startUpdateMode(_lap: UniversalLap) {
+        mode = Mode.MODE_UPDATE
+        lap.value = _lap
+    }
+
     fun onLapEditionCompleted() {
+        val prevMode = mode
+        mode = Mode.MODE_HISTORY
         launchAsync {
-            lap.value?.let { useCase.addLap(it) }
+            lap.value?.let {
+                when (prevMode) {
+                    Mode.MODE_ADDITION -> useCase.addLap(it)
+                    Mode.MODE_UPDATE -> useCase.updateLap(it)
+                }
+            }
+
             laps.postValue(useCase.getLaps())
             scores.postValue(useCase.getScores())
-            clearLapEdition()
+            lap.value = null
         }
     }
 
-    fun isOnLapEdition(): Boolean = lap.value != null
+    fun isOnHistoryMode() = mode == Mode.MODE_HISTORY
 
-    fun clearLapEdition() {
+    fun endLapEdition() {
+        mode = Mode.MODE_HISTORY
         lap.value = null
     }
 
     fun getLap(): LiveData<UniversalLap> {
         lap.value ?: run {
+            mode = Mode.MODE_ADDITION
             launchAsync {
                 val players = useCase.getPlayers()
                 val points = ArrayList<Int>(players.size)
@@ -82,5 +103,11 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
             it.clear()
             it.addAll(points)
         }
+    }
+
+    enum class Mode {
+        MODE_HISTORY,
+        MODE_UPDATE,
+        MODE_ADDITION
     }
 }

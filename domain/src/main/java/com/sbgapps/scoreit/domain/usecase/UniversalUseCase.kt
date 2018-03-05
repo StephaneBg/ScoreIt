@@ -45,7 +45,7 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
         async { universalRepo.saveLap(gameId, lap) }
     }
 
-    fun editLap(lap: UniversalLap) {
+    fun updateLap(lap: UniversalLap) {
         TODO()
     }
 

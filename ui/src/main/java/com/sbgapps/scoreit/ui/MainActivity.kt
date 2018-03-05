@@ -18,8 +18,6 @@ package com.sbgapps.scoreit.ui
 
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.support.annotation.ColorRes
-import android.support.annotation.DrawableRes
 import com.sbgapps.scoreit.ui.base.BaseActivity
 import com.sbgapps.scoreit.ui.ext.color
 import com.sbgapps.scoreit.ui.ext.replaceFragment
@@ -27,6 +25,7 @@ import com.sbgapps.scoreit.ui.view.HeaderFragment
 import com.sbgapps.scoreit.ui.view.LapListFragment
 import com.sbgapps.scoreit.ui.view.UniversalLapFragment
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
+import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel.Mode.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.launch
 import org.koin.android.architecture.ext.viewModel
@@ -49,29 +48,39 @@ class MainActivity : BaseActivity() {
             }
 
         fab.setOnClickListener { onFabClicked() }
+        decorFab()
     }
 
+
     override fun onBackPressed() {
-        if (model.isOnLapEdition()) {
-            decorFab(R.color.color_accent, R.drawable.ic_add_black_24dp)
-            model.clearLapEdition()
+        if (model.isOnHistoryMode()) {
+            model.endLapEdition()
+            decorFab()
         }
         super.onBackPressed()
     }
 
     private fun onFabClicked() {
-        if (model.isOnLapEdition()) {
-            model.onLapEditionCompleted()
-            decorFab(R.color.color_accent, R.drawable.ic_add_black_24dp)
-            supportFragmentManager.popBackStack()
-        } else {
-            decorFab(R.color.color_primary, R.drawable.ic_done_black_24dp)
+        if (model.isOnHistoryMode()) {
+            model.startAdditionMode()
             replaceFragment(R.id.lapContainer, UniversalLapFragment.newInstance(), true)
+        } else {
+            model.onLapEditionCompleted()
+            supportFragmentManager.popBackStack()
         }
+        decorFab()
     }
 
-    private fun decorFab(@ColorRes color: Int, @DrawableRes icon: Int) {
-        fab.backgroundTintList = ColorStateList.valueOf(color(color))
-        fab.setImageDrawable(getDrawable(icon))
+    private fun decorFab() {
+        when (model.mode) {
+            MODE_HISTORY -> {
+                fab.backgroundTintList = ColorStateList.valueOf(color(R.color.color_accent))
+                fab.setImageDrawable(getDrawable(R.drawable.ic_add_black_24dp))
+            }
+            MODE_UPDATE, MODE_ADDITION -> {
+                fab.backgroundTintList = ColorStateList.valueOf(color(R.color.color_primary))
+                fab.setImageDrawable(getDrawable(R.drawable.ic_done_black_24dp))
+            }
+        }
     }
 }

@@ -17,9 +17,5 @@
 package com.sbgapps.scoreit.ui.base
 
 import android.support.v4.app.Fragment
-import com.sbgapps.scoreit.ui.R
 
-open class BaseFragment : Fragment() {
-
-    open fun getErrorMessage(throwable: Throwable?) = getString(R.string.core_error_general)
-}
+open class BaseFragment : Fragment()
