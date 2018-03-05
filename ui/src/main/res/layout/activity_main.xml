@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@color/white"
-            app:layout_scrollFlags="scroll|enterAlways"
+            app:layout_scrollFlags="scroll"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="@string/app_name"
             />
@@ -59,6 +59,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/margin_padding_size_medium"
         android:tint="@color/white"
+        app:rippleColor="@color/white"
         app:srcCompat="@drawable/ic_add_black_24dp"
         />
 </android.support.design.widget.CoordinatorLayout>

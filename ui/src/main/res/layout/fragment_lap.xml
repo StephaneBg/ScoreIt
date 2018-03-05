@@ -26,6 +26,8 @@
         android:id="@+id/lapRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="@dimen/margin_padding_size_medium"
+        android:clipToPadding="false"
         />
 
     <ImageView

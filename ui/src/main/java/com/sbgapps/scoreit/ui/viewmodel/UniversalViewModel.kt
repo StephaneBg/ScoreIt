@@ -22,33 +22,61 @@ import com.sbgapps.scoreit.domain.model.Player
 import com.sbgapps.scoreit.domain.model.UniversalLap
 import com.sbgapps.scoreit.domain.usecase.UniversalUseCase
 import com.sbgapps.scoreit.ui.base.BaseViewModel
-import timber.log.Timber
 
 
 class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel() {
 
-    private val playersScores = MutableLiveData<List<Pair<Player, Int>>>()
-    private val laps = MutableLiveData<List<UniversalLap>>()
+    private val players = MutableLiveData<List<Player>>()
+    private val scores = MutableLiveData<List<Int>>()
+    private val laps = MutableLiveData<MutableList<UniversalLap>>()
+    private var lap = MutableLiveData<UniversalLap>()
 
     suspend fun init() {
-        Timber.d("Start of init")
         useCase.execute()
-        Timber.d("End of init")
     }
 
-    fun getPlayersAndScores(): MutableLiveData<List<Pair<Player, Int>>> {
-        Timber.d("Enter getPlayersAndScores")
-        playersScores.value ?: run {
-            launchAsync { playersScores.postValue(useCase.getPlayersAndScores()) }
-        }
-        return playersScores
+    fun getPlayers(): LiveData<List<Player>> {
+        players.value ?: run { launchAsync { players.postValue(useCase.getPlayers()) } }
+        return players
     }
 
-    fun getLaps(): LiveData<List<UniversalLap>> {
-        Timber.d("Enter getLaps")
-        laps.value ?: run {
-            launchAsync { laps.postValue(useCase.getLaps()) }
-        }
+    fun getScores(): LiveData<List<Int>> {
+        scores.value ?: run { launchAsync { scores.postValue(useCase.getScores()) } }
+        return scores
+    }
+
+    fun getLaps(): LiveData<MutableList<UniversalLap>> {
+        laps.value ?: run { launchAsync { laps.postValue(useCase.getLaps()) } }
         return laps
+    }
+
+    fun onLapEditionCompleted() {
+        launchAsync {
+            lap.value?.let { useCase.addLap(it) }
+            laps.postValue(useCase.getLaps())
+            scores.postValue(useCase.getScores())
+            lap.value = null
+        }
+    }
+
+    fun isOnLapEdition(): Boolean = lap.value != null
+
+    fun getLap(): LiveData<UniversalLap> {
+        lap.value ?: run {
+            launchAsync {
+                val players = useCase.getPlayers()
+                val points = ArrayList<Int>(players.size)
+                for (i in 0 until players.size) points.add(0)
+                lap.postValue(UniversalLap(null, points))
+            }
+        }
+        return lap
+    }
+
+    fun setPoints(points: List<Int>) {
+        lap.value?.let {
+            it.clear()
+            it.addAll(points)
+        }
     }
 }

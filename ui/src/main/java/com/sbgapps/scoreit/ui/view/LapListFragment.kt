@@ -31,12 +31,11 @@ import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.inflate
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
-import com.sbgapps.scoreit.ui.utils.SwipeHolder
 import kotlinx.android.synthetic.main.fragment_lap.*
 import kotlinx.android.synthetic.main.item_lap.view.*
 import org.koin.android.architecture.ext.viewModel
 
-class LapFragment : BaseFragment() {
+class LapListFragment : BaseFragment() {
 
     private val model: UniversalViewModel by viewModel(true)
     private val adapter = LapListAdapter()
@@ -46,12 +45,10 @@ class LapFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        with(lapRecycler) {
-            layoutManager = LinearLayoutManager(context)
-            emptyView = emptyView
-            adapter = adapter
-            setHasFixedSize(true)
-        }
+        lapRecycler.layoutManager = LinearLayoutManager(context)
+        lapRecycler.emptyView = emptyView
+        lapRecycler.adapter = adapter
+        lapRecycler.setHasFixedSize(true)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -63,7 +60,7 @@ class LapFragment : BaseFragment() {
     }
 
     inner class LapListAdapter : RecyclerView.Adapter<Holder>() {
-        var laps = emptyList<UniversalLap>()
+        private var laps = emptyList<UniversalLap>()
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
             holder.bind(laps[position])
@@ -82,7 +79,7 @@ class LapFragment : BaseFragment() {
         }
     }
 
-    inner class Holder(view: View?) : SwipeHolder(view) {
+    inner class Holder(view: View?) : RecyclerView.ViewHolder(view) {
         fun bind(lap: UniversalLap) {
             itemView.lapItem.adapter = LapItemAdapter(lap.points)
         }
@@ -117,8 +114,8 @@ class LapFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(): LapFragment {
-            return LapFragment()
+        fun newInstance(): LapListFragment {
+            return LapListFragment()
         }
     }
 }

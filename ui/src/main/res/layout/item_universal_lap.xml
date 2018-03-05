@@ -1,0 +1,157 @@
+<!--
+  ~ Copyright 2018 Stéphane Baiget
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_padding_size_medium"
+    >
+
+    <TextView
+        android:id="@+id/playerName"
+        style="@style/TextAppearance.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Toto"
+        />
+
+    <Button
+        android:id="@+id/plusOne"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:text="+1"
+        app:layout_constraintEnd_toStartOf="@+id/plusFive"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerName"
+        tools:ignore="HardcodedText"
+        />
+
+    <Button
+        android:id="@+id/plusFive"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:text="+5"
+        app:layout_constraintEnd_toStartOf="@+id/plusTen"
+        app:layout_constraintStart_toEndOf="@+id/plusOne"
+        app:layout_constraintTop_toTopOf="@+id/plusOne"
+        tools:ignore="HardcodedText"
+        />
+
+    <Button
+        android:id="@+id/plusTen"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:text="+10"
+        app:layout_constraintEnd_toStartOf="@+id/plusHundred"
+        app:layout_constraintStart_toEndOf="@+id/plusFive"
+        app:layout_constraintTop_toTopOf="@+id/plusFive"
+        tools:ignore="HardcodedText"
+        />
+
+    <Button
+        android:id="@+id/plusHundred"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:text="+100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/plusTen"
+        app:layout_constraintTop_toTopOf="@+id/plusTen"
+        tools:ignore="HardcodedText"
+        />
+
+    <TextView
+        android:id="@+id/playerPoints"
+        style="@style/TextAppearance.AppCompat.Display1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="@dimen/margin_padding_size_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plusOne"
+        tools:text="128"
+        />
+
+    <Button
+        android:id="@+id/minusHundred"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:text="-100"
+        app:layout_constraintEnd_toStartOf="@+id/minusTen"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerPoints"
+        tools:ignore="HardcodedText"
+        />
+
+    <Button
+        android:id="@+id/minusTen"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:text="-10"
+        app:layout_constraintEnd_toStartOf="@+id/minusFive"
+        app:layout_constraintStart_toEndOf="@+id/minusHundred"
+        app:layout_constraintTop_toTopOf="@+id/minusHundred"
+        tools:ignore="HardcodedText"
+        />
+
+    <Button
+        android:id="@+id/minusFive"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:text="-5"
+        app:layout_constraintEnd_toStartOf="@+id/minusOne"
+        app:layout_constraintStart_toEndOf="@+id/minusTen"
+        app:layout_constraintTop_toTopOf="@+id/minusTen"
+        tools:ignore="HardcodedText"
+        />
+
+    <Button
+        android:id="@+id/minusOne"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:text="-1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/minusFive"
+        app:layout_constraintTop_toTopOf="@+id/minusFive"
+        tools:ignore="HardcodedText"
+        />
+</android.support.constraint.ConstraintLayout>

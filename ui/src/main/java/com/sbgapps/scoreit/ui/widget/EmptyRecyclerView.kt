@@ -20,6 +20,8 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.View
+import androidx.view.isGone
+import androidx.view.isVisible
 
 class EmptyRecyclerView : RecyclerView {
 
@@ -53,7 +55,7 @@ class EmptyRecyclerView : RecyclerView {
 
     internal fun checkIfEmpty() {
         val isEmptyVisible = adapter?.itemCount == 0
-        emptyView?.visibility = if (isEmptyVisible) View.VISIBLE else View.GONE
-        visibility = if (isEmptyVisible) View.GONE else View.VISIBLE
+        emptyView?.isVisible = isEmptyVisible
+        isGone = isEmptyVisible
     }
 }

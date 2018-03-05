@@ -14,17 +14,20 @@
   ~ limitations under the License.
   -->
 
-<TextView
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pointItem"
-    style="@style/TextAppearance.AppCompat.Medium"
-    android:layout_width="0dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:gravity="center"
-    android:paddingBottom="@dimen/margin_padding_size_small"
-    android:paddingTop="@dimen/margin_padding_size_small"
-    tools:layout_width="match_parent"
-    tools:text="32"
-    />
+    >
+
+    <com.linearlistview.LinearListView
+        android:id="@+id/players"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/light_grey"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        app:dividerThickness="1dp"
+        />
+</android.support.v4.widget.NestedScrollView>

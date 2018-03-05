@@ -28,23 +28,23 @@ import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.inflate
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
-import kotlinx.android.synthetic.main.fragment_header.*
-import org.jetbrains.anko.find
+import kotlinx.android.synthetic.main.fragment_universal_lap.*
+import kotlinx.android.synthetic.main.item_universal_lap.view.*
 import org.koin.android.architecture.ext.viewModel
+import timber.log.Timber
 import kotlin.math.min
 
-
-class HeaderFragment : BaseFragment() {
+class UniversalLapFragment : BaseFragment() {
 
     private val model: UniversalViewModel by viewModel(true)
-    private val adapter = HeaderAdapter()
+    private val adapter: PlayerAdapter = PlayerAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_header, container, false)
+        return inflater.inflate(R.layout.fragment_universal_lap, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        header.adapter = adapter
+        players.adapter = adapter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -53,44 +53,62 @@ class HeaderFragment : BaseFragment() {
         model.getPlayers().observe(this, Observer {
             it?.let { adapter.players = it }
         })
-        model.getScores().observe(this, Observer {
-            it?.let { adapter.scores = it }
+        model.getLap().observe(this, Observer {
+            it?.let { adapter.points = it.points.toMutableList() }
         })
     }
 
-    inner class HeaderAdapter : BaseAdapter() {
+    inner class PlayerAdapter : BaseAdapter() {
 
         var players = emptyList<Player>()
             set(value) {
                 field = value
                 notifyDataSetChanged()
             }
-        var scores = emptyList<Int>()
+        var points = mutableListOf<Int>()
             set(value) {
                 field = value
                 notifyDataSetChanged()
             }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val view = convertView ?: parent.inflate(R.layout.item_header)
+            Timber.d("Universal lap item $position is updated")
+            val view = convertView ?: parent.inflate(R.layout.item_universal_lap)
 
-            val (player, score) = getItem(position)
-            view.find<TextView>(R.id.name).text = player.name
-            view.find<TextView>(R.id.score).text = score.toString()
+            val (player, _points) = getItem(position)
+            with(view) {
+                playerName.text = player.name
+                playerPoints.text = _points.toString()
+
+                plusOne.setOnClickListener { addPoints(1, position, playerPoints) }
+                plusFive.setOnClickListener { addPoints(5, position, playerPoints) }
+                plusTen.setOnClickListener { addPoints(10, position, playerPoints) }
+                plusHundred.setOnClickListener { addPoints(100, position, playerPoints) }
+                minusOne.setOnClickListener { addPoints(-1, position, playerPoints) }
+                minusFive.setOnClickListener { addPoints(-5, position, playerPoints) }
+                minusTen.setOnClickListener { addPoints(-10, position, playerPoints) }
+                minusHundred.setOnClickListener { addPoints(-100, position, playerPoints) }
+            }
 
             return view
         }
 
-        override fun getItem(position: Int) = Pair(players[position], scores[position])
+        override fun getItem(position: Int) = Pair(players[position], points[position])
 
         override fun getItemId(position: Int) = position.toLong()
 
-        override fun getCount() = min(players.size, scores.size)
+        override fun getCount() = min(players.size, points.size)
+
+        private fun addPoints(_points: Int, position: Int, textView: TextView) {
+            points[position] += _points
+            textView.text = points[position].toString()
+            model.setPoints(points)
+        }
     }
 
     companion object {
-        fun newInstance(): HeaderFragment {
-            return HeaderFragment()
+        fun newInstance(): UniversalLapFragment {
+            return UniversalLapFragment()
         }
     }
 }

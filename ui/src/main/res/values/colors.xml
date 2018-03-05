@@ -15,9 +15,8 @@
   -->
 <resources>
     <color name="white">#FFFFFFFF</color>
-    <color name="divider_color">#1F000000</color>
-    <color name="light_grey">#DDDDDD</color>
-    <color name="dark_grey">#424242</color>
+    <color name="light_grey">#BDBDBD</color>
+    <color name="dark_grey">#757575</color>
 
     <color name="color_primary">#669900</color>
     <color name="color_primary_dark">#5B8900</color>
