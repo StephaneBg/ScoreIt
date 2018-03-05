@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.ui.header
+package com.sbgapps.scoreit.ui.viewmodel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData

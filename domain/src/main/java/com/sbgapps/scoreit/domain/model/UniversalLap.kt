@@ -19,7 +19,7 @@ package com.sbgapps.scoreit.domain.model
 
 class UniversalLap(val id: Long?, points: List<Int>) : ArrayList<Int>(points) {
 
-    var laps: List<Int> = this
+    var points: List<Int> = this
         get() {
             return if (isTotalDisplayed) this + sum() else this
         }

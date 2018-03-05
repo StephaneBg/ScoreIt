@@ -19,8 +19,9 @@ package com.sbgapps.scoreit.ui
 import android.os.Bundle
 import com.sbgapps.scoreit.ui.base.BaseActivity
 import com.sbgapps.scoreit.ui.ext.replaceFragment
-import com.sbgapps.scoreit.ui.header.HeaderFragment
-import com.sbgapps.scoreit.ui.header.UniversalViewModel
+import com.sbgapps.scoreit.ui.view.HeaderFragment
+import com.sbgapps.scoreit.ui.view.LapFragment
+import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import kotlinx.coroutines.experimental.launch
 import org.koin.android.architecture.ext.getViewModel
 
@@ -36,6 +37,7 @@ class MainActivity : BaseActivity() {
             model.init()
         }.invokeOnCompletion {
             replaceFragment(R.id.headerContainer, HeaderFragment.newInstance())
+            replaceFragment(R.id.lapContainer, LapFragment.newInstance())
         }
     }
 }

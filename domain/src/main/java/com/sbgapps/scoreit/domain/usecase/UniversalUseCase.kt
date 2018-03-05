@@ -49,7 +49,7 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
         for (i in 0 until players.size) scores.add(0)
 
         laps.forEach { lap ->
-            lap.forEachIndexed { index, points ->
+            lap.points.forEachIndexed { index, points ->
                 scores[index] += points
             }
         }

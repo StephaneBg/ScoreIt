@@ -30,7 +30,7 @@ class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
         return id
     }
 
-    fun populatePlayers(gameId: Long, count: Int) {
+    private fun populatePlayers(gameId: Long, count: Int) {
         val _count = if (count > NAMES.size) NAMES.size else count
         for (i in 0 until _count) {
             dbRepo.universalDb.playerDao().insertPlayer(PlayerEntity(null, gameId, NAMES[i], 0x424242))

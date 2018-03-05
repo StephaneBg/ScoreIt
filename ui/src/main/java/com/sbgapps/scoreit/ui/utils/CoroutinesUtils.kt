@@ -20,6 +20,7 @@ import kotlinx.coroutines.experimental.CancellationException
 import kotlinx.coroutines.experimental.CoroutineScope
 
 interface CoroutinesUtils {
+
     companion object {
         suspend fun CoroutineScope.tryCatch(
                 tryBlock: suspend CoroutineScope.() -> Unit,

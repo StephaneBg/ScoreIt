@@ -21,7 +21,7 @@ import android.content.Context
 import com.sbgapps.scoreit.cache.db.UniversalDatabase
 
 
-class DatabaseRepo(context: Context) {
+class DatabaseRepo(private val context: Context) {
 
-    val universalDb = Room.databaseBuilder(context, UniversalDatabase::class.java, "database-universal").build()
+    val universalDb by lazy { Room.databaseBuilder(context, UniversalDatabase::class.java, "database-universal").build() }
 }

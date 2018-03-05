@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.ui.header
+package com.sbgapps.scoreit.ui.view
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
@@ -27,6 +27,7 @@ import com.sbgapps.scoreit.domain.model.Player
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.inflate
+import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import kotlinx.android.synthetic.main.fragment_header.*
 import org.jetbrains.anko.find
 import org.koin.android.architecture.ext.viewModel
@@ -38,7 +39,7 @@ class HeaderFragment : BaseFragment() {
     private val adapter = HeaderAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return container?.inflate(R.layout.fragment_header)
+        return inflater.inflate(R.layout.fragment_header, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,10 +56,10 @@ class HeaderFragment : BaseFragment() {
 
     inner class HeaderAdapter : BaseAdapter() {
 
-        private var items: List<Pair<Player, Int>> = emptyList()
+        private var pairs = emptyList<Pair<Player, Int>>()
 
         fun setItems(items: List<Pair<Player, Int>>) {
-            this.items = items
+            this.pairs = items
             notifyDataSetChanged()
         }
 
@@ -72,11 +73,11 @@ class HeaderFragment : BaseFragment() {
             return view
         }
 
-        override fun getItem(position: Int) = items[position]
+        override fun getItem(position: Int) = pairs[position]
 
         override fun getItemId(position: Int) = position.toLong()
 
-        override fun getCount() = items.size
+        override fun getCount() = pairs.size
     }
 
     companion object {

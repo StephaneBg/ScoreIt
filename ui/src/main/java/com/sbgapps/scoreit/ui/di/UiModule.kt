@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit.ui.di
 
-import com.sbgapps.scoreit.ui.header.UniversalViewModel
+import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import org.koin.android.architecture.ext.viewModel
 import org.koin.dsl.module.applicationContext
 
