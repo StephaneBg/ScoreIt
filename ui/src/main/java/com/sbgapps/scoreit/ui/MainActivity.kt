@@ -67,6 +67,12 @@ class MainActivity : BaseActivity() {
                 item.title = getString(res)
                 true
             }
+
+            R.id.clear -> {
+                model.clearLaps()
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

@@ -35,11 +35,11 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
         private set
 
     suspend fun init() {
+        useCase.initGame()
         useCase.onUniversalTotalChanged {
             scores.postValue(useCase.getScores())
             laps.postValue(useCase.getLaps())
         }
-        useCase.initGame()
     }
 
     fun getPlayers(): LiveData<List<Player>> {
@@ -103,6 +103,14 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
     }
 
     fun toggleShowTotal() = useCase.toggleShowTotal()
+
+    fun clearLaps() {
+        launchAsync {
+            useCase.clearLaps()
+            laps.postValue(useCase.getLaps())
+            scores.postValue(useCase.getScores())
+        }
+    }
 
     enum class Mode {
         MODE_HISTORY,

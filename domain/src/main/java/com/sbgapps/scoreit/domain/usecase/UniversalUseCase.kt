@@ -85,6 +85,13 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
         TODO()
     }
 
+    suspend fun clearLaps() {
+        asyncAwait {
+            universalRepo.clearLaps(gameId)
+            laps.clear()
+        }
+    }
+
     suspend fun initGame() {
         val name = prefsHelper.getUniversalGameName()
         name ?: run { prefsHelper.setUniversalGame(PreferencesHelper.DEFAULT_GAME_NAME) }
