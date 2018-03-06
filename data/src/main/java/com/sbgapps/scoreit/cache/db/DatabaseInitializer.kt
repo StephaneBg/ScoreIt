@@ -27,7 +27,7 @@ class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
     fun createGame(): Long {
         val game = UniversalGameEntity(name = PreferencesHelper.DEFAULT_GAME_NAME)
         val id = dbRepo.universalDb.gameDao().insertGame(game)
-        populatePlayers(id, 4)
+        populatePlayers(id, DEFAULT_PLAYER_COUNT)
         return id
     }
 
@@ -39,6 +39,8 @@ class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
     }
 
     companion object {
+        private const val DEFAULT_PLAYER_COUNT = 2
+
         private val NAMES = listOf(
                 "Riri",
                 "Toto",

@@ -30,7 +30,6 @@ import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import kotlinx.android.synthetic.main.fragment_header.*
 import kotlinx.android.synthetic.main.item_header.view.*
 import org.koin.android.architecture.ext.viewModel
-import kotlin.math.min
 
 
 class HeaderFragment : BaseFragment() {
@@ -49,9 +48,6 @@ class HeaderFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        model.getPlayers().observe(this, Observer {
-            it?.let { adapter.players = it }
-        })
         model.getScores().observe(this, Observer {
             it?.let { adapter.scores = it }
         })
@@ -59,12 +55,7 @@ class HeaderFragment : BaseFragment() {
 
     inner class HeaderAdapter : BaseAdapter() {
 
-        var players = emptyList<Player>()
-            set(value) {
-                field = value
-                notifyDataSetChanged()
-            }
-        var scores = emptyList<Int>()
+        var scores = emptyList<Pair<Player, Int>>()
             set(value) {
                 field = value
                 notifyDataSetChanged()
@@ -83,11 +74,11 @@ class HeaderFragment : BaseFragment() {
             return view
         }
 
-        override fun getItem(position: Int) = Pair(players[position], scores[position])
+        override fun getItem(position: Int) = scores[position]
 
         override fun getItemId(position: Int) = position.toLong()
 
-        override fun getCount() = min(players.size, scores.size)
+        override fun getCount() = scores.size
     }
 
     companion object {

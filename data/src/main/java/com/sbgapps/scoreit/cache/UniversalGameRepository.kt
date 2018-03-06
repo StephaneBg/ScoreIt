@@ -42,13 +42,17 @@ class UniversalGameRepository(val dbRepo: DatabaseRepo,
         dbRepo.universalDb.gameDao().deleteGame(gameId)
     }
 
-    override fun getPlayers(gameId: Long): List<Player> = dbRepo.universalDb.playerDao().getPlayers(gameId).map { playerMapper.mapFromCache(it) }
+    override fun getPlayers(gameId: Long): List<Player> {
+        return dbRepo.universalDb.playerDao().getPlayers(gameId).map { playerMapper.mapFromCache(it) }
+    }
 
     override fun savePlayer(gameId: Long, player: Player) {
         dbRepo.universalDb.playerDao().insertPlayer(playerMapper.mapToCache(player, gameId))
     }
 
-    override fun getLaps(gameId: Long): List<UniversalLap> = dbRepo.universalDb.lapDao().getLaps(gameId).map { lapMapper.mapFromCache(it) }
+    override fun getLaps(gameId: Long): MutableList<UniversalLap> {
+        return dbRepo.universalDb.lapDao().getLaps(gameId).map { lapMapper.mapFromCache(it) }.toMutableList()
+    }
 
     override fun saveLap(gameId: Long, lap: UniversalLap) {
         val lapEntity = lapMapper.mapToCache(lap, gameId)

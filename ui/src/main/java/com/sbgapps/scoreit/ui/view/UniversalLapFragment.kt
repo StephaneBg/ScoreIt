@@ -54,7 +54,7 @@ class UniversalLapFragment : BaseFragment() {
             it?.let { adapter.players = it }
         })
         model.getLap().observe(this, Observer {
-            it?.let { adapter.points = it.points.toMutableList() }
+            it?.let { adapter.points = it.getPoints() }
         })
     }
 

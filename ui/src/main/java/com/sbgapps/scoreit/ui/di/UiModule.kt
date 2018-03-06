@@ -22,5 +22,5 @@ import org.koin.dsl.module.applicationContext
 
 val uiModule = applicationContext {
 
-    viewModel { UniversalViewModel(get(), get()) }
+    viewModel { UniversalViewModel(get()) }
 }

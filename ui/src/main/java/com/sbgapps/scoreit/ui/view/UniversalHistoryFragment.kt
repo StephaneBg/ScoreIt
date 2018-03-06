@@ -26,16 +26,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.sbgapps.scoreit.domain.model.UniversalLap
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.inflate
+import com.sbgapps.scoreit.ui.ext.sameContentWith
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import kotlinx.android.synthetic.main.fragment_lap.*
 import kotlinx.android.synthetic.main.item_lap.view.*
 import org.koin.android.architecture.ext.viewModel
 
-class LapListFragment : BaseFragment() {
+class UniversalHistoryFragment : BaseFragment() {
 
     private val model: UniversalViewModel by viewModel(true)
     private val adapter = LapListAdapter()
@@ -54,12 +54,12 @@ class LapListFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         model.getLaps().observe(this, Observer {
-            it?.let { adapter.updateList(it) }
+            it?.let { adapter.updateList(it.map { it.getPoints().toMutableList() }) }
         })
     }
 
     inner class LapListAdapter : RecyclerView.Adapter<Holder>() {
-        private var laps = emptyList<UniversalLap>()
+        private var laps = emptyList<List<Int>>()
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
             holder.bind(laps[position])
@@ -71,7 +71,7 @@ class LapListFragment : BaseFragment() {
 
         override fun getItemCount(): Int = laps.size
 
-        fun updateList(newLaps: List<UniversalLap>) {
+        fun updateList(newLaps: List<List<Int>>) {
             val diffResult = DiffUtil.calculateDiff(NoteDiffCallback(newLaps, laps))
             laps = newLaps
             diffResult.dispatchUpdatesTo(this)
@@ -79,8 +79,8 @@ class LapListFragment : BaseFragment() {
     }
 
     inner class Holder(view: View?) : RecyclerView.ViewHolder(view) {
-        fun bind(lap: UniversalLap) {
-            itemView.lapItem.adapter = LapItemAdapter(lap.points)
+        fun bind(points: List<Int>) {
+            itemView.lapItem.adapter = LapItemAdapter(points)
         }
     }
 
@@ -99,22 +99,26 @@ class LapListFragment : BaseFragment() {
         override fun getCount() = points.size
     }
 
-    inner class NoteDiffCallback(private val newLaps: List<UniversalLap>,
-                                 private val oldLaps: List<UniversalLap>)
+    inner class NoteDiffCallback(private val newLaps: List<List<Int>>,
+                                 private val oldLaps: List<List<Int>>)
         : DiffUtil.Callback() {
 
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) = oldLaps[oldItemPosition].id == newLaps[newItemPosition].id
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldLaps[oldItemPosition] == newLaps[newItemPosition]
+        }
 
         override fun getOldListSize() = oldLaps.size
 
         override fun getNewListSize() = newLaps.size
 
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) = oldLaps[oldItemPosition] == newLaps[newItemPosition]
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldLaps[oldItemPosition] sameContentWith newLaps[newItemPosition]
+        }
     }
 
     companion object {
-        fun newInstance(): LapListFragment {
-            return LapListFragment()
+        fun newInstance(): UniversalHistoryFragment {
+            return UniversalHistoryFragment()
         }
     }
 }

@@ -20,44 +20,40 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.sbgapps.scoreit.domain.model.Player
 import com.sbgapps.scoreit.domain.model.UniversalLap
-import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.domain.usecase.UniversalUseCase
 import com.sbgapps.scoreit.ui.base.BaseViewModel
 
 
-class UniversalViewModel(private val useCase: UniversalUseCase,
-                         private val prefsHelper: PreferencesHelper) : BaseViewModel() {
+class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel() {
 
     private val players = MutableLiveData<List<Player>>()
-    private val scores = MutableLiveData<List<Int>>()
-    private val laps = MutableLiveData<MutableList<UniversalLap>>()
+    private val scores = MutableLiveData<List<Pair<Player, Int>>>()
+    private val laps = MutableLiveData<List<UniversalLap>>()
     private var lap = MutableLiveData<UniversalLap>()
+
     var mode: Mode = Mode.MODE_HISTORY
         private set
 
-    suspend fun initGame() {
-        prefsHelper.onUniversalTotalChanged {
-            launchAsync {
-                players.postValue(useCase.getPlayers())
-                scores.postValue(useCase.getScores())
-                laps.postValue(useCase.getLaps())
-            }
+    suspend fun init() {
+        useCase.onUniversalTotalChanged {
+            scores.postValue(useCase.getScores())
+            laps.postValue(useCase.getLaps())
         }
         useCase.initGame()
     }
 
     fun getPlayers(): LiveData<List<Player>> {
-        players.value ?: run { launchAsync { players.postValue(useCase.getPlayers()) } }
+        players.value ?: run { players.postValue(useCase.getPlayers()) }
         return players
     }
 
-    fun getScores(): LiveData<List<Int>> {
-        scores.value ?: run { launchAsync { scores.postValue(useCase.getScores()) } }
+    fun getScores(): LiveData<List<Pair<Player, Int>>> {
+        scores.value ?: run { scores.postValue(useCase.getScores()) }
         return scores
     }
 
-    fun getLaps(): LiveData<MutableList<UniversalLap>> {
-        laps.value ?: run { launchAsync { laps.postValue(useCase.getLaps()) } }
+    fun getLaps(): LiveData<List<UniversalLap>> {
+        laps.value ?: run { laps.postValue(useCase.getLaps()) }
         return laps
     }
 
@@ -97,21 +93,20 @@ class UniversalViewModel(private val useCase: UniversalUseCase,
     fun getLap(): LiveData<UniversalLap> {
         lap.value ?: run {
             mode = Mode.MODE_ADDITION
-            launchAsync {
-                val players = useCase.getPlayers()
-                val points = ArrayList<Int>(players.size)
-                for (i in 0 until players.size) points.add(0)
-                lap.postValue(UniversalLap(null, points))
-            }
+            lap.postValue(createLap())
         }
         return lap
     }
 
-    fun setPoints(points: List<Int>) {
-        lap.value?.let {
-            it.clear()
-            it.addAll(points)
-        }
+    private fun createLap(): UniversalLap {
+        val players = useCase.getPlayers()
+        val points = mutableListOf<Int>()
+        for (i in 0 until players.size) points.add(0)
+        return UniversalLap(null, points)
+    }
+
+    fun setPoints(points: MutableList<Int>) {
+        lap.value?.setPoints(points)
     }
 
     enum class Mode {

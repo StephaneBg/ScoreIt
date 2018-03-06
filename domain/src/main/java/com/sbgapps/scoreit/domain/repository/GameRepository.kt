@@ -29,7 +29,7 @@ interface GameRepository<Lap> {
 
     fun savePlayer(gameId: Long, player: Player)
 
-    fun getLaps(gameId: Long): List<Lap>
+    fun getLaps(gameId: Long): MutableList<Lap>
 
     fun saveLap(gameId: Long, lap: Lap)
 

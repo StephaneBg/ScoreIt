@@ -14,22 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.domain.model
+package com.sbgapps.scoreit.ui.ext
 
-
-class UniversalLap(val id: Long?, private var points: MutableList<Int>) {
-
-    var isWithTotal: Boolean = false
-
-    fun setPoints(_points: MutableList<Int>) {
-        points = _points
-    }
-
-    fun getPoints(): MutableList<Int> {
-        return if (isWithTotal) {
-            val _points = points.toMutableList()
-            _points.add(points.sum())
-            _points
-        } else points
-    }
-}
+infix fun <T> Collection<T>.sameContentWith(collection: Collection<T>)
+        = collection.let { this.size == it.size && this.containsAll(it) }

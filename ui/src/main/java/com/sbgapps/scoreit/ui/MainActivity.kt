@@ -25,7 +25,7 @@ import com.sbgapps.scoreit.ui.base.BaseActivity
 import com.sbgapps.scoreit.ui.ext.color
 import com.sbgapps.scoreit.ui.ext.replaceFragment
 import com.sbgapps.scoreit.ui.view.HeaderFragment
-import com.sbgapps.scoreit.ui.view.LapListFragment
+import com.sbgapps.scoreit.ui.view.UniversalHistoryFragment
 import com.sbgapps.scoreit.ui.view.UniversalLapFragment
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel.Mode.*
@@ -46,10 +46,10 @@ class MainActivity : BaseActivity() {
 
         if (null == savedInstanceState)
             launch {
-                model.initGame()
+                model.init()
             }.invokeOnCompletion {
                 replaceFragment(R.id.headerContainer, HeaderFragment.newInstance())
-                replaceFragment(R.id.lapContainer, LapListFragment.newInstance())
+                replaceFragment(R.id.lapContainer, UniversalHistoryFragment.newInstance())
             }
 
         setSupportActionBar(toolbar)
