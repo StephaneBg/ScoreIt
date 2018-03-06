@@ -93,21 +93,16 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
     fun getLap(): LiveData<UniversalLap> {
         lap.value ?: run {
             mode = Mode.MODE_ADDITION
-            lap.postValue(createLap())
+            lap.postValue(useCase.createLap())
         }
         return lap
-    }
-
-    private fun createLap(): UniversalLap {
-        val players = useCase.getPlayers()
-        val points = mutableListOf<Int>()
-        for (i in 0 until players.size) points.add(0)
-        return UniversalLap(null, points)
     }
 
     fun setPoints(points: MutableList<Int>) {
         lap.value?.setPoints(points)
     }
+
+    fun toggleShowTotal() = useCase.toggleShowTotal()
 
     enum class Mode {
         MODE_HISTORY,

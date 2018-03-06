@@ -68,6 +68,14 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
         prefsHelper.onUniversalTotalChanged(block)
     }
 
+    fun createLap(): UniversalLap {
+        val points = mutableListOf<Int>()
+        for (i in 0 until getPlayers().size) points.add(0)
+        val lap = UniversalLap(null, points)
+        lap.isWithTotal = prefsHelper.isTotalDisplayed
+        return lap
+    }
+
     suspend fun addLap(lap: UniversalLap) {
         laps.add(lap)
         asyncAwait { universalRepo.saveLap(gameId, lap) }
@@ -83,5 +91,15 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
         gameId = universalRepo.getGameId(name)
         players = universalRepo.getPlayers(gameId)
         laps = universalRepo.getLaps(gameId)
+    }
+
+    fun toggleShowTotal(): Boolean {
+        return if (prefsHelper.isTotalDisplayed) {
+            prefsHelper.isTotalDisplayed = false
+            false
+        } else {
+            prefsHelper.isTotalDisplayed = true
+            true
+        }
     }
 }

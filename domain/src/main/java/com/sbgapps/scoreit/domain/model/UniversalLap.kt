@@ -22,7 +22,7 @@ class UniversalLap(val id: Long?, private var points: MutableList<Int>) {
     var isWithTotal: Boolean = false
 
     fun setPoints(_points: MutableList<Int>) {
-        points = _points
+        points = if (isWithTotal) _points.dropLast(1).toMutableList() else _points
     }
 
     fun getPoints(): MutableList<Int> {
