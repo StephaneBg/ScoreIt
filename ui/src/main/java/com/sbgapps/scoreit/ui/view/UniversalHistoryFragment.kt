@@ -31,7 +31,7 @@ import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.inflate
 import com.sbgapps.scoreit.ui.ext.sameContentWith
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
-import kotlinx.android.synthetic.main.fragment_lap.*
+import kotlinx.android.synthetic.main.fragment_universal_history.*
 import kotlinx.android.synthetic.main.item_lap.view.*
 import org.koin.android.architecture.ext.viewModel
 
@@ -41,7 +41,7 @@ class UniversalHistoryFragment : BaseFragment() {
     private val adapter = LapListAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_lap, container, false)
+        return inflater.inflate(R.layout.fragment_universal_history, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

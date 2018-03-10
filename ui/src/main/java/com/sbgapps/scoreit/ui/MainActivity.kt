@@ -18,6 +18,7 @@ package com.sbgapps.scoreit.ui
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.view.Menu
 import android.view.MenuItem
 import com.sbgapps.scoreit.ui.base.BaseActivity
@@ -94,18 +95,27 @@ class MainActivity : BaseActivity() {
             model.onLapEditionCompleted()
             supportFragmentManager.popBackStack()
         }
-        decorFab()
+        switchFab()
         invalidateOptionsMenu()
+    }
+
+    private fun switchFab() {
+        fab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
+            override fun onHidden(fab: FloatingActionButton) {
+                decorFab()
+                fab.show()
+            }
+        })
     }
 
     private fun decorFab() {
         when (model.mode) {
             MODE_HISTORY -> {
-                fab.backgroundTintList = ColorStateList.valueOf(color(R.color.color_accent))
+                fab.backgroundTintList = ColorStateList.valueOf(color(R.color.orange_500))
                 fab.setImageDrawable(getDrawable(R.drawable.ic_add_black_24dp))
             }
             MODE_UPDATE, MODE_ADDITION -> {
-                fab.backgroundTintList = ColorStateList.valueOf(color(R.color.color_primary))
+                fab.backgroundTintList = ColorStateList.valueOf(color(R.color.green_500))
                 fab.setImageDrawable(getDrawable(R.drawable.ic_done_black_24dp))
             }
         }

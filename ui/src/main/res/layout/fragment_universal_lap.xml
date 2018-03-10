@@ -25,8 +25,9 @@
         android:id="@+id/players"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/light_grey"
+        android:divider="@color/grey_100"
         android:orientation="vertical"
+        android:paddingBottom="88dp"
         android:showDividers="middle"
         app:dividerThickness="1dp"
         />

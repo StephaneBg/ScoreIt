@@ -26,5 +26,6 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:paddingTop="@dimen/margin_padding_size_medium"
+        android:paddingBottom="88dp"
         />
 </FrameLayout>
