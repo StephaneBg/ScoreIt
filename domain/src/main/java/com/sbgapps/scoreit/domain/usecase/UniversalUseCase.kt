@@ -64,10 +64,6 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
         } else players
     }
 
-    fun onUniversalTotalChanged(block: () -> Unit) {
-        prefsHelper.onUniversalTotalChanged(block)
-    }
-
     fun createLap(): UniversalLap {
         val points = mutableListOf<Int>()
         for (i in 0 until getPlayers().size) points.add(0)
