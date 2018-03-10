@@ -17,10 +17,11 @@
 package com.sbgapps.scoreit.ui.ext
 
 import android.support.annotation.LayoutRes
-import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 
 fun View.show() {
     animate()
@@ -43,4 +44,16 @@ fun View.hide() {
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
+}
+
+fun EditText.onImeActionDone(function: () -> Unit) {
+    setOnEditorActionListener { _, actionId, _ ->
+        when (actionId) {
+            EditorInfo.IME_ACTION_DONE -> {
+                function.invoke()
+                true
+            }
+            else -> false
+        }
+    }
 }

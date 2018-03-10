@@ -90,10 +90,22 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
 
     suspend fun initGame() {
         val name = prefsHelper.getUniversalGameName()
-        name ?: run { prefsHelper.setUniversalGame(PreferencesHelper.DEFAULT_GAME_NAME) }
-        gameId = universalRepo.getGameId(name)
-        players = universalRepo.getPlayers(gameId)
-        laps = universalRepo.getLaps(gameId)
+        name?.let {
+            gameId = universalRepo.getGameId(name)
+            players = universalRepo.getPlayers(gameId)
+            laps = universalRepo.getLaps(gameId)
+        } ?: run {
+            createGame(PreferencesHelper.DEFAULT_GAME_NAME, PreferencesHelper.DEFAULT_UNIVERSAL_PLAYER_COUNT)
+        }
+    }
+
+    suspend fun createGame(name: String, playerCount: Int) {
+        prefsHelper.initUniversalGame(name, playerCount)
+        asyncAwait {
+            gameId = universalRepo.createGame(name, playerCount)
+            players = universalRepo.getPlayers(gameId)
+            laps = universalRepo.getLaps(gameId)
+        }
     }
 
     fun toggleShowTotal(): Boolean {

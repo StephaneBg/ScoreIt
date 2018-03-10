@@ -33,12 +33,18 @@
     <style name="AlertDialogTheme"
         parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="buttonBarPositiveButtonStyle">@style/AlertDialogPositiveButton</item>
+        <item name="buttonBarNeutralButtonStyle">@style/AlertDialogNeutralButton</item>
         <item name="buttonBarNegativeButtonStyle">@style/AlertDialogNegativeButton</item>
     </style>
 
     <style name="AlertDialogPositiveButton"
         parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/green_500</item>
+    </style>
+
+    <style name="AlertDialogNeutralButton"
+        parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/grey_500</item>
     </style>
 
     <style name="AlertDialogNegativeButton"

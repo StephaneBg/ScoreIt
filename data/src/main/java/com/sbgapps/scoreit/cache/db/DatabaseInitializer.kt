@@ -24,10 +24,10 @@ import kotlin.math.min
 
 class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
 
-    fun createGame(): Long {
-        val game = UniversalGameEntity(name = PreferencesHelper.DEFAULT_GAME_NAME)
+    fun createGame(gameName: String, playerCount: Int): Long {
+        val game = UniversalGameEntity(name = gameName)
         val id = dbRepo.universalDb.gameDao().insertGame(game)
-        populatePlayers(id, DEFAULT_PLAYER_COUNT)
+        populatePlayers(id, playerCount)
         return id
     }
 
@@ -39,17 +39,15 @@ class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
     }
 
     companion object {
-        private const val DEFAULT_PLAYER_COUNT = 2
-
         private val NAMES = listOf(
                 "Riri",
                 "Toto",
-                "Fifi",
                 "Lulu",
-                "Titi",
-                "Baba",
+                "Fifi",
+                "Lolo",
+                "Bubu",
                 "Lili",
-                "Bubu"
+                "Roro"
         )
 
         private val COLORS = listOf(

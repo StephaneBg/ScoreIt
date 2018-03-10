@@ -29,6 +29,7 @@ object Versions {
     val androidKtx = "0.2"
     val linearListView = "1.0.1@aar"
     val debugDb = "1.0.3"
+    val numberPicker = "2.4.6"
 }
 
 object Build {
@@ -66,7 +67,9 @@ object Libs {
 
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
+
     val linearListView = "com.github.frankiesardo:linearlistview:${Versions.linearListView}"
+    val numberPicker = "com.shawnlin:number-picker:${Versions.numberPicker}"
 
     val koinAndroid = "org.koin:koin-android:${Versions.koin}"
     val koinAndroidArch = "org.koin:koin-android-architecture:${Versions.koin}"

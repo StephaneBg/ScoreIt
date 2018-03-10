@@ -21,12 +21,35 @@ import android.preference.PreferenceManager
 import androidx.content.edit
 import com.sbgapps.scoreit.domain.R
 import com.sbgapps.scoreit.domain.model.Player
-import timber.log.Timber
 
 
 class PreferencesHelper(private val context: Context) {
 
     private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+    /********************** Universal **********************/
+    fun getUniversalGameName(): String? {
+        val count = getUniversalPlayerCount()
+        return sharedPreferences.getString(KEY_UNIVERSAL_GAME_NAME + "_$count", null)
+    }
+
+    fun initUniversalGame(name: String, playerCount: Int) {
+        sharedPreferences.edit {
+            putString(KEY_UNIVERSAL_GAME_NAME + "_$playerCount", name)
+            putInt(KEY_UNIVERSAL_PLAYER_COUNT, playerCount)
+        }
+    }
+
+    private fun getUniversalPlayerCount(): Int {
+        return sharedPreferences.getInt(KEY_UNIVERSAL_PLAYER_COUNT, DEFAULT_UNIVERSAL_PLAYER_COUNT)
+    }
+
+    private fun setUniversalPlayerCount(playerCount: Int) {
+        sharedPreferences.edit { putInt(KEY_UNIVERSAL_PLAYER_COUNT, playerCount) }
+    }
+
+    fun getTotalPlayer() = Player(null, context.getString(R.string.universal_total_points), 0xFF757575.toInt())
+
     var isTotalDisplayed: Boolean
         get() {
             return sharedPreferences.getBoolean(KEY_UNIVERSAL_SHOW_TOTAL, false)
@@ -35,26 +58,15 @@ class PreferencesHelper(private val context: Context) {
             sharedPreferences.edit { putBoolean(KEY_UNIVERSAL_SHOW_TOTAL, value) }
         }
 
-    fun getUniversalGameName(): String? {
-        return sharedPreferences.getString(KEY_UNIVERSAL_GAME_NAME, null)
-    }
-
-    fun setUniversalGame(name: String) {
-        sharedPreferences.edit { putString(KEY_UNIVERSAL_GAME_NAME, name) }
-    }
-
-    fun getTotalPlayer() = Player(null, context.getString(R.string.universal_total_points), 0xFF757575.toInt())
-
-    fun onUniversalTotalChanged(block: () -> Unit) {
-        sharedPreferences.registerOnSharedPreferenceChangeListener { _, key ->
-            Timber.d("Show is total was updated")
-            if (key == KEY_UNIVERSAL_SHOW_TOTAL) block.invoke()
-        }
-    }
 
     companion object {
         const val DEFAULT_GAME_NAME = "ScoreIt"
+        const val KEY_DEFAULT_PLAYED_GAME = "KEY_DEFAULT_PLAYED_GAME"
+
+        // Universal
+        const val DEFAULT_UNIVERSAL_PLAYER_COUNT = 4
         private const val KEY_UNIVERSAL_GAME_NAME = "KEY_UNIVERSAL_GAME_NAME"
         private const val KEY_UNIVERSAL_SHOW_TOTAL = "KEY_UNIVERSAL_SHOW_TOTAL"
+        private const val KEY_UNIVERSAL_PLAYER_COUNT = "KEY_UNIVERSAL_PLAYER_COUNT"
     }
 }

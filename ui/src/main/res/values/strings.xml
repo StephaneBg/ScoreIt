@@ -96,7 +96,7 @@
 
     <!-- Dialog -->
     <string name="dialog_title_current_game">Current game</string>
-    <string name="dialog_title_filename">Filename</string>
+    <string name="dialog_title_game_name">Game name</string>
     <string name="dialog_title_player_number">Number of players</string>
     <string name="dialog_title_edit_name">Edit name</string>
     <string name="dialog_action_game_discard">Discard</string>
@@ -131,6 +131,7 @@
     <string name="menu_action_show_chart">Show chart</string>
     <string name="menu_action_show_totals">Show totals</string>
     <string name="menu_action_hide_totals">Hide totals</string>
+    <string name="menu_action_player_count">Number of players</string>
 
     <!-- Content descriptions -->
     <string name="content_description_delete">Delete</string>

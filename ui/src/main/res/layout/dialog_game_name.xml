@@ -13,20 +13,12 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources>
-
-    <color name="white">#FFFFFF</color>
-    <color name="green_500">#709E00</color>
-    <color name="green_50">#EEF3E0</color>
-    <color name="orange_500">#E97F02</color>
-    <color name="grey_500">#827E7C</color>
-    <color name="grey_100">#F0EAE8</color>
-    <color name="grey_50">#FBFAF9</color>
-
-    <color name="color_primary">@color/white</color>
-    <color name="color_primary_dark">@color/green_50</color>
-    <color name="color_accent">@color/orange_500</color>
-
-    <color name="game_won">#66BB6A</color>
-    <color name="game_lost">#EF5350</color>
-</resources>
+<EditText
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gameName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_padding_size_medium"
+    android:imeOptions="actionDone"
+    android:inputType="textCapWords"
+    />

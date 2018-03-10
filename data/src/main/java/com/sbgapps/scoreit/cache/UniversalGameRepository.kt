@@ -21,21 +21,23 @@ import com.sbgapps.scoreit.cache.mapper.PlayerMapper
 import com.sbgapps.scoreit.cache.mapper.UniversalLapMapper
 import com.sbgapps.scoreit.domain.model.Player
 import com.sbgapps.scoreit.domain.model.UniversalLap
+import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.domain.repository.GameRepository
 import timber.log.Timber
 
-class UniversalGameRepository(val dbRepo: DatabaseRepo,
-                              val playerMapper: PlayerMapper,
-                              val lapMapper: UniversalLapMapper,
-                              val dbInit: DatabaseInitializer)
+class UniversalGameRepository(private val dbRepo: DatabaseRepo,
+                              private val playerMapper: PlayerMapper,
+                              private val lapMapper: UniversalLapMapper,
+                              private val dbInit: DatabaseInitializer)
     : GameRepository<UniversalLap> {
 
-    override fun getGameId(name: String?): Long {
-        return name?.let {
-            dbRepo.universalDb.gameDao().getGame(name).id
-        } ?: run {
-            dbInit.createGame()
-        }
+    override fun getGameId(name: String): Long {
+        return dbRepo.universalDb.gameDao().getGame(name).id
+                ?: createGame(name, PreferencesHelper.DEFAULT_UNIVERSAL_PLAYER_COUNT)
+    }
+
+    override fun createGame(name: String, playerCount: Int): Long {
+        return dbInit.createGame(name, playerCount)
     }
 
     override fun deleteGame(gameId: Long) {

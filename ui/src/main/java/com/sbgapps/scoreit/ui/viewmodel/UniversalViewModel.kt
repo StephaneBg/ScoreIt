@@ -38,10 +38,21 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
         useCase.initGame()
     }
 
+    fun createGame(name: String, playerCount: Int) {
+        launchAsync {
+            useCase.createGame(name, playerCount)
+            players.postValue(useCase.getPlayers())
+            laps.postValue(useCase.getLaps())
+            scores.postValue(useCase.getScores())
+        }
+    }
+
     fun getPlayers(): LiveData<List<Player>> {
         players.value ?: run { players.postValue(useCase.getPlayers()) }
         return players
     }
+
+    fun getPlayerCount(): Int = players.value?.size ?: 0
 
     fun getScores(): LiveData<List<Pair<Player, Int>>> {
         scores.value ?: run { scores.postValue(useCase.getScores()) }

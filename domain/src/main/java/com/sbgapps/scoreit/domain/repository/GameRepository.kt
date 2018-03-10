@@ -21,7 +21,9 @@ import com.sbgapps.scoreit.domain.model.Player
 
 interface GameRepository<Lap> {
 
-    fun getGameId(name: String?): Long
+    fun getGameId(name: String): Long
+
+    fun createGame(name: String, playerCount: Int): Long
 
     fun deleteGame(gameId: Long)
 
