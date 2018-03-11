@@ -26,7 +26,6 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/color_primary_dark</item>
-        <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowBackground">@color/grey_50</item>
     </style>
 

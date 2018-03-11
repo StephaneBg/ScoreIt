@@ -13,23 +13,28 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
-<com.shawnlin.numberpicker.NumberPicker
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/playerCount"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_margin="@dimen/margin_padding_size_medium"
-    app:np_dividerColor="?colorAccent"
-    app:np_dividerThickness="1dp"
-    app:np_fadingEdgeEnabled="true"
-    app:np_max="8"
-    app:np_min="2"
-    app:np_order="descending"
-    app:np_selectedTextColor="?colorAccent"
-    app:np_textColor="@color/orange_500"
-    app:np_value="4"
-    app:np_wrapSelectorWheel="false"
-    />
+    >
+
+    <com.shawnlin.numberpicker.NumberPicker
+        android:id="@+id/playerCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_padding_size_medium"
+        app:np_dividerColor="?colorAccent"
+        app:np_dividerThickness="1dp"
+        app:np_fadingEdgeEnabled="true"
+        app:np_max="8"
+        app:np_min="2"
+        app:np_order="descending"
+        app:np_selectedTextColor="?colorAccent"
+        app:np_textColor="@color/orange_500"
+        app:np_value="4"
+        app:np_wrapSelectorWheel="false"
+        />
+</FrameLayout>

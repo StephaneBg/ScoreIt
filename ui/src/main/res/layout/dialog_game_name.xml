@@ -13,12 +13,18 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<EditText
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/gameName"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_padding_size_medium"
-    android:imeOptions="actionDone"
-    android:inputType="textCapWords"
-    />
+    >
+
+    <EditText
+        android:id="@+id/gameName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding_size_medium"
+        android:imeOptions="actionDone"
+        android:inputType="textCapWords"
+        />
+</FrameLayout>

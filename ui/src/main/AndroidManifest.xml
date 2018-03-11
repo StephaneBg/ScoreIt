@@ -35,7 +35,7 @@
         >
 
         <activity
-            android:name=".MainActivity"
+            android:name=".view.ScoreItActivity"
             android:label="@string/app_name"
             >
             <intent-filter>

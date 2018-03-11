@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.ui
+package com.sbgapps.scoreit.ui.view
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
@@ -23,23 +23,23 @@ import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import android.widget.EditText
+import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseActivity
 import com.sbgapps.scoreit.ui.ext.color
 import com.sbgapps.scoreit.ui.ext.onImeActionDone
 import com.sbgapps.scoreit.ui.ext.replaceFragment
-import com.sbgapps.scoreit.ui.view.HeaderFragment
-import com.sbgapps.scoreit.ui.view.UniversalHistoryFragment
-import com.sbgapps.scoreit.ui.view.UniversalLapFragment
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel.Mode.*
 import com.shawnlin.numberpicker.NumberPicker
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.launch
+import org.jetbrains.anko.find
 import org.koin.android.architecture.ext.viewModel
 
 
-class MainActivity : BaseActivity() {
+class ScoreItActivity : BaseActivity() {
 
     private val model by viewModel<UniversalViewModel>()
 
@@ -63,10 +63,6 @@ class MainActivity : BaseActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (model.isOnHistoryMode()) menuInflater.inflate(R.menu.menu_main, menu)
         return true
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -137,12 +133,13 @@ class MainActivity : BaseActivity() {
 
     @SuppressLint("InflateParams")
     private fun showPlayerCountDialog() {
-        val view = layoutInflater.inflate(R.layout.dialog_player_count, null) as NumberPicker
+        val view = layoutInflater.inflate(R.layout.dialog_player_count, null)
         AlertDialog.Builder(this)
                 .setView(view)
                 .setTitle(R.string.dialog_title_player_number)
                 .setPositiveButton(R.string.button_action_ok, { _, _ ->
-                    showGameNameDialog(view.value)
+                    val count = view.find<NumberPicker>(R.id.playerCount).value
+                    showGameNameDialog(count)
                 })
                 .setNeutralButton(R.string.button_action_cancel, null)
                 .create()
@@ -151,9 +148,10 @@ class MainActivity : BaseActivity() {
 
     @SuppressLint("InflateParams")
     private fun showGameNameDialog(playerCount: Int) {
-        val editText = layoutInflater.inflate(R.layout.dialog_game_name, null) as EditText
+        val view = layoutInflater.inflate(R.layout.dialog_game_name, null)
+        val editText = view.find<EditText>(R.id.gameName)
         val dialog = AlertDialog.Builder(this)
-                .setView(editText)
+                .setView(view)
                 .setTitle(R.string.dialog_title_game_name)
                 .setPositiveButton(R.string.button_action_ok, { _, _ ->
                     model.createGame(editText.text.toString(), playerCount)
@@ -165,7 +163,7 @@ class MainActivity : BaseActivity() {
             model.createGame(editText.text.toString(), playerCount)
             dialog.dismiss()
         }
-
+        dialog.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         dialog.show()
     }
 
