@@ -90,7 +90,7 @@ class ScoreItActivity : BaseActivity() {
 
     override fun onBackPressed() {
         if (!model.isOnHistoryMode()) {
-            model.endLapEdition()
+            model.setHistoryMode()
             decorFab()
         }
         invalidateOptionsMenu()
@@ -109,7 +109,7 @@ class ScoreItActivity : BaseActivity() {
         invalidateOptionsMenu()
     }
 
-    private fun switchFab() {
+    fun switchFab() {
         fab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
             override fun onHidden(fab: FloatingActionButton) {
                 decorFab()

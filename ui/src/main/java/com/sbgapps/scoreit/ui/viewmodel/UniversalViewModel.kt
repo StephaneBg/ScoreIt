@@ -81,6 +81,7 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
                 when (prevMode) {
                     Mode.MODE_ADDITION -> useCase.addLap(it)
                     Mode.MODE_UPDATE -> useCase.updateLap(it)
+                    Mode.MODE_HISTORY -> throw IllegalStateException("Cannot be on edition!")
                 }
             }
 
@@ -92,7 +93,7 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
 
     fun isOnHistoryMode() = mode == Mode.MODE_HISTORY
 
-    fun endLapEdition() {
+    fun setHistoryMode() {
         mode = Mode.MODE_HISTORY
         lap.value = null
     }
@@ -119,6 +120,19 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
     fun clearLaps() {
         launchAsync {
             useCase.clearLaps()
+            laps.postValue(useCase.getLaps())
+            scores.postValue(useCase.getScores())
+        }
+    }
+
+    fun restoreLap(lap: UniversalLap, position: Int) {
+        useCase.restoreLap(lap, position)
+        laps.postValue(useCase.getLaps())
+    }
+
+    fun deleteLap(lap: UniversalLap, fromCache: Boolean = false) {
+        launchAsync {
+            useCase.deleteLap(lap, fromCache)
             laps.postValue(useCase.getLaps())
             scores.postValue(useCase.getScores())
         }

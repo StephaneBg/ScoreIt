@@ -1,4 +1,4 @@
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Stéphane Baiget
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +14,15 @@
   ~ limitations under the License.
   -->
 
-<com.linearlistview.LinearListView
+<shape
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lapItem"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    />
+    android:shape="rectangle"
+    >
+
+    <size
+        android:width="1dp"
+        android:height="1dp"
+        />
+
+    <solid android:color="@color/grey_100" />
+</shape>

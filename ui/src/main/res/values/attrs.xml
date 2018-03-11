@@ -14,19 +14,14 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+<resources>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/lapRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:layoutAnimation="@anim/layout_animation_fall_down"
-        android:paddingBottom="88dp"
-
-        />
-</FrameLayout>
+    <declare-styleable name="SwipeRevealLayout">
+        <attr name="dragFromEdge">
+            <flag name="left"
+                value="1" />
+            <flag name="right"
+                value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

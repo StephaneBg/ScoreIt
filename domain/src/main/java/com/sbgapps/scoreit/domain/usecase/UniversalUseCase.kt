@@ -78,7 +78,7 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
     }
 
     suspend fun updateLap(lap: UniversalLap) {
-        TODO()
+        asyncAwait { universalRepo.saveLap(gameId, lap) }
     }
 
     suspend fun clearLaps() {
@@ -86,6 +86,17 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
             universalRepo.clearLaps(gameId)
             laps.clear()
         }
+    }
+
+    suspend fun deleteLap(lap: UniversalLap, fromCache: Boolean = false) {
+        asyncAwait {
+            if (fromCache) universalRepo.deleteLap(gameId, lap)
+            laps.remove(lap)
+        }
+    }
+
+    fun restoreLap(lap: UniversalLap, position: Int) {
+        laps.add(position, lap)
     }
 
     suspend fun initGame() {

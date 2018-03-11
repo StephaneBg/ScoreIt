@@ -20,4 +20,6 @@
     <dimen name="margin_padding_size_medium">16dp</dimen>
     <dimen name="margin_padding_size_large">32dp</dimen>
     <dimen name="margin_padding_size_extra_large">64dp</dimen>
+
+    <dimen name="list_item_height">64dp</dimen>
 </resources>
