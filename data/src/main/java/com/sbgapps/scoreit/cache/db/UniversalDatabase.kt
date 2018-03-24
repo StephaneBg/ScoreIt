@@ -19,12 +19,12 @@ package com.sbgapps.scoreit.cache.db
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
-import com.sbgapps.scoreit.cache.model.PlayerEntity
-import com.sbgapps.scoreit.cache.model.UniversalGameEntity
-import com.sbgapps.scoreit.cache.model.UniversalLapEntity
+import com.sbgapps.scoreit.cache.model.PlayerData
+import com.sbgapps.scoreit.cache.model.UniversalGameData
+import com.sbgapps.scoreit.cache.model.UniversalLapData
 
 @Database(
-        entities = [UniversalGameEntity::class, PlayerEntity::class, UniversalLapEntity::class],
+        entities = [UniversalGameData::class, PlayerData::class, UniversalLapData::class],
         version = 1)
 @TypeConverters(LapConverter::class)
 abstract class UniversalDatabase : RoomDatabase() {

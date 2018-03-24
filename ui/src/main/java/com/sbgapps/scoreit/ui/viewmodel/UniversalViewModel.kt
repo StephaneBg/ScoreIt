@@ -18,18 +18,22 @@ package com.sbgapps.scoreit.ui.viewmodel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import com.sbgapps.scoreit.domain.model.Player
-import com.sbgapps.scoreit.domain.model.UniversalLap
 import com.sbgapps.scoreit.domain.usecase.UniversalUseCase
 import com.sbgapps.scoreit.ui.base.BaseViewModel
+import com.sbgapps.scoreit.ui.mapper.PlayerMapper
+import com.sbgapps.scoreit.ui.mapper.UniversalLapMapper
+import com.sbgapps.scoreit.ui.model.Player
+import com.sbgapps.scoreit.ui.model.UniversalLap
 
 
-class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel() {
+class UniversalViewModel(useCase: UniversalUseCase,
+                         private val playerMapper: PlayerMapper,
+                         private val lapMapper: UniversalLapMapper)
+    : BaseViewModel<UniversalUseCase>(useCase) {
 
     private val players = MutableLiveData<List<Player>>()
-    private val scores = MutableLiveData<List<Pair<Player, Int>>>()
     private val laps = MutableLiveData<List<UniversalLap>>()
-    private var lap = MutableLiveData<UniversalLap>()
+    private var editedLap = MutableLiveData<UniversalLap>()
 
     var mode: Mode = Mode.MODE_HISTORY
         private set
@@ -41,28 +45,34 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
     fun createGame(name: String, playerCount: Int) {
         launchAsync {
             useCase.createGame(name, playerCount)
-            players.postValue(useCase.getPlayers())
-            laps.postValue(useCase.getLaps())
-            scores.postValue(useCase.getScores())
+            update()
         }
     }
 
     fun getPlayers(): LiveData<List<Player>> {
-        players.value ?: run { players.postValue(useCase.getPlayers()) }
+        players.value ?: run { players.postValue(internalGetPlayers()) }
+        return players
+    }
+
+    private fun internalGetPlayers(): List<Player> {
+        val laps = internalGetLaps()
+        val players = mutableListOf<Player>()
+        useCase.getPlayers().forEachIndexed { index, player ->
+            var score = 0
+            laps.forEach { score += it.points[index] }
+            players.add(playerMapper.mapFromDomain(player, score))
+        }
         return players
     }
 
     fun getPlayerCount(): Int = players.value?.size ?: 0
 
-    fun getScores(): LiveData<List<Pair<Player, Int>>> {
-        scores.value ?: run { scores.postValue(useCase.getScores()) }
-        return scores
-    }
-
     fun getLaps(): LiveData<List<UniversalLap>> {
-        laps.value ?: run { laps.postValue(useCase.getLaps()) }
+        laps.value ?: run { laps.postValue(internalGetLaps()) }
         return laps
     }
+
+    private fun internalGetLaps() = useCase.getLaps().map { lapMapper.mapFromDomain(it) }.toMutableList()
 
     fun startAdditionMode() {
         mode = Mode.MODE_ADDITION
@@ -70,24 +80,22 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
 
     fun startUpdateMode(_lap: UniversalLap) {
         mode = Mode.MODE_UPDATE
-        lap.value = _lap
+        editedLap.value = _lap
     }
 
     fun onLapEditionCompleted() {
         val prevMode = mode
         mode = Mode.MODE_HISTORY
         launchAsync {
-            lap.value?.let {
+            editedLap.value?.let {
                 when (prevMode) {
-                    Mode.MODE_ADDITION -> useCase.addLap(it)
-                    Mode.MODE_UPDATE -> useCase.updateLap(it)
+                    Mode.MODE_ADDITION -> useCase.addLap(lapMapper.mapToDomain(it))
+                    Mode.MODE_UPDATE -> useCase.updateLap(lapMapper.mapToDomain(it))
                     Mode.MODE_HISTORY -> throw IllegalStateException("Cannot be on edition!")
                 }
             }
-
-            laps.postValue(useCase.getLaps())
-            scores.postValue(useCase.getScores())
-            lap.value = null
+            editedLap.value = null
+            update()
         }
     }
 
@@ -95,47 +103,51 @@ class UniversalViewModel(private val useCase: UniversalUseCase) : BaseViewModel(
 
     fun setHistoryMode() {
         mode = Mode.MODE_HISTORY
-        lap.value = null
+        editedLap.value = null
     }
 
     fun getLap(): LiveData<UniversalLap> {
-        lap.value ?: run {
+        editedLap.value ?: run {
             mode = Mode.MODE_ADDITION
-            lap.postValue(useCase.createLap())
+            editedLap.postValue(lapMapper.mapFromDomain(useCase.createLap()))
         }
-        return lap
+        return editedLap
     }
 
     fun setPoints(points: MutableList<Int>) {
-        lap.value?.setPoints(points)
+        editedLap.value?.points = points
     }
 
     fun toggleShowTotal(): Boolean {
         val isDisplayed = useCase.toggleShowTotal()
-        scores.postValue(useCase.getScores())
-        laps.postValue(useCase.getLaps())
+        update()
         return isDisplayed
     }
 
     fun clearLaps() {
         launchAsync {
             useCase.clearLaps()
-            laps.postValue(useCase.getLaps())
-            scores.postValue(useCase.getScores())
+            update()
         }
     }
 
     fun restoreLap(lap: UniversalLap, position: Int) {
-        useCase.restoreLap(lap, position)
-        laps.postValue(useCase.getLaps())
+        useCase.restoreLap(lapMapper.mapToDomain(lap), position)
+        update()
     }
 
-    fun deleteLap(lap: UniversalLap, fromCache: Boolean = false) {
-        launchAsync {
-            useCase.deleteLap(lap, fromCache)
-            laps.postValue(useCase.getLaps())
-            scores.postValue(useCase.getScores())
-        }
+    fun deleteLap(lap: UniversalLap) {
+        useCase.deleteLap(lapMapper.mapToDomain(lap))
+        update()
+    }
+
+    fun deleteLapFromCache(lap: UniversalLap) {
+        launchAsync { useCase.deleteMapFromCache(lapMapper.mapToDomain(lap)) }
+    }
+
+    private fun update() {
+        players.postValue(internalGetPlayers())
+        laps.postValue(internalGetLaps())
     }
 
     enum class Mode {

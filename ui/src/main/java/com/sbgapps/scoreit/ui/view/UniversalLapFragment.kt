@@ -23,20 +23,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.sbgapps.scoreit.domain.model.Player
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.inflate
+import com.sbgapps.scoreit.ui.model.Player
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import kotlinx.android.synthetic.main.fragment_universal_lap.*
 import kotlinx.android.synthetic.main.item_universal_lap.view.*
-import org.koin.android.architecture.ext.viewModel
+import org.koin.android.architecture.ext.sharedViewModel
 import timber.log.Timber
 import kotlin.math.min
 
 class UniversalLapFragment : BaseFragment() {
 
-    private val model: UniversalViewModel by viewModel(true)
+    private val model by sharedViewModel<UniversalViewModel>()
     private val adapter: PlayerAdapter = PlayerAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,7 +54,7 @@ class UniversalLapFragment : BaseFragment() {
             it?.let { adapter.players = it }
         })
         model.getLap().observe(this, Observer {
-            it?.let { adapter.points = it.getPoints() }
+            it?.let { adapter.points = it.points }
         })
     }
 

@@ -14,22 +14,14 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.domain.model
+package com.sbgapps.scoreit.cache.model
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Index
+import android.arch.persistence.room.PrimaryKey
 
-class UniversalLap(val id: Long?, private var points: MutableList<Int>) {
-
-    var isWithTotal: Boolean = false
-
-    fun setPoints(_points: MutableList<Int>) {
-        points = if (isWithTotal) _points.dropLast(1).toMutableList() else _points
-    }
-
-    fun getPoints(): MutableList<Int> {
-        return if (isWithTotal) {
-            val _points = points.toMutableList()
-            _points.add(points.sum())
-            _points
-        } else points
-    }
-}
+@Entity(tableName = "games")
+data class UniversalGameData(
+        @PrimaryKey(autoGenerate = true) val id: Long? = null,
+        var name: String
+)

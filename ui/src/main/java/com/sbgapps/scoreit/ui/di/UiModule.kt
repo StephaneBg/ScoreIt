@@ -16,11 +16,16 @@
 
 package com.sbgapps.scoreit.ui.di
 
+import com.sbgapps.scoreit.ui.mapper.PlayerMapper
+import com.sbgapps.scoreit.ui.mapper.UniversalLapMapper
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import org.koin.android.architecture.ext.viewModel
 import org.koin.dsl.module.applicationContext
 
 val uiModule = applicationContext {
 
-    viewModel { UniversalViewModel(get()) }
+    bean { PlayerMapper() }
+    bean { UniversalLapMapper(get()) }
+
+    viewModel { UniversalViewModel(get(), get(), get()) }
 }

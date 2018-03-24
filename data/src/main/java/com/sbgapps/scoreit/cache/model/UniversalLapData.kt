@@ -17,10 +17,17 @@
 package com.sbgapps.scoreit.cache.model
 
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.ForeignKey
+import android.arch.persistence.room.Index
 import android.arch.persistence.room.PrimaryKey
 
-@Entity(tableName = "games")
-data class UniversalGameEntity(
+@Entity(tableName = "laps",
+        foreignKeys = [(ForeignKey(entity = UniversalGameData::class,
+                parentColumns = arrayOf("id"),
+                childColumns = arrayOf("gameId"),
+                onDelete = ForeignKey.CASCADE))])
+data class UniversalLapData(
         @PrimaryKey(autoGenerate = true) val id: Long? = null,
-        var name: String
+        val gameId: Long,
+        var points: List<Int>
 )

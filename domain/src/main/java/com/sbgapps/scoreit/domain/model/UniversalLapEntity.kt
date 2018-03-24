@@ -14,19 +14,8 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.model
+package com.sbgapps.scoreit.domain.model
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.ForeignKey
-import android.arch.persistence.room.PrimaryKey
 
-@Entity(tableName = "laps",
-        foreignKeys = [(ForeignKey(entity = UniversalGameEntity::class,
-                parentColumns = arrayOf("id"),
-                childColumns = arrayOf("gameId"),
-                onDelete = ForeignKey.CASCADE))])
-data class UniversalLapEntity(
-        @PrimaryKey(autoGenerate = true) val id: Long? = null,
-        val gameId: Long,
-        var points: List<Int>
-)
+data class UniversalLapEntity(val id: Long?,
+                              var points: MutableList<Int>)

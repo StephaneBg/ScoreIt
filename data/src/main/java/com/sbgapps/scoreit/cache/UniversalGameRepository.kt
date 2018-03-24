@@ -17,19 +17,19 @@
 package com.sbgapps.scoreit.cache
 
 import com.sbgapps.scoreit.cache.db.DatabaseInitializer
-import com.sbgapps.scoreit.cache.mapper.PlayerMapper
-import com.sbgapps.scoreit.cache.mapper.UniversalLapMapper
-import com.sbgapps.scoreit.domain.model.Player
-import com.sbgapps.scoreit.domain.model.UniversalLap
+import com.sbgapps.scoreit.cache.mapper.PlayerDataMapper
+import com.sbgapps.scoreit.cache.mapper.UniversalLapDataMapper
+import com.sbgapps.scoreit.domain.model.PlayerEntity
+import com.sbgapps.scoreit.domain.model.UniversalLapEntity
 import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.domain.repository.GameRepository
 import timber.log.Timber
 
 class UniversalGameRepository(private val dbRepo: DatabaseRepo,
-                              private val playerMapper: PlayerMapper,
-                              private val lapMapper: UniversalLapMapper,
+                              private val playerMapper: PlayerDataMapper,
+                              private val lapMapper: UniversalLapDataMapper,
                               private val dbInit: DatabaseInitializer)
-    : GameRepository<UniversalLap> {
+    : GameRepository<UniversalLapEntity> {
 
     override fun getGameId(name: String): Long {
         return dbRepo.universalDb.gameDao().getGame(name).id
@@ -44,26 +44,26 @@ class UniversalGameRepository(private val dbRepo: DatabaseRepo,
         dbRepo.universalDb.gameDao().deleteGame(gameId)
     }
 
-    override fun getPlayers(gameId: Long): List<Player> {
+    override fun getPlayers(gameId: Long): List<PlayerEntity> {
         return dbRepo.universalDb.playerDao().getPlayers(gameId).map { playerMapper.mapFromCache(it) }
     }
 
-    override fun savePlayer(gameId: Long, player: Player) {
-        dbRepo.universalDb.playerDao().insertPlayer(playerMapper.mapToCache(player, gameId))
+    override fun savePlayer(gameId: Long, playerEntity: PlayerEntity) {
+        dbRepo.universalDb.playerDao().insertPlayer(playerMapper.mapToCache(playerEntity, gameId))
     }
 
-    override fun getLaps(gameId: Long): MutableList<UniversalLap> {
-        return dbRepo.universalDb.lapDao().getLaps(gameId).map { lapMapper.mapFromCache(it) }.toMutableList()
+    override fun getLaps(gameId: Long): List<UniversalLapEntity> {
+        return dbRepo.universalDb.lapDao().getLaps(gameId).map { lapMapper.mapFromCache(it) }
     }
 
-    override fun saveLap(gameId: Long, lap: UniversalLap) {
+    override fun saveLap(gameId: Long, lap: UniversalLapEntity) {
         val lapEntity = lapMapper.mapToCache(lap, gameId)
         Timber.d("Saving " + lapEntity)
         dbRepo.universalDb.lapDao().insertLap(lapEntity)
     }
 
-    override fun deleteLap(gameId: Long, lap: UniversalLap) {
-        dbRepo.universalDb.lapDao().deleteLap(lapMapper.mapToCache(lap, gameId))
+    override fun deleteLap(gameId: Long, lap: UniversalLapEntity) {
+        lap.id?.let { dbRepo.universalDb.lapDao().deleteLap(gameId, it) }
     }
 
     override fun clearLaps(gameId: Long) {

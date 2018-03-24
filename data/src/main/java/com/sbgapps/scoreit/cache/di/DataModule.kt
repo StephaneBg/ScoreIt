@@ -19,18 +19,18 @@ package com.sbgapps.scoreit.cache.di
 import com.sbgapps.scoreit.cache.DatabaseRepo
 import com.sbgapps.scoreit.cache.UniversalGameRepository
 import com.sbgapps.scoreit.cache.db.DatabaseInitializer
-import com.sbgapps.scoreit.cache.mapper.PlayerMapper
-import com.sbgapps.scoreit.cache.mapper.UniversalLapMapper
-import com.sbgapps.scoreit.domain.model.UniversalLap
+import com.sbgapps.scoreit.cache.mapper.PlayerDataMapper
+import com.sbgapps.scoreit.cache.mapper.UniversalLapDataMapper
+import com.sbgapps.scoreit.domain.model.UniversalLapEntity
 import com.sbgapps.scoreit.domain.repository.GameRepository
 import org.koin.dsl.module.applicationContext
 
 val dataModule = applicationContext {
 
-    bean { PlayerMapper() }
-    bean { UniversalLapMapper() }
+    bean { PlayerDataMapper() }
+    bean { UniversalLapDataMapper() }
 
-    provide { DatabaseRepo(get()) }
-    provide { DatabaseInitializer(get()) }
-    provide { UniversalGameRepository(get(), get(), get(), get()) as GameRepository<UniversalLap> }
+    factory { DatabaseRepo(get()) }
+    factory { DatabaseInitializer(get()) }
+    factory { UniversalGameRepository(get(), get(), get(), get()) as GameRepository<UniversalLapEntity> }
 }

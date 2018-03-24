@@ -14,14 +14,21 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.domain.model
+package com.sbgapps.scoreit.cache.model
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.ForeignKey
+import android.arch.persistence.room.Index
+import android.arch.persistence.room.PrimaryKey
 
-data class Player(
-        val id: Long?,
+@Entity(tableName = "players",
+        foreignKeys = [(ForeignKey(entity = UniversalGameData::class,
+                parentColumns = arrayOf("id"),
+                childColumns = arrayOf("gameId"),
+                onDelete = ForeignKey.CASCADE))])
+data class PlayerData(
+        @PrimaryKey(autoGenerate = true) val id: Long? = null,
+        val gameId: Long,
         var name: String,
         var color: Int
-) {
-
-    override fun toString(): String = name
-}
+)

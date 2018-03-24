@@ -17,15 +17,14 @@
 package com.sbgapps.scoreit.cache.db
 
 import com.sbgapps.scoreit.cache.DatabaseRepo
-import com.sbgapps.scoreit.cache.model.PlayerEntity
-import com.sbgapps.scoreit.cache.model.UniversalGameEntity
-import com.sbgapps.scoreit.domain.preference.PreferencesHelper
+import com.sbgapps.scoreit.cache.model.PlayerData
+import com.sbgapps.scoreit.cache.model.UniversalGameData
 import kotlin.math.min
 
 class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
 
     fun createGame(gameName: String, playerCount: Int): Long {
-        val game = UniversalGameEntity(name = gameName)
+        val game = UniversalGameData(name = gameName)
         val id = dbRepo.universalDb.gameDao().insertGame(game)
         populatePlayers(id, playerCount)
         return id
@@ -34,7 +33,8 @@ class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
     private fun populatePlayers(gameId: Long, count: Int) {
         val _count = min(count, NAMES.size)
         for (i in 0 until _count) {
-            dbRepo.universalDb.playerDao().insertPlayer(PlayerEntity(null, gameId, NAMES[i], COLORS[i]))
+            val player = PlayerData(null, gameId, NAMES[i], COLORS[i])
+            dbRepo.universalDb.playerDao().insertPlayer(player)
         }
     }
 

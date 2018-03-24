@@ -17,17 +17,17 @@
 package com.sbgapps.scoreit.cache.db
 
 import android.arch.persistence.room.*
-import com.sbgapps.scoreit.cache.model.PlayerEntity
+import com.sbgapps.scoreit.cache.model.PlayerData
 
 @Dao
 interface PlayerDao {
 
     @Query("SELECT * FROM players WHERE gameId = :gameId")
-    fun getPlayers(gameId: Long): List<PlayerEntity>
+    fun getPlayers(gameId: Long): List<PlayerData>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPlayer(player: PlayerEntity)
+    fun insertPlayer(player: PlayerData)
 
     @Update
-    fun updatePlayer(player: PlayerEntity)
+    fun updatePlayer(player: PlayerData)
 }

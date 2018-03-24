@@ -14,26 +14,15 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.db
+package com.sbgapps.scoreit.cache.mapper
 
-import android.arch.persistence.room.*
 import com.sbgapps.scoreit.cache.model.UniversalLapData
+import com.sbgapps.scoreit.domain.model.UniversalLapEntity
 
-@Dao
-interface UniversalLapDao {
 
-    @Query("SELECT * FROM laps WHERE gameId = :gameId")
-    fun getLaps(gameId: Long): List<UniversalLapData>
+class UniversalLapDataMapper {
 
-    @Query("DELETE FROM laps WHERE gameId = :gameId")
-    fun clearLaps(gameId: Long)
+    fun mapFromCache(data: UniversalLapData) = UniversalLapEntity(data.id!!, data.points.toMutableList())
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertLap(lap: UniversalLapData)
-
-    @Update
-    fun updateLap(lap: UniversalLapData)
-
-    @Query("DELETE FROM laps WHERE id = :id AND gameId = :gameId")
-    fun deleteLap(gameId: Long, id: Long)
+    fun mapToCache(entity: UniversalLapEntity, gameId: Long) = UniversalLapData(entity.id, gameId, entity.points)
 }

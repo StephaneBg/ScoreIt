@@ -17,9 +17,6 @@
 package com.sbgapps.scoreit.domain.usecase
 
 import android.support.annotation.CallSuper
-import com.sbgapps.scoreit.domain.model.UniversalLap
-import com.sbgapps.scoreit.domain.preference.PreferencesHelper
-import com.sbgapps.scoreit.domain.repository.GameRepository
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.Deferred

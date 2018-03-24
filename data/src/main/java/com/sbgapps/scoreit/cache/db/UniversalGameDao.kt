@@ -20,22 +20,22 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
-import com.sbgapps.scoreit.cache.model.UniversalGameEntity
+import com.sbgapps.scoreit.cache.model.UniversalGameData
 
 @Dao
 interface UniversalGameDao {
 
     @Query("SELECT * FROM games")
-    fun getAllGames(): List<UniversalGameEntity>
+    fun getAllGames(): List<UniversalGameData>
 
     @Query("SELECT * FROM games WHERE id = :id")
-    fun getGame(id: Long): UniversalGameEntity
+    fun getGame(id: Long): UniversalGameData
 
     @Query("SELECT * FROM games WHERE name = :name")
-    fun getGame(name: String): UniversalGameEntity
+    fun getGame(name: String): UniversalGameData
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertGame(game: UniversalGameEntity): Long
+    fun insertGame(game: UniversalGameData): Long
 
     @Query("DELETE FROM games WHERE id = :id")
     fun deleteGame(id: Long)

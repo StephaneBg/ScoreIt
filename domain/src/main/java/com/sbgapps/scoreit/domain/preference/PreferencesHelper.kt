@@ -20,7 +20,7 @@ import android.content.Context
 import android.preference.PreferenceManager
 import androidx.content.edit
 import com.sbgapps.scoreit.domain.R
-import com.sbgapps.scoreit.domain.model.Player
+import com.sbgapps.scoreit.domain.model.PlayerEntity
 
 
 class PreferencesHelper(private val context: Context) {
@@ -48,8 +48,6 @@ class PreferencesHelper(private val context: Context) {
         sharedPreferences.edit { putInt(KEY_UNIVERSAL_PLAYER_COUNT, playerCount) }
     }
 
-    fun getTotalPlayer() = Player(null, context.getString(R.string.universal_total_points), 0xFF757575.toInt())
-
     var isTotalDisplayed: Boolean
         get() {
             return sharedPreferences.getBoolean(KEY_UNIVERSAL_SHOW_TOTAL, false)
@@ -58,6 +56,7 @@ class PreferencesHelper(private val context: Context) {
             sharedPreferences.edit { putBoolean(KEY_UNIVERSAL_SHOW_TOTAL, value) }
         }
 
+    fun getTotalPlayer() = PlayerEntity(null, context.getString(R.string.universal_total_points), 0xFF757575.toInt())
 
     companion object {
         const val DEFAULT_GAME_NAME = "ScoreIt"

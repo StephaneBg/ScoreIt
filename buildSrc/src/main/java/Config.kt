@@ -25,7 +25,7 @@ object Versions {
     val timber = "4.5.1"
     val moshi = "1.5.0"
     val anko = "0.10.1"
-    val koin = "0.9.0"
+    val koin = "0.9.1"
     val androidKtx = "0.2"
     val linearListView = "1.0.1@aar"
     val debugDb = "1.0.3"

@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.mapper
+package com.sbgapps.scoreit.ui.mapper
 
-import com.sbgapps.scoreit.cache.model.UniversalLapEntity
-import com.sbgapps.scoreit.domain.model.UniversalLap
+import com.sbgapps.scoreit.domain.model.PlayerEntity
+import com.sbgapps.scoreit.ui.model.Player
 
 
-class UniversalLapMapper : Mapper<UniversalLapEntity, UniversalLap> {
+class PlayerMapper {
 
-    override fun mapFromCache(data: UniversalLapEntity) = UniversalLap(data.id, data.points.toMutableList())
-
-    override fun mapToCache(domain: UniversalLap) = throw(IllegalArgumentException())
-
-    fun mapToCache(domain: UniversalLap, gameId: Long): UniversalLapEntity {
-        domain.isWithTotal = false
-        return UniversalLapEntity(domain.id, gameId, domain.getPoints())
+    fun mapFromDomain(entity: PlayerEntity, score: Int): Player {
+        return Player(entity.id, entity.name, entity.color, score)
     }
+
+    fun mapToDomain(player: Player) = PlayerEntity(player.id, player.name, player.color)
 }

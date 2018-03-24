@@ -18,6 +18,7 @@ package com.sbgapps.scoreit.ui.base
 
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.CallSuper
+import com.sbgapps.scoreit.domain.usecase.BaseUseCase
 import com.sbgapps.scoreit.ui.utils.CoroutinesUtils.Companion.tryCatch
 import com.sbgapps.scoreit.ui.utils.CoroutinesUtils.Companion.tryCatchFinally
 import com.sbgapps.scoreit.ui.utils.CoroutinesUtils.Companion.tryFinally
@@ -27,12 +28,13 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 
 
-open class BaseViewModel : ViewModel() {
+open class BaseViewModel<out UseCase: BaseUseCase>(val useCase: UseCase) : ViewModel() {
 
     private val asyncJobs = mutableListOf<Job>()
 
     override fun onCleared() {
         super.onCleared()
+        useCase.cleanup()
         cleanup()
     }
 

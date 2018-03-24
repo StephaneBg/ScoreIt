@@ -47,13 +47,14 @@ class ScoreItActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (null == savedInstanceState)
+        savedInstanceState ?: run {
             launch {
                 model.init()
             }.invokeOnCompletion {
-                replaceFragment(R.id.headerContainer, HeaderFragment.newInstance())
+                replaceFragment(R.id.headerContainer, ScoreFragment.newInstance())
                 replaceFragment(R.id.lapContainer, UniversalHistoryFragment.newInstance())
             }
+        }
 
         setSupportActionBar(toolbar)
         fab.setOnClickListener { onFabClicked() }
@@ -72,12 +73,12 @@ class ScoreItActivity : BaseActivity() {
                 true
             }
 
-            R.id.totals -> {
-                val isShown = model.toggleShowTotal()
-                val res = if (isShown) R.string.menu_action_hide_totals else R.string.menu_action_show_totals
-                item.title = getString(res)
-                true
-            }
+//            R.id.totals -> {
+//                val isShown = model.toggleShowTotal()
+//                val res = if (isShown) R.string.menu_action_hide_totals else R.string.menu_action_show_totals
+//                item.title = getString(res)
+//                true
+//            }
 
             R.id.clear -> {
                 showClearLapDialog()

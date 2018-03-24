@@ -16,95 +16,78 @@
 
 package com.sbgapps.scoreit.domain.usecase
 
-import com.sbgapps.scoreit.domain.model.Player
-import com.sbgapps.scoreit.domain.model.UniversalLap
+import com.sbgapps.scoreit.domain.model.PlayerEntity
+import com.sbgapps.scoreit.domain.model.UniversalLapEntity
 import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.domain.repository.GameRepository
 
 
-class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
+class UniversalUseCase(private val universalRepo: GameRepository<UniversalLapEntity>,
                        private val prefsHelper: PreferencesHelper)
     : BaseUseCase() {
 
     private var gameId: Long = 0
-    private lateinit var players: List<Player>
-    private lateinit var laps: MutableList<UniversalLap>
+    private lateinit var players: MutableList<PlayerEntity>
+    private lateinit var laps: MutableList<UniversalLapEntity>
 
-    fun getPlayers(): List<Player> = internalGetPlayer(false)
+    fun getPlayers(): List<PlayerEntity> {
+        if (prefsHelper.isTotalDisplayed) {
+            players.add(prefsHelper.getTotalPlayer())
+        }
+        return players
+    }
 
-    fun getLaps(): List<UniversalLap> {
-        val isWithTotal = prefsHelper.isTotalDisplayed
-        laps.map { it.isWithTotal = isWithTotal }
+    fun getLaps(): List<UniversalLapEntity> {
+        if (prefsHelper.isTotalDisplayed) {
+            laps.forEach {
+                val total = it.points.sum()
+                it.points.add(total)
+            }
+        }
         return laps
     }
 
-    fun getScores(): List<Pair<Player, Int>> {
-        val isWithTotal = prefsHelper.isTotalDisplayed
-        val count = if (isWithTotal) players.size + 1 else players.size
-
-        val scores = mutableListOf<Int>()
-        for (i in 0 until count) scores.add(0)
-
-        getLaps().forEach { lap ->
-            lap.getPoints().forEachIndexed { index, points ->
-                scores[index] += points
-            }
-        }
-
-        val players = internalGetPlayer(true)
-
-        return players.zip(scores)
-    }
-
-    private fun internalGetPlayer(withTotal: Boolean): List<Player> {
-        return if (prefsHelper.isTotalDisplayed && withTotal) {
-            val _players = players.toMutableList()
-            _players.add(prefsHelper.getTotalPlayer())
-            _players
-        } else players
-    }
-
-    fun createLap(): UniversalLap {
+    fun createLap(): UniversalLapEntity {
         val points = mutableListOf<Int>()
         for (i in 0 until getPlayers().size) points.add(0)
-        val lap = UniversalLap(null, points)
-        lap.isWithTotal = prefsHelper.isTotalDisplayed
-        return lap
+        return UniversalLapEntity(null, points)
     }
 
-    suspend fun addLap(lap: UniversalLap) {
-        laps.add(lap)
-        asyncAwait { universalRepo.saveLap(gameId, lap) }
+    fun deleteLap(lapEntity: UniversalLapEntity) {
+        laps.remove(lapEntity)
     }
 
-    suspend fun updateLap(lap: UniversalLap) {
-        asyncAwait { universalRepo.saveLap(gameId, lap) }
+    suspend fun addLap(lapEntity: UniversalLapEntity) {
+        if (prefsHelper.isTotalDisplayed) {
+            laps.forEach { it.points.dropLast(1) }
+        }
+        laps.add(lapEntity)
+        asyncAwait { universalRepo.saveLap(gameId, lapEntity) }
+    }
+
+    suspend fun updateLap(lapEntity: UniversalLapEntity) {
+        asyncAwait { universalRepo.saveLap(gameId, lapEntity) }
     }
 
     suspend fun clearLaps() {
-        asyncAwait {
-            universalRepo.clearLaps(gameId)
-            laps.clear()
-        }
+        laps.clear()
+        asyncAwait { universalRepo.clearLaps(gameId) }
     }
 
-    suspend fun deleteLap(lap: UniversalLap, fromCache: Boolean = false) {
-        asyncAwait {
-            if (fromCache) universalRepo.deleteLap(gameId, lap)
-            laps.remove(lap)
-        }
+    suspend fun deleteMapFromCache(lapEntity: UniversalLapEntity) {
+        asyncAwait { universalRepo.deleteLap(gameId, lapEntity) }
     }
 
-    fun restoreLap(lap: UniversalLap, position: Int) {
-        laps.add(position, lap)
+    fun restoreLap(lapEntity: UniversalLapEntity, position: Int) {
+        laps.add(position, lapEntity)
     }
 
     suspend fun initGame() {
         val name = prefsHelper.getUniversalGameName()
         name?.let {
             gameId = universalRepo.getGameId(name)
-            players = universalRepo.getPlayers(gameId)
-            laps = universalRepo.getLaps(gameId)
+            players = universalRepo.getPlayers(gameId).toMutableList()
+            laps = universalRepo.getLaps(gameId).toMutableList()
         } ?: run {
             createGame(PreferencesHelper.DEFAULT_GAME_NAME, PreferencesHelper.DEFAULT_UNIVERSAL_PLAYER_COUNT)
         }
@@ -114,13 +97,15 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLap>,
         prefsHelper.initUniversalGame(name, playerCount)
         asyncAwait {
             gameId = universalRepo.createGame(name, playerCount)
-            players = universalRepo.getPlayers(gameId)
-            laps = universalRepo.getLaps(gameId)
+            players = universalRepo.getPlayers(gameId).toMutableList()
+            laps = universalRepo.getLaps(gameId).toMutableList()
         }
     }
 
     fun toggleShowTotal(): Boolean {
         return if (prefsHelper.isTotalDisplayed) {
+            laps.forEach { it.points = it.points.dropLast(1).toMutableList() }
+            players = players.dropLast(1).toMutableList()
             prefsHelper.isTotalDisplayed = false
             false
         } else {

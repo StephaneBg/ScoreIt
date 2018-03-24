@@ -29,21 +29,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.sbgapps.scoreit.domain.model.UniversalLap
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.inflate
 import com.sbgapps.scoreit.ui.ext.replaceFragment
-import com.sbgapps.scoreit.ui.ext.sameContentWith
+import com.sbgapps.scoreit.ui.model.UniversalLap
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_universal_history.*
 import kotlinx.android.synthetic.main.item_universal_history.view.*
-import org.koin.android.architecture.ext.viewModel
+import org.koin.android.architecture.ext.sharedViewModel
 
 class UniversalHistoryFragment : BaseFragment() {
 
-    private val model: UniversalViewModel by viewModel(true)
+    private val model by sharedViewModel<UniversalViewModel>()
     private val adapter = LapListAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -67,10 +66,9 @@ class UniversalHistoryFragment : BaseFragment() {
 
     inner class LapListAdapter : RecyclerView.Adapter<Holder>() {
         private var laps = emptyList<UniversalLap>()
-        private var points = emptyList<List<Int>>()
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
-            holder.bind(laps[position], points[position])
+            holder.bind(laps[position])
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -80,17 +78,15 @@ class UniversalHistoryFragment : BaseFragment() {
         override fun getItemCount(): Int = laps.size
 
         fun updateList(newLaps: List<UniversalLap>) {
-            val newPoints = newLaps.map { it.getPoints().toMutableList() }
-            val diffResult = DiffUtil.calculateDiff(HistoryDiffCallback(newPoints, points))
+            val diffResult = DiffUtil.calculateDiff(HistoryDiffCallback(newLaps, laps))
             laps = newLaps
-            points = newPoints
             diffResult.dispatchUpdatesTo(this)
         }
     }
 
     inner class Holder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(lap: UniversalLap, points: List<Int>) {
-            itemView.lapItem.adapter = LapItemAdapter(points)
+        fun bind(lap: UniversalLap) {
+            itemView.lapItem.adapter = LapItemAdapter(lap.points)
 
             itemView.delete.setOnClickListener {
                 model.deleteLap(lap)
@@ -114,7 +110,7 @@ class UniversalHistoryFragment : BaseFragment() {
                             when (event) {
                                 DISMISS_EVENT_TIMEOUT,
                                 DISMISS_EVENT_CONSECUTIVE,
-                                DISMISS_EVENT_SWIPE -> model.deleteLap(lap, true)
+                                DISMISS_EVENT_SWIPE -> model.deleteLapFromCache(lap)
 
                                 DISMISS_EVENT_ACTION -> model.restoreLap(lap, adapterPosition)
                             }
@@ -139,8 +135,8 @@ class UniversalHistoryFragment : BaseFragment() {
         override fun getCount() = points.size
     }
 
-    inner class HistoryDiffCallback(private val newLaps: List<List<Int>>,
-                                    private val oldLaps: List<List<Int>>)
+    inner class HistoryDiffCallback(private val newLaps: List<UniversalLap>,
+                                    private val oldLaps: List<UniversalLap>)
         : DiffUtil.Callback() {
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
@@ -152,7 +148,7 @@ class UniversalHistoryFragment : BaseFragment() {
         override fun getNewListSize() = newLaps.size
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldLaps[oldItemPosition] sameContentWith newLaps[newItemPosition]
+            return oldLaps[oldItemPosition] == newLaps[newItemPosition]
         }
     }
 

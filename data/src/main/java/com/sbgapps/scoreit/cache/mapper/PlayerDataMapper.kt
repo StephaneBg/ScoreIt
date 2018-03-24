@@ -16,15 +16,13 @@
 
 package com.sbgapps.scoreit.cache.mapper
 
-import com.sbgapps.scoreit.cache.model.PlayerEntity
-import com.sbgapps.scoreit.domain.model.Player
+import com.sbgapps.scoreit.cache.model.PlayerData
+import com.sbgapps.scoreit.domain.model.PlayerEntity
 
 
-class PlayerMapper : Mapper<PlayerEntity, Player> {
+class PlayerDataMapper {
 
-    override fun mapFromCache(data: PlayerEntity) = Player(data.id, data.name, data.color)
+    fun mapFromCache(data: PlayerData) = PlayerEntity(data.id!!, data.name, data.color)
 
-    override fun mapToCache(domain: Player) = throw(IllegalArgumentException())
-
-    fun mapToCache(domain: Player, gameId: Long) = PlayerEntity(domain.id, gameId, domain.name, domain.color)
+    fun mapToCache(entity: PlayerEntity, gameId: Long) = PlayerData(entity.id, gameId, entity.name, entity.color)
 }

@@ -14,11 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.mapper
+package com.sbgapps.scoreit.ui.model
 
-interface Mapper<Data, Domain> {
-
-    fun mapFromCache(data: Data): Domain
-
-    fun mapToCache(domain: Domain): Data
-}
+data class UniversalLap(val id: Long?,
+                        var points: MutableList<Int>)

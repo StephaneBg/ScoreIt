@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit.domain.repository
 
-import com.sbgapps.scoreit.domain.model.Player
+import com.sbgapps.scoreit.domain.model.PlayerEntity
 
 
 interface GameRepository<Lap> {
@@ -27,11 +27,11 @@ interface GameRepository<Lap> {
 
     fun deleteGame(gameId: Long)
 
-    fun getPlayers(gameId: Long): List<Player>
+    fun getPlayers(gameId: Long): List<PlayerEntity>
 
-    fun savePlayer(gameId: Long, player: Player)
+    fun savePlayer(gameId: Long, playerEntity: PlayerEntity)
 
-    fun getLaps(gameId: Long): MutableList<Lap>
+    fun getLaps(gameId: Long): List<Lap>
 
     fun saveLap(gameId: Long, lap: Lap)
 
