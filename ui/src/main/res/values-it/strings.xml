@@ -101,7 +101,7 @@
     <string name="dialog_action_pick_contact">Scegli contatto</string>
     <!-- Snackbar -->
     <string name="snackbar_msg_on_lap_deleted">Giro eliminato</string>
-    <string name="snackbar_action_on_lap_deleted">Annulla</string>
+    <string name="snackbar_action_undo">Annulla</string>
     <!-- Button -->
     <string name="button_action_cancel">Annulla</string>
     <string name="button_action_add">Aggiungi</string>

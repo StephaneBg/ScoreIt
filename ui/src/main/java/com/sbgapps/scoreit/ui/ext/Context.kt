@@ -20,4 +20,3 @@ import android.content.Context
 import android.support.v4.content.ContextCompat
 
 fun Context.color(id: Int): Int = ContextCompat.getColor(this, id)
-

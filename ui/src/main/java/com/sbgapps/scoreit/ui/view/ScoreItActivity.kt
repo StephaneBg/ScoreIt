@@ -73,12 +73,12 @@ class ScoreItActivity : BaseActivity() {
                 true
             }
 
-//            R.id.totals -> {
-//                val isShown = model.toggleShowTotal()
-//                val res = if (isShown) R.string.menu_action_hide_totals else R.string.menu_action_show_totals
-//                item.title = getString(res)
-//                true
-//            }
+            R.id.totals -> {
+                val isShown = model.toggleShowTotal()
+                val res = if (isShown) R.string.menu_action_hide_totals else R.string.menu_action_show_totals
+                item.title = getString(res)
+                true
+            }
 
             R.id.clear -> {
                 showClearLapDialog()
@@ -101,7 +101,7 @@ class ScoreItActivity : BaseActivity() {
     private fun onFabClicked() {
         if (model.isOnHistoryMode()) {
             model.startAdditionMode()
-            replaceFragment(R.id.lapContainer, UniversalLapFragment.newInstance(), true)
+            replaceFragment(R.id.lapContainer, UniversalEditionFragment.newInstance(), true)
         } else {
             model.onLapEditionCompleted()
             supportFragmentManager.popBackStack()

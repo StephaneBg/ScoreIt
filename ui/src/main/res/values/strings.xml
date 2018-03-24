@@ -108,7 +108,7 @@
 
     <!-- Snackbar -->
     <string name="snackbar_msg_on_lap_deleted">Lap deleted</string>
-    <string name="snackbar_action_on_lap_deleted">Undo</string>
+    <string name="snackbar_action_undo">Undo</string>
 
     <!-- Button -->
     <string name="button_action_cancel">Cancel</string>

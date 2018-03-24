@@ -101,7 +101,7 @@
     <string name="dialog_action_pick_contact">Contact kiezen</string>
     <!-- Snackbar -->
     <string name="snackbar_msg_on_lap_deleted">Ronde verwijderd</string>
-    <string name="snackbar_action_on_lap_deleted">Ongedaan</string>
+    <string name="snackbar_action_undo">Ongedaan</string>
     <!-- Button -->
     <string name="button_action_cancel">Annuleren</string>
     <string name="button_action_add">Toevoegen</string>

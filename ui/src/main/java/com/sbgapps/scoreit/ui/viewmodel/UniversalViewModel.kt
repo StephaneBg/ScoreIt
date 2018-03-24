@@ -24,6 +24,7 @@ import com.sbgapps.scoreit.ui.mapper.PlayerMapper
 import com.sbgapps.scoreit.ui.mapper.UniversalLapMapper
 import com.sbgapps.scoreit.ui.model.Player
 import com.sbgapps.scoreit.ui.model.UniversalLap
+import timber.log.Timber
 
 
 class UniversalViewModel(useCase: UniversalUseCase,
@@ -50,14 +51,14 @@ class UniversalViewModel(useCase: UniversalUseCase,
     }
 
     fun getPlayers(): LiveData<List<Player>> {
-        players.value ?: run { players.postValue(internalGetPlayers()) }
+        players.value ?: run { update() }
         return players
     }
 
-    private fun internalGetPlayers(): List<Player> {
-        val laps = internalGetLaps()
+    private fun internalGetPlayers(laps: List<UniversalLap>): List<Player> {
+        Timber.d("Players are updated!")
         val players = mutableListOf<Player>()
-        useCase.getPlayers().forEachIndexed { index, player ->
+        useCase.getPlayers(true).forEachIndexed { index, player ->
             var score = 0
             laps.forEach { score += it.points[index] }
             players.add(playerMapper.mapFromDomain(player, score))
@@ -72,15 +73,18 @@ class UniversalViewModel(useCase: UniversalUseCase,
         return laps
     }
 
-    private fun internalGetLaps() = useCase.getLaps().map { lapMapper.mapFromDomain(it) }.toMutableList()
+    private fun internalGetLaps(): MutableList<UniversalLap> {
+        Timber.d("Laps are updated!")
+        return useCase.getLaps().map { lapMapper.mapFromDomain(it) }.toMutableList()
+    }
 
     fun startAdditionMode() {
         mode = Mode.MODE_ADDITION
     }
 
-    fun startUpdateMode(_lap: UniversalLap) {
+    fun startUpdateMode(lap: UniversalLap) {
         mode = Mode.MODE_UPDATE
-        editedLap.value = _lap
+        editedLap.value = lap
     }
 
     fun onLapEditionCompleted() {
@@ -109,7 +113,7 @@ class UniversalViewModel(useCase: UniversalUseCase,
     fun getLap(): LiveData<UniversalLap> {
         editedLap.value ?: run {
             mode = Mode.MODE_ADDITION
-            editedLap.postValue(lapMapper.mapFromDomain(useCase.createLap()))
+            editedLap.postValue(lapMapper.mapFromDomain(useCase.createLap(false)))
         }
         return editedLap
     }
@@ -146,8 +150,10 @@ class UniversalViewModel(useCase: UniversalUseCase,
     }
 
     private fun update() {
-        players.postValue(internalGetPlayers())
-        laps.postValue(internalGetLaps())
+        val _laps = internalGetLaps()
+        val _players = internalGetPlayers(_laps)
+        laps.postValue(_laps)
+        players.postValue(_players)
     }
 
     enum class Mode {

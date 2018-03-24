@@ -20,6 +20,7 @@ import com.sbgapps.scoreit.domain.model.PlayerEntity
 import com.sbgapps.scoreit.domain.model.UniversalLapEntity
 import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.domain.repository.GameRepository
+import timber.log.Timber
 
 
 class UniversalUseCase(private val universalRepo: GameRepository<UniversalLapEntity>,
@@ -30,26 +31,28 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLapEnt
     private lateinit var players: MutableList<PlayerEntity>
     private lateinit var laps: MutableList<UniversalLapEntity>
 
-    fun getPlayers(): List<PlayerEntity> {
-        if (prefsHelper.isTotalDisplayed) {
-            players.add(prefsHelper.getTotalPlayer())
+    fun getPlayers(withTotal: Boolean): List<PlayerEntity> {
+        val _players = players.toMutableList()
+        if (withTotal && prefsHelper.isTotalDisplayed) {
+            _players.add(prefsHelper.getTotalPlayer())
         }
-        return players
+        Timber.d("Players: $_players")
+        return _players
     }
 
     fun getLaps(): List<UniversalLapEntity> {
-        if (prefsHelper.isTotalDisplayed) {
-            laps.forEach {
-                val total = it.points.sum()
-                it.points.add(total)
-            }
+        val _laps = laps.map {
+            val points = it.points.toMutableList()
+            if (prefsHelper.isTotalDisplayed) points.add(points.sum())
+            UniversalLapEntity(it.id, points)
         }
-        return laps
+        Timber.d("Laps: $_laps")
+        return _laps
     }
 
-    fun createLap(): UniversalLapEntity {
+    fun createLap(withTotal: Boolean): UniversalLapEntity {
         val points = mutableListOf<Int>()
-        for (i in 0 until getPlayers().size) points.add(0)
+        for (i in 0 until getPlayers(withTotal).size) points.add(0)
         return UniversalLapEntity(null, points)
     }
 
@@ -58,15 +61,20 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLapEnt
     }
 
     suspend fun addLap(lapEntity: UniversalLapEntity) {
-        if (prefsHelper.isTotalDisplayed) {
-            laps.forEach { it.points.dropLast(1) }
-        }
         laps.add(lapEntity)
         asyncAwait { universalRepo.saveLap(gameId, lapEntity) }
     }
 
     suspend fun updateLap(lapEntity: UniversalLapEntity) {
-        asyncAwait { universalRepo.saveLap(gameId, lapEntity) }
+        asyncAwait {
+            universalRepo.saveLap(gameId, lapEntity)
+            laps.find { it.id == lapEntity.id }
+                    .let {
+                        val index = laps.indexOf(it)
+                        laps.removeAt(index)
+                        laps.add(index, lapEntity)
+                    }
+        }
     }
 
     suspend fun clearLaps() {
@@ -104,8 +112,6 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLapEnt
 
     fun toggleShowTotal(): Boolean {
         return if (prefsHelper.isTotalDisplayed) {
-            laps.forEach { it.points = it.points.dropLast(1).toMutableList() }
-            players = players.dropLast(1).toMutableList()
             prefsHelper.isTotalDisplayed = false
             false
         } else {

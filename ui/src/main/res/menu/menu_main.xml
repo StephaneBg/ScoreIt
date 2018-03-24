@@ -33,10 +33,10 @@
         app:showAsAction="ifRoom"
         />
 
-    <!--<item-->
-        <!--android:id="@+id/totals"-->
-        <!--android:icon="@drawable/ic_sigma_green_24dp"-->
-        <!--android:title="@string/menu_action_show_totals"-->
-        <!--app:showAsAction="ifRoom"-->
-        <!--/>-->
+    <item
+        android:id="@+id/totals"
+        android:icon="@drawable/ic_sigma_green_24dp"
+        android:title="@string/menu_action_show_totals"
+        app:showAsAction="ifRoom"
+        />
 </menu>

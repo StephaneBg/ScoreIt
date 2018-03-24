@@ -25,7 +25,7 @@ import org.koin.dsl.module.applicationContext
 val uiModule = applicationContext {
 
     bean { PlayerMapper() }
-    bean { UniversalLapMapper(get()) }
+    bean { UniversalLapMapper() }
 
     viewModel { UniversalViewModel(get(), get(), get()) }
 }

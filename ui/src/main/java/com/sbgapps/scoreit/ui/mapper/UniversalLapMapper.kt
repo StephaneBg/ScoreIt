@@ -17,21 +17,16 @@
 package com.sbgapps.scoreit.ui.mapper
 
 import com.sbgapps.scoreit.domain.model.UniversalLapEntity
-import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.ui.model.UniversalLap
 
 
-class UniversalLapMapper(private val prefsHelper: PreferencesHelper) {
+class UniversalLapMapper {
 
     fun mapFromDomain(entity: UniversalLapEntity): UniversalLap {
-        val points = entity.points.toMutableList()
-        if (prefsHelper.isTotalDisplayed) points.add(points.sum())
-        return UniversalLap(entity.id, points)
+        return UniversalLap(entity.id, entity.points)
     }
 
     fun mapToDomain(lap: UniversalLap): UniversalLapEntity {
-        val points = lap.points.toMutableList()
-        if (prefsHelper.isTotalDisplayed) points.dropLast(1)
-        return UniversalLapEntity(lap.id, points)
+        return UniversalLapEntity(lap.id, lap.points)
     }
 }

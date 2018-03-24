@@ -101,7 +101,7 @@
     <string name="dialog_action_pick_contact">Wähle einen Kontakt</string>
     <!-- Snackbar -->
     <string name="snackbar_msg_on_lap_deleted">Runde gelöscht</string>
-    <string name="snackbar_action_on_lap_deleted">Rückgängig</string>
+    <string name="snackbar_action_undo">Rückgängig</string>
     <!-- Button -->
     <string name="button_action_cancel">Abbrechen</string>
     <string name="button_action_add">Hinzufügen</string>

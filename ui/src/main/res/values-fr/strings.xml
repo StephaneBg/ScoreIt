@@ -101,7 +101,7 @@
     <string name="dialog_action_pick_contact">Sélectionner un contact</string>
     <!-- Snackbar -->
     <string name="snackbar_msg_on_lap_deleted">Mène supprimée</string>
-    <string name="snackbar_action_on_lap_deleted">Annuler</string>
+    <string name="snackbar_action_undo">Annuler</string>
     <!-- Button -->
     <string name="button_action_cancel">Annuler</string>
     <string name="button_action_add">Ajouter</string>

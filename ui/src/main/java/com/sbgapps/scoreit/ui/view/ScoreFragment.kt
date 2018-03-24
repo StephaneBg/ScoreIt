@@ -30,25 +30,28 @@ import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import kotlinx.android.synthetic.main.fragment_score.*
 import kotlinx.android.synthetic.main.item_score.view.*
 import org.koin.android.architecture.ext.sharedViewModel
+import timber.log.Timber
 
 
 class ScoreFragment : BaseFragment() {
 
     private val model by sharedViewModel<UniversalViewModel>()
     private val adapter = ScoreAdapter()
+    private val animDuration by lazy { context!!.resources.getInteger(android.R.integer.config_shortAnimTime).toLong() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_score, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        header.adapter = adapter
+        scoreContainer.adapter = adapter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         model.getPlayers().observe(this, Observer {
+            Timber.d("Players are notified")
             it?.let { adapter.scores = it }
         })
     }
@@ -68,9 +71,18 @@ class ScoreFragment : BaseFragment() {
             with(view) {
                 name.text = player.name
                 name.setTextColor(player.color)
-                score.text = player.score.toString()
+                score.animate()
+                        .alpha(0f)
+                        .setDuration(animDuration)
+                        .withEndAction {
+                            score.text = player.score.toString()
+                            score.animate()
+                                    .alpha(1f)
+                                    .setDuration(animDuration)
+                                    .start()
+                        }
+                        .start()
             }
-
             return view
         }
 

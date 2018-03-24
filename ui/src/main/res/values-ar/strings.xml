@@ -101,7 +101,7 @@
     <string name="dialog_action_pick_contact">اختيار شخص</string>
     <!-- Snackbar -->
     <string name="snackbar_msg_on_lap_deleted">تم الحذف</string>
-    <string name="snackbar_action_on_lap_deleted">ارجع</string>
+    <string name="snackbar_action_undo">ارجع</string>
     <!-- Button -->
     <string name="button_action_cancel">فك علينا</string>
     <string name="button_action_add">زيد</string>

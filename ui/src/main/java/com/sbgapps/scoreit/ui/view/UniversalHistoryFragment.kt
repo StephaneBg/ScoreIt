@@ -31,14 +31,16 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
+import com.sbgapps.scoreit.ui.ext.color
 import com.sbgapps.scoreit.ui.ext.inflate
 import com.sbgapps.scoreit.ui.ext.replaceFragment
+import com.sbgapps.scoreit.ui.ext.sameContentWith
 import com.sbgapps.scoreit.ui.model.UniversalLap
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_universal_history.*
 import kotlinx.android.synthetic.main.item_universal_history.view.*
 import org.koin.android.architecture.ext.sharedViewModel
+import timber.log.Timber
 
 class UniversalHistoryFragment : BaseFragment() {
 
@@ -60,6 +62,7 @@ class UniversalHistoryFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         model.getLaps().observe(this, Observer {
+            Timber.d("Laps are notified")
             it?.let { adapter.updateList(it) }
         })
     }
@@ -86,6 +89,7 @@ class UniversalHistoryFragment : BaseFragment() {
 
     inner class Holder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(lap: UniversalLap) {
+            itemView.revealLayout.close(true)
             itemView.lapItem.adapter = LapItemAdapter(lap.points)
 
             itemView.delete.setOnClickListener {
@@ -96,7 +100,7 @@ class UniversalHistoryFragment : BaseFragment() {
             itemView.edit.setOnClickListener {
                 model.startUpdateMode(lap)
                 with(activity as ScoreItActivity) {
-                    replaceFragment(R.id.lapContainer, UniversalLapFragment.newInstance(), true)
+                    replaceFragment(R.id.lapContainer, UniversalEditionFragment.newInstance(), true)
                     switchFab()
                     invalidateOptionsMenu()
                 }
@@ -104,15 +108,16 @@ class UniversalHistoryFragment : BaseFragment() {
         }
 
         private fun showSnackbar(lap: UniversalLap) {
+            val position = adapterPosition
             Snackbar.make(rootContainer, R.string.snackbar_msg_on_lap_deleted, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.snackbar_action_undo, { model.restoreLap(lap, position) })
+                    .setActionTextColor(context!!.color(R.color.orange_500))
                     .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
                         override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                             when (event) {
                                 DISMISS_EVENT_TIMEOUT,
                                 DISMISS_EVENT_CONSECUTIVE,
                                 DISMISS_EVENT_SWIPE -> model.deleteLapFromCache(lap)
-
-                                DISMISS_EVENT_ACTION -> model.restoreLap(lap, adapterPosition)
                             }
                         }
                     })
@@ -148,7 +153,7 @@ class UniversalHistoryFragment : BaseFragment() {
         override fun getNewListSize() = newLaps.size
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldLaps[oldItemPosition] == newLaps[newItemPosition]
+            return oldLaps sameContentWith newLaps
         }
     }
 

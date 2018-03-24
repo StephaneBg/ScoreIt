@@ -34,7 +34,7 @@ import org.koin.android.architecture.ext.sharedViewModel
 import timber.log.Timber
 import kotlin.math.min
 
-class UniversalLapFragment : BaseFragment() {
+class UniversalEditionFragment : BaseFragment() {
 
     private val model by sharedViewModel<UniversalViewModel>()
     private val adapter: PlayerAdapter = PlayerAdapter()
@@ -51,9 +51,11 @@ class UniversalLapFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         model.getPlayers().observe(this, Observer {
+            Timber.d("Players are notified")
             it?.let { adapter.players = it }
         })
         model.getLap().observe(this, Observer {
+            Timber.d("Lap is notified")
             it?.let { adapter.points = it.points }
         })
     }
@@ -107,8 +109,8 @@ class UniversalLapFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(): UniversalLapFragment {
-            return UniversalLapFragment()
+        fun newInstance(): UniversalEditionFragment {
+            return UniversalEditionFragment()
         }
     }
 }
