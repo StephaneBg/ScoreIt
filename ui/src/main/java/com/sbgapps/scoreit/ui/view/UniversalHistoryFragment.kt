@@ -62,7 +62,6 @@ class UniversalHistoryFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         model.getLaps().observe(this, Observer {
-            Timber.d("Laps are notified")
             it?.let { adapter.updateList(it) }
         })
     }
@@ -94,6 +93,7 @@ class UniversalHistoryFragment : BaseFragment() {
 
     inner class Holder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(lap: UniversalLap) {
+            Timber.d("Lap at position $adapterPosition with id ${lap.id} is updated")
             itemView.lapItem.adapter = LapItemAdapter(lap.points)
 
             itemView.delete.setOnClickListener {
@@ -102,7 +102,7 @@ class UniversalHistoryFragment : BaseFragment() {
             }
 
             itemView.edit.setOnClickListener {
-                model.startUpdateMode(lap)
+                model.startUpdateMode(UniversalLap(lap.id, lap.points.toMutableList()))
                 with(activity as ScoreItActivity) {
                     displayEdition()
                     switchFab()
@@ -117,7 +117,10 @@ class UniversalHistoryFragment : BaseFragment() {
             model.deleteLap(lap)
             deleteAction = { model.deleteLapFromCache() }
             Snackbar.make(rootContainer, R.string.snackbar_msg_on_lap_deleted, Snackbar.LENGTH_LONG)
-                    .setAction(R.string.snackbar_action_undo, { model.restoreLap(lap, position) })
+                    .setAction(R.string.snackbar_action_undo, {
+                        model.restoreLap(lap, position)
+                        deleteAction = null
+                    })
                     .setActionTextColor(context!!.color(R.color.orange_500))
                     .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
                         override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
@@ -160,7 +163,7 @@ class UniversalHistoryFragment : BaseFragment() {
         override fun getNewListSize() = newLaps.size
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldLaps sameContentWith newLaps
+            return oldLaps[oldItemPosition].points sameContentWith newLaps[newItemPosition].points
         }
     }
 

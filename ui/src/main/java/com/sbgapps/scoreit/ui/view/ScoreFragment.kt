@@ -51,7 +51,6 @@ class ScoreFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         model.getPlayers().observe(this, Observer {
-            Timber.d("Players are notified")
             it?.let { adapter.scores = it }
         })
     }

@@ -74,13 +74,11 @@ class UniversalViewModel(useCase: UniversalUseCase,
         return laps
     }
 
-    private fun internalGetLaps(): MutableList<UniversalLap> {
-        Timber.d("Laps are updated!")
-        return useCase.getLaps().map { lapMapper.mapFromDomain(it) }.toMutableList()
+    private fun internalGetLaps(): List<UniversalLap> {
+        return useCase.getLaps().map { lapMapper.mapFromDomain(it) }
     }
 
     fun startUpdateMode(lap: UniversalLap) {
-        Timber.d("Updating lap: $lap")
         mode = Mode.MODE_UPDATE
         editedLap.value = lap
     }
