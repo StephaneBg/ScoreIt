@@ -18,14 +18,14 @@
 
     <style name="AppTheme"
         parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="colorAccent">@color/color_accent</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/blue_900</item>
+        <item name="colorAccent">@color/orange_500</item>
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@color/color_primary_dark</item>
+        <item name="android:statusBarColor">@color/blue_500</item>
         <item name="android:windowBackground">@color/blue_50</item>
         <item name="android:listDivider">@drawable/list_divider</item>
     </style>
