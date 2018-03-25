@@ -22,7 +22,7 @@ import com.sbgapps.scoreit.domain.model.UniversalLapEntity
 
 class UniversalLapDataMapper {
 
-    fun mapFromCache(data: UniversalLapData) = UniversalLapEntity(data.id!!, data.points.toMutableList())
+    fun mapFromCache(data: UniversalLapData) = UniversalLapEntity(data.id!!, data.points)
 
     fun mapToCache(entity: UniversalLapEntity, gameId: Long) = UniversalLapData(entity.id, gameId, entity.points)
 }

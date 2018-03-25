@@ -100,7 +100,6 @@ class ScoreItActivity : BaseActivity() {
 
     private fun onFabClicked() {
         if (model.isOnHistoryMode()) {
-            model.startAdditionMode()
             replaceFragment(R.id.lapContainer, UniversalEditionFragment.newInstance(), true)
         } else {
             model.onLapEditionCompleted()

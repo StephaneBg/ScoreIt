@@ -35,6 +35,7 @@ class UniversalViewModel(useCase: UniversalUseCase,
     private val players = MutableLiveData<List<Player>>()
     private val laps = MutableLiveData<List<UniversalLap>>()
     private var editedLap = MutableLiveData<UniversalLap>()
+    private var deletedLap: UniversalLap? = null
 
     var mode: Mode = Mode.MODE_HISTORY
         private set
@@ -78,11 +79,8 @@ class UniversalViewModel(useCase: UniversalUseCase,
         return useCase.getLaps().map { lapMapper.mapFromDomain(it) }.toMutableList()
     }
 
-    fun startAdditionMode() {
-        mode = Mode.MODE_ADDITION
-    }
-
     fun startUpdateMode(lap: UniversalLap) {
+        Timber.d("Updating lap: $lap")
         mode = Mode.MODE_UPDATE
         editedLap.value = lap
     }
@@ -93,8 +91,14 @@ class UniversalViewModel(useCase: UniversalUseCase,
         launchAsync {
             editedLap.value?.let {
                 when (prevMode) {
-                    Mode.MODE_ADDITION -> useCase.addLap(lapMapper.mapToDomain(it))
-                    Mode.MODE_UPDATE -> useCase.updateLap(lapMapper.mapToDomain(it))
+                    Mode.MODE_ADDITION -> {
+                        Timber.d("Adding lap: $it")
+                        useCase.addLap(lapMapper.mapToDomain(it))
+                    }
+                    Mode.MODE_UPDATE -> {
+                        Timber.d("Updated lap: $it")
+                        useCase.updateLap(lapMapper.mapToDomain(it))
+                    }
                     Mode.MODE_HISTORY -> throw IllegalStateException("Cannot be on edition!")
                 }
             }
@@ -110,7 +114,7 @@ class UniversalViewModel(useCase: UniversalUseCase,
         editedLap.value = null
     }
 
-    fun getLap(): LiveData<UniversalLap> {
+    fun getEditedLap(): LiveData<UniversalLap> {
         editedLap.value ?: run {
             mode = Mode.MODE_ADDITION
             editedLap.postValue(lapMapper.mapFromDomain(useCase.createLap(false)))
@@ -141,12 +145,13 @@ class UniversalViewModel(useCase: UniversalUseCase,
     }
 
     fun deleteLap(lap: UniversalLap) {
+        deletedLap = lap
         useCase.deleteLap(lapMapper.mapToDomain(lap))
         update()
     }
 
-    fun deleteLapFromCache(lap: UniversalLap) {
-        launchAsync { useCase.deleteMapFromCache(lapMapper.mapToDomain(lap)) }
+    fun deleteLapFromCache() {
+        launchAsync { deletedLap?.let { useCase.deleteMapFromCache(lapMapper.mapToDomain(it)) } }
     }
 
     private fun update() {

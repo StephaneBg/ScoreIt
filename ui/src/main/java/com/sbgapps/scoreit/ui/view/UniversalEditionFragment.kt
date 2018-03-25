@@ -54,7 +54,7 @@ class UniversalEditionFragment : BaseFragment() {
             Timber.d("Players are notified")
             it?.let { adapter.players = it }
         })
-        model.getLap().observe(this, Observer {
+        model.getEditedLap().observe(this, Observer {
             Timber.d("Lap is notified")
             it?.let { adapter.points = it.points }
         })
@@ -74,7 +74,6 @@ class UniversalEditionFragment : BaseFragment() {
             }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            Timber.d("Universal lap item $position is updated")
             val view = convertView ?: parent.inflate(R.layout.item_universal_lap)
 
             val (player, _points) = getItem(position)

@@ -17,7 +17,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/headerItem"
+    android:id="@+id/scoreItem"
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"

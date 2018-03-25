@@ -49,20 +49,26 @@ class UniversalGameRepository(private val dbRepo: DatabaseRepo,
     }
 
     override fun savePlayer(gameId: Long, playerEntity: PlayerEntity) {
-        dbRepo.universalDb.playerDao().insertPlayer(playerMapper.mapToCache(playerEntity, gameId))
+        dbRepo.universalDb.playerDao().savePlayer(playerMapper.mapToCache(playerEntity, gameId))
     }
 
     override fun getLaps(gameId: Long): List<UniversalLapEntity> {
         return dbRepo.universalDb.lapDao().getLaps(gameId).map { lapMapper.mapFromCache(it) }
     }
 
-    override fun saveLap(gameId: Long, lap: UniversalLapEntity) {
-        val lapEntity = lapMapper.mapToCache(lap, gameId)
-        Timber.d("Saving " + lapEntity)
-        dbRepo.universalDb.lapDao().insertLap(lapEntity)
+    override fun saveLap(gameId: Long, lap: UniversalLapEntity): Long {
+        val lapData = lapMapper.mapToCache(lap, gameId)
+        Timber.d("Saving " + lapData)
+        return dbRepo.universalDb.lapDao().saveLap(lapData)
+    }
+
+    override fun updateLap(gameId: Long, lap: UniversalLapEntity) {
+        val lapData = lapMapper.mapToCache(lap, gameId)
+        dbRepo.universalDb.lapDao().updateLap(lapData)
     }
 
     override fun deleteLap(gameId: Long, lap: UniversalLapEntity) {
+        Timber.d("Deleting lap: id ${lap.id}")
         lap.id?.let { dbRepo.universalDb.lapDao().deleteLap(gameId, it) }
     }
 

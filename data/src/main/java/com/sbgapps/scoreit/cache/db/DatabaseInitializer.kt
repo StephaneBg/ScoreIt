@@ -34,7 +34,7 @@ class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
         val _count = min(count, NAMES.size)
         for (i in 0 until _count) {
             val player = PlayerData(null, gameId, NAMES[i], COLORS[i])
-            dbRepo.universalDb.playerDao().insertPlayer(player)
+            dbRepo.universalDb.playerDao().savePlayer(player)
         }
     }
 

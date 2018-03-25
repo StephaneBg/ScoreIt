@@ -18,6 +18,7 @@ package com.sbgapps.scoreit.ui.view
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +38,6 @@ class ScoreFragment : BaseFragment() {
 
     private val model by sharedViewModel<UniversalViewModel>()
     private val adapter = ScoreAdapter()
-    private val animDuration by lazy { context!!.resources.getInteger(android.R.integer.config_shortAnimTime).toLong() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_score, container, false)
@@ -71,17 +71,7 @@ class ScoreFragment : BaseFragment() {
             with(view) {
                 name.text = player.name
                 name.setTextColor(player.color)
-                score.animate()
-                        .alpha(0f)
-                        .setDuration(animDuration)
-                        .withEndAction {
-                            score.text = player.score.toString()
-                            score.animate()
-                                    .alpha(1f)
-                                    .setDuration(animDuration)
-                                    .start()
-                        }
-                        .start()
+                score.text = player.score.toString()
             }
             return view
         }

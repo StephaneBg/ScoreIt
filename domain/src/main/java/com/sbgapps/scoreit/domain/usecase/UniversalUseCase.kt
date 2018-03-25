@@ -62,18 +62,16 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLapEnt
 
     suspend fun addLap(lapEntity: UniversalLapEntity) {
         laps.add(lapEntity)
-        asyncAwait { universalRepo.saveLap(gameId, lapEntity) }
+        asyncAwait {
+            val id = universalRepo.saveLap(gameId, lapEntity)
+            lapEntity.id = id
+        }
     }
 
     suspend fun updateLap(lapEntity: UniversalLapEntity) {
         asyncAwait {
-            universalRepo.saveLap(gameId, lapEntity)
-            laps.find { it.id == lapEntity.id }
-                    .let {
-                        val index = laps.indexOf(it)
-                        laps.removeAt(index)
-                        laps.add(index, lapEntity)
-                    }
+            universalRepo.updateLap(gameId, lapEntity)
+            laps.find { it.id == lapEntity.id }?.points = lapEntity.points
         }
     }
 

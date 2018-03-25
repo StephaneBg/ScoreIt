@@ -29,9 +29,9 @@ interface UniversalLapDao {
     fun clearLaps(gameId: Long)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertLap(lap: UniversalLapData)
+    fun saveLap(lap: UniversalLapData): Long
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateLap(lap: UniversalLapData)
 
     @Query("DELETE FROM laps WHERE id = :id AND gameId = :gameId")

@@ -29,5 +29,5 @@ import android.arch.persistence.room.PrimaryKey
 data class UniversalLapData(
         @PrimaryKey(autoGenerate = true) val id: Long? = null,
         val gameId: Long,
-        var points: List<Int>
+        var points: MutableList<Int>
 )

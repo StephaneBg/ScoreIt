@@ -26,7 +26,7 @@ interface PlayerDao {
     fun getPlayers(gameId: Long): List<PlayerData>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPlayer(player: PlayerData)
+    fun savePlayer(player: PlayerData)
 
     @Update
     fun updatePlayer(player: PlayerData)

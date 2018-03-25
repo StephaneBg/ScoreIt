@@ -46,6 +46,7 @@ class UniversalHistoryFragment : BaseFragment() {
 
     private val model by sharedViewModel<UniversalViewModel>()
     private val adapter = LapListAdapter()
+    private var deleteAction: (() -> Unit)? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_universal_history, container, false)
@@ -65,6 +66,11 @@ class UniversalHistoryFragment : BaseFragment() {
             Timber.d("Laps are notified")
             it?.let { adapter.updateList(it) }
         })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        deleteAction?.invoke()
     }
 
     inner class LapListAdapter : RecyclerView.Adapter<Holder>() {
@@ -92,10 +98,7 @@ class UniversalHistoryFragment : BaseFragment() {
             itemView.revealLayout.close(true)
             itemView.lapItem.adapter = LapItemAdapter(lap.points)
 
-            itemView.delete.setOnClickListener {
-                model.deleteLap(lap)
-                showSnackbar(lap)
-            }
+            itemView.delete.setOnClickListener { deleteLap(lap) }
 
             itemView.edit.setOnClickListener {
                 model.startUpdateMode(lap)
@@ -107,8 +110,10 @@ class UniversalHistoryFragment : BaseFragment() {
             }
         }
 
-        private fun showSnackbar(lap: UniversalLap) {
+        private fun deleteLap(lap: UniversalLap) {
             val position = adapterPosition
+            model.deleteLap(lap)
+            deleteAction = { model.deleteLapFromCache() }
             Snackbar.make(rootContainer, R.string.snackbar_msg_on_lap_deleted, Snackbar.LENGTH_LONG)
                     .setAction(R.string.snackbar_action_undo, { model.restoreLap(lap, position) })
                     .setActionTextColor(context!!.color(R.color.orange_500))
@@ -117,7 +122,7 @@ class UniversalHistoryFragment : BaseFragment() {
                             when (event) {
                                 DISMISS_EVENT_TIMEOUT,
                                 DISMISS_EVENT_CONSECUTIVE,
-                                DISMISS_EVENT_SWIPE -> model.deleteLapFromCache(lap)
+                                DISMISS_EVENT_SWIPE -> deleteAction?.invoke()
                             }
                         }
                     })

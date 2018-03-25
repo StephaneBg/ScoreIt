@@ -33,7 +33,9 @@ interface GameRepository<Lap> {
 
     fun getLaps(gameId: Long): List<Lap>
 
-    fun saveLap(gameId: Long, lap: Lap)
+    fun saveLap(gameId: Long, lap: Lap): Long
+
+    fun updateLap(gameId: Long, lap: Lap)
 
     fun deleteLap(gameId: Long, lap: Lap)
 
