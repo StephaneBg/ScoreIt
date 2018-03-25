@@ -24,5 +24,5 @@
         android:height="1dp"
         />
 
-    <solid android:color="@color/grey_100" />
+    <solid android:color="@color/blue_100" />
 </shape>

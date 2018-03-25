@@ -27,6 +27,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseActivity
+import com.sbgapps.scoreit.ui.ext.addFragment
 import com.sbgapps.scoreit.ui.ext.color
 import com.sbgapps.scoreit.ui.ext.onImeActionDone
 import com.sbgapps.scoreit.ui.ext.replaceFragment
@@ -100,7 +101,10 @@ class ScoreItActivity : BaseActivity() {
 
     private fun onFabClicked() {
         if (model.isOnHistoryMode()) {
-            replaceFragment(R.id.lapContainer, UniversalEditionFragment.newInstance(), true)
+            addFragment(R.id.lapContainer,
+                    UniversalEditionFragment.newInstance(),
+                    true
+                    )
         } else {
             model.onLapEditionCompleted()
             supportFragmentManager.popBackStack()
@@ -125,7 +129,7 @@ class ScoreItActivity : BaseActivity() {
                 fab.setImageDrawable(getDrawable(R.drawable.ic_add_black_24dp))
             }
             MODE_UPDATE, MODE_ADDITION -> {
-                fab.backgroundTintList = ColorStateList.valueOf(color(R.color.green_500))
+                fab.backgroundTintList = ColorStateList.valueOf(color(R.color.blue_500))
                 fab.setImageDrawable(getDrawable(R.drawable.ic_done_black_24dp))
             }
         }

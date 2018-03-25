@@ -28,8 +28,8 @@ import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.inflate
 import com.sbgapps.scoreit.ui.model.Player
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
-import kotlinx.android.synthetic.main.fragment_universal_lap.*
-import kotlinx.android.synthetic.main.item_universal_lap.view.*
+import kotlinx.android.synthetic.main.fragment_universal_edition.*
+import kotlinx.android.synthetic.main.item_universal_edition.view.*
 import org.koin.android.architecture.ext.sharedViewModel
 import timber.log.Timber
 import kotlin.math.min
@@ -40,7 +40,7 @@ class UniversalEditionFragment : BaseFragment() {
     private val adapter: PlayerAdapter = PlayerAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_universal_lap, container, false)
+        return inflater.inflate(R.layout.fragment_universal_edition, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,7 +74,7 @@ class UniversalEditionFragment : BaseFragment() {
             }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val view = convertView ?: parent.inflate(R.layout.item_universal_lap)
+            val view = convertView ?: parent.inflate(R.layout.item_universal_edition)
 
             val (player, _points) = getItem(position)
             with(view) {

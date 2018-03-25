@@ -16,17 +16,14 @@
 <resources>
 
     <color name="white">#FFFFFF</color>
-    <color name="green_500">#4CAF50</color>
-    <color name="green_700">#388E3C</color>
-    <color name="orange_500">#E97F02</color>
-    <color name="grey_500">#6D6A6F</color>
-    <color name="grey_100">#EFE9F4</color>
-    <color name="grey_50">#F6F4F6</color>
+    <color name="blue_500">#4b6a9b</color>
+    <color name="blue_100">#eef2f7</color>
+    <color name="blue_50">#fbfcfd</color>
+    <color name="orange_500">#f79845</color>
+    <color name="green_500">#29a944</color>
+    <color name="red_500">#e3513e</color>
 
     <color name="color_primary">@color/white</color>
-    <color name="color_primary_dark">@color/green_700</color>
+    <color name="color_primary_dark">@color/blue_500</color>
     <color name="color_accent">@color/orange_500</color>
-
-    <color name="game_won">#66BB6A</color>
-    <color name="game_lost">#EF5350</color>
 </resources>

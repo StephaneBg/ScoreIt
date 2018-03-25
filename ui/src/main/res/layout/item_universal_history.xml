@@ -57,7 +57,7 @@
         android:id="@+id/lapItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey_50"
+        android:background="@color/blue_50"
         android:clickable="true"
         android:foreground="?selectableItemBackground"
         android:orientation="horizontal"

@@ -19,13 +19,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/blue_50"
     >
 
     <com.linearlistview.LinearListView
         android:id="@+id/players"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/grey_100"
+        android:divider="@color/blue_100"
         android:orientation="vertical"
         android:paddingBottom="88dp"
         android:showDividers="middle"
