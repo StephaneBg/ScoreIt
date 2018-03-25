@@ -101,16 +101,22 @@ class ScoreItActivity : BaseActivity() {
 
     private fun onFabClicked() {
         if (model.isOnHistoryMode()) {
-            addFragment(R.id.lapContainer,
-                    UniversalEditionFragment.newInstance(),
-                    true
-                    )
+            displayEdition()
         } else {
             model.onLapEditionCompleted()
             supportFragmentManager.popBackStack()
         }
         switchFab()
         invalidateOptionsMenu()
+    }
+
+    fun displayEdition() {
+        addFragment(R.id.lapContainer,
+                UniversalEditionFragment.newInstance(),
+                true,
+                R.anim.slide_in_up,
+                R.anim.slide_out_down
+        )
     }
 
     fun switchFab() {

@@ -33,7 +33,6 @@ import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.color
 import com.sbgapps.scoreit.ui.ext.inflate
-import com.sbgapps.scoreit.ui.ext.replaceFragment
 import com.sbgapps.scoreit.ui.ext.sameContentWith
 import com.sbgapps.scoreit.ui.model.UniversalLap
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
@@ -95,18 +94,21 @@ class UniversalHistoryFragment : BaseFragment() {
 
     inner class Holder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(lap: UniversalLap) {
-            itemView.revealLayout.close(true)
             itemView.lapItem.adapter = LapItemAdapter(lap.points)
 
-            itemView.delete.setOnClickListener { deleteLap(lap) }
+            itemView.delete.setOnClickListener {
+                deleteLap(lap)
+                itemView.revealLayout.close(true)
+            }
 
             itemView.edit.setOnClickListener {
                 model.startUpdateMode(lap)
                 with(activity as ScoreItActivity) {
-                    replaceFragment(R.id.lapContainer, UniversalEditionFragment.newInstance(), true)
+                    displayEdition()
                     switchFab()
                     invalidateOptionsMenu()
                 }
+                itemView.revealLayout.close(true)
             }
         }
 

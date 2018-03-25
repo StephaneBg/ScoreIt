@@ -29,33 +29,30 @@ inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
 
 fun FragmentActivity.addFragment(frameId: Int,
                                  fragment: Fragment,
-                                 addBackStack: Boolean = false,
-                                 tag: String? = null) {
+                                 addBackStack: Boolean = false) {
     supportFragmentManager.inTransaction {
         add(frameId, fragment)
-        if (addBackStack) addToBackStack(tag)
+        if (addBackStack) addToBackStack(null)
     }
 }
 
 fun FragmentActivity.addFragment(frameId: Int,
                                  fragment: Fragment,
                                  addBackStack: Boolean = false,
-                                 tag: String? = null,
                                  animIn: Int,
                                  animOut: Int) {
     supportFragmentManager.inTransaction {
-        setCustomAnimations(animIn, animOut)
+        setCustomAnimations(animIn, animOut, animIn, animOut)
         add(frameId, fragment)
-        if (addBackStack) addToBackStack(tag)
+        if (addBackStack) addToBackStack(null)
     }
 }
 
 fun FragmentActivity.replaceFragment(frameId: Int,
                                      fragment: Fragment,
-                                     addBackStack: Boolean = false,
-                                     tag: String? = null) {
+                                     addBackStack: Boolean = false) {
     supportFragmentManager.inTransaction {
         replace(frameId, fragment)
-        if (addBackStack) addToBackStack(tag)
+        if (addBackStack) addToBackStack(null)
     }
 }
