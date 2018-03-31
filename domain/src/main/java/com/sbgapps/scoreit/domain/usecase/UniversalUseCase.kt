@@ -50,9 +50,9 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLapEnt
         return _laps
     }
 
-    fun createLap(withTotal: Boolean): UniversalLapEntity {
+    fun createLap(): UniversalLapEntity {
         val points = mutableListOf<Int>()
-        for (i in 0 until getPlayers(withTotal).size) points.add(0)
+        for (i in 0 until getPlayers(false).size) points.add(0)
         return UniversalLapEntity(null, points)
     }
 
@@ -69,6 +69,9 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLapEnt
     }
 
     suspend fun updateLap(lapEntity: UniversalLapEntity) {
+        if (prefsHelper.isTotalDisplayed)
+            lapEntity.points = lapEntity.points.dropLast(1).toMutableList()
+
         asyncAwait {
             universalRepo.updateLap(gameId, lapEntity)
             laps.find { it.id == lapEntity.id }?.points = lapEntity.points

@@ -92,7 +92,6 @@ dependencies {
     implementation Libs.archExtensions
     implementation Libs.timber
     implementation Libs.koinAndroidArch
-    implementation Libs.linearListView
     implementation Libs.numberPicker
 
     debugImplementation Libs.debugDb

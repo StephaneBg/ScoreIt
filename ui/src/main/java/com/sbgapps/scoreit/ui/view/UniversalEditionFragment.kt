@@ -21,64 +21,48 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.TextView
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
-import com.sbgapps.scoreit.ui.ext.inflate
-import com.sbgapps.scoreit.ui.model.Player
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
+import com.sbgapps.scoreit.ui.widget.LinearListView
 import kotlinx.android.synthetic.main.fragment_universal_edition.*
 import kotlinx.android.synthetic.main.item_universal_edition.view.*
 import org.koin.android.architecture.ext.sharedViewModel
-import timber.log.Timber
-import kotlin.math.min
 
 class UniversalEditionFragment : BaseFragment() {
 
     private val model by sharedViewModel<UniversalViewModel>()
     private val adapter: PlayerAdapter = PlayerAdapter()
+    private var points = mutableListOf<Int>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_universal_edition, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        players.adapter = adapter
+        players.setAdapter(adapter)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        model.getPlayers().observe(this, Observer {
-            Timber.d("Players are notified")
-            it?.let { adapter.players = it }
-        })
         model.getEditedLap().observe(this, Observer {
-            Timber.d("Lap is notified")
-            it?.let { adapter.points = it.points }
+            it?.let {
+                points = it.first.points
+                adapter.items = it.second.zip(it.first.points)
+            }
         })
     }
 
-    inner class PlayerAdapter : BaseAdapter() {
+    inner class PlayerAdapter : LinearListView.Adapter<Pair<String, Int>>() {
 
-        var players = emptyList<Player>()
-            set(value) {
-                field = value
-                notifyDataSetChanged()
-            }
-        var points = mutableListOf<Int>()
-            set(value) {
-                field = value
-                notifyDataSetChanged()
-            }
+        override val layoutId = R.layout.item_universal_edition
 
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val view = convertView ?: parent.inflate(R.layout.item_universal_edition)
-
+        override fun bind(position: Int, view: View) {
             val (player, _points) = getItem(position)
             with(view) {
-                playerName.text = player.name
+                playerName.text = player
                 playerPoints.text = _points.toString()
 
                 plusOne.setOnClickListener { addPoints(1, position, playerPoints) }
@@ -90,20 +74,11 @@ class UniversalEditionFragment : BaseFragment() {
                 minusTen.setOnClickListener { addPoints(-10, position, playerPoints) }
                 minusHundred.setOnClickListener { addPoints(-100, position, playerPoints) }
             }
-
-            return view
         }
-
-        override fun getItem(position: Int) = Pair(players[position], points[position])
-
-        override fun getItemId(position: Int) = position.toLong()
-
-        override fun getCount() = min(players.size, points.size)
 
         private fun addPoints(_points: Int, position: Int, textView: TextView) {
             points[position] += _points
             textView.text = points[position].toString()
-            model.setPoints(points)
         }
     }
 

@@ -63,7 +63,7 @@ class PreferencesHelper(private val context: Context) {
         const val KEY_DEFAULT_PLAYED_GAME = "KEY_DEFAULT_PLAYED_GAME"
 
         // Universal
-        const val DEFAULT_UNIVERSAL_PLAYER_COUNT = 4
+        const val DEFAULT_UNIVERSAL_PLAYER_COUNT = 2
         private const val KEY_UNIVERSAL_GAME_NAME = "KEY_UNIVERSAL_GAME_NAME"
         private const val KEY_UNIVERSAL_SHOW_TOTAL = "KEY_UNIVERSAL_SHOW_TOTAL"
         private const val KEY_UNIVERSAL_PLAYER_COUNT = "KEY_UNIVERSAL_PLAYER_COUNT"

@@ -34,7 +34,7 @@ class UniversalViewModel(useCase: UniversalUseCase,
 
     private val players = MutableLiveData<List<Player>>()
     private val laps = MutableLiveData<List<UniversalLap>>()
-    private var editedLap = MutableLiveData<UniversalLap>()
+    private var editionLap = MutableLiveData<Pair<UniversalLap, List<String>>>()
     private var deletedLap: UniversalLap? = null
 
     var mode: Mode = Mode.MODE_HISTORY
@@ -80,27 +80,29 @@ class UniversalViewModel(useCase: UniversalUseCase,
 
     fun startUpdateMode(lap: UniversalLap) {
         mode = Mode.MODE_UPDATE
-        editedLap.value = lap
+        val names = useCase.getPlayers(false).map { it.name }
+        editionLap.value = lap to names
     }
 
     fun onLapEditionCompleted() {
         val prevMode = mode
         mode = Mode.MODE_HISTORY
         launchAsync {
-            editedLap.value?.let {
+            editionLap.value?.let {
+                val lap = it.first
                 when (prevMode) {
                     Mode.MODE_ADDITION -> {
                         Timber.d("Adding lap: $it")
-                        useCase.addLap(lapMapper.mapToDomain(it))
+                        useCase.addLap(lapMapper.mapToDomain(lap))
                     }
                     Mode.MODE_UPDATE -> {
                         Timber.d("Updated lap: $it")
-                        useCase.updateLap(lapMapper.mapToDomain(it))
+                        useCase.updateLap(lapMapper.mapToDomain(lap))
                     }
                     Mode.MODE_HISTORY -> throw IllegalStateException("Cannot be on edition!")
                 }
             }
-            editedLap.value = null
+            editionLap.value = null
             update()
         }
     }
@@ -109,19 +111,17 @@ class UniversalViewModel(useCase: UniversalUseCase,
 
     fun setHistoryMode() {
         mode = Mode.MODE_HISTORY
-        editedLap.value = null
+        editionLap.value = null
     }
 
-    fun getEditedLap(): LiveData<UniversalLap> {
-        editedLap.value ?: run {
+    fun getEditedLap(): LiveData<Pair<UniversalLap, List<String>>> {
+        editionLap.value ?: run {
             mode = Mode.MODE_ADDITION
-            editedLap.postValue(lapMapper.mapFromDomain(useCase.createLap(false)))
+            val lap = lapMapper.mapFromDomain(useCase.createLap())
+            val names = useCase.getPlayers(false).map { it.name }
+            editionLap.postValue(Pair(lap, names))
         }
-        return editedLap
-    }
-
-    fun setPoints(points: MutableList<Int>) {
-        editedLap.value?.points = points
+        return editionLap
     }
 
     fun toggleShowTotal(): Boolean {

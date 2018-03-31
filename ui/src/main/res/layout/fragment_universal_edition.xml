@@ -16,20 +16,17 @@
 
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/blue_50"
     >
 
-    <com.linearlistview.LinearListView
+    <com.sbgapps.scoreit.ui.widget.LinearListView
         android:id="@+id/players"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/blue_100"
         android:orientation="vertical"
         android:paddingBottom="88dp"
         android:showDividers="middle"
-        app:dividerThickness="1dp"
         />
 </android.support.v4.widget.NestedScrollView>

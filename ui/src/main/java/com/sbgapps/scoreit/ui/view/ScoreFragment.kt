@@ -18,20 +18,17 @@ package com.sbgapps.scoreit.ui.view
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
-import com.sbgapps.scoreit.ui.ext.inflate
 import com.sbgapps.scoreit.ui.model.Player
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
+import com.sbgapps.scoreit.ui.widget.LinearListView
 import kotlinx.android.synthetic.main.fragment_score.*
 import kotlinx.android.synthetic.main.item_score.view.*
 import org.koin.android.architecture.ext.sharedViewModel
-import timber.log.Timber
 
 
 class ScoreFragment : BaseFragment() {
@@ -44,42 +41,29 @@ class ScoreFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        scoreContainer.adapter = adapter
+        scoreContainer.setAdapter(adapter)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         model.getPlayers().observe(this, Observer {
-            it?.let { adapter.scores = it }
+            it?.let { adapter.items = it }
         })
     }
 
-    inner class ScoreAdapter : BaseAdapter() {
+    inner class ScoreAdapter : LinearListView.Adapter<Player>() {
 
-        var scores = emptyList<Player>()
-            set(value) {
-                field = value
-                notifyDataSetChanged()
-            }
+        override val layoutId = R.layout.item_score
 
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val view = convertView ?: parent.inflate(R.layout.item_score)
-
+        override fun bind(position: Int, view: View) {
             val player = getItem(position)
             with(view) {
                 name.text = player.name
                 name.setTextColor(player.color)
                 score.text = player.score.toString()
             }
-            return view
         }
-
-        override fun getItem(position: Int) = scores[position]
-
-        override fun getItemId(position: Int) = position.toLong()
-
-        override fun getCount() = scores.size
     }
 
     companion object {

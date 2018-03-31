@@ -27,7 +27,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.TextView
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
@@ -36,6 +35,7 @@ import com.sbgapps.scoreit.ui.ext.inflate
 import com.sbgapps.scoreit.ui.ext.sameContentWith
 import com.sbgapps.scoreit.ui.model.UniversalLap
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
+import com.sbgapps.scoreit.ui.widget.LinearListView
 import kotlinx.android.synthetic.main.fragment_universal_history.*
 import kotlinx.android.synthetic.main.item_universal_history.view.*
 import org.koin.android.architecture.ext.sharedViewModel
@@ -94,7 +94,9 @@ class UniversalHistoryFragment : BaseFragment() {
     inner class Holder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(lap: UniversalLap) {
             Timber.d("Lap at position $adapterPosition with id ${lap.id} is updated")
-            itemView.lapItem.adapter = LapItemAdapter(lap.points)
+            val adapter = LapItemAdapter()
+            itemView.points.setAdapter(adapter)
+            adapter.items = lap.points
 
             itemView.delete.setOnClickListener {
                 deleteLap(lap)
@@ -109,6 +111,14 @@ class UniversalHistoryFragment : BaseFragment() {
                     invalidateOptionsMenu()
                 }
                 itemView.revealLayout.close(true)
+            }
+
+            itemView.points.setOnClickListener {
+                if (itemView.revealLayout.isOpen) {
+                    itemView.revealLayout.close(true)
+                } else {
+                    itemView.revealLayout.open(true)
+                }
             }
         }
 
@@ -135,19 +145,13 @@ class UniversalHistoryFragment : BaseFragment() {
         }
     }
 
-    inner class LapItemAdapter(private val points: List<Int>) : BaseAdapter() {
+    inner class LapItemAdapter : LinearListView.Adapter<Int>() {
 
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val textView = (convertView ?: parent.inflate(R.layout.item_point)) as TextView
-            textView.text = getItem(position).toString()
-            return textView
+        override val layoutId = R.layout.item_point
+
+        override fun bind(position: Int, view: View) {
+            (view as TextView).text = getItem(position).toString()
         }
-
-        override fun getItem(position: Int) = points[position]
-
-        override fun getItemId(position: Int) = position.toLong()
-
-        override fun getCount() = points.size
     }
 
     inner class HistoryDiffCallback(private val newLaps: List<UniversalLap>,

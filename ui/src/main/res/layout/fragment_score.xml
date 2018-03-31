@@ -14,11 +14,10 @@
   ~ limitations under the License.
   -->
 
-<com.linearlistview.LinearListView
+<com.sbgapps.scoreit.ui.widget.LinearListView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scoreContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:animateLayoutChanges="true"
     />

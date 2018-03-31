@@ -39,6 +39,7 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="match_parent"
+            android:contentDescription="@string/content_description_edit"
             android:tint="@color/white"
             app:srcCompat="@drawable/ic_edit_black_24dp"
             />
@@ -48,17 +49,19 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="match_parent"
+            android:contentDescription="@string/content_description_delete"
             android:tint="@color/white"
             app:srcCompat="@drawable/ic_delete_black_24dp"
             />
     </LinearLayout>
 
-    <com.linearlistview.LinearListView
-        android:id="@+id/lapItem"
+    <com.sbgapps.scoreit.ui.widget.LinearListView
+        android:id="@+id/points"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/blue_50"
         android:clickable="true"
+        android:focusable="true"
         android:foreground="?selectableItemBackground"
         android:orientation="horizontal"
         tools:visibility="invisible"

@@ -93,6 +93,7 @@ public class SwipeRevealLayout extends ViewGroup {
      */
     private int mMinDistRequestDisallowParent = 0;
 
+    private boolean mIsOpen = false;
     private boolean mIsOpenBeforeInit = false;
     private volatile boolean mIsScrolling = false;
     private volatile boolean mLockDrag = false;
@@ -120,6 +121,10 @@ public class SwipeRevealLayout extends ViewGroup {
 
     public SwipeRevealLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    public boolean isOpen() {
+        return mIsOpen;
     }
 
     @Nullable
@@ -358,6 +363,7 @@ public class SwipeRevealLayout extends ViewGroup {
      */
     public void open(boolean animation) {
         mIsOpenBeforeInit = true;
+        mIsOpen = true;
 
         if (animation) {
             mDragHelper.smoothSlideViewTo(mMainView, mRectMainOpen.left, mRectMainOpen.top);
@@ -387,6 +393,7 @@ public class SwipeRevealLayout extends ViewGroup {
      */
     public void close(boolean animation) {
         mIsOpenBeforeInit = false;
+        mIsOpen = false;
 
         if (animation) {
             mDragHelper.smoothSlideViewTo(mMainView, mRectMainClose.left, mRectMainClose.top);
