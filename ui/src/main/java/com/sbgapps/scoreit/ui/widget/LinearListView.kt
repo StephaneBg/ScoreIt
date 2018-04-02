@@ -17,6 +17,7 @@
 package com.sbgapps.scoreit.ui.widget
 
 import android.content.Context
+import android.database.DataSetObserver
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
@@ -33,32 +34,42 @@ class LinearListView : LinearLayout {
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     private var adapter: Adapter<*>? = null
-    private val children = mutableListOf<View>()
+    private val dataObserver = object : DataSetObserver() {
+        override fun onChanged() {
+            setupChildren()
+        }
+
+        override fun onInvalidated() {
+            setupChildren()
+        }
+    }
 
     fun setAdapter(_adapter: Adapter<*>) {
+        adapter?.unregisterDataSetObserver(dataObserver)
         adapter = _adapter
+        adapter?.registerDataSetObserver(dataObserver)
         setupChildren()
     }
 
     private fun setupChildren() {
         removeAllViews()
-        adapter?.let {
-            it.items.forEachIndexed { index, _ ->
-                val view = children.getOrNull(index) ?: run {
-                    val view = it.getView(index, null, this)
-                    children.add(view)
-                    view
-                }
-                Timber.d("Binding view $index for adapter")
-                it.bind(index, view)
-                addViewInLayout(view, -1, view.layoutParams, true)
-            }
-        }
+        adapter?.populateViews(this)
     }
 
-    abstract class Adapter<out Model>(val items: List<Model>) : BaseAdapter() {
+    abstract class Adapter<Model> : BaseAdapter() {
 
         abstract val layoutId: Int
+        private val views = mutableListOf<View>()
+        var items = emptyList<Model>()
+            set(value) {
+                if (value.count() == items.count()) {
+                    field = value
+                    updateItems()
+                } else {
+                    field = value
+                    notifyDataSetChanged()
+                }
+            }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             Timber.d("Creating view $position for adapter")
@@ -72,5 +83,22 @@ class LinearListView : LinearLayout {
         override fun getCount() = items.size
 
         abstract fun bind(position: Int, view: View)
+
+        fun populateViews(linearListView: LinearListView) {
+            for (i in 0 until items.size) {
+                val view = views.getOrNull(i) ?: run {
+                    val view = getView(i, null, linearListView)
+                    views.add(view)
+                    view
+                }
+                Timber.d("Binding view $i for adapter")
+                bind(i, view)
+                linearListView.addViewInLayout(view, -1, view.layoutParams, true)
+            }
+        }
+
+        private fun updateItems() {
+            for (i in 0 until items.size) bind(i, views[i])
+        }
     }
 }

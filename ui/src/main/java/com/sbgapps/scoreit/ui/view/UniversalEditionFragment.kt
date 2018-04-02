@@ -33,10 +33,15 @@ import org.koin.android.architecture.ext.sharedViewModel
 class UniversalEditionFragment : BaseFragment() {
 
     private val model by sharedViewModel<UniversalViewModel>()
+    private val adapter: PlayerAdapter = PlayerAdapter()
     private var points = mutableListOf<Int>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_universal_edition, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        players.setAdapter(adapter)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -45,12 +50,12 @@ class UniversalEditionFragment : BaseFragment() {
         model.getEditedLap().observe(this, Observer {
             it?.let {
                 points = it.first.points
-                players.setAdapter(PlayerAdapter(it.second.zip(it.first.points)))
+                adapter.items = it.second.zip(it.first.points)
             }
         })
     }
 
-    inner class PlayerAdapter(items: List<Pair<String, Int>>) : LinearListView.Adapter<Pair<String, Int>>(items) {
+    inner class PlayerAdapter : LinearListView.Adapter<Pair<String, Int>>() {
 
         override val layoutId = R.layout.item_universal_edition
 
