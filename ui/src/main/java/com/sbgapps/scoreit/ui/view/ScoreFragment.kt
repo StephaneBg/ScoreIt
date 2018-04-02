@@ -34,25 +34,20 @@ import org.koin.android.architecture.ext.sharedViewModel
 class ScoreFragment : BaseFragment() {
 
     private val model by sharedViewModel<UniversalViewModel>()
-    private val adapter = ScoreAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_score, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        scoreContainer.setAdapter(adapter)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         model.getPlayers().observe(this, Observer {
-            it?.let { adapter.items = it }
+            it?.let { scoreContainer.setAdapter(ScoreAdapter(it)) }
         })
     }
 
-    inner class ScoreAdapter : LinearListView.Adapter<Player>() {
+    inner class ScoreAdapter(items: List<Player>) : LinearListView.Adapter<Player>(items) {
 
         override val layoutId = R.layout.item_score
 

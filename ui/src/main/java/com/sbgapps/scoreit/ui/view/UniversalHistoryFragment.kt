@@ -94,9 +94,7 @@ class UniversalHistoryFragment : BaseFragment() {
     inner class Holder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(lap: UniversalLap) {
             Timber.d("Lap at position $adapterPosition with id ${lap.id} is updated")
-            val adapter = LapItemAdapter()
-            itemView.points.setAdapter(adapter)
-            adapter.items = lap.points
+            itemView.points.setAdapter(LapItemAdapter(lap.points))
 
             itemView.delete.setOnClickListener {
                 deleteLap(lap)
@@ -145,7 +143,7 @@ class UniversalHistoryFragment : BaseFragment() {
         }
     }
 
-    inner class LapItemAdapter : LinearListView.Adapter<Int>() {
+    inner class LapItemAdapter(items: List<Int>) : LinearListView.Adapter<Int>(items) {
 
         override val layoutId = R.layout.item_point
 
