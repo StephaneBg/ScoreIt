@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit.cache
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import android.content.Context
 import com.sbgapps.scoreit.cache.db.UniversalDatabase
 

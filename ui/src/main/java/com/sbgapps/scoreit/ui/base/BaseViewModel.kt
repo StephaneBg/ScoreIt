@@ -16,8 +16,8 @@
 
 package com.sbgapps.scoreit.ui.base
 
-import android.arch.lifecycle.ViewModel
-import android.support.annotation.CallSuper
+import androidx.lifecycle.ViewModel
+import androidx.annotation.CallSuper
 import com.sbgapps.scoreit.domain.usecase.BaseUseCase
 import com.sbgapps.scoreit.ui.utils.CoroutinesUtils.Companion.tryCatch
 import com.sbgapps.scoreit.ui.utils.CoroutinesUtils.Companion.tryCatchFinally

@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit.domain.usecase
 
-import android.support.annotation.CallSuper
+import androidx.annotation.CallSuper
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.Deferred

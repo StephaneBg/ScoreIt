@@ -24,8 +24,8 @@ android {
     compileSdkVersion Android.compileSdkVersion
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility Versions.java
+        targetCompatibility Versions.java
     }
 
     defaultConfig {
@@ -53,10 +53,10 @@ android {
 dependencies {
     implementation project(':domain')
     implementation Libs.kotlinStd
-    implementation Libs.archRoom
+    implementation Libs.room
     implementation Libs.moshi
     implementation Libs.koinAndroid
     implementation Libs.timber
 
-    kapt Libs.archRoomCompiler
+    kapt Libs.roomCompiler
 }

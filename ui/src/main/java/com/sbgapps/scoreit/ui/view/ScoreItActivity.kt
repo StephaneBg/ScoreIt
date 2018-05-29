@@ -19,8 +19,8 @@ package com.sbgapps.scoreit.ui.view
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v7.app.AlertDialog
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.appcompat.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
@@ -37,7 +37,7 @@ import com.shawnlin.numberpicker.NumberPicker
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.launch
 import org.jetbrains.anko.find
-import org.koin.android.architecture.ext.viewModel
+import org.koin.android.architecture.ext.android.viewModel
 
 
 class ScoreItActivity : BaseActivity() {
@@ -120,8 +120,8 @@ class ScoreItActivity : BaseActivity() {
     }
 
     fun switchFab() {
-        fab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
-            override fun onHidden(fab: FloatingActionButton) {
+        fab.hide(object : com.google.android.material.floatingactionbutton.FloatingActionButton.OnVisibilityChangedListener() {
+            override fun onHidden(fab: com.google.android.material.floatingactionbutton.FloatingActionButton) {
                 decorFab()
                 fab.show()
             }

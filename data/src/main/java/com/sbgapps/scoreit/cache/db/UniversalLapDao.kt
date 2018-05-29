@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit.cache.db
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.sbgapps.scoreit.cache.model.UniversalLapData
 
 @Dao

@@ -17,11 +17,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-kotlin {
-    experimental {
-        coroutines 'enable'
-    }
-}
+kotlin { experimental { coroutines 'enable' } }
 
 android {
 
@@ -29,8 +25,8 @@ android {
     compileSdkVersion Android.compileSdkVersion
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility Versions.java
+        targetCompatibility Versions.java
     }
 
     defaultConfig {
@@ -59,7 +55,7 @@ dependencies {
     implementation Libs.kotlinStd
     implementation Libs.coroutinesCore
     implementation Libs.appcompat
-    implementation Libs.androidKtx
+    implementation Libs.ktx
     implementation Libs.koinAndroid
     implementation Libs.timber
 }

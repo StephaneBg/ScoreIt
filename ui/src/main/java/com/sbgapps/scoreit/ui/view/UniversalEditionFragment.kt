@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit.ui.view
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +28,7 @@ import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import com.sbgapps.scoreit.ui.widget.LinearListView
 import kotlinx.android.synthetic.main.fragment_universal_edition.*
 import kotlinx.android.synthetic.main.item_universal_edition.view.*
-import org.koin.android.architecture.ext.sharedViewModel
+import org.koin.android.architecture.ext.android.sharedViewModel
 
 class UniversalEditionFragment : BaseFragment() {
 
@@ -83,8 +83,6 @@ class UniversalEditionFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(): UniversalEditionFragment {
-            return UniversalEditionFragment()
-        }
+        fun newInstance() = UniversalEditionFragment()
     }
 }

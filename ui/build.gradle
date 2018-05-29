@@ -26,8 +26,8 @@ android {
     compileSdkVersion Android.compileSdkVersion
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility Versions.java
+        targetCompatibility Versions.java
     }
 
     defaultConfig {
@@ -81,17 +81,16 @@ dependencies {
     implementation Libs.kotlinStd
     implementation Libs.coroutinesCore
     implementation Libs.coroutinesAndroid
-    implementation Libs.ankoAppcompat
+    implementation Libs.anko
     implementation Libs.appcompat
-    implementation Libs.recyclerview
-    implementation Libs.cardview
-    implementation Libs.design
-    implementation Libs.constraintLayout
     implementation Libs.vectorDrawable
-    implementation Libs.androidKtx
-    implementation Libs.archExtensions
+    implementation Libs.recyclerview
+    implementation Libs.material
+    implementation Libs.constraintLayout
+    implementation Libs.ktx
+    implementation Libs.lifecycle
     implementation Libs.timber
-    implementation Libs.koinAndroidArch
+    implementation Libs.koinAndroid
     implementation Libs.numberPicker
 
     debugImplementation Libs.debugDb

@@ -18,7 +18,7 @@ package com.sbgapps.scoreit.domain.preference
 
 import android.content.Context
 import android.preference.PreferenceManager
-import androidx.content.edit
+import androidx.core.content.edit
 import com.sbgapps.scoreit.domain.R
 import com.sbgapps.scoreit.domain.model.PlayerEntity
 

@@ -18,9 +18,9 @@ package com.sbgapps.scoreit.domain.di
 
 import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.domain.usecase.UniversalUseCase
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-val domainModule = applicationContext {
+val domainModule = module {
 
     factory { PreferencesHelper(get()) }
     factory { UniversalUseCase(get(), get()) }

@@ -16,18 +16,13 @@
 
 package com.sbgapps.scoreit.ui.view
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.design.widget.BaseTransientBottomBar
-import android.support.design.widget.Snackbar
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DiffUtil
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.color
@@ -38,7 +33,7 @@ import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import com.sbgapps.scoreit.ui.widget.LinearListView
 import kotlinx.android.synthetic.main.fragment_universal_history.*
 import kotlinx.android.synthetic.main.item_universal_history.view.*
-import org.koin.android.architecture.ext.sharedViewModel
+import org.koin.android.architecture.ext.android.sharedViewModel
 import timber.log.Timber
 
 class UniversalHistoryFragment : BaseFragment() {
@@ -52,10 +47,10 @@ class UniversalHistoryFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        lapRecycler.layoutManager = LinearLayoutManager(context)
+        lapRecycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         lapRecycler.adapter = adapter
         lapRecycler.setHasFixedSize(true)
-        lapRecycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        lapRecycler.addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(context, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -71,7 +66,7 @@ class UniversalHistoryFragment : BaseFragment() {
         deleteAction?.invoke()
     }
 
-    inner class LapListAdapter : RecyclerView.Adapter<Holder>() {
+    inner class LapListAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<Holder>() {
         private var laps = emptyList<UniversalLap>()
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
@@ -91,7 +86,7 @@ class UniversalHistoryFragment : BaseFragment() {
         }
     }
 
-    inner class Holder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class Holder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val adapter = LapItemAdapter()
 
         init {
@@ -130,14 +125,14 @@ class UniversalHistoryFragment : BaseFragment() {
             val position = adapterPosition
             model.deleteLap(lap)
             deleteAction = { model.deleteLapFromCache() }
-            Snackbar.make(rootContainer, R.string.snackbar_msg_on_lap_deleted, Snackbar.LENGTH_LONG)
+            com.google.android.material.snackbar.Snackbar.make(rootContainer, R.string.snackbar_msg_on_lap_deleted, com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
                     .setAction(R.string.snackbar_action_undo, {
                         model.restoreLap(lap, position)
                         deleteAction = null
                     })
                     .setActionTextColor(context!!.color(R.color.orange_500))
-                    .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-                        override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                    .addCallback(object : com.google.android.material.snackbar.BaseTransientBottomBar.BaseCallback<com.google.android.material.snackbar.Snackbar>() {
+                        override fun onDismissed(transientBottomBar: com.google.android.material.snackbar.Snackbar?, event: Int) {
                             when (event) {
                                 DISMISS_EVENT_TIMEOUT,
                                 DISMISS_EVENT_CONSECUTIVE,
@@ -176,8 +171,6 @@ class UniversalHistoryFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(): UniversalHistoryFragment {
-            return UniversalHistoryFragment()
-        }
+        fun newInstance() = UniversalHistoryFragment()
     }
 }

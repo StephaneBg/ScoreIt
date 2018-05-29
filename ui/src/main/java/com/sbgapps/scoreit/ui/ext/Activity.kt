@@ -16,31 +16,31 @@
 
 package com.sbgapps.scoreit.ui.ext
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 
-inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
+inline fun androidx.fragment.app.FragmentManager.inTransaction(func: androidx.fragment.app.FragmentTransaction.() -> Unit) {
     val fragmentTransaction = beginTransaction()
     fragmentTransaction.func()
     fragmentTransaction.commit()
 }
 
-fun FragmentActivity.addFragment(frameId: Int,
-                                 fragment: Fragment,
-                                 addBackStack: Boolean = false) {
+fun androidx.fragment.app.FragmentActivity.addFragment(frameId: Int,
+                                                       fragment: androidx.fragment.app.Fragment,
+                                                       addBackStack: Boolean = false) {
     supportFragmentManager.inTransaction {
         add(frameId, fragment)
         if (addBackStack) addToBackStack(null)
     }
 }
 
-fun FragmentActivity.addFragment(frameId: Int,
-                                 fragment: Fragment,
-                                 addBackStack: Boolean = false,
-                                 animIn: Int,
-                                 animOut: Int) {
+fun androidx.fragment.app.FragmentActivity.addFragment(frameId: Int,
+                                                       fragment: androidx.fragment.app.Fragment,
+                                                       addBackStack: Boolean = false,
+                                                       animIn: Int,
+                                                       animOut: Int) {
     supportFragmentManager.inTransaction {
         setCustomAnimations(animIn, animOut, animIn, animOut)
         add(frameId, fragment)
@@ -48,9 +48,9 @@ fun FragmentActivity.addFragment(frameId: Int,
     }
 }
 
-fun FragmentActivity.replaceFragment(frameId: Int,
-                                     fragment: Fragment,
-                                     addBackStack: Boolean = false) {
+fun androidx.fragment.app.FragmentActivity.replaceFragment(frameId: Int,
+                                                           fragment: androidx.fragment.app.Fragment,
+                                                           addBackStack: Boolean = false) {
     supportFragmentManager.inTransaction {
         replace(frameId, fragment)
         if (addBackStack) addToBackStack(null)

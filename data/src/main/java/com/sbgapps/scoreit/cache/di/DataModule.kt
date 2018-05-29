@@ -23,9 +23,9 @@ import com.sbgapps.scoreit.cache.mapper.PlayerDataMapper
 import com.sbgapps.scoreit.cache.mapper.UniversalLapDataMapper
 import com.sbgapps.scoreit.domain.model.UniversalLapEntity
 import com.sbgapps.scoreit.domain.repository.GameRepository
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-val dataModule = applicationContext {
+val dataModule = module {
 
     bean { PlayerDataMapper() }
     bean { UniversalLapDataMapper() }
