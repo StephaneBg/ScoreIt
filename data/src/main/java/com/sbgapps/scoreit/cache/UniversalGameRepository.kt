@@ -25,11 +25,12 @@ import com.sbgapps.scoreit.domain.preference.PreferencesHelper
 import com.sbgapps.scoreit.domain.repository.GameRepository
 import timber.log.Timber
 
-class UniversalGameRepository(private val dbRepo: DatabaseRepo,
-                              private val playerMapper: PlayerDataMapper,
-                              private val lapMapper: UniversalLapDataMapper,
-                              private val dbInit: DatabaseInitializer)
-    : GameRepository<UniversalLapEntity> {
+class UniversalGameRepository(
+    private val dbRepo: DatabaseRepo,
+    private val playerMapper: PlayerDataMapper,
+    private val lapMapper: UniversalLapDataMapper,
+    private val dbInit: DatabaseInitializer
+) : GameRepository<UniversalLapEntity> {
 
     override fun getGameId(name: String): Long {
         return dbRepo.universalDb.gameDao().getGame(name).id
@@ -45,7 +46,8 @@ class UniversalGameRepository(private val dbRepo: DatabaseRepo,
     }
 
     override fun getPlayers(gameId: Long): List<PlayerEntity> {
-        return dbRepo.universalDb.playerDao().getPlayers(gameId).map { playerMapper.mapFromCache(it) }
+        return dbRepo.universalDb.playerDao().getPlayers(gameId)
+            .map { playerMapper.mapFromCache(it) }
     }
 
     override fun savePlayer(gameId: Long, playerEntity: PlayerEntity) {
@@ -58,7 +60,7 @@ class UniversalGameRepository(private val dbRepo: DatabaseRepo,
 
     override fun saveLap(gameId: Long, lap: UniversalLapEntity): Long {
         val lapData = lapMapper.mapToCache(lap, gameId)
-        Timber.d("Saving " + lapData)
+        Timber.d("Saving $lapData")
         return dbRepo.universalDb.lapDao().saveLap(lapData)
     }
 

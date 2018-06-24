@@ -18,4 +18,4 @@ package com.sbgapps.scoreit.ui.base
 
 import androidx.fragment.app.Fragment
 
-open class BaseFragment : androidx.fragment.app.Fragment()
+open class BaseFragment : Fragment()

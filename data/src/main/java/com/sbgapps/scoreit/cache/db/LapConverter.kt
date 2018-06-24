@@ -25,8 +25,13 @@ class LapConverter {
 
     private val adapter by lazy {
         Moshi.Builder()
-                .build()
-                .adapter<List<Int>>(Types.newParameterizedType(List::class.java, Int::class.javaObjectType))
+            .build()
+            .adapter<List<Int>>(
+                Types.newParameterizedType(
+                    List::class.java,
+                    Int::class.javaObjectType
+                )
+            )
     }
 
     @TypeConverter

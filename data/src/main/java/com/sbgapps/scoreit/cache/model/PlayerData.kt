@@ -21,14 +21,18 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "players",
-        foreignKeys = [(ForeignKey(entity = UniversalGameData::class,
-                parentColumns = arrayOf("id"),
-                childColumns = arrayOf("gameId"),
-                onDelete = ForeignKey.CASCADE))])
+@Entity(
+    tableName = "players",
+    foreignKeys = [(ForeignKey(
+        entity = UniversalGameData::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("gameId"),
+        onDelete = ForeignKey.CASCADE
+    ))]
+)
 data class PlayerData(
-        @PrimaryKey(autoGenerate = true) val id: Long? = null,
-        val gameId: Long,
-        var name: String,
-        var color: Int
+    @PrimaryKey(autoGenerate = true) val id: Long? = null,
+    val gameId: Long,
+    var name: String,
+    var color: Int
 )

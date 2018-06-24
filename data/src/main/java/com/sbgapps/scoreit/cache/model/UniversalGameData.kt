@@ -22,6 +22,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "games")
 data class UniversalGameData(
-        @PrimaryKey(autoGenerate = true) val id: Long? = null,
-        var name: String
+    @PrimaryKey(autoGenerate = true) val id: Long? = null,
+    var name: String
 )

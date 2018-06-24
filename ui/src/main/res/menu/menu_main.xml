@@ -21,21 +21,21 @@
 
     <item
         android:id="@+id/playerCount"
-        android:icon="@drawable/ic_people_green_24dp"
+        android:icon="@drawable/ic_people_white_24dp"
         android:title="@string/menu_action_player_count"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/clear"
-        android:icon="@drawable/ic_clear_all_green_24dp"
+        android:icon="@drawable/ic_clear_all_white_24dp"
         android:title="@string/menu_action_clear"
         app:showAsAction="ifRoom"
         />
 
     <item
         android:id="@+id/totals"
-        android:icon="@drawable/ic_sigma_green_24dp"
+        android:icon="@drawable/ic_sigma_white_24dp"
         android:title="@string/menu_action_show_totals"
         app:showAsAction="ifRoom"
         />

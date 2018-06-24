@@ -21,26 +21,26 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
-inline fun androidx.fragment.app.FragmentManager.inTransaction(func: androidx.fragment.app.FragmentTransaction.() -> Unit) {
+inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
     val fragmentTransaction = beginTransaction()
     fragmentTransaction.func()
     fragmentTransaction.commit()
 }
 
-fun androidx.fragment.app.FragmentActivity.addFragment(frameId: Int,
-                                                       fragment: androidx.fragment.app.Fragment,
-                                                       addBackStack: Boolean = false) {
+fun FragmentActivity.addFragment(frameId: Int, fragment: Fragment, addBackStack: Boolean = false) {
     supportFragmentManager.inTransaction {
         add(frameId, fragment)
         if (addBackStack) addToBackStack(null)
     }
 }
 
-fun androidx.fragment.app.FragmentActivity.addFragment(frameId: Int,
-                                                       fragment: androidx.fragment.app.Fragment,
-                                                       addBackStack: Boolean = false,
-                                                       animIn: Int,
-                                                       animOut: Int) {
+fun FragmentActivity.addFragment(
+    frameId: Int,
+    fragment: Fragment,
+    addBackStack: Boolean = false,
+    animIn: Int,
+    animOut: Int
+) {
     supportFragmentManager.inTransaction {
         setCustomAnimations(animIn, animOut, animIn, animOut)
         add(frameId, fragment)
@@ -48,9 +48,11 @@ fun androidx.fragment.app.FragmentActivity.addFragment(frameId: Int,
     }
 }
 
-fun androidx.fragment.app.FragmentActivity.replaceFragment(frameId: Int,
-                                                           fragment: androidx.fragment.app.Fragment,
-                                                           addBackStack: Boolean = false) {
+fun FragmentActivity.replaceFragment(
+    frameId: Int,
+    fragment: Fragment,
+    addBackStack: Boolean = false
+) {
     supportFragmentManager.inTransaction {
         replace(frameId, fragment)
         if (addBackStack) addToBackStack(null)

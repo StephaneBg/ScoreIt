@@ -40,25 +40,25 @@ class DatabaseInitializer(private val dbRepo: DatabaseRepo) {
 
     companion object {
         private val NAMES = listOf(
-                "Riri",
-                "Toto",
-                "Lulu",
-                "Fifi",
-                "Lolo",
-                "Bubu",
-                "Lili",
-                "Roro"
+            "Riri",
+            "Toto",
+            "Lulu",
+            "Fifi",
+            "Lolo",
+            "Bubu",
+            "Lili",
+            "Roro"
         )
 
         private val COLORS = listOf(
-                0xFFF57C00.toInt(),
-                0xFF388E3C.toInt(),
-                0xFF1976D2.toInt(),
-                0xFF7B1FA2.toInt(),
-                0xFF00796B.toInt(),
-                0xFFD32F2F.toInt(),
-                0xFF5D4037.toInt(),
-                0xFF303F9F.toInt()
+            0xFFF57C00.toInt(),
+            0xFF388E3C.toInt(),
+            0xFF1976D2.toInt(),
+            0xFF7B1FA2.toInt(),
+            0xFF00796B.toInt(),
+            0xFFD32F2F.toInt(),
+            0xFF5D4037.toInt(),
+            0xFF303F9F.toInt()
         )
     }
 }

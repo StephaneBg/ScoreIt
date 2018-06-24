@@ -16,5 +16,7 @@
 
 package com.sbgapps.scoreit.ui.model
 
-data class UniversalLap(val id: Long?,
-                        var points: MutableList<Int>)
+data class UniversalLap(
+    val id: Long?,
+    var points: MutableList<Int>
+)

@@ -25,9 +25,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@color/blue_100</item>
+        <item name="android:statusBarColor">@color/blue_500</item>
         <item name="android:windowBackground">@color/blue_50</item>
         <item name="android:listDivider">@drawable/list_divider</item>
-        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>

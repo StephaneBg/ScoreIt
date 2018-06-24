@@ -18,9 +18,9 @@ package com.sbgapps.scoreit.domain.model
 
 
 data class PlayerEntity(
-        val id: Long?,
-        var name: String,
-        var color: Int
+    val id: Long?,
+    var name: String,
+    var color: Int
 ) {
 
     override fun toString(): String = name

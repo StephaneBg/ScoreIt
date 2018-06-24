@@ -23,9 +23,10 @@ import com.sbgapps.scoreit.domain.repository.GameRepository
 import timber.log.Timber
 
 
-class UniversalUseCase(private val universalRepo: GameRepository<UniversalLapEntity>,
-                       private val prefsHelper: PreferencesHelper)
-    : BaseUseCase() {
+class UniversalUseCase(
+    private val universalRepo: GameRepository<UniversalLapEntity>,
+    private val prefsHelper: PreferencesHelper
+) : BaseUseCase() {
 
     private var gameId: Long = 0
     private lateinit var players: MutableList<PlayerEntity>
@@ -98,7 +99,10 @@ class UniversalUseCase(private val universalRepo: GameRepository<UniversalLapEnt
             players = universalRepo.getPlayers(gameId).toMutableList()
             laps = universalRepo.getLaps(gameId).toMutableList()
         } ?: run {
-            createGame(PreferencesHelper.DEFAULT_GAME_NAME, PreferencesHelper.DEFAULT_UNIVERSAL_PLAYER_COUNT)
+            createGame(
+                PreferencesHelper.DEFAULT_GAME_NAME,
+                PreferencesHelper.DEFAULT_UNIVERSAL_PLAYER_COUNT
+            )
         }
     }
 

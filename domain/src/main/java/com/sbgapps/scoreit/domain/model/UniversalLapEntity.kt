@@ -17,5 +17,7 @@
 package com.sbgapps.scoreit.domain.model
 
 
-data class UniversalLapEntity(var id: Long?,
-                              var points: MutableList<Int>)
+data class UniversalLapEntity(
+    var id: Long?,
+    var points: MutableList<Int>
+)

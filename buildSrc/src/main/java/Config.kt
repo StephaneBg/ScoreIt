@@ -18,8 +18,8 @@ import org.gradle.api.JavaVersion
 
 object Versions {
     val java = JavaVersion.VERSION_1_8
-    val androidGradle = "3.2.0-alpha15"
-    val kotlin = "1.2.41"
+    val androidGradle = "3.2.0-beta01"
+    val kotlin = "1.2.50"
     val coroutines = "0.22.3"
     val appcompat = "1.0.0-alpha1"
     val recyclerView = "1.0.0-alpha1"
@@ -44,8 +44,8 @@ object Build {
 object Android {
     val buildToolsVersion = "27.0.3"
     val minSdkVersion = 21
-    val targetSdkVersion = 27
-    val compileSdkVersion = "android-P"
+    val targetSdkVersion = 28
+    val compileSdkVersion = 28
     val applicationId = "com.sbgapps.scoreit"
     val versionCode = 1
     val versionName = "0.1"

@@ -18,10 +18,10 @@ package com.sbgapps.scoreit.ui.model
 
 
 data class Player(
-        val id: Long?,
-        var name: String,
-        var color: Int,
-        var score: Int
+    val id: Long?,
+    var name: String,
+    var color: Int,
+    var score: Int
 ) {
 
     override fun toString(): String = name

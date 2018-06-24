@@ -24,12 +24,13 @@ import com.sbgapps.scoreit.cache.model.UniversalGameData
 import com.sbgapps.scoreit.cache.model.UniversalLapData
 
 @Database(
-        entities = [UniversalGameData::class, PlayerData::class, UniversalLapData::class],
-        version = 1)
+    entities = [UniversalGameData::class, PlayerData::class, UniversalLapData::class],
+    version = 1
+)
 @TypeConverters(LapConverter::class)
 abstract class UniversalDatabase : RoomDatabase() {
 
     abstract fun gameDao(): UniversalGameDao
-    abstract fun playerDao() : PlayerDao
+    abstract fun playerDao(): PlayerDao
     abstract fun lapDao(): UniversalLapDao
 }

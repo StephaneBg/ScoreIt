@@ -25,21 +25,25 @@ import android.widget.EditText
 
 fun View.show() {
     animate()
-            .setDuration(context.resources.getInteger(android.R.integer.config_shortAnimTime).toLong())
-            .alpha(1f)
-            .withStartAction {
-                alpha = 0f
-                visibility = View.VISIBLE
-            }
-            .start()
+        .setDuration(
+            context.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+        )
+        .alpha(1f)
+        .withStartAction {
+            alpha = 0f
+            visibility = View.VISIBLE
+        }
+        .start()
 }
 
 fun View.hide() {
     animate()
-            .setDuration(context.resources.getInteger(android.R.integer.config_shortAnimTime).toLong())
-            .alpha(0f)
-            .withEndAction { visibility = View.INVISIBLE }
-            .start()
+        .setDuration(
+            context.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+        )
+        .alpha(0f)
+        .withEndAction { visibility = View.INVISIBLE }
+        .start()
 }
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {

@@ -27,10 +27,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseActivity
-import com.sbgapps.scoreit.ui.ext.addFragment
-import com.sbgapps.scoreit.ui.ext.color
-import com.sbgapps.scoreit.ui.ext.onImeActionDone
-import com.sbgapps.scoreit.ui.ext.replaceFragment
+import com.sbgapps.scoreit.ui.ext.*
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel.Mode.*
 import com.shawnlin.numberpicker.NumberPicker
@@ -57,7 +54,7 @@ class ScoreItActivity : BaseActivity() {
             }
         }
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(bottomBar)
         fab.setOnClickListener { onFabClicked() }
         decorFab()
     }
@@ -76,7 +73,8 @@ class ScoreItActivity : BaseActivity() {
 
             R.id.totals -> {
                 val isShown = model.toggleShowTotal()
-                val res = if (isShown) R.string.menu_action_hide_totals else R.string.menu_action_show_totals
+                val res =
+                    if (isShown) R.string.menu_action_hide_totals else R.string.menu_action_show_totals
                 item.title = getString(res)
                 true
             }
@@ -111,17 +109,18 @@ class ScoreItActivity : BaseActivity() {
     }
 
     fun displayEdition() {
-        addFragment(R.id.lapContainer,
-                UniversalEditionFragment.newInstance(),
-                true,
-                R.anim.slide_in_up,
-                R.anim.slide_out_down
+        addFragment(
+            R.id.lapContainer,
+            UniversalEditionFragment.newInstance(),
+            true,
+            R.anim.slide_in_up,
+            R.anim.slide_out_down
         )
     }
 
     fun switchFab() {
-        fab.hide(object : com.google.android.material.floatingactionbutton.FloatingActionButton.OnVisibilityChangedListener() {
-            override fun onHidden(fab: com.google.android.material.floatingactionbutton.FloatingActionButton) {
+        fab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
+            override fun onHidden(fab: FloatingActionButton) {
                 decorFab()
                 fab.show()
             }
@@ -145,15 +144,15 @@ class ScoreItActivity : BaseActivity() {
     private fun showPlayerCountDialog() {
         val view = layoutInflater.inflate(R.layout.dialog_player_count, null)
         AlertDialog.Builder(this)
-                .setView(view)
-                .setTitle(R.string.dialog_title_player_number)
-                .setPositiveButton(R.string.button_action_ok, { _, _ ->
-                    val count = view.find<NumberPicker>(R.id.playerCount).value
-                    showGameNameDialog(count)
-                })
-                .setNeutralButton(R.string.button_action_cancel, null)
-                .create()
-                .show()
+            .setView(view)
+            .setTitle(R.string.dialog_title_player_number)
+            .setPositiveButton(R.string.button_action_ok) { _, _ ->
+                val count = view.find<NumberPicker>(R.id.playerCount).value
+                showGameNameDialog(count)
+            }
+            .setNeutralButton(R.string.button_action_cancel, null)
+            .create()
+            .show()
     }
 
     @SuppressLint("InflateParams")
@@ -161,13 +160,13 @@ class ScoreItActivity : BaseActivity() {
         val view = layoutInflater.inflate(R.layout.dialog_game_name, null)
         val editText = view.find<EditText>(R.id.gameName)
         val dialog = AlertDialog.Builder(this)
-                .setView(view)
-                .setTitle(R.string.dialog_title_game_name)
-                .setPositiveButton(R.string.button_action_ok, { _, _ ->
-                    model.createGame(editText.text.toString(), playerCount)
-                })
-                .setNeutralButton(R.string.button_action_cancel, null)
-                .create()
+            .setView(view)
+            .setTitle(R.string.dialog_title_game_name)
+            .setPositiveButton(R.string.button_action_ok) { _, _ ->
+                model.createGame(editText.text.toString(), playerCount)
+            }
+            .setNeutralButton(R.string.button_action_cancel, null)
+            .create()
 
         editText.onImeActionDone {
             model.createGame(editText.text.toString(), playerCount)
@@ -179,14 +178,14 @@ class ScoreItActivity : BaseActivity() {
 
     private fun showClearLapDialog() {
         AlertDialog.Builder(this)
-                .setTitle(R.string.dialog_title_current_game)
-                .setItems(R.array.dialog_clear_actions, { _, which ->
-                    when (which) {
-                        0 -> model.clearLaps()
-                        1 -> showGameNameDialog(model.getPlayerCount())
-                    }
-                })
-                .create()
-                .show()
+            .setTitle(R.string.dialog_title_current_game)
+            .setItems(R.array.dialog_clear_actions) { _, which ->
+                when (which) {
+                    0 -> model.clearLaps()
+                    1 -> showGameNameDialog(model.getPlayerCount())
+                }
+            }
+            .create()
+            .show()
     }
 }

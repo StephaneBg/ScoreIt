@@ -27,10 +27,11 @@ import com.sbgapps.scoreit.ui.model.UniversalLap
 import timber.log.Timber
 
 
-class UniversalViewModel(useCase: UniversalUseCase,
-                         private val playerMapper: PlayerMapper,
-                         private val lapMapper: UniversalLapMapper)
-    : BaseViewModel<UniversalUseCase>(useCase) {
+class UniversalViewModel(
+    useCase: UniversalUseCase,
+    private val playerMapper: PlayerMapper,
+    private val lapMapper: UniversalLapMapper
+) : BaseViewModel<UniversalUseCase>(useCase) {
 
     private val players = MutableLiveData<List<Player>>()
     private val laps = MutableLiveData<List<UniversalLap>>()
