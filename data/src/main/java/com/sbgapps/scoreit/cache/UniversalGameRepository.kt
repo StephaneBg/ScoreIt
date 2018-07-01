@@ -17,8 +17,8 @@
 package com.sbgapps.scoreit.cache
 
 import com.sbgapps.scoreit.cache.db.DatabaseInitializer
-import com.sbgapps.scoreit.cache.mapper.PlayerDataMapper
-import com.sbgapps.scoreit.cache.mapper.UniversalLapDataMapper
+import com.sbgapps.scoreit.cache.model.mapFromCache
+import com.sbgapps.scoreit.cache.model.mapToCache
 import com.sbgapps.scoreit.domain.model.PlayerEntity
 import com.sbgapps.scoreit.domain.model.UniversalLapEntity
 import com.sbgapps.scoreit.domain.preference.PreferencesHelper
@@ -27,8 +27,6 @@ import timber.log.Timber
 
 class UniversalGameRepository(
     private val dbRepo: DatabaseRepo,
-    private val playerMapper: PlayerDataMapper,
-    private val lapMapper: UniversalLapDataMapper,
     private val dbInit: DatabaseInitializer
 ) : GameRepository<UniversalLapEntity> {
 
@@ -47,25 +45,25 @@ class UniversalGameRepository(
 
     override fun getPlayers(gameId: Long): List<PlayerEntity> {
         return dbRepo.universalDb.playerDao().getPlayers(gameId)
-            .map { playerMapper.mapFromCache(it) }
+            .map { it.mapFromCache() }
     }
 
     override fun savePlayer(gameId: Long, playerEntity: PlayerEntity) {
-        dbRepo.universalDb.playerDao().savePlayer(playerMapper.mapToCache(playerEntity, gameId))
+        dbRepo.universalDb.playerDao().savePlayer(playerEntity.mapToCache(gameId))
     }
 
     override fun getLaps(gameId: Long): List<UniversalLapEntity> {
-        return dbRepo.universalDb.lapDao().getLaps(gameId).map { lapMapper.mapFromCache(it) }
+        return dbRepo.universalDb.lapDao().getLaps(gameId).map { it.mapFromCache() }
     }
 
     override fun saveLap(gameId: Long, lap: UniversalLapEntity): Long {
-        val lapData = lapMapper.mapToCache(lap, gameId)
+        val lapData = lap.mapToCache(gameId)
         Timber.d("Saving $lapData")
         return dbRepo.universalDb.lapDao().saveLap(lapData)
     }
 
     override fun updateLap(gameId: Long, lap: UniversalLapEntity) {
-        val lapData = lapMapper.mapToCache(lap, gameId)
+        val lapData = lap.mapToCache(gameId)
         dbRepo.universalDb.lapDao().updateLap(lapData)
     }
 

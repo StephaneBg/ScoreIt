@@ -20,18 +20,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sbgapps.scoreit.domain.usecase.UniversalUseCase
 import com.sbgapps.scoreit.ui.base.BaseViewModel
-import com.sbgapps.scoreit.ui.mapper.PlayerMapper
-import com.sbgapps.scoreit.ui.mapper.UniversalLapMapper
 import com.sbgapps.scoreit.ui.model.Player
 import com.sbgapps.scoreit.ui.model.UniversalLap
+import com.sbgapps.scoreit.ui.model.mapFromDomain
+import com.sbgapps.scoreit.ui.model.mapToDomain
 import timber.log.Timber
 
 
-class UniversalViewModel(
-    useCase: UniversalUseCase,
-    private val playerMapper: PlayerMapper,
-    private val lapMapper: UniversalLapMapper
-) : BaseViewModel<UniversalUseCase>(useCase) {
+class UniversalViewModel(useCase: UniversalUseCase) : BaseViewModel<UniversalUseCase>(useCase) {
 
     private val players = MutableLiveData<List<Player>>()
     private val laps = MutableLiveData<List<UniversalLap>>()
@@ -63,7 +59,7 @@ class UniversalViewModel(
         useCase.getPlayers(true).forEachIndexed { index, player ->
             var score = 0
             laps.forEach { score += it.points[index] }
-            players.add(playerMapper.mapFromDomain(player, score))
+            players.add(player.mapFromDomain(score))
         }
         return players
     }
@@ -76,7 +72,7 @@ class UniversalViewModel(
     }
 
     private fun internalGetLaps(): List<UniversalLap> {
-        return useCase.getLaps().map { lapMapper.mapFromDomain(it) }
+        return useCase.getLaps().map { it.mapFromDomain() }
     }
 
     fun startUpdateMode(lap: UniversalLap) {
@@ -94,11 +90,11 @@ class UniversalViewModel(
                 when (prevMode) {
                     Mode.MODE_ADDITION -> {
                         Timber.d("Adding lap: $it")
-                        useCase.addLap(lapMapper.mapToDomain(lap))
+                        useCase.addLap(lap.mapToDomain())
                     }
                     Mode.MODE_UPDATE -> {
                         Timber.d("Updated lap: $it")
-                        useCase.updateLap(lapMapper.mapToDomain(lap))
+                        useCase.updateLap(lap.mapToDomain())
                     }
                     Mode.MODE_HISTORY -> throw IllegalStateException("Cannot be on edition!")
                 }
@@ -118,7 +114,7 @@ class UniversalViewModel(
     fun getEditedLap(): LiveData<Pair<UniversalLap, List<String>>> {
         editionLap.value ?: run {
             mode = Mode.MODE_ADDITION
-            val lap = lapMapper.mapFromDomain(useCase.createLap())
+            val lap = useCase.createLap().mapFromDomain()
             val names = useCase.getPlayers(false).map { it.name }
             editionLap.postValue(Pair(lap, names))
         }
@@ -139,18 +135,18 @@ class UniversalViewModel(
     }
 
     fun restoreLap(lap: UniversalLap, position: Int) {
-        useCase.restoreLap(lapMapper.mapToDomain(lap), position)
+        useCase.restoreLap(lap.mapToDomain(), position)
         update()
     }
 
     fun deleteLap(lap: UniversalLap) {
         deletedLap = lap
-        useCase.deleteLap(lapMapper.mapToDomain(lap))
+        useCase.deleteLap(lap.mapToDomain())
         update()
     }
 
     fun deleteLapFromCache() {
-        launchAsync { deletedLap?.let { useCase.deleteFromCache(lapMapper.mapToDomain(it)) } }
+        launchAsync { deletedLap?.let { useCase.deleteFromCache(it.mapToDomain()) } }
     }
 
     private fun update() {

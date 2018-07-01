@@ -19,22 +19,25 @@ package com.sbgapps.scoreit.ui.view
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import androidx.appcompat.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
 import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseActivity
-import com.sbgapps.scoreit.ui.ext.*
+import com.sbgapps.scoreit.ui.ext.addFragment
+import com.sbgapps.scoreit.ui.ext.color
+import com.sbgapps.scoreit.ui.ext.onImeActionDone
+import com.sbgapps.scoreit.ui.ext.replaceFragment
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel.Mode.*
 import com.shawnlin.numberpicker.NumberPicker
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.launch
 import org.jetbrains.anko.find
-import org.koin.android.architecture.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ScoreItActivity : BaseActivity() {
