@@ -150,7 +150,7 @@ class UniversalViewModel(
     }
 
     fun deleteLapFromCache() {
-        launchAsync { deletedLap?.let { useCase.deleteMapFromCache(lapMapper.mapToDomain(it)) } }
+        launchAsync { deletedLap?.let { useCase.deleteFromCache(lapMapper.mapToDomain(it)) } }
     }
 
     private fun update() {

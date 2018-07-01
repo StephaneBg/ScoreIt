@@ -22,11 +22,7 @@ import com.sbgapps.scoreit.ui.model.UniversalLap
 
 class UniversalLapMapper {
 
-    fun mapFromDomain(entity: UniversalLapEntity): UniversalLap {
-        return UniversalLap(entity.id, entity.points)
-    }
+    fun mapFromDomain(entity: UniversalLapEntity) = UniversalLap(entity.id, entity.points)
 
-    fun mapToDomain(lap: UniversalLap): UniversalLapEntity {
-        return UniversalLapEntity(lap.id, lap.points)
-    }
+    fun mapToDomain(lap: UniversalLap) = UniversalLapEntity(lap.id, lap.points)
 }

@@ -22,4 +22,5 @@
     <dimen name="margin_padding_size_extra_large">64dp</dimen>
 
     <dimen name="list_item_height">64dp</dimen>
+    <dimen name="header_height">128dp</dimen>
 </resources>

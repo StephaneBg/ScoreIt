@@ -64,8 +64,7 @@ class UniversalUseCase(
     suspend fun addLap(lapEntity: UniversalLapEntity) {
         laps.add(lapEntity)
         asyncAwait {
-            val id = universalRepo.saveLap(gameId, lapEntity)
-            lapEntity.id = id
+            lapEntity.id = universalRepo.saveLap(gameId, lapEntity)
         }
     }
 
@@ -84,7 +83,7 @@ class UniversalUseCase(
         asyncAwait { universalRepo.clearLaps(gameId) }
     }
 
-    suspend fun deleteMapFromCache(lapEntity: UniversalLapEntity) {
+    suspend fun deleteFromCache(lapEntity: UniversalLapEntity) {
         asyncAwait { universalRepo.deleteLap(gameId, lapEntity) }
     }
 
@@ -98,12 +97,10 @@ class UniversalUseCase(
             gameId = universalRepo.getGameId(name)
             players = universalRepo.getPlayers(gameId).toMutableList()
             laps = universalRepo.getLaps(gameId).toMutableList()
-        } ?: run {
-            createGame(
-                PreferencesHelper.DEFAULT_GAME_NAME,
-                PreferencesHelper.DEFAULT_UNIVERSAL_PLAYER_COUNT
-            )
-        }
+        } ?: createGame(
+            PreferencesHelper.DEFAULT_GAME_NAME,
+            PreferencesHelper.DEFAULT_UNIVERSAL_PLAYER_COUNT
+        )
     }
 
     suspend fun createGame(name: String, playerCount: Int) {
@@ -115,13 +112,11 @@ class UniversalUseCase(
         }
     }
 
-    fun toggleShowTotal(): Boolean {
-        return if (prefsHelper.isTotalDisplayed) {
-            prefsHelper.isTotalDisplayed = false
-            false
-        } else {
-            prefsHelper.isTotalDisplayed = true
-            true
-        }
+    fun toggleShowTotal() = if (prefsHelper.isTotalDisplayed) {
+        prefsHelper.isTotalDisplayed = false
+        false
+    } else {
+        prefsHelper.isTotalDisplayed = true
+        true
     }
 }

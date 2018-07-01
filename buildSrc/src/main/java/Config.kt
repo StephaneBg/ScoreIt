@@ -18,7 +18,7 @@ import org.gradle.api.JavaVersion
 
 object Versions {
     val java = JavaVersion.VERSION_1_8
-    val androidGradle = "3.2.0-beta01"
+    val androidGradle = "3.2.0-beta02"
     val kotlin = "1.2.50"
     val coroutines = "0.22.3"
     val appcompat = "1.0.0-alpha1"
@@ -30,7 +30,7 @@ object Versions {
     val timber = "4.5.1"
     val moshi = "1.5.0"
     val anko = "0.10.5"
-    val koin = "1.0.0-alpha-11"
+    val koin = "1.0.0-beta-2"
     val ktx = "1.0.0-alpha1"
     val debugDb = "1.0.3"
     val numberPicker = "2.4.6"
@@ -74,7 +74,7 @@ object Libs {
 
     val numberPicker = "com.shawnlin:number-picker:${Versions.numberPicker}"
 
-    val koinAndroid = "org.koin:koin-androidx:${Versions.koin}"
+    val koinAndroid = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
 
     val debugDb = "com.amitshekhar.android:debug-db:${Versions.debugDb}"
 }

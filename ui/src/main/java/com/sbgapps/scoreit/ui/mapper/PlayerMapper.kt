@@ -22,9 +22,8 @@ import com.sbgapps.scoreit.ui.model.Player
 
 class PlayerMapper {
 
-    fun mapFromDomain(entity: PlayerEntity, score: Int): Player {
-        return Player(entity.id, entity.name, entity.color, score)
-    }
+    fun mapFromDomain(entity: PlayerEntity, score: Int) =
+        Player(entity.id, entity.name, entity.color, score)
 
     fun mapToDomain(player: Player) = PlayerEntity(player.id, player.name, player.color)
 }
