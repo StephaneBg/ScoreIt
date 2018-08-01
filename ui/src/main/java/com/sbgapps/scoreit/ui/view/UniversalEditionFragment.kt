@@ -21,9 +21,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
+import com.sbgapps.scoreit.ui.ext.observe
+import com.sbgapps.scoreit.ui.model.UniversalLap
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import com.sbgapps.scoreit.ui.widget.LinearListView
 import kotlinx.android.synthetic.main.fragment_universal_edition.*
@@ -46,14 +47,16 @@ class UniversalEditionFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        model.getEditedLap().observe(this, Observer {
-            it?.let {
-                points = it.first.points
-                adapter.items = it.second.zip(it.first.points)
-            }
-        })
+        observe(model.getEditedLap(), ::setGame)
     }
+
+    private fun setGame(laps: Pair<UniversalLap, List<String>>?) {
+        laps?.let {
+            points = it.first.points
+            adapter.items = it.second.zip(it.first.points)
+        }
+    }
+
 
     inner class PlayerAdapter : LinearListView.Adapter<Pair<String, Int>>() {
 

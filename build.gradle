@@ -38,4 +38,4 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-apply from: "./signing.gradle"
+//apply from: "./signing.gradle"

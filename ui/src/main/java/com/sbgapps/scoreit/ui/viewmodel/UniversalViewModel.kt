@@ -24,7 +24,6 @@ import com.sbgapps.scoreit.ui.model.Player
 import com.sbgapps.scoreit.ui.model.UniversalLap
 import com.sbgapps.scoreit.ui.model.mapFromDomain
 import com.sbgapps.scoreit.ui.model.mapToDomain
-import timber.log.Timber
 
 
 class UniversalViewModel(useCase: UniversalUseCase) : BaseViewModel<UniversalUseCase>(useCase) {
@@ -49,7 +48,7 @@ class UniversalViewModel(useCase: UniversalUseCase) : BaseViewModel<UniversalUse
     }
 
     fun getPlayers(): LiveData<List<Player>> {
-        players.value ?: run { update() }
+        players.value ?: update()
         return players
     }
 
@@ -67,7 +66,7 @@ class UniversalViewModel(useCase: UniversalUseCase) : BaseViewModel<UniversalUse
     fun getPlayerCount(): Int = players.value?.size ?: 0
 
     fun getLaps(): LiveData<List<UniversalLap>> {
-        laps.value ?: run { laps.postValue(internalGetLaps()) }
+        laps.value ?: laps.postValue(internalGetLaps())
         return laps
     }
 

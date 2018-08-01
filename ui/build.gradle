@@ -39,18 +39,18 @@ android {
         resConfigs "en", "fr"
     }
 
-    signingConfigs {
-        release {
-            storeFile file(appSigning.storeFilePath)
-            storePassword appSigning.storePassword
-            keyAlias appSigning.keyAlias
-            keyPassword appSigning.keyPassword
-        }
-    }
+//    signingConfigs {
+//        release {
+//            storeFile file(appSigning.storeFilePath)
+//            storePassword appSigning.storePassword
+//            keyAlias appSigning.keyAlias
+//            keyPassword appSigning.keyPassword
+//        }
+//    }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            //signingConfig signingConfigs.release
             minifyEnabled true
             shrinkResources true
             debuggable false

@@ -20,9 +20,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
+import com.sbgapps.scoreit.ui.ext.observe
 import com.sbgapps.scoreit.ui.model.Player
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
 import com.sbgapps.scoreit.ui.widget.LinearListView
@@ -46,10 +46,11 @@ class ScoreFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        observe(model.getPlayers(), ::setPlayers)
+    }
 
-        model.getPlayers().observe(this, Observer {
-            it?.let { adapter.items = it }
-        })
+    private fun setPlayers(players: List<Player>?) {
+        players?.let { adapter.items = it }
     }
 
     inner class ScoreAdapter : LinearListView.Adapter<Player>() {

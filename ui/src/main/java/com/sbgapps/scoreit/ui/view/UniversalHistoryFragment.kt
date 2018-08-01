@@ -21,12 +21,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseFragment
 import com.sbgapps.scoreit.ui.ext.color
 import com.sbgapps.scoreit.ui.ext.inflate
+import com.sbgapps.scoreit.ui.ext.observe
 import com.sbgapps.scoreit.ui.ext.sameContentWith
 import com.sbgapps.scoreit.ui.model.UniversalLap
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
@@ -34,7 +39,6 @@ import com.sbgapps.scoreit.ui.widget.LinearListView
 import kotlinx.android.synthetic.main.fragment_universal_history.*
 import kotlinx.android.synthetic.main.item_universal_history.view.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import timber.log.Timber
 
 class UniversalHistoryFragment : BaseFragment() {
 
@@ -47,18 +51,19 @@ class UniversalHistoryFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        lapRecycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        lapRecycler.layoutManager = LinearLayoutManager(context)
         lapRecycler.adapter = adapter
         lapRecycler.setHasFixedSize(true)
-        lapRecycler.addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(context, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL))
+        lapRecycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        observe(model.getLaps(), ::setLaps)
+    }
 
-        model.getLaps().observe(this, Observer {
-            it?.let { adapter.updateList(it) }
-        })
+    private fun setLaps(laps: List<UniversalLap>?) {
+        laps?.let { adapter.updateList(it) }
     }
 
     override fun onPause() {
@@ -66,7 +71,7 @@ class UniversalHistoryFragment : BaseFragment() {
         deleteAction?.invoke()
     }
 
-    inner class LapListAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<Holder>() {
+    inner class LapListAdapter : RecyclerView.Adapter<Holder>() {
         private var laps = emptyList<UniversalLap>()
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
@@ -86,7 +91,7 @@ class UniversalHistoryFragment : BaseFragment() {
         }
     }
 
-    inner class Holder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    inner class Holder(view: View) : RecyclerView.ViewHolder(view) {
         private val adapter = LapItemAdapter()
 
         init {
@@ -125,14 +130,14 @@ class UniversalHistoryFragment : BaseFragment() {
             val position = adapterPosition
             model.deleteLap(lap)
             deleteAction = { model.deleteLapFromCache() }
-            com.google.android.material.snackbar.Snackbar.make(rootContainer, R.string.snackbar_msg_on_lap_deleted, com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
-                    .setAction(R.string.snackbar_action_undo, {
+            Snackbar.make(rootContainer, R.string.snackbar_msg_on_lap_deleted, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.snackbar_action_undo) {
                         model.restoreLap(lap, position)
                         deleteAction = null
-                    })
-                    .setActionTextColor(context!!.color(R.color.orange_500))
-                    .addCallback(object : com.google.android.material.snackbar.BaseTransientBottomBar.BaseCallback<com.google.android.material.snackbar.Snackbar>() {
-                        override fun onDismissed(transientBottomBar: com.google.android.material.snackbar.Snackbar?, event: Int) {
+                    }
+                    .setActionTextColor(requireContext().color(R.color.orange_500))
+                    .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                        override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                             when (event) {
                                 DISMISS_EVENT_TIMEOUT,
                                 DISMISS_EVENT_CONSECUTIVE,
@@ -153,9 +158,9 @@ class UniversalHistoryFragment : BaseFragment() {
         }
     }
 
-    inner class HistoryDiffCallback(private val newLaps: List<UniversalLap>,
-                                    private val oldLaps: List<UniversalLap>)
-        : DiffUtil.Callback() {
+    inner class HistoryDiffCallback(
+            private val newLaps: List<UniversalLap>,
+            private val oldLaps: List<UniversalLap>) : DiffUtil.Callback() {
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             return oldLaps[oldItemPosition] == newLaps[newItemPosition]
