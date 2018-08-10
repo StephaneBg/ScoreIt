@@ -24,7 +24,7 @@ import com.sbgapps.scoreit.ui.model.Player
 import com.sbgapps.scoreit.ui.model.UniversalLap
 import com.sbgapps.scoreit.ui.model.mapFromDomain
 import com.sbgapps.scoreit.ui.model.mapToDomain
-
+import timber.log.Timber
 
 class UniversalViewModel(useCase: UniversalUseCase) : BaseViewModel<UniversalUseCase>(useCase) {
 

@@ -18,11 +18,11 @@ import org.gradle.api.JavaVersion
 
 object Versions {
     val java = JavaVersion.VERSION_1_8
-    val androidGradle = "3.2.0-beta02"
-    val kotlin = "1.2.50"
-    val coroutines = "0.22.3"
-    val appcompat = "1.0.0-beta01"
-    val recyclerView = "1.0.0-beta01"
+    val androidGradle = "3.2.0-beta05"
+    val kotlin = "1.2.60"
+    val coroutines = "0.24.0"
+    val appcompat = "1.0.0-rc01"
+    val recyclerView = "1.0.0-rc01"
     val material = "1.0.0-beta01"
     val constraintLayout = "1.1.0"
     val lifecyle = "2.0.0-alpha1"
@@ -33,7 +33,6 @@ object Versions {
     val koin = "1.0.0-beta-3"
     val ktx = "1.0.0-alpha1"
     val debugDb = "1.0.3"
-    val numberPicker = "2.4.6"
 }
 
 object Build {
@@ -42,7 +41,7 @@ object Build {
 }
 
 object Android {
-    val buildToolsVersion = "27.0.3"
+    val buildToolsVersion = "28.0.2"
     val minSdkVersion = 21
     val targetSdkVersion = 28
     val compileSdkVersion = 28
@@ -71,8 +70,6 @@ object Libs {
 
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
-
-    val numberPicker = "com.shawnlin:number-picker:${Versions.numberPicker}"
 
     val koinAndroid = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
 

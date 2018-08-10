@@ -35,11 +35,11 @@
 
     <Button
         android:id="@+id/plusOne"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="?selectableItemBackgroundBorderless"
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
+        android:layout_marginEnd="@dimen/margin_padding_size_small"
         android:text="+1"
         app:layout_constraintEnd_toStartOf="@+id/plusFive"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -50,10 +50,10 @@
 
     <Button
         android:id="@+id/plusFive"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?selectableItemBackgroundBorderless"
+        android:layout_marginEnd="@dimen/margin_padding_size_small"
         android:text="+5"
         app:layout_constraintEnd_toStartOf="@+id/plusTen"
         app:layout_constraintStart_toEndOf="@+id/plusOne"
@@ -63,10 +63,10 @@
 
     <Button
         android:id="@+id/plusTen"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?selectableItemBackgroundBorderless"
+        android:layout_marginEnd="@dimen/margin_padding_size_small"
         android:text="+10"
         app:layout_constraintEnd_toStartOf="@+id/plusHundred"
         app:layout_constraintStart_toEndOf="@+id/plusFive"
@@ -76,10 +76,9 @@
 
     <Button
         android:id="@+id/plusHundred"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?selectableItemBackgroundBorderless"
         android:text="+100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/plusTen"
@@ -89,10 +88,10 @@
 
     <TextView
         android:id="@+id/playerPoints"
-        style="@style/TextAppearance.AppCompat.Display1"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
         android:background="?selectableItemBackgroundBorderless"
         android:padding="@dimen/margin_padding_size_medium"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,11 +102,11 @@
 
     <Button
         android:id="@+id/minusHundred"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="?selectableItemBackgroundBorderless"
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
+        android:layout_marginEnd="@dimen/margin_padding_size_small"
         android:text="-100"
         app:layout_constraintEnd_toStartOf="@+id/minusTen"
         app:layout_constraintHorizontal_chainStyle="spread"
@@ -118,10 +117,10 @@
 
     <Button
         android:id="@+id/minusTen"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?selectableItemBackgroundBorderless"
+        android:layout_marginEnd="@dimen/margin_padding_size_small"
         android:text="-10"
         app:layout_constraintEnd_toStartOf="@+id/minusFive"
         app:layout_constraintStart_toEndOf="@+id/minusHundred"
@@ -131,10 +130,10 @@
 
     <Button
         android:id="@+id/minusFive"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?selectableItemBackgroundBorderless"
+        android:layout_marginEnd="@dimen/margin_padding_size_small"
         android:text="-5"
         app:layout_constraintEnd_toStartOf="@+id/minusOne"
         app:layout_constraintStart_toEndOf="@+id/minusTen"
@@ -144,10 +143,9 @@
 
     <Button
         android:id="@+id/minusOne"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackgroundBorderless"
         android:text="-1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/minusFive"

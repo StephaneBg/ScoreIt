@@ -91,7 +91,6 @@ dependencies {
     implementation Libs.lifecycle
     implementation Libs.timber
     implementation Libs.koinAndroid
-    implementation Libs.numberPicker
 
     debugImplementation Libs.debugDb
 }

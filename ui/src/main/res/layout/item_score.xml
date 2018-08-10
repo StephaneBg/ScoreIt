@@ -27,7 +27,7 @@
 
     <TextView
         android:id="@+id/name"
-        style="@style/TextAppearance.AppCompat.Large"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -38,7 +38,7 @@
 
     <TextView
         android:id="@+id/score"
-        style="@style/TextAppearance.AppCompat.Large"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

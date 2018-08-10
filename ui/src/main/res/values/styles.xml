@@ -16,52 +16,51 @@
 
 <resources>
 
-    <style name="AppTheme"
-        parent="Theme.AppCompat.Light">
+    <style name="Theme.ScoreIt"
+           parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/blue_900</item>
+        <item name="colorPrimaryDark">@color/blue_500</item>
         <item name="colorAccent">@color/orange_500</item>
-        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+        <item name="alertDialogTheme">@style/Theme.AlertDialog</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@color/blue_500</item>
-        <item name="android:windowBackground">@color/blue_50</item>
-        <item name="android:listDivider">@drawable/list_divider</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:listDivider">@drawable/divider</item>
     </style>
 
-    <style name="AlertDialogTheme"
-        parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="buttonBarPositiveButtonStyle">@style/AlertDialogPositiveButton</item>
-        <item name="buttonBarNeutralButtonStyle">@style/AlertDialogNeutralButton</item>
-        <item name="buttonBarNegativeButtonStyle">@style/AlertDialogNegativeButton</item>
+    <style name="Theme.AlertDialog"
+           parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.Button.Dialog.Positive</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.Button.Dialog.Neutral</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.Button.Dialog.Negative</item>
     </style>
 
-    <style name="AlertDialogPositiveButton"
-        parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <style name="Widget.Button.Dialog.Positive"
+           parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/blue_500</item>
     </style>
 
-    <style name="AlertDialogNeutralButton"
-        parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <style name="Widget.Button.Dialog.Neutral"
+           parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/blue_500</item>
     </style>
 
-    <style name="AlertDialogNegativeButton"
-        parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <style name="Widget.Button.Dialog.Negative"
+           parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/orange_500</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay"
-        parent="ThemeOverlay.AppCompat.ActionBar">
+           parent="ThemeOverlay.MaterialComponents.ActionBar">
         <item name="android:textColorPrimary">@color/blue_500</item>
     </style>
 
     <style name="AppTheme.PopupOverlay"
-        parent="ThemeOverlay.AppCompat.Light" />
+           parent="ThemeOverlay.MaterialComponents.Light"/>
 
     <style name="TextAppearance.Title"
-        parent="TextAppearance.AppCompat.Title">
+           parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textColor">@color/blue_500</item>
     </style>
 </resources>

@@ -16,11 +16,10 @@
 <resources>
 
     <color name="white">#FFFFFF</color>
-    <color name="blue_900">#233c6d</color>
     <color name="blue_500">#4b6a9b</color>
-    <color name="blue_100">#eef2f7</color>
-    <color name="blue_50">#fbfcfd</color>
+    <color name="blue_50">#c9d2e1</color>
     <color name="orange_500">#f79845</color>
     <color name="green_500">#29a944</color>
     <color name="red_500">#e3513e</color>
+    <color name="gray">#505359</color>
 </resources>

@@ -17,7 +17,6 @@
 package com.sbgapps.scoreit.ui.view
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -29,11 +28,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseActivity
 import com.sbgapps.scoreit.ui.ext.addFragment
-import com.sbgapps.scoreit.ui.ext.color
 import com.sbgapps.scoreit.ui.ext.onImeActionDone
 import com.sbgapps.scoreit.ui.ext.replaceFragment
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
-import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel.Mode.*
 import kotlinx.android.synthetic.main.activity_scoreit.*
 import kotlinx.coroutines.experimental.launch
 import org.jetbrains.anko.find
@@ -57,7 +54,6 @@ class ScoreItActivity : BaseActivity() {
 
         setSupportActionBar(bottomBar)
         fab.setOnClickListener { onFabClicked() }
-        decorFab()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -65,28 +61,26 @@ class ScoreItActivity : BaseActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.playerCount -> {
-                showPlayerCountDialog()
-                true
-            }
-
-            R.id.totals -> {
-                val isShown = model.toggleShowTotal()
-                val res = if (isShown) R.string.menu_action_hide_totals
-                else R.string.menu_action_show_totals
-                item.title = getString(res)
-                true
-            }
-
-            R.id.clear -> {
-                showClearLapDialog()
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.playerCount -> {
+            showPlayerCountDialog()
+            true
         }
+
+        R.id.totals -> {
+            val isShown = model.toggleShowTotal()
+            val res = if (isShown) R.string.menu_action_hide_totals
+            else R.string.menu_action_show_totals
+            item.title = getString(res)
+            true
+        }
+
+        R.id.clear -> {
+            showClearLapDialog()
+            true
+        }
+
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun onBackPressed() {
@@ -130,16 +124,12 @@ class ScoreItActivity : BaseActivity() {
 
     private fun decorFab() {
         when (model.mode) {
-            MODE_HISTORY -> {
-                fab.backgroundTintList = ColorStateList.valueOf(color(R.color.orange_500))
-                fab.setImageDrawable(getDrawable(R.drawable.ic_add_black_24dp))
-
+            UniversalViewModel.Mode.MODE_HISTORY -> {
+                fab.setImageDrawable(getDrawable(R.drawable.ic_add))
                 bottomBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
             }
-            MODE_UPDATE, MODE_ADDITION -> {
-                fab.backgroundTintList = ColorStateList.valueOf(color(R.color.blue_500))
-                fab.setImageDrawable(getDrawable(R.drawable.ic_done_black_24dp))
-
+            UniversalViewModel.Mode.MODE_UPDATE, UniversalViewModel.Mode.MODE_ADDITION -> {
+                fab.setImageDrawable(getDrawable(R.drawable.ic_done))
                 bottomBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
             }
         }
@@ -147,15 +137,11 @@ class ScoreItActivity : BaseActivity() {
 
     @SuppressLint("InflateParams")
     private fun showPlayerCountDialog() {
-        val view = layoutInflater.inflate(R.layout.dialog_player_count, null)
         AlertDialog.Builder(this)
-                .setView(view)
                 .setTitle(R.string.dialog_title_player_number)
-                .setPositiveButton(R.string.button_action_ok) { _, _ ->
-                    val count = view.find<NumberPicker>(R.id.playerCount).value
-                    showGameNameDialog(count)
+                .setItems(arrayOf("2", "3", "4", "5", "6", "7", "8")) { _, which ->
+                    showGameNameDialog(which + 2)
                 }
-                .setNeutralButton(R.string.button_action_cancel, null)
                 .create()
                 .show()
     }
@@ -173,10 +159,14 @@ class ScoreItActivity : BaseActivity() {
                 .setNeutralButton(R.string.button_action_cancel, null)
                 .create()
 
-        editText.onImeActionDone {
-            model.createGame(editText.text.toString(), playerCount)
-            dialog.dismiss()
+        with(editText) {
+            requestFocus()
+            onImeActionDone {
+                model.createGame(text.toString(), playerCount)
+                dialog.dismiss()
+            }
         }
+
         dialog.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         dialog.show()
     }

@@ -99,7 +99,6 @@ class UniversalHistoryFragment : BaseFragment() {
         }
 
         fun bind(lap: UniversalLap) {
-            Timber.d("Lap at position $adapterPosition with id ${lap.id} is updated")
             adapter.items = lap.points
 
             itemView.delete.setOnClickListener {
