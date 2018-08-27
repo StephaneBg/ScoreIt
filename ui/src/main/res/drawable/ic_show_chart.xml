@@ -14,20 +14,15 @@
   ~ limitations under the License.
   -->
 
-<androidx.core.widget.NestedScrollView
+<vector
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24.0"
+        android:viewportHeight="24.0"
         >
-
-    <com.sbgapps.scoreit.ui.widget.LinearListView
-            android:id="@+id/players"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@drawable/divider"
-            android:orientation="vertical"
-            android:paddingBottom="88dp"
-            android:showDividers="middle"
+    <path
+            android:fillColor="@color/white"
+            android:pathData="M3.5,18.49l6,-6.01 4,4L22,6.92l-1.41,-1.41 -7.09,7.97 -4,-4L2,16.99z"
             />
-</androidx.core.widget.NestedScrollView>
+</vector>

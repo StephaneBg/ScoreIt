@@ -18,14 +18,14 @@ import org.gradle.api.JavaVersion
 
 object Versions {
     val java = JavaVersion.VERSION_1_8
-    val androidGradle = "3.2.0-beta05"
-    val kotlin = "1.2.60"
+    val androidGradle = "3.2.0-rc02"
+    val kotlin = "1.2.61"
     val coroutines = "0.24.0"
     val appcompat = "1.0.0-rc01"
     val recyclerView = "1.0.0-rc01"
     val material = "1.0.0-beta01"
     val constraintLayout = "1.1.0"
-    val lifecyle = "2.0.0-alpha1"
+    val lifecyle = "2.0.0-beta01"
     val room = "2.0.0-alpha1"
     val timber = "4.5.1"
     val moshi = "1.5.0"
@@ -33,6 +33,7 @@ object Versions {
     val koin = "1.0.0-beta-3"
     val ktx = "1.0.0-alpha1"
     val debugDb = "1.0.3"
+    val williamchart = "2.5.0"
 }
 
 object Build {
@@ -70,8 +71,7 @@ object Libs {
 
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
-
     val koinAndroid = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
-
     val debugDb = "com.amitshekhar.android:debug-db:${Versions.debugDb}"
+    val williamChart = "com.diogobernardino:williamchart:${Versions.williamchart}"
 }

@@ -46,15 +46,22 @@ class UniversalHistoryFragment : BaseFragment() {
     private val adapter = LapListAdapter()
     private var deleteAction: (() -> Unit)? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_universal_history, container, false)
-    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_universal_history, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         lapRecycler.layoutManager = LinearLayoutManager(context)
         lapRecycler.adapter = adapter
         lapRecycler.setHasFixedSize(true)
-        lapRecycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        lapRecycler.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -108,11 +115,6 @@ class UniversalHistoryFragment : BaseFragment() {
 
             itemView.edit.setOnClickListener {
                 model.startUpdateMode(UniversalLap(lap.id, lap.points.toMutableList()))
-                with(activity as ScoreItActivity) {
-                    displayEdition()
-                    switchFab()
-                    invalidateOptionsMenu()
-                }
                 itemView.revealLayout.close(true)
             }
 
@@ -130,21 +132,21 @@ class UniversalHistoryFragment : BaseFragment() {
             model.deleteLap(lap)
             deleteAction = { model.deleteLapFromCache() }
             Snackbar.make(rootContainer, R.string.snackbar_msg_on_lap_deleted, Snackbar.LENGTH_LONG)
-                    .setAction(R.string.snackbar_action_undo) {
-                        model.restoreLap(lap, position)
-                        deleteAction = null
-                    }
-                    .setActionTextColor(requireContext().color(R.color.orange_500))
-                    .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-                        override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                            when (event) {
-                                DISMISS_EVENT_TIMEOUT,
-                                DISMISS_EVENT_CONSECUTIVE,
-                                DISMISS_EVENT_SWIPE -> deleteAction?.invoke()
-                            }
+                .setAction(R.string.snackbar_action_undo) {
+                    model.restoreLap(lap, position)
+                    deleteAction = null
+                }
+                .setActionTextColor(requireContext().color(R.color.orange_500))
+                .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                    override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                        when (event) {
+                            DISMISS_EVENT_TIMEOUT,
+                            DISMISS_EVENT_CONSECUTIVE,
+                            DISMISS_EVENT_SWIPE -> deleteAction?.invoke()
                         }
-                    })
-                    .show()
+                    }
+                })
+                .show()
         }
     }
 
@@ -158,8 +160,9 @@ class UniversalHistoryFragment : BaseFragment() {
     }
 
     inner class HistoryDiffCallback(
-            private val newLaps: List<UniversalLap>,
-            private val oldLaps: List<UniversalLap>) : DiffUtil.Callback() {
+        private val newLaps: List<UniversalLap>,
+        private val oldLaps: List<UniversalLap>
+    ) : DiffUtil.Callback() {
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             return oldLaps[oldItemPosition] == newLaps[newItemPosition]

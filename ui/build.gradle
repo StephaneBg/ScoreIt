@@ -91,6 +91,7 @@ dependencies {
     implementation Libs.lifecycle
     implementation Libs.timber
     implementation Libs.koinAndroid
+    implementation Libs.williamChart
 
     debugImplementation Libs.debugDb
 }

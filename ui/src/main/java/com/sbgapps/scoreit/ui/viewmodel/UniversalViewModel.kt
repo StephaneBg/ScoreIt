@@ -20,6 +20,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sbgapps.scoreit.domain.usecase.UniversalUseCase
 import com.sbgapps.scoreit.ui.base.BaseViewModel
+import com.sbgapps.scoreit.ui.ext.combineAndCompute
+import com.sbgapps.scoreit.ui.model.Game
 import com.sbgapps.scoreit.ui.model.Player
 import com.sbgapps.scoreit.ui.model.UniversalLap
 import com.sbgapps.scoreit.ui.model.mapFromDomain
@@ -31,21 +33,18 @@ class UniversalViewModel(useCase: UniversalUseCase) : BaseViewModel<UniversalUse
     private val players = MutableLiveData<List<Player>>()
     private val laps = MutableLiveData<List<UniversalLap>>()
     private var editionLap = MutableLiveData<Pair<UniversalLap, List<String>>>()
+    private val mode = MutableLiveData<Mode>()
     private var deletedLap: UniversalLap? = null
 
-    var mode: Mode = Mode.MODE_HISTORY
-        private set
+    suspend fun init() = useCase.initGame()
 
-    suspend fun init() {
-        useCase.initGame()
+    fun createGame(name: String, playerCount: Int) = launchAsync {
+        useCase.createGame(name, playerCount)
+        update()
     }
 
-    fun createGame(name: String, playerCount: Int) {
-        launchAsync {
-            useCase.createGame(name, playerCount)
-            update()
-        }
-    }
+    fun getGame(): LiveData<Game> =
+        players.combineAndCompute(laps) { players, laps -> Game(players, laps) }
 
     fun getPlayers(): LiveData<List<Player>> {
         players.value ?: update()
@@ -70,49 +69,63 @@ class UniversalViewModel(useCase: UniversalUseCase) : BaseViewModel<UniversalUse
         return laps
     }
 
-    private fun internalGetLaps(): List<UniversalLap> {
-        return useCase.getLaps().map { it.mapFromDomain() }
+    private fun internalGetLaps(): List<UniversalLap> = useCase.getLaps().map { it.mapFromDomain() }
+
+    fun hasLaps(): Boolean = laps.value?.isNotEmpty() ?: false
+
+    fun getMode(): LiveData<Mode> {
+        mode.value ?: mode.postValue(Mode.HISTORY)
+        return mode
+    }
+
+    fun validate() {
+        when (mode.value) {
+            Mode.HISTORY -> mode.postValue(Mode.ADDITION)
+            Mode.UPDATE, Mode.ADDITION -> onLapEditionCompleted()
+            else -> {
+            }
+        }
     }
 
     fun startUpdateMode(lap: UniversalLap) {
-        mode = Mode.MODE_UPDATE
+        mode.postValue(Mode.UPDATE)
         val names = useCase.getPlayers(false).map { it.name }
         editionLap.value = lap to names
     }
 
-    fun onLapEditionCompleted() {
-        val prevMode = mode
-        mode = Mode.MODE_HISTORY
+    private fun onLapEditionCompleted() {
+        val prevMode = mode.value
         launchAsync {
             editionLap.value?.let {
                 val lap = it.first
                 when (prevMode) {
-                    Mode.MODE_ADDITION -> {
-                        Timber.d("Adding lap: $it")
+                    Mode.ADDITION -> {
+                        Timber.d("Add lap: $it")
                         useCase.addLap(lap.mapToDomain())
                     }
-                    Mode.MODE_UPDATE -> {
-                        Timber.d("Updated lap: $it")
+                    Mode.UPDATE -> {
+                        Timber.d("Update lap: $it")
                         useCase.updateLap(lap.mapToDomain())
                     }
-                    Mode.MODE_HISTORY -> throw IllegalStateException("Cannot be on edition!")
+                    else -> error("Incorrect mode")
                 }
             }
             editionLap.value = null
             update()
+            mode.postValue(Mode.HISTORY)
         }
     }
 
-    fun isOnHistoryMode() = mode == Mode.MODE_HISTORY
-
-    fun setHistoryMode() {
-        mode = Mode.MODE_HISTORY
+    fun stopEditionMode(): Boolean = if (mode.value == Mode.HISTORY) {
+        false
+    } else {
         editionLap.value = null
+        mode.postValue(Mode.HISTORY)
+        true
     }
 
     fun getEditedLap(): LiveData<Pair<UniversalLap, List<String>>> {
         editionLap.value ?: run {
-            mode = Mode.MODE_ADDITION
             val lap = useCase.createLap().mapFromDomain()
             val names = useCase.getPlayers(false).map { it.name }
             editionLap.postValue(Pair(lap, names))
@@ -126,11 +139,9 @@ class UniversalViewModel(useCase: UniversalUseCase) : BaseViewModel<UniversalUse
         return isDisplayed
     }
 
-    fun clearLaps() {
-        launchAsync {
-            useCase.clearLaps()
-            update()
-        }
+    fun clearLaps() = launchAsync {
+        useCase.clearLaps()
+        update()
     }
 
     fun restoreLap(lap: UniversalLap, position: Int) {
@@ -144,9 +155,11 @@ class UniversalViewModel(useCase: UniversalUseCase) : BaseViewModel<UniversalUse
         update()
     }
 
-    fun deleteLapFromCache() {
-        launchAsync { deletedLap?.let { useCase.deleteFromCache(it.mapToDomain()) } }
+    fun deleteLapFromCache() = launchAsync {
+        deletedLap?.let { useCase.deleteFromCache(it.mapToDomain()) }
     }
+
+    fun shouldShowMenu(): Boolean = mode.value == Mode.HISTORY
 
     private fun update() {
         val _laps = internalGetLaps()
@@ -156,8 +169,8 @@ class UniversalViewModel(useCase: UniversalUseCase) : BaseViewModel<UniversalUse
     }
 
     enum class Mode {
-        MODE_HISTORY,
-        MODE_UPDATE,
-        MODE_ADDITION
+        HISTORY,
+        UPDATE,
+        ADDITION
     }
 }

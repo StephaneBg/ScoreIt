@@ -17,17 +17,22 @@
 package com.sbgapps.scoreit.ui.view
 
 import android.annotation.SuppressLint
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sbgapps.scoreit.ui.R
 import com.sbgapps.scoreit.ui.base.BaseActivity
 import com.sbgapps.scoreit.ui.ext.addFragment
+import com.sbgapps.scoreit.ui.ext.observe
 import com.sbgapps.scoreit.ui.ext.onImeActionDone
 import com.sbgapps.scoreit.ui.ext.replaceFragment
 import com.sbgapps.scoreit.ui.viewmodel.UniversalViewModel
@@ -40,10 +45,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ScoreItActivity : BaseActivity() {
 
     private val model by viewModel<UniversalViewModel>()
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scoreit)
+        initBottomSheet()
+        setSupportActionBar(bottomBar)
+        fab.setOnClickListener { model.validate() }
+        observe(model.getMode(), ::manageMode)
 
         savedInstanceState ?: launch {
             model.init()
@@ -51,17 +61,61 @@ class ScoreItActivity : BaseActivity() {
             replaceFragment(R.id.headerContainer, ScoreFragment.newInstance())
             replaceFragment(R.id.lapContainer, UniversalHistoryFragment.newInstance())
         }
+    }
 
-        setSupportActionBar(bottomBar)
-        fab.setOnClickListener { onFabClicked() }
+    private fun manageMode(mode: UniversalViewModel.Mode?) {
+        invalidateOptionsMenu()
+        when (mode) {
+            UniversalViewModel.Mode.HISTORY -> {
+                fab.setImageDrawable(getDrawable(R.drawable.ic_add))
+                bottomBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                supportFragmentManager.popBackStack()
+            }
+            UniversalViewModel.Mode.ADDITION, UniversalViewModel.Mode.UPDATE -> {
+                fab.setImageDrawable(getDrawable(R.drawable.ic_done))
+                bottomBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+                displayEdition()
+            }
+            else -> {
+            }
+        }
+    }
+
+    private fun initBottomSheet() {
+        bottomSheetBehavior = BottomSheetBehavior.from(chartContainer)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_HIDDEN -> fab.show()
+                    BottomSheetBehavior.STATE_SETTLING -> fab.hide()
+                }
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (model.isOnHistoryMode()) menuInflater.inflate(R.menu.menu_main, menu)
+        if (model.shouldShowMenu()) menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.findItem(R.id.chart)?.isVisible = model.hasLaps()
+        menu?.findItem(R.id.clear)?.isVisible = model.hasLaps()
+        menu?.findItem(R.id.totals)?.isVisible = model.hasLaps()
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.chart -> {
+            replaceFragment(R.id.chartContainer, ChartFragment.newInstance())
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            true
+        }
+
         R.id.playerCount -> {
             showPlayerCountDialog()
             true
@@ -84,66 +138,41 @@ class ScoreItActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        if (!model.isOnHistoryMode()) {
-            model.setHistoryMode()
-            switchFab()
-        }
-        invalidateOptionsMenu()
-        super.onBackPressed()
+        if (model.stopEditionMode()) supportFragmentManager.popBackStack()
+        else super.onBackPressed()
     }
 
-    private fun onFabClicked() {
-        if (model.isOnHistoryMode()) {
-            displayEdition()
-        } else {
-            model.onLapEditionCompleted()
-            supportFragmentManager.popBackStack()
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                val outRect = Rect()
+                chartContainer.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt()))
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            }
         }
-        switchFab()
-        invalidateOptionsMenu()
+        return super.dispatchTouchEvent(event)
     }
 
-    fun displayEdition() {
+    private fun displayEdition() {
         addFragment(
-                R.id.lapContainer,
-                UniversalEditionFragment.newInstance(),
-                true,
-                R.anim.slide_in_up,
-                R.anim.slide_out_down
+            R.id.lapContainer,
+            UniversalEditionFragment.newInstance(),
+            true,
+            R.anim.slide_in_up,
+            R.anim.slide_out_down
         )
-    }
-
-    fun switchFab() {
-        fab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
-            override fun onHidden(fab: FloatingActionButton) {
-                decorFab()
-                fab.show()
-            }
-        })
-    }
-
-    private fun decorFab() {
-        when (model.mode) {
-            UniversalViewModel.Mode.MODE_HISTORY -> {
-                fab.setImageDrawable(getDrawable(R.drawable.ic_add))
-                bottomBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-            }
-            UniversalViewModel.Mode.MODE_UPDATE, UniversalViewModel.Mode.MODE_ADDITION -> {
-                fab.setImageDrawable(getDrawable(R.drawable.ic_done))
-                bottomBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-            }
-        }
     }
 
     @SuppressLint("InflateParams")
     private fun showPlayerCountDialog() {
         AlertDialog.Builder(this)
-                .setTitle(R.string.dialog_title_player_number)
-                .setItems(arrayOf("2", "3", "4", "5", "6", "7", "8")) { _, which ->
-                    showGameNameDialog(which + 2)
-                }
-                .create()
-                .show()
+            .setTitle(R.string.dialog_title_player_number)
+            .setItems(arrayOf("2", "3", "4", "5", "6", "7", "8")) { _, which ->
+                showGameNameDialog(which + 2)
+            }
+            .create()
+            .show()
     }
 
     @SuppressLint("InflateParams")
@@ -151,13 +180,13 @@ class ScoreItActivity : BaseActivity() {
         val view = layoutInflater.inflate(R.layout.dialog_game_name, null)
         val editText = view.find<EditText>(R.id.gameName)
         val dialog = AlertDialog.Builder(this)
-                .setView(view)
-                .setTitle(R.string.dialog_title_game_name)
-                .setPositiveButton(R.string.button_action_ok) { _, _ ->
-                    model.createGame(editText.text.toString(), playerCount)
-                }
-                .setNeutralButton(R.string.button_action_cancel, null)
-                .create()
+            .setView(view)
+            .setTitle(R.string.dialog_title_game_name)
+            .setPositiveButton(R.string.button_action_ok) { _, _ ->
+                model.createGame(editText.text.toString(), playerCount)
+            }
+            .setNeutralButton(R.string.button_action_cancel, null)
+            .create()
 
         with(editText) {
             requestFocus()
@@ -167,20 +196,20 @@ class ScoreItActivity : BaseActivity() {
             }
         }
 
-        dialog.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         dialog.show()
     }
 
     private fun showClearLapDialog() {
         AlertDialog.Builder(this)
-                .setTitle(R.string.dialog_title_current_game)
-                .setItems(R.array.dialog_clear_actions) { _, which ->
-                    when (which) {
-                        0 -> model.clearLaps()
-                        1 -> showGameNameDialog(model.getPlayerCount())
-                    }
+            .setTitle(R.string.dialog_title_current_game)
+            .setItems(R.array.dialog_clear_actions) { _, which ->
+                when (which) {
+                    0 -> model.clearLaps()
+                    1 -> showGameNameDialog(model.getPlayerCount())
                 }
-                .create()
-                .show()
+            }
+            .create()
+            .show()
     }
 }

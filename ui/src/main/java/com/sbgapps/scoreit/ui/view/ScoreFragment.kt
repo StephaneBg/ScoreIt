@@ -36,9 +36,11 @@ class ScoreFragment : BaseFragment() {
     private val model by sharedViewModel<UniversalViewModel>()
     private val adapter = ScoreAdapter()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_score, container, false)
-    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_score, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         scoreContainer.setAdapter(adapter)

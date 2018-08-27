@@ -37,9 +37,11 @@ class UniversalEditionFragment : BaseFragment() {
     private val adapter: PlayerAdapter = PlayerAdapter()
     private var points = mutableListOf<Int>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_universal_edition, container, false)
-    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_universal_edition, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         players.setAdapter(adapter)
@@ -56,7 +58,6 @@ class UniversalEditionFragment : BaseFragment() {
             adapter.items = it.second.zip(it.first.points)
         }
     }
-
 
     inner class PlayerAdapter : LinearListView.Adapter<Pair<String, Int>>() {
 

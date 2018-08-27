@@ -27,6 +27,7 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:listDivider">@drawable/divider</item>
+        <item name="android:navigationBarColor">@color/blue_500</item>
     </style>
 
     <style name="Theme.AlertDialog"
@@ -52,8 +53,7 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay"
-           parent="ThemeOverlay.MaterialComponents.ActionBar">
-        <item name="android:textColorPrimary">@color/blue_500</item>
+           parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
     </style>
 
     <style name="AppTheme.PopupOverlay"

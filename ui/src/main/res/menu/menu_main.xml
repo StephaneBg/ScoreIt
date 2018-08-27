@@ -15,28 +15,35 @@
   -->
 
 <menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        >
 
     <item
-        android:id="@+id/playerCount"
-        android:icon="@drawable/ic_people"
-        android:title="@string/menu_action_player_count"
-        app:showAsAction="always"
-        />
+            android:id="@+id/chart"
+            android:icon="@drawable/ic_show_chart"
+            android:title="@string/menu_action_show_chart"
+            app:showAsAction="always"
+            />
 
     <item
-        android:id="@+id/clear"
-        android:icon="@drawable/ic_clear_all"
-        android:title="@string/menu_action_clear"
-        app:showAsAction="ifRoom"
-        />
+            android:id="@+id/clear"
+            android:icon="@drawable/ic_clear_all"
+            android:title="@string/menu_action_clear"
+            app:showAsAction="always"
+            />
 
     <item
-        android:id="@+id/totals"
-        android:icon="@drawable/ic_sigma"
-        android:title="@string/menu_action_show_totals"
-        app:showAsAction="ifRoom"
-        />
+            android:id="@+id/playerCount"
+            android:icon="@drawable/ic_people"
+            android:title="@string/menu_action_player_count"
+            app:showAsAction="ifRoom"
+            />
+
+    <item
+            android:id="@+id/totals"
+            android:icon="@drawable/ic_sigma"
+            android:title="@string/menu_action_show_totals"
+            app:showAsAction="ifRoom"
+            />
 </menu>
