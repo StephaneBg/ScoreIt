@@ -18,8 +18,8 @@ package com.sbgapps.scoreit.fragments;
 
 import android.widget.ArrayAdapter;
 
-import com.sbgapps.scoreit.models.Player;
-import com.sbgapps.scoreit.models.belote.GenericBeloteLap;
+import com.sbgapps.scoreit.data.model.Player;
+import com.sbgapps.scoreit.data.model.belote.GenericBeloteLap;
 
 /**
  * Created by sbaiget on 29/10/2014.

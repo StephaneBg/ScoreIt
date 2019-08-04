@@ -27,8 +27,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
-import com.sbgapps.scoreit.models.Game;
-import com.sbgapps.scoreit.models.GameManager;
+import com.sbgapps.scoreit.data.interactor.GameManager;
+import com.sbgapps.scoreit.data.model.Game;
 import com.sbgapps.scoreit.views.adapters.GenericBeloteScoreAdapter;
 import com.sbgapps.scoreit.views.adapters.ScoreListAdapter;
 import com.sbgapps.scoreit.views.adapters.TarotScoreAdapter;

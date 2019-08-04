@@ -22,7 +22,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.models.Lap;
+import com.sbgapps.scoreit.data.model.Lap;
 
 /**
  * Created by Stéphane on 29/07/2014.
@@ -61,7 +61,7 @@ public class LapRowAdapter extends BaseAdapter {
                     .inflate(R.layout.list_item_score, parent, false);
 
             h = new ViewHolder();
-            h.score = (TextView) convertView.findViewById(R.id.score);
+            h.score = convertView.findViewById(R.id.score);
             convertView.setTag(h);
         } else {
             h = (ViewHolder) convertView.getTag();

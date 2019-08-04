@@ -31,6 +31,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 55
         versionName '4.0.4'
+        applicationId "com.sbgapps.scoreit"
         vectorDrawables.generatedDensities = ['hdpi', 'xxhdpi']
 //        buildConfigField("String", "INAPP_KEY", rootProject.ext.inAppKey)
     }
@@ -63,15 +64,16 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+    implementation(project(":data"))
+
     implementation "androidx.appcompat:appcompat:1.0.2"
     implementation "androidx.recyclerview:recyclerview:1.0.0"
     implementation "com.google.android.material:material:1.0.0"
     implementation "androidx.percentlayout:percentlayout:1.0.0"
 
-    implementation "com.google.code.gson:gson:2.8.5"
     implementation "com.anjlab.android.iab.v3:library:1.0.36"
     implementation "com.code-troopers.betterpickers:library:3.0.1"
-    implementation "com.sromku:simple-storage:1.2.1"
     implementation "com.thebluealliance:spectrum:0.6.0"
     implementation "com.wunderlist:sliding-layer:1.2.5"
     implementation "com.github.StephaneBg:SwipeSelector:1.0"

@@ -27,8 +27,8 @@ import android.widget.TextView;
 import com.codetroopers.betterpickers.numberpicker.NumberPickerBuilder;
 import com.codetroopers.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.models.Player;
-import com.sbgapps.scoreit.models.universal.UniversalLap;
+import com.sbgapps.scoreit.data.model.Player;
+import com.sbgapps.scoreit.data.model.universal.UniversalLap;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -52,7 +52,7 @@ public class UniversalLapFragment extends LapFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap_universal, container, false);
 
-        LinearLayout ll = (LinearLayout) view.findViewById(R.id.ll_players);
+        LinearLayout ll = view.findViewById(R.id.ll_players);
 
         for (int i = 0; i < getGameHelper().getPlayerCount(); i++) {
             View input = inflater.inflate(R.layout.list_item_universal_input, ll, false);
@@ -67,10 +67,10 @@ public class UniversalLapFragment extends LapFragment
     private void initView(View view, final int position) {
         Player player = getGameHelper().getPlayer(position);
 
-        TextView tv = (TextView) view.findViewById(R.id.tv_name);
+        TextView tv = view.findViewById(R.id.tv_name);
         tv.setText(player.getName());
 
-        tv = (TextView) view.findViewById(R.id.points);
+        tv = view.findViewById(R.id.points);
         tv.setText(Integer.toString(getLap().getScore(position)));
         mPoints.add(tv);
 
@@ -86,7 +86,7 @@ public class UniversalLapFragment extends LapFragment
             }
         });
 
-        tv = (TextView) view.findViewById(R.id.btn_plus);
+        tv = view.findViewById(R.id.btn_plus);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +94,7 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
-        tv = (TextView) view.findViewById(R.id.btn_plus_5);
+        tv = view.findViewById(R.id.btn_plus_5);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +102,7 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
-        tv = (TextView) view.findViewById(R.id.btn_plus_10);
+        tv = view.findViewById(R.id.btn_plus_10);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +110,7 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
-        tv = (TextView) view.findViewById(R.id.btn_plus_100);
+        tv = view.findViewById(R.id.btn_plus_100);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +118,7 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
-        tv = (TextView) view.findViewById(R.id.btn_minus);
+        tv = view.findViewById(R.id.btn_minus);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +126,7 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
-        tv = (TextView) view.findViewById(R.id.btn_minus_5);
+        tv = view.findViewById(R.id.btn_minus_5);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +134,7 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
-        tv = (TextView) view.findViewById(R.id.btn_minus_10);
+        tv = view.findViewById(R.id.btn_minus_10);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +142,7 @@ public class UniversalLapFragment extends LapFragment
                 updatePoints(position);
             }
         });
-        tv = (TextView) view.findViewById(R.id.btn_minus_100);
+        tv = view.findViewById(R.id.btn_minus_100);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

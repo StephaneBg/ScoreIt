@@ -34,10 +34,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.models.Player;
-import com.sbgapps.scoreit.models.belote.BeloteBonus;
-import com.sbgapps.scoreit.models.coinche.CoincheBonus;
-import com.sbgapps.scoreit.models.coinche.CoincheLap;
+import com.sbgapps.scoreit.data.model.Player;
+import com.sbgapps.scoreit.data.model.belote.BeloteBonus;
+import com.sbgapps.scoreit.data.model.coinche.CoincheBonus;
+import com.sbgapps.scoreit.data.model.coinche.CoincheLap;
 import com.sbgapps.scoreit.views.widgets.SeekPoints;
 
 /**

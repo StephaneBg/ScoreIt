@@ -37,11 +37,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.models.Player;
-import com.sbgapps.scoreit.models.tarot.TarotBid;
-import com.sbgapps.scoreit.models.tarot.TarotBonus;
-import com.sbgapps.scoreit.models.tarot.TarotFiveLap;
-import com.sbgapps.scoreit.models.tarot.TarotLap;
+import com.sbgapps.scoreit.data.model.Player;
+import com.sbgapps.scoreit.data.model.tarot.TarotBid;
+import com.sbgapps.scoreit.data.model.tarot.TarotBonus;
+import com.sbgapps.scoreit.data.model.tarot.TarotFiveLap;
+import com.sbgapps.scoreit.data.model.tarot.TarotLap;
 import com.sbgapps.scoreit.views.widgets.SeekPoints;
 
 /**

@@ -22,8 +22,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.data.model.belote.GenericBeloteLap;
 import com.sbgapps.scoreit.fragments.ScoreListFragment;
-import com.sbgapps.scoreit.models.belote.GenericBeloteLap;
 
 /**
  * Created by sbaiget on 23/11/13.

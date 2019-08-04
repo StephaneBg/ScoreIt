@@ -21,8 +21,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.models.Lap;
-import com.sbgapps.scoreit.models.belote.GenericBeloteLap;
+import com.sbgapps.scoreit.data.model.Lap;
+import com.sbgapps.scoreit.data.model.belote.GenericBeloteLap;
 
 /**
  * Created by Stéphane on 29/07/2014.
@@ -64,7 +64,7 @@ public class BeloteLapRowAdapter extends LapRowAdapter {
                     .inflate(R.layout.list_item_score, parent, false);
 
             h = new ViewHolder();
-            h.score = (TextView) convertView.findViewById(R.id.score);
+            h.score = convertView.findViewById(R.id.score);
             convertView.setTag(h);
         } else {
             h = (ViewHolder) convertView.getTag();

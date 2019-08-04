@@ -24,9 +24,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
+import com.sbgapps.scoreit.data.interactor.GameManager;
+import com.sbgapps.scoreit.data.model.Lap;
 import com.sbgapps.scoreit.fragments.ScoreListFragment;
-import com.sbgapps.scoreit.models.GameManager;
-import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.views.widgets.LinearListView;
 import com.sbgapps.scoreit.views.widgets.RevealView;
 

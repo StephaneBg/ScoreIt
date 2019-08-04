@@ -52,6 +52,16 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.sbgapps.scoreit.data.interactor.GameManager;
+import com.sbgapps.scoreit.data.model.Game;
+import com.sbgapps.scoreit.data.model.Lap;
+import com.sbgapps.scoreit.data.model.Player;
+import com.sbgapps.scoreit.data.model.belote.BeloteLap;
+import com.sbgapps.scoreit.data.model.coinche.CoincheLap;
+import com.sbgapps.scoreit.data.model.tarot.TarotFiveLap;
+import com.sbgapps.scoreit.data.model.tarot.TarotFourLap;
+import com.sbgapps.scoreit.data.model.tarot.TarotThreeLap;
+import com.sbgapps.scoreit.data.model.universal.UniversalLap;
 import com.sbgapps.scoreit.fragments.BeloteLapFragment;
 import com.sbgapps.scoreit.fragments.CoincheLapFragment;
 import com.sbgapps.scoreit.fragments.HeaderFragment;
@@ -60,16 +70,6 @@ import com.sbgapps.scoreit.fragments.ScoreChartFragment;
 import com.sbgapps.scoreit.fragments.ScoreListFragment;
 import com.sbgapps.scoreit.fragments.TarotLapFragment;
 import com.sbgapps.scoreit.fragments.UniversalLapFragment;
-import com.sbgapps.scoreit.models.Game;
-import com.sbgapps.scoreit.models.GameManager;
-import com.sbgapps.scoreit.models.Lap;
-import com.sbgapps.scoreit.models.Player;
-import com.sbgapps.scoreit.models.belote.BeloteLap;
-import com.sbgapps.scoreit.models.coinche.CoincheLap;
-import com.sbgapps.scoreit.models.tarot.TarotFiveLap;
-import com.sbgapps.scoreit.models.tarot.TarotFourLap;
-import com.sbgapps.scoreit.models.tarot.TarotThreeLap;
-import com.sbgapps.scoreit.models.universal.UniversalLap;
 import com.sbgapps.scoreit.views.widgets.ScrollAwareFabBehavior;
 import com.wunderlist.slidinglayer.SlidingLayer;
 
@@ -445,6 +445,8 @@ public class ScoreItActivity extends BaseActivity {
                 supportInvalidateOptionsMenu();
                 updateFragments();
                 break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
         }
     }
 

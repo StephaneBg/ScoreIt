@@ -25,8 +25,8 @@ import androidx.fragment.app.Fragment;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
-import com.sbgapps.scoreit.models.GameManager;
-import com.sbgapps.scoreit.models.Lap;
+import com.sbgapps.scoreit.data.interactor.GameManager;
+import com.sbgapps.scoreit.data.model.Lap;
 import com.sbgapps.scoreit.views.widgets.LineChart;
 
 public class ScoreChartFragment extends Fragment {

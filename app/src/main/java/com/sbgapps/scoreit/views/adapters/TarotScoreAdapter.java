@@ -23,12 +23,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sbgapps.scoreit.R;
+import com.sbgapps.scoreit.data.model.Player;
+import com.sbgapps.scoreit.data.model.tarot.TarotBid;
+import com.sbgapps.scoreit.data.model.tarot.TarotBonus;
+import com.sbgapps.scoreit.data.model.tarot.TarotFiveLap;
+import com.sbgapps.scoreit.data.model.tarot.TarotLap;
 import com.sbgapps.scoreit.fragments.ScoreListFragment;
-import com.sbgapps.scoreit.models.Player;
-import com.sbgapps.scoreit.models.tarot.TarotBid;
-import com.sbgapps.scoreit.models.tarot.TarotBonus;
-import com.sbgapps.scoreit.models.tarot.TarotFiveLap;
-import com.sbgapps.scoreit.models.tarot.TarotLap;
 
 /**
  * Created by sbaiget on 23/11/13.
@@ -45,7 +45,7 @@ public class TarotScoreAdapter extends ScoreListAdapter<TarotScoreAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mSummary = (TextView) itemView.findViewById(R.id.summary);
+            mSummary = itemView.findViewById(R.id.summary);
             mMaker = itemView.findViewById(R.id.marker);
         }
     }

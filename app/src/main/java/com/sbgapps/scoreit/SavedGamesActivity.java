@@ -26,7 +26,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sbgapps.scoreit.models.GameManager;
+import com.sbgapps.scoreit.data.interactor.GameManager;
 
 import java.util.List;
 

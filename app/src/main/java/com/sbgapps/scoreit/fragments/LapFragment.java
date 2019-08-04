@@ -21,8 +21,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import com.sbgapps.scoreit.ScoreItActivity;
-import com.sbgapps.scoreit.models.GameManager;
-import com.sbgapps.scoreit.models.Lap;
+import com.sbgapps.scoreit.data.interactor.GameManager;
+import com.sbgapps.scoreit.data.model.Lap;
 
 /**
  * Created by sbaiget on 08/01/14.

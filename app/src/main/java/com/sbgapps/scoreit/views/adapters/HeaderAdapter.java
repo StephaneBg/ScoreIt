@@ -24,15 +24,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
-
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
-import com.sbgapps.scoreit.models.Game;
-import com.sbgapps.scoreit.models.GameManager;
-import com.sbgapps.scoreit.models.Lap;
-import com.sbgapps.scoreit.models.Player;
-import com.sbgapps.scoreit.models.belote.GenericBeloteLap;
+import com.sbgapps.scoreit.data.interactor.GameManager;
+import com.sbgapps.scoreit.data.model.Game;
+import com.sbgapps.scoreit.data.model.Lap;
+import com.sbgapps.scoreit.data.model.Player;
+import com.sbgapps.scoreit.data.model.belote.GenericBeloteLap;
 import com.thebluealliance.spectrum.SpectrumDialog;
 
 /**
@@ -104,21 +102,13 @@ public class HeaderAdapter extends BaseAdapter {
 
         h.score.setText(Integer.toString(info.mScore));
         h.score.setTextColor(mGameManager.getPlayerColor(position));
-        h.score.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new SpectrumDialog.Builder(mActivity)
-                        .setColors(R.array.player_colors)
-                        .setTitle(null)
-                        .setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
-                            @Override
-                            public void onColorSelected(boolean positiveResult, @ColorInt int color) {
-                                mGameManager.setPlayerColor(position, color);
-                                mActivity.updateFragments();
-                            }
-                        }).build().show(mActivity.getSupportFragmentManager(), null);
-            }
-        });
+        h.score.setOnClickListener(v -> new SpectrumDialog.Builder(mActivity)
+                .setColors(R.array.player_colors)
+                .setTitle(null)
+                .setOnColorSelectedListener((positiveResult, color) -> {
+                    mGameManager.setPlayerColor(position, color);
+                    mActivity.updateFragments();
+                }).build().show(mActivity.getSupportFragmentManager(), null));
 
         int mod = -1;
         if (Game.BELOTE != mGameManager.getPlayedGame()

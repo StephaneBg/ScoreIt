@@ -36,9 +36,9 @@ import com.roughike.swipeselector.OnSwipeItemSelectedListener;
 import com.roughike.swipeselector.SwipeItem;
 import com.roughike.swipeselector.SwipeSelector;
 import com.sbgapps.scoreit.R;
-import com.sbgapps.scoreit.models.Player;
-import com.sbgapps.scoreit.models.belote.BeloteBonus;
-import com.sbgapps.scoreit.models.belote.BeloteLap;
+import com.sbgapps.scoreit.data.model.Player;
+import com.sbgapps.scoreit.data.model.belote.BeloteBonus;
+import com.sbgapps.scoreit.data.model.belote.BeloteLap;
 import com.sbgapps.scoreit.views.widgets.SeekPoints;
 
 /**
