@@ -34,9 +34,7 @@ import com.sbgapps.scoreit.data.model.tarot.TarotFiveGame;
 import com.sbgapps.scoreit.data.model.tarot.TarotFourGame;
 import com.sbgapps.scoreit.data.model.tarot.TarotThreeGame;
 import com.sbgapps.scoreit.data.model.universal.UniversalGame;
-import com.sbgapps.scoreit.data.repository.FileHelper;
-import com.sromku.simple.storage.SimpleStorage;
-import com.sromku.simple.storage.Storage;
+import com.sbgapps.scoreit.data.repository.StorageManager;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -59,26 +57,20 @@ public class GameManager {
 
     final private Context mContext;
     final private SharedPreferences mPreferences;
-    final private Storage mStorage;
-    final private FileHelper mFileHelper;
+    final private StorageManager mStorageManager;
     private Game mGame;
     private int mPlayedGame;
     private Player mPlayerTotal;
 
     public GameManager(Context context) {
         mContext = context;
-        mStorage = SimpleStorage.getInternalStorage(mContext);
-        mFileHelper = new FileHelper(this);
+        mStorageManager = new StorageManager(context, this);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         mPlayedGame = mPreferences.getInt(KEY_SELECTED_GAME, Game.UNIVERSAL);
     }
 
     public SharedPreferences getPreferences() {
         return mPreferences;
-    }
-
-    public Context getContext() {
-        return mContext;
     }
 
     public int getPlayedGame() {
@@ -95,21 +87,17 @@ public class GameManager {
         loadGame();
     }
 
-    public Storage getStorage() {
-        return mStorage;
-    }
-
-    public FileHelper getFileHelper() {
-        return mFileHelper;
+    public StorageManager getStorageManager() {
+        return mStorageManager;
     }
 
     public void saveGame() {
-        final File file = mFileHelper.getPlayedFile();
+        final File file = mStorageManager.getPlayedFile();
         save(file);
     }
 
     public void saveGame(String fileName) {
-        File file = mFileHelper.createFile(fileName);
+        File file = mStorageManager.createFile(fileName);
         save(file);
     }
 
@@ -216,7 +204,7 @@ public class GameManager {
                 }
                 break;
         }
-        mFileHelper.setPlayedFile("default");
+        mStorageManager.setPlayedFile("default");
     }
 
     @SuppressWarnings("unchecked")
@@ -277,7 +265,7 @@ public class GameManager {
     private <T> T load(final Class<T> clazz) {
         try {
             final Gson g = new Gson();
-            final File file = mFileHelper.getPlayedFile();
+            final File file = mStorageManager.getPlayedFile();
             final FileInputStream is = new FileInputStream(file);
             final BufferedReader r = new BufferedReader(
                     new InputStreamReader(is));

@@ -23,7 +23,7 @@
     android:layout_gravity="right"
     android:background="?attr/colorAccent"
     android:orientation="horizontal"
-    tools:context=".ScoreItActivity"
+    tools:context=".legacy.ScoreItActivity"
     >
 
     <ImageButton

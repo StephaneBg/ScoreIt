@@ -19,7 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScoreItActivity"
+    tools:context=".legacy.ScoreItActivity"
     >
 
     <LinearLayout
@@ -54,7 +54,7 @@
                 android:layout_marginStart="@dimen/margin_padding_size_medium"
                 />
 
-            <com.sbgapps.scoreit.views.widgets.SeekPoints
+            <com.sbgapps.scoreit.legacy.views.widgets.SeekPoints
                 android:id="@+id/seekbar_bid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
                     />
             </RelativeLayout>
 
-            <com.sbgapps.scoreit.views.widgets.SeekPoints
+            <com.sbgapps.scoreit.legacy.views.widgets.SeekPoints
                 android:id="@+id/seekbar_points"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

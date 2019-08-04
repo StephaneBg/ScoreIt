@@ -14,11 +14,12 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<com.sbgapps.scoreit.views.widgets.LinearListView
+<com.sbgapps.scoreit.legacy.views.widgets.LinearListView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_header"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context="ScoreItActivity"/>
+    tools:context=".legacy.ScoreItActivity"
+    />

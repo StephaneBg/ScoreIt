@@ -22,7 +22,7 @@
     android:layout_marginRight="@dimen/margin_padding_size_medium"
     android:gravity="center_horizontal"
     android:orientation="horizontal"
-    tools:context="ScoreItActivity"
+    tools:context=".legacy.ScoreItActivity"
     >
 
     <TextView

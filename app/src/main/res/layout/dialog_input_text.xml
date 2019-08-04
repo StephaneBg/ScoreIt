@@ -20,7 +20,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/margin_padding_size_small"
-    tools:context="ScoreItActivity">
+    tools:context=".legacy.ScoreItActivity"
+    >
 
     <EditText
         android:id="@+id/edit_text"

@@ -33,7 +33,7 @@
         >
 
         <activity
-            android:name=".ScoreItActivity"
+            android:name=".legacy.ScoreItActivity"
             android:theme="@style/AppTheme.NoActionBar"
             >
             <intent-filter>
@@ -44,35 +44,35 @@
         </activity>
 
         <activity
-            android:name=".SavedGamesActivity"
-            android:parentActivityName=".ScoreItActivity"
+            android:name=".legacy.SavedGamesActivity"
+            android:parentActivityName=".legacy.ScoreItActivity"
             android:theme="@style/AppTheme.NoActionBar.Adaptive"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScoreItActivity"
+                android:value=".legacy.ScoreItActivity"
                 />
         </activity>
 
         <activity
-            android:name=".AboutActivity"
-            android:parentActivityName=".ScoreItActivity"
+            android:name=".legacy.AboutActivity"
+            android:parentActivityName=".legacy.ScoreItActivity"
             android:theme="@style/AppTheme.NoActionBar.Adaptive"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScoreItActivity"
+                android:value=".legacy.ScoreItActivity"
                 />
         </activity>
 
         <activity
-            android:name=".DonateActivity"
-            android:parentActivityName=".ScoreItActivity"
+            android:name=".legacy.DonateActivity"
+            android:parentActivityName=".legacy.ScoreItActivity"
             android:theme="@style/AppTheme.Dialog"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScoreItActivity"
+                android:value=".legacy.ScoreItActivity"
                 />
         </activity>
     </application>

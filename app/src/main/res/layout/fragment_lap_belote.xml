@@ -20,7 +20,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ScoreItActivity"
+    tools:context=".legacy.ScoreItActivity"
     >
 
     <LinearLayout
@@ -124,7 +124,7 @@
                     />
             </RelativeLayout>
 
-            <com.sbgapps.scoreit.views.widgets.SeekPoints
+            <com.sbgapps.scoreit.legacy.views.widgets.SeekPoints
                 android:id="@+id/seekbar_points"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -23,7 +23,7 @@
     android:baselineAligned="false"
     android:gravity="center"
     android:orientation="horizontal"
-    tools:context=".ScoreItActivity"
+    tools:context=".legacy.ScoreItActivity"
     >
 
     <ImageView
@@ -38,14 +38,14 @@
         android:tint="?colorAccent"
         />
 
-    <com.sbgapps.scoreit.views.widgets.BoundedFrameLayout
+    <com.sbgapps.scoreit.legacy.views.widgets.BoundedFrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         app:bounded_width="160dp"
         >
 
-        <com.sbgapps.scoreit.views.widgets.SeekArc
+        <com.sbgapps.scoreit.legacy.views.widgets.SeekArc
             android:id="@+id/seekarc_points"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -60,7 +60,7 @@
             android:layout_gravity="center"
             tools:text="48"
             />
-    </com.sbgapps.scoreit.views.widgets.BoundedFrameLayout>
+    </com.sbgapps.scoreit.legacy.views.widgets.BoundedFrameLayout>
 
     <ImageView
         android:id="@+id/btn_plus"

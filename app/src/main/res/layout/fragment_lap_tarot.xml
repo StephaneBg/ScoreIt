@@ -19,7 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScoreItActivity"
+    tools:context=".legacy.ScoreItActivity"
     >
 
     <LinearLayout
@@ -145,7 +145,7 @@
                 android:text="@string/tarot_header_points"
                 />
 
-            <com.sbgapps.scoreit.views.widgets.SeekPoints
+            <com.sbgapps.scoreit.legacy.views.widgets.SeekPoints
                 android:id="@+id/seekbar_points"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
