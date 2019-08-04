@@ -19,7 +19,6 @@ package com.sbgapps.scoreit.fragments;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +33,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.models.Player;
@@ -68,14 +69,14 @@ public class TarotLapFragment extends LapFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap_tarot, container, false);
 
-        mContainer = (LinearLayout) view.findViewById(R.id.bonus_container);
-        mTaker = (Spinner) view.findViewById(R.id.spinner_taker);
-        mBid = (Spinner) view.findViewById(R.id.spinner_bid);
-        mPetit = (CheckBox) view.findViewById(R.id.checkbox_petit);
-        mTwentyOne = (CheckBox) view.findViewById(R.id.checkbox_twenty_one);
-        mExcuse = (CheckBox) view.findViewById(R.id.checkbox_excuse);
-        mSeekPoints = (SeekPoints) view.findViewById(R.id.seekbar_points);
-        mButtonBonus = (Button) view.findViewById(R.id.btn_add_bonus);
+        mContainer = view.findViewById(R.id.bonus_container);
+        mTaker = view.findViewById(R.id.spinner_taker);
+        mBid = view.findViewById(R.id.spinner_bid);
+        mPetit = view.findViewById(R.id.checkbox_petit);
+        mTwentyOne = view.findViewById(R.id.checkbox_twenty_one);
+        mExcuse = view.findViewById(R.id.checkbox_excuse);
+        mSeekPoints = view.findViewById(R.id.seekbar_points);
+        mButtonBonus = view.findViewById(R.id.btn_add_bonus);
 
         if (null == getLap()) return view;
 
@@ -94,9 +95,9 @@ public class TarotLapFragment extends LapFragment
         });
 
         if (5 == getGameHelper().getPlayerCount()) {
-            ViewStub stub = (ViewStub) view.findViewById(R.id.viewstub_partner);
+            ViewStub stub = view.findViewById(R.id.viewstub_partner);
             View v = stub.inflate();
-            mPartner = (Spinner) v.findViewById(R.id.spinner_partner);
+            mPartner = v.findViewById(R.id.spinner_partner);
             mPartner.setAdapter(getPartnerAdapter());
             mPartner.setSelection(((TarotFiveLap) getLap()).getPartner());
             mPartner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -189,9 +190,9 @@ public class TarotLapFragment extends LapFragment
     @SuppressLint("InflateParams")
     private void showBonusDialog() {
         View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_add_bonus, null);
-        final Spinner spinnerBonus = (Spinner) view.findViewById(R.id.spinner_bonus);
+        final Spinner spinnerBonus = view.findViewById(R.id.spinner_bonus);
         spinnerBonus.setAdapter(getBonusAdapter());
-        final Spinner spinnerPlayer = (Spinner) view.findViewById(R.id.spinner_player);
+        final Spinner spinnerPlayer = view.findViewById(R.id.spinner_player);
         spinnerPlayer.setAdapter(getPlayerAdapter());
 
         new AlertDialog.Builder(getActivity())
@@ -217,13 +218,13 @@ public class TarotLapFragment extends LapFragment
         final View view = getActivity().getLayoutInflater()
                 .inflate(R.layout.list_item_bonus, mContainer, false);
 
-        TextView tv = (TextView) view.findViewById(R.id.tv_bonus);
+        TextView tv = view.findViewById(R.id.tv_bonus);
         tv.setText(TarotBonus.getLiteralBonus(getContext(), bonus.get()));
 
-        tv = (TextView) view.findViewById(R.id.tv_player);
+        tv = view.findViewById(R.id.tv_player);
         tv.setText(getGameHelper().getPlayer(bonus.getPlayer()).getName());
 
-        ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_bonus);
+        ImageButton btn = view.findViewById(R.id.btn_remove_bonus);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

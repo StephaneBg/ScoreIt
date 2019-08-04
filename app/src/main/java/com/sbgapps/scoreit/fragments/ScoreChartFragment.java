@@ -17,10 +17,11 @@
 package com.sbgapps.scoreit.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
@@ -43,7 +44,7 @@ public class ScoreChartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score_chart, container, false);
-        mGraph = (LineChart) view.findViewById(R.id.line_chart);
+        mGraph = view.findViewById(R.id.line_chart);
         return view;
     }
 

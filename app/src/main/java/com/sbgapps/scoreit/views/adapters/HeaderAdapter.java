@@ -18,12 +18,13 @@ package com.sbgapps.scoreit.views.adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.support.annotation.ColorInt;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
@@ -81,8 +82,8 @@ public class HeaderAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.list_item_header, parent, false);
 
             h = new ViewHolder();
-            h.name = (TextView) convertView.findViewById(R.id.name);
-            h.score = (TextView) convertView.findViewById(R.id.score);
+            h.name = convertView.findViewById(R.id.name);
+            h.score = convertView.findViewById(R.id.score);
             h.marker = convertView.findViewById(R.id.marker);
             convertView.setTag(h);
         } else {

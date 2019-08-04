@@ -27,30 +27,31 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.sbgapps.scoreit.fragments.BeloteLapFragment;
 import com.sbgapps.scoreit.fragments.CoincheLapFragment;
 import com.sbgapps.scoreit.fragments.HeaderFragment;
@@ -111,8 +112,8 @@ public class ScoreItActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
-        mSlidingLayer = (SlidingLayer) findViewById(R.id.sliding_layer);
+        mAppBarLayout = findViewById(R.id.appbar);
+        mSlidingLayer = findViewById(R.id.sliding_layer);
 
         mGameManager = new GameManager(this);
         mGameManager.loadGame();
@@ -274,8 +275,8 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     private void setupDrawer() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener() {
@@ -310,7 +311,7 @@ public class ScoreItActivity extends BaseActivity {
     }
 
     private void setupActionButton() {
-        mActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        mActionButton = findViewById(R.id.fab);
         setActionButtonColor();
         mActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -473,7 +474,7 @@ public class ScoreItActivity extends BaseActivity {
 
     @Override
     public void onRequestPermissionsResult(
-            int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+            int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQ_PERM_READ_CONTACTS: {
                 if (grantResults.length > 0
@@ -770,7 +771,7 @@ public class ScoreItActivity extends BaseActivity {
     @SuppressLint("InflateParams")
     private void showEditNameDialog() {
         View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
-        final EditText editText = (EditText) view.findViewById(R.id.edit_text);
+        final EditText editText = view.findViewById(R.id.edit_text);
 
         new AlertDialog.Builder(this)
                 .setTitle(R.string.dialog_title_edit_name)
@@ -795,7 +796,7 @@ public class ScoreItActivity extends BaseActivity {
     @SuppressLint("InflateParams")
     private void showSaveFileDialog(final boolean load) {
         View view = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
-        final EditText editText = (EditText) view.findViewById(R.id.edit_text);
+        final EditText editText = view.findViewById(R.id.edit_text);
 
         new AlertDialog.Builder(this)
                 .setTitle(R.string.dialog_title_filename)

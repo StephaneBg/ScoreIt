@@ -17,13 +17,14 @@
 package com.sbgapps.scoreit;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sbgapps.scoreit.models.GameManager;
 
@@ -47,7 +48,7 @@ public class SavedGamesActivity extends BaseActivity {
         mGameManager = new GameManager(this);
         mGames = mGameManager.getFileHelper().getSavedFiles();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(android.R.id.list);
+        RecyclerView recyclerView = findViewById(android.R.id.list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new SaveAdapter());
@@ -93,7 +94,7 @@ public class SavedGamesActivity extends BaseActivity {
 
         SaveViewHolder(View itemView) {
             super(itemView);
-            game = (TextView) itemView.findViewById(android.R.id.text1);
+            game = itemView.findViewById(android.R.id.text1);
         }
     }
 }

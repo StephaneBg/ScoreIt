@@ -17,13 +17,14 @@
 package com.sbgapps.scoreit;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 import com.sbgapps.scoreit.fragments.InfoFragment;
 import com.sbgapps.scoreit.fragments.TranslationsFragment;
 
@@ -38,10 +39,10 @@ public class AboutActivity extends BaseActivity {
         SectionsPagerAdapter sectionsPagerAdapter
                 = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(sectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         ActionBar actionBar = getSupportActionBar();

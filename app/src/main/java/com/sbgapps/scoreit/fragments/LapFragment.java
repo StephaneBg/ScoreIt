@@ -17,11 +17,12 @@
 package com.sbgapps.scoreit.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
+import androidx.fragment.app.Fragment;
 
 import com.sbgapps.scoreit.ScoreItActivity;
-import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.models.GameManager;
+import com.sbgapps.scoreit.models.Lap;
 
 /**
  * Created by sbaiget on 08/01/14.

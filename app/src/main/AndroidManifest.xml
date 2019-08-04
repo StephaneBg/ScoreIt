@@ -30,6 +30,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:replace="android:allowBackup"
+        tools:ignore="GoogleAppIndexingWarning"
         >
 
         <activity

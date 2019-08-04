@@ -17,7 +17,8 @@
 package com.sbgapps.scoreit.models.tarot;
 
 import android.content.Context;
-import android.support.annotation.IntDef;
+
+import androidx.annotation.IntDef;
 
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.R;

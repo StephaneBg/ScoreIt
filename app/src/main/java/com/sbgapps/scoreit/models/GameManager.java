@@ -20,7 +20,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
-import android.support.annotation.ColorInt;
+
+import androidx.annotation.ColorInt;
 
 import com.google.gson.Gson;
 import com.sbgapps.scoreit.R;

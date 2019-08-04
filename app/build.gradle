@@ -32,21 +32,21 @@ android {
         versionCode 55
         versionName '4.0.4'
         vectorDrawables.generatedDensities = ['hdpi', 'xxhdpi']
-        buildConfigField("String", "INAPP_KEY", rootProject.ext.inAppKey)
+//        buildConfigField("String", "INAPP_KEY", rootProject.ext.inAppKey)
     }
 
-    signingConfigs {
-        release {
-            storeFile file(rootProject.ext.scoreItSigning.storeFilePath)
-            storePassword rootProject.ext.scoreItSigning.storePassword
-            keyAlias rootProject.ext.scoreItSigning.keyAlias
-            keyPassword rootProject.ext.scoreItSigning.keyPassword
-        }
-    }
+//    signingConfigs {
+//        release {
+//            storeFile file(rootProject.ext.scoreItSigning.storeFilePath)
+//            storePassword rootProject.ext.scoreItSigning.storePassword
+//            keyAlias rootProject.ext.scoreItSigning.keyAlias
+//            keyPassword rootProject.ext.scoreItSigning.keyPassword
+//        }
+//    }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable false
@@ -63,17 +63,16 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:support-v4:$supportLibraryVersion"
-    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
-    compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
-    compile "com.android.support:design:$supportLibraryVersion"
-    compile "com.android.support:percent:$supportLibraryVersion"
+    implementation "androidx.appcompat:appcompat:1.0.2"
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
+    implementation "com.google.android.material:material:1.0.0"
+    implementation "androidx.percentlayout:percentlayout:1.0.0"
 
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'com.anjlab.android.iab.v3:library:1.0.36'
-    compile 'com.code-troopers.betterpickers:library:3.0.1'
-    compile 'com.sromku:simple-storage:1.2.0'
-    compile 'com.thebluealliance:spectrum:0.6.0'
-    compile 'com.wunderlist:sliding-layer:1.2.5'
-    compile 'com.github.StephaneBg:SwipeSelector:1.0'
+    implementation "com.google.code.gson:gson:2.8.5"
+    implementation "com.anjlab.android.iab.v3:library:1.0.36"
+    implementation "com.code-troopers.betterpickers:library:3.0.1"
+    implementation "com.sromku:simple-storage:1.2.1"
+    implementation "com.thebluealliance:spectrum:0.6.0"
+    implementation "com.wunderlist:sliding-layer:1.2.5"
+    implementation "com.github.StephaneBg:SwipeSelector:1.0"
 }

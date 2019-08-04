@@ -50,7 +50,7 @@ public class DonateActivity extends BaseActivity
         mCoffeeBtn = (Button) findViewById(R.id.btn_donate_coffee);
         mBeerBtn = (Button) findViewById(R.id.btn_donate_beer);
 
-        mBillingProcessor = new BillingProcessor(this, BuildConfig.INAPP_KEY, this);
+//        mBillingProcessor = new BillingProcessor(this, BuildConfig.INAPP_KEY, this);
 
         setupWindow();
     }
@@ -109,7 +109,7 @@ public class DonateActivity extends BaseActivity
 
     @Override
     public void onBillingError(int errorCode, Throwable throwable) {
-        Log.e(LOG_TAG, "onBillingError: " + Integer.toString(errorCode));
+        Log.e(LOG_TAG, "onBillingError: " + errorCode);
     }
 
     @Override

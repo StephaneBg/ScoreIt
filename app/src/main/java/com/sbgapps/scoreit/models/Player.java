@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit.models;
 
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 
 import com.google.gson.annotations.SerializedName;
 

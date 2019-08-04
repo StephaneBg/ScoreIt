@@ -16,16 +16,17 @@
 
 package com.sbgapps.scoreit.views.adapters;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
 import com.sbgapps.scoreit.fragments.ScoreListFragment;
-import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.models.GameManager;
+import com.sbgapps.scoreit.models.Lap;
 import com.sbgapps.scoreit.views.widgets.LinearListView;
 import com.sbgapps.scoreit.views.widgets.RevealView;
 
@@ -97,10 +98,10 @@ public abstract class ScoreListAdapter<E extends ScoreListAdapter.ViewHolder> ex
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mRevealView = (RevealView) itemView.findViewById(R.id.reveal);
-            mLinearListView = (LinearListView) itemView.findViewById(R.id.list_score);
-            mDeleteBtn = (ImageButton) itemView.findViewById(R.id.action_discard);
-            mEditBtn = (ImageButton) itemView.findViewById(R.id.action_edit);
+            mRevealView = itemView.findViewById(R.id.reveal);
+            mLinearListView = itemView.findViewById(R.id.list_score);
+            mDeleteBtn = itemView.findViewById(R.id.action_discard);
+            mEditBtn = itemView.findViewById(R.id.action_edit);
         }
     }
 }

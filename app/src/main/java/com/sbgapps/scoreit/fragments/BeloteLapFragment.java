@@ -19,7 +19,6 @@ package com.sbgapps.scoreit.fragments;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.roughike.swipeselector.OnSwipeItemSelectedListener;
 import com.roughike.swipeselector.SwipeItem;
@@ -67,15 +68,15 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
 
         if (null == getLap()) return view;
 
-        mContainer = (LinearLayout) view.findViewById(R.id.bonus_container);
-        mPlayer1Name = (TextView) view.findViewById(R.id.player1_name);
-        mPlayer2Name = (TextView) view.findViewById(R.id.player2_name);
-        mPlayer1Points = (TextView) view.findViewById(R.id.player1_points);
-        mPlayer2Points = (TextView) view.findViewById(R.id.player2_points);
-        mSwitchBtn = (ImageView) view.findViewById(R.id.btn_switch);
-        mScoreSelector = (SwipeSelector) view.findViewById(R.id.selector_score);
-        mSeekPoints = (SeekPoints) view.findViewById(R.id.seekbar_points);
-        mButtonBonus = (Button) view.findViewById(R.id.btn_add_bonus);
+        mContainer = view.findViewById(R.id.bonus_container);
+        mPlayer1Name = view.findViewById(R.id.player1_name);
+        mPlayer2Name = view.findViewById(R.id.player2_name);
+        mPlayer1Points = view.findViewById(R.id.player1_points);
+        mPlayer2Points = view.findViewById(R.id.player2_points);
+        mSwitchBtn = view.findViewById(R.id.btn_switch);
+        mScoreSelector = view.findViewById(R.id.selector_score);
+        mSeekPoints = view.findViewById(R.id.seekbar_points);
+        mButtonBonus = view.findViewById(R.id.btn_add_bonus);
 
         mPlayer1Name.setText(getGameHelper().getPlayer(Player.PLAYER_1).getName());
         mPlayer2Name.setText(getGameHelper().getPlayer(Player.PLAYER_2).getName());
@@ -160,9 +161,9 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
     @SuppressLint("InflateParams")
     private void showBonusDialog() {
         View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_add_bonus, null);
-        final Spinner spinnerBonus = (Spinner) view.findViewById(R.id.spinner_bonus);
+        final Spinner spinnerBonus = view.findViewById(R.id.spinner_bonus);
         spinnerBonus.setAdapter(getBonusAdapter());
-        final Spinner spinnerPlayer = (Spinner) view.findViewById(R.id.spinner_player);
+        final Spinner spinnerPlayer = view.findViewById(R.id.spinner_player);
         spinnerPlayer.setAdapter(getPlayerAdapter());
 
         new AlertDialog.Builder(getActivity())
@@ -188,13 +189,13 @@ public class BeloteLapFragment extends GenericBeloteLapFragment
         final View view = getActivity().getLayoutInflater()
                 .inflate(R.layout.list_item_bonus, mContainer, false);
 
-        TextView tv = (TextView) view.findViewById(R.id.tv_bonus);
+        TextView tv = view.findViewById(R.id.tv_bonus);
         tv.setText(BeloteBonus.getLiteralBonus(getContext(), bonus.get()));
 
-        tv = (TextView) view.findViewById(R.id.tv_player);
+        tv = view.findViewById(R.id.tv_player);
         tv.setText(getGameHelper().getPlayer(bonus.getPlayer()).getName());
 
-        ImageButton btn = (ImageButton) view.findViewById(R.id.btn_remove_bonus);
+        ImageButton btn = view.findViewById(R.id.btn_remove_bonus);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

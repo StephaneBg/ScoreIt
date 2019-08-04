@@ -17,12 +17,13 @@
 package com.sbgapps.scoreit.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sbgapps.scoreit.R;
 import com.sbgapps.scoreit.ScoreItActivity;
@@ -52,7 +53,7 @@ public class ScoreListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score_list, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(android.R.id.list);
+        RecyclerView recyclerView = view.findViewById(android.R.id.list);
         recyclerView.setHasFixedSize(true);
 
         mManager = new LinearLayoutManager(getActivity());
@@ -94,7 +95,7 @@ public class ScoreListFragment extends Fragment {
             for (int i = 0; i < mManager.getChildCount(); i++) {
                 View view = mManager.getChildAt(i);
                 if (null != view) {
-                    RevealView rv = (RevealView) view.findViewById(R.id.reveal);
+                    RevealView rv = view.findViewById(R.id.reveal);
                     if (!rv.equals(revealView)) rv.hide();
                 }
             }
