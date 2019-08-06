@@ -24,7 +24,8 @@ import com.sbgapps.scoreit.core.ext.inflate
 
 class GenericRecyclerViewAdapter : RecyclerView.Adapter<BaseViewHolder>() {
 
-    private var items: List<ItemAdapter> = emptyList()
+    var items: List<ItemAdapter> = emptyList()
+        private set
 
     fun updateItems(newItems: List<ItemAdapter>, diffResult: DiffUtil.DiffResult? = null) {
         items = newItems
@@ -41,5 +42,7 @@ class GenericRecyclerViewAdapter : RecyclerView.Adapter<BaseViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) =
-        items[position].onBindBaseViewHolder(holder)
+        items[position].onBindViewHolder(holder)
+
+    inline fun <reified T> getItems() = items as T
 }

@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (c) 2016 SBG Apps
+  ~ Copyright 2019 Stéphane Baiget
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
   ~ You may obtain a copy of the License at
   ~
-  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~ http://www.apache.org/licenses/LICENSE-2.0
   ~
   ~ Unless required by applicable law or agreed to in writing, software
   ~ distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,37 +15,44 @@
   -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <group
-        android:id="@+id/group1"
-        android:checkableBehavior="single">
+        android:id="@+id/games"
+        android:checkableBehavior="none"
+        >
         <item
-            android:id="@+id/nav_universal"
-            android:icon="@drawable/ic_puzzle_24dp"
-            android:title="@string/drawer_game_universal" />
+            android:id="@+id/universal"
+            android:title="@string/drawer_game_universal"
+            />
         <item
-            android:id="@+id/nav_tarot"
-            android:icon="@drawable/ic_hat_24dp"
-            android:title="@string/drawer_game_tarot" />
+            android:id="@+id/tarot"
+            android:title="@string/drawer_game_tarot"
+            />
         <item
-            android:id="@+id/nav_belote"
-            android:icon="@drawable/ic_crown_24dp"
-            android:title="@string/drawer_game_belote" />
+            android:id="@+id/belote"
+            android:title="@string/drawer_game_belote"
+            />
         <item
-            android:id="@+id/nav_coinche"
-            android:icon="@drawable/ic_messenger_24dp"
-            android:title="@string/drawer_game_coinche" />
+            android:id="@+id/coinche"
+            android:title="@string/drawer_game_coinche"
+            />
     </group>
 
     <group
-        android:id="@+id/group2"
-        android:checkableBehavior="none">
+        android:id="@+id/app"
+        android:checkableBehavior="none"
+        >
         <item
-            android:id="@+id/nav_donate"
-            android:icon="@drawable/ic_heart_24dp"
-            android:title="@string/drawer_thank" />
+            android:id="@+id/preferences"
+            android:title="@string/drawer_preferences"
+            />
         <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_info_24dp"
-            android:title="@string/drawer_about" />
+            android:id="@+id/about"
+            android:title="@string/drawer_about"
+            />
+        <item
+            android:id="@+id/thanks"
+            android:title="@string/drawer_thank"
+            />
     </group>
 </menu>

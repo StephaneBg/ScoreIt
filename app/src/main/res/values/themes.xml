@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (c) 2016 SBG Apps
+  ~ Copyright 2019 Stéphane Baiget
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
   ~ You may obtain a copy of the License at
   ~
-  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~ http://www.apache.org/licenses/LICENSE-2.0
   ~
   ~ Unless required by applicable law or agreed to in writing, software
   ~ distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,51 +13,52 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <item name="android:windowBackground">@color/white</item>
-        <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="colorAccent">@color/color_accent</item>
-        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+    <style name="Theme.ScoreIt" parent="Base.Theme" />
+
+    <style name="Base.Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSurface">@color/surface</item>
+
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorOnBackground">@color/on_background</item>
+
+        <item name="textAppearanceHeadline1">@style/TextAppearance.ScoreIt.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.ScoreIt.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.ScoreIt.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.ScoreIt.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.ScoreIt.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.ScoreIt.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.ScoreIt.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.ScoreIt.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.ScoreIt.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.ScoreIt.Body2</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.ScoreIt.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.ScoreIt.Overline</item>
+
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.ScoreIt.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.ScoreIt.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.ScoreIt.LargeComponent</item>
+
+        <item name="materialButtonStyle">@style/Widget.ScoreIt.Button</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.ScoreIt.BottomSheetDialog</item>
+
+        <item name="android:statusBarColor">@color/status_bar</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:navigationBarColor">@color/navigation_bar</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="ThemeOverlay.ScoreIt.BottomSheetDialog"
+        parent="ThemeOverlay.MaterialComponents.DayNight.BottomSheetDialog">
+        <item name="materialButtonStyle">@style/Widget.ScoreIt.Button</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
+        <item name="elevationOverlayEnabled">false</item>
     </style>
-
-    <style name="AppTheme.NoActionBar.Adaptive">
-        <item name="android:windowBackground">@color/color_primary_400</item>
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="isDialog">false</item>
-    </style>
-
-    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
-        <item name="android:windowBackground">@color/color_primary_400</item>
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="colorAccent">@color/color_accent</item>
-    </style>
-
-    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="buttonBarPositiveButtonStyle">@style/AlertDialogPositiveButton</item>
-        <item name="buttonBarNegativeButtonStyle">@style/AlertDialogNegativeButton</item>
-    </style>
-
-    <style name="AlertDialogPositiveButton" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
-        <item name="android:textColor">@color/color_primary</item>
-    </style>
-
-    <style name="AlertDialogNegativeButton" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
-        <item name="android:textColor">@color/dark_grey</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>

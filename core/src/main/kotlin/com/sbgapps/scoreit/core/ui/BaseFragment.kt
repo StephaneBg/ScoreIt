@@ -18,7 +18,7 @@ package com.sbgapps.scoreit.core.ui
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.sbgapps.scoreit.core.R
 import com.sbgapps.scoreit.core.network.NoConnectivityException
@@ -41,9 +41,15 @@ open class BaseFragment : Fragment() {
         else -> R.drawable.ic_error_outline_black_24dp
     }
 
-    fun setTitle(@StringRes title: Int) = setTitle(getString(title))
+    fun setTitle(@StringRes title: Int) {
+        setTitle(getString(title))
+    }
 
     fun setTitle(title: String?) {
-        (requireActivity() as? AppCompatActivity)?.supportActionBar?.title = title
+        (requireActivity() as BaseActivity).supportActionBar?.title = title
+    }
+
+    fun setToolbar(toolbar: Toolbar?) {
+        (requireActivity() as BaseActivity).setSupportActionBar(toolbar)
     }
 }

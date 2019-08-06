@@ -1,0 +1,96 @@
+<!--
+  ~ Copyright 2019 Stéphane Baiget
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/historyFragment"
+    >
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.sbgapps.scoreit.app.ui.history.HistoryFragment"
+        android:label="HistoryFragment"
+        >
+        <action
+            android:id="@+id/action_historyFragment_to_navDrawerFragment"
+            app:destination="@id/navDrawerFragment"
+            />
+        <action
+            android:id="@+id/action_historyFragment_to_chartFragment"
+            app:destination="@id/chartFragment"
+            />
+        <action
+            android:id="@+id/action_historyFragment_to_universalEditionActivity"
+            app:destination="@id/universalEditionActivity"
+            />
+        <action
+            android:id="@+id/action_historyFragment_to_beloteEditionActivity"
+            app:destination="@id/beloteEditionActivity"
+            />
+        <action
+            android:id="@+id/action_historyFragment_to_tarotEditionActivity"
+            app:destination="@id/tarotEditionActivity"
+            />
+        <action
+            android:id="@+id/action_historyFragment_to_coincheEditionActivity"
+            app:destination="@id/coincheEditionActivity"
+            />
+    </fragment>
+
+    <dialog
+        android:id="@+id/navDrawerFragment"
+        android:name="com.sbgapps.scoreit.app.ui.NavDrawerFragment"
+        android:label="NavDrawerFragment"
+        >
+        <action
+            android:id="@+id/action_navDrawerFragment_to_preferencesActivity"
+            app:destination="@id/preferencesActivity"
+            />
+    </dialog>
+
+    <dialog
+        android:id="@+id/chartFragment"
+        android:name="com.sbgapps.scoreit.app.ui.chart.ChartFragment"
+        android:label="ChartFragment"
+        />
+
+    <activity
+        android:id="@+id/preferencesActivity"
+        android:name="com.sbgapps.scoreit.app.ui.prefs.PreferencesActivity"
+        android:label="PreferencesActivity"
+        />
+    <activity
+        android:id="@+id/universalEditionActivity"
+        android:name="com.sbgapps.scoreit.app.ui.edition.universal.UniversalEditionActivity"
+        android:label="UniversalEditionActivity"
+        />
+    <activity
+        android:id="@+id/beloteEditionActivity"
+        android:name="com.sbgapps.scoreit.app.ui.edition.belote.BeloteEditionActivity"
+        android:label="BeloteEditionActivity"
+        />
+    <activity
+        android:id="@+id/tarotEditionActivity"
+        android:name="com.sbgapps.scoreit.app.ui.edition.tarot.TarotEditionActivity"
+        android:label="TarotEditionActivity"
+        />
+    <activity
+        android:id="@+id/coincheEditionActivity"
+        android:name="com.sbgapps.scoreit.app.ui.edition.coinche.CoincheEditionActivity"
+        android:label="CoincheEditionActivity"
+        />
+</navigation>

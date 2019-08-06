@@ -13,11 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.sbgapps.scoreit.data.source
 
-import com.sbgapps.scoreit.data.repository.UserPreferencesRepo
+import com.sbgapps.scoreit.data.model.BELOTE
+import com.sbgapps.scoreit.data.model.COINCHE
+import com.sbgapps.scoreit.data.model.GameData
+import com.sbgapps.scoreit.data.model.UNIVERSAL
+import com.sbgapps.scoreit.data.repository.CacheRepo
+import com.sbgapps.scoreit.data.repository.PreferencesRepo
 
-interface DataStore {
+class DataStore(
+    private val cacheRepo: CacheRepo,
+    private val prefsRepo: PreferencesRepo
+) {
+    private var game: GameData? = null
 
-    fun getUserPreferences(): UserPreferencesRepo
+    fun getGame(): GameData = game ?: cacheRepo.loadGame().also { game = it }
+
+    fun createGame(name: String) {
+        game = cacheRepo.createGame(name)
+    }
+
+    fun saveGame(game: GameData) {
+        this.game = game
+        cacheRepo.saveGame(game)
+    }
+
+    fun setCurrentGame(game: Int) {
+        this.game = null
+        prefsRepo.setCurrentGame(game)
+    }
+
+    fun setPlayerCount(count: Int) {
+        this.game = null
+        prefsRepo.setPlayerCount(count)
+    }
+
+    fun isUniversalTotalDisplayed(): Boolean = prefsRepo.isTotalDisplayed(UNIVERSAL)
+    fun setUniversalTotalDisplayed(displayed: Boolean) = prefsRepo.setTotalDisplayed(UNIVERSAL, displayed)
+
+    fun isBeloteScoreRounded(): Boolean = prefsRepo.isRounded(BELOTE)
+    fun setBeloteScoreRounded(rounded: Boolean) = prefsRepo.setRounded(BELOTE, rounded)
+
+    fun isCoincheScoreRounded(): Boolean = prefsRepo.isRounded(COINCHE)
+    fun setCoincheScoreRounded(rounded: Boolean) = prefsRepo.setRounded(COINCHE, rounded)
+
+    fun getPrefThemeMode(): String = prefsRepo.getThemeMode()
+    fun setPrefThemeMode(mode: String) = prefsRepo.setThemeMode(mode)
 }

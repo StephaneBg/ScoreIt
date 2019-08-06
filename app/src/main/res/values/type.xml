@@ -1,0 +1,42 @@
+<!--
+  ~ Copyright 2019 Stéphane Baiget
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <style name="TextAppearance.ScoreIt.Headline1" parent="TextAppearance.MaterialComponents.Headline1" />
+
+    <style name="TextAppearance.ScoreIt.Headline2" parent="TextAppearance.MaterialComponents.Headline2" />
+
+    <style name="TextAppearance.ScoreIt.Headline3" parent="TextAppearance.MaterialComponents.Headline3" />
+
+    <style name="TextAppearance.ScoreIt.Headline4" parent="TextAppearance.MaterialComponents.Headline4" />
+
+    <style name="TextAppearance.ScoreIt.Headline5" parent="TextAppearance.MaterialComponents.Headline5" />
+
+    <style name="TextAppearance.ScoreIt.Headline6" parent="TextAppearance.MaterialComponents.Headline6" />
+
+    <style name="TextAppearance.ScoreIt.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1" />
+
+    <style name="TextAppearance.ScoreIt.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2" />
+
+    <style name="TextAppearance.ScoreIt.Body1" parent="TextAppearance.MaterialComponents.Body1" />
+
+    <style name="TextAppearance.ScoreIt.Body2" parent="TextAppearance.MaterialComponents.Body2" />
+
+    <style name="TextAppearance.ScoreIt.Caption" parent="TextAppearance.MaterialComponents.Caption" />
+
+    <style name="TextAppearance.ScoreIt.Overline" parent="TextAppearance.MaterialComponents.Overline" />
+</resources>

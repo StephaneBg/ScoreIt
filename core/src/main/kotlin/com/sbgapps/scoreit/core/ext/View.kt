@@ -46,9 +46,10 @@ fun View.hide() {
         .start()
 }
 
-fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
-    return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
-}
+fun ViewGroup.layoutInflater(): LayoutInflater = LayoutInflater.from(context)
+
+fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View =
+    layoutInflater().inflate(layoutRes, this, attachToRoot)
 
 fun EditText.onImeActionDone(function: () -> Unit) {
     setOnEditorActionListener { _, actionId, _ ->

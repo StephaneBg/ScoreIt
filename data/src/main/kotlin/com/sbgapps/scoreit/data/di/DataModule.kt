@@ -16,11 +16,20 @@
 
 package com.sbgapps.scoreit.data.di
 
+import com.sbgapps.scoreit.data.interactor.GameUseCase
+import com.sbgapps.scoreit.data.solver.BeloteSolver
+import com.sbgapps.scoreit.data.solver.CoincheSolver
+import com.sbgapps.scoreit.data.solver.TarotSolver
+import com.sbgapps.scoreit.data.solver.UniversalSolver
 import com.sbgapps.scoreit.data.source.DataStore
-import com.sbgapps.scoreit.data.source.ScoreItDataStore
 import org.koin.dsl.module
 
 val dataModule = module {
 
-    single<DataStore> { ScoreItDataStore(get(), get()) }
+    single { DataStore(get(), get()) }
+    single { GameUseCase(get(), get(), get(), get(), get()) }
+    single { UniversalSolver(get()) }
+    single { TarotSolver() }
+    single { BeloteSolver(get()) }
+    single { CoincheSolver(get()) }
 }

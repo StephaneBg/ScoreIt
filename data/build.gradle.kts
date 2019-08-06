@@ -30,7 +30,7 @@ android {
     defaultConfig {
         minSdkVersion(Android.minSdkVersion)
         targetSdkVersion(Android.targetSdkVersion)
-        resConfigs("fr")
+        buildToolsVersion(Android.buildToolsVersion)
     }
 
     sourceSets {
@@ -45,5 +45,8 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.5")
     implementation("com.sromku:simple-storage:1.2.1")
     implementation("androidx.annotation:annotation:1.1.0")
-    implementation(Libs.koinAndroid)
+    implementation(Libs.koinAndroidX)
+
+    testImplementation("junit:junit:4.12")
+    testImplementation("io.mockk:mockk:1.9")
 }

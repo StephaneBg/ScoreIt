@@ -19,16 +19,16 @@ package com.sbgapps.scoreit.core.ui
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
+import androidx.annotation.LayoutRes
 import androidx.core.widget.ContentLoadingProgressBar
 import com.sbgapps.scoreit.core.R
 import com.sbgapps.scoreit.core.ext.find
 import com.sbgapps.scoreit.core.ext.hide
 import com.sbgapps.scoreit.core.ext.show
-import com.sbgapps.scoreit.core.widget.EmptinessLayout
 import com.sbgapps.scoreit.core.widget.ErrorView
 
 @Suppress("UNCHECKED_CAST")
-open class BaseLceFragment<T : View> : BaseFragment() {
+open class BaseLceFragment<T : View>(@LayoutRes layoutId: Int) : BaseFragment() {
 
     lateinit var contentView: T
     lateinit var loadingView: ContentLoadingProgressBar
@@ -61,11 +61,4 @@ open class BaseLceFragment<T : View> : BaseFragment() {
         loadingView.hide()
         errorView.show(getErrorDrawable(throwable), getErrorMessage(throwable), action)
     }
-}
-
-fun BaseLceFragment<EmptinessLayout>.scrollToTop(): Boolean = if (contentView.isScrolled()) {
-    contentView.scrollToTop()
-    true
-} else {
-    false
 }

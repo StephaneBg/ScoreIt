@@ -23,7 +23,5 @@ abstract class ItemAdapter(@LayoutRes open val layoutId: Int) {
 
     fun onCreateViewHolder(itemView: View) = BaseViewHolder(itemView)
 
-    fun onBindBaseViewHolder(holder: BaseViewHolder) = holder.onBindViewHolder()
-
-    abstract fun BaseViewHolder.onBindViewHolder()
+    abstract fun onBindViewHolder(viewHolder: BaseViewHolder)
 }

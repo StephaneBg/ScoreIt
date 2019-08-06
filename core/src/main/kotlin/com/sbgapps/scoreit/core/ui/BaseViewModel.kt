@@ -16,23 +16,6 @@
 
 package com.sbgapps.scoreit.core.ui
 
-import androidx.lifecycle.ViewModel
-import io.gumil.kaskade.Action
-import io.gumil.kaskade.Kaskade
-import io.gumil.kaskade.State
-import io.gumil.kaskade.livedata.stateLiveData
-import kotlinx.coroutines.CoroutineExceptionHandler
+import io.uniflow.androidx.flow.AndroidDataFlow
 
-abstract class BaseViewModel<ACTION : Action, STATE : State> : ViewModel() {
-
-    protected abstract val exceptionHandler: CoroutineExceptionHandler
-    protected abstract val stateContainer: Kaskade<ACTION, STATE>
-    val state by lazy { stateContainer.stateLiveData() }
-
-    override fun onCleared() {
-        super.onCleared()
-        stateContainer.unsubscribe()
-    }
-
-    fun process(action: ACTION) = stateContainer.process(action)
-}
+open class BaseViewModel : AndroidDataFlow()

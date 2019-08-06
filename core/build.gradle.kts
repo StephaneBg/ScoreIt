@@ -30,7 +30,7 @@ android {
     defaultConfig {
         minSdkVersion(Android.minSdkVersion)
         targetSdkVersion(Android.targetSdkVersion)
-        resConfigs("fr")
+        buildToolsVersion(Android.buildToolsVersion)
     }
 
     sourceSets {
@@ -40,17 +40,14 @@ android {
 
 dependencies {
     implementation(kotlin("stdlib", Versions.kotlin))
-    implementation(Libs.koinAndroid)
+    implementation(Libs.koinAndroidX)
     implementation(Libs.coroutinesCore)
     implementation(Libs.coroutinesAndroid)
     implementation(Libs.appCompat)
     implementation(Libs.coreKtx)
     implementation(Libs.fragmentKtx)
-    implementation(Libs.anko)
-    implementation(Libs.vectorDrawable)
     implementation(Libs.material)
+    implementation(Libs.uniflowAndroidX)
     implementation(Libs.lifecyleViewmodel)
     implementation(Libs.timber)
-    implementation(Libs.kaskadeCore)
-    implementation(Libs.kaskadeLiveData)
 }

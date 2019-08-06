@@ -26,7 +26,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.sbgapps.scoreit.core.R
 import com.sbgapps.scoreit.core.ext.show
-import org.jetbrains.anko.find
 
 class ErrorView @JvmOverloads constructor(
     context: Context,
@@ -43,9 +42,9 @@ class ErrorView @JvmOverloads constructor(
         id = R.id.errorView
         inflate(context, R.layout.widget_error_view, this)
 
-        image = find(R.id.errorImage)
-        message = find(R.id.errorMessage)
-        action = find(R.id.errorAction)
+        image = findViewById(R.id.errorImage)
+        message = findViewById(R.id.errorMessage)
+        action = findViewById(R.id.errorAction)
     }
 
     fun show(

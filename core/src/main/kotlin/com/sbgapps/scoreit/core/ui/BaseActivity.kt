@@ -29,5 +29,7 @@ open class BaseActivity : AppCompatActivity() {
         else -> super.onOptionsItemSelected(item)
     }
 
-    open fun onUpPressed() = onBackPressed()
+    open fun onUpPressed() {
+        onBackPressed()
+    }
 }

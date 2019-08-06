@@ -1,0 +1,33 @@
+<!--
+  ~ Copyright 2019 Stéphane Baiget
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <color name="primary">@color/md_green_400</color>
+    <color name="secondary">@color/md_orange_300</color>
+    <color name="surface">@color/md_grey_800</color>
+    <color name="background">@color/md_grey_900</color>
+
+    <color name="on_primary">@color/md_white_1000</color>
+    <color name="on_secondary">@color/md_white_1000</color>
+    <color name="on_surface">@color/md_white_1000</color>
+    <color name="on_background">@color/md_white_1000</color>
+
+    <color name="navigation_bar">@color/md_grey_800</color>
+    <color name="status_bar">@color/md_grey_800</color>
+
+    <color name="game_won">@color/md_green_300</color>
+    <color name="game_lost">@color/md_red_300</color>
+</resources>

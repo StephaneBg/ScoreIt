@@ -1,0 +1,272 @@
+<!--
+  ~ Copyright 2019 Stéphane Baiget
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <com.google.android.material.appbar.AppBarLayout
+        style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/headerBid"
+                style="?textAppearanceOverline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="@string/coinche_header_bid"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/bid"
+                style="?textAppearanceHeadline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:layout_marginEnd="@dimen/margin_padding_size_large"
+                android:padding="@dimen/margin_padding_size_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headerBid"
+                tools:text="🐼"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bidMinusTen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="-10"
+                app:layout_constraintBottom_toBottomOf="@id/bid"
+                app:layout_constraintEnd_toStartOf="@id/bid"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/bid"
+                tools:ignore="HardcodedText"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bidPlusTen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="+10"
+                app:layout_constraintBottom_toBottomOf="@id/bid"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/bid"
+                app:layout_constraintTop_toTopOf="@id/bid"
+                tools:ignore="HardcodedText"
+                />
+
+            <TextView
+                android:id="@+id/headerCoinche"
+                style="?textAppearanceOverline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="@string/coinche_header_coinche"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bid"
+                />
+
+            <TextView
+                android:id="@+id/coinche"
+                style="?textAppearanceHeadline6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_size_large"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:layout_marginEnd="@dimen/margin_padding_size_large"
+                android:background="?selectableItemBackground"
+                android:drawableEnd="@drawable/ic_arrow_drop_down_24dp"
+                android:padding="@dimen/margin_padding_size_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headerCoinche"
+                tools:text="@string/coinche_coinche_coinche"
+                />
+
+            <TextView
+                android:id="@+id/headerPoints"
+                style="?textAppearanceOverline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="@string/coinche_header_points"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/coinche"
+                />
+
+            <ImageView
+                android:id="@+id/switchPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:tint="?attr/colorSecondary"
+                app:layout_constraintBottom_toBottomOf="@+id/pointsTeamOne"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/pointsTeamOne"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pointsTeamOne"
+                app:srcCompat="@drawable/ic_swap_horiz_24dp"
+                tools:ignore="ContentDescription"
+                />
+
+            <TextView
+                android:id="@+id/nameTeamOne"
+                style="?textAppearanceHeadline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:layout_marginEnd="@dimen/margin_padding_size_large"
+                app:layout_constraintEnd_toStartOf="@id/switchPoints"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headerPoints"
+                tools:text="@string/belote_first_team_default_name"
+                />
+
+            <TextView
+                android:id="@+id/nameTeamTwo"
+                style="?textAppearanceHeadline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_size_large"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/switchPoints"
+                app:layout_constraintTop_toBottomOf="@id/headerPoints"
+                tools:text="@string/belote_second_team_default_name"
+                />
+
+            <TextView
+                android:id="@+id/pointsTeamOne"
+                style="?textAppearanceHeadline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:layout_marginEnd="@dimen/margin_padding_size_large"
+                android:padding="@dimen/margin_padding_size_medium"
+                app:layout_constraintEnd_toStartOf="@id/switchPoints"
+                app:layout_constraintTop_toBottomOf="@id/nameTeamOne"
+                tools:text="🐼"
+                />
+
+            <TextView
+                android:id="@+id/pointsTeamTwo"
+                style="?textAppearanceHeadline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_size_large"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:padding="@dimen/margin_padding_size_medium"
+                app:layout_constraintStart_toEndOf="@id/switchPoints"
+                app:layout_constraintTop_toBottomOf="@id/nameTeamTwo"
+                tools:text="🐼"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/pointsPlusTen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="+10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/pointsMinusTen"
+                app:layout_constraintTop_toBottomOf="@+id/pointsTeamOne"
+                tools:ignore="HardcodedText"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/pointsMinusTen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="-10"
+                app:layout_constraintEnd_toStartOf="@id/pointsPlusTen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pointsTeamOne"
+                tools:ignore="HardcodedText"
+                />
+
+            <TextView
+                android:id="@+id/headerBonuses"
+                style="?textAppearanceOverline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="@string/belote_header_bonuses"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pointsPlusTen"
+                />
+
+            <com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayout
+                android:id="@+id/bonusContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:layout_marginEnd="@dimen/margin_padding_size_medium"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headerBonuses"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addBonus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_size_large"
+                android:layout_marginEnd="@dimen/margin_padding_size_large"
+                android:text="@string/button_action_add"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bonusContainer"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
