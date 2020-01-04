@@ -29,15 +29,15 @@ public abstract class TarotLap implements Lap {
     @SerializedName("taker")
     protected int mTaker;
     @SerializedName("bid")
-    protected TarotBid mBid;
+    protected TarotBidCache mBid;
     @SerializedName("points")
     protected int mPoints;
     @SerializedName("oudlers")
     protected int mOudlers;
     @SerializedName("bonuses")
-    protected List<TarotBonus> mBonuses;
+    protected List<TarotBonusCache> mBonuses;
 
-    protected TarotLap(int taker, TarotBid bid, int points, int oudlers, List<TarotBonus> bonuses) {
+    protected TarotLap(int taker, TarotBidCache bid, int points, int oudlers, List<TarotBonusCache> bonuses) {
         mTaker = taker;
         mBid = bid;
         mPoints = points;
@@ -69,7 +69,7 @@ public abstract class TarotLap implements Lap {
         mPoints = points;
     }
 
-    public TarotBid getBid() {
+    public TarotBidCache getBid() {
         return mBid;
     }
 
@@ -77,11 +77,11 @@ public abstract class TarotLap implements Lap {
         mBid.set(bid);
     }
 
-    public void setBid(TarotBid bid) {
+    public void setBid(TarotBidCache bid) {
         mBid = bid;
     }
 
-    public List<TarotBonus> getBonuses() {
+    public List<TarotBonusCache> getBonuses() {
         return mBonuses;
     }
 }

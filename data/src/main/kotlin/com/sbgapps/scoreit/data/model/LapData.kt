@@ -16,6 +16,10 @@
 
 package com.sbgapps.scoreit.data.model
 
+import com.sbgapps.scoreit.data.solver.TarotBidData
+import com.sbgapps.scoreit.data.solver.TarotBonusData
+import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.OUDLER_NONE
+
 sealed class LapData
 
 data class UniversalLapData(
@@ -28,10 +32,10 @@ data class TarotLapData(
     val playerCount: Int,
     val taker: Int = PLAYER_1,
     val partner: Int = if (5 == playerCount) PLAYER_2 else PLAYER_NONE,
-    val bid: Int = BID_PRISE,
+    val bid: TarotBidData = TarotBidData.SMALL,
     val oudlers: Int = OUDLER_NONE,
     val points: Int = 56,
-    val bonuses: List<Pair<Int, Int> /* Player to Bonus */> = emptyList()
+    val bonuses: List<Pair<Int, TarotBonusData>> = emptyList()
 ) : LapData()
 
 data class BeloteLapData(

@@ -16,22 +16,14 @@
 
 package com.sbgapps.scoreit.cache.model.tarot;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.sbgapps.scoreit.data.model.ConstantsKt.OUDLER_NONE;
-import static com.sbgapps.scoreit.data.model.ConstantsKt.PLAYER_1;
 
 /**
  * Created by sbaiget on 07/12/13.
  */
 public class TarotThreeLap extends TarotLap {
 
-    public TarotThreeLap() {
-        this(PLAYER_1, new TarotBid(), 41, OUDLER_NONE, new ArrayList<>());
-    }
-
-    public TarotThreeLap(int taker, TarotBid bid, int points, int oudlers, List<TarotBonus> bonuses) {
+    public TarotThreeLap(int taker, TarotBidCache bid, int points, int oudlers, List<TarotBonusCache> bonuses) {
         super(taker, bid, points, oudlers, bonuses);
     }
 }
