@@ -18,12 +18,15 @@ package com.sbgapps.scoreit.app.model
 
 import androidx.annotation.StringRes
 import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.data.solver.TarotBidData
 
 enum class TarotBid(@StringRes val resId: Int) {
-    Take(R.string.tarot_bid_take),
+    Small(R.string.tarot_bid_take),
     Guard(R.string.tarot_bid_guard),
     GuardWithoutKitty(R.string.tarot_bid_guard_without_kitty),
-    GuardAgainstKitty(R.string.tarot_bid_guard_against_kitty)
+    GuardAgainstKitty(R.string.tarot_bid_guard_against_kitty);
+
+    fun toData(): TarotBidData = TarotBidData.values()[ordinal]
 }
 
-fun Int.toTarotBid(): TarotBid = TarotBid.values()[this]
+fun TarotBidData.toTarotBid(): TarotBid = TarotBid.values()[ordinal]

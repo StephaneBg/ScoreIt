@@ -28,11 +28,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ActivityEditionTarotBinding
 import com.sbgapps.scoreit.app.databinding.ListItemEditionBonusBinding
+import com.sbgapps.scoreit.app.model.TarotBid
 import com.sbgapps.scoreit.app.model.TarotBonus
-import com.sbgapps.scoreit.app.model.toTarotBid
 import com.sbgapps.scoreit.app.ui.edition.EditionActivity
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayoutAdapter
-import com.sbgapps.scoreit.data.model.*
+import com.sbgapps.scoreit.data.model.PLAYER_NONE
+import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.OUDLER_21_MSK
+import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.OUDLER_EXCUSE_MSK
+import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.OUDLER_NONE
+import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.OUDLER_PETIT_MSK
 import io.uniflow.androidx.flow.onStates
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -89,7 +93,7 @@ class TarotEditionActivity : EditionActivity() {
                                 R.array.tarot_bids,
                                 state.bid.ordinal
                             ) { dialog, which ->
-                                viewModel.setBid(which.toTarotBid())
+                                viewModel.setBid(TarotBid.values()[which])
                                 dialog.dismiss()
                             }
                             .show()

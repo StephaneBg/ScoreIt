@@ -18,26 +18,25 @@ package com.sbgapps.scoreit.cache.model.tarot;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * Created by sbaiget on 07/12/13.
+ * Created by Stéphane on 29/07/2014.
  */
-public class TarotFiveLap extends TarotLap {
+public class TarotBidCache implements Serializable {
 
-    @SerializedName("partner")
-    private int mPartner;
+    @SerializedName("bid")
+    private int mBid;
 
-    public TarotFiveLap(int taker, TarotBidCache bid, int points, int oudlers, List<TarotBonusCache> bonuses, int partner) {
-        super(taker, bid, points, oudlers, bonuses);
-        mPartner = partner;
+    public TarotBidCache(int bid) {
+        mBid = bid;
     }
 
-    public int getPartner() {
-        return mPartner;
+    public int get() {
+        return mBid;
     }
 
-    public void setPartner(int partner) {
-        mPartner = partner;
+    public void set(int bid) {
+        mBid = bid;
     }
 }

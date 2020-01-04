@@ -29,6 +29,8 @@ import com.sbgapps.scoreit.cache.model.universal.UniversalGame
 import com.sbgapps.scoreit.cache.model.universal.UniversalLap
 import com.sbgapps.scoreit.data.model.*
 import com.sbgapps.scoreit.data.repository.CacheRepo
+import com.sbgapps.scoreit.data.solver.TarotBidData
+import com.sbgapps.scoreit.data.solver.TarotBonusData
 
 class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
 
@@ -50,10 +52,15 @@ class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
                         game.laps.map {
                             TarotThreeLap(
                                 it.taker,
-                                TarotBid(it.bid),
+                                TarotBidCache(it.bid.ordinal),
                                 it.points,
                                 it.oudlers,
-                                it.bonuses.map { TarotBonus(it.first, it.second) }
+                                it.bonuses.map { (player, bonus) ->
+                                    TarotBonusCache(
+                                        bonus.ordinal,
+                                        player
+                                    )
+                                }
                             )
                         }
                     )
@@ -64,10 +71,15 @@ class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
                         game.laps.map {
                             TarotFourLap(
                                 it.taker,
-                                TarotBid(it.bid),
+                                TarotBidCache(it.bid.ordinal),
                                 it.points,
                                 it.oudlers,
-                                it.bonuses.map { TarotBonus(it.first, it.second) }
+                                it.bonuses.map { (player, bonus) ->
+                                    TarotBonusCache(
+                                        bonus.ordinal,
+                                        player
+                                    )
+                                }
                             )
                         }
                     )
@@ -78,10 +90,15 @@ class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
                         game.laps.map {
                             TarotFiveLap(
                                 it.taker,
-                                TarotBid(it.bid),
+                                TarotBidCache(it.bid.ordinal),
                                 it.points,
                                 it.oudlers,
-                                it.bonuses.map { TarotBonus(it.first, it.second) },
+                                it.bonuses.map { (player, bonus) ->
+                                    TarotBonusCache(
+                                        bonus.ordinal,
+                                        player
+                                    )
+                                },
                                 it.partner
                             )
                         }
@@ -109,7 +126,7 @@ class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
         gameManager.saveGame(gameToSave)
     }
 
-    private fun Game<Lap>.toGameData() = when (this) {
+    private fun Game<Lap>.toGameData(): GameData = when (this) {
         is UniversalGame -> UniversalGameData(
             players.map { it.toPlayerData() },
             laps.map {
@@ -124,10 +141,10 @@ class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
                     TarotThreeGame.NB_PLAYERS,
                     it.taker,
                     PLAYER_NONE,
-                    it.bid.get(),
+                    it.bid.fromCache(),
                     it.oudlers,
                     it.points,
-                    it.bonuses.map { bonus -> bonus.player to bonus.get() }
+                    it.bonuses.map { bonus -> bonus.player to bonus.fromCache() }
                 )
             }
         )
@@ -139,10 +156,10 @@ class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
                     TarotFourGame.NB_PLAYERS,
                     it.taker,
                     PLAYER_NONE,
-                    it.bid.get(),
+                    it.bid.fromCache(),
                     it.oudlers,
                     it.points,
-                    it.bonuses.map { bonus -> bonus.player to bonus.get() }
+                    it.bonuses.map { bonus -> bonus.player to bonus.fromCache() }
                 )
             }
         )
@@ -154,10 +171,10 @@ class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
                     TarotFiveGame.NB_PLAYERS,
                     it.taker,
                     it.partner,
-                    it.bid.get(),
+                    it.bid.fromCache(),
                     it.oudlers,
                     it.points,
-                    it.bonuses.map { bonus -> bonus.player to bonus.get() }
+                    it.bonuses.map { bonus -> bonus.player to bonus.fromCache() }
                 )
             }
         )
@@ -189,4 +206,7 @@ class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
 
         else -> error("Unknown game")
     }
+
+    private fun TarotBidCache.fromCache(): TarotBidData = TarotBidData.values()[get()]
+    private fun TarotBonusCache.fromCache(): TarotBonusData = TarotBonusData.values()[get()]
 }

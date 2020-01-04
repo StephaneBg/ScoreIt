@@ -82,20 +82,20 @@ class TarotSolver {
     private fun getPoints(lap: TarotLapData): Int {
         var points: Int = when (lap.oudlers) {
             // Only one
-            OUDLER_21_MSK, OUDLER_PETIT_MSK, OUDLER_EXCUSE_MSK -> lap.points - 51
+            OUDLER_21_MSK, OUDLER_PETIT_MSK, OUDLER_EXCUSE_MSK -> lap.points - POINTS_WITH_ONE_OUDLER
             // Two
             OUDLER_21_MSK or OUDLER_PETIT_MSK,
             OUDLER_21_MSK or OUDLER_EXCUSE_MSK,
-            OUDLER_EXCUSE_MSK or OUDLER_PETIT_MSK -> lap.points - 41
+            OUDLER_EXCUSE_MSK or OUDLER_PETIT_MSK -> lap.points - POINTS_WITH_TWO_OUDLERS
             // All
-            OUDLER_21_MSK or OUDLER_PETIT_MSK or OUDLER_EXCUSE_MSK -> lap.points - 36
+            OUDLER_21_MSK or OUDLER_PETIT_MSK or OUDLER_EXCUSE_MSK -> lap.points - POINTS_WITH_THREE_OUDLERS
             // None
-            else -> lap.points - 56
+            else -> lap.points - POINTS_WITH_NO_OUDLER
         }
 
         // Contrat
         val isWon = points >= 0
-        points = (25 + abs(points)) * getCoefficient(lap)
+        points = (POINTS_CONTRACT + abs(points)) * getCoefficient(lap)
 
         // Poignée
         points += getPoigneeBonus(lap)
@@ -119,7 +119,7 @@ class TarotSolver {
 
     private fun getPetitBonus(lap: TarotLapData): Int {
         for ((player, bonus) in lap.bonuses) {
-            if (bonus == BONUS_PETIT_AU_BOUT) {
+            if (bonus == TarotBonusData.PETIT_AU_BOUT) {
                 when (lap.playerCount) {
                     3, 4 -> return (if (lap.taker == player) 10 else -10) * getCoefficient(lap)
                     5 -> return (if (lap.taker == player || lap.partner == player) 10 else -10) * getCoefficient(lap)
@@ -129,55 +129,70 @@ class TarotSolver {
         return 0
     }
 
-    private fun getPoigneeBonus(lap: TarotLapData): Int {
-        for ((_, bonus) in lap.bonuses) {
-            when (bonus) {
-                BONUS_POIGNEE_SIMPLE -> return 20
-                BONUS_POIGNEE_DOUBLE -> return 30
-                BONUS_POIGNEE_TRIPLE -> return 40
-            }
-        }
-        return 0
-    }
+    private fun getPoigneeBonus(lap: TarotLapData): Int = lap.bonuses
+        .map { it.second }
+        .firstOrNull {
+            it == TarotBonusData.POIGNEE_SIMPLE || it == TarotBonusData.POIGNEE_DOUBLE || it == TarotBonusData.POIGNEE_TRIPLE
+        }?.points ?: 0
 
-    private fun getChelemBonus(lap: TarotLapData): Int {
-        for ((_, bonus) in lap.bonuses) {
-            when (bonus) {
-                BONUS_CHELEM_NON_ANNONCE -> return 200
-                BONUS_CHELEM_ANNONCE_REALISE -> return 400
-                BONUS_CHELEM_ANNONCE_NON_REALISE -> return -200
-            }
-        }
-        return 0
-    }
+    private fun getChelemBonus(lap: TarotLapData): Int = lap.bonuses
+        .map { it.second }
+        .firstOrNull {
+            it == TarotBonusData.CHELEM_NON_ANNONCE || it == TarotBonusData.CHELEM_ANNONCE_REALISE || it == TarotBonusData.CHELEM_ANNONCE_NON_REALISE
+        }?.points ?: 0
 
-    private fun getCoefficient(lap: TarotLapData): Int = when (lap.bid) {
-        BID_GARDE -> 2
-        BID_GARDE_SANS -> 4
-        BID_GARDE_CONTRE -> 6
-        else -> 1 // Prise
-    }
+    private fun getCoefficient(lap: TarotLapData): Int = lap.bid.coefficient
 
-    fun getAvailableBonuses(lap: TarotLapData): List<Int> {
+    fun getAvailableBonuses(lap: TarotLapData): List<TarotBonusData> {
         val currentBonuses = lap.bonuses.map { it.second }
-        val bonuses = mutableListOf<Int>()
-        if (!currentBonuses.contains(BONUS_PETIT_AU_BOUT)) bonuses.add(BONUS_PETIT_AU_BOUT)
-        if (!currentBonuses.contains(BONUS_POIGNEE_SIMPLE)
-            && !currentBonuses.contains(BONUS_POIGNEE_DOUBLE)
-            && !currentBonuses.contains(BONUS_POIGNEE_TRIPLE)
+        val bonuses = mutableListOf<TarotBonusData>()
+        if (!currentBonuses.contains(TarotBonusData.PETIT_AU_BOUT)) bonuses.add(TarotBonusData.PETIT_AU_BOUT)
+        if (!currentBonuses.contains(TarotBonusData.POIGNEE_SIMPLE)
+            && !currentBonuses.contains(TarotBonusData.POIGNEE_DOUBLE)
+            && !currentBonuses.contains(TarotBonusData.POIGNEE_TRIPLE)
         ) {
-            bonuses.add(BONUS_POIGNEE_SIMPLE)
-            bonuses.add(BONUS_POIGNEE_DOUBLE)
-            bonuses.add(BONUS_POIGNEE_TRIPLE)
+            bonuses.add(TarotBonusData.POIGNEE_SIMPLE)
+            bonuses.add(TarotBonusData.POIGNEE_DOUBLE)
+            bonuses.add(TarotBonusData.POIGNEE_TRIPLE)
         }
-        if (!currentBonuses.contains(BONUS_CHELEM_NON_ANNONCE)
-            && !currentBonuses.contains(BONUS_CHELEM_ANNONCE_REALISE)
-            && !currentBonuses.contains(BONUS_CHELEM_ANNONCE_NON_REALISE)
+        if (!currentBonuses.contains(TarotBonusData.CHELEM_NON_ANNONCE)
+            && !currentBonuses.contains(TarotBonusData.CHELEM_ANNONCE_REALISE)
+            && !currentBonuses.contains(TarotBonusData.CHELEM_ANNONCE_NON_REALISE)
         ) {
-            bonuses.add(BONUS_CHELEM_NON_ANNONCE)
-            bonuses.add(BONUS_CHELEM_ANNONCE_REALISE)
-            bonuses.add(BONUS_CHELEM_ANNONCE_NON_REALISE)
+            bonuses.add(TarotBonusData.CHELEM_NON_ANNONCE)
+            bonuses.add(TarotBonusData.CHELEM_ANNONCE_REALISE)
+            bonuses.add(TarotBonusData.CHELEM_ANNONCE_NON_REALISE)
         }
         return bonuses
     }
+
+    companion object {
+        const val OUDLER_NONE = 0
+        const val OUDLER_PETIT_MSK = 1
+        const val OUDLER_EXCUSE_MSK = 2
+        const val OUDLER_21_MSK = 4
+
+        const val POINTS_CONTRACT = 25
+        const val POINTS_WITH_NO_OUDLER = 56
+        const val POINTS_WITH_ONE_OUDLER = 51
+        const val POINTS_WITH_TWO_OUDLERS = 41
+        const val POINTS_WITH_THREE_OUDLERS = 36
+    }
+}
+
+enum class TarotBidData(val coefficient: Int) {
+    SMALL(1),
+    GUARD(2),
+    GUARD_WITHOUT_KITTY(4),
+    GUARD_AGAINST_KITTY(6)
+}
+
+enum class TarotBonusData(val points: Int) {
+    PETIT_AU_BOUT(10),
+    POIGNEE_SIMPLE(20),
+    POIGNEE_DOUBLE(30),
+    POIGNEE_TRIPLE(40),
+    CHELEM_NON_ANNONCE(200),
+    CHELEM_ANNONCE_REALISE(400),
+    CHELEM_ANNONCE_NON_REALISE(-200)
 }

@@ -18,6 +18,7 @@ package com.sbgapps.scoreit.app.model
 
 import androidx.annotation.StringRes
 import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.data.solver.TarotBonusData
 
 enum class TarotBonus(@StringRes val resId: Int) {
     PetitAuBout(R.string.tarot_bonus_petit_au_bout),
@@ -26,7 +27,9 @@ enum class TarotBonus(@StringRes val resId: Int) {
     PoigneeTriple(R.string.tarot_bonus_triple_poignee),
     ChelemNonAnnonce(R.string.tarot_bonus_slam_not_announced),
     ChelemAnnonceRealise(R.string.tarot_bonus_slam_announced_done),
-    ChelemAnnoneNonRealise(R.string.tarot_bonus_slam_announced_not_done)
+    ChelemAnnoneNonRealise(R.string.tarot_bonus_slam_announced_not_done);
+
+    fun toData(): TarotBonusData = TarotBonusData.values()[ordinal]
 }
 
-fun Int.toTarotBonus(): TarotBonus = TarotBonus.values()[this]
+fun TarotBonusData.toTarotBonus(): TarotBonus = TarotBonus.values()[ordinal]

@@ -34,25 +34,6 @@ const val PLAYER_7 = 6
 const val PLAYER_8 = 7
 const val PLAYER_COUNT = 8
 
-// Tarot
-const val BID_PRISE = 0
-const val BID_GARDE = 1
-const val BID_GARDE_SANS = 2
-const val BID_GARDE_CONTRE = 3
-
-const val OUDLER_NONE = 0
-const val OUDLER_PETIT_MSK = 1
-const val OUDLER_EXCUSE_MSK = 2
-const val OUDLER_21_MSK = 4
-
-const val BONUS_PETIT_AU_BOUT = 0
-const val BONUS_POIGNEE_SIMPLE = 1
-const val BONUS_POIGNEE_DOUBLE = 2
-const val BONUS_POIGNEE_TRIPLE = 3
-const val BONUS_CHELEM_NON_ANNONCE = 4
-const val BONUS_CHELEM_ANNONCE_REALISE = 5
-const val BONUS_CHELEM_ANNONCE_NON_REALISE = 6
-
 // Belote
 const val BONUS_BELOTE = 0
 const val BONUS_RUN_3 = 1

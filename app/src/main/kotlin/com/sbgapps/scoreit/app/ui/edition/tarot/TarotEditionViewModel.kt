@@ -45,7 +45,7 @@ class TarotEditionViewModel(private val useCase: GameUseCase, private val solver
 
     fun setBid(bid: TarotBid) {
         setState {
-            useCase.updateEdition(getEditedLap().copy(bid = bid.ordinal))
+            useCase.updateEdition(getEditedLap().copy(bid = bid.toData()))
             getContent()
         }
     }
@@ -69,7 +69,7 @@ class TarotEditionViewModel(private val useCase: GameUseCase, private val solver
         setState {
             val lap = getEditedLap()
             val bonuses = lap.bonuses.toMutableList()
-            bonuses += bonus.first to bonus.second.ordinal
+            bonuses += bonus.first to bonus.second.toData()
             useCase.updateEdition(lap.copy(bonuses = bonuses))
             getContent()
         }
@@ -110,12 +110,12 @@ class TarotEditionViewModel(private val useCase: GameUseCase, private val solver
 
     private fun getEditedLap(): TarotLapData = useCase.getEditedLap() as TarotLapData
 
-    fun canIncrement(lap: TarotLapData): StepScore = StepScore(
+    private fun canIncrement(lap: TarotLapData): StepScore = StepScore(
         lap.points <= 82,
         lap.points <= 91
     )
 
-    fun canDecrement(lap: TarotLapData): StepScore = StepScore(
+    private fun canDecrement(lap: TarotLapData): StepScore = StepScore(
         lap.points > 10,
         lap.points > 1
     )

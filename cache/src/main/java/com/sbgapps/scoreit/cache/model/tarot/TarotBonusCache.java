@@ -20,29 +20,34 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-import static com.sbgapps.scoreit.data.model.ConstantsKt.BID_PRISE;
-
 /**
- * Created by Stéphane on 29/07/2014.
+ * Created by sbaiget on 23/06/2014.
  */
-public class TarotBid implements Serializable {
+public class TarotBonusCache implements Serializable {
 
-    @SerializedName("bid")
-    private int mBid;
+    @SerializedName("bonus")
+    private int mBonus;
+    @SerializedName("player")
+    private int mPlayer;
 
-    public TarotBid() {
-        this(BID_PRISE);
-    }
-
-    public TarotBid(int bid) {
-        mBid = bid;
+    public TarotBonusCache(int bonus, int player) {
+        mBonus = bonus;
+        mPlayer = player;
     }
 
     public int get() {
-        return mBid;
+        return mBonus;
     }
 
-    public void set(int bid) {
-        mBid = bid;
+    public void set(int bonus) {
+        mBonus = bonus;
+    }
+
+    public int getPlayer() {
+        return mPlayer;
+    }
+
+    public void setPlayer(int player) {
+        mPlayer = player;
     }
 }
