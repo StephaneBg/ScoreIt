@@ -29,8 +29,6 @@ import com.sbgapps.scoreit.cache.model.universal.UniversalGame
 import com.sbgapps.scoreit.cache.model.universal.UniversalLap
 import com.sbgapps.scoreit.data.model.*
 import com.sbgapps.scoreit.data.repository.CacheRepo
-import com.sbgapps.scoreit.data.solver.TarotBidData
-import com.sbgapps.scoreit.data.solver.TarotBonusData
 
 class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
 

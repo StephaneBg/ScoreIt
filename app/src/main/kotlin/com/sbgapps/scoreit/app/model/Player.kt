@@ -25,5 +25,5 @@ data class Player(
 ) {
     constructor(player: PlayerData) : this(player.name, player.color)
 
-    fun toPlayerData(): PlayerData = PlayerData(name, color)
+    fun toData(): PlayerData = PlayerData(name, color)
 }

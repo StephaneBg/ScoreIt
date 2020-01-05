@@ -29,11 +29,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.sbgapps.scoreit.data.model.ConstantsKt.BELOTE;
-import static com.sbgapps.scoreit.data.model.ConstantsKt.COINCHE;
-import static com.sbgapps.scoreit.data.model.ConstantsKt.TAROT;
-import static com.sbgapps.scoreit.data.model.ConstantsKt.UNIVERSAL;
-
 /**
  * Created by Stéphane on 09/07/2014.
  */

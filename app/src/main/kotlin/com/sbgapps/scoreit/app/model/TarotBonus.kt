@@ -18,7 +18,7 @@ package com.sbgapps.scoreit.app.model
 
 import androidx.annotation.StringRes
 import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.data.solver.TarotBonusData
+import com.sbgapps.scoreit.data.model.TarotBonusData
 
 enum class TarotBonus(@StringRes val resId: Int) {
     PetitAuBout(R.string.tarot_bonus_petit_au_bout),

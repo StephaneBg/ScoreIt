@@ -16,8 +16,6 @@
 
 package com.sbgapps.scoreit.data.model
 
-import com.sbgapps.scoreit.data.solver.TarotBidData
-import com.sbgapps.scoreit.data.solver.TarotBonusData
 import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.OUDLER_NONE
 
 sealed class LapData

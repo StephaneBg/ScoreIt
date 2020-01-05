@@ -38,7 +38,7 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
         }
     }
 
-    fun selectGame(game: Int) {
+    fun selectGame(game: Game) {
         setState {
             useCase.setCurrentGame(game)
             getContent()
