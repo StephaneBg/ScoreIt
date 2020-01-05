@@ -40,3 +40,10 @@ data class TarotGameData(
     override val players: List<PlayerData>,
     override val laps: List<TarotLapData>
 ) : GameData(players, laps)
+
+enum class Game {
+    UNIVERSAL,
+    TAROT,
+    BELOTE,
+    COINCHE
+}

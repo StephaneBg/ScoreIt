@@ -16,10 +16,8 @@
 
 package com.sbgapps.scoreit.data.source
 
-import com.sbgapps.scoreit.data.model.BELOTE
-import com.sbgapps.scoreit.data.model.COINCHE
+import com.sbgapps.scoreit.data.model.Game
 import com.sbgapps.scoreit.data.model.GameData
-import com.sbgapps.scoreit.data.model.UNIVERSAL
 import com.sbgapps.scoreit.data.repository.CacheRepo
 import com.sbgapps.scoreit.data.repository.PreferencesRepo
 
@@ -40,7 +38,7 @@ class DataStore(
         cacheRepo.saveGame(game)
     }
 
-    fun setCurrentGame(game: Int) {
+    fun setCurrentGame(game: Game) {
         this.game = null
         prefsRepo.setCurrentGame(game)
     }
@@ -50,15 +48,23 @@ class DataStore(
         prefsRepo.setPlayerCount(count)
     }
 
-    fun isUniversalTotalDisplayed(): Boolean = prefsRepo.isTotalDisplayed(UNIVERSAL)
-    fun setUniversalTotalDisplayed(displayed: Boolean) = prefsRepo.setTotalDisplayed(UNIVERSAL, displayed)
+    fun isUniversalTotalDisplayed(): Boolean = prefsRepo.isTotalDisplayed(Game.UNIVERSAL)
+    fun setUniversalTotalDisplayed(displayed: Boolean) {
+        prefsRepo.setTotalDisplayed(Game.UNIVERSAL, displayed)
+    }
 
-    fun isBeloteScoreRounded(): Boolean = prefsRepo.isRounded(BELOTE)
-    fun setBeloteScoreRounded(rounded: Boolean) = prefsRepo.setRounded(BELOTE, rounded)
+    fun isBeloteScoreRounded(): Boolean = prefsRepo.isRounded(Game.BELOTE)
+    fun setBeloteScoreRounded(rounded: Boolean) {
+        prefsRepo.setRounded(Game.BELOTE, rounded)
+    }
 
-    fun isCoincheScoreRounded(): Boolean = prefsRepo.isRounded(COINCHE)
-    fun setCoincheScoreRounded(rounded: Boolean) = prefsRepo.setRounded(COINCHE, rounded)
+    fun isCoincheScoreRounded(): Boolean = prefsRepo.isRounded(Game.COINCHE)
+    fun setCoincheScoreRounded(rounded: Boolean) {
+        prefsRepo.setRounded(Game.COINCHE, rounded)
+    }
 
     fun getPrefThemeMode(): String = prefsRepo.getThemeMode()
-    fun setPrefThemeMode(mode: String) = prefsRepo.setThemeMode(mode)
+    fun setPrefThemeMode(mode: String) {
+        prefsRepo.setThemeMode(mode)
+    }
 }

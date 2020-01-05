@@ -16,19 +16,21 @@
 
 package com.sbgapps.scoreit.data.repository
 
+import com.sbgapps.scoreit.data.model.Game
+
 interface PreferencesRepo {
 
-    fun getCurrentGame(): Int
-    fun setCurrentGame(game: Int)
+    fun getCurrentGame(): Game
+    fun setCurrentGame(game: Game)
 
     fun getPlayerCount(): Int
     fun setPlayerCount(count: Int)
 
-    fun isRounded(game: Int): Boolean
-    fun setRounded(game: Int, rounded: Boolean)
+    fun isRounded(game: Game): Boolean
+    fun setRounded(game: Game, rounded: Boolean)
 
-    fun isTotalDisplayed(game: Int): Boolean
-    fun setTotalDisplayed(game: Int, displayed: Boolean)
+    fun isTotalDisplayed(game: Game): Boolean
+    fun setTotalDisplayed(game: Game, displayed: Boolean)
 
     fun getThemeMode(): String
     fun setThemeMode(mode: String)

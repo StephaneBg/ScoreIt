@@ -34,7 +34,7 @@ class GameUseCase(
 
     private var editionState: EditionState? = null
 
-    fun setCurrentGame(game: Int) {
+    fun setCurrentGame(game: Game) {
         editionState = null
         dataStore.setCurrentGame(game)
     }

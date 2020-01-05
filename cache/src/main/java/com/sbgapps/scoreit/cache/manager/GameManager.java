@@ -34,11 +34,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 
-import static com.sbgapps.scoreit.data.model.ConstantsKt.BELOTE;
-import static com.sbgapps.scoreit.data.model.ConstantsKt.COINCHE;
-import static com.sbgapps.scoreit.data.model.ConstantsKt.TAROT;
-import static com.sbgapps.scoreit.data.model.ConstantsKt.UNIVERSAL;
-
 /**
  * Created by sbaiget on 01/11/13.
  */

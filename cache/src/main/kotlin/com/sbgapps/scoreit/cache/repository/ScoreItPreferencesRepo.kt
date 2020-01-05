@@ -23,10 +23,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import androidx.core.content.edit
 import com.sbgapps.scoreit.core.utils.THEME_MODE_AUTO
-import com.sbgapps.scoreit.data.model.BELOTE
-import com.sbgapps.scoreit.data.model.COINCHE
-import com.sbgapps.scoreit.data.model.TAROT
-import com.sbgapps.scoreit.data.model.UNIVERSAL
+import com.sbgapps.scoreit.data.model.Game
 import com.sbgapps.scoreit.data.repository.PreferencesRepo
 import kotlin.math.max
 
@@ -34,52 +31,65 @@ class ScoreItPreferencesRepo(context: Context) : PreferencesRepo {
 
     private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    override fun getCurrentGame(): Int = preferences.getInt(USER_PREF_CURRENT_GAME, UNIVERSAL)
+    override fun getCurrentGame(): Game =
+        Game.values()[preferences.getInt(USER_PREF_CURRENT_GAME, Game.UNIVERSAL.ordinal)]
 
-    override fun setCurrentGame(game: Int) = preferences.edit {
-        putInt(USER_PREF_CURRENT_GAME, game)
-    }
-
-    override fun getPlayerCount(): Int = when (getCurrentGame()) {
-        UNIVERSAL -> preferences.getInt(USER_PREF_UNIVERSAL_PLAYER_CNT, 5)
-        TAROT -> preferences.getInt(USER_PREF_TAROT_PLAYER_CNT, 5)
-        else -> 2
-    }
-
-    override fun setPlayerCount(count: Int) = preferences.edit {
-        when (getCurrentGame()) {
-            UNIVERSAL -> putInt(USER_PREF_UNIVERSAL_PLAYER_CNT, max(2, count))
-            TAROT -> putInt(USER_PREF_TAROT_PLAYER_CNT, max(3, count))
+    override fun setCurrentGame(game: Game) {
+        preferences.edit {
+            putInt(USER_PREF_CURRENT_GAME, game.ordinal)
         }
     }
 
-    override fun isRounded(game: Int): Boolean = when (game) {
-        BELOTE -> preferences.getBoolean(USER_PREF_BELOTE_ROUND, true)
-        COINCHE -> preferences.getBoolean(USER_PREF_COINCHE_ROUND, true)
+    override fun getPlayerCount(): Int = when (getCurrentGame()) {
+        Game.UNIVERSAL -> preferences.getInt(USER_PREF_UNIVERSAL_PLAYER_CNT, 5)
+        Game.TAROT -> preferences.getInt(USER_PREF_TAROT_PLAYER_CNT, 5)
+        else -> 2
+    }
+
+    override fun setPlayerCount(count: Int) {
+        preferences.edit {
+            when (getCurrentGame()) {
+                Game.UNIVERSAL -> putInt(USER_PREF_UNIVERSAL_PLAYER_CNT, max(2, count))
+                Game.TAROT -> putInt(USER_PREF_TAROT_PLAYER_CNT, max(3, count))
+                else -> error("Cannot set player count for this game")
+            }
+        }
+    }
+
+    override fun isRounded(game: Game): Boolean = when (game) {
+        Game.BELOTE -> preferences.getBoolean(USER_PREF_BELOTE_ROUND, true)
+        Game.COINCHE -> preferences.getBoolean(USER_PREF_COINCHE_ROUND, true)
         else -> true
     }
 
-    override fun setRounded(game: Int, rounded: Boolean) = when (game) {
-        BELOTE -> preferences.edit { putBoolean(USER_PREF_BELOTE_ROUND, rounded) }
-        COINCHE -> preferences.edit { putBoolean(USER_PREF_COINCHE_ROUND, rounded) }
-        else -> Unit
+    override fun setRounded(game: Game, rounded: Boolean) {
+        return when (game) {
+            Game.BELOTE -> preferences.edit { putBoolean(USER_PREF_BELOTE_ROUND, rounded) }
+            Game.COINCHE -> preferences.edit { putBoolean(USER_PREF_COINCHE_ROUND, rounded) }
+            else -> Unit
+        }
     }
 
-    override fun isTotalDisplayed(game: Int): Boolean = when (game) {
-        UNIVERSAL -> preferences.getBoolean(USER_PREF_UNIVERSAL_TOTAL, false)
+    override fun isTotalDisplayed(game: Game): Boolean = when (game) {
+        Game.UNIVERSAL -> preferences.getBoolean(USER_PREF_UNIVERSAL_TOTAL, false)
         else -> false
     }
 
-    override fun setTotalDisplayed(game: Int, displayed: Boolean) = preferences.edit {
-        when (game) {
-            UNIVERSAL -> putBoolean(USER_PREF_UNIVERSAL_TOTAL, displayed)
+    override fun setTotalDisplayed(game: Game, displayed: Boolean) {
+        preferences.edit {
+            when (game) {
+                Game.UNIVERSAL -> putBoolean(USER_PREF_UNIVERSAL_TOTAL, displayed)
+                else -> error("Cannot display total for this game")
+            }
         }
     }
 
     override fun getThemeMode(): String = preferences.getString(USER_PREF_THEME, null) ?: THEME_MODE_AUTO
 
-    override fun setThemeMode(mode: String) = preferences.edit {
-        putString(USER_PREF_THEME, mode)
+    override fun setThemeMode(mode: String) {
+        preferences.edit {
+            putString(USER_PREF_THEME, mode)
+        }
     }
 
     companion object {

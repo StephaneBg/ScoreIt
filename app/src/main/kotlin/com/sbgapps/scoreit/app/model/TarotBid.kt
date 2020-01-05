@@ -18,7 +18,7 @@ package com.sbgapps.scoreit.app.model
 
 import androidx.annotation.StringRes
 import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.data.solver.TarotBidData
+import com.sbgapps.scoreit.data.model.TarotBidData
 
 enum class TarotBid(@StringRes val resId: Int) {
     Small(R.string.tarot_bid_take),

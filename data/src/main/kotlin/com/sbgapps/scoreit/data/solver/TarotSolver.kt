@@ -26,52 +26,21 @@ class TarotSolver {
         val points = getPoints(lap)
 
         when (lap.playerCount) {
-            3 -> {
-                results[PLAYER_1] = if (PLAYER_1 == lap.taker) 2 * points else -points
-                results[PLAYER_2] = if (PLAYER_2 == lap.taker) 2 * points else -points
-                results[PLAYER_3] = if (PLAYER_3 == lap.taker) 2 * points else -points
-            }
+            3 -> for (player in PLAYER_1..PLAYER_3) results[player] = (if (player == lap.taker) 2 else -1) * points
 
-            4 -> {
-                results[PLAYER_1] = if (PLAYER_1 == lap.taker) 3 * points else -points
-                results[PLAYER_2] = if (PLAYER_2 == lap.taker) 3 * points else -points
-                results[PLAYER_3] = if (PLAYER_3 == lap.taker) 3 * points else -points
-                results[PLAYER_4] = if (PLAYER_4 == lap.taker) 3 * points else -points
-            }
+            4 -> for (player in PLAYER_1..PLAYER_4) results[player] = (if (player == lap.taker) 3 else -1) * points
 
             5 -> {
                 if (lap.taker != lap.partner) {
-                    results[PLAYER_1] = when (PLAYER_1) {
-                        lap.taker -> 2 * points
-                        lap.partner -> points
-                        else -> -points
-                    }
-                    results[PLAYER_2] = when (PLAYER_2) {
-                        lap.taker -> 2 * points
-                        lap.partner -> points
-                        else -> -points
-                    }
-                    results[PLAYER_3] = when (PLAYER_3) {
-                        lap.taker -> 2 * points
-                        lap.partner -> points
-                        else -> -points
-                    }
-                    results[PLAYER_4] = when (PLAYER_4) {
-                        lap.taker -> 2 * points
-                        lap.partner -> points
-                        else -> -points
-                    }
-                    results[PLAYER_5] = when (PLAYER_5) {
-                        lap.taker -> 2 * points
-                        lap.partner -> points
-                        else -> -points
+                    for (player in PLAYER_1..PLAYER_5) {
+                        results[player] = when (player) {
+                            lap.taker -> 2
+                            lap.partner -> 1
+                            else -> -1
+                        } * points
                     }
                 } else {
-                    results[PLAYER_1] = if (PLAYER_1 == lap.taker) 4 * points else -points
-                    results[PLAYER_2] = if (PLAYER_2 == lap.taker) 4 * points else -points
-                    results[PLAYER_3] = if (PLAYER_3 == lap.taker) 4 * points else -points
-                    results[PLAYER_4] = if (PLAYER_4 == lap.taker) 4 * points else -points
-                    results[PLAYER_5] = if (PLAYER_5 == lap.taker) 4 * points else -points
+                    for (player in PLAYER_1..PLAYER_5) results[player] = (if (player == lap.taker) 4 else -1) * points
                 }
             }
         }
@@ -95,7 +64,7 @@ class TarotSolver {
 
         // Contrat
         val isWon = points >= 0
-        points = (POINTS_CONTRACT + abs(points)) * getCoefficient(lap)
+        points = (POINTS_CONTRACT + abs(points)) * lap.bid.coefficient
 
         // Poignée
         points += getPoigneeBonus(lap)
@@ -121,8 +90,8 @@ class TarotSolver {
         for ((player, bonus) in lap.bonuses) {
             if (bonus == TarotBonusData.PETIT_AU_BOUT) {
                 when (lap.playerCount) {
-                    3, 4 -> return (if (lap.taker == player) 10 else -10) * getCoefficient(lap)
-                    5 -> return (if (lap.taker == player || lap.partner == player) 10 else -10) * getCoefficient(lap)
+                    3, 4 -> return (if (lap.taker == player) 10 else -10) * lap.bid.coefficient
+                    5 -> return (if (lap.taker == player || lap.partner == player) 10 else -10) * lap.bid.coefficient
                 }
             }
         }
@@ -141,12 +110,12 @@ class TarotSolver {
             it == TarotBonusData.CHELEM_NON_ANNONCE || it == TarotBonusData.CHELEM_ANNONCE_REALISE || it == TarotBonusData.CHELEM_ANNONCE_NON_REALISE
         }?.points ?: 0
 
-    private fun getCoefficient(lap: TarotLapData): Int = lap.bid.coefficient
-
     fun getAvailableBonuses(lap: TarotLapData): List<TarotBonusData> {
         val currentBonuses = lap.bonuses.map { it.second }
         val bonuses = mutableListOf<TarotBonusData>()
-        if (!currentBonuses.contains(TarotBonusData.PETIT_AU_BOUT)) bonuses.add(TarotBonusData.PETIT_AU_BOUT)
+        if (!currentBonuses.contains(TarotBonusData.PETIT_AU_BOUT)) {
+            bonuses.add(TarotBonusData.PETIT_AU_BOUT)
+        }
         if (!currentBonuses.contains(TarotBonusData.POIGNEE_SIMPLE)
             && !currentBonuses.contains(TarotBonusData.POIGNEE_DOUBLE)
             && !currentBonuses.contains(TarotBonusData.POIGNEE_TRIPLE)
@@ -178,21 +147,4 @@ class TarotSolver {
         const val POINTS_WITH_TWO_OUDLERS = 41
         const val POINTS_WITH_THREE_OUDLERS = 36
     }
-}
-
-enum class TarotBidData(val coefficient: Int) {
-    SMALL(1),
-    GUARD(2),
-    GUARD_WITHOUT_KITTY(4),
-    GUARD_AGAINST_KITTY(6)
-}
-
-enum class TarotBonusData(val points: Int) {
-    PETIT_AU_BOUT(10),
-    POIGNEE_SIMPLE(20),
-    POIGNEE_DOUBLE(30),
-    POIGNEE_TRIPLE(40),
-    CHELEM_NON_ANNONCE(200),
-    CHELEM_ANNONCE_REALISE(400),
-    CHELEM_ANNONCE_NON_REALISE(-200)
 }
