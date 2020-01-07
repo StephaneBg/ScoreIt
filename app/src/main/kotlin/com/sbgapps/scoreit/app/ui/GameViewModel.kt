@@ -119,9 +119,10 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
         return items
     }
 
-    private fun getHeader(): Header = useCase.getPlayers(true).zip(useCase.getScores()) { player, score ->
-        Player(player.name, player.color) to score
-    }
+    private fun getHeader(): Header = useCase.getPlayers(true)
+        .zip(useCase.getScores()) { player, score ->
+            Player(player.name, player.color) to score
+        }
 
     private fun getLaps(): List<Lap> = when (val game = useCase.getGame()) {
         is UniversalGameData -> game.laps.map {

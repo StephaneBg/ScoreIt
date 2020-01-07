@@ -28,7 +28,7 @@ val dataModule = module {
 
     single { DataStore(get(), get()) }
     single { GameUseCase(get(), get(), get(), get(), get()) }
-    single { UniversalSolver(get()) }
+    single { UniversalSolver() }
     single { TarotSolver() }
     single { BeloteSolver(get()) }
     single { CoincheSolver(get()) }
