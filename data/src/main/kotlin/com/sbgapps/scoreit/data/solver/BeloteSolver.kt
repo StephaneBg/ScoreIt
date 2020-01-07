@@ -16,7 +16,10 @@
 
 package com.sbgapps.scoreit.data.solver
 
-import com.sbgapps.scoreit.data.model.*
+import com.sbgapps.scoreit.data.model.BeloteBonusData
+import com.sbgapps.scoreit.data.model.BeloteLapData
+import com.sbgapps.scoreit.data.model.PLAYER_1
+import com.sbgapps.scoreit.data.model.PLAYER_2
 import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_CAPOT
 import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_TOTAL
 import com.sbgapps.scoreit.data.source.DataStore
@@ -41,16 +44,8 @@ class BeloteSolver(private val dataStore: DataStore) {
         return results.toList() to isWon
     }
 
-    private fun addBonuses(results: IntArray, bonuses: List<Pair<Int, Int>>) {
-        for ((player, bonus) in bonuses) {
-            when (bonus) {
-                BONUS_BELOTE, BONUS_RUN_3 -> results[player] += 20
-                BONUS_RUN_4 -> results[player] += 50
-                BONUS_RUN_5, BONUS_FOUR_NORMAL -> results[player] += 100
-                BONUS_FOUR_NINE -> results[player] += 150
-                BONUS_FOUR_JACK -> results[player] += 200
-            }
-        }
+    private fun addBonuses(results: IntArray, bonuses: List<Pair<Int, BeloteBonusData>>) {
+        for ((player, bonus) in bonuses) results[player] += bonus.points
     }
 
     fun computeScores(laps: List<BeloteLapData>): List<Int> {
@@ -78,15 +73,6 @@ class BeloteSolver(private val dataStore: DataStore) {
     private fun isLitigation(points: List<Int>): Boolean =
         (81 == points[PLAYER_1] && 81 == points[PLAYER_2]) || (91 == points[PLAYER_1] && 91 == points[PLAYER_2])
 
-    private fun isScoreRounded(): Boolean = dataStore.isBeloteScoreRounded()
-
-    fun getLapPoints(lap: BeloteLapData): Pair<Int, Int> =
-        if (PLAYER_1 == lap.scorer) {
-            lap.points to lap.counterPoints()
-        } else {
-            lap.counterPoints() to lap.points
-        }
-
     fun isCapot(lap: BeloteLapData): Boolean = lap.points == POINTS_CAPOT
 
     private fun roundPoint(score: Int): Int = when (score) {
@@ -95,17 +81,17 @@ class BeloteSolver(private val dataStore: DataStore) {
         else -> (score + 5) / 10 * 10
     }
 
-    fun getPointsForDisplay(points: Int): Int = if (isScoreRounded()) roundPoint(points) else points
+    fun getPointsForDisplay(points: Int): Int = if (dataStore.isBeloteScoreRounded()) roundPoint(points) else points
 
-    fun getAvailableBonuses(lap: BeloteLapData): List<Int> {
+    fun getAvailableBonuses(lap: BeloteLapData): List<BeloteBonusData> {
         val currentBonuses = lap.bonuses.map { it.second }
         return listOfNotNull(
-            BONUS_BELOTE.takeUnless { currentBonuses.contains(BONUS_BELOTE) },
-            BONUS_RUN_3,
-            BONUS_RUN_5,
-            BONUS_FOUR_NORMAL,
-            BONUS_FOUR_NINE.takeUnless { currentBonuses.contains(BONUS_FOUR_NINE) },
-            BONUS_FOUR_JACK.takeUnless { currentBonuses.contains(BONUS_FOUR_JACK) }
+            BeloteBonusData.BELOTE.takeUnless { currentBonuses.contains(BeloteBonusData.BELOTE) },
+            BeloteBonusData.RUN_3,
+            BeloteBonusData.RUN_5,
+            BeloteBonusData.FOUR_NORMAL,
+            BeloteBonusData.FOUR_NINE.takeUnless { currentBonuses.contains(BeloteBonusData.FOUR_NINE) },
+            BeloteBonusData.FOUR_JACK.takeUnless { currentBonuses.contains(BeloteBonusData.FOUR_JACK) }
         )
     }
 

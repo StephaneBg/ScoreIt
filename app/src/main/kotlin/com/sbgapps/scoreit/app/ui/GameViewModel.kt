@@ -139,7 +139,7 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
 
         is BeloteGameData -> game.laps.map {
             val (results, isWon) = useCase.getLapResults(it)
-            val belote = it.bonuses.find { bonus -> bonus.second == BONUS_BELOTE }?.first ?: PLAYER_NONE
+            val belote = it.bonuses.find { bonus -> bonus.second == BeloteBonusData.BELOTE }?.first ?: PLAYER_NONE
             BeloteLap(results, isWon, belote)
         }
         is CoincheGameData -> game.laps.map {

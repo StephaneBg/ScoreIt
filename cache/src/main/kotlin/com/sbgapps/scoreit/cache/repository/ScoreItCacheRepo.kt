@@ -20,7 +20,7 @@ import com.sbgapps.scoreit.cache.manager.GameManager
 import com.sbgapps.scoreit.cache.model.Game
 import com.sbgapps.scoreit.cache.model.Lap
 import com.sbgapps.scoreit.cache.model.Player
-import com.sbgapps.scoreit.cache.model.belote.BeloteBonus
+import com.sbgapps.scoreit.cache.model.belote.BeloteBonusCache
 import com.sbgapps.scoreit.cache.model.belote.BeloteGame
 import com.sbgapps.scoreit.cache.model.belote.BeloteLap
 import com.sbgapps.scoreit.cache.model.coinche.CoincheGame
@@ -111,7 +111,12 @@ class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
                     BeloteLap(
                         it.scorer,
                         it.points,
-                        it.bonuses.map { bonus -> BeloteBonus(bonus.second, bonus.first) })
+                        it.bonuses.map { bonus ->
+                            BeloteBonusCache(
+                                bonus.second.ordinal,
+                                bonus.first
+                            )
+                        })
                 }
             )
 
@@ -183,7 +188,7 @@ class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
                 BeloteLapData(
                     it.scorer,
                     it.points,
-                    it.bonuses.map { bonus -> bonus.player to bonus.get() }
+                    it.bonuses.map { bonus -> bonus.player to bonus.fromCache() }
                 )
             }
         )
@@ -195,9 +200,9 @@ class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
                     it.scorer,
                     it.bidder,
                     it.bid,
-                    it.coinche,
+                    CoincheBidData.values()[it.coinche],
                     it.points,
-                    it.bonuses.map { bonus -> bonus.player to bonus.get() }
+                    it.bonuses.map { bonus -> bonus.player to bonus.fromCache() }
                 )
             }
         )
@@ -207,4 +212,5 @@ class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
 
     private fun TarotBidCache.fromCache(): TarotBidData = TarotBidData.values()[get()]
     private fun TarotBonusCache.fromCache(): TarotBonusData = TarotBonusData.values()[get()]
+    private fun BeloteBonusCache.fromCache(): BeloteBonusData = BeloteBonusData.values()[get()]
 }

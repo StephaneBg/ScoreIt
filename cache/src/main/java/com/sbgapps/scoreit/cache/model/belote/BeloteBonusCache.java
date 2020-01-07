@@ -18,22 +18,36 @@ package com.sbgapps.scoreit.cache.model.belote;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * Created by sbaiget on 11/11/13.
+ * Created by Stéphane on 21/08/2014.
  */
-public class BeloteLap extends BaseBeloteCoincheLap {
+public class BeloteBonusCache implements Serializable {
 
-    @SerializedName("bonuses")
-    protected List<BeloteBonusCache> mBonuses;
+    @SerializedName("bonus")
+    private int mBonus;
+    @SerializedName("player")
+    private int mPlayer;
 
-    public BeloteLap(int scorer, int points, List<BeloteBonusCache> bonuses) {
-        super(scorer, points);
-        mBonuses = bonuses;
+    public BeloteBonusCache(int bonus, int player) {
+        mBonus = bonus;
+        mPlayer = player;
     }
 
-    public List<BeloteBonusCache> getBonuses() {
-        return mBonuses;
+    public int get() {
+        return mBonus;
+    }
+
+    public void set(int bonus) {
+        mBonus = bonus;
+    }
+
+    public int getPlayer() {
+        return mPlayer;
+    }
+
+    public void setPlayer(int player) {
+        mPlayer = player;
     }
 }

@@ -39,14 +39,14 @@ data class TarotLapData(
 data class BeloteLapData(
     val scorer: Int = PLAYER_1,
     val points: Int = 81,
-    val bonuses: List<Pair<Int, Int> /* Player to Bonus */> = emptyList()
+    val bonuses: List<Pair<Int, BeloteBonusData>> = emptyList()
 ) : LapData()
 
 data class CoincheLapData(
     val scorer: Int = PLAYER_1,
     val bidder: Int = PLAYER_1,
     val bidPoints: Int = 110,
-    val coincheBid: Int = COINCHE_NONE,
+    val coincheBid: CoincheBidData = CoincheBidData.NONE,
     val points: Int = 110,
-    val bonuses: List<Pair<Int, Int> /* Player to Bonus */> = emptyList()
+    val bonuses: List<Pair<Int, BeloteBonusData>> = emptyList()
 ) : LapData()

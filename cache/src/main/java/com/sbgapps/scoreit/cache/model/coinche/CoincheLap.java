@@ -18,12 +18,9 @@ package com.sbgapps.scoreit.cache.model.coinche;
 
 import com.google.gson.annotations.SerializedName;
 import com.sbgapps.scoreit.cache.model.belote.BaseBeloteCoincheLap;
+import com.sbgapps.scoreit.cache.model.belote.BeloteBonusCache;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.sbgapps.scoreit.data.model.ConstantsKt.COINCHE_NONE;
-import static com.sbgapps.scoreit.data.model.ConstantsKt.PLAYER_1;
 
 /**
  * Created by sbaiget on 11/11/13.
@@ -37,18 +34,14 @@ public class CoincheLap extends BaseBeloteCoincheLap {
     @SerializedName("coinche")
     protected int mCoinche;
     @SerializedName("bonuses")
-    protected List<CoincheBonus> mBonuses;
+    protected List<BeloteBonusCache> mBonuses;
 
-    public CoincheLap(int taker, int points, int bidder, int bid, int coinche, List<CoincheBonus> bonuses) {
+    public CoincheLap(int taker, int points, int bidder, int bid, int coinche, List<BeloteBonusCache> bonuses) {
         super(taker, points);
         mBidder = bidder;
         mBid = bid;
         mCoinche = coinche;
         mBonuses = bonuses;
-    }
-
-    public CoincheLap() {
-        this(PLAYER_1, 100, PLAYER_1, 140, COINCHE_NONE, new ArrayList<>());
     }
 
     public int getBidder() {
@@ -75,7 +68,7 @@ public class CoincheLap extends BaseBeloteCoincheLap {
         mCoinche = coinche;
     }
 
-    public List<CoincheBonus> getBonuses() {
+    public List<BeloteBonusCache> getBonuses() {
         return mBonuses;
     }
 }

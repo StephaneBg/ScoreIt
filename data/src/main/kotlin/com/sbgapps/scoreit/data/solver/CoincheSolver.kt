@@ -16,7 +16,10 @@
 
 package com.sbgapps.scoreit.data.solver
 
-import com.sbgapps.scoreit.data.model.*
+import com.sbgapps.scoreit.data.model.BeloteBonusData
+import com.sbgapps.scoreit.data.model.CoincheLapData
+import com.sbgapps.scoreit.data.model.PLAYER_1
+import com.sbgapps.scoreit.data.model.PLAYER_2
 import com.sbgapps.scoreit.data.source.DataStore
 
 class CoincheSolver(private val dataStore: DataStore) {
@@ -42,15 +45,7 @@ class CoincheSolver(private val dataStore: DataStore) {
         }
 
         // Add bonuses
-        for ((player, bonus) in lap.bonuses) {
-            when (bonus) {
-                BONUS_BELOTE, BONUS_RUN_3 -> results[player] += 20
-                BONUS_RUN_4 -> results[player] += 50
-                BONUS_RUN_5, BONUS_FOUR_NORMAL -> results[player] += 100
-                BONUS_FOUR_NINE -> results[player] += 150
-                BONUS_FOUR_JACK -> results[player] += 200
-            }
-        }
+        for ((player, bonus) in lap.bonuses) results[player] += bonus.points
 
         var bidderPts: Int
         var counterPts: Int
@@ -66,18 +61,12 @@ class CoincheSolver(private val dataStore: DataStore) {
         if (isWon) {
             // Deal succeeded
             bidderPts += lap.bidPoints
-            when (lap.coincheBid) {
-                COINCHE_COINCHE -> bidderPts *= 2
-                COINCHE_SURCOINCHE -> bidderPts *= 4
-            }
+            bidderPts *= lap.coincheBid.coefficient
         } else {
             // Deal failed
             bidderPts = 0
             counterPts = if (250 == lap.bidPoints) 500 else 160 + lap.bidPoints
-            when (lap.coincheBid) {
-                COINCHE_COINCHE -> counterPts *= 2
-                COINCHE_SURCOINCHE -> counterPts *= 4
-            }
+            counterPts *= lap.coincheBid.coefficient
         }
 
         if (PLAYER_1 == lap.bidder) {
@@ -101,22 +90,20 @@ class CoincheSolver(private val dataStore: DataStore) {
 
     fun getPointsForDisplay(points: Int): Int = if (dataStore.isCoincheScoreRounded()) roundPoint(points) else points
 
-    fun canIncrement(lap: CoincheLapData): Pair<Boolean, Boolean> /* Bid to Points */ =
-        (lap.bidPoints <= 990) to (lap.points < 150)
+    fun canIncrement(lap: CoincheLapData): Pair<Boolean, Boolean> = (lap.bidPoints <= 990) to (lap.points < 150)
 
-    fun canDecrement(lap: CoincheLapData): Pair<Boolean, Boolean> /* Bid to Points */ =
-        (lap.bidPoints >= 110) to (lap.points >= 20)
+    fun canDecrement(lap: CoincheLapData): Pair<Boolean, Boolean> = (lap.bidPoints >= 110) to (lap.points >= 20)
 
-    fun getAvailableBonuses(lap: CoincheLapData): List<Int> {
+    fun getAvailableBonuses(lap: CoincheLapData): List<BeloteBonusData> {
         val currentBonuses = lap.bonuses.map { it.second }
-        val bonuses = mutableListOf<Int>()
-        if (!currentBonuses.contains(BONUS_BELOTE)) bonuses.add(BONUS_BELOTE)
-        bonuses.add(BONUS_RUN_3)
-        bonuses.add(BONUS_RUN_4)
-        bonuses.add(BONUS_RUN_5)
-        bonuses.add(BONUS_FOUR_NORMAL)
-        bonuses.add(BONUS_FOUR_NINE)
-        bonuses.add(BONUS_FOUR_JACK)
+        val bonuses = mutableListOf<BeloteBonusData>()
+        if (!currentBonuses.contains(BeloteBonusData.BELOTE)) bonuses.add(BeloteBonusData.BELOTE)
+        bonuses.add(BeloteBonusData.RUN_3)
+        bonuses.add(BeloteBonusData.RUN_4)
+        bonuses.add(BeloteBonusData.RUN_5)
+        bonuses.add(BeloteBonusData.FOUR_NORMAL)
+        bonuses.add(BeloteBonusData.FOUR_NINE)
+        bonuses.add(BeloteBonusData.FOUR_JACK)
         return bonuses
     }
 
