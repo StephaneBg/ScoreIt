@@ -32,10 +32,10 @@
             android:id="@+id/belote"
             android:title="@string/drawer_game_belote"
             />
-        <item
-            android:id="@+id/coinche"
-            android:title="@string/drawer_game_coinche"
-            />
+        <!--        <item-->
+        <!--            android:id="@+id/coinche"-->
+        <!--            android:title="@string/drawer_game_coinche"-->
+        <!--            />-->
     </group>
 
     <group

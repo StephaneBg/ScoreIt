@@ -81,7 +81,7 @@ class CoincheEditionViewModel(private val useCase: GameUseCase, private val solv
         setState {
             val lap = getEditedLap()
             val bonuses = lap.bonuses.toMutableList()
-            bonuses += bonus.first to bonus.second.ordinal
+            bonuses += bonus.first to bonus.second.toData()
             useCase.updateEdition(lap.copy(bonuses = bonuses))
             getContent()
         }

@@ -68,7 +68,7 @@ class BeloteEditionViewModel(private val useCase: GameUseCase, private val solve
         setState {
             val lap = editedLap
             val bonuses = lap.bonuses.toMutableList()
-            bonuses += bonus.first to bonus.second.ordinal
+            bonuses += bonus.first to bonus.second.toData()
             useCase.updateEdition(lap.copy(bonuses = bonuses))
             getContent()
         }

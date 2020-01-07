@@ -20,3 +20,10 @@ data class PlayerData(
     val name: String,
     val color: Int
 )
+
+const val PLAYER_NONE = -1
+const val PLAYER_1 = 0
+const val PLAYER_2 = 1
+const val PLAYER_3 = 2
+const val PLAYER_4 = 3
+const val PLAYER_5 = 4

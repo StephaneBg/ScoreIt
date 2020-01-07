@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit.data.solver
 
-import com.sbgapps.scoreit.data.model.BONUS_BELOTE
+import com.sbgapps.scoreit.data.model.BeloteBonusData
 import com.sbgapps.scoreit.data.model.BeloteLapData
 import com.sbgapps.scoreit.data.model.PLAYER_1
 import com.sbgapps.scoreit.data.model.PLAYER_2
@@ -127,7 +127,7 @@ class BeloteSolverTest {
         val lap = BeloteLapData(
             scorer = PLAYER_1,
             points = 72,
-            bonuses = listOf(PLAYER_1 to BONUS_BELOTE)
+            bonuses = listOf(PLAYER_1 to BeloteBonusData.BELOTE)
         )
 
         val (results, isWon) = solver.computeResults(lap)
@@ -142,7 +142,7 @@ class BeloteSolverTest {
         val lap = BeloteLapData(
             scorer = PLAYER_2,
             points = 72,
-            bonuses = listOf(PLAYER_2 to BONUS_BELOTE)
+            bonuses = listOf(PLAYER_2 to BeloteBonusData.BELOTE)
         )
 
         val (results, isWon) = solver.computeResults(lap)
@@ -157,7 +157,7 @@ class BeloteSolverTest {
         val lap = BeloteLapData(
             scorer = PLAYER_1,
             points = 70,
-            bonuses = listOf(PLAYER_1 to BONUS_BELOTE)
+            bonuses = listOf(PLAYER_1 to BeloteBonusData.BELOTE)
         )
 
         val (results, isWon) = solver.computeResults(lap)
@@ -172,7 +172,7 @@ class BeloteSolverTest {
         val lap = BeloteLapData(
             scorer = PLAYER_2,
             points = 70,
-            bonuses = listOf(PLAYER_2 to BONUS_BELOTE)
+            bonuses = listOf(PLAYER_2 to BeloteBonusData.BELOTE)
         )
 
         val (results, isWon) = solver.computeResults(lap)
@@ -201,7 +201,7 @@ class BeloteSolverTest {
         val lap = BeloteLapData(
             scorer = PLAYER_1,
             points = 71,
-            bonuses = listOf(PLAYER_1 to BONUS_BELOTE)
+            bonuses = listOf(PLAYER_1 to BeloteBonusData.BELOTE)
         )
 
         val (results, isWon) = solver.computeResults(lap)
@@ -261,7 +261,7 @@ class BeloteSolverTest {
             BeloteLapData(PLAYER_1, 60),
             BeloteLapData(PLAYER_1, 252),
             BeloteLapData(PLAYER_2, 143),
-            BeloteLapData(PLAYER_2, 71, listOf(PLAYER_2 to BONUS_BELOTE)),
+            BeloteLapData(PLAYER_2, 71, listOf(PLAYER_2 to BeloteBonusData.BELOTE)),
             BeloteLapData(PLAYER_2, 120)
         )
         val scores: List<Int> = solver.computeScores(laps)

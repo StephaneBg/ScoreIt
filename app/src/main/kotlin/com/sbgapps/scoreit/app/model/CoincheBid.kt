@@ -18,11 +18,14 @@ package com.sbgapps.scoreit.app.model
 
 import androidx.annotation.StringRes
 import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.data.model.CoincheBidData
 
 enum class CoincheBid(@StringRes val resId: Int) {
     None(R.string.coinche_coinche_none),
     Coinche(R.string.coinche_coinche_coinche),
-    Surcoinche(R.string.coinche_coinche_surcoinche)
+    Surcoinche(R.string.coinche_coinche_surcoinche);
+
+    fun toData(): CoincheBidData = CoincheBidData.values()[ordinal]
 }
 
-fun Int.toCoincheBid(): CoincheBid = CoincheBid.values()[this]
+fun CoincheBidData.toCoincheBid(): CoincheBid = CoincheBid.values()[ordinal]

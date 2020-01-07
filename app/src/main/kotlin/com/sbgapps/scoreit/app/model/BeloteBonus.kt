@@ -18,6 +18,7 @@ package com.sbgapps.scoreit.app.model
 
 import androidx.annotation.StringRes
 import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.data.model.BeloteBonusData
 
 enum class BeloteBonus(@StringRes val resId: Int) {
     Belote(R.string.belote_bonus_belote),
@@ -26,7 +27,9 @@ enum class BeloteBonus(@StringRes val resId: Int) {
     RunOfFive(R.string.belote_bonus_run_5),
     FourNormal(R.string.belote_bonus_normal_four),
     FourNine(R.string.belote_bonus_nine_four),
-    FourJack(R.string.belote_bonus_jack_four)
+    FourJack(R.string.belote_bonus_jack_four);
+
+    fun toData(): BeloteBonusData = BeloteBonusData.values()[ordinal]
 }
 
-fun Int.toBeloteBonus(): BeloteBonus = BeloteBonus.values()[this]
+fun BeloteBonusData.toBeloteBonus(): BeloteBonus = BeloteBonus.values()[ordinal]
