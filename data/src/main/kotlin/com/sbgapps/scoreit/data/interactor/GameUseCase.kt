@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit.data.interactor
 
+import android.graphics.Color
 import com.sbgapps.scoreit.core.ext.replace
 import com.sbgapps.scoreit.data.model.*
 import com.sbgapps.scoreit.data.solver.BeloteSolver
@@ -42,19 +43,25 @@ class GameUseCase(
     fun getGame(): GameData = dataStore.getGame()
 
     fun getPlayers(withTotal: Boolean = false): List<PlayerData> = when (val game = getGame()) {
-        is UniversalGameData -> universalSolver.getPlayers(game, withTotal)
+        is UniversalGameData -> game.players.toMutableList().apply {
+            if (dataStore.isUniversalTotalDisplayed() && withTotal) add(PlayerData("Total", Color.RED))
+        }
         else -> game.players
     }
 
     fun getLapResults(lap: LapData): Pair<List<Int>, Boolean> = when (lap) {
-        is UniversalLapData -> universalSolver.computeResults(lap)
+        is UniversalLapData -> universalSolver.computeResults(lap, dataStore.isUniversalTotalDisplayed())
         is TarotLapData -> tarotSolver.computeResults(lap)
         is BeloteLapData -> beloteSolver.computeResults(lap)
         is CoincheLapData -> coincheSolver.computeResults(lap)
     }
 
     fun getScores(): List<Int> = when (val game = getGame()) {
-        is UniversalGameData -> universalSolver.computeScores(game.laps, getPlayers(true).size)
+        is UniversalGameData -> universalSolver.computeScores(
+            game.laps,
+            getPlayers().size,
+            dataStore.isUniversalTotalDisplayed()
+        )
         is BeloteGameData -> beloteSolver.computeScores(game.laps)
         is CoincheGameData -> coincheSolver.computeScores(game.laps)
         is TarotGameData -> tarotSolver.computeScores(game.laps, getPlayers().size)

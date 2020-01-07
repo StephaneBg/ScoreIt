@@ -16,39 +16,24 @@
 
 package com.sbgapps.scoreit.data.solver
 
-import android.graphics.Color
-import com.sbgapps.scoreit.data.model.PlayerData
-import com.sbgapps.scoreit.data.model.UniversalGameData
 import com.sbgapps.scoreit.data.model.UniversalLapData
-import com.sbgapps.scoreit.data.source.DataStore
 
-class UniversalSolver(private val dataStore: DataStore) {
+class UniversalSolver {
 
-    fun computeResults(lap: UniversalLapData): Pair<List<Int>, Boolean> =
-        if (dataStore.isUniversalTotalDisplayed()) {
-            val results = lap.points.toMutableList()
-            results += results.sum()
-            results to true
-        } else {
-            lap.points to true
-        }
+    fun computeResults(lap: UniversalLapData, withTotal: Boolean): Pair<List<Int>, Boolean> =
+        internalComputeResults(lap, withTotal) to true
 
-
-    fun computeScores(laps: List<UniversalLapData>, playerCount: Int): List<Int> {
-        val scores = MutableList(playerCount) { 0 }
-        laps.map { it.points }.forEach { points ->
-            for (player in 0 until playerCount) scores[player] += points[player]
+    fun computeScores(laps: List<UniversalLapData>, playerCount: Int, withTotal: Boolean): List<Int> {
+        val count = if (withTotal) playerCount + 1 else playerCount
+        val scores = MutableList(count) { 0 }
+        laps.map { lap ->
+            internalComputeResults(lap, withTotal)
+        }.forEach { points ->
+            for (player in 0 until count) scores[player] += points[player]
         }
         return scores
     }
 
-    fun getPlayers(game: UniversalGameData, withTotal: Boolean): List<PlayerData> {
-        val players = game.players.toMutableList()
-        return if (dataStore.isUniversalTotalDisplayed() && withTotal) {
-            players += PlayerData("Total", Color.RED)
-            players
-        } else {
-            players
-        }
-    }
+    private fun internalComputeResults(lap: UniversalLapData, withTotal: Boolean): List<Int> =
+        lap.points.toMutableList().apply { if (withTotal) add(sum()) }
 }
