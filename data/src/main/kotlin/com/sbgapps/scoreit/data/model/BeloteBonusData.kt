@@ -16,12 +16,7 @@
 
 package com.sbgapps.scoreit.data.model
 
-enum class BeloteBonusData(val points: Int) {
-    BELOTE(20),
-    RUN_3(20),
-    RUN_4(50),
-    RUN_5(100),
-    FOUR_NORMAL(100),
-    FOUR_NINE(150),
-    FOUR_JACK(200)
-}
+data class BeloteBonusData(
+    val player: PlayerPosition,
+    val bonus: BeloteBonus
+)

@@ -24,16 +24,15 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.FragmentEditionBeloteBonusBinding
-import com.sbgapps.scoreit.app.model.BeloteBonus
-import com.sbgapps.scoreit.data.model.PLAYER_1
-import com.sbgapps.scoreit.data.model.PLAYER_2
+import com.sbgapps.scoreit.data.model.BeloteBonus
+import com.sbgapps.scoreit.data.model.PlayerPosition
 import io.uniflow.androidx.flow.onStates
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class BeloteEditionBonusFragment : BottomSheetDialogFragment() {
 
     private val viewModel by sharedViewModel<BeloteEditionViewModel>()
-    private var beloteBonus: BeloteBonus = BeloteBonus.Belote
+    private var beloteBonus: BeloteBonus = BeloteBonus.BELOTE
     private lateinit var binding: FragmentEditionBeloteBonusBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,8 +43,8 @@ class BeloteEditionBonusFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         onStates(viewModel) { state ->
             if (state is BeloteEditionState.Content) {
-                binding.teamOne.text = state.players[PLAYER_1].name
-                binding.teamTwo.text = state.players[PLAYER_2].name
+                binding.teamOne.text = state.players[PlayerPosition.ONE.index].name
+                binding.teamTwo.text = state.players[PlayerPosition.TWO.index].name
 
                 beloteBonus = state.availableBonuses.first()
                 binding.bonus.text = getString(beloteBonus.resId)
@@ -70,5 +69,6 @@ class BeloteEditionBonusFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun getTeam(): Int = if (R.id.teamOne == binding.teamGroup.checkedButtonId) PLAYER_1 else PLAYER_2
+    private fun getTeam(): PlayerPosition =
+        if (R.id.teamOne == binding.teamGroup.checkedButtonId) PlayerPosition.ONE else PlayerPosition.TWO
 }

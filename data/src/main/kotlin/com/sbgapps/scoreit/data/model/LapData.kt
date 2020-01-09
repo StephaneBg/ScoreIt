@@ -16,8 +16,6 @@
 
 package com.sbgapps.scoreit.data.model
 
-import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.OUDLER_NONE
-
 sealed class LapData
 
 data class UniversalLapData(
@@ -28,25 +26,25 @@ data class UniversalLapData(
 
 data class TarotLapData(
     val playerCount: Int,
-    val taker: Int = PLAYER_1,
-    val partner: Int = if (5 == playerCount) PLAYER_2 else PLAYER_NONE,
-    val bid: TarotBidData = TarotBidData.SMALL,
-    val oudlers: Int = OUDLER_NONE,
+    val taker: PlayerPosition = PlayerPosition.ONE,
+    val partner: PlayerPosition = if (5 == playerCount) PlayerPosition.TWO else PlayerPosition.NONE,
+    val bid: TarotBid = TarotBid.SMALL,
+    val oudlers: List<TarotOudler> = emptyList(),
     val points: Int = 56,
-    val bonuses: List<Pair<Int, TarotBonusData>> = emptyList()
+    val bonuses: List<TarotBonusData> = emptyList()
 ) : LapData()
 
 data class BeloteLapData(
-    val scorer: Int = PLAYER_1,
+    val scorer: PlayerPosition = PlayerPosition.ONE,
     val points: Int = 81,
-    val bonuses: List<Pair<Int, BeloteBonusData>> = emptyList()
+    val bonuses: List<BeloteBonusData> = emptyList()
 ) : LapData()
 
 data class CoincheLapData(
-    val scorer: Int = PLAYER_1,
-    val bidder: Int = PLAYER_1,
+    val scorer: PlayerPosition = PlayerPosition.ONE,
+    val bidder: PlayerPosition = PlayerPosition.ONE,
     val bidPoints: Int = 110,
-    val coincheBid: CoincheBidData = CoincheBidData.NONE,
+    val coincheBid: CoincheBid = CoincheBid.NONE,
     val points: Int = 110,
-    val bonuses: List<Pair<Int, BeloteBonusData>> = emptyList()
+    val bonuses: List<BeloteBonusData> = emptyList()
 ) : LapData()

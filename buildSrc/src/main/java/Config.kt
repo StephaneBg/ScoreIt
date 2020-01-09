@@ -29,9 +29,12 @@ object Versions {
     const val coreKtx = "1.1.0"
     const val fragmentKtx = "1.1.0"
     const val navigation = "2.1.0"
+    const val preferences = "1.1.0"
+    const val moshi = "1.9.2"
     const val timber = "4.7.1"
     const val koinAndroidX = "2.0.1"
     const val uniflowAndroidX = "0.9.3"
+    const val storage = "2.1.0"
 }
 
 object Build {
@@ -57,10 +60,15 @@ object Libs {
     val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtx}"
     val navFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
     val navUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    val preferences = "androidx.preference:preference-ktx:${Versions.preferences}"
 
     val material = "com.google.android.material:material:${Versions.material}"
 
+    val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
+    val moshiAdapters = "com.squareup.moshi:moshi-adapters:${Versions.moshi}"
+    val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     val koinAndroidX = "org.koin:koin-androidx-viewmodel:${Versions.koinAndroidX}"
     val uniflowAndroidX = "io.uniflow:uniflow-androidx:${Versions.uniflowAndroidX}"
+    val storage = "com.snatik:storage:${Versions.storage}"
 }

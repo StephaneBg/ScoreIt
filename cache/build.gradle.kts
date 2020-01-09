@@ -44,8 +44,13 @@ dependencies {
     implementation(project(":core"))
 
     implementation(kotlin("stdlib", Versions.kotlin))
-    implementation("com.google.code.gson:gson:2.8.5")
-    implementation("com.sromku:simple-storage:1.2.1")
+    implementation(Libs.moshiKotlin)
+    implementation(Libs.moshiAdapters)
+    implementation(Libs.storage)
+    implementation(Libs.preferences)
     implementation(Libs.koinAndroidX)
     implementation(Libs.coreKtx)
+    implementation(Libs.timber)
+
+    kapt(Libs.moshiCodegen)
 }

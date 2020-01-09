@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.model
+package com.sbgapps.scoreit.data.model
 
 import androidx.annotation.StringRes
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.data.model.TarotBidData
+import com.sbgapps.scoreit.data.R
 
-enum class TarotBid(@StringRes val resId: Int) {
-    Small(R.string.tarot_bid_take),
-    Guard(R.string.tarot_bid_guard),
-    GuardWithoutKitty(R.string.tarot_bid_guard_without_kitty),
-    GuardAgainstKitty(R.string.tarot_bid_guard_against_kitty);
-
-    fun toData(): TarotBidData = TarotBidData.values()[ordinal]
+enum class TarotBonus(val points: Int, @StringRes val resId: Int) {
+    PETIT_AU_BOUT(10, R.string.tarot_bonus_petit_au_bout),
+    POIGNEE_SIMPLE(20, R.string.tarot_bonus_simple_poignee),
+    POIGNEE_DOUBLE(30, R.string.tarot_bonus_double_poignee),
+    POIGNEE_TRIPLE(40, R.string.tarot_bonus_triple_poignee),
+    CHELEM_NON_ANNONCE(200, R.string.tarot_bonus_slam_not_announced),
+    CHELEM_ANNONCE_REALISE(400, R.string.tarot_bonus_slam_announced_done),
+    CHELEM_ANNONCE_NON_REALISE(-200, R.string.tarot_bonus_slam_announced_not_done)
 }
-
-fun TarotBidData.toTarotBid(): TarotBid = TarotBid.values()[ordinal]

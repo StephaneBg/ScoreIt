@@ -16,10 +16,10 @@
 
 package com.sbgapps.scoreit.data.solver
 
+import com.sbgapps.scoreit.data.model.BeloteBonus
 import com.sbgapps.scoreit.data.model.BeloteBonusData
 import com.sbgapps.scoreit.data.model.BeloteLapData
-import com.sbgapps.scoreit.data.model.PLAYER_1
-import com.sbgapps.scoreit.data.model.PLAYER_2
+import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_CAPOT
 import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_TOTAL
 import com.sbgapps.scoreit.data.source.DataStore
@@ -28,24 +28,24 @@ class BeloteSolver(private val dataStore: DataStore) {
 
     fun computeResults(lap: BeloteLapData): Pair<List<Int>, Boolean> {
         val results = IntArray(2)
-        results[lap.scorer] = lap.points
-        results[lap.counter()] = lap.counterPoints()
+        results[lap.scorer.index] = lap.points
+        results[lap.counter().index] = lap.counterPoints()
 
         addBonuses(results, lap.bonuses)
 
-        val isWon = results[lap.scorer] >= results[lap.counter()]
+        val isWon = results[lap.scorer.index] >= results[lap.counter().index]
 
         if (!isWon) {
-            results[lap.scorer] = 0
-            results[lap.counter()] = POINTS_TOTAL
+            results[lap.scorer.index] = 0
+            results[lap.counter().index] = POINTS_TOTAL
             addBonuses(results, lap.bonuses)
         }
 
         return results.toList() to isWon
     }
 
-    private fun addBonuses(results: IntArray, bonuses: List<Pair<Int, BeloteBonusData>>) {
-        for ((player, bonus) in bonuses) results[player] += bonus.points
+    private fun addBonuses(results: IntArray, bonuses: List<BeloteBonusData>) {
+        for ((player, bonus) in bonuses) results[player.index] += bonus.points
     }
 
     fun computeScores(laps: List<BeloteLapData>): List<Int> {
@@ -54,7 +54,7 @@ class BeloteSolver(private val dataStore: DataStore) {
             val points = computeResults(lap).first
             if (isLitigation(points)) {
                 val counter = lap.counter()
-                scores[counter] += points[counter]
+                scores[counter.index] += points[counter.index]
             } else {
                 for (player in 0 until 2) scores[player] += points[player]
             }
@@ -62,7 +62,9 @@ class BeloteSolver(private val dataStore: DataStore) {
                 val previousLap = laps[index - 1]
                 val previousPoints = computeResults(previousLap).first
                 if (isLitigation(previousPoints)) {
-                    val winner = if (points[PLAYER_1] > points[PLAYER_2]) PLAYER_1 else PLAYER_2
+                    val winner =
+                        if (points[PlayerPosition.ONE.index] > points[PlayerPosition.TWO.index]) PlayerPosition.ONE.index
+                        else PlayerPosition.TWO.index
                     scores[winner] += previousPoints[winner]
                 }
             }
@@ -71,7 +73,8 @@ class BeloteSolver(private val dataStore: DataStore) {
     }
 
     private fun isLitigation(points: List<Int>): Boolean =
-        (81 == points[PLAYER_1] && 81 == points[PLAYER_2]) || (91 == points[PLAYER_1] && 91 == points[PLAYER_2])
+        (81 == points[PlayerPosition.ONE.index] && 81 == points[PlayerPosition.TWO.index]) ||
+                (91 == points[PlayerPosition.ONE.index] && 91 == points[PlayerPosition.TWO.index])
 
     fun isCapot(lap: BeloteLapData): Boolean = lap.points == POINTS_CAPOT
 
@@ -83,15 +86,15 @@ class BeloteSolver(private val dataStore: DataStore) {
 
     fun getPointsForDisplay(points: Int): Int = if (dataStore.isBeloteScoreRounded()) roundPoint(points) else points
 
-    fun getAvailableBonuses(lap: BeloteLapData): List<BeloteBonusData> {
-        val currentBonuses = lap.bonuses.map { it.second }
+    fun getAvailableBonuses(lap: BeloteLapData): List<BeloteBonus> {
+        val currentBonuses = lap.bonuses.map { it.bonus }
         return listOfNotNull(
-            BeloteBonusData.BELOTE.takeUnless { currentBonuses.contains(BeloteBonusData.BELOTE) },
-            BeloteBonusData.RUN_3,
-            BeloteBonusData.RUN_5,
-            BeloteBonusData.FOUR_NORMAL,
-            BeloteBonusData.FOUR_NINE.takeUnless { currentBonuses.contains(BeloteBonusData.FOUR_NINE) },
-            BeloteBonusData.FOUR_JACK.takeUnless { currentBonuses.contains(BeloteBonusData.FOUR_JACK) }
+            BeloteBonus.BELOTE.takeUnless { currentBonuses.contains(BeloteBonus.BELOTE) },
+            BeloteBonus.RUN_3,
+            BeloteBonus.RUN_5,
+            BeloteBonus.FOUR_NORMAL,
+            BeloteBonus.FOUR_NINE.takeUnless { currentBonuses.contains(BeloteBonus.FOUR_NINE) },
+            BeloteBonus.FOUR_JACK.takeUnless { currentBonuses.contains(BeloteBonus.FOUR_JACK) }
         )
     }
 
@@ -103,4 +106,5 @@ class BeloteSolver(private val dataStore: DataStore) {
 
 fun BeloteLapData.counterPoints(): Int = if (points == POINTS_CAPOT) 0 else POINTS_TOTAL - points
 
-fun BeloteLapData.counter(): Int = if (PLAYER_1 == scorer) PLAYER_2 else PLAYER_1
+fun BeloteLapData.counter(): PlayerPosition =
+    if (PlayerPosition.ONE == scorer) PlayerPosition.TWO else PlayerPosition.ONE

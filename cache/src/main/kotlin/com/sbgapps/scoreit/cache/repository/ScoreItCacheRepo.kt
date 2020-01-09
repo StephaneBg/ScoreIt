@@ -16,201 +16,42 @@
 
 package com.sbgapps.scoreit.cache.repository
 
-import com.sbgapps.scoreit.cache.manager.GameManager
-import com.sbgapps.scoreit.cache.model.Game
-import com.sbgapps.scoreit.cache.model.Lap
-import com.sbgapps.scoreit.cache.model.Player
-import com.sbgapps.scoreit.cache.model.belote.BeloteBonusCache
-import com.sbgapps.scoreit.cache.model.belote.BeloteGame
-import com.sbgapps.scoreit.cache.model.belote.BeloteLap
-import com.sbgapps.scoreit.cache.model.coinche.CoincheGame
-import com.sbgapps.scoreit.cache.model.tarot.*
-import com.sbgapps.scoreit.cache.model.universal.UniversalGame
-import com.sbgapps.scoreit.cache.model.universal.UniversalLap
-import com.sbgapps.scoreit.data.model.*
+import com.sbgapps.scoreit.cache.model.BeloteGameCache
+import com.sbgapps.scoreit.cache.model.CoincheGameCache
+import com.sbgapps.scoreit.cache.model.TarotGameCache
+import com.sbgapps.scoreit.cache.model.UniversalGameCache
+import com.sbgapps.scoreit.data.model.BeloteGameData
+import com.sbgapps.scoreit.data.model.CoincheGameData
+import com.sbgapps.scoreit.data.model.GameData
+import com.sbgapps.scoreit.data.model.TarotGameData
+import com.sbgapps.scoreit.data.model.UniversalGameData
 import com.sbgapps.scoreit.data.repository.CacheRepo
+import com.sbgapps.scoreit.data.repository.PreferencesRepo
 
-class ScoreItCacheRepo(private val gameManager: GameManager) : CacheRepo {
+class ScoreItCacheRepo(
+    private val gameDao: ScoreItGameDao,
+    private val preferencesRepo: PreferencesRepo
+) : CacheRepo {
 
-    override fun loadGame(): GameData = gameManager.loadGame().toGameData()
+    override fun loadGame(): GameData = gameDao.getCurrentGame(
+        preferencesRepo.getGameType(),
+        preferencesRepo.getPlayerCount()
+    ).toData()
 
-    override fun createGame(name: String): GameData = gameManager.createGame(name).toGameData()
+    override fun createGame(fileName: String): GameData = gameDao.createGame(
+        preferencesRepo.getGameType(),
+        preferencesRepo.getPlayerCount(),
+        fileName
+    ).toData()
 
-    override fun saveGame(game: GameData) {
-        val gameToSave = when (game) {
-            is UniversalGameData -> UniversalGame(
-                game.players.map { Player(it.name, it.color) },
-                game.laps.map { UniversalLap(it.points.toIntArray()) }
-            )
-
-            is TarotGameData -> when (game.players.size) {
-                3 -> {
-                    TarotThreeGame(
-                        game.players.map { Player(it.name, it.color) },
-                        game.laps.map {
-                            TarotThreeLap(
-                                it.taker,
-                                TarotBidCache(it.bid.ordinal),
-                                it.points,
-                                it.oudlers,
-                                it.bonuses.map { (player, bonus) ->
-                                    TarotBonusCache(
-                                        bonus.ordinal,
-                                        player
-                                    )
-                                }
-                            )
-                        }
-                    )
-                }
-                4 -> {
-                    TarotFourGame(
-                        game.players.map { Player(it.name, it.color) },
-                        game.laps.map {
-                            TarotFourLap(
-                                it.taker,
-                                TarotBidCache(it.bid.ordinal),
-                                it.points,
-                                it.oudlers,
-                                it.bonuses.map { (player, bonus) ->
-                                    TarotBonusCache(
-                                        bonus.ordinal,
-                                        player
-                                    )
-                                }
-                            )
-                        }
-                    )
-                }
-                5 -> {
-                    TarotFiveGame(
-                        game.players.map { Player(it.name, it.color) },
-                        game.laps.map {
-                            TarotFiveLap(
-                                it.taker,
-                                TarotBidCache(it.bid.ordinal),
-                                it.points,
-                                it.oudlers,
-                                it.bonuses.map { (player, bonus) ->
-                                    TarotBonusCache(
-                                        bonus.ordinal,
-                                        player
-                                    )
-                                },
-                                it.partner
-                            )
-                        }
-                    )
-                }
-                else -> error("Can't play Tarot with another player count")
-            }
-
-            is BeloteGameData -> BeloteGame(
-                game.players.map { Player(it.name, it.color) },
-                game.laps.map {
-                    BeloteLap(
-                        it.scorer,
-                        it.points,
-                        it.bonuses.map { bonus ->
-                            BeloteBonusCache(
-                                bonus.second.ordinal,
-                                bonus.first
-                            )
-                        })
-                }
-            )
-
-//            is CoincheGameData -> CoincheGame(
-//                game.players.map { Player(it.name, it.color) },
-//                game.laps.map { CoincheLap(it.points.toIntArray()) }
-//            )
+    override fun saveGame(gameData: GameData) {
+        val gameCache = when (gameData) {
+            is UniversalGameData -> UniversalGameCache(gameData)
+            is TarotGameData -> TarotGameCache(gameData)
+            is BeloteGameData -> BeloteGameCache(gameData)
+            is CoincheGameData -> CoincheGameCache(gameData)
             else -> error("Unknown game")
         }
-        gameManager.saveGame(gameToSave)
+        gameDao.saveGame(gameCache, preferencesRepo.getPlayerCount())
     }
-
-    private fun Game<Lap>.toGameData(): GameData = when (this) {
-        is UniversalGame -> UniversalGameData(
-            players.map { it.toPlayerData() },
-            laps.map {
-                UniversalLapData(it.scores.toList())
-            }
-        )
-
-        is TarotThreeGame -> TarotGameData(
-            players.map { it.toPlayerData() },
-            laps.map {
-                TarotLapData(
-                    TarotThreeGame.NB_PLAYERS,
-                    it.taker,
-                    PLAYER_NONE,
-                    it.bid.fromCache(),
-                    it.oudlers,
-                    it.points,
-                    it.bonuses.map { bonus -> bonus.player to bonus.fromCache() }
-                )
-            }
-        )
-
-        is TarotFourGame -> TarotGameData(
-            players.map { it.toPlayerData() },
-            laps.map {
-                TarotLapData(
-                    TarotFourGame.NB_PLAYERS,
-                    it.taker,
-                    PLAYER_NONE,
-                    it.bid.fromCache(),
-                    it.oudlers,
-                    it.points,
-                    it.bonuses.map { bonus -> bonus.player to bonus.fromCache() }
-                )
-            }
-        )
-
-        is TarotFiveGame -> TarotGameData(
-            players.map { it.toPlayerData() },
-            laps.map {
-                TarotLapData(
-                    TarotFiveGame.NB_PLAYERS,
-                    it.taker,
-                    it.partner,
-                    it.bid.fromCache(),
-                    it.oudlers,
-                    it.points,
-                    it.bonuses.map { bonus -> bonus.player to bonus.fromCache() }
-                )
-            }
-        )
-
-        is BeloteGame -> BeloteGameData(
-            players.map { it.toPlayerData() },
-            laps.map {
-                BeloteLapData(
-                    it.scorer,
-                    it.points,
-                    it.bonuses.map { bonus -> bonus.player to bonus.fromCache() }
-                )
-            }
-        )
-
-        is CoincheGame -> CoincheGameData(
-            players.map { it.toPlayerData() },
-            laps.map {
-                CoincheLapData(
-                    it.scorer,
-                    it.bidder,
-                    it.bid,
-                    CoincheBidData.values()[it.coinche],
-                    it.points,
-                    it.bonuses.map { bonus -> bonus.player to bonus.fromCache() }
-                )
-            }
-        )
-
-        else -> error("Unknown game")
-    }
-
-    private fun TarotBidCache.fromCache(): TarotBidData = TarotBidData.values()[get()]
-    private fun TarotBonusCache.fromCache(): TarotBonusData = TarotBonusData.values()[get()]
-    private fun BeloteBonusCache.fromCache(): BeloteBonusData = BeloteBonusData.values()[get()]
 }

@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.model
+package com.sbgapps.scoreit.cache.model
 
-import androidx.annotation.StringRes
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.data.model.CoincheBidData
+import com.sbgapps.scoreit.data.model.PlayerPosition
+import com.sbgapps.scoreit.data.model.TarotBonus
+import com.sbgapps.scoreit.data.model.TarotBonusData
+import com.squareup.moshi.JsonClass
 
-enum class CoincheBid(@StringRes val resId: Int) {
-    None(R.string.coinche_coinche_none),
-    Coinche(R.string.coinche_coinche_coinche),
-    Surcoinche(R.string.coinche_coinche_surcoinche);
+@JsonClass(generateAdapter = true)
+data class TarotBonusCache(
+    val player: PlayerPosition,
+    val bonus: TarotBonus
+) {
+    constructor(bonus: TarotBonusData) : this(
+        bonus.player,
+        bonus.bonus
+    )
 
-    fun toData(): CoincheBidData = CoincheBidData.values()[ordinal]
+    fun toData(): TarotBonusData = TarotBonusData(player, bonus)
 }
-
-fun CoincheBidData.toCoincheBid(): CoincheBid = CoincheBid.values()[ordinal]

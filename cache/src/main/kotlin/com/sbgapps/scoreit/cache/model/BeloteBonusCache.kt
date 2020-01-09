@@ -14,25 +14,23 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.model.universal;
+package com.sbgapps.scoreit.cache.model
 
-import android.content.Context;
+import com.sbgapps.scoreit.data.model.BeloteBonus
+import com.sbgapps.scoreit.data.model.BeloteBonusData
+import com.sbgapps.scoreit.data.model.PlayerPosition
+import com.squareup.moshi.JsonClass
 
-import com.sbgapps.scoreit.cache.model.Game;
-import com.sbgapps.scoreit.cache.model.Player;
+@JsonClass(generateAdapter = true)
+data class BeloteBonusCache(
+    val player: PlayerPosition,
+    val bonus: BeloteBonus
+) {
 
-import java.util.List;
+    constructor(bonus: BeloteBonusData) : this(
+        bonus.player,
+        bonus.bonus
+    )
 
-/**
- * Created by sbaiget on 24/06/2014.
- */
-public class UniversalGame extends Game<UniversalLap> {
-
-    public UniversalGame(Context context, int playerCount) {
-        super(context, playerCount);
-    }
-
-    public UniversalGame(List<Player> players, List<UniversalLap> laps) {
-        super(laps, players);
-    }
+    fun toData(): BeloteBonusData = BeloteBonusData(player, bonus)
 }

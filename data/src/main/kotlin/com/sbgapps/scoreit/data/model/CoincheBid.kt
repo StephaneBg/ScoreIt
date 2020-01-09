@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.model.tarot;
+package com.sbgapps.scoreit.data.model
 
-import java.util.List;
+import androidx.annotation.StringRes
+import com.sbgapps.scoreit.data.R
 
-/**
- * Created by sbaiget on 07/12/13.
- */
-public class TarotFourLap extends TarotLap {
-
-    public TarotFourLap(int taker, TarotBidCache bid, int points, int oudlers, List<TarotBonusCache> bonuses) {
-        super(taker, bid, points, oudlers, bonuses);
-    }
+enum class CoincheBid(val coefficient: Int, @StringRes val resId: Int) {
+    NONE(1, R.string.coinche_coinche_none),
+    COINCHE(2, R.string.coinche_coinche_coinche),
+    SURCOINCHE(4, R.string.coinche_coinche_surcoinche);
 }
