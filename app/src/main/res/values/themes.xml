@@ -47,6 +47,7 @@
 
         <item name="materialButtonStyle">@style/Widget.ScoreIt.Button</item>
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.ScoreIt.BottomSheetDialog</item>
+        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
 
         <item name="android:statusBarColor">@color/status_bar</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>

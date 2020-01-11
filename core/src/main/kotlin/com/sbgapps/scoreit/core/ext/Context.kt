@@ -23,10 +23,13 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.TypedValue
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+
 
 inline fun <reified T : Activity> Context.start(bundle: Bundle? = null, configIntent: Intent.() -> Unit = {}) {
     startActivity(Intent(this, T::class.java).apply(configIntent), bundle)
@@ -64,4 +67,9 @@ private fun Resources.Theme.attr(@AttrRes attribute: Int): TypedValue {
     }
 
     return typedValue
+}
+
+fun Context.showKeyboard(view: View) {
+    val inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
 }

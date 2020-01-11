@@ -23,7 +23,10 @@ import com.sbgapps.scoreit.app.model.Player
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayoutAdapter
 import com.sbgapps.scoreit.core.ext.layoutInflater
 
-class HeaderAdapter(private val model: Header) : AdaptableLinearLayoutAdapter {
+class HeaderAdapter(
+    private val model: Header,
+    private val editCallback: (position: Int) -> Unit
+) : AdaptableLinearLayoutAdapter {
 
     override fun getView(position: Int, parent: ViewGroup): View {
         val binding = ListItemHeaderBinding.inflate(parent.layoutInflater(), parent, false)
@@ -31,6 +34,7 @@ class HeaderAdapter(private val model: Header) : AdaptableLinearLayoutAdapter {
         binding.player.apply {
             text = player.name
             setTextColor(player.color)
+            setOnClickListener { editCallback(position) }
         }
         binding.score.text = score.toString()
         return binding.root

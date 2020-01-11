@@ -49,21 +49,25 @@ class DataStore(
     }
 
     fun isUniversalTotalDisplayed(): Boolean = prefsRepo.isTotalDisplayed(GameType.UNIVERSAL)
+
     fun setUniversalTotalDisplayed(displayed: Boolean) {
         prefsRepo.setTotalDisplayed(GameType.UNIVERSAL, displayed)
     }
 
     fun isBeloteScoreRounded(): Boolean = prefsRepo.isRounded(GameType.BELOTE)
+
     fun setBeloteScoreRounded(rounded: Boolean) {
         prefsRepo.setRounded(GameType.BELOTE, rounded)
     }
 
     fun isCoincheScoreRounded(): Boolean = prefsRepo.isRounded(GameType.COINCHE)
+
     fun setCoincheScoreRounded(rounded: Boolean) {
         prefsRepo.setRounded(GameType.COINCHE, rounded)
     }
 
     fun getPrefThemeMode(): String = prefsRepo.getThemeMode()
+
     fun setPrefThemeMode(mode: String) {
         prefsRepo.setThemeMode(mode)
     }

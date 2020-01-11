@@ -95,5 +95,4 @@ dependencies {
     implementation(Libs.koinAndroidX)
     implementation(Libs.uniflowAndroidX)
     implementation(Libs.timber)
-    implementation("com.github.skydoves:colorpickerview:2.1.5")
 }

@@ -21,10 +21,17 @@
     android:padding="@dimen/margin_padding_size_medium"
     >
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/gameName"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        />
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/playerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName|textCapWords"
+            android:hint="@string/dialog_action_enter_name"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 </FrameLayout>
