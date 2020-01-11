@@ -78,6 +78,7 @@
     <string name="dialog_action_game_load">Save and load</string>
     <string name="dialog_action_enter_name">Enter name</string>
     <string name="dialog_action_pick_contact">Pick contact</string>
+    <string name="dialog_action_pick_color">Pick color</string>
 
     <!-- Snackbar -->
     <string name="snackbar_msg_on_lap_deleted">Lap deleted</string>
@@ -111,18 +112,4 @@
     <!-- Content descriptions -->
     <string name="content_description_delete">Delete</string>
     <string name="content_description_edit">Edit</string>
-
-    <!-- Tabs -->
-    <string name="tab_title_application">App</string>
-    <string name="tab_title_translations">Translations</string>
-
-    <!-- Languages -->
-    <string name="language_english">English</string>
-    <string name="language_french">French</string>
-    <string name="language_dutch">Dutch</string>
-    <string name="language_russian">Russian</string>
-    <string name="language_german">German</string>
-    <string name="language_spanish">Spanish</string>
-    <string name="language_italian">Italian</string>
-    <string name="language_arabic">Arabic</string>
 </resources>

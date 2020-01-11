@@ -20,15 +20,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.snackbar.Snackbar
 import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.app.databinding.DialogPlayerNameBinding
 import com.sbgapps.scoreit.app.databinding.FragmentHistoryBinding
-import com.sbgapps.scoreit.app.model.*
+import com.sbgapps.scoreit.app.model.BeloteLap
+import com.sbgapps.scoreit.app.model.CoincheLap
+import com.sbgapps.scoreit.app.model.Lap
+import com.sbgapps.scoreit.app.model.TarotLap
+import com.sbgapps.scoreit.app.model.UniversalLap
 import com.sbgapps.scoreit.app.ui.Content
 import com.sbgapps.scoreit.app.ui.GameEvent
 import com.sbgapps.scoreit.app.ui.GameViewModel
+import com.sbgapps.scoreit.app.ui.color.ColorPickerFragment
+import com.sbgapps.scoreit.core.ext.onImeActionDone
 import com.sbgapps.scoreit.core.ui.BaseFragment
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
 import com.sbgapps.scoreit.core.widget.ItemAdapter
@@ -66,7 +74,7 @@ class HistoryFragment : BaseFragment() {
         onStates(viewModel) { state ->
             when (state) {
                 is Content -> {
-                    binding.header.adapter = HeaderAdapter(state.header)
+                    binding.header.adapter = HeaderAdapter(state.header, ::displayPlayerEditionOptions)
                     historyAdapter.updateItems(getItems(state.results))
                 }
             }
@@ -119,5 +127,48 @@ class HistoryFragment : BaseFragment() {
 
     private fun onDelete(position: Int) {
         viewModel.deleteLap(position)
+    }
+
+    private fun displayPlayerEditionOptions(position: Int) {
+        if (!viewModel.canEditPlayer(position)) return
+        AlertDialog.Builder(requireContext())
+            .setItems(R.array.dialog_edit_player_actions) { _, which ->
+                when (which) {
+                    0 -> displayNameDialog(position)
+                    1 -> displayColorDialog(position)
+                }
+            }
+            .create()
+            .show()
+    }
+
+    private fun displayNameDialog(position: Int) {
+        val action = { name: String ->
+            if (name.isNotEmpty()) viewModel.setPlayerName(position, name)
+        }
+        val view = DialogPlayerNameBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(view.root)
+            .setPositiveButton(R.string.button_action_ok) { _, _ ->
+                action(view.playerName.text.toString())
+            }
+            .create()
+        view.playerName.apply {
+            requestFocus()
+            onImeActionDone {
+                action(text.toString())
+                dialog.dismiss()
+            }
+        }
+        dialog.show()
+    }
+
+    private fun displayColorDialog(position: Int) {
+        ColorPickerFragment().show(
+            resources.getIntArray(R.array.colors),
+            childFragmentManager
+        ) { color ->
+            viewModel.setPlayerColor(position, color)
+        }
     }
 }

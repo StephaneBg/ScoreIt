@@ -53,20 +53,20 @@ class ScoreItPreferencesRepo(private val preferences: SharedPreferences) : Prefe
     override fun isRounded(gameType: GameType): Boolean = when (gameType) {
         GameType.BELOTE -> preferences.getBoolean(USER_PREF_BELOTE_ROUND, true)
         GameType.COINCHE -> preferences.getBoolean(USER_PREF_COINCHE_ROUND, true)
-        else -> true
+        else -> error("This game can't have rounded points")
     }
 
     override fun setRounded(gameType: GameType, rounded: Boolean) {
         return when (gameType) {
             GameType.BELOTE -> preferences.edit { putBoolean(USER_PREF_BELOTE_ROUND, rounded) }
             GameType.COINCHE -> preferences.edit { putBoolean(USER_PREF_COINCHE_ROUND, rounded) }
-            else -> Unit
+            else -> error("This game can't have rounded points")
         }
     }
 
     override fun isTotalDisplayed(gameType: GameType): Boolean = when (gameType) {
         GameType.UNIVERSAL -> preferences.getBoolean(USER_PREF_UNIVERSAL_TOTAL, false)
-        else -> false
+        else -> error("Cannot display total for this game")
     }
 
     override fun setTotalDisplayed(gameType: GameType, displayed: Boolean) {

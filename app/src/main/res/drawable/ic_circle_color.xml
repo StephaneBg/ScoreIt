@@ -14,17 +14,14 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/margin_padding_size_medium"
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"
     >
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/gameName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
+    <solid android:color="#666666" />
+
+    <size
+        android:width="40dp"
+        android:height="40dp"
         />
-</FrameLayout>
+</shape>

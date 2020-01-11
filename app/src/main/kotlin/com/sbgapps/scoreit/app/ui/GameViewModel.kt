@@ -16,6 +16,7 @@
 
 package com.sbgapps.scoreit.app.ui
 
+import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.model.BeloteLap
@@ -52,7 +53,7 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
 
     fun selectGame(gameType: GameType) {
         setState {
-            useCase.setCurrentGame(gameType)
+            useCase.setGameType(gameType)
             getContent()
         }
     }
@@ -102,6 +103,22 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
     fun confirmLapDeletion(position: Int) {
         setState {
             useCase.deleteLap(position)
+            getContent()
+        }
+    }
+
+    fun canEditPlayer(position: Int): Boolean = useCase.canEditPlayer(position)
+
+    fun setPlayerName(position: Int, name: String) {
+        setState {
+            useCase.editPlayerName(position, name)
+            getContent()
+        }
+    }
+
+    fun setPlayerColor(position: Int, @ColorInt color: Int) {
+        setState {
+            useCase.editPlayerColor(position, color)
             getContent()
         }
     }
@@ -159,7 +176,6 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
             val (results, isWon) = useCase.getLapResults(it)
             CoincheLap(results, isWon)
         }
-        else -> error("Unknown game")
     }
 
     private fun getTarotLapInfo(lap: TarotLapData): StringFactory {

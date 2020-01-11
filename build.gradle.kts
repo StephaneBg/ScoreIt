@@ -16,7 +16,6 @@
 
 buildscript {
     repositories {
-        //        maven("http://picnex000.dom101.mapres:8081/repository/g-maven-ibp/")
         jcenter()
         google()
     }
@@ -29,7 +28,6 @@ buildscript {
 
 allprojects {
     repositories {
-        //        maven("http://picnex000.dom101.mapres:8081/repository/g-maven-ibp/")
         jcenter()
         google()
     }

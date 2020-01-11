@@ -17,6 +17,9 @@
 package com.sbgapps.scoreit.data.interactor
 
 import android.graphics.Color
+import androidx.annotation.ColorInt
+import com.sbgapps.scoreit.core.ext.asListOfType
+import com.sbgapps.scoreit.core.ext.asMutableListOfType
 import com.sbgapps.scoreit.core.ext.replace
 import com.sbgapps.scoreit.data.model.BeloteGameData
 import com.sbgapps.scoreit.data.model.BeloteLapData
@@ -46,18 +49,20 @@ class GameUseCase(
 
     private var editionState: EditionState? = null
 
-    fun setCurrentGame(gameType: GameType) {
+    fun setGameType(gameType: GameType) {
         editionState = null
         dataStore.setCurrentGame(gameType)
     }
 
     fun getGame(): GameData = dataStore.getGame()
 
-    fun getPlayers(withTotal: Boolean = false): List<PlayerData> = when (val game = getGame()) {
-        is UniversalGameData -> game.players.toMutableList().apply {
-            if (dataStore.isUniversalTotalDisplayed() && withTotal) add(PlayerData("Total", Color.RED))
+    fun getPlayers(withTotal: Boolean = false): List<PlayerData> {
+        val game = getGame()
+        return if (withTotal && game is UniversalGameData && dataStore.isUniversalTotalDisplayed()) {
+            game.players.toMutableList().apply { add(PlayerData("Total", Color.RED)) }
+        } else {
+            game.players
         }
-        else -> game.players
     }
 
     fun getLapResults(lap: LapData): Pair<List<Int>, Boolean> = when (lap) {
@@ -83,6 +88,27 @@ class GameUseCase(
     fun setPlayerCount(count: Int) {
         editionState = null
         dataStore.setPlayerCount(count)
+    }
+
+    fun editPlayerName(position: Int, name: String) {
+        val player = getPlayers()[position]
+        editPlayer(position, name, player.color)
+    }
+
+    fun editPlayerColor(position: Int, @ColorInt color: Int) {
+        val player = getPlayers()[position]
+        editPlayer(position, player.name, color)
+    }
+
+    private fun editPlayer(position: Int, name: String, @ColorInt color: Int) {
+        val players = getPlayers().replace(position, PlayerData(name, color))
+        val editedGame = when (val game = getGame()) {
+            is UniversalGameData -> UniversalGameData(players, game.laps)
+            is TarotGameData -> TarotGameData(players, game.laps)
+            is BeloteGameData -> BeloteGameData(players, game.laps)
+            is CoincheGameData -> CoincheGameData(players, game.laps)
+        }
+        dataStore.saveGame(editedGame)
     }
 
     fun getEditedLap(): LapData = when (val state = editionState) {
@@ -136,15 +162,15 @@ class GameUseCase(
     }
 
     private inline fun <reified T> actualAddLap(game: GameData, state: EditionState.Creation): List<T> {
-        val laps = game.laps.toMutableList() as MutableList<T>
+        val laps = game.laps.asMutableListOfType<T>()
         laps += state.createdLap as T
         return laps
     }
 
     private inline fun <reified T> actualEditLap(game: GameData, state: EditionState.Modification): List<T> {
-        val laps = (game.laps as List<T>)
+        val laps = game.laps.asListOfType<T>()
         val index = laps.indexOf(state.initialLapData as T)
-        return laps.toMutableList().replace(index, state.modifiedLapData as T)
+        return laps.replace(index, state.modifiedLapData as T)
     }
 
     fun reset() {
@@ -179,9 +205,18 @@ class GameUseCase(
     }
 
     private inline fun <reified T> actualDeleteLap(game: GameData, position: Int): List<T> {
-        val laps = game.laps.toMutableList()
+        val laps = game.laps.asMutableListOfType<T>()
         laps.removeAt(position)
-        return laps as List<T>
+        return laps
+    }
+
+    fun canEditPlayer(position: Int): Boolean {
+        return when (getGame()) {
+            is UniversalGameData ->
+                if (dataStore.isUniversalTotalDisplayed()) position != getPlayers().size
+                else true
+            else -> true
+        }
     }
 }
 

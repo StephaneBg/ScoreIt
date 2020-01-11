@@ -22,9 +22,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sbgapps.scoreit.core.ext.inflate
 
-class GenericRecyclerViewAdapter : RecyclerView.Adapter<BaseViewHolder>() {
+class GenericRecyclerViewAdapter(initialItems: List<ItemAdapter> = emptyList()) :
+    RecyclerView.Adapter<BaseViewHolder>() {
 
-    var items: List<ItemAdapter> = emptyList()
+    var items: List<ItemAdapter> = initialItems
         private set
 
     fun updateItems(newItems: List<ItemAdapter>, diffResult: DiffUtil.DiffResult? = null) {
@@ -43,6 +44,4 @@ class GenericRecyclerViewAdapter : RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) =
         items[position].onBindViewHolder(holder)
-
-    inline fun <reified T> getItems() = items as T
 }
