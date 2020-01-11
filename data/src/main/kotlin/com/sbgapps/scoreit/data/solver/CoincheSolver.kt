@@ -16,10 +16,9 @@
 
 package com.sbgapps.scoreit.data.solver
 
-import com.sbgapps.scoreit.data.model.BeloteBonusData
+import com.sbgapps.scoreit.data.model.BeloteBonus
 import com.sbgapps.scoreit.data.model.CoincheLapData
-import com.sbgapps.scoreit.data.model.PLAYER_1
-import com.sbgapps.scoreit.data.model.PLAYER_2
+import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.source.DataStore
 
 class CoincheSolver(private val dataStore: DataStore) {
@@ -36,25 +35,25 @@ class CoincheSolver(private val dataStore: DataStore) {
             points[1] = 162 - lap.points
         }
 
-        if (PLAYER_1 == lap.scorer) {
-            results[PLAYER_1] = points[0]
-            results[PLAYER_2] = points[1]
+        if (PlayerPosition.ONE == lap.scorer) {
+            results[PlayerPosition.ONE.index] = points[0]
+            results[PlayerPosition.TWO.index] = points[1]
         } else {
-            results[PLAYER_1] = points[1]
-            results[PLAYER_2] = points[0]
+            results[PlayerPosition.ONE.index] = points[1]
+            results[PlayerPosition.TWO.index] = points[0]
         }
 
         // Add bonuses
-        for ((player, bonus) in lap.bonuses) results[player] += bonus.points
+        for ((player, bonus) in lap.bonuses) results[player.index] += bonus.points
 
         var bidderPts: Int
         var counterPts: Int
-        if (PLAYER_1 == lap.bidder) {
-            bidderPts = results[PLAYER_1]
-            counterPts = results[PLAYER_2]
+        if (PlayerPosition.ONE == lap.bidder) {
+            bidderPts = results[PlayerPosition.ONE.index]
+            counterPts = results[PlayerPosition.TWO.index]
         } else {
-            bidderPts = results[PLAYER_2]
-            counterPts = results[PLAYER_1]
+            bidderPts = results[PlayerPosition.TWO.index]
+            counterPts = results[PlayerPosition.ONE.index]
         }
 
         val isWon = bidderPts >= lap.bidPoints && bidderPts > counterPts
@@ -69,12 +68,12 @@ class CoincheSolver(private val dataStore: DataStore) {
             counterPts *= lap.coincheBid.coefficient
         }
 
-        if (PLAYER_1 == lap.bidder) {
-            results[PLAYER_1] = bidderPts
-            results[PLAYER_2] = counterPts
+        if (PlayerPosition.ONE == lap.bidder) {
+            results[PlayerPosition.ONE.index] = bidderPts
+            results[PlayerPosition.TWO.index] = counterPts
         } else {
-            results[PLAYER_1] = counterPts
-            results[PLAYER_2] = bidderPts
+            results[PlayerPosition.ONE.index] = counterPts
+            results[PlayerPosition.TWO.index] = bidderPts
         }
 
         return results.toList() to isWon
@@ -94,16 +93,16 @@ class CoincheSolver(private val dataStore: DataStore) {
 
     fun canDecrement(lap: CoincheLapData): Pair<Boolean, Boolean> = (lap.bidPoints >= 110) to (lap.points >= 20)
 
-    fun getAvailableBonuses(lap: CoincheLapData): List<BeloteBonusData> {
-        val currentBonuses = lap.bonuses.map { it.second }
-        val bonuses = mutableListOf<BeloteBonusData>()
-        if (!currentBonuses.contains(BeloteBonusData.BELOTE)) bonuses.add(BeloteBonusData.BELOTE)
-        bonuses.add(BeloteBonusData.RUN_3)
-        bonuses.add(BeloteBonusData.RUN_4)
-        bonuses.add(BeloteBonusData.RUN_5)
-        bonuses.add(BeloteBonusData.FOUR_NORMAL)
-        bonuses.add(BeloteBonusData.FOUR_NINE)
-        bonuses.add(BeloteBonusData.FOUR_JACK)
+    fun getAvailableBonuses(lap: CoincheLapData): List<BeloteBonus> {
+        val currentBonuses = lap.bonuses.map { it.bonus }
+        val bonuses = mutableListOf<BeloteBonus>()
+        if (!currentBonuses.contains(BeloteBonus.BELOTE)) bonuses.add(BeloteBonus.BELOTE)
+        bonuses.add(BeloteBonus.RUN_3)
+        bonuses.add(BeloteBonus.RUN_4)
+        bonuses.add(BeloteBonus.RUN_5)
+        bonuses.add(BeloteBonus.FOUR_NORMAL)
+        bonuses.add(BeloteBonus.FOUR_NINE)
+        bonuses.add(BeloteBonus.FOUR_JACK)
         return bonuses
     }
 

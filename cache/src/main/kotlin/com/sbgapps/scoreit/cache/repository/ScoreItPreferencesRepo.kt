@@ -14,71 +14,65 @@
  * limitations under the License.
  */
 
-@file:Suppress("DEPRECATION")
-
 package com.sbgapps.scoreit.cache.repository
 
-import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import androidx.core.content.edit
 import com.sbgapps.scoreit.core.utils.THEME_MODE_AUTO
-import com.sbgapps.scoreit.data.model.Game
+import com.sbgapps.scoreit.data.model.GameType
 import com.sbgapps.scoreit.data.repository.PreferencesRepo
 import kotlin.math.max
 
-class ScoreItPreferencesRepo(context: Context) : PreferencesRepo {
+class ScoreItPreferencesRepo(private val preferences: SharedPreferences) : PreferencesRepo {
 
-    private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    override fun getGameType(): GameType =
+        GameType.values()[preferences.getInt(USER_PREF_CURRENT_GAME, GameType.UNIVERSAL.ordinal)]
 
-    override fun getCurrentGame(): Game =
-        Game.values()[preferences.getInt(USER_PREF_CURRENT_GAME, Game.UNIVERSAL.ordinal)]
-
-    override fun setCurrentGame(game: Game) {
+    override fun setGameType(gameType: GameType) {
         preferences.edit {
-            putInt(USER_PREF_CURRENT_GAME, game.ordinal)
+            putInt(USER_PREF_CURRENT_GAME, gameType.ordinal)
         }
     }
 
-    override fun getPlayerCount(): Int = when (getCurrentGame()) {
-        Game.UNIVERSAL -> preferences.getInt(USER_PREF_UNIVERSAL_PLAYER_CNT, 5)
-        Game.TAROT -> preferences.getInt(USER_PREF_TAROT_PLAYER_CNT, 5)
+    override fun getPlayerCount(): Int = when (getGameType()) {
+        GameType.UNIVERSAL -> preferences.getInt(USER_PREF_UNIVERSAL_PLAYER_CNT, 5)
+        GameType.TAROT -> preferences.getInt(USER_PREF_TAROT_PLAYER_CNT, 5)
         else -> 2
     }
 
     override fun setPlayerCount(count: Int) {
         preferences.edit {
-            when (getCurrentGame()) {
-                Game.UNIVERSAL -> putInt(USER_PREF_UNIVERSAL_PLAYER_CNT, max(2, count))
-                Game.TAROT -> putInt(USER_PREF_TAROT_PLAYER_CNT, max(3, count))
+            when (getGameType()) {
+                GameType.UNIVERSAL -> putInt(USER_PREF_UNIVERSAL_PLAYER_CNT, max(2, count))
+                GameType.TAROT -> putInt(USER_PREF_TAROT_PLAYER_CNT, max(3, count))
                 else -> error("Cannot set player count for this game")
             }
         }
     }
 
-    override fun isRounded(game: Game): Boolean = when (game) {
-        Game.BELOTE -> preferences.getBoolean(USER_PREF_BELOTE_ROUND, true)
-        Game.COINCHE -> preferences.getBoolean(USER_PREF_COINCHE_ROUND, true)
+    override fun isRounded(gameType: GameType): Boolean = when (gameType) {
+        GameType.BELOTE -> preferences.getBoolean(USER_PREF_BELOTE_ROUND, true)
+        GameType.COINCHE -> preferences.getBoolean(USER_PREF_COINCHE_ROUND, true)
         else -> true
     }
 
-    override fun setRounded(game: Game, rounded: Boolean) {
-        return when (game) {
-            Game.BELOTE -> preferences.edit { putBoolean(USER_PREF_BELOTE_ROUND, rounded) }
-            Game.COINCHE -> preferences.edit { putBoolean(USER_PREF_COINCHE_ROUND, rounded) }
+    override fun setRounded(gameType: GameType, rounded: Boolean) {
+        return when (gameType) {
+            GameType.BELOTE -> preferences.edit { putBoolean(USER_PREF_BELOTE_ROUND, rounded) }
+            GameType.COINCHE -> preferences.edit { putBoolean(USER_PREF_COINCHE_ROUND, rounded) }
             else -> Unit
         }
     }
 
-    override fun isTotalDisplayed(game: Game): Boolean = when (game) {
-        Game.UNIVERSAL -> preferences.getBoolean(USER_PREF_UNIVERSAL_TOTAL, false)
+    override fun isTotalDisplayed(gameType: GameType): Boolean = when (gameType) {
+        GameType.UNIVERSAL -> preferences.getBoolean(USER_PREF_UNIVERSAL_TOTAL, false)
         else -> false
     }
 
-    override fun setTotalDisplayed(game: Game, displayed: Boolean) {
+    override fun setTotalDisplayed(gameType: GameType, displayed: Boolean) {
         preferences.edit {
-            when (game) {
-                Game.UNIVERSAL -> putBoolean(USER_PREF_UNIVERSAL_TOTAL, displayed)
+            when (gameType) {
+                GameType.UNIVERSAL -> putBoolean(USER_PREF_UNIVERSAL_TOTAL, displayed)
                 else -> error("Cannot display total for this game")
             }
         }

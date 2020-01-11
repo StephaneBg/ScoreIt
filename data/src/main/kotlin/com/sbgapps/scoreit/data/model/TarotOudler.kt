@@ -14,26 +14,10 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.model.belote;
+package com.sbgapps.scoreit.data.model
 
-import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
-
-/**
- * Created by sbaiget on 11/11/13.
- */
-public class BeloteLap extends BaseBeloteCoincheLap {
-
-    @SerializedName("bonuses")
-    protected List<BeloteBonusCache> mBonuses;
-
-    public BeloteLap(int scorer, int points, List<BeloteBonusCache> bonuses) {
-        super(scorer, points);
-        mBonuses = bonuses;
-    }
-
-    public List<BeloteBonusCache> getBonuses() {
-        return mBonuses;
-    }
+enum class TarotOudler {
+    PETIT,
+    EXCUSE,
+    TWENTY_ONE
 }

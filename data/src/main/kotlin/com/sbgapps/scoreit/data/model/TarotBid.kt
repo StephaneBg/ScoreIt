@@ -14,29 +14,14 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.model.tarot;
+package com.sbgapps.scoreit.data.model
 
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.StringRes
+import com.sbgapps.scoreit.data.R
 
-import java.io.Serializable;
-
-/**
- * Created by Stéphane on 29/07/2014.
- */
-public class TarotBidCache implements Serializable {
-
-    @SerializedName("bid")
-    private int mBid;
-
-    public TarotBidCache(int bid) {
-        mBid = bid;
-    }
-
-    public int get() {
-        return mBid;
-    }
-
-    public void set(int bid) {
-        mBid = bid;
-    }
+enum class TarotBid(val coefficient: Int, @StringRes val resId: Int) {
+    SMALL(1, R.string.tarot_bid_take),
+    GUARD(2, R.string.tarot_bid_guard),
+    GUARD_WITHOUT_KITTY(4, R.string.tarot_bid_guard_without_kitty),
+    GUARD_AGAINST_KITTY(6, R.string.tarot_bid_guard_against_kitty)
 }

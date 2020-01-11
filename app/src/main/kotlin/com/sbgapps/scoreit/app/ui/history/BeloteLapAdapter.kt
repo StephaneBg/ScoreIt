@@ -34,7 +34,7 @@ class BeloteLapAdapter(
             model.results.mapIndexed { index, points ->
                 listOfNotNull(
                     solver.getPointsForDisplay(points).toString(),
-                    "★".takeIf { model.hasBelote == index }
+                    "★".takeIf { model.hasBelote.index == index }
                 ).joinToString(" ")
             }
         )

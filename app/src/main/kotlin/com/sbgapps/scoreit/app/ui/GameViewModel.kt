@@ -18,7 +18,12 @@ package com.sbgapps.scoreit.app.ui
 
 import androidx.annotation.IdRes
 import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.model.*
+import com.sbgapps.scoreit.app.model.BeloteLap
+import com.sbgapps.scoreit.app.model.CoincheLap
+import com.sbgapps.scoreit.app.model.Lap
+import com.sbgapps.scoreit.app.model.Player
+import com.sbgapps.scoreit.app.model.TarotLap
+import com.sbgapps.scoreit.app.model.UniversalLap
 import com.sbgapps.scoreit.app.ui.history.Header
 import com.sbgapps.scoreit.core.ui.BaseViewModel
 import com.sbgapps.scoreit.core.utils.string.StringFactory
@@ -26,7 +31,14 @@ import com.sbgapps.scoreit.core.utils.string.fromResources
 import com.sbgapps.scoreit.core.utils.string.join
 import com.sbgapps.scoreit.core.utils.string.toStringFactory
 import com.sbgapps.scoreit.data.interactor.GameUseCase
-import com.sbgapps.scoreit.data.model.*
+import com.sbgapps.scoreit.data.model.BeloteBonus
+import com.sbgapps.scoreit.data.model.BeloteGameData
+import com.sbgapps.scoreit.data.model.CoincheGameData
+import com.sbgapps.scoreit.data.model.GameType
+import com.sbgapps.scoreit.data.model.PlayerPosition
+import com.sbgapps.scoreit.data.model.TarotGameData
+import com.sbgapps.scoreit.data.model.TarotLapData
+import com.sbgapps.scoreit.data.model.UniversalGameData
 import io.uniflow.core.flow.UIEvent
 import io.uniflow.core.flow.UIState
 
@@ -38,9 +50,9 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
         }
     }
 
-    fun selectGame(game: Game) {
+    fun selectGame(gameType: GameType) {
         setState {
-            useCase.setCurrentGame(game)
+            useCase.setCurrentGame(gameType)
             getContent()
         }
     }
@@ -140,7 +152,7 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
 
         is BeloteGameData -> game.laps.map {
             val (results, isWon) = useCase.getLapResults(it)
-            val belote = it.bonuses.find { bonus -> bonus.second == BeloteBonusData.BELOTE }?.first ?: PLAYER_NONE
+            val belote = it.bonuses.find { bonus -> bonus.bonus == BeloteBonus.BELOTE }?.player ?: PlayerPosition.NONE
             BeloteLap(results, isWon, belote)
         }
         is CoincheGameData -> game.laps.map {
@@ -155,14 +167,14 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
         return when (lap.playerCount) {
             3, 4 -> join(
                 " • ",
-                players[lap.taker].name.toStringFactory(),
-                fromResources(lap.bid.toTarotBid().resId)
+                players[lap.taker.index].name.toStringFactory(),
+                fromResources(lap.bid.resId)
             )
             5 -> join(
                 " • ",
-                (if (lap.taker == lap.partner) players[lap.taker].name
-                else "${players[lap.taker].name} & ${players[lap.partner].name}").toStringFactory(),
-                fromResources(lap.bid.toTarotBid().resId)
+                (if (lap.taker == lap.partner) players[lap.taker.index].name
+                else "${players[lap.taker.index].name} & ${players[lap.partner.index].name}").toStringFactory(),
+                fromResources(lap.bid.resId)
             )
             else -> error("Can't play Tarot with another player count")
         }

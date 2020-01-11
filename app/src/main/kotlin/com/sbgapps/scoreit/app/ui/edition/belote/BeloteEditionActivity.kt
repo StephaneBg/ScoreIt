@@ -27,11 +27,10 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ActivityEditionBeloteBinding
 import com.sbgapps.scoreit.app.databinding.ListItemEditionBonusBinding
-import com.sbgapps.scoreit.app.model.BeloteBonus
 import com.sbgapps.scoreit.app.ui.edition.EditionActivity
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayoutAdapter
-import com.sbgapps.scoreit.data.model.PLAYER_1
-import com.sbgapps.scoreit.data.model.PLAYER_2
+import com.sbgapps.scoreit.data.model.BeloteBonus
+import com.sbgapps.scoreit.data.model.PlayerPosition
 import io.uniflow.androidx.flow.onStates
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -51,13 +50,14 @@ class BeloteEditionActivity : EditionActivity() {
         onStates(viewModel) { state ->
             when (state) {
                 is BeloteEditionState.Content -> {
-                    binding.buttonTeamOne.text = state.players[PLAYER_1].name
-                    binding.buttonTeamTwo.text = state.players[PLAYER_2].name
+                    binding.buttonTeamOne.text = state.players[PlayerPosition.ONE.index].name
+                    binding.buttonTeamTwo.text = state.players[PlayerPosition.TWO.index].name
 
                     binding.scorerGroup.removeOnButtonCheckedListener(scorerCheckedListener)
                     when (state.scorer) {
-                        PLAYER_1 -> binding.scorerGroup.check(R.id.buttonTeamOne)
-                        PLAYER_2 -> binding.scorerGroup.check(R.id.buttonTeamTwo)
+                        PlayerPosition.ONE -> binding.scorerGroup.check(R.id.buttonTeamOne)
+                        PlayerPosition.TWO -> binding.scorerGroup.check(R.id.buttonTeamTwo)
+                        else -> error("Only two players for Belote")
                     }
                     binding.scorerGroup.addOnButtonCheckedListener(scorerCheckedListener)
 
@@ -81,12 +81,12 @@ class BeloteEditionActivity : EditionActivity() {
                     setupButton(binding.pointsMinusOne, -1, state.canDecrement.canStepOne)
 
                     binding.nameTeamOne.apply {
-                        text = state.players[PLAYER_1].name
-                        setTextColor(state.players[PLAYER_1].color)
+                        text = state.players[PlayerPosition.ONE.index].name
+                        setTextColor(state.players[PlayerPosition.ONE.index].color)
                     }
                     binding.nameTeamTwo.apply {
-                        text = state.players[PLAYER_2].name
-                        setTextColor(state.players[PLAYER_2].color)
+                        text = state.players[PlayerPosition.TWO.index].name
+                        setTextColor(state.players[PlayerPosition.TWO.index].color)
                     }
 
                     val (teamOne, teamTwo) = state.teamPoints
@@ -98,7 +98,7 @@ class BeloteEditionActivity : EditionActivity() {
                         BeloteEditionBonusFragment().show(supportFragmentManager, null)
                     }
                     val model = state.selectedBonuses.map { (player, bonus) ->
-                        state.players[player].name to bonus
+                        state.players[player.index].name to bonus
                     }
                     binding.bonusContainer.adapter = BonusAdapter(model)
                 }
@@ -133,8 +133,8 @@ class BeloteEditionActivity : EditionActivity() {
         if (isChecked) {
             viewModel.changeScorer(
                 when (checkedId) {
-                    R.id.buttonTeamOne -> PLAYER_1
-                    R.id.buttonTeamTwo -> PLAYER_2
+                    R.id.buttonTeamOne -> PlayerPosition.ONE
+                    R.id.buttonTeamTwo -> PlayerPosition.TWO
                     else -> error("Unknown player")
                 }
             )

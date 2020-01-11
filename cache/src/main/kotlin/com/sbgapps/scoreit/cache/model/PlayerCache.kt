@@ -13,11 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.sbgapps.scoreit.cache.model
 
-package com.sbgapps.scoreit.data.model
+import androidx.annotation.ColorInt
+import com.sbgapps.scoreit.data.model.PlayerData
+import com.squareup.moshi.JsonClass
 
-enum class CoincheBidData(val coefficient: Int) {
-    NONE(1),
-    COINCHE(2),
-    SURCOINCHE(4)
+@JsonClass(generateAdapter = true)
+data class PlayerCache(
+    var name: String,
+    @ColorInt var color: Int
+) {
+
+    constructor(player: PlayerData) : this(
+        player.name,
+        player.color
+    )
+
+    fun toData(): PlayerData = PlayerData(name, color)
+
+    override fun toString(): String = name
 }

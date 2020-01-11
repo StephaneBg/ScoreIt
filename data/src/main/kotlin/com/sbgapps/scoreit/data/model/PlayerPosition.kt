@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.model;
+package com.sbgapps.scoreit.data.model
 
-import java.io.Serializable;
+enum class PlayerPosition(val index: Int) {
+    NONE(-1),
+    ONE(0),
+    TWO(1),
+    THREE(2),
+    FOUR(3),
+    FIVE(4);
 
-/**
- * Created by sbaiget on 11/11/13.
- */
-public interface Lap extends Serializable {
+    companion object {
+        fun fromIndex(index: Int): PlayerPosition = values().first { it.index == index }
+    }
 }

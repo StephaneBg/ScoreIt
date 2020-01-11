@@ -16,13 +16,13 @@
 
 package com.sbgapps.scoreit.app.ui.edition.belote
 
-import com.sbgapps.scoreit.app.model.BeloteBonus
 import com.sbgapps.scoreit.app.model.Player
-import com.sbgapps.scoreit.app.model.toBeloteBonus
 import com.sbgapps.scoreit.core.ui.BaseViewModel
 import com.sbgapps.scoreit.data.interactor.GameUseCase
+import com.sbgapps.scoreit.data.model.BeloteBonus
+import com.sbgapps.scoreit.data.model.BeloteBonusData
 import com.sbgapps.scoreit.data.model.BeloteLapData
-import com.sbgapps.scoreit.data.model.PLAYER_1
+import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.solver.BeloteSolver
 import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_CAPOT
 import com.sbgapps.scoreit.data.solver.counterPoints
@@ -49,7 +49,7 @@ class BeloteEditionViewModel(private val useCase: GameUseCase, private val solve
             val lap = editedLap
             useCase.updateEdition(
                 lap.copy(
-                    points = if (PLAYER_1 == lap.scorer) lap.points + points
+                    points = if (PlayerPosition.ONE == lap.scorer) lap.points + points
                     else lap.points - points
                 )
             )
@@ -57,18 +57,18 @@ class BeloteEditionViewModel(private val useCase: GameUseCase, private val solve
         }
     }
 
-    fun changeScorer(scorer: Int) {
+    fun changeScorer(scorer: PlayerPosition) {
         setState {
             useCase.updateEdition(editedLap.copy(scorer = scorer))
             getContent()
         }
     }
 
-    fun addBonus(bonus: Pair<Int, BeloteBonus>) {
+    fun addBonus(bonus: Pair<PlayerPosition, BeloteBonus>) {
         setState {
             val lap = editedLap
             val bonuses = lap.bonuses.toMutableList()
-            bonuses += bonus.first to bonus.second.toData()
+            bonuses += BeloteBonusData(bonus.first, bonus.second)
             useCase.updateEdition(lap.copy(bonuses = bonuses))
             getContent()
         }
@@ -98,8 +98,8 @@ class BeloteEditionViewModel(private val useCase: GameUseCase, private val solve
             lap.scorer,
             getPointMode(lap),
             getTeamPoints(),
-            lap.bonuses.map { it.first to it.second.toBeloteBonus() },
-            solver.getAvailableBonuses(lap).map { it.toBeloteBonus() },
+            lap.bonuses.map { it.player to it.bonus },
+            solver.getAvailableBonuses(lap),
             canIncrement(lap),
             canDecrement(lap)
         )
@@ -114,7 +114,7 @@ class BeloteEditionViewModel(private val useCase: GameUseCase, private val solve
 
     private fun getTeamPoints(): Pair<String, String> {
         val lap = editedLap
-        return if (PLAYER_1 == lap.scorer) {
+        return if (PlayerPosition.ONE == lap.scorer) {
             lap.points.toString() to lap.counterPoints().toString()
         } else {
             lap.counterPoints().toString() to lap.points.toString()
@@ -125,10 +125,10 @@ class BeloteEditionViewModel(private val useCase: GameUseCase, private val solve
 sealed class BeloteEditionState : UIState() {
     data class Content(
         val players: List<Player>,
-        val scorer: Int,
+        val scorer: PlayerPosition,
         val pointMode: PointMode,
         val teamPoints: Pair<String, String>,
-        val selectedBonuses: List<Pair<Int, BeloteBonus>>,
+        val selectedBonuses: List<Pair<PlayerPosition, BeloteBonus>>,
         val availableBonuses: List<BeloteBonus>,
         val canIncrement: StepScore,
         val canDecrement: StepScore

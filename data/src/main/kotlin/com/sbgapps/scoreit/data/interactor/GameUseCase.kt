@@ -18,7 +18,18 @@ package com.sbgapps.scoreit.data.interactor
 
 import android.graphics.Color
 import com.sbgapps.scoreit.core.ext.replace
-import com.sbgapps.scoreit.data.model.*
+import com.sbgapps.scoreit.data.model.BeloteGameData
+import com.sbgapps.scoreit.data.model.BeloteLapData
+import com.sbgapps.scoreit.data.model.CoincheGameData
+import com.sbgapps.scoreit.data.model.CoincheLapData
+import com.sbgapps.scoreit.data.model.GameData
+import com.sbgapps.scoreit.data.model.GameType
+import com.sbgapps.scoreit.data.model.LapData
+import com.sbgapps.scoreit.data.model.PlayerData
+import com.sbgapps.scoreit.data.model.TarotGameData
+import com.sbgapps.scoreit.data.model.TarotLapData
+import com.sbgapps.scoreit.data.model.UniversalGameData
+import com.sbgapps.scoreit.data.model.UniversalLapData
 import com.sbgapps.scoreit.data.solver.BeloteSolver
 import com.sbgapps.scoreit.data.solver.CoincheSolver
 import com.sbgapps.scoreit.data.solver.TarotSolver
@@ -35,9 +46,9 @@ class GameUseCase(
 
     private var editionState: EditionState? = null
 
-    fun setCurrentGame(game: Game) {
+    fun setCurrentGame(gameType: GameType) {
         editionState = null
-        dataStore.setCurrentGame(game)
+        dataStore.setCurrentGame(gameType)
     }
 
     fun getGame(): GameData = dataStore.getGame()

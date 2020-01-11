@@ -14,27 +14,11 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.model.tarot;
+package com.sbgapps.scoreit.data.model
 
-import android.content.Context;
-
-import com.sbgapps.scoreit.cache.model.Game;
-import com.sbgapps.scoreit.cache.model.Player;
-
-import java.util.List;
-
-/**
- * Created by sbaiget on 24/06/2014.
- */
-public class TarotThreeGame extends Game<TarotThreeLap> {
-
-    public final static int NB_PLAYERS = 3;
-
-    public TarotThreeGame(Context context) {
-        super(context, NB_PLAYERS);
-    }
-
-    public TarotThreeGame(List<Player> players, List<TarotThreeLap> laps) {
-        super(laps, players);
-    }
+enum class GameType {
+    UNIVERSAL,
+    TAROT,
+    BELOTE,
+    COINCHE
 }

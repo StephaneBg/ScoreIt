@@ -28,15 +28,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ActivityEditionTarotBinding
 import com.sbgapps.scoreit.app.databinding.ListItemEditionBonusBinding
-import com.sbgapps.scoreit.app.model.TarotBid
-import com.sbgapps.scoreit.app.model.TarotBonus
 import com.sbgapps.scoreit.app.ui.edition.EditionActivity
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayoutAdapter
-import com.sbgapps.scoreit.data.model.PLAYER_NONE
-import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.OUDLER_21_MSK
-import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.OUDLER_EXCUSE_MSK
-import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.OUDLER_NONE
-import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.OUDLER_PETIT_MSK
+import com.sbgapps.scoreit.data.model.PlayerPosition
+import com.sbgapps.scoreit.data.model.TarotBid
+import com.sbgapps.scoreit.data.model.TarotBonus
+import com.sbgapps.scoreit.data.model.TarotOudler
 import io.uniflow.androidx.flow.onStates
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -55,31 +52,31 @@ class TarotEditionActivity : EditionActivity() {
         onStates(viewModel) { state ->
             when (state) {
                 is TarotEditionState.Content -> {
-                    binding.taker.text = state.players[state.taker].name
+                    binding.taker.text = state.players[state.taker.index].name
                     binding.taker.setOnClickListener {
                         MaterialAlertDialogBuilder(this)
                             .setSingleChoiceItems(
                                 state.players.map { it.name }.toTypedArray(),
-                                state.taker
+                                state.taker.index
                             ) { dialog, which ->
-                                viewModel.setTaker(which)
+                                viewModel.setTaker(PlayerPosition.fromIndex(which))
                                 dialog.dismiss()
                             }
                             .show()
                     }
 
-                    if (PLAYER_NONE == state.partner) {
+                    if (PlayerPosition.NONE == state.partner) {
                         binding.headerPartner.isVisible = false
                         binding.partner.isVisible = false
                     } else {
-                        binding.partner.text = state.players[state.partner].name
+                        binding.partner.text = state.players[state.partner.index].name
                         binding.partner.setOnClickListener {
                             MaterialAlertDialogBuilder(this)
                                 .setSingleChoiceItems(
                                     state.players.map { it.name }.toTypedArray(),
-                                    state.partner
+                                    state.partner.index
                                 ) { dialog, which ->
-                                    viewModel.setPartner(which)
+                                    viewModel.setPartner(PlayerPosition.fromIndex(which))
                                     dialog.dismiss()
                                 }
                                 .show()
@@ -100,9 +97,9 @@ class TarotEditionActivity : EditionActivity() {
                     }
 
                     binding.oudlersButtonGroup.removeOnButtonCheckedListener(buttonCheckedListener)
-                    if (state.oudlers and OUDLER_PETIT_MSK == OUDLER_PETIT_MSK) binding.oudlersButtonGroup.check(R.id.buttonPetit)
-                    if (state.oudlers and OUDLER_21_MSK == OUDLER_21_MSK) binding.oudlersButtonGroup.check(R.id.buttonTwentyOne)
-                    if (state.oudlers and OUDLER_EXCUSE_MSK == OUDLER_EXCUSE_MSK) binding.oudlersButtonGroup.check(R.id.buttonExcuse)
+                    if (state.oudlers.contains(TarotOudler.PETIT)) binding.oudlersButtonGroup.check(R.id.buttonPetit)
+                    if (state.oudlers.contains(TarotOudler.TWENTY_ONE)) binding.oudlersButtonGroup.check(R.id.buttonTwentyOne)
+                    if (state.oudlers.contains(TarotOudler.EXCUSE)) binding.oudlersButtonGroup.check(R.id.buttonExcuse)
                     binding.oudlersButtonGroup.addOnButtonCheckedListener(buttonCheckedListener)
 
                     binding.points.text = state.points.toString()
@@ -117,7 +114,7 @@ class TarotEditionActivity : EditionActivity() {
                         TarotEditionBonusFragment().show(supportFragmentManager, null)
                     }
                     val model = state.selectedBonuses.map { (player, bonus) ->
-                        state.players[player].name to bonus
+                        state.players[player.index].name to bonus
                     }
                     binding.bonusContainer.adapter = BonusAdapter(model)
                 }
@@ -136,12 +133,12 @@ class TarotEditionActivity : EditionActivity() {
     }
 
     private val buttonCheckedListener = MaterialButtonToggleGroup.OnButtonCheckedListener { view, _, _ ->
-        var oudlers = OUDLER_NONE
+        val oudlers = mutableListOf<TarotOudler>()
         view.checkedButtonIds.forEach {
             when (it) {
-                R.id.buttonPetit -> oudlers = oudlers or OUDLER_PETIT_MSK
-                R.id.buttonTwentyOne -> oudlers = oudlers or OUDLER_21_MSK
-                R.id.buttonExcuse -> oudlers = oudlers or OUDLER_EXCUSE_MSK
+                R.id.buttonPetit -> oudlers += TarotOudler.PETIT
+                R.id.buttonTwentyOne -> oudlers += TarotOudler.TWENTY_ONE
+                R.id.buttonExcuse -> oudlers += TarotOudler.EXCUSE
             }
         }
         viewModel.setOudlers(oudlers)

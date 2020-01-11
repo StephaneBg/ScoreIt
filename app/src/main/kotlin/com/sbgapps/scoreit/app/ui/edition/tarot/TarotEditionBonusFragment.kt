@@ -23,8 +23,8 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sbgapps.scoreit.app.databinding.FragmentEditionTarotBonusBinding
-import com.sbgapps.scoreit.app.model.TarotBonus
-import com.sbgapps.scoreit.data.model.PLAYER_1
+import com.sbgapps.scoreit.data.model.PlayerPosition
+import com.sbgapps.scoreit.data.model.TarotBonus
 import io.uniflow.androidx.flow.onStates
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -32,8 +32,8 @@ class TarotEditionBonusFragment : BottomSheetDialogFragment() {
 
     private val viewModel by sharedViewModel<TarotEditionViewModel>()
     private lateinit var binding: FragmentEditionTarotBonusBinding
-    private var tarotBonus: TarotBonus = TarotBonus.PetitAuBout
-    private var player: Int = PLAYER_1
+    private var tarotBonus: TarotBonus = TarotBonus.PETIT_AU_BOUT
+    private var player: PlayerPosition = PlayerPosition.ONE
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentEditionTarotBonusBinding.inflate(inflater)
@@ -45,15 +45,15 @@ class TarotEditionBonusFragment : BottomSheetDialogFragment() {
             if (state is TarotEditionState.Content) {
                 if (state.availableBonuses.isEmpty()) return@onStates
 
-                binding.player.text = state.players[player].name
+                binding.player.text = state.players[player.index].name
                 binding.player.setOnClickListener {
                     MaterialAlertDialogBuilder(requireContext())
                         .setSingleChoiceItems(
                             state.players.map { it.name }.toTypedArray(),
-                            player
+                            player.index
                         ) { dialog, which ->
-                            player = which
-                            binding.player.text = state.players[player].name
+                            player = PlayerPosition.fromIndex(which)
+                            binding.player.text = state.players[which].name
                             dialog.dismiss()
                         }
                         .show()

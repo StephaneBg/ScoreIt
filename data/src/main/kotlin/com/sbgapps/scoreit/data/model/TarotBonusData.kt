@@ -16,12 +16,7 @@
 
 package com.sbgapps.scoreit.data.model
 
-enum class TarotBonusData(val points: Int) {
-    PETIT_AU_BOUT(10),
-    POIGNEE_SIMPLE(20),
-    POIGNEE_DOUBLE(30),
-    POIGNEE_TRIPLE(40),
-    CHELEM_NON_ANNONCE(200),
-    CHELEM_ANNONCE_REALISE(400),
-    CHELEM_ANNONCE_NON_REALISE(-200)
-}
+data class TarotBonusData(
+    val player: PlayerPosition,
+    val bonus: TarotBonus
+)

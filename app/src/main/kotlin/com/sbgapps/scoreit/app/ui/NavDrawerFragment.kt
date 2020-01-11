@@ -24,7 +24,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.navigation.NavigationView
 import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.data.model.Game
+import com.sbgapps.scoreit.data.model.GameType
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class NavDrawerFragment : BottomSheetDialogFragment() {
@@ -37,9 +37,9 @@ class NavDrawerFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (view as NavigationView).setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.universal -> viewModel.selectGame(Game.UNIVERSAL)
-                R.id.tarot -> viewModel.selectGame(Game.TAROT)
-                R.id.belote -> viewModel.selectGame(Game.BELOTE)
+                R.id.universal -> viewModel.selectGame(GameType.UNIVERSAL)
+                R.id.tarot -> viewModel.selectGame(GameType.TAROT)
+                R.id.belote -> viewModel.selectGame(GameType.BELOTE)
 //                R.id.coinche -> viewModel.selectGame(Game.COINCHE)
 
                 R.id.preferences -> findNavController().navigate(R.id.action_navDrawerFragment_to_preferencesActivity)
