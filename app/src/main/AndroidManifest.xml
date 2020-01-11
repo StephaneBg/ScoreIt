@@ -63,5 +63,9 @@
             android:name=".ui.edition.coinche.CoincheEditionActivity"
             android:label="@string/title_game_coinche"
             />
+        <activity
+            android:name=".ui.AboutActivity"
+            android:label="@string/title_activity_about"
+            />
     </application>
 </manifest>

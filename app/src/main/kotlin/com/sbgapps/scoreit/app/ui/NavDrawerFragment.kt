@@ -43,6 +43,7 @@ class NavDrawerFragment : BottomSheetDialogFragment() {
 //                R.id.coinche -> viewModel.selectGame(Game.COINCHE)
 
                 R.id.preferences -> findNavController().navigate(R.id.action_navDrawerFragment_to_preferencesActivity)
+                R.id.about -> findNavController().navigate(R.id.action_navDrawerFragment_to_aboutActivity)
             }
             this@NavDrawerFragment.dismiss()
             true

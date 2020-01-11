@@ -23,7 +23,6 @@
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.sbgapps.scoreit.app.ui.history.HistoryFragment"
-        android:label="HistoryFragment"
         >
         <action
             android:id="@+id/action_historyFragment_to_navDrawerFragment"
@@ -54,43 +53,46 @@
     <dialog
         android:id="@+id/navDrawerFragment"
         android:name="com.sbgapps.scoreit.app.ui.NavDrawerFragment"
-        android:label="NavDrawerFragment"
         >
         <action
             android:id="@+id/action_navDrawerFragment_to_preferencesActivity"
             app:destination="@id/preferencesActivity"
+            />
+        <action
+            android:id="@+id/action_navDrawerFragment_to_aboutActivity"
+            app:destination="@id/aboutActivity"
             />
     </dialog>
 
     <dialog
         android:id="@+id/chartFragment"
         android:name="com.sbgapps.scoreit.app.ui.chart.ChartFragment"
-        android:label="ChartFragment"
         />
 
     <activity
         android:id="@+id/preferencesActivity"
         android:name="com.sbgapps.scoreit.app.ui.prefs.PreferencesActivity"
-        android:label="PreferencesActivity"
+        android:label="@string/title_activity_preferences"
         />
     <activity
         android:id="@+id/universalEditionActivity"
         android:name="com.sbgapps.scoreit.app.ui.edition.universal.UniversalEditionActivity"
-        android:label="UniversalEditionActivity"
         />
     <activity
         android:id="@+id/beloteEditionActivity"
         android:name="com.sbgapps.scoreit.app.ui.edition.belote.BeloteEditionActivity"
-        android:label="BeloteEditionActivity"
         />
     <activity
         android:id="@+id/tarotEditionActivity"
         android:name="com.sbgapps.scoreit.app.ui.edition.tarot.TarotEditionActivity"
-        android:label="TarotEditionActivity"
         />
     <activity
         android:id="@+id/coincheEditionActivity"
         android:name="com.sbgapps.scoreit.app.ui.edition.coinche.CoincheEditionActivity"
-        android:label="CoincheEditionActivity"
+        />
+    <activity
+        android:id="@+id/aboutActivity"
+        android:name="com.sbgapps.scoreit.app.ui.AboutActivity"
+        android:label="@string/title_activity_about"
         />
 </navigation>
