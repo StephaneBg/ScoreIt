@@ -50,9 +50,9 @@
             android:id="@+id/about"
             android:title="@string/drawer_about"
             />
-        <item
-            android:id="@+id/thanks"
-            android:title="@string/drawer_thank"
-            />
+        <!--        <item-->
+        <!--            android:id="@+id/thanks"-->
+        <!--            android:title="@string/drawer_thank"-->
+        <!--            />-->
     </group>
 </menu>
