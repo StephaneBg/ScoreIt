@@ -71,4 +71,10 @@ class DataStore(
     fun setPrefThemeMode(mode: String) {
         prefsRepo.setThemeMode(mode)
     }
+
+    fun getSavedFiles(): List<Pair<String, Long>> = cacheRepo.getSavedFiles()
+
+    fun loadGame(name: String) {
+        game = cacheRepo.loadGame(name)
+    }
 }

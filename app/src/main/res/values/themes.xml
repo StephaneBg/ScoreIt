@@ -48,6 +48,7 @@
         <item name="materialButtonStyle">@style/Widget.ScoreIt.Button</item>
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.ScoreIt.BottomSheetDialog</item>
         <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.ScoreIt.Dialog.Alert</item>
 
         <item name="android:statusBarColor">@color/status_bar</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
@@ -61,5 +62,9 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:navigationBarColor">?attr/colorSurface</item>
         <item name="elevationOverlayEnabled">false</item>
+    </style>
+
+    <style name="ThemeOverlay.ScoreIt.Dialog.Alert" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button.TextButton</item>
     </style>
 </resources>

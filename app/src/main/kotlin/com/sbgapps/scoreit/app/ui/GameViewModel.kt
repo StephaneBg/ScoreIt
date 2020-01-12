@@ -45,8 +45,9 @@ import io.uniflow.core.flow.UIState
 
 class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
 
-    fun loadGame() {
+    fun loadGame(name: String? = null) {
         setState {
+            name?.let { useCase.loadGame(name) }
             getContent()
         }
     }
@@ -145,6 +146,9 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
             items.add(R.id.menu_chart)
             items.add(R.id.menu_clear)
         }
+        if (useCase.getSavedFiles().size > 1) {
+            items.add(R.id.menu_save)
+        }
         return items
     }
 
@@ -203,6 +207,8 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
         is BeloteGameData -> R.id.action_historyFragment_to_beloteEditionActivity
         is CoincheGameData -> R.id.action_historyFragment_to_coincheEditionActivity
     }
+
+    fun getSavedFiles(): List<Pair<String, Long>> = useCase.getSavedFiles()
 }
 
 data class Content(val header: Header, val results: List<Lap>) : UIState()

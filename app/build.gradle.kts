@@ -95,4 +95,5 @@ dependencies {
     implementation(Libs.koinAndroidX)
     implementation(Libs.uniflowAndroidX)
     implementation(Libs.timber)
+    implementation(Libs.jsr310)
 }

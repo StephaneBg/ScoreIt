@@ -20,7 +20,8 @@ import com.sbgapps.scoreit.data.model.GameData
 
 interface CacheRepo {
 
-    fun loadGame(): GameData
+    fun loadGame(name: String? = null): GameData
     fun saveGame(gameData: GameData)
-    fun createGame(fileName: String): GameData
+    fun createGame(name: String): GameData
+    fun getSavedFiles(): List<Pair<String, Long>>
 }

@@ -23,6 +23,7 @@ interface FileStorage {
     fun loadFile(directoryName: String, fileName: String): String
     fun saveFile(directoryName: String, fileName: String, data: String)
     fun createDirectory(directoryName: String)
+    fun getSavedFiles(directoryName: String): List<Pair<String, Long>>
 }
 
 class ScoreItFileStorage(context: Context) : FileStorage {
@@ -40,4 +41,9 @@ class ScoreItFileStorage(context: Context) : FileStorage {
     override fun createDirectory(directoryName: String) {
         storage.createDirectory("$internalStorageDirectory/$directoryName")
     }
+
+    override fun getSavedFiles(directoryName: String): List<Pair<String, Long>> =
+        storage.getFiles("$internalStorageDirectory/$directoryName").map {
+            it.name to it.lastModified()
+        }
 }

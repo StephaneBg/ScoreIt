@@ -17,7 +17,6 @@
 
     <!-- Application -->
     <string name="app_name" translatable="false">Score It</string>
-    <string name="app_name_subtitle">Score keeper</string>
 
     <!-- Activity and toolbar titles -->
     <string name="title_activity_saved_games">Saved games</string>
@@ -77,7 +76,7 @@
     <string name="dialog_action_game_create">Save and create</string>
     <string name="dialog_action_game_load">Save and load</string>
     <string name="dialog_action_enter_name">Enter name</string>
-    <string name="dialog_action_pick_contact">Pick contact</string>
+    <string name="dialog_action_new_name">New name</string>
     <string name="dialog_action_pick_color">Pick color</string>
 
     <!-- Snackbar -->
@@ -88,11 +87,6 @@
     <string name="button_action_cancel">Cancel</string>
     <string name="button_action_add">Add</string>
     <string name="button_action_ok">OK</string>
-    <string name="button_help_translate">Help to translate</string>
-    <string name="button_contact_developer">Contact developer</string>
-    <string name="button_rate_app">Rate this application</string>
-    <string name="button_share_app">Share this application</string>
-    <string name="button_join_community">Google+ community</string>
     <string name="button_donate_coffee">Buy me a coffee</string>
     <string name="button_donate_coffee_donated">You bought me a coffee. Thanks!</string>
     <string name="button_donate_beer">Buy me a beer</string>
@@ -109,7 +103,7 @@
     <string name="menu_action_round_scores">Round scores</string>
     <string name="menu_action_show_totals">Show totals</string>
 
-    <!-- Content descriptions -->
-    <string name="content_description_delete">Delete</string>
-    <string name="content_description_edit">Edit</string>
+    <!-- Date -->
+    <string name="local_date_pattern">eeee, dd MMMM yyyy \'at\' h:mm a</string>
+
 </resources>
