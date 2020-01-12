@@ -38,6 +38,7 @@ import com.sbgapps.scoreit.app.ui.GameViewModel
 import com.sbgapps.scoreit.app.ui.color.ColorPickerFragment
 import com.sbgapps.scoreit.core.ext.onImeActionDone
 import com.sbgapps.scoreit.core.ui.BaseFragment
+import com.sbgapps.scoreit.core.widget.DividerItemDecoration
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
 import com.sbgapps.scoreit.core.widget.ItemAdapter
 import com.sbgapps.scoreit.data.solver.BeloteSolver
@@ -63,9 +64,10 @@ class HistoryFragment : BaseFragment() {
 
         setToolbar(binding.bottomAppBar)
 
-        binding.results.apply {
+        binding.recyclerView.apply {
             adapter = historyAdapter
             ItemTouchHelper(SwipeCallback(::onEdit, ::onDelete)).attachToRecyclerView(this)
+            addItemDecoration(DividerItemDecoration(requireContext()))
         }
         binding.fab.setOnClickListener {
             viewModel.addLap()

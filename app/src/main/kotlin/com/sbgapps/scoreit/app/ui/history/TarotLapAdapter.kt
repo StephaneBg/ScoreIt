@@ -28,7 +28,7 @@ class TarotLapAdapter(private val model: TarotLap) : ItemAdapter(R.layout.list_i
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         val binding = ListItemLapTarotBinding.bind(viewHolder.itemView)
         binding.info.text = model.info.build(viewHolder.context)
-        binding.results.adapter = LapResultAdapter(model.results.map { it.toString() })
+        binding.recyclerView.adapter = LapResultAdapter(model.results.map { it.toString() })
         binding.done.setBackgroundResource(if (model.isWon) R.color.game_won else R.color.game_lost)
     }
 }

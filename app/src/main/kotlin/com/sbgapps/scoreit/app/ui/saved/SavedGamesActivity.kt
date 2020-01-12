@@ -21,6 +21,7 @@ import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ActivitySavedGamesBinding
 import com.sbgapps.scoreit.app.ui.GameViewModel
 import com.sbgapps.scoreit.core.ui.BaseActivity
+import com.sbgapps.scoreit.core.widget.DividerItemDecoration
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDateTime
@@ -50,7 +51,10 @@ class SavedGamesActivity : BaseActivity() {
                 ::onGameSelected
             )
         }
-        binding.recyclerView.adapter = GenericRecyclerViewAdapter(adapters)
+        binding.recyclerView.apply {
+            adapter = GenericRecyclerViewAdapter(adapters)
+            addItemDecoration(DividerItemDecoration(this@SavedGamesActivity))
+        }
     }
 
     private fun onGameSelected(fileName: String) {

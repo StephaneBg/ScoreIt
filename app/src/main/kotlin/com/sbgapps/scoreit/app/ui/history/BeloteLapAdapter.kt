@@ -30,7 +30,7 @@ class BeloteLapAdapter(
 
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         val binding = ListItemLapBeloteCoincheBinding.bind(viewHolder.itemView)
-        binding.results.adapter = LapResultAdapter(
+        binding.recyclerView.adapter = LapResultAdapter(
             model.results.mapIndexed { index, points ->
                 listOfNotNull(
                     solver.getPointsForDisplay(points).toString(),

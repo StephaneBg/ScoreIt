@@ -26,7 +26,7 @@ class CoincheLapAdapter(private val model: CoincheLap) : ItemAdapter(R.layout.li
 
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         val binding = ListItemLapBeloteCoincheBinding.bind(viewHolder.itemView)
-        binding.results.adapter = LapResultAdapter(model.results.map { it.toString() })
+        binding.recyclerView.adapter = LapResultAdapter(model.results.map { it.toString() })
         binding.done.setBackgroundResource(if (model.isWon) R.color.game_won else R.color.game_lost)
     }
 }
