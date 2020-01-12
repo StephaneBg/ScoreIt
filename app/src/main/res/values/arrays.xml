@@ -28,11 +28,6 @@
         <item>@string/dialog_action_pick_color</item>
     </string-array>
 
-    <string-array name="dialog_edit_name_actions">
-        <item>@string/dialog_action_pick_contact</item>
-        <item>@string/dialog_action_enter_name</item>
-    </string-array>
-
     <string-array name="dialog_clear_actions">
         <item>@string/dialog_action_game_reset</item>
         <item>@string/dialog_action_game_create</item>

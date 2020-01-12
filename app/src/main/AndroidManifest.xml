@@ -67,5 +67,9 @@
             android:name=".ui.AboutActivity"
             android:label="@string/title_activity_about"
             />
+        <activity
+            android:name=".ui.saved.SavedGamesActivity"
+            android:label="@string/title_activity_saved_games"
+            />
     </application>
 </manifest>

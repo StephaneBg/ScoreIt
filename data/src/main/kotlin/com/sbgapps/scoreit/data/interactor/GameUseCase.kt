@@ -218,6 +218,12 @@ class GameUseCase(
             else -> true
         }
     }
+
+    fun getSavedFiles(): List<Pair<String, Long>> = dataStore.getSavedFiles()
+
+    fun loadGame(name: String) {
+        dataStore.loadGame(name)
+    }
 }
 
 sealed class EditionState {

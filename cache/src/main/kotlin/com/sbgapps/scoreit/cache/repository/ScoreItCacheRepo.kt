@@ -33,15 +33,19 @@ class ScoreItCacheRepo(
     private val preferencesRepo: PreferencesRepo
 ) : CacheRepo {
 
-    override fun loadGame(): GameData = gameDao.getCurrentGame(
-        preferencesRepo.getGameType(),
-        preferencesRepo.getPlayerCount()
-    ).toData()
+    override fun loadGame(name: String?): GameData {
+        val gameType = preferencesRepo.getGameType()
+        val count = preferencesRepo.getPlayerCount()
+        name?.let {
+            gameDao.setFileName(gameType, count, it)
+        }
+        return gameDao.getCurrentGame(gameType, count).toData()
+    }
 
-    override fun createGame(fileName: String): GameData = gameDao.createGame(
+    override fun createGame(name: String): GameData = gameDao.createGame(
         preferencesRepo.getGameType(),
         preferencesRepo.getPlayerCount(),
-        fileName
+        name
     ).toData()
 
     override fun saveGame(gameData: GameData) {
@@ -54,4 +58,9 @@ class ScoreItCacheRepo(
         }
         gameDao.saveGame(gameCache, preferencesRepo.getPlayerCount())
     }
+
+    override fun getSavedFiles(): List<Pair<String, Long>> = gameDao.getSavedFiles(
+        preferencesRepo.getGameType(),
+        preferencesRepo.getPlayerCount()
+    )
 }

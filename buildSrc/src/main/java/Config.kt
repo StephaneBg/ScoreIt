@@ -35,6 +35,7 @@ object Versions {
     const val koinAndroidX = "2.0.1"
     const val uniflowAndroidX = "0.9.3"
     const val storage = "2.1.0"
+    const val jsr310 = "1.2.1"
 }
 
 object Build {
@@ -49,26 +50,27 @@ object Android {
 }
 
 object Libs {
-    val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-    val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+    const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
-    val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
-    val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
-    val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-    val lifecyleViewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecyleViewmodel}"
-    val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
-    val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtx}"
-    val navFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
-    val navUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
-    val preferences = "androidx.preference:preference-ktx:${Versions.preferences}"
+    const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
+    const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    const val lifecyleViewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecyleViewmodel}"
+    const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
+    const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtx}"
+    const val navFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    const val navUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    const val preferences = "androidx.preference:preference-ktx:${Versions.preferences}"
 
-    val material = "com.google.android.material:material:${Versions.material}"
+    const val material = "com.google.android.material:material:${Versions.material}"
 
-    val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
-    val moshiAdapters = "com.squareup.moshi:moshi-adapters:${Versions.moshi}"
-    val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
-    val timber = "com.jakewharton.timber:timber:${Versions.timber}"
-    val koinAndroidX = "org.koin:koin-androidx-viewmodel:${Versions.koinAndroidX}"
-    val uniflowAndroidX = "io.uniflow:uniflow-androidx:${Versions.uniflowAndroidX}"
-    val storage = "com.snatik:storage:${Versions.storage}"
+    const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
+    const val moshiAdapters = "com.squareup.moshi:moshi-adapters:${Versions.moshi}"
+    const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+    const val koinAndroidX = "org.koin:koin-androidx-viewmodel:${Versions.koinAndroidX}"
+    const val uniflowAndroidX = "io.uniflow:uniflow-androidx:${Versions.uniflowAndroidX}"
+    const val storage = "com.snatik:storage:${Versions.storage}"
+    const val jsr310 = "com.jakewharton.threetenabp:threetenabp:${Versions.jsr310}"
 }

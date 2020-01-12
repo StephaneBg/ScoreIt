@@ -20,9 +20,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.DialogPlayerNameBinding
@@ -131,7 +131,7 @@ class HistoryFragment : BaseFragment() {
 
     private fun displayPlayerEditionOptions(position: Int) {
         if (!viewModel.canEditPlayer(position)) return
-        AlertDialog.Builder(requireContext())
+        MaterialAlertDialogBuilder(requireContext())
             .setItems(R.array.dialog_edit_player_actions) { _, which ->
                 when (which) {
                     0 -> displayNameDialog(position)
@@ -147,7 +147,7 @@ class HistoryFragment : BaseFragment() {
             if (name.isNotEmpty()) viewModel.setPlayerName(position, name)
         }
         val view = DialogPlayerNameBinding.inflate(layoutInflater)
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = MaterialAlertDialogBuilder(requireContext())
             .setView(view.root)
             .setPositiveButton(R.string.button_action_ok) { _, _ ->
                 action(view.playerName.text.toString())

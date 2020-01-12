@@ -18,6 +18,7 @@ package com.sbgapps.scoreit.core.ui
 
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -27,6 +28,13 @@ open class BaseActivity : AppCompatActivity() {
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    fun setupActionBar(toolbar: Toolbar) {
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     open fun onUpPressed() {

@@ -28,6 +28,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.DialogGameNameBinding
 import com.sbgapps.scoreit.app.ui.prefs.PreferencesViewModel
+import com.sbgapps.scoreit.app.ui.saved.SavedGamesActivity
+import com.sbgapps.scoreit.core.ext.onImeActionDone
+import com.sbgapps.scoreit.core.ext.start
 import com.sbgapps.scoreit.core.ui.BaseActivity
 import io.uniflow.androidx.flow.onStates
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -70,6 +73,7 @@ class ScoreItActivity : BaseActivity() {
         R.id.menu_count -> showPlayerCountDialog()
         R.id.menu_chart -> showChart()
         R.id.menu_clear -> showClearDialog()
+        R.id.menu_save -> displaySavedGames()
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -102,19 +106,33 @@ class ScoreItActivity : BaseActivity() {
     }
 
     private fun showGameNameDialog() {
+        val action = { name: String ->
+            if (name.isNotEmpty()) gameViewModel.createGame(name)
+        }
         val view = DialogGameNameBinding.inflate(layoutInflater)
-        MaterialAlertDialogBuilder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
             .setView(view.root)
             .setPositiveButton(R.string.button_action_ok) { _, _ ->
-                val name = view.gameName.text.toString()
-                gameViewModel.createGame(name)
+                action(view.gameName.text.toString())
             }
-            .setNegativeButton(R.string.button_action_cancel) { _, _ -> }
-            .show()
+            .create()
+        view.gameName.apply {
+            requestFocus()
+            onImeActionDone {
+                action(text.toString())
+                dialog.dismiss()
+            }
+        }
+        dialog.show()
     }
 
     private fun showChart(): Boolean {
         navController.navigate(R.id.action_historyFragment_to_chartFragment)
+        return true
+    }
+
+    private fun displaySavedGames(): Boolean {
+        start<SavedGamesActivity>()
         return true
     }
 }

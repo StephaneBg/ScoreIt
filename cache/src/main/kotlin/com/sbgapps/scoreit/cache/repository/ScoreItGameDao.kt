@@ -66,6 +66,12 @@ class ScoreItGameDao(
         storage.saveFile(directory, fileName, json)
     }
 
+    fun setFileName(gameType: GameType, playerCount: Int, fileName: String) {
+        preferences.edit {
+            putString(getFileNameKey(gameType, playerCount), fileName)
+        }
+    }
+
     private fun getFileName(gameType: GameType, playerCount: Int): String =
         preferences.getString(getFileNameKey(gameType, playerCount), DEFAULT_FILE_NAME) ?: DEFAULT_FILE_NAME
 
@@ -113,7 +119,10 @@ class ScoreItGameDao(
         return players
     }
 
+    fun getSavedFiles(gameType: GameType, playerCount: Int): List<Pair<String, Long>> =
+        storage.getSavedFiles(getDirectory(gameType, playerCount))
+
     companion object {
-        const val DEFAULT_FILE_NAME = "default_game"
+        const val DEFAULT_FILE_NAME = "ScoreIt"
     }
 }
