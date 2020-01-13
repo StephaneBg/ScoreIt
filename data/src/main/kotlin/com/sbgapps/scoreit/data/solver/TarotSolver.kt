@@ -23,7 +23,7 @@ import kotlin.math.abs
 
 class TarotSolver {
 
-    fun computeResults(lap: TarotLapData): Pair<List<Int>, Boolean> {
+    fun getResults(lap: TarotLapData): List<Int> {
         val results = IntArray(lap.playerCount)
         val points = getPoints(lap)
 
@@ -49,9 +49,16 @@ class TarotSolver {
                 }
             }
         }
-
-        return results.toList() to (points >= 0)
+        return results.toList()
     }
+
+    fun getDisplayResults(lap: TarotLapData): Pair<List<String>, Boolean> =
+        getResults(lap).mapIndexed { index, points ->
+            listOfNotNull(
+                points.toString(),
+                "①".takeIf { lap.bonuses.firstOrNull { it.bonus == TarotBonus.PETIT_AU_BOUT }?.player?.index == index }
+            ).joinToString(" ")
+        } to (getPoints(lap) >= 0)
 
     private fun getPoints(lap: TarotLapData): Int {
         var points: Int = lap.points - when (lap.oudlers.size) {
@@ -80,7 +87,7 @@ class TarotSolver {
 
     fun computeScores(laps: List<TarotLapData>, playerCount: Int): List<Int> {
         val scores = MutableList(playerCount) { 0 }
-        laps.map { computeResults(it).first }.forEach { points ->
+        laps.map { getResults(it) }.forEach { points ->
             for (player in 0 until playerCount) scores[player] += points[player]
         }
         return scores

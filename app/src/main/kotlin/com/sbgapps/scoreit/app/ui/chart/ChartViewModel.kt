@@ -36,7 +36,7 @@ class ChartViewModel(private val useCase: GameUseCase) : ViewModel() {
         val lines = mutableListOf<LineSet>()
         val lapResults = mutableListOf<List<Int>>()
         useCase.getGame().laps.forEachIndexed { index, lap ->
-            val (results, _) = useCase.getLapResults(lap)
+            val results = useCase.getResults(lap)
             lapResults += if (0 == index) {
                 results
             } else {

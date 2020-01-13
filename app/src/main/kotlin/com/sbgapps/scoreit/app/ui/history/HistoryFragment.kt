@@ -41,16 +41,13 @@ import com.sbgapps.scoreit.core.ui.BaseFragment
 import com.sbgapps.scoreit.core.widget.DividerItemDecoration
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
 import com.sbgapps.scoreit.core.widget.ItemAdapter
-import com.sbgapps.scoreit.data.solver.BeloteSolver
 import io.uniflow.androidx.flow.onEvents
 import io.uniflow.androidx.flow.onStates
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HistoryFragment : BaseFragment() {
 
     private val viewModel by sharedViewModel<GameViewModel>()
-    private val beloteSolver by inject<BeloteSolver>()
     private lateinit var binding: FragmentHistoryBinding
     private val historyAdapter = GenericRecyclerViewAdapter()
 
@@ -117,7 +114,7 @@ class HistoryFragment : BaseFragment() {
     private fun getItems(scores: List<Lap>): List<ItemAdapter> = scores.map { lap ->
         when (lap) {
             is UniversalLap -> UniversalLapAdapter(lap)
-            is BeloteLap -> BeloteLapAdapter(lap, beloteSolver)
+            is BeloteLap -> BeloteLapAdapter(lap)
             is CoincheLap -> CoincheLapAdapter(lap)
             is TarotLap -> TarotLapAdapter(lap)
         }

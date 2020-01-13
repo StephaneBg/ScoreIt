@@ -23,7 +23,35 @@ import com.sbgapps.scoreit.data.source.DataStore
 
 class CoincheSolver(private val dataStore: DataStore) {
 
-    fun computeResults(lap: CoincheLapData): Pair<List<Int>, Boolean> {
+    fun getResults(lap: CoincheLapData): List<Int> {
+        var (bidderPts, counterPts) = computeResults(lap)
+        if (isWon(bidderPts, counterPts, lap.bidPoints)) {
+            // Deal succeeded
+            bidderPts += lap.bidPoints
+            bidderPts *= lap.coincheBid.coefficient
+        } else {
+            // Deal failed
+            bidderPts = 0
+            counterPts = if (250 == lap.bidPoints) 500 else 160 + lap.bidPoints
+            counterPts *= lap.coincheBid.coefficient
+        }
+
+        return if (PlayerPosition.ONE == lap.bidder) {
+            listOf(bidderPts, counterPts)
+        } else {
+            listOf(counterPts, bidderPts)
+        }
+    }
+
+    fun getDisplayResults(lap: CoincheLapData): Pair<List<String>, Boolean> {
+        val (bidderPts, counterPts) = computeResults(lap)
+        return getResults(lap).map { it.toString() } to isWon(bidderPts, counterPts, lap.bidPoints)
+    }
+
+    private fun isWon(bidderPts: Int, counterPts: Int, bidPoints: Int): Boolean =
+        bidderPts >= bidPoints && bidderPts > counterPts
+
+    private fun computeResults(lap: CoincheLapData): Pair<Int, Int> {
         val points = IntArray(2)
         val results = IntArray(2)
 
@@ -46,42 +74,16 @@ class CoincheSolver(private val dataStore: DataStore) {
         // Add bonuses
         for ((player, bonus) in lap.bonuses) results[player.index] += bonus.points
 
-        var bidderPts: Int
-        var counterPts: Int
-        if (PlayerPosition.ONE == lap.bidder) {
-            bidderPts = results[PlayerPosition.ONE.index]
-            counterPts = results[PlayerPosition.TWO.index]
+        return if (PlayerPosition.ONE == lap.bidder) {
+            results[PlayerPosition.ONE.index] to results[PlayerPosition.TWO.index]
         } else {
-            bidderPts = results[PlayerPosition.TWO.index]
-            counterPts = results[PlayerPosition.ONE.index]
+            results[PlayerPosition.TWO.index] to results[PlayerPosition.ONE.index]
         }
-
-        val isWon = bidderPts >= lap.bidPoints && bidderPts > counterPts
-        if (isWon) {
-            // Deal succeeded
-            bidderPts += lap.bidPoints
-            bidderPts *= lap.coincheBid.coefficient
-        } else {
-            // Deal failed
-            bidderPts = 0
-            counterPts = if (250 == lap.bidPoints) 500 else 160 + lap.bidPoints
-            counterPts *= lap.coincheBid.coefficient
-        }
-
-        if (PlayerPosition.ONE == lap.bidder) {
-            results[PlayerPosition.ONE.index] = bidderPts
-            results[PlayerPosition.TWO.index] = counterPts
-        } else {
-            results[PlayerPosition.ONE.index] = counterPts
-            results[PlayerPosition.TWO.index] = bidderPts
-        }
-
-        return results.toList() to isWon
     }
 
     fun computeScores(laps: List<CoincheLapData>): List<Int> {
         val scores = MutableList(2) { 0 }
-        laps.map { computeResults(it).first }.forEach { points ->
+        laps.map { getResults(it) }.forEach { points ->
             for (player in 0 until 2) scores[player] += points[player]
         }
         return scores.map { getPointsForDisplay(it) }

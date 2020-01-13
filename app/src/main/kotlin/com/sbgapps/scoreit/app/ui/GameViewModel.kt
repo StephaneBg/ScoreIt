@@ -32,11 +32,9 @@ import com.sbgapps.scoreit.core.utils.string.fromResources
 import com.sbgapps.scoreit.core.utils.string.join
 import com.sbgapps.scoreit.core.utils.string.toStringFactory
 import com.sbgapps.scoreit.data.interactor.GameUseCase
-import com.sbgapps.scoreit.data.model.BeloteBonus
 import com.sbgapps.scoreit.data.model.BeloteGameData
 import com.sbgapps.scoreit.data.model.CoincheGameData
 import com.sbgapps.scoreit.data.model.GameType
-import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.model.TarotGameData
 import com.sbgapps.scoreit.data.model.TarotLapData
 import com.sbgapps.scoreit.data.model.UniversalGameData
@@ -47,7 +45,7 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
 
     fun loadGame(name: String? = null) {
         setState {
-            name?.let { useCase.loadGame(name) }
+            name?.let { useCase.loadGame(it) }
             getContent()
         }
     }
@@ -159,26 +157,20 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
 
     private fun getLaps(): List<Lap> = when (val game = useCase.getGame()) {
         is UniversalGameData -> game.laps.map {
-            val (results, _) = useCase.getLapResults(it)
-            UniversalLap(results)
+            UniversalLap(useCase.getResults(it))
         }
         is TarotGameData -> game.laps.map {
-            val (results, isWon) = useCase.getLapResults(it)
-            TarotLap(
-                results,
-                getTarotLapInfo(it),
-                isWon
-            )
+            val (displayResults, isWon) = useCase.getDisplayResults(it)
+            TarotLap(displayResults, getTarotLapInfo(it), isWon)
         }
 
         is BeloteGameData -> game.laps.map {
-            val (results, isWon) = useCase.getLapResults(it)
-            val belote = it.bonuses.find { bonus -> bonus.bonus == BeloteBonus.BELOTE }?.player ?: PlayerPosition.NONE
-            BeloteLap(results, isWon, belote)
+            val (displayResults, isWon) = useCase.getDisplayResults(it)
+            BeloteLap(displayResults, isWon)
         }
         is CoincheGameData -> game.laps.map {
-            val (results, isWon) = useCase.getLapResults(it)
-            CoincheLap(results, isWon)
+            val (displayResults, isWon) = useCase.getDisplayResults(it)
+            CoincheLap(displayResults, isWon)
         }
     }
 

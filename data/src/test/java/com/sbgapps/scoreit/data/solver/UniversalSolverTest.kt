@@ -29,7 +29,7 @@ class UniversalSolverTest {
         val playerCount = 3
         val points = (1..playerCount).map { it * 10 }
         val lap = UniversalLapData(points)
-        val (results, _) = solver.computeResults(lap, false)
+        val results = solver.getResults(lap, false)
         assertEquals(points, results)
     }
 
@@ -38,7 +38,7 @@ class UniversalSolverTest {
         val playerCount = 3
         val points = (1..playerCount).map { it * 10 }
         val lap = UniversalLapData(points)
-        val (results, _) = solver.computeResults(lap, true)
+        val results = solver.getResults(lap, true)
         assertEquals(points.toMutableList().apply { add(points.sum()) }, results)
     }
 

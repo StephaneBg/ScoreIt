@@ -31,7 +31,9 @@ import org.junit.Test
 
 class BeloteSolverTest {
 
-    private val mockDataStore = mockk<DataStore>()
+    private val mockDataStore = mockk<DataStore> {
+        every { isBeloteScoreRounded() } returns true
+    }
     private val solver: BeloteSolver = BeloteSolver(mockDataStore)
 
     @Test
@@ -42,7 +44,8 @@ class BeloteSolverTest {
             bonuses = emptyList()
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         assertTrue(isWon)
         assertEquals(82, results[PlayerPosition.ONE.index])
@@ -57,7 +60,8 @@ class BeloteSolverTest {
             bonuses = emptyList()
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         assertTrue(isWon)
         assertEquals(80, results[PlayerPosition.ONE.index])
@@ -72,7 +76,8 @@ class BeloteSolverTest {
             bonuses = emptyList()
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         assertFalse(isWon)
         assertEquals(0, results[PlayerPosition.ONE.index])
@@ -87,7 +92,8 @@ class BeloteSolverTest {
             bonuses = emptyList()
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         assertFalse(isWon)
         assertEquals(162, results[PlayerPosition.ONE.index])
@@ -102,7 +108,8 @@ class BeloteSolverTest {
             bonuses = emptyList()
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         assertTrue(isWon)
         assertEquals(0, results[PlayerPosition.ONE.index])
@@ -117,7 +124,8 @@ class BeloteSolverTest {
             bonuses = emptyList()
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         assertTrue(isWon)
         assertEquals(252, results[PlayerPosition.ONE.index])
@@ -132,7 +140,8 @@ class BeloteSolverTest {
             bonuses = listOf(BeloteBonusData(PlayerPosition.ONE, BeloteBonus.BELOTE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         assertTrue(isWon)
         assertEquals(92, results[PlayerPosition.ONE.index])
@@ -147,7 +156,8 @@ class BeloteSolverTest {
             bonuses = listOf(BeloteBonusData(PlayerPosition.TWO, BeloteBonus.BELOTE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         assertTrue(isWon)
         assertEquals(90, results[PlayerPosition.ONE.index])
@@ -162,7 +172,8 @@ class BeloteSolverTest {
             bonuses = listOf(BeloteBonusData(PlayerPosition.ONE, BeloteBonus.BELOTE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         assertFalse(isWon)
         assertEquals(20, results[PlayerPosition.ONE.index])
@@ -177,7 +188,8 @@ class BeloteSolverTest {
             bonuses = listOf(BeloteBonusData(PlayerPosition.TWO, BeloteBonus.BELOTE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         assertFalse(isWon)
         assertEquals(162, results[PlayerPosition.ONE.index])
@@ -191,7 +203,8 @@ class BeloteSolverTest {
             points = 81
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         assertTrue(isWon)
         assertEquals(81, results[PlayerPosition.ONE.index])
@@ -206,7 +219,8 @@ class BeloteSolverTest {
             bonuses = listOf(BeloteBonusData(PlayerPosition.ONE, BeloteBonus.BELOTE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         assertTrue(isWon)
         assertEquals(91, results[PlayerPosition.ONE.index])
@@ -235,7 +249,6 @@ class BeloteSolverTest {
 
     @Test
     fun `calcule le score avec arrondi et sans litige`() {
-        every { mockDataStore.isBeloteScoreRounded() } returns true
         val laps = listOf(
             BeloteLapData(PlayerPosition.ONE, 116),
             BeloteLapData(PlayerPosition.TWO, 90),

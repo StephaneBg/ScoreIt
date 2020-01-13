@@ -21,7 +21,7 @@ sealed class LapData
 data class UniversalLapData(
     val points: List<Int>
 ) : LapData() {
-    constructor(playerCount: Int) : this(MutableList(playerCount) { 0 })
+    constructor(playerCount: Int) : this(List(playerCount) { 0 })
 }
 
 data class TarotLapData(

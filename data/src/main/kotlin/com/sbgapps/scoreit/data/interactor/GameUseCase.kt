@@ -64,11 +64,18 @@ class GameUseCase(
         }
     }
 
-    fun getLapResults(lap: LapData): Pair<List<Int>, Boolean> = when (lap) {
-        is UniversalLapData -> universalSolver.computeResults(lap, dataStore.isUniversalTotalDisplayed())
-        is TarotLapData -> tarotSolver.computeResults(lap)
-        is BeloteLapData -> beloteSolver.computeResults(lap)
-        is CoincheLapData -> coincheSolver.computeResults(lap)
+    fun getResults(lap: LapData): List<Int> = when (lap) {
+        is UniversalLapData -> universalSolver.getResults(lap, dataStore.isUniversalTotalDisplayed())
+        is TarotLapData -> tarotSolver.getResults(lap)
+        is BeloteLapData -> beloteSolver.getResults(lap)
+        is CoincheLapData -> coincheSolver.getResults(lap)
+    }
+
+    fun getDisplayResults(lap: LapData): Pair<List<String>, Boolean> = when (lap) {
+        is UniversalLapData -> error("Not needed for this game")
+        is TarotLapData -> tarotSolver.getDisplayResults(lap)
+        is BeloteLapData -> beloteSolver.getDisplayResults(lap)
+        is CoincheLapData -> coincheSolver.getDisplayResults(lap)
     }
 
     fun getScores(): List<Int> = when (val game = getGame()) {

@@ -73,7 +73,8 @@ class TarotSolverTest {
             points = points
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_NO_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -95,7 +96,8 @@ class TarotSolverTest {
             points = points
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertFalse(isWon)
         val score = (abs(points - POINTS_WITH_NO_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -117,7 +119,8 @@ class TarotSolverTest {
             points = points
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -139,7 +142,8 @@ class TarotSolverTest {
             points = 56
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -161,7 +165,8 @@ class TarotSolverTest {
             points = points
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_THREE_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -184,7 +189,8 @@ class TarotSolverTest {
             points = points
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_NO_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -207,7 +213,8 @@ class TarotSolverTest {
             points = points
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertFalse(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -230,7 +237,8 @@ class TarotSolverTest {
             points = points
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -253,7 +261,8 @@ class TarotSolverTest {
             points = points
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -276,7 +285,8 @@ class TarotSolverTest {
             points = points
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_THREE_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -300,7 +310,8 @@ class TarotSolverTest {
             points = points
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_NO_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -324,7 +335,8 @@ class TarotSolverTest {
             points = points
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertFalse(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -348,7 +360,8 @@ class TarotSolverTest {
             points = points
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient
@@ -383,7 +396,8 @@ class TarotSolverTest {
             bonuses = listOf(TarotBonusData(PlayerPosition.ONE, TarotBonus.PETIT_AU_BOUT))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT + TarotBonus.PETIT_AU_BOUT.points) *
@@ -407,7 +421,8 @@ class TarotSolverTest {
             bonuses = listOf(TarotBonusData(PlayerPosition.TWO, TarotBonus.PETIT_AU_BOUT))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_NO_OUDLER) + POINTS_CONTRACT - TarotBonus.PETIT_AU_BOUT.points) *
@@ -431,7 +446,8 @@ class TarotSolverTest {
             bonuses = listOf(TarotBonusData(PlayerPosition.THREE, TarotBonus.PETIT_AU_BOUT))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertFalse(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT + TarotBonus.PETIT_AU_BOUT.points) *
@@ -485,7 +501,8 @@ class TarotSolverTest {
             bonuses = listOf(TarotBonusData(PlayerPosition.ONE, TarotBonus.POIGNEE_SIMPLE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient +
@@ -509,7 +526,8 @@ class TarotSolverTest {
             bonuses = listOf(TarotBonusData(PlayerPosition.TWO, TarotBonus.POIGNEE_DOUBLE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient +
@@ -533,7 +551,8 @@ class TarotSolverTest {
             bonuses = listOf(TarotBonusData(PlayerPosition.THREE, TarotBonus.POIGNEE_TRIPLE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient +
@@ -557,7 +576,8 @@ class TarotSolverTest {
             bonuses = listOf(TarotBonusData(PlayerPosition.ONE, TarotBonus.POIGNEE_TRIPLE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient +
@@ -581,7 +601,8 @@ class TarotSolverTest {
             bonuses = listOf(TarotBonusData(PlayerPosition.ONE, TarotBonus.POIGNEE_SIMPLE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertFalse(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient +
@@ -605,7 +626,8 @@ class TarotSolverTest {
             bonuses = listOf(TarotBonusData(PlayerPosition.TWO, TarotBonus.POIGNEE_SIMPLE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertFalse(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient +
@@ -662,7 +684,8 @@ class TarotSolverTest {
             bonuses = listOf(TarotBonusData(PlayerPosition.THREE, TarotBonus.CHELEM_ANNONCE_REALISE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient +
@@ -686,7 +709,8 @@ class TarotSolverTest {
             bonuses = listOf(TarotBonusData(PlayerPosition.THREE, TarotBonus.CHELEM_NON_ANNONCE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient +
@@ -710,7 +734,8 @@ class TarotSolverTest {
             bonuses = listOf(TarotBonusData(PlayerPosition.THREE, TarotBonus.CHELEM_ANNONCE_NON_REALISE))
         )
 
-        val (results, isWon) = solver.computeResults(lap)
+        val (_, isWon) = solver.getDisplayResults(lap)
+        val results = solver.getResults(lap)
 
         Assert.assertFalse(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient +
