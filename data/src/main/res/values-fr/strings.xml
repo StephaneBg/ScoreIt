@@ -1,0 +1,48 @@
+<!--
+  ~ Copyright 2019 Stéphane Baiget
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <!-- Universal -->
+    <string name="universal_total_points">Total</string>
+
+    <!-- Tarot -->
+    <string name="tarot_bid_take">Prise</string>
+    <string name="tarot_bid_guard">Garde</string>
+    <string name="tarot_bid_guard_without_kitty">Garde sans</string>
+    <string name="tarot_bid_guard_against_kitty">Garde contre</string>
+    <string name="tarot_bonus_simple_poignee">Poignée simple</string>
+    <string name="tarot_bonus_double_poignee">Poignée double</string>
+    <string name="tarot_bonus_triple_poignee">Poignée triple</string>
+    <string name="tarot_bonus_petit_au_bout">Petit au bout</string>
+    <string name="tarot_bonus_slam_not_announced">Chelem non annoncé</string>
+    <string name="tarot_bonus_slam_announced_not_done">Chelem annoncé réalisé</string>
+    <string name="tarot_bonus_slam_announced_done">Chelem annoncé non réalisé</string>
+
+    <!-- Belote -->
+    <string name="belote_bonus_belote">Belote</string>
+    <string name="belote_bonus_run_3">Tierce</string>
+    <string name="belote_bonus_run_4">Suite de 4 cartes</string>
+    <string name="belote_bonus_run_5">Suite de 5 cartes</string>
+    <string name="belote_bonus_normal_four">Carré - Roi, Dame et 10</string>
+    <string name="belote_bonus_nine_four">Carré - 9</string>
+    <string name="belote_bonus_jack_four">Carré - Valet</string>
+
+    <!-- Coinche -->
+    <string name="coinche_coinche_none">Aucune</string>
+    <string name="coinche_coinche_coinche">Coinche</string>
+    <string name="coinche_coinche_surcoinche">Sur-coinche</string>
+</resources>

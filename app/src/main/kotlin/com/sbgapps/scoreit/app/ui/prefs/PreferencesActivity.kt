@@ -46,8 +46,7 @@ class PreferencesActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setupActionBar(binding.toolbar)
 
         binding.themeMode.setOnClickListener {
             MaterialAlertDialogBuilder(this)
@@ -83,10 +82,6 @@ class PreferencesActivity : BaseActivity() {
                 viewModel.setCoincheScoreRounded(isChecked)
             }
         }
-    }
-
-    override fun onUpPressed() {
-        finish()
     }
 
     private fun getCurrentChoice(): Int = when (viewModel.getPrefThemeMode()) {

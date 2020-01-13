@@ -16,17 +16,27 @@
 
 package com.sbgapps.scoreit.data.di
 
+import android.graphics.Color
+import com.sbgapps.scoreit.data.R
 import com.sbgapps.scoreit.data.interactor.GameUseCase
+import com.sbgapps.scoreit.data.model.PlayerData
 import com.sbgapps.scoreit.data.solver.BeloteSolver
 import com.sbgapps.scoreit.data.solver.CoincheSolver
 import com.sbgapps.scoreit.data.solver.TarotSolver
 import com.sbgapps.scoreit.data.solver.UniversalSolver
 import com.sbgapps.scoreit.data.source.DataStore
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val dataModule = module {
 
-    single { DataStore(get(), get()) }
+    single {
+        DataStore(
+            get(),
+            get(),
+            PlayerData(androidContext().getString(R.string.universal_total_points), Color.RED)
+        )
+    }
     single { GameUseCase(get(), get(), get(), get(), get()) }
     single { UniversalSolver() }
     single { TarotSolver() }

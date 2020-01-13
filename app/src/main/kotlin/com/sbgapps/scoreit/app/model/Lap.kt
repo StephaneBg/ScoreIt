@@ -19,27 +19,25 @@ package com.sbgapps.scoreit.app.model
 import com.sbgapps.scoreit.core.utils.string.StringFactory
 import com.sbgapps.scoreit.data.model.PlayerPosition
 
-sealed class Lap(
-    open val results: List<Int>
-)
+sealed class Lap
 
 data class UniversalLap(
-    override val results: List<Int>
-) : Lap(results)
+    val results: List<Int>
+) : Lap()
 
 data class BeloteLap(
-    override val results: List<Int> = emptyList(),
+    val results: List<Int> = emptyList(),
     val isWon: Boolean = true,
     val hasBelote: PlayerPosition
-) : Lap(results)
+) : Lap()
 
 data class CoincheLap(
-    override val results: List<Int>,
+    val results: List<Int>,
     val isWon: Boolean
-) : Lap(results)
+) : Lap()
 
 data class TarotLap(
-    override val results: List<Int>,
+    val results: List<Int>,
     val info: StringFactory,
     val isWon: Boolean
-) : Lap(results)
+) : Lap()

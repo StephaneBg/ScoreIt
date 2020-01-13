@@ -13,9 +13,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
+
 <resources>
 
     <!-- Belote/Coinche -->
-    <string name="belote_first_team_default_name">Them</string>
-    <string name="belote_second_team_default_name">Us</string>
+    <string name="belote_first_team_default_name">Eux</string>
+    <string name="belote_second_team_default_name">Nous</string>
 </resources>

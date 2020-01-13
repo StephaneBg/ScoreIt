@@ -36,6 +36,18 @@
     <string name="drawer_about">About</string>
     <string name="drawer_preferences">Preferences</string>
 
+    <!-- Tarot -->
+    <string name="tarot_header_scorer">Taker</string>
+    <string name="tarot_header_player">Player</string>
+    <string name="tarot_header_partner">Partner</string>
+    <string name="tarot_header_bid">Bid</string>
+    <string name="tarot_header_oudlers">Oudlers</string>
+    <string name="tarot_header_points">Points</string>
+    <string name="tarot_header_bonuses">Bonuses</string>
+    <string name="tarot_oudler_excuse">Excuse</string>
+    <string name="tarot_oudler_petit">Petit</string>
+    <string name="tarot_oudler_twentyone">21</string>
+
     <!-- Belote -->
     <string name="belote_header_scorer">Scorer</string>
     <string name="belote_button_score">Score</string>
@@ -50,21 +62,6 @@
     <string name="coinche_header_points">Points</string>
     <string name="coinche_header_bonuses">Bonuses</string>
     <string name="coinche_header_announces">Announces</string>
-
-    <!-- Tarot -->
-    <string name="tarot_header_scorer">Taker</string>
-    <string name="tarot_header_player">Player</string>
-    <string name="tarot_header_partner">Partner</string>
-    <string name="tarot_header_bid">Bid</string>
-    <string name="tarot_header_oudlers">Oudlers</string>
-    <string name="tarot_header_points">Points</string>
-    <string name="tarot_header_bonuses">Bonuses</string>
-    <string name="tarot_oudler_excuse">Excuse</string>
-    <string name="tarot_oudler_petit">Petit</string>
-    <string name="tarot_oudler_twentyone">21</string>
-
-    <!-- Universal -->
-    <string name="universal_total_points">Total</string>
 
     <!-- Dialog -->
     <string name="dialog_title_current_game">Current game</string>
@@ -94,9 +91,8 @@
 
     <!-- Menu -->
     <string name="menu_action_clear">Clear</string>
-    <string name="menu_action_actual_scores">Actual scores</string>
+    <string name="menu_action_done">Done</string>
     <string name="menu_action_show_chart">Show chart</string>
-    <string name="menu_action_hide_totals">Hide totals</string>
 
     <!-- Prefs -->
     <string name="prefs_select_theme_mode">Select theme</string>
@@ -105,5 +101,4 @@
 
     <!-- Date -->
     <string name="local_date_pattern">eeee, dd MMMM yyyy \'at\' h:mm a</string>
-
 </resources>

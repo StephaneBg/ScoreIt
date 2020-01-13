@@ -16,6 +16,10 @@
 
 <resources>
 
+    <!-- Universal -->
+    <string name="universal_total_points">Total</string>
+
+    <!-- Tarot -->
     <string name="tarot_bid_take">Take</string>
     <string name="tarot_bid_guard">Guard</string>
     <string name="tarot_bid_guard_without_kitty">Guard without the kitty</string>
@@ -28,6 +32,7 @@
     <string name="tarot_bonus_slam_announced_not_done">Slam announced - Not done</string>
     <string name="tarot_bonus_slam_announced_done">Slam announced - Done</string>
 
+    <!-- Belote -->
     <string name="belote_bonus_belote">Belote</string>
     <string name="belote_bonus_run_3">Run of 3 cards</string>
     <string name="belote_bonus_run_4">Run of 4 cards</string>
@@ -36,6 +41,7 @@
     <string name="belote_bonus_nine_four">Four of a kind - 9</string>
     <string name="belote_bonus_jack_four">Four of a kind - Jack</string>
 
+    <!-- Coinche -->
     <string name="coinche_coinche_none">None</string>
     <string name="coinche_coinche_coinche">Coinche</string>
     <string name="coinche_coinche_surcoinche">Sur-coinche</string>

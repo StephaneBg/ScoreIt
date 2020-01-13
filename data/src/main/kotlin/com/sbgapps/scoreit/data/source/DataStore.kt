@@ -18,12 +18,14 @@ package com.sbgapps.scoreit.data.source
 
 import com.sbgapps.scoreit.data.model.GameData
 import com.sbgapps.scoreit.data.model.GameType
+import com.sbgapps.scoreit.data.model.PlayerData
 import com.sbgapps.scoreit.data.repository.CacheRepo
 import com.sbgapps.scoreit.data.repository.PreferencesRepo
 
 class DataStore(
     private val cacheRepo: CacheRepo,
-    private val prefsRepo: PreferencesRepo
+    private val prefsRepo: PreferencesRepo,
+    val totalPlayer: PlayerData
 ) {
     private var game: GameData? = null
 

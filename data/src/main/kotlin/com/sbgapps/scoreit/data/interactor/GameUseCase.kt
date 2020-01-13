@@ -16,7 +16,6 @@
 
 package com.sbgapps.scoreit.data.interactor
 
-import android.graphics.Color
 import androidx.annotation.ColorInt
 import com.sbgapps.scoreit.core.ext.asListOfType
 import com.sbgapps.scoreit.core.ext.asMutableListOfType
@@ -59,7 +58,7 @@ class GameUseCase(
     fun getPlayers(withTotal: Boolean = false): List<PlayerData> {
         val game = getGame()
         return if (withTotal && game is UniversalGameData && dataStore.isUniversalTotalDisplayed()) {
-            game.players.toMutableList().apply { add(PlayerData("Total", Color.RED)) }
+            game.players.toMutableList().apply { add(dataStore.totalPlayer) }
         } else {
             game.players
         }
