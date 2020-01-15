@@ -58,7 +58,7 @@ class UniversalEditionActivity : EditionActivity() {
         }
     }
 
-    override fun onUpPressed() {
+    override fun onBackPressed() {
         viewModel.cancelEdition()
     }
 

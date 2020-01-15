@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_padding_size_medium"
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
-                android:text="@string/belote_header_scorer"
+                android:text="@string/belote_header_taker"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
@@ -88,6 +88,17 @@
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
             <TextView
+                android:id="@+id/lapInfo"
+                style="@style/TextAppearance.ScoreIt.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_padding_size_medium"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/scorerGroup"
+                tools:text="Lap information"
+                />
+
+            <TextView
                 android:id="@+id/headerPoints"
                 style="?textAppearanceOverline"
                 android:layout_width="wrap_content"
@@ -96,37 +107,8 @@
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
                 android:text="@string/belote_header_points"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/scorerGroup"
+                app:layout_constraintTop_toBottomOf="@id/lapInfo"
                 />
-
-            <com.google.android.material.button.MaterialButtonToggleGroup
-                android:id="@+id/pointsModeGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_padding_size_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/headerPoints"
-                app:selectionRequired="true"
-                app:singleSelection="true"
-                >
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/buttonPoints"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/belote_button_score"
-                    />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/buttonCapot"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/belote_button_capot"
-                    />
-            </com.google.android.material.button.MaterialButtonToggleGroup>
 
             <TextView
                 android:id="@+id/nameTeamOne"
@@ -136,7 +118,7 @@
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
                 app:layout_constraintEnd_toEndOf="@id/pointsTeamOne"
                 app:layout_constraintStart_toStartOf="@id/pointsTeamOne"
-                app:layout_constraintTop_toBottomOf="@id/pointsModeGroup"
+                app:layout_constraintTop_toBottomOf="@id/headerPoints"
                 tools:text="@string/belote_first_team_default_name"
                 />
 
@@ -148,7 +130,7 @@
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
                 app:layout_constraintEnd_toEndOf="@id/pointsTeamTwo"
                 app:layout_constraintStart_toStartOf="@id/pointsTeamTwo"
-                app:layout_constraintTop_toBottomOf="@id/pointsModeGroup"
+                app:layout_constraintTop_toBottomOf="@id/headerPoints"
                 tools:text="@string/belote_second_team_default_name"
                 />
 

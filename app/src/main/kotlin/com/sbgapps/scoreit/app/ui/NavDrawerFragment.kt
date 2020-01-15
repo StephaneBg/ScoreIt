@@ -40,7 +40,7 @@ class NavDrawerFragment : BottomSheetDialogFragment() {
                 R.id.universal -> viewModel.selectGame(GameType.UNIVERSAL)
                 R.id.tarot -> viewModel.selectGame(GameType.TAROT)
                 R.id.belote -> viewModel.selectGame(GameType.BELOTE)
-//                R.id.coinche -> viewModel.selectGame(Game.COINCHE)
+                R.id.coinche -> viewModel.selectGame(GameType.COINCHE)
 
                 R.id.preferences -> findNavController().navigate(R.id.action_navDrawerFragment_to_preferencesActivity)
                 R.id.about -> findNavController().navigate(R.id.action_navDrawerFragment_to_aboutActivity)

@@ -29,10 +29,12 @@ import com.sbgapps.scoreit.app.databinding.ActivityEditionBeloteBinding
 import com.sbgapps.scoreit.app.databinding.ListItemEditionBonusBinding
 import com.sbgapps.scoreit.app.ui.edition.EditionActivity
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayoutAdapter
+import com.sbgapps.scoreit.core.utils.string.build
 import com.sbgapps.scoreit.data.model.BeloteBonus
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import io.uniflow.androidx.flow.onStates
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class BeloteEditionActivity : EditionActivity() {
 
@@ -54,31 +56,19 @@ class BeloteEditionActivity : EditionActivity() {
                     binding.buttonTeamTwo.text = state.players[PlayerPosition.TWO.index].name
 
                     binding.scorerGroup.removeOnButtonCheckedListener(scorerCheckedListener)
-                    when (state.scorer) {
+                    when (state.taker) {
                         PlayerPosition.ONE -> binding.scorerGroup.check(R.id.buttonTeamOne)
                         PlayerPosition.TWO -> binding.scorerGroup.check(R.id.buttonTeamTwo)
                         else -> error("Only two players for Belote")
                     }
                     binding.scorerGroup.addOnButtonCheckedListener(scorerCheckedListener)
 
-                    binding.buttonPoints.text = getString(R.string.belote_button_score)
-                    binding.pointsModeGroup.removeOnButtonCheckedListener(pointModeCheckedListener)
-                    when (state.pointMode) {
-                        is PointMode.Score -> {
-                            binding.pointsModeGroup.check(R.id.buttonPoints)
-                            binding.buttonGroup.isVisible = true
-                        }
-                        PointMode.Capot -> {
-                            binding.pointsModeGroup.check(R.id.buttonCapot)
-                            binding.buttonGroup.isVisible = false
-                        }
-                    }
-                    binding.pointsModeGroup.addOnButtonCheckedListener(pointModeCheckedListener)
+                    binding.lapInfo.text = state.lapInfo.build(this)
 
-                    setupButton(binding.pointsPlusTen, 10, state.canIncrement.canStepTen)
-                    setupButton(binding.pointsMinusTen, -10, state.canDecrement.canStepTen)
-                    setupButton(binding.pointsPlusOne, 1, state.canIncrement.canStepOne)
-                    setupButton(binding.pointsMinusOne, -1, state.canDecrement.canStepOne)
+                    setupButton(binding.pointsPlusTen, 10, state.stepPointsByTen.canAdd)
+                    setupButton(binding.pointsMinusTen, -10, state.stepPointsByTen.canSubtract)
+                    setupButton(binding.pointsPlusOne, 1, state.stepPointsByOne.canAdd)
+                    setupButton(binding.pointsMinusOne, -1, state.stepPointsByOne.canSubtract)
 
                     binding.nameTeamOne.apply {
                         text = state.players[PlayerPosition.ONE.index].name
@@ -89,6 +79,7 @@ class BeloteEditionActivity : EditionActivity() {
                         setTextColor(state.players[PlayerPosition.TWO.index].color)
                     }
 
+                    Timber.d("Team points are ${state.teamPoints}")
                     val (teamOne, teamTwo) = state.teamPoints
                     binding.pointsTeamOne.text = teamOne
                     binding.pointsTeamTwo.text = teamTwo
@@ -116,22 +107,13 @@ class BeloteEditionActivity : EditionActivity() {
         else -> super.onOptionsItemSelected(item)
     }
 
-    private val pointModeCheckedListener =
-        MaterialButtonToggleGroup.OnButtonCheckedListener { _, checkedId, isChecked ->
-            if (isChecked) {
-                viewModel.editMode(
-                    when (checkedId) {
-                        R.id.buttonPoints -> PointMode.Score(81)
-                        R.id.buttonCapot -> PointMode.Capot
-                        else -> error("Unknown mode")
-                    }
-                )
-            }
-        }
+    override fun onBackPressed() {
+        viewModel.cancelEdition()
+    }
 
     private val scorerCheckedListener = MaterialButtonToggleGroup.OnButtonCheckedListener { _, checkedId, isChecked ->
         if (isChecked) {
-            viewModel.changeScorer(
+            viewModel.changeTaker(
                 when (checkedId) {
                     R.id.buttonTeamOne -> PlayerPosition.ONE
                     R.id.buttonTeamTwo -> PlayerPosition.TWO
@@ -145,9 +127,7 @@ class BeloteEditionActivity : EditionActivity() {
         button.apply {
             isEnabled = enabled
             setOnClickListener {
-                viewModel.incrementScore(
-                    if (binding.scorerGroup.checkedButtonId == R.id.buttonTeamOne) increment else -increment
-                )
+                viewModel.incrementScore(increment)
             }
         }
     }

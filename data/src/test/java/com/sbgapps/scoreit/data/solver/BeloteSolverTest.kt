@@ -20,6 +20,8 @@ import com.sbgapps.scoreit.data.model.BeloteBonus
 import com.sbgapps.scoreit.data.model.BeloteBonusData
 import com.sbgapps.scoreit.data.model.BeloteLapData
 import com.sbgapps.scoreit.data.model.PlayerPosition
+import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_CAPOT
+import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_TOTAL
 import com.sbgapps.scoreit.data.source.DataStore
 import io.mockk.every
 import io.mockk.mockk
@@ -37,194 +39,205 @@ class BeloteSolverTest {
     private val solver: BeloteSolver = BeloteSolver(mockDataStore)
 
     @Test
-    fun `equipe une remporte son contrat car a plus de 81 points`() {
-        val lap = BeloteLapData(
-            scorer = PlayerPosition.ONE,
-            points = 82,
-            bonuses = emptyList()
-        )
-
-        val (_, isWon) = solver.getDisplayResults(lap)
-        val results = solver.getResults(lap)
-
-        assertTrue(isWon)
-        assertEquals(82, results[PlayerPosition.ONE.index])
-        assertEquals(80, results[PlayerPosition.TWO.index])
+    fun `Le total des points est de 162`() {
+        assertEquals(162, POINTS_TOTAL)
     }
 
     @Test
-    fun `equipe deux remporte son contrat car a plus de 81 points`() {
-        val lap = BeloteLapData(
-            scorer = PlayerPosition.TWO,
-            points = 82,
-            bonuses = emptyList()
-        )
-
-        val (_, isWon) = solver.getDisplayResults(lap)
-        val results = solver.getResults(lap)
-
-        assertTrue(isWon)
-        assertEquals(80, results[PlayerPosition.ONE.index])
-        assertEquals(82, results[PlayerPosition.TWO.index])
+    fun `Le total des points pour le capot est de 252`() {
+        assertEquals(252, POINTS_CAPOT)
     }
 
     @Test
-    fun `equipe une perd son contrat car elle est dedans`() {
+    fun `équipe une remporte son contrat car a plus de 81 points`() {
+        val points = 82
         val lap = BeloteLapData(
-            scorer = PlayerPosition.ONE,
-            points = 80,
+            taker = PlayerPosition.ONE,
+            points = points,
             bonuses = emptyList()
         )
 
-        val (_, isWon) = solver.getDisplayResults(lap)
-        val results = solver.getResults(lap)
+        val (results, isWon) = solver.getResults(lap)
+
+        assertTrue(isWon)
+        assertEquals(points, results[PlayerPosition.ONE.index])
+        assertEquals(POINTS_TOTAL - points, results[PlayerPosition.TWO.index])
+    }
+
+    @Test
+    fun `équipe deux remporte son contrat car a plus de 81 points`() {
+        val points = 82
+        val lap = BeloteLapData(
+            taker = PlayerPosition.TWO,
+            points = points,
+            bonuses = emptyList()
+        )
+
+        val (results, isWon) = solver.getResults(lap)
+
+        assertTrue(isWon)
+        assertEquals(POINTS_TOTAL - points, results[PlayerPosition.ONE.index])
+        assertEquals(points, results[PlayerPosition.TWO.index])
+    }
+
+    @Test
+    fun `équipe une perd son contrat car elle est dedans`() {
+        val points = 80
+        val lap = BeloteLapData(
+            taker = PlayerPosition.ONE,
+            points = points,
+            bonuses = emptyList()
+        )
+
+        val (results, isWon) = solver.getResults(lap)
 
         assertFalse(isWon)
         assertEquals(0, results[PlayerPosition.ONE.index])
-        assertEquals(162, results[PlayerPosition.TWO.index])
+        assertEquals(POINTS_TOTAL, results[PlayerPosition.TWO.index])
     }
 
     @Test
-    fun `equipe deux perd son contrat car elle est dedans`() {
+    fun `équipe deux perd son contrat car elle est dedans`() {
+        val points = 80
         val lap = BeloteLapData(
-            scorer = PlayerPosition.TWO,
-            points = 80,
+            taker = PlayerPosition.TWO,
+            points = points,
             bonuses = emptyList()
         )
 
-        val (_, isWon) = solver.getDisplayResults(lap)
-        val results = solver.getResults(lap)
+        val (results, isWon) = solver.getResults(lap)
 
         assertFalse(isWon)
-        assertEquals(162, results[PlayerPosition.ONE.index])
+        assertEquals(POINTS_TOTAL, results[PlayerPosition.ONE.index])
         assertEquals(0, results[PlayerPosition.TWO.index])
     }
 
     @Test
-    fun `equipe une perd car elle est capot`() {
+    fun `équipe une perd car elle est capot`() {
         val lap = BeloteLapData(
-            scorer = PlayerPosition.TWO,
-            points = 252,
+            taker = PlayerPosition.TWO,
+            points = POINTS_TOTAL,
             bonuses = emptyList()
         )
 
-        val (_, isWon) = solver.getDisplayResults(lap)
-        val results = solver.getResults(lap)
+        val (results, isWon) = solver.getResults(lap)
 
         assertTrue(isWon)
         assertEquals(0, results[PlayerPosition.ONE.index])
-        assertEquals(252, results[PlayerPosition.TWO.index])
+        assertEquals(POINTS_CAPOT, results[PlayerPosition.TWO.index])
     }
 
     @Test
-    fun `equipe deux perd car elle est capot`() {
+    fun `équipe deux perd car elle est capot`() {
         val lap = BeloteLapData(
-            scorer = PlayerPosition.ONE,
-            points = 252,
+            taker = PlayerPosition.ONE,
+            points = POINTS_TOTAL,
             bonuses = emptyList()
         )
 
-        val (_, isWon) = solver.getDisplayResults(lap)
-        val results = solver.getResults(lap)
+        val (results, isWon) = solver.getResults(lap)
 
         assertTrue(isWon)
-        assertEquals(252, results[PlayerPosition.ONE.index])
+        assertEquals(POINTS_CAPOT, results[PlayerPosition.ONE.index])
         assertEquals(0, results[PlayerPosition.TWO.index])
     }
 
     @Test
-    fun `equipe une remporte son contrat avec la belote et moins de 81 points`() {
+    fun `Le bonus accordé pour la belote est de 20 points`() {
+        assertEquals(20, BeloteBonus.BELOTE.points)
+    }
+
+    @Test
+    fun `équipe une remporte son contrat avec la belote et moins de 81 points`() {
+        val points = 72
         val lap = BeloteLapData(
-            scorer = PlayerPosition.ONE,
-            points = 72,
+            taker = PlayerPosition.ONE,
+            points = points,
             bonuses = listOf(BeloteBonusData(PlayerPosition.ONE, BeloteBonus.BELOTE))
         )
 
-        val (_, isWon) = solver.getDisplayResults(lap)
-        val results = solver.getResults(lap)
+        val (results, isWon) = solver.getResults(lap)
 
         assertTrue(isWon)
-        assertEquals(92, results[PlayerPosition.ONE.index])
-        assertEquals(90, results[PlayerPosition.TWO.index])
+        assertEquals(points + BeloteBonus.BELOTE.points, results[PlayerPosition.ONE.index])
+        assertEquals(POINTS_TOTAL - points, results[PlayerPosition.TWO.index])
     }
 
     @Test
-    fun `equipe deux remporte son contrat avec la belote et moins de 81 points`() {
+    fun `équipe deux remporte son contrat avec la belote et moins de 81 points`() {
+        val points = 72
         val lap = BeloteLapData(
-            scorer = PlayerPosition.TWO,
-            points = 72,
+            taker = PlayerPosition.TWO,
+            points = points,
             bonuses = listOf(BeloteBonusData(PlayerPosition.TWO, BeloteBonus.BELOTE))
         )
 
-        val (_, isWon) = solver.getDisplayResults(lap)
-        val results = solver.getResults(lap)
+        val (results, isWon) = solver.getResults(lap)
 
         assertTrue(isWon)
-        assertEquals(90, results[PlayerPosition.ONE.index])
-        assertEquals(92, results[PlayerPosition.TWO.index])
+        assertEquals(POINTS_TOTAL - points, results[PlayerPosition.ONE.index])
+        assertEquals(points + BeloteBonus.BELOTE.points, results[PlayerPosition.TWO.index])
     }
 
     @Test
-    fun `equipe une perd son contrat avec la belote`() {
+    fun `équipe une perd son contrat avec la belote qui est imprenable`() {
         val lap = BeloteLapData(
-            scorer = PlayerPosition.ONE,
+            taker = PlayerPosition.ONE,
             points = 70,
             bonuses = listOf(BeloteBonusData(PlayerPosition.ONE, BeloteBonus.BELOTE))
         )
 
-        val (_, isWon) = solver.getDisplayResults(lap)
-        val results = solver.getResults(lap)
+        val (results, isWon) = solver.getResults(lap)
 
         assertFalse(isWon)
-        assertEquals(20, results[PlayerPosition.ONE.index])
-        assertEquals(162, results[PlayerPosition.TWO.index])
+        assertEquals(BeloteBonus.BELOTE.points, results[PlayerPosition.ONE.index])
+        assertEquals(POINTS_TOTAL, results[PlayerPosition.TWO.index])
     }
 
     @Test
-    fun `equipe deux perd son contrat avec la belote`() {
+    fun `équipe deux perd son contrat avec la belote qui est imprenable`() {
         val lap = BeloteLapData(
-            scorer = PlayerPosition.TWO,
+            taker = PlayerPosition.TWO,
             points = 70,
             bonuses = listOf(BeloteBonusData(PlayerPosition.TWO, BeloteBonus.BELOTE))
         )
 
-        val (_, isWon) = solver.getDisplayResults(lap)
-        val results = solver.getResults(lap)
+        val (results, isWon) = solver.getResults(lap)
 
         assertFalse(isWon)
-        assertEquals(162, results[PlayerPosition.ONE.index])
-        assertEquals(20, results[PlayerPosition.TWO.index])
+        assertEquals(POINTS_TOTAL, results[PlayerPosition.ONE.index])
+        assertEquals(BeloteBonus.BELOTE.points, results[PlayerPosition.TWO.index])
     }
 
     @Test
     fun `litige sans belote`() {
+        val points = 81
         val lap = BeloteLapData(
-            scorer = PlayerPosition.ONE,
-            points = 81
+            taker = PlayerPosition.ONE,
+            points = points
         )
 
-        val (_, isWon) = solver.getDisplayResults(lap)
-        val results = solver.getResults(lap)
+        val (results, isWon) = solver.getResults(lap)
 
         assertTrue(isWon)
-        assertEquals(81, results[PlayerPosition.ONE.index])
-        assertEquals(81, results[PlayerPosition.TWO.index])
+        assertEquals(points, results[PlayerPosition.ONE.index])
+        assertEquals(POINTS_TOTAL - points, results[PlayerPosition.TWO.index])
     }
 
     @Test
     fun `litige avec belote`() {
+        val points = 71
         val lap = BeloteLapData(
-            scorer = PlayerPosition.ONE,
-            points = 71,
+            taker = PlayerPosition.ONE,
+            points = points,
             bonuses = listOf(BeloteBonusData(PlayerPosition.ONE, BeloteBonus.BELOTE))
         )
 
-        val (_, isWon) = solver.getDisplayResults(lap)
-        val results = solver.getResults(lap)
+        val (results, isWon) = solver.getResults(lap)
 
         assertTrue(isWon)
-        assertEquals(91, results[PlayerPosition.ONE.index])
-        assertEquals(91, results[PlayerPosition.TWO.index])
+        assertEquals(points + BeloteBonus.BELOTE.points, results[PlayerPosition.ONE.index])
+        assertEquals(POINTS_TOTAL - points, results[PlayerPosition.TWO.index])
     }
 
     @Test

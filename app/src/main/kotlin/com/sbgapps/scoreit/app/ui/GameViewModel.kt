@@ -25,7 +25,7 @@ import com.sbgapps.scoreit.app.model.Lap
 import com.sbgapps.scoreit.app.model.Player
 import com.sbgapps.scoreit.app.model.TarotLap
 import com.sbgapps.scoreit.app.model.UniversalLap
-import com.sbgapps.scoreit.app.ui.history.Header
+import com.sbgapps.scoreit.app.ui.history.adapter.Header
 import com.sbgapps.scoreit.core.ui.BaseViewModel
 import com.sbgapps.scoreit.core.utils.string.StringFactory
 import com.sbgapps.scoreit.core.utils.string.fromResources

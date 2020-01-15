@@ -17,100 +17,87 @@
 package com.sbgapps.scoreit.data.solver
 
 import com.sbgapps.scoreit.data.model.BeloteBonus
+import com.sbgapps.scoreit.data.model.BeloteBonusData
 import com.sbgapps.scoreit.data.model.CoincheLapData
 import com.sbgapps.scoreit.data.model.PlayerPosition
+import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.POINTS_CAPOT
+import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.POINTS_TOTAL
 import com.sbgapps.scoreit.data.source.DataStore
 
 class CoincheSolver(private val dataStore: DataStore) {
 
-    fun getResults(lap: CoincheLapData): List<Int> {
-        var (bidderPts, counterPts) = computeResults(lap)
-        if (isWon(bidderPts, counterPts, lap.bidPoints)) {
-            // Deal succeeded
-            bidderPts += lap.bidPoints
-            bidderPts *= lap.coincheBid.coefficient
+    fun getResults(lap: CoincheLapData): Pair<List<Int>, Boolean> {
+        val takerIndex = lap.taker.index
+        val counterIndex = lap.counter().index
+        val (results, isWon) = computeResults(lap)
+        if (isWon) {
+            results[takerIndex] += lap.bid
+            results[takerIndex] *= lap.coinche.coefficient
         } else {
-            // Deal failed
-            bidderPts = 0
-            counterPts = if (250 == lap.bidPoints) 500 else 160 + lap.bidPoints
-            counterPts *= lap.coincheBid.coefficient
+            results[takerIndex] = 0
+            results[counterIndex] = POINTS_TOTAL + lap.bid
+            results[counterIndex] *= lap.coinche.coefficient
+            addBonuses(results, lap.bonuses)
         }
-
-        return if (PlayerPosition.ONE == lap.bidder) {
-            listOf(bidderPts, counterPts)
-        } else {
-            listOf(counterPts, bidderPts)
-        }
+        return results.toList() to isWon
     }
 
     fun getDisplayResults(lap: CoincheLapData): Pair<List<String>, Boolean> {
-        val (bidderPts, counterPts) = computeResults(lap)
-        return getResults(lap).map { it.toString() } to isWon(bidderPts, counterPts, lap.bidPoints)
+        val (results, isWon) = getResults(lap)
+        return results.toList().mapIndexed { index, points ->
+            listOfNotNull(
+                getPointsForDisplay(points).toString(),
+                "♛".takeIf { lap.bonuses.find { it.bonus == BeloteBonus.BELOTE && it.player.index == index } != null },
+                "★".takeIf { lap.bonuses.find { it.bonus != BeloteBonus.BELOTE && it.player.index == index } != null }
+            ).joinToString(" ")
+        } to isWon
     }
 
-    private fun isWon(bidderPts: Int, counterPts: Int, bidPoints: Int): Boolean =
-        bidderPts >= bidPoints && bidderPts > counterPts
-
-    private fun computeResults(lap: CoincheLapData): Pair<Int, Int> {
-        val points = IntArray(2)
+    private fun computeResults(lap: CoincheLapData): Pair<IntArray, Boolean> {
+        val takerIndex = lap.taker.index
+        val counterIndex = lap.counter().index
         val results = IntArray(2)
-
-        if (lap.points >= 158) {
-            points[0] = lap.points
-            points[1] = 0
+        if (POINTS_TOTAL == lap.points) {
+            results[takerIndex] = POINTS_CAPOT
+            results[counterIndex] = 0
         } else {
-            points[0] = lap.points
-            points[1] = 162 - lap.points
+            results[takerIndex] = lap.points
+            results[counterIndex] = lap.counterPoints()
         }
+        addBonuses(results, lap.bonuses)
+        val isWon = results[takerIndex] >= lap.bid && results[takerIndex] > results[counterIndex]
+        return results to isWon
+    }
 
-        if (PlayerPosition.ONE == lap.scorer) {
-            results[PlayerPosition.ONE.index] = points[0]
-            results[PlayerPosition.TWO.index] = points[1]
-        } else {
-            results[PlayerPosition.ONE.index] = points[1]
-            results[PlayerPosition.TWO.index] = points[0]
-        }
-
-        // Add bonuses
-        for ((player, bonus) in lap.bonuses) results[player.index] += bonus.points
-
-        return if (PlayerPosition.ONE == lap.bidder) {
-            results[PlayerPosition.ONE.index] to results[PlayerPosition.TWO.index]
-        } else {
-            results[PlayerPosition.TWO.index] to results[PlayerPosition.ONE.index]
-        }
+    private fun addBonuses(results: IntArray, bonuses: List<BeloteBonusData>) {
+        for ((player, bonus) in bonuses) results[player.index] += bonus.points
     }
 
     fun computeScores(laps: List<CoincheLapData>): List<Int> {
         val scores = MutableList(2) { 0 }
-        laps.map { getResults(it) }.forEach { points ->
+        laps.map { getResults(it).first }.forEach { points ->
             for (player in 0 until 2) scores[player] += points[player]
         }
         return scores.map { getPointsForDisplay(it) }
     }
 
-    fun getPointsForDisplay(points: Int): Int = if (dataStore.isCoincheScoreRounded()) roundPoint(points) else points
-
-    fun canIncrement(lap: CoincheLapData): Pair<Boolean, Boolean> = (lap.bidPoints <= 990) to (lap.points < 150)
-
-    fun canDecrement(lap: CoincheLapData): Pair<Boolean, Boolean> = (lap.bidPoints >= 110) to (lap.points >= 20)
-
-    fun getAvailableBonuses(lap: CoincheLapData): List<BeloteBonus> {
-        val currentBonuses = lap.bonuses.map { it.bonus }
-        val bonuses = mutableListOf<BeloteBonus>()
-        if (!currentBonuses.contains(BeloteBonus.BELOTE)) bonuses.add(BeloteBonus.BELOTE)
-        bonuses.add(BeloteBonus.RUN_3)
-        bonuses.add(BeloteBonus.RUN_4)
-        bonuses.add(BeloteBonus.RUN_5)
-        bonuses.add(BeloteBonus.FOUR_NORMAL)
-        bonuses.add(BeloteBonus.FOUR_NINE)
-        bonuses.add(BeloteBonus.FOUR_JACK)
-        return bonuses
-    }
+    private fun getPointsForDisplay(points: Int): Int =
+        if (dataStore.isCoincheScoreRounded()) roundPoint(points) else points
 
     private fun roundPoint(score: Int): Int = when (score) {
-        162, 160 -> 160
-        250 -> score
+        POINTS_TOTAL -> 160
+        POINTS_CAPOT -> 250
         else -> (score + 5) / 10 * 10
     }
+
+    companion object {
+        const val POINTS_TOTAL = 162
+        const val POINTS_CAPOT = 252
+        const val BID_MIN = 80
+        const val BID_MAX = 650
+    }
 }
+
+fun CoincheLapData.counterPoints(): Int = if (points == POINTS_CAPOT) 0 else POINTS_TOTAL - points
+
+fun CoincheLapData.counter(): PlayerPosition = taker.counter()

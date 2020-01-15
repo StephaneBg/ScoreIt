@@ -36,6 +36,11 @@ import com.sbgapps.scoreit.app.ui.Content
 import com.sbgapps.scoreit.app.ui.GameEvent
 import com.sbgapps.scoreit.app.ui.GameViewModel
 import com.sbgapps.scoreit.app.ui.color.ColorPickerFragment
+import com.sbgapps.scoreit.app.ui.history.adapter.BeloteLapAdapter
+import com.sbgapps.scoreit.app.ui.history.adapter.CoincheLapAdapter
+import com.sbgapps.scoreit.app.ui.history.adapter.HeaderAdapter
+import com.sbgapps.scoreit.app.ui.history.adapter.TarotLapAdapter
+import com.sbgapps.scoreit.app.ui.history.adapter.UniversalLapAdapter
 import com.sbgapps.scoreit.core.ext.onImeActionDone
 import com.sbgapps.scoreit.core.ui.BaseFragment
 import com.sbgapps.scoreit.core.widget.DividerItemDecoration
@@ -73,7 +78,11 @@ class HistoryFragment : BaseFragment() {
         onStates(viewModel) { state ->
             when (state) {
                 is Content -> {
-                    binding.header.adapter = HeaderAdapter(state.header, ::displayPlayerEditionOptions)
+                    binding.header.adapter =
+                        HeaderAdapter(
+                            state.header,
+                            ::displayPlayerEditionOptions
+                        )
                     historyAdapter.updateItems(getItems(state.results))
                 }
             }

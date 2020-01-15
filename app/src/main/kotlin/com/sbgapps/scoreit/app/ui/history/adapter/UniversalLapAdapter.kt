@@ -14,21 +14,17 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.ui.history
+package com.sbgapps.scoreit.app.ui.history.adapter
 
 import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ListItemLapTarotBinding
-import com.sbgapps.scoreit.app.model.TarotLap
-import com.sbgapps.scoreit.core.utils.string.build
+import com.sbgapps.scoreit.app.model.UniversalLap
+import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayout
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
-import com.sbgapps.scoreit.core.widget.ItemAdapter
 
-class TarotLapAdapter(private val model: TarotLap) : ItemAdapter(R.layout.list_item_lap_tarot) {
+class UniversalLapAdapter(private val model: UniversalLap) : BaseLapAdapter(R.layout.list_item_lap_universal) {
 
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
-        val binding = ListItemLapTarotBinding.bind(viewHolder.itemView)
-        binding.info.text = model.info.build(viewHolder.context)
-        binding.recyclerView.adapter = LapResultAdapter(model.results)
-        binding.done.setBackgroundResource(if (model.isWon) R.color.game_won else R.color.game_lost)
+        super.onBindViewHolder(viewHolder)
+        (viewHolder.itemView as AdaptableLinearLayout).adapter = LapResultAdapter(model.results.map { it.toString() })
     }
 }

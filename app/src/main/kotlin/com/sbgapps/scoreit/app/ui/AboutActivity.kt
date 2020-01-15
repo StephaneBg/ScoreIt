@@ -40,6 +40,8 @@ class AboutActivity : BaseActivity() {
                 ObjectAnimator.ofFloat(binding.logo, View.ALPHA, 0.2f, 1f),
                 ObjectAnimator.ofFloat(binding.logo, View.SCALE_X, 0.5f, 1f),
                 ObjectAnimator.ofFloat(binding.logo, View.SCALE_Y, 0.5f, 1f),
+                ObjectAnimator.ofFloat(binding.appName, View.ALPHA, 0f, 1f),
+                ObjectAnimator.ofFloat(binding.author, View.ALPHA, 0f, 1f),
                 ObjectAnimator.ofFloat(binding.email, View.ALPHA, 0f, 1f),
                 ObjectAnimator.ofFloat(binding.github, View.ALPHA, 0f, 1f)
             )

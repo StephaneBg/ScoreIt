@@ -40,7 +40,6 @@
         android:layout_height="wrap_content"
         android:background="?selectableItemBackgroundBorderless"
         android:padding="@dimen/margin_padding_size_medium"
-        android:tint="?colorOnBackground"
         app:srcCompat="@drawable/ic_cancel_24dp"
         tools:ignore="ContentDescription"
         />

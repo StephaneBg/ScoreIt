@@ -14,17 +14,13 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.ui.history
+package com.sbgapps.scoreit.data.model
 
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.model.UniversalLap
-import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayout
-import com.sbgapps.scoreit.core.widget.BaseViewHolder
-import com.sbgapps.scoreit.core.widget.ItemAdapter
+import androidx.annotation.StringRes
+import com.sbgapps.scoreit.data.R
 
-class UniversalLapAdapter(private val model: UniversalLap) : ItemAdapter(R.layout.list_item_lap_universal) {
-
-    override fun onBindViewHolder(viewHolder: BaseViewHolder) {
-        (viewHolder.itemView as AdaptableLinearLayout).adapter = LapResultAdapter(model.results.map { it.toString() })
-    }
+enum class Coinche(val coefficient: Int, @StringRes val resId: Int) {
+    NONE(1, R.string.coinche_coinche_none),
+    COINCHE(2, R.string.coinche_coinche_coinche),
+    SURCOINCHE(4, R.string.coinche_coinche_surcoinche);
 }

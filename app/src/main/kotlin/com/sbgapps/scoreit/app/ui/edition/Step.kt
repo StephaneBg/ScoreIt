@@ -14,13 +14,9 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.data.model
+package com.sbgapps.scoreit.app.ui.edition
 
-import androidx.annotation.StringRes
-import com.sbgapps.scoreit.data.R
-
-enum class CoincheBid(val coefficient: Int, @StringRes val resId: Int) {
-    NONE(1, R.string.coinche_coinche_none),
-    COINCHE(2, R.string.coinche_coinche_coinche),
-    SURCOINCHE(4, R.string.coinche_coinche_surcoinche);
-}
+data class Step(
+    val canAdd: Boolean,
+    val canSubtract: Boolean
+)

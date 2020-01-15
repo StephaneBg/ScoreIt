@@ -23,6 +23,7 @@ import com.sbgapps.scoreit.data.model.TarotBonusData
 import com.sbgapps.scoreit.data.model.TarotLapData
 import com.sbgapps.scoreit.data.model.TarotOudler
 import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.POINTS_CONTRACT
+import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.POINTS_TOTAL
 import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.POINTS_WITH_NO_OUDLER
 import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.POINTS_WITH_ONE_OUDLER
 import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.POINTS_WITH_THREE_OUDLERS
@@ -38,6 +39,11 @@ class TarotSolverTest {
     @Test
     fun `la base des points du contrat est 25`() {
         Assert.assertEquals(25, POINTS_CONTRACT)
+    }
+
+    @Test
+    fun `le nombre total de points est 91`() {
+        Assert.assertEquals(91, POINTS_TOTAL)
     }
 
     @Test

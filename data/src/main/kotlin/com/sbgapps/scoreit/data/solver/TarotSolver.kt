@@ -144,6 +144,7 @@ class TarotSolver {
 
     companion object {
         const val POINTS_CONTRACT = 25
+        const val POINTS_TOTAL = 91
         const val POINTS_WITH_NO_OUDLER = 56
         const val POINTS_WITH_ONE_OUDLER = 51
         const val POINTS_WITH_TWO_OUDLERS = 41

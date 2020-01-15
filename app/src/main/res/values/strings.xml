@@ -49,12 +49,14 @@
     <string name="tarot_oudler_twentyone">21</string>
 
     <!-- Belote -->
-    <string name="belote_header_scorer">Scorer</string>
-    <string name="belote_button_score">Score</string>
-    <string name="belote_button_capot">Capot</string>
+    <string name="belote_header_taker">Taker</string>
     <string name="belote_header_points">Points</string>
     <string name="belote_header_bonuses">Bonus</string>
     <string name="belote_header_announces">Announces</string>
+    <string name="belote_info_win">Taker has made the contract with %1$s points</string>
+    <string name="belote_info_lose">Taker has not made the contract and defense gets %1$s points</string>
+    <string name="belote_info_litigation">There is litigation</string>
+    <string name="belote_info_capot">Taker has taken all the folds and gets %1$s points</string>
 
     <!-- Coinche -->
     <string name="coinche_header_bid">Bid</string>
@@ -62,6 +64,8 @@
     <string name="coinche_header_points">Points</string>
     <string name="coinche_header_bonuses">Bonuses</string>
     <string name="coinche_header_announces">Announces</string>
+    <string name="coinche_info_win">Taker has made the contract with %1$s points</string>
+    <string name="coinche_info_lose">Taker has not made the contract and defense gets %1$s points</string>
 
     <!-- Dialog -->
     <string name="dialog_title_current_game">Current game</string>
@@ -101,4 +105,7 @@
 
     <!-- Date -->
     <string name="local_date_pattern">eeee, dd MMMM yyyy \'at\' h:mm a</string>
+
+    <!-- Toast -->
+    <string name="history_lap_click_hint">Swipe to edit or delete</string>
 </resources>

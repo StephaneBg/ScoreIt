@@ -96,6 +96,9 @@ class TarotEditionActivity : EditionActivity() {
                             .show()
                     }
 
+                    binding.buttonPetit.text = getString(R.string.tarot_oudler_petit)
+                    binding.buttonTwentyOne.text = getString(R.string.tarot_oudler_twentyone)
+                    binding.buttonExcuse.text = getString(R.string.tarot_oudler_excuse)
                     binding.oudlersButtonGroup.removeOnButtonCheckedListener(buttonCheckedListener)
                     if (state.oudlers.contains(TarotOudler.PETIT)) binding.oudlersButtonGroup.check(R.id.buttonPetit)
                     if (state.oudlers.contains(TarotOudler.TWENTY_ONE)) binding.oudlersButtonGroup.check(R.id.buttonTwentyOne)
@@ -103,11 +106,10 @@ class TarotEditionActivity : EditionActivity() {
                     binding.oudlersButtonGroup.addOnButtonCheckedListener(buttonCheckedListener)
 
                     binding.points.text = state.points.toString()
-
-                    setupButton(binding.pointsPlusTen, 10, state.canIncrement.canStepTen)
-                    setupButton(binding.pointsMinusTen, -10, state.canDecrement.canStepTen)
-                    setupButton(binding.pointsPlusOne, 1, state.canIncrement.canStepOne)
-                    setupButton(binding.pointsMinusOne, -1, state.canDecrement.canStepOne)
+                    setupButton(binding.pointsPlusTen, 10, state.stepPointsByTen.canAdd)
+                    setupButton(binding.pointsMinusTen, -10, state.stepPointsByTen.canSubtract)
+                    setupButton(binding.pointsPlusOne, 1, state.stepPointsByOne.canAdd)
+                    setupButton(binding.pointsMinusOne, -1, state.stepPointsByOne.canSubtract)
 
                     binding.addBonus.isVisible = state.availableBonuses.isNotEmpty()
                     binding.addBonus.setOnClickListener {
@@ -130,6 +132,10 @@ class TarotEditionActivity : EditionActivity() {
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        viewModel.cancelEdition()
     }
 
     private val buttonCheckedListener = MaterialButtonToggleGroup.OnButtonCheckedListener { view, _, _ ->

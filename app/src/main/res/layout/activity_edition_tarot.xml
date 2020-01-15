@@ -210,19 +210,19 @@
                 android:text="+10"
                 app:layout_constraintBottom_toTopOf="@id/pointsMinusOne"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/points"
                 app:layout_constraintTop_toTopOf="@+id/points"
+                android:layout_marginEnd="@dimen/margin_padding_size_large"
                 tools:ignore="HardcodedText"
                 />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/pointsPlusOne"
                 android:layout_width="wrap_content"
+                android:layout_marginEnd="@dimen/margin_padding_size_large"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
                 android:text="+1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/points"
                 app:layout_constraintTop_toBottomOf="@+id/pointsMinusTen"
                 tools:ignore="HardcodedText"
                 />
@@ -232,8 +232,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-10"
+                android:layout_marginStart="@dimen/margin_padding_size_large"
                 app:layout_constraintBottom_toTopOf="@id/pointsPlusOne"
-                app:layout_constraintEnd_toStartOf="@+id/points"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/points"
                 tools:ignore="HardcodedText"
@@ -241,11 +241,11 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/pointsMinusOne"
+                android:layout_marginStart="@dimen/margin_padding_size_large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
                 android:text="-1"
-                app:layout_constraintEnd_toStartOf="@+id/points"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pointsPlusTen"
                 tools:ignore="HardcodedText"

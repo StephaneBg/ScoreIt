@@ -16,88 +16,89 @@
 
 package com.sbgapps.scoreit.app.ui.edition.coinche
 
+import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.model.Player
-import com.sbgapps.scoreit.app.ui.edition.belote.PointMode
+import com.sbgapps.scoreit.app.ui.edition.Step
 import com.sbgapps.scoreit.core.ui.BaseViewModel
+import com.sbgapps.scoreit.core.utils.string.StringFactory
+import com.sbgapps.scoreit.core.utils.string.fromResources
 import com.sbgapps.scoreit.data.interactor.GameUseCase
 import com.sbgapps.scoreit.data.model.BeloteBonus
 import com.sbgapps.scoreit.data.model.BeloteBonusData
-import com.sbgapps.scoreit.data.model.CoincheBid
+import com.sbgapps.scoreit.data.model.Coinche
 import com.sbgapps.scoreit.data.model.CoincheLapData
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.solver.CoincheSolver
+import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.BID_MAX
+import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.BID_MIN
+import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.POINTS_TOTAL
+import com.sbgapps.scoreit.data.solver.counter
+import com.sbgapps.scoreit.data.solver.counterPoints
 import io.uniflow.core.flow.UIState
 
-class CoincheEditionViewModel(private val useCase: GameUseCase, private val solver: CoincheSolver) : BaseViewModel() {
+class CoincheEditionViewModel(
+    private val useCase: GameUseCase,
+    private val solver: CoincheSolver
+) : BaseViewModel() {
 
     init {
         setState { getContent() }
     }
 
-    fun editMode(pointMode: PointMode) {
+    private val editedLap
+        get() = useCase.getEditedLap() as CoincheLapData
+
+
+    fun stepBid(increment: Int) {
         setState {
             useCase.updateEdition(
-                getEditedLap().copy(points = 12)
+                editedLap.copy(bid = editedLap.bid + increment)
             )
             getContent()
         }
     }
 
-    fun incrementBid(increment: Int) {
+    fun setCoinche(coinche: Coinche) {
         setState {
-            val lap = getEditedLap()
-            useCase.updateEdition(
-                getEditedLap().copy(
-                    bidPoints = if (PlayerPosition.ONE == lap.bidder) lap.bidPoints + increment
-                    else lap.bidPoints - increment
-                )
-            )
+            useCase.updateEdition(editedLap.copy(coinche = coinche))
             getContent()
         }
     }
 
-    fun incrementPoints(increment: Int) {
+    fun incrementScore(increment: Int) {
         setState {
-            val lap = getEditedLap()
-            useCase.updateEdition(
-                getEditedLap().copy(
-                    points = if (PlayerPosition.ONE == lap.scorer) lap.points + increment
-                    else lap.points - increment
-                )
-            )
+            val result = editedLap.points + increment
+            val points = when {
+                result >= POINTS_TOTAL -> POINTS_TOTAL
+                result < 2 -> 2
+                else -> result
+            }
+            useCase.updateEdition(editedLap.copy(points = points))
             getContent()
         }
     }
 
-    fun switchScorer() {
+    fun changeTaker(taker: PlayerPosition) {
         setState {
-            val lap = getEditedLap()
-            useCase.updateEdition(
-                getEditedLap().copy(
-                    scorer = if (PlayerPosition.ONE == lap.scorer) PlayerPosition.TWO
-                    else PlayerPosition.ONE
-                )
-            )
+            useCase.updateEdition(editedLap.copy(taker = taker))
             getContent()
         }
     }
 
     fun addBonus(bonus: Pair<PlayerPosition, BeloteBonus>) {
         setState {
-            val lap = getEditedLap()
-            val bonuses = lap.bonuses.toMutableList()
+            val bonuses = editedLap.bonuses.toMutableList()
             bonuses += BeloteBonusData(bonus.first, bonus.second)
-            useCase.updateEdition(lap.copy(bonuses = bonuses))
+            useCase.updateEdition(editedLap.copy(bonuses = bonuses))
             getContent()
         }
     }
 
     fun removeBonus(bonusIndex: Int) {
         setState {
-            val lap = getEditedLap()
-            val bonuses = lap.bonuses.toMutableList()
+            val bonuses = editedLap.bonuses.toMutableList()
             bonuses.removeAt(bonusIndex)
-            useCase.updateEdition(lap.copy(bonuses = bonuses))
+            useCase.updateEdition(editedLap.copy(bonuses = bonuses))
             getContent()
         }
     }
@@ -109,37 +110,80 @@ class CoincheEditionViewModel(private val useCase: GameUseCase, private val solv
         }
     }
 
-    private fun getContent(): CoincheEditionState.Content {
-        val lap = getEditedLap()
-        return CoincheEditionState.Content(
-            useCase.getPlayers().map { Player(it) },
-            lap.scorer,
-            lap.bidder,
-            lap.bidPoints,
-            lap.points,
-            lap.coincheBid,
-            lap.bonuses.map { it.player to it.bonus },
-            solver.getAvailableBonuses(lap),
-            solver.canIncrement(lap),
-            solver.canDecrement(lap)
-        )
+    fun cancelEdition() {
+        setState {
+            useCase.cancelEdition()
+            CoincheEditionState.Completed
+        }
     }
 
-    private fun getEditedLap(): CoincheLapData = useCase.getEditedLap() as CoincheLapData
+    private fun getContent(): CoincheEditionState.Content =
+        CoincheEditionState.Content(
+            useCase.getPlayers().map { Player(it) },
+            editedLap.taker,
+            getInfo(editedLap),
+            editedLap.bid,
+            getTeamPoints(editedLap),
+            editedLap.coinche,
+            editedLap.bonuses.map { it.player to it.bonus },
+            getAvailableBonuses(editedLap),
+            canStepBid(editedLap),
+            canStepPointsByOne(editedLap),
+            canStepPointsByTen(editedLap)
+        )
+
+    private fun canStepBid(lap: CoincheLapData): Step =
+        Step((lap.bid < BID_MAX), (lap.bid > BID_MIN))
+
+    private fun canStepPointsByOne(lap: CoincheLapData): Step =
+        Step((lap.points < POINTS_TOTAL), (lap.points > 2))
+
+    private fun canStepPointsByTen(lap: CoincheLapData): Step =
+        Step((lap.points < POINTS_TOTAL), (lap.points > 2))
+
+    private fun getAvailableBonuses(lap: CoincheLapData): List<BeloteBonus> {
+        val currentBonuses = lap.bonuses.map { it.bonus }
+        val bonuses = mutableListOf<BeloteBonus>()
+        if (!currentBonuses.contains(BeloteBonus.BELOTE)) bonuses.add(BeloteBonus.BELOTE)
+        bonuses.add(BeloteBonus.RUN_3)
+        bonuses.add(BeloteBonus.RUN_4)
+        bonuses.add(BeloteBonus.RUN_5)
+        bonuses.add(BeloteBonus.FOUR_NORMAL)
+        bonuses.add(BeloteBonus.FOUR_NINE)
+        bonuses.add(BeloteBonus.FOUR_JACK)
+        return bonuses
+    }
+
+    private fun getInfo(lap: CoincheLapData): StringFactory {
+        val (results, isWon) = solver.getResults(lap)
+        return if (isWon) {
+            fromResources(R.string.coinche_info_win, results[lap.taker.index].toString())
+        } else {
+            fromResources(R.string.coinche_info_lose, results[lap.counter().index].toString())
+        }
+    }
+
+    private fun getTeamPoints(lap: CoincheLapData): Pair<String, String> =
+        if (PlayerPosition.ONE == lap.taker) {
+            lap.points.toString() to lap.counterPoints().toString()
+        } else {
+            lap.counterPoints().toString() to lap.points.toString()
+        }
 }
 
 sealed class CoincheEditionState : UIState() {
     data class Content(
         val players: List<Player>,
-        val scorer: PlayerPosition,
-        val bidder: PlayerPosition,
+        val taker: PlayerPosition,
+        val lapInfo: StringFactory,
         val bidPoints: Int,
-        val points: Int,
-        val coincheBid: CoincheBid,
+        val teamPoints: Pair<String, String>,
+        val coinche: Coinche,
         val selectedBonuses: List<Pair<PlayerPosition, BeloteBonus>>,
         val availableBonuses: List<BeloteBonus>,
-        val canIncrement: Pair<Boolean, Boolean>,
-        val canDecrement: Pair<Boolean, Boolean>
+        val stepBid: Step,
+        val stepPointsByOne: Step,
+        val stepPointsByTen: Step
     ) : CoincheEditionState()
 
     object Completed : CoincheEditionState()

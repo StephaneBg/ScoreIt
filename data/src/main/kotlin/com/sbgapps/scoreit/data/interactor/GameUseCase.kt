@@ -28,6 +28,7 @@ import com.sbgapps.scoreit.data.model.GameData
 import com.sbgapps.scoreit.data.model.GameType
 import com.sbgapps.scoreit.data.model.LapData
 import com.sbgapps.scoreit.data.model.PlayerData
+import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.model.TarotGameData
 import com.sbgapps.scoreit.data.model.TarotLapData
 import com.sbgapps.scoreit.data.model.UniversalGameData
@@ -64,11 +65,13 @@ class GameUseCase(
         }
     }
 
+    fun getPlayer(playerPosition: PlayerPosition): PlayerData = getPlayers()[playerPosition.index]
+
     fun getResults(lap: LapData): List<Int> = when (lap) {
         is UniversalLapData -> universalSolver.getResults(lap, dataStore.isUniversalTotalDisplayed())
         is TarotLapData -> tarotSolver.getResults(lap)
-        is BeloteLapData -> beloteSolver.getResults(lap)
-        is CoincheLapData -> coincheSolver.getResults(lap)
+        is BeloteLapData -> beloteSolver.getResults(lap).first
+        is CoincheLapData -> coincheSolver.getResults(lap).first
     }
 
     fun getDisplayResults(lap: LapData): Pair<List<String>, Boolean> = when (lap) {

@@ -14,22 +14,33 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.ui.history
+package com.sbgapps.scoreit.app.ui.history.adapter
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.app.databinding.ListItemHeaderBinding
+import com.sbgapps.scoreit.app.model.Player
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayoutAdapter
-import com.sbgapps.scoreit.core.ext.inflate
+import com.sbgapps.scoreit.core.ext.layoutInflater
 
-class LapResultAdapter(private val model: List<String>) : AdaptableLinearLayoutAdapter {
+class HeaderAdapter(
+    private val model: Header,
+    private val editCallback: (position: Int) -> Unit
+) : AdaptableLinearLayoutAdapter {
 
     override fun getView(position: Int, parent: ViewGroup): View {
-        val view = parent.inflate(R.layout.list_item_lap_result) as TextView
-        view.text = model[position]
-        return view
+        val binding = ListItemHeaderBinding.inflate(parent.layoutInflater(), parent, false)
+        val (player, score) = model[position]
+        binding.player.apply {
+            text = player.name
+            setTextColor(player.color)
+            setOnClickListener { editCallback(position) }
+        }
+        binding.score.text = score.toString()
+        return binding.root
     }
 
     override fun getCount(): Int = model.size
 }
+
+typealias Header = List<Pair<Player, Int>>

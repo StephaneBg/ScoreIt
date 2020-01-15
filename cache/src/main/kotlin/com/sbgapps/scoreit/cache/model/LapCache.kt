@@ -16,7 +16,7 @@
 package com.sbgapps.scoreit.cache.model
 
 import com.sbgapps.scoreit.data.model.BeloteLapData
-import com.sbgapps.scoreit.data.model.CoincheBid
+import com.sbgapps.scoreit.data.model.Coinche
 import com.sbgapps.scoreit.data.model.CoincheLapData
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.model.TarotBid
@@ -67,19 +67,19 @@ data class TarotLapCache(
 
 @JsonClass(generateAdapter = true)
 data class BeloteLapCache(
-    val scorer: PlayerPosition,
+    val taker: PlayerPosition,
     val points: Int,
     val bonuses: List<BeloteBonusCache>
 ) {
 
     constructor(lap: BeloteLapData) : this(
-        lap.scorer,
+        lap.taker,
         lap.points,
         lap.bonuses.map { BeloteBonusCache(it) }
     )
 
     fun toData(): BeloteLapData = BeloteLapData(
-        scorer,
+        taker,
         points,
         bonuses.map { it.toData() }
     )
@@ -87,28 +87,25 @@ data class BeloteLapCache(
 
 @JsonClass(generateAdapter = true)
 data class CoincheLapCache(
-    val scorer: PlayerPosition,
-    val bidder: PlayerPosition,
+    val taker: PlayerPosition,
     val bidPoints: Int,
-    val coincheBid: CoincheBid,
+    val coinche: Coinche,
     val points: Int,
     val bonuses: List<BeloteBonusCache>
 ) {
 
     constructor(lap: CoincheLapData) : this(
-        lap.scorer,
-        lap.bidder,
-        lap.bidPoints,
-        lap.coincheBid,
+        lap.taker,
+        lap.bid,
+        lap.coinche,
         lap.points,
         lap.bonuses.map { BeloteBonusCache(it) }
     )
 
     fun toData(): CoincheLapData = CoincheLapData(
-        scorer,
-        bidder,
+        taker,
         bidPoints,
-        coincheBid,
+        coinche,
         points,
         bonuses.map { it.toData() }
     )

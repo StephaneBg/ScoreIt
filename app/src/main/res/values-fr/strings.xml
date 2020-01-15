@@ -47,12 +47,14 @@
     <string name="tarot_oudler_twentyone">Vingt et un</string>
 
     <!-- Belote -->
-    <string name="belote_header_scorer">Meneur</string>
-    <string name="belote_button_score">Score</string>
-    <string name="belote_button_capot">Capot</string>
+    <string name="belote_header_taker">Attaque</string>
     <string name="belote_header_points">Points</string>
     <string name="belote_header_bonuses">Bonus</string>
     <string name="belote_header_announces">Annonces</string>
+    <string name="belote_info_win">L\'attaque a rempli son contrat avec %1$s points</string>
+    <string name="belote_info_lose">L\'attaque est dedans et la défense réalise %1$s points</string>
+    <string name="belote_info_litigation">Litige</string>
+    <string name="belote_info_capot">L\'attaque a réalisé un capot et marque %1$s points</string>
 
     <!-- Coinche -->
     <string name="coinche_header_bid">Contrat</string>
@@ -60,6 +62,8 @@
     <string name="coinche_header_points">Points</string>
     <string name="coinche_header_bonuses">Bonus</string>
     <string name="coinche_header_announces">Annonces</string>
+    <string name="coinche_info_win">L\'attaque a rempli son contrat avec %1$s points</string>
+    <string name="coinche_info_lose">L\'attaque chute son contrat et la défense réalise %1$s points</string>
 
     <!-- Dialog -->
     <string name="dialog_title_current_game">Partie en cours</string>
@@ -99,4 +103,7 @@
 
     <!-- Date -->
     <string name="local_date_pattern">eeee dd MMMM yyyy \'à\' HH:mm</string>
+
+    <!-- Toast -->
+    <string name="history_lap_click_hint">Faire glisser pour éditer ou supprimer</string>
 </resources>

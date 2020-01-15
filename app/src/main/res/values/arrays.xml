@@ -23,6 +23,12 @@
         <item>@string/tarot_bid_guard_against_kitty</item>
     </string-array>
 
+    <string-array name="coinche">
+        <item>@string/coinche_coinche_none</item>
+        <item>@string/coinche_coinche_coinche</item>
+        <item>@string/coinche_coinche_surcoinche</item>
+    </string-array>
+
     <string-array name="dialog_edit_player_actions">
         <item>@string/dialog_action_enter_name</item>
         <item>@string/dialog_action_pick_color</item>
