@@ -24,8 +24,8 @@ import com.sbgapps.scoreit.core.widget.BaseViewHolder
 import com.sbgapps.scoreit.core.widget.ItemAdapter
 
 class UniversalEditionAdapter(
-    private val player: Player,
-    private val score: Int,
+    val player: Player,
+    val score: Int,
     private val callback: (Int, Int) -> Unit
 ) : ItemAdapter(R.layout.list_item_edition_universal) {
 
@@ -45,16 +45,12 @@ class UniversalEditionAdapter(
         initButton(binding.pointsMinusFive, viewHolder.adapterPosition, -5)
         initButton(binding.pointsMinusTen, viewHolder.adapterPosition, -10)
         initButton(binding.pointsMinusHundred, viewHolder.adapterPosition, -100)
-        updateScore(score)
+        binding.score.text = score.toString()
     }
 
     private fun initButton(button: MaterialButton, position: Int, increment: Int) {
         button.setOnClickListener {
             callback(position, increment)
         }
-    }
-
-    fun updateScore(score: Int) {
-        binding.score.text = score.toString()
     }
 }

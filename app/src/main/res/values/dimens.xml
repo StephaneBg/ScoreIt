@@ -15,5 +15,5 @@
   -->
 
 <resources>
-
+    <dimen name="padding_bottom_recyclerview">92dp</dimen>
 </resources>

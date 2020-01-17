@@ -33,9 +33,9 @@ object Versions {
     const val moshi = "1.9.2"
     const val timber = "4.7.1"
     const val koinAndroidX = "2.0.1"
-    const val uniflowAndroidX = "0.9.3"
+    const val uniflowAndroidX = "0.9.4"
     const val storage = "2.1.0"
-    const val jsr310 = "1.2.1"
+    const val jsr310 = "1.2.2"
 }
 
 object Build {

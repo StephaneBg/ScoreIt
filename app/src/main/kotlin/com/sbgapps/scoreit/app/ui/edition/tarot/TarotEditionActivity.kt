@@ -124,6 +124,7 @@ class TarotEditionActivity : EditionActivity() {
                 TarotEditionState.Completed -> finish()
             }
         }
+        viewModel.loadContent()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {

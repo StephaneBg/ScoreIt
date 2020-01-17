@@ -70,14 +70,8 @@ class CoincheEditionActivity : EditionActivity() {
                     setupBidButton(binding.bidPlusTen, 10, state.stepBid.canAdd)
                     setupBidButton(binding.bidMinusTen, -10, state.stepBid.canSubtract)
 
-                    binding.nameTeamOne.apply {
-                        text = state.players[PlayerPosition.ONE.index].name
-                        setTextColor(state.players[PlayerPosition.ONE.index].color)
-                    }
-                    binding.nameTeamTwo.apply {
-                        text = state.players[PlayerPosition.TWO.index].name
-                        setTextColor(state.players[PlayerPosition.TWO.index].color)
-                    }
+                    binding.nameTeamOne.text = state.players[PlayerPosition.ONE.index].name
+                    binding.nameTeamTwo.text = state.players[PlayerPosition.TWO.index].name
 
                     binding.coinche.text = getString(state.coinche.resId)
                     binding.coinche.setOnClickListener {
@@ -112,6 +106,7 @@ class CoincheEditionActivity : EditionActivity() {
                 is CoincheEditionState.Completed -> finish()
             }
         }
+        viewModel.loadContent()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {

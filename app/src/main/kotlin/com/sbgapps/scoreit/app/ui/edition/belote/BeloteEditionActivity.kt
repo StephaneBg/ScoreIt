@@ -70,14 +70,8 @@ class BeloteEditionActivity : EditionActivity() {
                     setupButton(binding.pointsPlusOne, 1, state.stepPointsByOne.canAdd)
                     setupButton(binding.pointsMinusOne, -1, state.stepPointsByOne.canSubtract)
 
-                    binding.nameTeamOne.apply {
-                        text = state.players[PlayerPosition.ONE.index].name
-                        setTextColor(state.players[PlayerPosition.ONE.index].color)
-                    }
-                    binding.nameTeamTwo.apply {
-                        text = state.players[PlayerPosition.TWO.index].name
-                        setTextColor(state.players[PlayerPosition.TWO.index].color)
-                    }
+                    binding.nameTeamOne.text = state.players[PlayerPosition.ONE.index].name
+                    binding.nameTeamTwo.text = state.players[PlayerPosition.TWO.index].name
 
                     Timber.d("Team points are ${state.teamPoints}")
                     val (teamOne, teamTwo) = state.teamPoints
@@ -97,6 +91,7 @@ class BeloteEditionActivity : EditionActivity() {
                 is BeloteEditionState.Completed -> finish()
             }
         }
+        viewModel.loadContent()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {

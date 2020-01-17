@@ -26,22 +26,20 @@ import io.uniflow.core.flow.UIState
 
 class UniversalEditionViewModel(private val useCase: GameUseCase) : BaseViewModel() {
 
-    init {
-        setState {
-            UniversalEditionState.Content(
-                useCase.getPlayers().map { Player(it) },
-                UniversalLap(getEditedLap().points)
-            )
-        }
+    private val editedLap
+        get() = useCase.getEditedLap() as UniversalLapData
+
+    fun loadContent() {
+        setState { getContent() }
     }
 
     fun increment(position: Int, points: Int) {
         setState {
-            val oldPoints = getEditedLap().points
+            val oldPoints = editedLap.points
             val newScore = oldPoints[position] + points
             val newPoints = oldPoints.replace(position, newScore)
             useCase.updateEdition(UniversalLapData(newPoints))
-            UniversalEditionState.Incremented(position, newScore)
+            getContent()
         }
     }
 
@@ -59,11 +57,14 @@ class UniversalEditionViewModel(private val useCase: GameUseCase) : BaseViewMode
         }
     }
 
-    private fun getEditedLap(): UniversalLapData = useCase.getEditedLap() as UniversalLapData
+    private fun getContent(): UniversalEditionState.Content =
+        UniversalEditionState.Content(
+            useCase.getPlayers().map { Player(it) },
+            UniversalLap(editedLap.points)
+        )
 }
 
 sealed class UniversalEditionState : UIState() {
     data class Content(val players: List<Player>, val lap: UniversalLap) : UniversalEditionState()
-    data class Incremented(val position: Int, val points: Int) : UniversalEditionState()
     object Completed : UniversalEditionState()
 }

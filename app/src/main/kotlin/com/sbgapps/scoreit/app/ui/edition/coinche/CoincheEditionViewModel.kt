@@ -41,13 +41,13 @@ class CoincheEditionViewModel(
     private val solver: CoincheSolver
 ) : BaseViewModel() {
 
-    init {
-        setState { getContent() }
-    }
-
     private val editedLap
         get() = useCase.getEditedLap() as CoincheLapData
 
+
+    fun loadContent() {
+        setState { getContent() }
+    }
 
     fun stepBid(increment: Int) {
         setState {

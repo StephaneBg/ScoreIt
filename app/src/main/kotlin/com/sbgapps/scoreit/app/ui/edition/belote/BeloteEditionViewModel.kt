@@ -38,12 +38,12 @@ class BeloteEditionViewModel(
     private val solver: BeloteSolver
 ) : BaseViewModel() {
 
-    init {
-        setState { getContent() }
-    }
-
     private val editedLap
         get() = useCase.getEditedLap() as BeloteLapData
+
+    fun loadContent() {
+        setState { getContent() }
+    }
 
     fun incrementScore(increment: Int) {
         setState {
