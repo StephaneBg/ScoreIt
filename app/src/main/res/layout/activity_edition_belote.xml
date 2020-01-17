@@ -47,7 +47,7 @@
             >
 
             <TextView
-                android:id="@+id/headerScorer"
+                android:id="@+id/headerTaker"
                 style="?textAppearanceOverline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/headerScorer"
+                app:layout_constraintTop_toBottomOf="@id/headerTaker"
                 app:selectionRequired="true"
                 app:singleSelection="true"
                 >
@@ -89,7 +89,7 @@
 
             <TextView
                 android:id="@+id/lapInfo"
-                style="@style/TextAppearance.ScoreIt.Body2"
+                style="?textAppearanceBody2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_padding_size_medium"
@@ -111,27 +111,27 @@
                 />
 
             <TextView
-                android:id="@+id/nameTeamOne"
-                style="?textAppearanceHeadline5"
+                android:id="@+id/nameTaker"
+                style="?textAppearanceSubtitle1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="@string/belote_points_taker"
                 app:layout_constraintEnd_toEndOf="@id/pointsTeamOne"
                 app:layout_constraintStart_toStartOf="@id/pointsTeamOne"
                 app:layout_constraintTop_toBottomOf="@id/headerPoints"
-                tools:text="@string/belote_first_team_default_name"
                 />
 
             <TextView
-                android:id="@+id/nameTeamTwo"
-                style="?textAppearanceHeadline5"
+                android:id="@+id/nameDefender"
+                style="?textAppearanceSubtitle1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="@string/belote_points_defender"
                 app:layout_constraintEnd_toEndOf="@id/pointsTeamTwo"
                 app:layout_constraintStart_toStartOf="@id/pointsTeamTwo"
                 app:layout_constraintTop_toBottomOf="@id/headerPoints"
-                tools:text="@string/belote_second_team_default_name"
                 />
 
             <TextView
@@ -143,7 +143,7 @@
                 android:gravity="center"
                 app:layout_constraintEnd_toStartOf="@id/pointsTeamTwo"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/nameTeamOne"
+                app:layout_constraintTop_toBottomOf="@id/nameTaker"
                 tools:text="🐼"
                 />
 
@@ -156,7 +156,7 @@
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/pointsTeamOne"
-                app:layout_constraintTop_toBottomOf="@id/nameTeamTwo"
+                app:layout_constraintTop_toBottomOf="@id/nameDefender"
                 tools:text="🐼"
                 />
 

@@ -70,9 +70,6 @@ class CoincheEditionActivity : EditionActivity() {
                     setupBidButton(binding.bidPlusTen, 10, state.stepBid.canAdd)
                     setupBidButton(binding.bidMinusTen, -10, state.stepBid.canSubtract)
 
-                    binding.nameTeamOne.text = state.players[PlayerPosition.ONE.index].name
-                    binding.nameTeamTwo.text = state.players[PlayerPosition.TWO.index].name
-
                     binding.coinche.text = getString(state.coinche.resId)
                     binding.coinche.setOnClickListener {
                         MaterialAlertDialogBuilder(this)

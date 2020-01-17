@@ -70,11 +70,8 @@ class BeloteEditionActivity : EditionActivity() {
                     setupButton(binding.pointsPlusOne, 1, state.stepPointsByOne.canAdd)
                     setupButton(binding.pointsMinusOne, -1, state.stepPointsByOne.canSubtract)
 
-                    binding.nameTeamOne.text = state.players[PlayerPosition.ONE.index].name
-                    binding.nameTeamTwo.text = state.players[PlayerPosition.TWO.index].name
-
-                    Timber.d("Team points are ${state.teamPoints}")
-                    val (teamOne, teamTwo) = state.teamPoints
+                    Timber.d("Team points are ${state.results}")
+                    val (teamOne, teamTwo) = state.results
                     binding.pointsTeamOne.text = teamOne
                     binding.pointsTeamTwo.text = teamTwo
 

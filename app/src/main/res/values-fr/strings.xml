@@ -51,6 +51,8 @@
     <string name="belote_header_points">Points</string>
     <string name="belote_header_bonuses">Bonus</string>
     <string name="belote_header_announces">Annonces</string>
+    <string name="belote_points_taker">Attaque</string>
+    <string name="belote_points_defender">Défense</string>
     <string name="belote_info_win">L\'attaque a rempli son contrat avec %1$s points</string>
     <string name="belote_info_lose">L\'attaque est dedans et la défense réalise %1$s points</string>
     <string name="belote_info_litigation">Litige</string>
@@ -62,6 +64,8 @@
     <string name="coinche_header_points">Points</string>
     <string name="coinche_header_bonuses">Bonus</string>
     <string name="coinche_header_announces">Annonces</string>
+    <string name="coinche_points_taker">Attaque</string>
+    <string name="coinche_points_defender">Défense</string>
     <string name="coinche_info_win">L\'attaque a rempli son contrat avec %1$s points</string>
     <string name="coinche_info_lose">L\'attaque chute son contrat et la défense réalise %1$s points</string>
 

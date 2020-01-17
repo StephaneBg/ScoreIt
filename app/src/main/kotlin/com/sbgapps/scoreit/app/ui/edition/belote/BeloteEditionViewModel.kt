@@ -102,7 +102,7 @@ class BeloteEditionViewModel(
             useCase.getPlayers().map { Player(it) },
             editedLap.taker,
             getInfo(editedLap),
-            getTeamPoints(editedLap),
+            getResults(editedLap),
             editedLap.bonuses.map { it.player to it.bonus },
             getAvailableBonuses(editedLap),
             canStepPointsByOne(editedLap),
@@ -131,12 +131,8 @@ class BeloteEditionViewModel(
     private fun canStepPointsByTen(lap: BeloteLapData): Step =
         Step((lap.points < POINTS_TOTAL), (lap.points > 2))
 
-    private fun getTeamPoints(lap: BeloteLapData): Pair<String, String> =
-        if (PlayerPosition.ONE == lap.taker) {
-            lap.points.toString() to lap.counterPoints().toString()
-        } else {
-            lap.counterPoints().toString() to lap.points.toString()
-        }
+    private fun getResults(lap: BeloteLapData): Pair<String, String> =
+        lap.points.toString() to lap.counterPoints().toString()
 
     private fun getAvailableBonuses(lap: BeloteLapData): List<BeloteBonus> {
         val currentBonuses = lap.bonuses.map { it.bonus }
@@ -156,7 +152,7 @@ sealed class BeloteEditionState : UIState() {
         val players: List<Player>,
         val taker: PlayerPosition,
         val lapInfo: StringFactory,
-        val teamPoints: Pair<String, String>,
+        val results: Pair<String, String>,
         val selectedBonuses: List<Pair<PlayerPosition, BeloteBonus>>,
         val availableBonuses: List<BeloteBonus>,
         val stepPointsByOne: Step,

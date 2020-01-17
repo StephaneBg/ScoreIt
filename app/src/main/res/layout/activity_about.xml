@@ -35,7 +35,7 @@
 
     <TextView
         android:id="@+id/appName"
-        style="@style/TextAppearance.ScoreIt.Headline3"
+        style="?textAppearanceHeadline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding_size_medium"
@@ -44,7 +44,7 @@
 
     <TextView
         android:id="@+id/author"
-        style="@style/TextAppearance.ScoreIt.Subtitle1"
+        style="?textAppearanceSubtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding_size_small"

@@ -53,6 +53,8 @@
     <string name="belote_header_points">Points</string>
     <string name="belote_header_bonuses">Bonus</string>
     <string name="belote_header_announces">Announces</string>
+    <string name="belote_points_taker">Taker</string>
+    <string name="belote_points_defender">Defender</string>
     <string name="belote_info_win">Taker has made the contract with %1$s points</string>
     <string name="belote_info_lose">Taker has not made the contract and defense gets %1$s points</string>
     <string name="belote_info_litigation">There is litigation</string>
@@ -64,6 +66,8 @@
     <string name="coinche_header_points">Points</string>
     <string name="coinche_header_bonuses">Bonuses</string>
     <string name="coinche_header_announces">Announces</string>
+    <string name="coinche_points_taker">Taker</string>
+    <string name="coinche_points_defender">Defender</string>
     <string name="coinche_info_win">Taker has made the contract with %1$s points</string>
     <string name="coinche_info_lose">Taker has not made the contract and defense gets %1$s points</string>
 

@@ -164,11 +164,7 @@ class CoincheEditionViewModel(
     }
 
     private fun getTeamPoints(lap: CoincheLapData): Pair<String, String> =
-        if (PlayerPosition.ONE == lap.taker) {
-            lap.points.toString() to lap.counterPoints().toString()
-        } else {
-            lap.counterPoints().toString() to lap.points.toString()
-        }
+        lap.points.toString() to lap.counterPoints().toString()
 }
 
 sealed class CoincheEditionState : UIState() {
