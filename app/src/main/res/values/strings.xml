@@ -61,6 +61,7 @@
     <string name="belote_info_capot">Taker has taken all the folds and gets %1$s points</string>
 
     <!-- Coinche -->
+    <string name="coinche_header_taker">Taker</string>
     <string name="coinche_header_bid">Bid</string>
     <string name="coinche_header_coinche">Coinche</string>
     <string name="coinche_header_points">Points</string>

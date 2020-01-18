@@ -125,7 +125,6 @@ class CoincheSolverTest {
         assertEquals(POINTS_TOTAL + bid, results[PlayerPosition.TWO.index])
     }
 
-
     @Test
     fun `équipe une enchérit 140, réalise 110 points, annonce la belote et chute son contrat`() {
         val bid = 140
@@ -143,6 +142,26 @@ class CoincheSolverTest {
         assertFalse(isWon)
         assertEquals(BeloteBonusValue.BELOTE.points, results[PlayerPosition.ONE.index])
         assertEquals(POINTS_TOTAL + bid, results[PlayerPosition.TWO.index])
+    }
+
+
+    @Test
+    fun `équipe une enchérit 150, réalise 110 points, annonce une tierce et chute son contrat`() {
+        val bid = 150
+        val points = 110
+        val lap = CoincheLap(
+            taker = PlayerPosition.ONE,
+            bid = bid,
+            coinche = CoincheValue.NONE,
+            points = points,
+            bonuses = listOf(BeloteBonus(PlayerPosition.ONE, BeloteBonusValue.RUN_3))
+        )
+
+        val (results, isWon) = solver.getResults(lap)
+
+        assertFalse(isWon)
+        assertEquals(0, results[PlayerPosition.ONE.index])
+        assertEquals(POINTS_TOTAL + bid + BeloteBonusValue.RUN_3.points, results[PlayerPosition.TWO.index])
     }
 
     @Test
@@ -287,5 +306,4 @@ class CoincheSolverTest {
         assertEquals((POINTS_TOTAL + bid) * CoincheValue.SURCOINCHE.coefficient, results[PlayerPosition.ONE.index])
         assertEquals(0, results[PlayerPosition.TWO.index])
     }
-
 }

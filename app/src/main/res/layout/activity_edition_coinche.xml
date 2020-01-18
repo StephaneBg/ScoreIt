@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_padding_size_medium"
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
-                android:text="@string/belote_header_taker"
+                android:text="@string/coinche_header_taker"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
