@@ -195,6 +195,21 @@ class BeloteSolverTest {
     }
 
     @Test
+    fun `équipe une perd son contrat avec une tierce`() {
+        val lap = BeloteLap(
+            taker = PlayerPosition.ONE,
+            points = 70,
+            bonuses = listOf(BeloteBonus(PlayerPosition.ONE, BeloteBonusValue.RUN_3))
+        )
+
+        val (results, isWon) = solver.getResults(lap)
+
+        assertFalse(isWon)
+        assertEquals(0, results[PlayerPosition.ONE.index])
+        assertEquals(POINTS_TOTAL + BeloteBonusValue.RUN_3.points, results[PlayerPosition.TWO.index])
+    }
+
+    @Test
     fun `équipe deux perd son contrat avec la belote qui est imprenable`() {
         val lap = BeloteLap(
             taker = PlayerPosition.TWO,

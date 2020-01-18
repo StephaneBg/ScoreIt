@@ -10,6 +10,7 @@
 # generated files
 bin/
 gen/
+*.aab
 
 # Local configuration file
 local.properties
