@@ -114,6 +114,7 @@ class RecyclerViewSwipeDecorator private constructor(
     fun decorate() {
         try {
             val iconHorizontalMargin = recyclerView.context.dip(16)
+            val iconVisibilityDx = recyclerView.context.dip(16 + 24)
             if (actionState != ItemTouchHelper.ACTION_STATE_SWIPE) return
 
             if (dX > 0) {
@@ -129,7 +130,7 @@ class RecyclerViewSwipeDecorator private constructor(
                     background.draw(canvas)
                 }
 
-                if (swipeRightActionIconId != 0 && dX > iconHorizontalMargin) {
+                if (swipeRightActionIconId != 0 && dX > iconVisibilityDx) {
                     val icon = ContextCompat.getDrawable(recyclerView.context, swipeRightActionIconId)
                     if (icon != null) {
                         val iconSize = icon.intrinsicHeight
@@ -161,7 +162,7 @@ class RecyclerViewSwipeDecorator private constructor(
                     background.draw(canvas)
                 }
 
-                if (swipeLeftActionIconId != 0 && dX < -iconHorizontalMargin) {
+                if (swipeLeftActionIconId != 0 && dX < -iconVisibilityDx) {
                     val icon = ContextCompat.getDrawable(recyclerView.context, swipeLeftActionIconId)
                     if (icon != null) {
                         val iconSize = icon.intrinsicHeight

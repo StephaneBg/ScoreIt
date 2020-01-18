@@ -16,24 +16,21 @@
 
 package com.sbgapps.scoreit.data.solver
 
-import com.sbgapps.scoreit.data.model.UniversalLapData
+import com.sbgapps.scoreit.data.model.UniversalLap
 
 class UniversalSolver {
 
-    fun computeResults(lap: UniversalLapData, withTotal: Boolean): Pair<List<Int>, Boolean> =
-        internalComputeResults(lap, withTotal) to true
+    fun getResults(lap: UniversalLap, withTotal: Boolean): List<Int> =
+        lap.points.toMutableList().apply { if (withTotal) add(sum()) }
 
-    fun computeScores(laps: List<UniversalLapData>, playerCount: Int, withTotal: Boolean): List<Int> {
+    fun computeScores(laps: List<UniversalLap>, playerCount: Int, withTotal: Boolean): List<Int> {
         val count = if (withTotal) playerCount + 1 else playerCount
         val scores = MutableList(count) { 0 }
         laps.map { lap ->
-            internalComputeResults(lap, withTotal)
+            getResults(lap, withTotal)
         }.forEach { points ->
             for (player in 0 until count) scores[player] += points[player]
         }
         return scores
     }
-
-    private fun internalComputeResults(lap: UniversalLapData, withTotal: Boolean): List<Int> =
-        lap.points.toMutableList().apply { if (withTotal) add(sum()) }
 }

@@ -16,24 +16,26 @@
 
 package com.sbgapps.scoreit.data.source
 
-import com.sbgapps.scoreit.data.model.GameData
+import com.sbgapps.scoreit.data.model.Game
 import com.sbgapps.scoreit.data.model.GameType
+import com.sbgapps.scoreit.data.model.Player
 import com.sbgapps.scoreit.data.repository.CacheRepo
 import com.sbgapps.scoreit.data.repository.PreferencesRepo
 
 class DataStore(
     private val cacheRepo: CacheRepo,
-    private val prefsRepo: PreferencesRepo
+    private val prefsRepo: PreferencesRepo,
+    val totalPlayer: Player
 ) {
-    private var game: GameData? = null
+    private var game: Game? = null
 
-    fun getGame(): GameData = game ?: cacheRepo.loadGame().also { game = it }
+    fun getGame(): Game = game ?: cacheRepo.loadGame().also { game = it }
 
     fun createGame(name: String) {
         game = cacheRepo.createGame(name)
     }
 
-    fun saveGame(game: GameData) {
+    fun saveGame(game: Game) {
         this.game = game
         cacheRepo.saveGame(game)
     }

@@ -72,7 +72,6 @@
     <activity
         android:id="@+id/preferencesActivity"
         android:name="com.sbgapps.scoreit.app.ui.prefs.PreferencesActivity"
-        android:label="@string/title_activity_preferences"
         />
     <activity
         android:id="@+id/universalEditionActivity"
@@ -93,6 +92,5 @@
     <activity
         android:id="@+id/aboutActivity"
         android:name="com.sbgapps.scoreit.app.ui.AboutActivity"
-        android:label="@string/title_activity_about"
         />
 </navigation>

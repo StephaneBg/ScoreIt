@@ -17,13 +17,13 @@
 package com.sbgapps.scoreit.data.solver
 
 import com.sbgapps.scoreit.data.model.PlayerPosition
-import com.sbgapps.scoreit.data.model.TarotBonus
-import com.sbgapps.scoreit.data.model.TarotLapData
+import com.sbgapps.scoreit.data.model.TarotBonusValue
+import com.sbgapps.scoreit.data.model.TarotLap
 import kotlin.math.abs
 
 class TarotSolver {
 
-    fun computeResults(lap: TarotLapData): Pair<List<Int>, Boolean> {
+    fun getResults(lap: TarotLap): List<Int> {
         val results = IntArray(lap.playerCount)
         val points = getPoints(lap)
 
@@ -49,11 +49,18 @@ class TarotSolver {
                 }
             }
         }
-
-        return results.toList() to (points >= 0)
+        return results.toList()
     }
 
-    private fun getPoints(lap: TarotLapData): Int {
+    fun getDisplayResults(lap: TarotLap): Pair<List<String>, Boolean> =
+        getResults(lap).mapIndexed { index, points ->
+            listOfNotNull(
+                points.toString(),
+                "①".takeIf { lap.bonuses.firstOrNull { it.bonus == TarotBonusValue.PETIT_AU_BOUT }?.player?.index == index }
+            ).joinToString(" ")
+        } to (getPoints(lap) >= 0)
+
+    private fun getPoints(lap: TarotLap): Int {
         var points: Int = lap.points - when (lap.oudlers.size) {
             0 -> POINTS_WITH_NO_OUDLER
             1 -> POINTS_WITH_ONE_OUDLER
@@ -78,17 +85,17 @@ class TarotSolver {
         return points
     }
 
-    fun computeScores(laps: List<TarotLapData>, playerCount: Int): List<Int> {
+    fun computeScores(laps: List<TarotLap>, playerCount: Int): List<Int> {
         val scores = MutableList(playerCount) { 0 }
-        laps.map { computeResults(it).first }.forEach { points ->
+        laps.map { getResults(it) }.forEach { points ->
             for (player in 0 until playerCount) scores[player] += points[player]
         }
         return scores
     }
 
-    private fun getPetitBonus(lap: TarotLapData): Int {
+    private fun getPetitBonus(lap: TarotLap): Int {
         for ((player, bonus) in lap.bonuses) {
-            if (bonus == TarotBonus.PETIT_AU_BOUT) {
+            if (bonus == TarotBonusValue.PETIT_AU_BOUT) {
                 when (lap.playerCount) {
                     3, 4 -> return (if (lap.taker == player) 10 else -10) * lap.bid.coefficient
                     5 -> return (if (lap.taker == player || lap.partner == player) 10 else -10) * lap.bid.coefficient
@@ -98,45 +105,46 @@ class TarotSolver {
         return 0
     }
 
-    private fun getPoigneeBonus(lap: TarotLapData): Int = lap.bonuses
+    private fun getPoigneeBonus(lap: TarotLap): Int = lap.bonuses
         .map { it.bonus }
         .firstOrNull {
-            it == TarotBonus.POIGNEE_SIMPLE || it == TarotBonus.POIGNEE_DOUBLE || it == TarotBonus.POIGNEE_TRIPLE
+            it == TarotBonusValue.POIGNEE_SIMPLE || it == TarotBonusValue.POIGNEE_DOUBLE || it == TarotBonusValue.POIGNEE_TRIPLE
         }?.points ?: 0
 
-    private fun getChelemBonus(lap: TarotLapData): Int = lap.bonuses
+    private fun getChelemBonus(lap: TarotLap): Int = lap.bonuses
         .map { it.bonus }
         .firstOrNull {
-            it == TarotBonus.CHELEM_NON_ANNONCE || it == TarotBonus.CHELEM_ANNONCE_REALISE || it == TarotBonus.CHELEM_ANNONCE_NON_REALISE
+            it == TarotBonusValue.CHELEM_NON_ANNONCE || it == TarotBonusValue.CHELEM_ANNONCE_REALISE || it == TarotBonusValue.CHELEM_ANNONCE_NON_REALISE
         }?.points ?: 0
 
-    fun getAvailableBonuses(lap: TarotLapData): List<TarotBonus> {
+    fun getAvailableBonuses(lap: TarotLap): List<TarotBonusValue> {
         val currentBonuses = lap.bonuses.map { it.bonus }
-        val bonuses = mutableListOf<TarotBonus>()
-        if (!currentBonuses.contains(TarotBonus.PETIT_AU_BOUT)) {
-            bonuses.add(TarotBonus.PETIT_AU_BOUT)
+        val bonuses = mutableListOf<TarotBonusValue>()
+        if (!currentBonuses.contains(TarotBonusValue.PETIT_AU_BOUT)) {
+            bonuses.add(TarotBonusValue.PETIT_AU_BOUT)
         }
-        if (!currentBonuses.contains(TarotBonus.POIGNEE_SIMPLE)
-            && !currentBonuses.contains(TarotBonus.POIGNEE_DOUBLE)
-            && !currentBonuses.contains(TarotBonus.POIGNEE_TRIPLE)
+        if (!currentBonuses.contains(TarotBonusValue.POIGNEE_SIMPLE)
+            && !currentBonuses.contains(TarotBonusValue.POIGNEE_DOUBLE)
+            && !currentBonuses.contains(TarotBonusValue.POIGNEE_TRIPLE)
         ) {
-            bonuses.add(TarotBonus.POIGNEE_SIMPLE)
-            bonuses.add(TarotBonus.POIGNEE_DOUBLE)
-            bonuses.add(TarotBonus.POIGNEE_TRIPLE)
+            bonuses.add(TarotBonusValue.POIGNEE_SIMPLE)
+            bonuses.add(TarotBonusValue.POIGNEE_DOUBLE)
+            bonuses.add(TarotBonusValue.POIGNEE_TRIPLE)
         }
-        if (!currentBonuses.contains(TarotBonus.CHELEM_NON_ANNONCE)
-            && !currentBonuses.contains(TarotBonus.CHELEM_ANNONCE_REALISE)
-            && !currentBonuses.contains(TarotBonus.CHELEM_ANNONCE_NON_REALISE)
+        if (!currentBonuses.contains(TarotBonusValue.CHELEM_NON_ANNONCE)
+            && !currentBonuses.contains(TarotBonusValue.CHELEM_ANNONCE_REALISE)
+            && !currentBonuses.contains(TarotBonusValue.CHELEM_ANNONCE_NON_REALISE)
         ) {
-            bonuses.add(TarotBonus.CHELEM_NON_ANNONCE)
-            bonuses.add(TarotBonus.CHELEM_ANNONCE_REALISE)
-            bonuses.add(TarotBonus.CHELEM_ANNONCE_NON_REALISE)
+            bonuses.add(TarotBonusValue.CHELEM_NON_ANNONCE)
+            bonuses.add(TarotBonusValue.CHELEM_ANNONCE_REALISE)
+            bonuses.add(TarotBonusValue.CHELEM_ANNONCE_NON_REALISE)
         }
         return bonuses
     }
 
     companion object {
         const val POINTS_CONTRACT = 25
+        const val POINTS_TOTAL = 91
         const val POINTS_WITH_NO_OUDLER = 56
         const val POINTS_WITH_ONE_OUDLER = 51
         const val POINTS_WITH_TWO_OUDLERS = 41

@@ -16,23 +16,23 @@
 
 package com.sbgapps.scoreit.data.interactor
 
-import android.graphics.Color
 import androidx.annotation.ColorInt
 import com.sbgapps.scoreit.core.ext.asListOfType
 import com.sbgapps.scoreit.core.ext.asMutableListOfType
 import com.sbgapps.scoreit.core.ext.replace
-import com.sbgapps.scoreit.data.model.BeloteGameData
-import com.sbgapps.scoreit.data.model.BeloteLapData
-import com.sbgapps.scoreit.data.model.CoincheGameData
-import com.sbgapps.scoreit.data.model.CoincheLapData
-import com.sbgapps.scoreit.data.model.GameData
+import com.sbgapps.scoreit.data.model.BeloteGame
+import com.sbgapps.scoreit.data.model.BeloteLap
+import com.sbgapps.scoreit.data.model.CoincheGame
+import com.sbgapps.scoreit.data.model.CoincheLap
+import com.sbgapps.scoreit.data.model.Game
 import com.sbgapps.scoreit.data.model.GameType
-import com.sbgapps.scoreit.data.model.LapData
-import com.sbgapps.scoreit.data.model.PlayerData
-import com.sbgapps.scoreit.data.model.TarotGameData
-import com.sbgapps.scoreit.data.model.TarotLapData
-import com.sbgapps.scoreit.data.model.UniversalGameData
-import com.sbgapps.scoreit.data.model.UniversalLapData
+import com.sbgapps.scoreit.data.model.Lap
+import com.sbgapps.scoreit.data.model.Player
+import com.sbgapps.scoreit.data.model.PlayerPosition
+import com.sbgapps.scoreit.data.model.TarotGame
+import com.sbgapps.scoreit.data.model.TarotLap
+import com.sbgapps.scoreit.data.model.UniversalGame
+import com.sbgapps.scoreit.data.model.UniversalLap
 import com.sbgapps.scoreit.data.solver.BeloteSolver
 import com.sbgapps.scoreit.data.solver.CoincheSolver
 import com.sbgapps.scoreit.data.solver.TarotSolver
@@ -54,33 +54,42 @@ class GameUseCase(
         dataStore.setCurrentGame(gameType)
     }
 
-    fun getGame(): GameData = dataStore.getGame()
+    fun getGame(): Game = dataStore.getGame()
 
-    fun getPlayers(withTotal: Boolean = false): List<PlayerData> {
+    fun getPlayers(withTotal: Boolean = false): List<Player> {
         val game = getGame()
-        return if (withTotal && game is UniversalGameData && dataStore.isUniversalTotalDisplayed()) {
-            game.players.toMutableList().apply { add(PlayerData("Total", Color.RED)) }
+        return if (withTotal && game is UniversalGame && dataStore.isUniversalTotalDisplayed()) {
+            game.players.toMutableList().apply { add(dataStore.totalPlayer) }
         } else {
             game.players
         }
     }
 
-    fun getLapResults(lap: LapData): Pair<List<Int>, Boolean> = when (lap) {
-        is UniversalLapData -> universalSolver.computeResults(lap, dataStore.isUniversalTotalDisplayed())
-        is TarotLapData -> tarotSolver.computeResults(lap)
-        is BeloteLapData -> beloteSolver.computeResults(lap)
-        is CoincheLapData -> coincheSolver.computeResults(lap)
+    fun getPlayer(playerPosition: PlayerPosition): Player = getPlayers()[playerPosition.index]
+
+    fun getResults(lap: Lap): List<Int> = when (lap) {
+        is UniversalLap -> universalSolver.getResults(lap, dataStore.isUniversalTotalDisplayed())
+        is TarotLap -> tarotSolver.getResults(lap)
+        is BeloteLap -> beloteSolver.getResults(lap).first
+        is CoincheLap -> coincheSolver.getResults(lap).first
+    }
+
+    fun getDisplayResults(lap: Lap): Pair<List<String>, Boolean> = when (lap) {
+        is UniversalLap -> error("Not needed for this game")
+        is TarotLap -> tarotSolver.getDisplayResults(lap)
+        is BeloteLap -> beloteSolver.getDisplayResults(lap)
+        is CoincheLap -> coincheSolver.getDisplayResults(lap)
     }
 
     fun getScores(): List<Int> = when (val game = getGame()) {
-        is UniversalGameData -> universalSolver.computeScores(
+        is UniversalGame -> universalSolver.computeScores(
             game.laps,
             getPlayers().size,
             dataStore.isUniversalTotalDisplayed()
         )
-        is BeloteGameData -> beloteSolver.computeScores(game.laps)
-        is CoincheGameData -> coincheSolver.computeScores(game.laps)
-        is TarotGameData -> tarotSolver.computeScores(game.laps, getPlayers().size)
+        is BeloteGame -> beloteSolver.computeScores(game.laps)
+        is CoincheGame -> coincheSolver.computeScores(game.laps)
+        is TarotGame -> tarotSolver.computeScores(game.laps, getPlayers().size)
     }
 
     fun isGameStarted(): Boolean = getGame().laps.isNotEmpty()
@@ -101,35 +110,35 @@ class GameUseCase(
     }
 
     private fun editPlayer(position: Int, name: String, @ColorInt color: Int) {
-        val players = getPlayers().replace(position, PlayerData(name, color))
+        val players = getPlayers().replace(position, Player(name, color))
         val editedGame = when (val game = getGame()) {
-            is UniversalGameData -> UniversalGameData(players, game.laps)
-            is TarotGameData -> TarotGameData(players, game.laps)
-            is BeloteGameData -> BeloteGameData(players, game.laps)
-            is CoincheGameData -> CoincheGameData(players, game.laps)
+            is UniversalGame -> UniversalGame(players, game.laps)
+            is TarotGame -> TarotGame(players, game.laps)
+            is BeloteGame -> BeloteGame(players, game.laps)
+            is CoincheGame -> CoincheGame(players, game.laps)
         }
         dataStore.saveGame(editedGame)
     }
 
-    fun getEditedLap(): LapData = when (val state = editionState) {
+    fun getEditedLap(): Lap = when (val state = editionState) {
         null -> {
             val lap = when (val game = getGame()) {
-                is UniversalGameData -> UniversalLapData(game.players.size)
-                is TarotGameData -> TarotLapData(game.players.size)
-                is BeloteGameData -> BeloteLapData()
-                is CoincheGameData -> CoincheLapData()
+                is UniversalGame -> UniversalLap(game.players.size)
+                is TarotGame -> TarotLap(game.players.size)
+                is BeloteGame -> BeloteLap()
+                is CoincheGame -> CoincheLap()
             }
             editionState = EditionState.Creation(lap)
             lap
         }
         is EditionState.Creation -> state.createdLap
-        is EditionState.Modification -> state.modifiedLapData
+        is EditionState.Modification -> state.modifiedLap
     }
 
-    fun updateEdition(lap: LapData) {
+    fun updateEdition(lap: Lap) {
         when (val state = editionState) {
             is EditionState.Creation -> editionState = EditionState.Creation(lap)
-            is EditionState.Modification -> editionState = EditionState.Modification(state.initialLapData, lap)
+            is EditionState.Modification -> editionState = EditionState.Modification(state.initialLap, lap)
         }
     }
 
@@ -137,18 +146,18 @@ class GameUseCase(
         val game = when (val state = editionState) {
             is EditionState.Creation -> {
                 when (val game = getGame()) {
-                    is UniversalGameData -> UniversalGameData(game.players, actualAddLap(game, state))
-                    is TarotGameData -> TarotGameData(game.players, actualAddLap(game, state))
-                    is BeloteGameData -> BeloteGameData(game.players, actualAddLap(game, state))
-                    is CoincheGameData -> CoincheGameData(game.players, actualAddLap(game, state))
+                    is UniversalGame -> UniversalGame(game.players, actualAddLap(game, state))
+                    is TarotGame -> TarotGame(game.players, actualAddLap(game, state))
+                    is BeloteGame -> BeloteGame(game.players, actualAddLap(game, state))
+                    is CoincheGame -> CoincheGame(game.players, actualAddLap(game, state))
                 }
             }
             is EditionState.Modification -> {
                 when (val game = getGame()) {
-                    is UniversalGameData -> UniversalGameData(game.players, actualEditLap(game, state))
-                    is TarotGameData -> TarotGameData(game.players, actualEditLap(game, state))
-                    is BeloteGameData -> BeloteGameData(game.players, actualEditLap(game, state))
-                    is CoincheGameData -> CoincheGameData(game.players, actualEditLap(game, state))
+                    is UniversalGame -> UniversalGame(game.players, actualEditLap(game, state))
+                    is TarotGame -> TarotGame(game.players, actualEditLap(game, state))
+                    is BeloteGame -> BeloteGame(game.players, actualEditLap(game, state))
+                    is CoincheGame -> CoincheGame(game.players, actualEditLap(game, state))
                 }
             }
             else -> error("Unknown state")
@@ -161,24 +170,24 @@ class GameUseCase(
         if (editionState is EditionState.Modification) editionState = null
     }
 
-    private inline fun <reified T> actualAddLap(game: GameData, state: EditionState.Creation): List<T> {
+    private inline fun <reified T> actualAddLap(game: Game, state: EditionState.Creation): List<T> {
         val laps = game.laps.asMutableListOfType<T>()
         laps += state.createdLap as T
         return laps
     }
 
-    private inline fun <reified T> actualEditLap(game: GameData, state: EditionState.Modification): List<T> {
+    private inline fun <reified T> actualEditLap(game: Game, state: EditionState.Modification): List<T> {
         val laps = game.laps.asListOfType<T>()
-        val index = laps.indexOf(state.initialLapData as T)
-        return laps.replace(index, state.modifiedLapData as T)
+        val index = laps.indexOf(state.initialLap as T)
+        return laps.replace(index, state.modifiedLap as T)
     }
 
     fun reset() {
         val newGame = when (val game = getGame()) {
-            is UniversalGameData -> UniversalGameData(game.players, emptyList())
-            is TarotGameData -> TarotGameData(game.players, emptyList())
-            is BeloteGameData -> BeloteGameData(game.players, emptyList())
-            is CoincheGameData -> CoincheGameData(game.players, emptyList())
+            is UniversalGame -> UniversalGame(game.players, emptyList())
+            is TarotGame -> TarotGame(game.players, emptyList())
+            is BeloteGame -> BeloteGame(game.players, emptyList())
+            is CoincheGame -> CoincheGame(game.players, emptyList())
         }
         editionState = null
         dataStore.saveGame(newGame)
@@ -196,15 +205,15 @@ class GameUseCase(
 
     fun deleteLap(position: Int) {
         val game = when (val game = getGame()) {
-            is UniversalGameData -> UniversalGameData(game.players, actualDeleteLap(game, position))
-            is TarotGameData -> TarotGameData(game.players, actualDeleteLap(game, position))
-            is BeloteGameData -> BeloteGameData(game.players, actualDeleteLap(game, position))
-            is CoincheGameData -> CoincheGameData(game.players, actualDeleteLap(game, position))
+            is UniversalGame -> UniversalGame(game.players, actualDeleteLap(game, position))
+            is TarotGame -> TarotGame(game.players, actualDeleteLap(game, position))
+            is BeloteGame -> BeloteGame(game.players, actualDeleteLap(game, position))
+            is CoincheGame -> CoincheGame(game.players, actualDeleteLap(game, position))
         }
         dataStore.saveGame(game)
     }
 
-    private inline fun <reified T> actualDeleteLap(game: GameData, position: Int): List<T> {
+    private inline fun <reified T> actualDeleteLap(game: Game, position: Int): List<T> {
         val laps = game.laps.asMutableListOfType<T>()
         laps.removeAt(position)
         return laps
@@ -212,7 +221,7 @@ class GameUseCase(
 
     fun canEditPlayer(position: Int): Boolean {
         return when (getGame()) {
-            is UniversalGameData ->
+            is UniversalGame ->
                 if (dataStore.isUniversalTotalDisplayed()) position != getPlayers().size
                 else true
             else -> true
@@ -227,6 +236,6 @@ class GameUseCase(
 }
 
 sealed class EditionState {
-    data class Creation(val createdLap: LapData) : EditionState()
-    data class Modification(val initialLapData: LapData, val modifiedLapData: LapData) : EditionState()
+    data class Creation(val createdLap: Lap) : EditionState()
+    data class Modification(val initialLap: Lap, val modifiedLap: Lap) : EditionState()
 }

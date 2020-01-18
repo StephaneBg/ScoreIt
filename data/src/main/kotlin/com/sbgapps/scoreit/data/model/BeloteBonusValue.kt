@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.model
+package com.sbgapps.scoreit.data.model
 
-import android.graphics.Color
-import com.sbgapps.scoreit.data.model.PlayerData
+import androidx.annotation.StringRes
+import com.sbgapps.scoreit.data.R
+import com.squareup.moshi.JsonClass
 
-data class Player(
-    val name: String = "",
-    val color: Int = Color.BLACK
-) {
-    constructor(player: PlayerData) : this(player.name, player.color)
-
-    fun toData(): PlayerData = PlayerData(name, color)
+@JsonClass(generateAdapter = false)
+enum class BeloteBonusValue(val points: Int, @StringRes val resId: Int) {
+    BELOTE(20, R.string.belote_bonus_belote),
+    RUN_3(20, R.string.belote_bonus_run_3),
+    RUN_4(50, R.string.belote_bonus_run_4),
+    RUN_5(100, R.string.belote_bonus_run_5),
+    FOUR_NORMAL(100, R.string.belote_bonus_normal_four),
+    FOUR_NINE(150, R.string.belote_bonus_nine_four),
+    FOUR_JACK(200, R.string.belote_bonus_jack_four)
 }

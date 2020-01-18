@@ -20,18 +20,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?colorSurface"
     android:gravity="center"
     android:orientation="vertical"
     >
 
     <ImageView
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_score_it"
+        tools:ignore="ContentDescription"
         />
 
     <TextView
-        style="@style/TextAppearance.ScoreIt.Headline3"
+        android:id="@+id/appName"
+        style="?textAppearanceHeadline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding_size_medium"
@@ -39,11 +43,40 @@
         />
 
     <TextView
-        style="@style/TextAppearance.ScoreIt.Subtitle1"
+        android:id="@+id/author"
+        style="?textAppearanceSubtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding_size_small"
         android:text="Stéphane Baiget"
         tools:ignore="HardcodedText"
         />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_size_large"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/email"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="@dimen/margin_padding_size_medium"
+            android:background="?selectableItemBackgroundBorderless"
+            app:srcCompat="@drawable/ic_email_24dp"
+            tools:ignore="ContentDescription"
+            />
+
+        <ImageView
+            android:id="@+id/github"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="@dimen/margin_padding_size_medium"
+            android:background="?selectableItemBackgroundBorderless"
+            app:srcCompat="@drawable/ic_github_24dp"
+            tools:ignore="ContentDescription"
+            />
+    </LinearLayout>
 </LinearLayout>

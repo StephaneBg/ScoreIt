@@ -21,7 +21,7 @@ buildscript {
     }
 
     dependencies {
-        classpath(kotlin("gradle-plugin", Versions.kotlin))
+        classpath(kotlin("gradle-plugin", Build.Versions.kotlin))
         classpath(Build.androidGradle)
     }
 }
@@ -30,5 +30,23 @@ allprojects {
     repositories {
         jcenter()
         google()
+    }
+
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-progressive", "-Xuse-experimental=kotlin.Experimental")
+            jvmTarget = "1.8"
+        }
+    }
+}
+
+subprojects {
+    afterEvaluate {
+        extensions.configure<com.android.build.gradle.BaseExtension> {
+            compileOptions {
+                sourceCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_1_8
+            }
+        }
     }
 }

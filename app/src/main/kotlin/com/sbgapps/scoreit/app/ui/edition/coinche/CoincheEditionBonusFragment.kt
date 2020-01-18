@@ -24,7 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.FragmentEditionCoincheBonusBinding
-import com.sbgapps.scoreit.data.model.BeloteBonus
+import com.sbgapps.scoreit.data.model.BeloteBonusValue
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import io.uniflow.androidx.flow.onStates
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -32,7 +32,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class CoincheEditionBonusFragment : BottomSheetDialogFragment() {
 
     private val viewModel by sharedViewModel<CoincheEditionViewModel>()
-    private var beloteBonus: BeloteBonus = BeloteBonus.BELOTE
+    private var beloteBonus: BeloteBonusValue = BeloteBonusValue.BELOTE
     private lateinit var binding: FragmentEditionCoincheBonusBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

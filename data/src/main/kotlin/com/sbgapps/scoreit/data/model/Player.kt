@@ -16,7 +16,10 @@
 
 package com.sbgapps.scoreit.data.model
 
-data class TarotBonusData(
-    val player: PlayerPosition,
-    val bonus: TarotBonus
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
+data class Player(
+    val name: String,
+    val color: Int
 )

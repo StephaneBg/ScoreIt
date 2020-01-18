@@ -47,6 +47,58 @@
             >
 
             <TextView
+                android:id="@+id/headerTaker"
+                style="?textAppearanceOverline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="@string/belote_header_taker"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/scorerGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headerTaker"
+                app:selectionRequired="true"
+                app:singleSelection="true"
+                >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonTeamOne"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/belote_first_team_default_name"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonTeamTwo"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/belote_second_team_default_name"
+                    />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <TextView
+                android:id="@+id/lapInfo"
+                style="?textAppearanceBody2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_padding_size_medium"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/scorerGroup"
+                tools:text="Lap information"
+                />
+
+            <TextView
                 android:id="@+id/headerBid"
                 style="?textAppearanceOverline"
                 android:layout_width="wrap_content"
@@ -55,7 +107,7 @@
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
                 android:text="@string/coinche_header_bid"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lapInfo"
                 />
 
             <TextView
@@ -139,70 +191,53 @@
                 app:layout_constraintTop_toBottomOf="@id/coinche"
                 />
 
-            <ImageView
-                android:id="@+id/switchPoints"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?selectableItemBackgroundBorderless"
-                android:tint="?attr/colorSecondary"
-                app:layout_constraintBottom_toBottomOf="@+id/pointsTeamOne"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/pointsTeamOne"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/pointsTeamOne"
-                app:srcCompat="@drawable/ic_swap_horiz_24dp"
-                tools:ignore="ContentDescription"
-                />
-
             <TextView
-                android:id="@+id/nameTeamOne"
-                style="?textAppearanceHeadline5"
+                android:id="@+id/nameTaker"
+                style="?textAppearanceSubtitle1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
-                android:layout_marginEnd="@dimen/margin_padding_size_large"
-                app:layout_constraintEnd_toStartOf="@id/switchPoints"
-                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/coinche_points_taker"
+                app:layout_constraintEnd_toEndOf="@id/pointsTeamOne"
+                app:layout_constraintStart_toStartOf="@id/pointsTeamOne"
                 app:layout_constraintTop_toBottomOf="@id/headerPoints"
-                tools:text="@string/belote_first_team_default_name"
                 />
 
             <TextView
-                android:id="@+id/nameTeamTwo"
-                style="?textAppearanceHeadline5"
+                android:id="@+id/nameDefender"
+                style="?textAppearanceSubtitle1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_padding_size_large"
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/switchPoints"
+                android:text="@string/coinche_points_defender"
+                app:layout_constraintEnd_toEndOf="@id/pointsTeamTwo"
+                app:layout_constraintStart_toStartOf="@id/pointsTeamTwo"
                 app:layout_constraintTop_toBottomOf="@id/headerPoints"
-                tools:text="@string/belote_second_team_default_name"
                 />
 
             <TextView
                 android:id="@+id/pointsTeamOne"
                 style="?textAppearanceHeadline2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_padding_size_medium"
-                android:layout_marginEnd="@dimen/margin_padding_size_large"
-                android:padding="@dimen/margin_padding_size_medium"
-                app:layout_constraintEnd_toStartOf="@id/switchPoints"
-                app:layout_constraintTop_toBottomOf="@id/nameTeamOne"
+                android:layout_margin="@dimen/margin_padding_size_medium"
+                android:gravity="center"
+                app:layout_constraintEnd_toStartOf="@id/pointsTeamTwo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nameTaker"
                 tools:text="🐼"
                 />
 
             <TextView
                 android:id="@+id/pointsTeamTwo"
                 style="?textAppearanceHeadline2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_padding_size_large"
-                android:layout_marginTop="@dimen/margin_padding_size_medium"
-                android:padding="@dimen/margin_padding_size_medium"
-                app:layout_constraintStart_toEndOf="@id/switchPoints"
-                app:layout_constraintTop_toBottomOf="@id/nameTeamTwo"
+                android:layout_margin="@dimen/margin_padding_size_medium"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/pointsTeamOne"
+                app:layout_constraintTop_toBottomOf="@id/nameDefender"
                 tools:text="🐼"
                 />
 
@@ -210,11 +245,23 @@
                 android:id="@+id/pointsPlusTen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:layout_marginTop="@dimen/margin_padding_size_large"
                 android:text="+10"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/pointsMinusTen"
+                app:layout_constraintEnd_toEndOf="@id/pointsTeamTwo"
+                app:layout_constraintStart_toStartOf="@id/pointsTeamTwo"
                 app:layout_constraintTop_toBottomOf="@+id/pointsTeamOne"
+                tools:ignore="HardcodedText"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/pointsPlusOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="+1"
+                app:layout_constraintEnd_toEndOf="@id/pointsTeamTwo"
+                app:layout_constraintStart_toStartOf="@id/pointsTeamTwo"
+                app:layout_constraintTop_toBottomOf="@id/pointsPlusTen"
                 tools:ignore="HardcodedText"
                 />
 
@@ -222,11 +269,23 @@
                 android:id="@+id/pointsMinusTen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:layout_marginTop="@dimen/margin_padding_size_large"
                 android:text="-10"
-                app:layout_constraintEnd_toStartOf="@id/pointsPlusTen"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/pointsTeamOne"
+                app:layout_constraintStart_toStartOf="@id/pointsTeamOne"
                 app:layout_constraintTop_toBottomOf="@+id/pointsTeamOne"
+                tools:ignore="HardcodedText"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/pointsMinusOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:text="-1"
+                app:layout_constraintEnd_toEndOf="@id/pointsTeamOne"
+                app:layout_constraintStart_toStartOf="@id/pointsTeamOne"
+                app:layout_constraintTop_toBottomOf="@id/pointsMinusTen"
                 tools:ignore="HardcodedText"
                 />
 
@@ -239,7 +298,7 @@
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
                 android:text="@string/belote_header_bonuses"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pointsPlusTen"
+                app:layout_constraintTop_toBottomOf="@id/pointsMinusOne"
                 />
 
             <com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayout

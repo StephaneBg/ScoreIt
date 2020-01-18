@@ -36,21 +36,6 @@
     <string name="drawer_about">About</string>
     <string name="drawer_preferences">Preferences</string>
 
-    <!-- Belote -->
-    <string name="belote_header_scorer">Scorer</string>
-    <string name="belote_button_score">Score</string>
-    <string name="belote_button_capot">Capot</string>
-    <string name="belote_header_points">Points</string>
-    <string name="belote_header_bonuses">Bonus</string>
-    <string name="belote_header_announces">Announces</string>
-
-    <!-- Coinche -->
-    <string name="coinche_header_bid">Bid</string>
-    <string name="coinche_header_coinche">Coinche</string>
-    <string name="coinche_header_points">Points</string>
-    <string name="coinche_header_bonuses">Bonuses</string>
-    <string name="coinche_header_announces">Announces</string>
-
     <!-- Tarot -->
     <string name="tarot_header_scorer">Taker</string>
     <string name="tarot_header_player">Player</string>
@@ -63,8 +48,28 @@
     <string name="tarot_oudler_petit">Petit</string>
     <string name="tarot_oudler_twentyone">21</string>
 
-    <!-- Universal -->
-    <string name="universal_total_points">Total</string>
+    <!-- Belote -->
+    <string name="belote_header_taker">Taker</string>
+    <string name="belote_header_points">Points</string>
+    <string name="belote_header_bonuses">Bonus</string>
+    <string name="belote_header_announces">Announces</string>
+    <string name="belote_points_taker">Taker</string>
+    <string name="belote_points_defender">Defender</string>
+    <string name="belote_info_win">Taker has made the contract with %1$s points</string>
+    <string name="belote_info_lose">Taker has not made the contract and defense gets %1$s points</string>
+    <string name="belote_info_litigation">There is litigation</string>
+    <string name="belote_info_capot">Taker has taken all the folds and gets %1$s points</string>
+
+    <!-- Coinche -->
+    <string name="coinche_header_bid">Bid</string>
+    <string name="coinche_header_coinche">Coinche</string>
+    <string name="coinche_header_points">Points</string>
+    <string name="coinche_header_bonuses">Bonuses</string>
+    <string name="coinche_header_announces">Announces</string>
+    <string name="coinche_points_taker">Taker</string>
+    <string name="coinche_points_defender">Defender</string>
+    <string name="coinche_info_win">Taker has made the contract with %1$s points</string>
+    <string name="coinche_info_lose">Taker has not made the contract and defense gets %1$s points</string>
 
     <!-- Dialog -->
     <string name="dialog_title_current_game">Current game</string>
@@ -94,9 +99,8 @@
 
     <!-- Menu -->
     <string name="menu_action_clear">Clear</string>
-    <string name="menu_action_actual_scores">Actual scores</string>
+    <string name="menu_action_done">Done</string>
     <string name="menu_action_show_chart">Show chart</string>
-    <string name="menu_action_hide_totals">Hide totals</string>
 
     <!-- Prefs -->
     <string name="prefs_select_theme_mode">Select theme</string>
@@ -106,4 +110,6 @@
     <!-- Date -->
     <string name="local_date_pattern">eeee, dd MMMM yyyy \'at\' h:mm a</string>
 
+    <!-- Toast -->
+    <string name="history_lap_click_hint">Swipe to edit or delete</string>
 </resources>

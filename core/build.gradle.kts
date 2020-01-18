@@ -22,15 +22,9 @@ plugins {
 android {
     compileSdkVersion(Android.compileSdkVersion)
 
-    compileOptions {
-        sourceCompatibility = Versions.java
-        targetCompatibility = Versions.java
-    }
-
     defaultConfig {
         minSdkVersion(Android.minSdkVersion)
         targetSdkVersion(Android.targetSdkVersion)
-        buildToolsVersion(Android.buildToolsVersion)
     }
 
     sourceSets {
@@ -39,15 +33,15 @@ android {
 }
 
 dependencies {
-    implementation(kotlin("stdlib", Versions.kotlin))
-    implementation(Libs.koinAndroidX)
-    implementation(Libs.coroutinesCore)
-    implementation(Libs.coroutinesAndroid)
-    implementation(Libs.appCompat)
-    implementation(Libs.coreKtx)
-    implementation(Libs.fragmentKtx)
+    implementation(kotlin("stdlib", Build.Versions.kotlin))
+    implementation(Coroutines.core)
+    implementation(Coroutines.android)
+    implementation(AndroidX.appCompat)
+    implementation(AndroidX.coreKtx)
+    implementation(AndroidX.fragmentKtx)
+    implementation(AndroidX.lifecyleViewmodel)
     implementation(Libs.material)
+    implementation(Libs.koinAndroidX)
     implementation(Libs.uniflowAndroidX)
-    implementation(Libs.lifecyleViewmodel)
     implementation(Libs.timber)
 }

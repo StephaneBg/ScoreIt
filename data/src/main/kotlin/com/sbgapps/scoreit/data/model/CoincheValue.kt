@@ -16,8 +16,13 @@
 
 package com.sbgapps.scoreit.data.model
 
-enum class TarotOudler {
-    PETIT,
-    EXCUSE,
-    TWENTY_ONE
+import androidx.annotation.StringRes
+import com.sbgapps.scoreit.data.R
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = false)
+enum class CoincheValue(val coefficient: Int, @StringRes val resId: Int) {
+    NONE(1, R.string.coinche_coinche_none),
+    COINCHE(2, R.string.coinche_coinche_coinche),
+    SURCOINCHE(4, R.string.coinche_coinche_surcoinche);
 }

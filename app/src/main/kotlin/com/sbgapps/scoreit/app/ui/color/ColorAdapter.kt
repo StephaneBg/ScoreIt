@@ -24,7 +24,7 @@ import com.sbgapps.scoreit.core.widget.ItemAdapter
 
 class ColorAdapter(
     private val color: Int,
-    private val callback: (color: Int) -> Unit
+    private val callback: (Int) -> Unit
 ) : ItemAdapter(R.layout.list_item_color) {
 
     private lateinit var binding: ListItemColorBinding

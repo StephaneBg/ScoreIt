@@ -16,12 +16,12 @@
 
 package com.sbgapps.scoreit.data.repository
 
-import com.sbgapps.scoreit.data.model.GameData
+import com.sbgapps.scoreit.data.model.Game
 
 interface CacheRepo {
 
-    fun loadGame(name: String? = null): GameData
-    fun saveGame(gameData: GameData)
-    fun createGame(name: String): GameData
+    fun loadGame(name: String? = null): Game
+    fun saveGame(game: Game)
+    fun createGame(name: String): Game
     fun getSavedFiles(): List<Pair<String, Long>>
 }

@@ -16,15 +16,10 @@
 
 package com.sbgapps.scoreit.data.model
 
-import androidx.annotation.StringRes
-import com.sbgapps.scoreit.data.R
+import com.squareup.moshi.JsonClass
 
-enum class TarotBonus(val points: Int, @StringRes val resId: Int) {
-    PETIT_AU_BOUT(10, R.string.tarot_bonus_petit_au_bout),
-    POIGNEE_SIMPLE(20, R.string.tarot_bonus_simple_poignee),
-    POIGNEE_DOUBLE(30, R.string.tarot_bonus_double_poignee),
-    POIGNEE_TRIPLE(40, R.string.tarot_bonus_triple_poignee),
-    CHELEM_NON_ANNONCE(200, R.string.tarot_bonus_slam_not_announced),
-    CHELEM_ANNONCE_REALISE(400, R.string.tarot_bonus_slam_announced_done),
-    CHELEM_ANNONCE_NON_REALISE(-200, R.string.tarot_bonus_slam_announced_not_done)
-}
+@JsonClass(generateAdapter = true)
+data class TarotBonus(
+    val player: PlayerPosition,
+    val bonus: TarotBonusValue
+)

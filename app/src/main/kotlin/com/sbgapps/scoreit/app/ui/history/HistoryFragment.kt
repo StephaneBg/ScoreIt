@@ -27,29 +27,32 @@ import com.google.android.material.snackbar.Snackbar
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.DialogPlayerNameBinding
 import com.sbgapps.scoreit.app.databinding.FragmentHistoryBinding
-import com.sbgapps.scoreit.app.model.BeloteLap
-import com.sbgapps.scoreit.app.model.CoincheLap
-import com.sbgapps.scoreit.app.model.Lap
-import com.sbgapps.scoreit.app.model.TarotLap
-import com.sbgapps.scoreit.app.model.UniversalLap
+import com.sbgapps.scoreit.app.model.BeloteLapRow
+import com.sbgapps.scoreit.app.model.CoincheLapRow
+import com.sbgapps.scoreit.app.model.LapRow
+import com.sbgapps.scoreit.app.model.TarotLapRow
+import com.sbgapps.scoreit.app.model.UniversalLapRow
 import com.sbgapps.scoreit.app.ui.Content
 import com.sbgapps.scoreit.app.ui.GameEvent
 import com.sbgapps.scoreit.app.ui.GameViewModel
 import com.sbgapps.scoreit.app.ui.color.ColorPickerFragment
+import com.sbgapps.scoreit.app.ui.history.adapter.BeloteLapAdapter
+import com.sbgapps.scoreit.app.ui.history.adapter.CoincheLapAdapter
+import com.sbgapps.scoreit.app.ui.history.adapter.HeaderAdapter
+import com.sbgapps.scoreit.app.ui.history.adapter.TarotLapAdapter
+import com.sbgapps.scoreit.app.ui.history.adapter.UniversalLapAdapter
 import com.sbgapps.scoreit.core.ext.onImeActionDone
 import com.sbgapps.scoreit.core.ui.BaseFragment
+import com.sbgapps.scoreit.core.widget.DividerItemDecoration
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
 import com.sbgapps.scoreit.core.widget.ItemAdapter
-import com.sbgapps.scoreit.data.solver.BeloteSolver
 import io.uniflow.androidx.flow.onEvents
 import io.uniflow.androidx.flow.onStates
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HistoryFragment : BaseFragment() {
 
     private val viewModel by sharedViewModel<GameViewModel>()
-    private val beloteSolver by inject<BeloteSolver>()
     private lateinit var binding: FragmentHistoryBinding
     private val historyAdapter = GenericRecyclerViewAdapter()
 
@@ -63,9 +66,10 @@ class HistoryFragment : BaseFragment() {
 
         setToolbar(binding.bottomAppBar)
 
-        binding.results.apply {
+        binding.recyclerView.apply {
             adapter = historyAdapter
             ItemTouchHelper(SwipeCallback(::onEdit, ::onDelete)).attachToRecyclerView(this)
+            addItemDecoration(DividerItemDecoration(requireContext()))
         }
         binding.fab.setOnClickListener {
             viewModel.addLap()
@@ -74,7 +78,11 @@ class HistoryFragment : BaseFragment() {
         onStates(viewModel) { state ->
             when (state) {
                 is Content -> {
-                    binding.header.adapter = HeaderAdapter(state.header, ::displayPlayerEditionOptions)
+                    binding.header.adapter =
+                        HeaderAdapter(
+                            state.header,
+                            ::displayPlayerEditionOptions
+                        )
                     historyAdapter.updateItems(getItems(state.results))
                 }
             }
@@ -112,12 +120,12 @@ class HistoryFragment : BaseFragment() {
         viewModel.loadGame()
     }
 
-    private fun getItems(scores: List<Lap>): List<ItemAdapter> = scores.map { lap ->
+    private fun getItems(scores: List<LapRow>): List<ItemAdapter> = scores.map { lap ->
         when (lap) {
-            is UniversalLap -> UniversalLapAdapter(lap)
-            is BeloteLap -> BeloteLapAdapter(lap, beloteSolver)
-            is CoincheLap -> CoincheLapAdapter(lap)
-            is TarotLap -> TarotLapAdapter(lap)
+            is UniversalLapRow -> UniversalLapAdapter(lap)
+            is BeloteLapRow -> BeloteLapAdapter(lap)
+            is CoincheLapRow -> CoincheLapAdapter(lap)
+            is TarotLapRow -> TarotLapAdapter(lap)
         }
     }
 

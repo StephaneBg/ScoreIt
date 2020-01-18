@@ -21,7 +21,7 @@
     <item
         android:id="@+id/done"
         android:icon="@drawable/ic_done_24dp"
-        android:title="@string/drawer_game_universal"
+        android:title="@string/menu_action_done"
         app:showAsAction="always"
         />
 </menu>

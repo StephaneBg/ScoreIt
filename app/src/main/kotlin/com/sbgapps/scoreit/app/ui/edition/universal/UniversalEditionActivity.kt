@@ -18,9 +18,12 @@ package com.sbgapps.scoreit.app.ui.edition.universal
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.recyclerview.widget.DiffUtil
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ActivityEditionUniversalBinding
 import com.sbgapps.scoreit.app.ui.edition.EditionActivity
+import com.sbgapps.scoreit.core.ext.asListOfType
+import com.sbgapps.scoreit.core.widget.DividerItemDecoration
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
 import io.uniflow.androidx.flow.onStates
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -38,27 +41,28 @@ class UniversalEditionActivity : EditionActivity() {
         setContentView(binding.root)
         setupActionBar(binding.toolbar)
 
-        binding.recyclerView.adapter = lapAdapter
+        binding.recyclerView.apply {
+            adapter = lapAdapter
+            itemAnimator = null
+            addItemDecoration(DividerItemDecoration(this@UniversalEditionActivity))
+        }
 
         onStates(viewModel) { state ->
             when (state) {
                 is UniversalEditionState.Content -> {
                     val adapters = state.players.mapIndexed { index, player ->
-                        UniversalEditionAdapter(player, state.lap.results[index], ::onScoreEdited)
+                        UniversalEditionAdapter(player, state.results[index], ::onScoreEdited)
                     }
-                    lapAdapter.updateItems(adapters)
+                    val diff = DiffUtil.calculateDiff(DiffCallback(lapAdapter.items.asListOfType(), adapters))
+                    lapAdapter.updateItems(adapters, diff)
                 }
-
-                is UniversalEditionState.Incremented -> {
-                    (lapAdapter.items[state.position] as UniversalEditionAdapter).updateScore(state.points)
-                }
-
                 is UniversalEditionState.Completed -> finish()
             }
         }
+        viewModel.loadContent()
     }
 
-    override fun onUpPressed() {
+    override fun onBackPressed() {
         viewModel.cancelEdition()
     }
 
@@ -72,5 +76,22 @@ class UniversalEditionActivity : EditionActivity() {
 
     private fun onScoreEdited(position: Int, increment: Int) {
         viewModel.increment(position, increment)
+    }
+
+    inner class DiffCallback(
+        private val oldEntries: List<UniversalEditionAdapter>,
+        private val newEntries: List<UniversalEditionAdapter>
+    ) : DiffUtil.Callback() {
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            oldEntries[oldItemPosition].score == newEntries[newItemPosition].score &&
+                    oldEntries[oldItemPosition].player == newEntries[newItemPosition].player
+
+        override fun getOldListSize(): Int = oldEntries.size
+
+        override fun getNewListSize(): Int = newEntries.size
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            oldEntries[oldItemPosition].score == newEntries[newItemPosition].score
     }
 }

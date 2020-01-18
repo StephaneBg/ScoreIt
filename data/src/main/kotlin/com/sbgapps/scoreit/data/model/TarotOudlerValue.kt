@@ -14,22 +14,13 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.model
+package com.sbgapps.scoreit.data.model
 
-import com.sbgapps.scoreit.data.model.PlayerPosition
-import com.sbgapps.scoreit.data.model.TarotBonus
-import com.sbgapps.scoreit.data.model.TarotBonusData
 import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
-data class TarotBonusCache(
-    val player: PlayerPosition,
-    val bonus: TarotBonus
-) {
-    constructor(bonus: TarotBonusData) : this(
-        bonus.player,
-        bonus.bonus
-    )
-
-    fun toData(): TarotBonusData = TarotBonusData(player, bonus)
+@JsonClass(generateAdapter = false)
+enum class TarotOudlerValue {
+    PETIT,
+    EXCUSE,
+    TWENTY_ONE
 }

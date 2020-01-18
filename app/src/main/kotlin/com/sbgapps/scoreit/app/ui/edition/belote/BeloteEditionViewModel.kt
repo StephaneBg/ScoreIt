@@ -16,70 +16,69 @@
 
 package com.sbgapps.scoreit.app.ui.edition.belote
 
-import com.sbgapps.scoreit.app.model.Player
+import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.app.ui.edition.Step
 import com.sbgapps.scoreit.core.ui.BaseViewModel
+import com.sbgapps.scoreit.core.utils.string.StringFactory
+import com.sbgapps.scoreit.core.utils.string.fromResources
 import com.sbgapps.scoreit.data.interactor.GameUseCase
 import com.sbgapps.scoreit.data.model.BeloteBonus
-import com.sbgapps.scoreit.data.model.BeloteBonusData
-import com.sbgapps.scoreit.data.model.BeloteLapData
+import com.sbgapps.scoreit.data.model.BeloteBonusValue
+import com.sbgapps.scoreit.data.model.BeloteLap
+import com.sbgapps.scoreit.data.model.Player
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.solver.BeloteSolver
-import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_CAPOT
+import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_TOTAL
+import com.sbgapps.scoreit.data.solver.counter
 import com.sbgapps.scoreit.data.solver.counterPoints
 import io.uniflow.core.flow.UIState
 
-class BeloteEditionViewModel(private val useCase: GameUseCase, private val solver: BeloteSolver) : BaseViewModel() {
+class BeloteEditionViewModel(
+    private val useCase: GameUseCase,
+    private val solver: BeloteSolver
+) : BaseViewModel() {
 
-    init {
+    private val editedLap
+        get() = useCase.getEditedLap() as BeloteLap
+
+    fun loadContent() {
         setState { getContent() }
     }
 
-    private val editedLap
-        get() = useCase.getEditedLap() as BeloteLapData
-
-    fun editMode(pointMode: PointMode) {
+    fun incrementScore(increment: Int) {
         setState {
-            useCase.updateEdition(editedLap.copy(points = pointMode.points))
+            val result = editedLap.points + increment
+            val points = when {
+                result >= POINTS_TOTAL -> POINTS_TOTAL
+                result < 2 -> 2
+                else -> result
+            }
+            useCase.updateEdition(editedLap.copy(points = points))
             getContent()
         }
     }
 
-    fun incrementScore(points: Int) {
+    fun changeTaker(taker: PlayerPosition) {
         setState {
-            val lap = editedLap
-            useCase.updateEdition(
-                lap.copy(
-                    points = if (PlayerPosition.ONE == lap.scorer) lap.points + points
-                    else lap.points - points
-                )
-            )
+            useCase.updateEdition(editedLap.copy(taker = taker))
             getContent()
         }
     }
 
-    fun changeScorer(scorer: PlayerPosition) {
+    fun addBonus(bonus: Pair<PlayerPosition, BeloteBonusValue>) {
         setState {
-            useCase.updateEdition(editedLap.copy(scorer = scorer))
-            getContent()
-        }
-    }
-
-    fun addBonus(bonus: Pair<PlayerPosition, BeloteBonus>) {
-        setState {
-            val lap = editedLap
-            val bonuses = lap.bonuses.toMutableList()
-            bonuses += BeloteBonusData(bonus.first, bonus.second)
-            useCase.updateEdition(lap.copy(bonuses = bonuses))
+            val bonuses = editedLap.bonuses.toMutableList()
+            bonuses += BeloteBonus(bonus.first, bonus.second)
+            useCase.updateEdition(editedLap.copy(bonuses = bonuses))
             getContent()
         }
     }
 
     fun removeBonus(bonusIndex: Int) {
         setState {
-            val lap = editedLap
-            val bonuses = lap.bonuses.toMutableList()
+            val bonuses = editedLap.bonuses.toMutableList()
             bonuses.removeAt(bonusIndex)
-            useCase.updateEdition(lap.copy(bonuses = bonuses))
+            useCase.updateEdition(editedLap.copy(bonuses = bonuses))
             getContent()
         }
     }
@@ -91,58 +90,74 @@ class BeloteEditionViewModel(private val useCase: GameUseCase, private val solve
         }
     }
 
-    private fun getContent(): BeloteEditionState.Content {
-        val lap = editedLap
-        return BeloteEditionState.Content(
-            useCase.getPlayers().map { Player(it) },
-            lap.scorer,
-            getPointMode(lap),
-            getTeamPoints(),
-            lap.bonuses.map { it.player to it.bonus },
-            solver.getAvailableBonuses(lap),
-            canIncrement(lap),
-            canDecrement(lap)
-        )
+    fun cancelEdition() {
+        setState {
+            useCase.cancelEdition()
+            BeloteEditionState.Completed
+        }
     }
 
-    private fun getPointMode(lap: BeloteLapData): PointMode =
-        if (solver.isCapot(lap)) PointMode.Capot else PointMode.Score(lap.points)
+    private fun getContent(): BeloteEditionState.Content =
+        BeloteEditionState.Content(
+            useCase.getPlayers(),
+            editedLap.taker,
+            getInfo(editedLap),
+            getResults(editedLap),
+            editedLap.bonuses.map { it.player to it.bonus },
+            getAvailableBonuses(editedLap),
+            canStepPointsByOne(editedLap),
+            canStepPointsByTen(editedLap)
+        )
 
-    private fun canIncrement(lap: BeloteLapData) = StepScore(lap.points <= 150, lap.points < 160)
-
-    private fun canDecrement(lap: BeloteLapData) = StepScore(lap.points >= 12, lap.points > 2)
-
-    private fun getTeamPoints(): Pair<String, String> {
-        val lap = editedLap
-        return if (PlayerPosition.ONE == lap.scorer) {
-            lap.points.toString() to lap.counterPoints().toString()
+    private fun getInfo(lap: BeloteLap): StringFactory {
+        val (results, isWon) = solver.getResults(lap)
+        return if (isWon) {
+            when {
+                lap.points == POINTS_TOTAL -> fromResources(
+                    R.string.belote_info_capot,
+                    results[lap.taker.index].toString()
+                )
+                solver.isLitigation(results.toList()) -> fromResources(R.string.belote_info_litigation)
+                else -> fromResources(R.string.belote_info_win, results[lap.taker.index].toString())
+            }
         } else {
-            lap.counterPoints().toString() to lap.points.toString()
+            fromResources(R.string.belote_info_lose, results[lap.counter().index].toString())
         }
+    }
+
+    private fun canStepPointsByOne(lap: BeloteLap): Step =
+        Step((lap.points < POINTS_TOTAL), (lap.points > 2))
+
+    private fun canStepPointsByTen(lap: BeloteLap): Step =
+        Step((lap.points < POINTS_TOTAL), (lap.points > 2))
+
+    private fun getResults(lap: BeloteLap): Pair<String, String> =
+        lap.points.toString() to lap.counterPoints().toString()
+
+    private fun getAvailableBonuses(lap: BeloteLap): List<BeloteBonusValue> {
+        val currentBonuses = lap.bonuses.map { it.bonus }
+        return listOfNotNull(
+            BeloteBonusValue.BELOTE.takeUnless { currentBonuses.contains(BeloteBonusValue.BELOTE) },
+            BeloteBonusValue.RUN_3,
+            BeloteBonusValue.RUN_5,
+            BeloteBonusValue.FOUR_NORMAL,
+            BeloteBonusValue.FOUR_NINE.takeUnless { currentBonuses.contains(BeloteBonusValue.FOUR_NINE) },
+            BeloteBonusValue.FOUR_JACK.takeUnless { currentBonuses.contains(BeloteBonusValue.FOUR_JACK) }
+        )
     }
 }
 
 sealed class BeloteEditionState : UIState() {
     data class Content(
         val players: List<Player>,
-        val scorer: PlayerPosition,
-        val pointMode: PointMode,
-        val teamPoints: Pair<String, String>,
-        val selectedBonuses: List<Pair<PlayerPosition, BeloteBonus>>,
-        val availableBonuses: List<BeloteBonus>,
-        val canIncrement: StepScore,
-        val canDecrement: StepScore
+        val taker: PlayerPosition,
+        val lapInfo: StringFactory,
+        val results: Pair<String, String>,
+        val selectedBonuses: List<Pair<PlayerPosition, BeloteBonusValue>>,
+        val availableBonuses: List<BeloteBonusValue>,
+        val stepPointsByOne: Step,
+        val stepPointsByTen: Step
     ) : BeloteEditionState()
 
     object Completed : BeloteEditionState()
 }
-
-sealed class PointMode(val points: Int) {
-    class Score(points: Int) : PointMode(points)
-    object Capot : PointMode(POINTS_CAPOT)
-}
-
-data class StepScore(
-    val canStepTen: Boolean,
-    val canStepOne: Boolean
-)

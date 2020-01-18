@@ -16,15 +16,7 @@
 
 package com.sbgapps.scoreit.cache.repository
 
-import com.sbgapps.scoreit.cache.model.BeloteGameCache
-import com.sbgapps.scoreit.cache.model.CoincheGameCache
-import com.sbgapps.scoreit.cache.model.TarotGameCache
-import com.sbgapps.scoreit.cache.model.UniversalGameCache
-import com.sbgapps.scoreit.data.model.BeloteGameData
-import com.sbgapps.scoreit.data.model.CoincheGameData
-import com.sbgapps.scoreit.data.model.GameData
-import com.sbgapps.scoreit.data.model.TarotGameData
-import com.sbgapps.scoreit.data.model.UniversalGameData
+import com.sbgapps.scoreit.data.model.Game
 import com.sbgapps.scoreit.data.repository.CacheRepo
 import com.sbgapps.scoreit.data.repository.PreferencesRepo
 
@@ -33,30 +25,23 @@ class ScoreItCacheRepo(
     private val preferencesRepo: PreferencesRepo
 ) : CacheRepo {
 
-    override fun loadGame(name: String?): GameData {
+    override fun loadGame(name: String?): Game {
         val gameType = preferencesRepo.getGameType()
         val count = preferencesRepo.getPlayerCount()
         name?.let {
             gameDao.setFileName(gameType, count, it)
         }
-        return gameDao.getCurrentGame(gameType, count).toData()
+        return gameDao.getCurrentGame(gameType, count)
     }
 
-    override fun createGame(name: String): GameData = gameDao.createGame(
+    override fun createGame(name: String): Game = gameDao.createGame(
         preferencesRepo.getGameType(),
         preferencesRepo.getPlayerCount(),
         name
-    ).toData()
+    )
 
-    override fun saveGame(gameData: GameData) {
-        val gameCache = when (gameData) {
-            is UniversalGameData -> UniversalGameCache(gameData)
-            is TarotGameData -> TarotGameCache(gameData)
-            is BeloteGameData -> BeloteGameCache(gameData)
-            is CoincheGameData -> CoincheGameCache(gameData)
-            else -> error("Unknown game")
-        }
-        gameDao.saveGame(gameCache, preferencesRepo.getPlayerCount())
+    override fun saveGame(game: Game) {
+        gameDao.saveGame(game, preferencesRepo.getPlayerCount())
     }
 
     override fun getSavedFiles(): List<Pair<String, Long>> = gameDao.getSavedFiles(

@@ -14,23 +14,16 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.model
+package com.sbgapps.scoreit.data.model
 
-import com.sbgapps.scoreit.data.model.BeloteBonus
-import com.sbgapps.scoreit.data.model.BeloteBonusData
-import com.sbgapps.scoreit.data.model.PlayerPosition
+import androidx.annotation.StringRes
+import com.sbgapps.scoreit.data.R
 import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
-data class BeloteBonusCache(
-    val player: PlayerPosition,
-    val bonus: BeloteBonus
-) {
-
-    constructor(bonus: BeloteBonusData) : this(
-        bonus.player,
-        bonus.bonus
-    )
-
-    fun toData(): BeloteBonusData = BeloteBonusData(player, bonus)
+@JsonClass(generateAdapter = false)
+enum class TarotBidValue(val coefficient: Int, @StringRes val resId: Int) {
+    SMALL(1, R.string.tarot_bid_take),
+    GUARD(2, R.string.tarot_bid_guard),
+    GUARD_WITHOUT_KITTY(4, R.string.tarot_bid_guard_without_kitty),
+    GUARD_AGAINST_KITTY(6, R.string.tarot_bid_guard_against_kitty)
 }

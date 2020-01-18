@@ -16,13 +16,18 @@
 
 package com.sbgapps.scoreit.data.model
 
-enum class PlayerPosition(val index: Int) {
-    NONE(-1),
-    ONE(0),
-    TWO(1),
-    THREE(2),
-    FOUR(3),
-    FIVE(4);
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = false)
+enum class PlayerPosition {
+    NONE,
+    ONE,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE;
+
+    val index: Int = ordinal - 1
 
     companion object {
         fun fromIndex(index: Int): PlayerPosition = values().first { it.index == index }

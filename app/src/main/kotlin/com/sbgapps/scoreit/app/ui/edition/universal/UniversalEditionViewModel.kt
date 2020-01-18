@@ -16,32 +16,29 @@
 
 package com.sbgapps.scoreit.app.ui.edition.universal
 
-import com.sbgapps.scoreit.app.model.Player
-import com.sbgapps.scoreit.app.model.UniversalLap
 import com.sbgapps.scoreit.core.ext.replace
 import com.sbgapps.scoreit.core.ui.BaseViewModel
 import com.sbgapps.scoreit.data.interactor.GameUseCase
-import com.sbgapps.scoreit.data.model.UniversalLapData
+import com.sbgapps.scoreit.data.model.Player
+import com.sbgapps.scoreit.data.model.UniversalLap
 import io.uniflow.core.flow.UIState
 
 class UniversalEditionViewModel(private val useCase: GameUseCase) : BaseViewModel() {
 
-    init {
-        setState {
-            UniversalEditionState.Content(
-                useCase.getPlayers().map { Player(it) },
-                UniversalLap(getEditedLap().points)
-            )
-        }
+    private val editedLap
+        get() = useCase.getEditedLap() as UniversalLap
+
+    fun loadContent() {
+        setState { getContent() }
     }
 
     fun increment(position: Int, points: Int) {
         setState {
-            val oldPoints = getEditedLap().points
+            val oldPoints = editedLap.points
             val newScore = oldPoints[position] + points
             val newPoints = oldPoints.replace(position, newScore)
-            useCase.updateEdition(UniversalLapData(newPoints))
-            UniversalEditionState.Incremented(position, newScore)
+            useCase.updateEdition(UniversalLap(newPoints))
+            getContent()
         }
     }
 
@@ -59,11 +56,14 @@ class UniversalEditionViewModel(private val useCase: GameUseCase) : BaseViewMode
         }
     }
 
-    private fun getEditedLap(): UniversalLapData = useCase.getEditedLap() as UniversalLapData
+    private fun getContent(): UniversalEditionState.Content =
+        UniversalEditionState.Content(
+            useCase.getPlayers(),
+            editedLap.points
+        )
 }
 
 sealed class UniversalEditionState : UIState() {
-    data class Content(val players: List<Player>, val lap: UniversalLap) : UniversalEditionState()
-    data class Incremented(val position: Int, val points: Int) : UniversalEditionState()
+    data class Content(val players: List<Player>, val results: List<Int>) : UniversalEditionState()
     object Completed : UniversalEditionState()
 }

@@ -15,9 +15,7 @@
   -->
 <resources>
 
+    <!-- Belote/Coinche -->
     <string name="belote_first_team_default_name">Them</string>
     <string name="belote_second_team_default_name">Us</string>
-
-    <string name="coinche_first_team_default_name">Them</string>
-    <string name="coinche_second_team_default_name">Us</string>
 </resources>

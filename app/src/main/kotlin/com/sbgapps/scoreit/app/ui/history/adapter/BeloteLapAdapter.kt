@@ -14,30 +14,21 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.ui.history
+package com.sbgapps.scoreit.app.ui.history.adapter
 
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ListItemLapBeloteCoincheBinding
-import com.sbgapps.scoreit.app.model.BeloteLap
+import com.sbgapps.scoreit.app.model.BeloteLapRow
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
-import com.sbgapps.scoreit.core.widget.ItemAdapter
-import com.sbgapps.scoreit.data.solver.BeloteSolver
 
 class BeloteLapAdapter(
-    private val model: BeloteLap,
-    private val solver: BeloteSolver
-) : ItemAdapter(R.layout.list_item_lap_belote_coinche) {
+    private val model: BeloteLapRow
+) : BaseLapAdapter(R.layout.list_item_lap_belote_coinche) {
 
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
+        super.onBindViewHolder(viewHolder)
         val binding = ListItemLapBeloteCoincheBinding.bind(viewHolder.itemView)
-        binding.results.adapter = LapResultAdapter(
-            model.results.mapIndexed { index, points ->
-                listOfNotNull(
-                    solver.getPointsForDisplay(points).toString(),
-                    "★".takeIf { model.hasBelote.index == index }
-                ).joinToString(" ")
-            }
-        )
+        binding.recyclerView.adapter = LapResultAdapter(model.results)
         binding.done.setBackgroundResource(if (model.isWon) R.color.game_won else R.color.game_lost)
     }
 }

@@ -18,7 +18,6 @@ package com.sbgapps.scoreit.app.ui.prefs
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.isVisible
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ActivityPreferencesBinding
@@ -46,8 +45,7 @@ class PreferencesActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setupActionBar(binding.toolbar)
 
         binding.themeMode.setOnClickListener {
             MaterialAlertDialogBuilder(this)
@@ -75,18 +73,12 @@ class PreferencesActivity : BaseActivity() {
             }
         }
 
-        binding.titleCoinche.isVisible = false
         binding.roundCoinche.apply {
-            isVisible = false
             isChecked = viewModel.isCoincheScoreRounded()
             setOnCheckedChangeListener { _, isChecked ->
                 viewModel.setCoincheScoreRounded(isChecked)
             }
         }
-    }
-
-    override fun onUpPressed() {
-        finish()
     }
 
     private fun getCurrentChoice(): Int = when (viewModel.getPrefThemeMode()) {

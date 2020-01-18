@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.data.model
+package com.sbgapps.scoreit.app.ui.edition
 
-data class PlayerData(
-    val name: String,
-    val color: Int
+data class Step(
+    val canAdd: Boolean,
+    val canSubtract: Boolean
 )

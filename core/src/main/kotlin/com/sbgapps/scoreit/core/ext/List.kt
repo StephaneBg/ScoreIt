@@ -16,17 +16,11 @@
 
 package com.sbgapps.scoreit.core.ext
 
-inline fun <reified T> List<*>.asListOfType(): List<T> =
-    if (all { it is T })
-        @Suppress("UNCHECKED_CAST")
-        this as List<T>
-    else error("Incorrect type")
+@Suppress("UNCHECKED_CAST")
+inline fun <reified T> List<*>.asListOfType(): List<T> = this as List<T>
 
-inline fun <reified T> List<*>.asMutableListOfType(): MutableList<T> =
-    if (all { it is T })
-        @Suppress("UNCHECKED_CAST")
-        this as MutableList<T>
-    else error("Incorrect type")
+@Suppress("UNCHECKED_CAST")
+inline fun <reified T> List<*>.asMutableListOfType(): MutableList<T> = this as MutableList<T>
 
 inline fun <reified E> List<E>.replace(index: Int, element: E): List<E> = this.mapIndexed { i, e ->
     if (index == i) element else e

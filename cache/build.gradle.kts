@@ -17,21 +17,14 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("kapt")
 }
 
 android {
     compileSdkVersion(Android.compileSdkVersion)
 
-    compileOptions {
-        sourceCompatibility = Versions.java
-        targetCompatibility = Versions.java
-    }
-
     defaultConfig {
         minSdkVersion(Android.minSdkVersion)
         targetSdkVersion(Android.targetSdkVersion)
-        buildToolsVersion(Android.buildToolsVersion)
     }
 
     sourceSets {
@@ -43,14 +36,12 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":core"))
 
-    implementation(kotlin("stdlib", Versions.kotlin))
-    implementation(Libs.moshiKotlin)
-    implementation(Libs.moshiAdapters)
+    implementation(kotlin("stdlib", Build.Versions.kotlin))
+    implementation(AndroidX.coreKtx)
+    implementation(AndroidX.preferences)
+    implementation(Moshi.kotlin)
+    implementation(Moshi.adapters)
     implementation(Libs.storage)
-    implementation(Libs.preferences)
     implementation(Libs.koinAndroidX)
-    implementation(Libs.coreKtx)
     implementation(Libs.timber)
-
-    kapt(Libs.moshiCodegen)
 }
