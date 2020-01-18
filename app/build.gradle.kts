@@ -26,11 +26,6 @@ val versionPatch = 0
 android {
     compileSdkVersion(Android.compileSdkVersion)
 
-    compileOptions {
-        sourceCompatibility = Versions.java
-        targetCompatibility = Versions.java
-    }
-
     defaultConfig {
         applicationId = "com.sbgapps.scoreit"
         versionCode = versionMajor * 100 + versionMinor * 10 + versionPatch
@@ -38,7 +33,15 @@ android {
         vectorDrawables.useSupportLibrary = true
         minSdkVersion(Android.minSdkVersion)
         targetSdkVersion(Android.targetSdkVersion)
-        buildToolsVersion(Android.buildToolsVersion)
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file(project.properties["scoreItStoreFile"] as String)
+            storePassword = project.properties["scoreItStorePassword"] as String
+            keyAlias = project.properties["scoreItKeyAlias"] as String
+            keyPassword = project.properties["scoreItKeyPassword"] as String
+        }
     }
 
     buildTypes {
@@ -48,6 +51,7 @@ android {
             isDebuggable = false
             isJniDebuggable = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard.pro")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
@@ -84,13 +88,13 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":cache"))
 
-    implementation(kotlin("stdlib", Versions.kotlin))
-    implementation(Libs.appCompat)
-    implementation(Libs.coreKtx)
-    implementation(Libs.constraintLayout)
-    implementation(Libs.recyclerView)
-    implementation(Libs.navFragment)
-    implementation(Libs.navUi)
+    implementation(kotlin("stdlib", Build.Versions.kotlin))
+    implementation(AndroidX.appCompat)
+    implementation(AndroidX.coreKtx)
+    implementation(AndroidX.constraintLayout)
+    implementation(AndroidX.recyclerView)
+    implementation(AndroidX.navFragment)
+    implementation(AndroidX.navUi)
     implementation(Libs.material)
     implementation(Libs.koinAndroidX)
     implementation(Libs.uniflowAndroidX)

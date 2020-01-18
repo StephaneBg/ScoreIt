@@ -20,24 +20,24 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.sbgapps.scoreit.cache.R
-import com.sbgapps.scoreit.cache.model.BeloteGameCache
-import com.sbgapps.scoreit.cache.model.CoincheGameCache
-import com.sbgapps.scoreit.cache.model.GameCache
-import com.sbgapps.scoreit.cache.model.PlayerCache
-import com.sbgapps.scoreit.cache.model.TarotGameCache
-import com.sbgapps.scoreit.cache.model.UniversalGameCache
 import com.sbgapps.scoreit.core.ext.color
+import com.sbgapps.scoreit.data.model.BeloteGame
+import com.sbgapps.scoreit.data.model.CoincheGame
+import com.sbgapps.scoreit.data.model.Game
 import com.sbgapps.scoreit.data.model.GameType
+import com.sbgapps.scoreit.data.model.Player
+import com.sbgapps.scoreit.data.model.TarotGame
+import com.sbgapps.scoreit.data.model.UniversalGame
 import com.squareup.moshi.JsonAdapter
 
 class ScoreItGameDao(
     private val context: Context,
     private val preferences: SharedPreferences,
     private val storage: FileStorage,
-    private val gameCacheJsonAdapter: JsonAdapter<GameCache>
+    private val gameCacheJsonAdapter: JsonAdapter<Game>
 ) {
 
-    fun getCurrentGame(gameType: GameType, playerCount: Int): GameCache {
+    fun getCurrentGame(gameType: GameType, playerCount: Int): Game {
         val directory = getDirectory(gameType, playerCount)
         val fileName = getFileName(gameType, playerCount)
         return try {
@@ -48,18 +48,18 @@ class ScoreItGameDao(
         }
     }
 
-    fun createGame(gameType: GameType, playerCount: Int, fileName: String): GameCache {
+    fun createGame(gameType: GameType, playerCount: Int, fileName: String): Game {
         preferences.edit { putString(getFileNameKey(gameType, playerCount), fileName) }
         val players = initPlayers(context, gameType, playerCount)
         return when (gameType) {
-            GameType.UNIVERSAL -> UniversalGameCache(players)
-            GameType.TAROT -> TarotGameCache(players)
-            GameType.BELOTE -> BeloteGameCache(players)
-            GameType.COINCHE -> CoincheGameCache(players)
+            GameType.UNIVERSAL -> UniversalGame(players)
+            GameType.TAROT -> TarotGame(players)
+            GameType.BELOTE -> BeloteGame(players)
+            GameType.COINCHE -> CoincheGame(players)
         }
     }
 
-    fun saveGame(gameCache: GameCache, playerCount: Int) {
+    fun saveGame(gameCache: Game, playerCount: Int) {
         val directory = getDirectory(gameCache.type, playerCount)
         val fileName = getFileName(gameCache.type, playerCount)
         val json = gameCacheJsonAdapter.toJson(gameCache)
@@ -93,15 +93,15 @@ class ScoreItGameDao(
         return directory
     }
 
-    private fun initPlayers(context: Context, gameType: GameType, playerCount: Int): List<PlayerCache> {
-        val players = mutableListOf<PlayerCache>()
+    private fun initPlayers(context: Context, gameType: GameType, playerCount: Int): List<Player> {
+        val players = mutableListOf<Player>()
         when (gameType) {
             GameType.BELOTE, GameType.COINCHE -> {
-                players += PlayerCache(
+                players += Player(
                     context.getString(R.string.belote_first_team_default_name),
                     context.color(R.color.md_green_600)
                 )
-                players += PlayerCache(
+                players += Player(
                     context.getString(R.string.belote_second_team_default_name),
                     context.color(R.color.md_orange_600)
                 )
@@ -110,7 +110,7 @@ class ScoreItGameDao(
                 val names = context.resources.obtainTypedArray(R.array.player_names)
                 val colors = context.resources.obtainTypedArray(R.array.player_colors)
                 for (i in 0 until playerCount) {
-                    players += PlayerCache(names.getString(i)!!, colors.getColor(i, 0))
+                    players += Player(names.getString(i)!!, colors.getColor(i, 0))
                 }
                 names.recycle()
                 colors.recycle()

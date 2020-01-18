@@ -17,8 +17,8 @@
 package com.sbgapps.scoreit.data.solver
 
 import com.sbgapps.scoreit.data.model.BeloteBonus
-import com.sbgapps.scoreit.data.model.BeloteBonusData
-import com.sbgapps.scoreit.data.model.CoincheLapData
+import com.sbgapps.scoreit.data.model.BeloteBonusValue
+import com.sbgapps.scoreit.data.model.CoincheLap
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.POINTS_CAPOT
 import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.POINTS_TOTAL
@@ -26,7 +26,7 @@ import com.sbgapps.scoreit.data.source.DataStore
 
 class CoincheSolver(private val dataStore: DataStore) {
 
-    fun getResults(lap: CoincheLapData): Pair<List<Int>, Boolean> {
+    fun getResults(lap: CoincheLap): Pair<List<Int>, Boolean> {
         val takerIndex = lap.taker.index
         val counterIndex = lap.counter().index
         val (results, isWon) = computeResults(lap)
@@ -42,18 +42,18 @@ class CoincheSolver(private val dataStore: DataStore) {
         return results.toList() to isWon
     }
 
-    fun getDisplayResults(lap: CoincheLapData): Pair<List<String>, Boolean> {
+    fun getDisplayResults(lap: CoincheLap): Pair<List<String>, Boolean> {
         val (results, isWon) = getResults(lap)
         return results.toList().mapIndexed { index, points ->
             listOfNotNull(
                 getPointsForDisplay(points).toString(),
-                "♛".takeIf { lap.bonuses.find { it.bonus == BeloteBonus.BELOTE && it.player.index == index } != null },
-                "★".takeIf { lap.bonuses.find { it.bonus != BeloteBonus.BELOTE && it.player.index == index } != null }
+                "♛".takeIf { lap.bonuses.find { it.bonus == BeloteBonusValue.BELOTE && it.player.index == index } != null },
+                "★".takeIf { lap.bonuses.find { it.bonus != BeloteBonusValue.BELOTE && it.player.index == index } != null }
             ).joinToString(" ")
         } to isWon
     }
 
-    private fun computeResults(lap: CoincheLapData): Pair<IntArray, Boolean> {
+    private fun computeResults(lap: CoincheLap): Pair<IntArray, Boolean> {
         val takerIndex = lap.taker.index
         val counterIndex = lap.counter().index
         val results = IntArray(2)
@@ -69,11 +69,11 @@ class CoincheSolver(private val dataStore: DataStore) {
         return results to isWon
     }
 
-    private fun addBonuses(results: IntArray, bonuses: List<BeloteBonusData>) {
+    private fun addBonuses(results: IntArray, bonuses: List<BeloteBonus>) {
         for ((player, bonus) in bonuses) results[player.index] += bonus.points
     }
 
-    fun computeScores(laps: List<CoincheLapData>): List<Int> {
+    fun computeScores(laps: List<CoincheLap>): List<Int> {
         val scores = MutableList(2) { 0 }
         laps.map { getResults(it).first }.forEach { points ->
             for (player in 0 until 2) scores[player] += points[player]
@@ -98,6 +98,6 @@ class CoincheSolver(private val dataStore: DataStore) {
     }
 }
 
-fun CoincheLapData.counterPoints(): Int = if (points == POINTS_CAPOT) 0 else POINTS_TOTAL - points
+fun CoincheLap.counterPoints(): Int = if (points == POINTS_CAPOT) 0 else POINTS_TOTAL - points
 
-fun CoincheLapData.counter(): PlayerPosition = taker.counter()
+fun CoincheLap.counter(): PlayerPosition = taker.counter()

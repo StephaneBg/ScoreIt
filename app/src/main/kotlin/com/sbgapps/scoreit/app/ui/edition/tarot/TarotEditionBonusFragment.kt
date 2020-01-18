@@ -24,7 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sbgapps.scoreit.app.databinding.FragmentEditionTarotBonusBinding
 import com.sbgapps.scoreit.data.model.PlayerPosition
-import com.sbgapps.scoreit.data.model.TarotBonus
+import com.sbgapps.scoreit.data.model.TarotBonusValue
 import io.uniflow.androidx.flow.onStates
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -32,7 +32,7 @@ class TarotEditionBonusFragment : BottomSheetDialogFragment() {
 
     private val viewModel by sharedViewModel<TarotEditionViewModel>()
     private lateinit var binding: FragmentEditionTarotBonusBinding
-    private var tarotBonus: TarotBonus = TarotBonus.PETIT_AU_BOUT
+    private var tarotBonus: TarotBonusValue = TarotBonusValue.PETIT_AU_BOUT
     private var player: PlayerPosition = PlayerPosition.ONE
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

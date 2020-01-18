@@ -19,9 +19,9 @@ package com.sbgapps.scoreit.app.ui.edition.universal
 import com.google.android.material.button.MaterialButton
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ListItemEditionUniversalBinding
-import com.sbgapps.scoreit.app.model.Player
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
 import com.sbgapps.scoreit.core.widget.ItemAdapter
+import com.sbgapps.scoreit.data.model.Player
 
 class UniversalEditionAdapter(
     val player: Player,

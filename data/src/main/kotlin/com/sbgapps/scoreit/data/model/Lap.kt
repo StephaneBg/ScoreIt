@@ -16,34 +16,40 @@
 
 package com.sbgapps.scoreit.data.model
 
-sealed class LapData
+import com.squareup.moshi.JsonClass
 
-data class UniversalLapData(
+sealed class Lap
+
+@JsonClass(generateAdapter = true)
+data class UniversalLap(
     val points: List<Int>
-) : LapData() {
+) : Lap() {
     constructor(playerCount: Int) : this(List(playerCount) { 0 })
 }
 
-data class TarotLapData(
+@JsonClass(generateAdapter = true)
+data class TarotLap(
     val playerCount: Int,
     val taker: PlayerPosition = PlayerPosition.ONE,
     val partner: PlayerPosition = if (5 == playerCount) PlayerPosition.TWO else PlayerPosition.NONE,
-    val bid: TarotBid = TarotBid.SMALL,
-    val oudlers: List<TarotOudler> = emptyList(),
+    val bid: TarotBidValue = TarotBidValue.SMALL,
+    val oudlers: List<TarotOudlerValue> = emptyList(),
     val points: Int = 56,
-    val bonuses: List<TarotBonusData> = emptyList()
-) : LapData()
+    val bonuses: List<TarotBonus> = emptyList()
+) : Lap()
 
-data class BeloteLapData(
+@JsonClass(generateAdapter = true)
+data class BeloteLap(
     val taker: PlayerPosition = PlayerPosition.ONE,
     val points: Int = 90,
-    val bonuses: List<BeloteBonusData> = emptyList()
-) : LapData()
+    val bonuses: List<BeloteBonus> = emptyList()
+) : Lap()
 
-data class CoincheLapData(
+@JsonClass(generateAdapter = true)
+data class CoincheLap(
     val taker: PlayerPosition = PlayerPosition.ONE,
     val bid: Int = 110,
-    val coinche: Coinche = Coinche.NONE,
+    val coinche: CoincheValue = CoincheValue.NONE,
     val points: Int = 110,
-    val bonuses: List<BeloteBonusData> = emptyList()
-) : LapData()
+    val bonuses: List<BeloteBonus> = emptyList()
+) : Lap()

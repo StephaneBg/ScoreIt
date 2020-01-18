@@ -17,11 +17,11 @@
 package com.sbgapps.scoreit.app.ui.history.adapter
 
 import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.model.UniversalLap
+import com.sbgapps.scoreit.app.model.UniversalLapRow
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayout
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
 
-class UniversalLapAdapter(private val model: UniversalLap) : BaseLapAdapter(R.layout.list_item_lap_universal) {
+class UniversalLapAdapter(private val model: UniversalLapRow) : BaseLapAdapter(R.layout.list_item_lap_universal) {
 
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         super.onBindViewHolder(viewHolder)

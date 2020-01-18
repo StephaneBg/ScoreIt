@@ -16,7 +16,10 @@
 
 package com.sbgapps.scoreit.data.model
 
-enum class TarotOudler {
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = false)
+enum class TarotOudlerValue {
     PETIT,
     EXCUSE,
     TWENTY_ONE

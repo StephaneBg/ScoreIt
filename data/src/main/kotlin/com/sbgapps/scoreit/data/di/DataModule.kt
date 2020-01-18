@@ -19,7 +19,7 @@ package com.sbgapps.scoreit.data.di
 import android.graphics.Color
 import com.sbgapps.scoreit.data.R
 import com.sbgapps.scoreit.data.interactor.GameUseCase
-import com.sbgapps.scoreit.data.model.PlayerData
+import com.sbgapps.scoreit.data.model.Player
 import com.sbgapps.scoreit.data.solver.BeloteSolver
 import com.sbgapps.scoreit.data.solver.CoincheSolver
 import com.sbgapps.scoreit.data.solver.TarotSolver
@@ -34,7 +34,7 @@ val dataModule = module {
         DataStore(
             get(),
             get(),
-            PlayerData(androidContext().getString(R.string.universal_total_points), Color.RED)
+            Player(androidContext().getString(R.string.universal_total_points), Color.RED)
         )
     }
     single { GameUseCase(get(), get(), get(), get(), get()) }

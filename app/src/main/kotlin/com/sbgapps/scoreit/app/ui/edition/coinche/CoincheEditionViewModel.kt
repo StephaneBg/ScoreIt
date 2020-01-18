@@ -17,16 +17,16 @@
 package com.sbgapps.scoreit.app.ui.edition.coinche
 
 import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.model.Player
 import com.sbgapps.scoreit.app.ui.edition.Step
 import com.sbgapps.scoreit.core.ui.BaseViewModel
 import com.sbgapps.scoreit.core.utils.string.StringFactory
 import com.sbgapps.scoreit.core.utils.string.fromResources
 import com.sbgapps.scoreit.data.interactor.GameUseCase
 import com.sbgapps.scoreit.data.model.BeloteBonus
-import com.sbgapps.scoreit.data.model.BeloteBonusData
-import com.sbgapps.scoreit.data.model.Coinche
-import com.sbgapps.scoreit.data.model.CoincheLapData
+import com.sbgapps.scoreit.data.model.BeloteBonusValue
+import com.sbgapps.scoreit.data.model.CoincheLap
+import com.sbgapps.scoreit.data.model.CoincheValue
+import com.sbgapps.scoreit.data.model.Player
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.solver.CoincheSolver
 import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.BID_MAX
@@ -42,7 +42,7 @@ class CoincheEditionViewModel(
 ) : BaseViewModel() {
 
     private val editedLap
-        get() = useCase.getEditedLap() as CoincheLapData
+        get() = useCase.getEditedLap() as CoincheLap
 
 
     fun loadContent() {
@@ -58,7 +58,7 @@ class CoincheEditionViewModel(
         }
     }
 
-    fun setCoinche(coinche: Coinche) {
+    fun setCoinche(coinche: CoincheValue) {
         setState {
             useCase.updateEdition(editedLap.copy(coinche = coinche))
             getContent()
@@ -85,10 +85,10 @@ class CoincheEditionViewModel(
         }
     }
 
-    fun addBonus(bonus: Pair<PlayerPosition, BeloteBonus>) {
+    fun addBonus(bonus: Pair<PlayerPosition, BeloteBonusValue>) {
         setState {
             val bonuses = editedLap.bonuses.toMutableList()
-            bonuses += BeloteBonusData(bonus.first, bonus.second)
+            bonuses += BeloteBonus(bonus.first, bonus.second)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
             getContent()
         }
@@ -119,7 +119,7 @@ class CoincheEditionViewModel(
 
     private fun getContent(): CoincheEditionState.Content =
         CoincheEditionState.Content(
-            useCase.getPlayers().map { Player(it) },
+            useCase.getPlayers(),
             editedLap.taker,
             getInfo(editedLap),
             editedLap.bid,
@@ -132,29 +132,29 @@ class CoincheEditionViewModel(
             canStepPointsByTen(editedLap)
         )
 
-    private fun canStepBid(lap: CoincheLapData): Step =
+    private fun canStepBid(lap: CoincheLap): Step =
         Step((lap.bid < BID_MAX), (lap.bid > BID_MIN))
 
-    private fun canStepPointsByOne(lap: CoincheLapData): Step =
+    private fun canStepPointsByOne(lap: CoincheLap): Step =
         Step((lap.points < POINTS_TOTAL), (lap.points > 2))
 
-    private fun canStepPointsByTen(lap: CoincheLapData): Step =
+    private fun canStepPointsByTen(lap: CoincheLap): Step =
         Step((lap.points < POINTS_TOTAL), (lap.points > 2))
 
-    private fun getAvailableBonuses(lap: CoincheLapData): List<BeloteBonus> {
+    private fun getAvailableBonuses(lap: CoincheLap): List<BeloteBonusValue> {
         val currentBonuses = lap.bonuses.map { it.bonus }
-        val bonuses = mutableListOf<BeloteBonus>()
-        if (!currentBonuses.contains(BeloteBonus.BELOTE)) bonuses.add(BeloteBonus.BELOTE)
-        bonuses.add(BeloteBonus.RUN_3)
-        bonuses.add(BeloteBonus.RUN_4)
-        bonuses.add(BeloteBonus.RUN_5)
-        bonuses.add(BeloteBonus.FOUR_NORMAL)
-        bonuses.add(BeloteBonus.FOUR_NINE)
-        bonuses.add(BeloteBonus.FOUR_JACK)
+        val bonuses = mutableListOf<BeloteBonusValue>()
+        if (!currentBonuses.contains(BeloteBonusValue.BELOTE)) bonuses.add(BeloteBonusValue.BELOTE)
+        bonuses.add(BeloteBonusValue.RUN_3)
+        bonuses.add(BeloteBonusValue.RUN_4)
+        bonuses.add(BeloteBonusValue.RUN_5)
+        bonuses.add(BeloteBonusValue.FOUR_NORMAL)
+        bonuses.add(BeloteBonusValue.FOUR_NINE)
+        bonuses.add(BeloteBonusValue.FOUR_JACK)
         return bonuses
     }
 
-    private fun getInfo(lap: CoincheLapData): StringFactory {
+    private fun getInfo(lap: CoincheLap): StringFactory {
         val (results, isWon) = solver.getResults(lap)
         return if (isWon) {
             fromResources(R.string.coinche_info_win, results[lap.taker.index].toString())
@@ -163,7 +163,7 @@ class CoincheEditionViewModel(
         }
     }
 
-    private fun getTeamPoints(lap: CoincheLapData): Pair<String, String> =
+    private fun getTeamPoints(lap: CoincheLap): Pair<String, String> =
         lap.points.toString() to lap.counterPoints().toString()
 }
 
@@ -174,9 +174,9 @@ sealed class CoincheEditionState : UIState() {
         val lapInfo: StringFactory,
         val bidPoints: Int,
         val teamPoints: Pair<String, String>,
-        val coinche: Coinche,
-        val selectedBonuses: List<Pair<PlayerPosition, BeloteBonus>>,
-        val availableBonuses: List<BeloteBonus>,
+        val coinche: CoincheValue,
+        val selectedBonuses: List<Pair<PlayerPosition, BeloteBonusValue>>,
+        val availableBonuses: List<BeloteBonusValue>,
         val stepBid: Step,
         val stepPointsByOne: Step,
         val stepPointsByTen: Step

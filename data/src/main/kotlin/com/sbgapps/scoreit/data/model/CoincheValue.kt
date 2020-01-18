@@ -14,28 +14,15 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.model
+package com.sbgapps.scoreit.data.model
 
-import com.sbgapps.scoreit.core.utils.string.StringFactory
+import androidx.annotation.StringRes
+import com.sbgapps.scoreit.data.R
+import com.squareup.moshi.JsonClass
 
-sealed class Lap
-
-data class UniversalLap(
-    val results: List<Int>
-) : Lap()
-
-data class BeloteLap(
-    val results: List<String>,
-    val isWon: Boolean = true
-) : Lap()
-
-data class CoincheLap(
-    val results: List<String>,
-    val isWon: Boolean
-) : Lap()
-
-data class TarotLap(
-    val results: List<String>,
-    val info: StringFactory,
-    val isWon: Boolean
-) : Lap()
+@JsonClass(generateAdapter = false)
+enum class CoincheValue(val coefficient: Int, @StringRes val resId: Int) {
+    NONE(1, R.string.coinche_coinche_none),
+    COINCHE(2, R.string.coinche_coinche_coinche),
+    SURCOINCHE(4, R.string.coinche_coinche_surcoinche);
+}

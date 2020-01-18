@@ -17,20 +17,15 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
     compileSdkVersion(Android.compileSdkVersion)
 
-    compileOptions {
-        sourceCompatibility = Versions.java
-        targetCompatibility = Versions.java
-    }
-
     defaultConfig {
         minSdkVersion(Android.minSdkVersion)
         targetSdkVersion(Android.targetSdkVersion)
-        buildToolsVersion(Android.buildToolsVersion)
     }
 
     sourceSets {
@@ -41,12 +36,13 @@ android {
 dependencies {
     implementation(project(":core"))
 
-    implementation(kotlin("stdlib", Versions.kotlin))
-    implementation("com.google.code.gson:gson:2.8.5")
-    implementation("com.sromku:simple-storage:1.2.1")
-    implementation("androidx.annotation:annotation:1.1.0")
+    implementation(kotlin("stdlib", Build.Versions.kotlin))
+    implementation(AndroidX.annotation)
     implementation(Libs.koinAndroidX)
+    implementation(Moshi.kotlin)
 
-    testImplementation("junit:junit:4.12")
-    testImplementation("io.mockk:mockk:1.9")
+    kapt(Moshi.codegen)
+
+    testImplementation(Tests.junit)
+    testImplementation(Tests.mockk)
 }

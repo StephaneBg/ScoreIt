@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit.data.solver
 
-import com.sbgapps.scoreit.data.model.UniversalLapData
+import com.sbgapps.scoreit.data.model.UniversalLap
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 
@@ -28,7 +28,7 @@ class UniversalSolverTest {
     fun `calcule les résultats sans totaux`() {
         val playerCount = 3
         val points = (1..playerCount).map { it * 10 }
-        val lap = UniversalLapData(points)
+        val lap = UniversalLap(points)
         val results = solver.getResults(lap, false)
         assertEquals(points, results)
     }
@@ -37,7 +37,7 @@ class UniversalSolverTest {
     fun `calcule les résultats avec totaux`() {
         val playerCount = 3
         val points = (1..playerCount).map { it * 10 }
-        val lap = UniversalLapData(points)
+        val lap = UniversalLap(points)
         val results = solver.getResults(lap, true)
         assertEquals(points.toMutableList().apply { add(points.sum()) }, results)
     }
@@ -47,8 +47,8 @@ class UniversalSolverTest {
         val playerCount = 3
         val points = (1..playerCount).map { it * 10 }
         val laps = listOf(
-            UniversalLapData(points),
-            UniversalLapData(points)
+            UniversalLap(points),
+            UniversalLap(points)
         )
         assertEquals(points.map { it * 2 }, solver.computeScores(laps, playerCount, false))
     }
@@ -58,8 +58,8 @@ class UniversalSolverTest {
         val playerCount = 3
         val points = (1..playerCount).map { it * 10 }
         val laps = listOf(
-            UniversalLapData(points),
-            UniversalLapData(points)
+            UniversalLap(points),
+            UniversalLap(points)
         )
         assertEquals(
             points.map { it * 2 }.toMutableList().apply { add(sum()) },

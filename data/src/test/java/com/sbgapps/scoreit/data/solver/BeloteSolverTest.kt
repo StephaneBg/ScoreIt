@@ -17,8 +17,8 @@
 package com.sbgapps.scoreit.data.solver
 
 import com.sbgapps.scoreit.data.model.BeloteBonus
-import com.sbgapps.scoreit.data.model.BeloteBonusData
-import com.sbgapps.scoreit.data.model.BeloteLapData
+import com.sbgapps.scoreit.data.model.BeloteBonusValue
+import com.sbgapps.scoreit.data.model.BeloteLap
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_CAPOT
 import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_TOTAL
@@ -51,7 +51,7 @@ class BeloteSolverTest {
     @Test
     fun `équipe une remporte son contrat car a plus de 81 points`() {
         val points = 82
-        val lap = BeloteLapData(
+        val lap = BeloteLap(
             taker = PlayerPosition.ONE,
             points = points,
             bonuses = emptyList()
@@ -67,7 +67,7 @@ class BeloteSolverTest {
     @Test
     fun `équipe deux remporte son contrat car a plus de 81 points`() {
         val points = 82
-        val lap = BeloteLapData(
+        val lap = BeloteLap(
             taker = PlayerPosition.TWO,
             points = points,
             bonuses = emptyList()
@@ -83,7 +83,7 @@ class BeloteSolverTest {
     @Test
     fun `équipe une perd son contrat car elle est dedans`() {
         val points = 80
-        val lap = BeloteLapData(
+        val lap = BeloteLap(
             taker = PlayerPosition.ONE,
             points = points,
             bonuses = emptyList()
@@ -99,7 +99,7 @@ class BeloteSolverTest {
     @Test
     fun `équipe deux perd son contrat car elle est dedans`() {
         val points = 80
-        val lap = BeloteLapData(
+        val lap = BeloteLap(
             taker = PlayerPosition.TWO,
             points = points,
             bonuses = emptyList()
@@ -114,7 +114,7 @@ class BeloteSolverTest {
 
     @Test
     fun `équipe une perd car elle est capot`() {
-        val lap = BeloteLapData(
+        val lap = BeloteLap(
             taker = PlayerPosition.TWO,
             points = POINTS_TOTAL,
             bonuses = emptyList()
@@ -129,7 +129,7 @@ class BeloteSolverTest {
 
     @Test
     fun `équipe deux perd car elle est capot`() {
-        val lap = BeloteLapData(
+        val lap = BeloteLap(
             taker = PlayerPosition.ONE,
             points = POINTS_TOTAL,
             bonuses = emptyList()
@@ -144,75 +144,75 @@ class BeloteSolverTest {
 
     @Test
     fun `Le bonus accordé pour la belote est de 20 points`() {
-        assertEquals(20, BeloteBonus.BELOTE.points)
+        assertEquals(20, BeloteBonusValue.BELOTE.points)
     }
 
     @Test
     fun `équipe une remporte son contrat avec la belote et moins de 81 points`() {
         val points = 72
-        val lap = BeloteLapData(
+        val lap = BeloteLap(
             taker = PlayerPosition.ONE,
             points = points,
-            bonuses = listOf(BeloteBonusData(PlayerPosition.ONE, BeloteBonus.BELOTE))
+            bonuses = listOf(BeloteBonus(PlayerPosition.ONE, BeloteBonusValue.BELOTE))
         )
 
         val (results, isWon) = solver.getResults(lap)
 
         assertTrue(isWon)
-        assertEquals(points + BeloteBonus.BELOTE.points, results[PlayerPosition.ONE.index])
+        assertEquals(points + BeloteBonusValue.BELOTE.points, results[PlayerPosition.ONE.index])
         assertEquals(POINTS_TOTAL - points, results[PlayerPosition.TWO.index])
     }
 
     @Test
     fun `équipe deux remporte son contrat avec la belote et moins de 81 points`() {
         val points = 72
-        val lap = BeloteLapData(
+        val lap = BeloteLap(
             taker = PlayerPosition.TWO,
             points = points,
-            bonuses = listOf(BeloteBonusData(PlayerPosition.TWO, BeloteBonus.BELOTE))
+            bonuses = listOf(BeloteBonus(PlayerPosition.TWO, BeloteBonusValue.BELOTE))
         )
 
         val (results, isWon) = solver.getResults(lap)
 
         assertTrue(isWon)
         assertEquals(POINTS_TOTAL - points, results[PlayerPosition.ONE.index])
-        assertEquals(points + BeloteBonus.BELOTE.points, results[PlayerPosition.TWO.index])
+        assertEquals(points + BeloteBonusValue.BELOTE.points, results[PlayerPosition.TWO.index])
     }
 
     @Test
     fun `équipe une perd son contrat avec la belote qui est imprenable`() {
-        val lap = BeloteLapData(
+        val lap = BeloteLap(
             taker = PlayerPosition.ONE,
             points = 70,
-            bonuses = listOf(BeloteBonusData(PlayerPosition.ONE, BeloteBonus.BELOTE))
+            bonuses = listOf(BeloteBonus(PlayerPosition.ONE, BeloteBonusValue.BELOTE))
         )
 
         val (results, isWon) = solver.getResults(lap)
 
         assertFalse(isWon)
-        assertEquals(BeloteBonus.BELOTE.points, results[PlayerPosition.ONE.index])
+        assertEquals(BeloteBonusValue.BELOTE.points, results[PlayerPosition.ONE.index])
         assertEquals(POINTS_TOTAL, results[PlayerPosition.TWO.index])
     }
 
     @Test
     fun `équipe deux perd son contrat avec la belote qui est imprenable`() {
-        val lap = BeloteLapData(
+        val lap = BeloteLap(
             taker = PlayerPosition.TWO,
             points = 70,
-            bonuses = listOf(BeloteBonusData(PlayerPosition.TWO, BeloteBonus.BELOTE))
+            bonuses = listOf(BeloteBonus(PlayerPosition.TWO, BeloteBonusValue.BELOTE))
         )
 
         val (results, isWon) = solver.getResults(lap)
 
         assertFalse(isWon)
         assertEquals(POINTS_TOTAL, results[PlayerPosition.ONE.index])
-        assertEquals(BeloteBonus.BELOTE.points, results[PlayerPosition.TWO.index])
+        assertEquals(BeloteBonusValue.BELOTE.points, results[PlayerPosition.TWO.index])
     }
 
     @Test
     fun `litige sans belote`() {
         val points = 81
-        val lap = BeloteLapData(
+        val lap = BeloteLap(
             taker = PlayerPosition.ONE,
             points = points
         )
@@ -227,16 +227,16 @@ class BeloteSolverTest {
     @Test
     fun `litige avec belote`() {
         val points = 71
-        val lap = BeloteLapData(
+        val lap = BeloteLap(
             taker = PlayerPosition.ONE,
             points = points,
-            bonuses = listOf(BeloteBonusData(PlayerPosition.ONE, BeloteBonus.BELOTE))
+            bonuses = listOf(BeloteBonus(PlayerPosition.ONE, BeloteBonusValue.BELOTE))
         )
 
         val (results, isWon) = solver.getResults(lap)
 
         assertTrue(isWon)
-        assertEquals(points + BeloteBonus.BELOTE.points, results[PlayerPosition.ONE.index])
+        assertEquals(points + BeloteBonusValue.BELOTE.points, results[PlayerPosition.ONE.index])
         assertEquals(POINTS_TOTAL - points, results[PlayerPosition.TWO.index])
     }
 
@@ -244,12 +244,12 @@ class BeloteSolverTest {
     fun `calcule le score sans arrondi et sans litige`() {
         every { mockDataStore.isBeloteScoreRounded() } returns false
         val laps = listOf(
-            BeloteLapData(PlayerPosition.ONE, 116),
-            BeloteLapData(PlayerPosition.TWO, 90),
-            BeloteLapData(PlayerPosition.TWO, 50),
-            BeloteLapData(PlayerPosition.ONE, 60),
-            BeloteLapData(PlayerPosition.ONE, 252),
-            BeloteLapData(PlayerPosition.TWO, 143)
+            BeloteLap(PlayerPosition.ONE, 116),
+            BeloteLap(PlayerPosition.TWO, 90),
+            BeloteLap(PlayerPosition.TWO, 50),
+            BeloteLap(PlayerPosition.ONE, 60),
+            BeloteLap(PlayerPosition.ONE, 252),
+            BeloteLap(PlayerPosition.TWO, 143)
         )
         val scores: List<Int> = solver.computeScores(laps)
 
@@ -263,12 +263,12 @@ class BeloteSolverTest {
     @Test
     fun `calcule le score avec arrondi et sans litige`() {
         val laps = listOf(
-            BeloteLapData(PlayerPosition.ONE, 116),
-            BeloteLapData(PlayerPosition.TWO, 90),
-            BeloteLapData(PlayerPosition.TWO, 50),
-            BeloteLapData(PlayerPosition.ONE, 60),
-            BeloteLapData(PlayerPosition.ONE, 252),
-            BeloteLapData(PlayerPosition.TWO, 143)
+            BeloteLap(PlayerPosition.ONE, 116),
+            BeloteLap(PlayerPosition.TWO, 90),
+            BeloteLap(PlayerPosition.TWO, 50),
+            BeloteLap(PlayerPosition.ONE, 60),
+            BeloteLap(PlayerPosition.ONE, 252),
+            BeloteLap(PlayerPosition.TWO, 143)
         )
         val scores: List<Int> = solver.computeScores(laps)
 
@@ -283,14 +283,14 @@ class BeloteSolverTest {
     fun `calcule le score sans arrondi et avec litige`() {
         every { mockDataStore.isBeloteScoreRounded() } returns false
         val laps = listOf(
-            BeloteLapData(PlayerPosition.ONE, 116),
-            BeloteLapData(PlayerPosition.TWO, 81),
-            BeloteLapData(PlayerPosition.TWO, 50),
-            BeloteLapData(PlayerPosition.ONE, 60),
-            BeloteLapData(PlayerPosition.ONE, 252),
-            BeloteLapData(PlayerPosition.TWO, 143),
-            BeloteLapData(PlayerPosition.TWO, 71, listOf(BeloteBonusData(PlayerPosition.TWO, BeloteBonus.BELOTE))),
-            BeloteLapData(PlayerPosition.TWO, 120)
+            BeloteLap(PlayerPosition.ONE, 116),
+            BeloteLap(PlayerPosition.TWO, 81),
+            BeloteLap(PlayerPosition.TWO, 50),
+            BeloteLap(PlayerPosition.ONE, 60),
+            BeloteLap(PlayerPosition.ONE, 252),
+            BeloteLap(PlayerPosition.TWO, 143),
+            BeloteLap(PlayerPosition.TWO, 71, listOf(BeloteBonus(PlayerPosition.TWO, BeloteBonusValue.BELOTE))),
+            BeloteLap(PlayerPosition.TWO, 120)
         )
         val scores: List<Int> = solver.computeScores(laps)
 

@@ -31,8 +31,8 @@ import com.sbgapps.scoreit.app.databinding.ListItemEditionBonusBinding
 import com.sbgapps.scoreit.app.ui.edition.EditionActivity
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayoutAdapter
 import com.sbgapps.scoreit.core.utils.string.build
-import com.sbgapps.scoreit.data.model.BeloteBonus
-import com.sbgapps.scoreit.data.model.Coinche
+import com.sbgapps.scoreit.data.model.BeloteBonusValue
+import com.sbgapps.scoreit.data.model.CoincheValue
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import io.uniflow.androidx.flow.onStates
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -77,7 +77,7 @@ class CoincheEditionActivity : EditionActivity() {
                                 R.array.coinche,
                                 state.coinche.ordinal
                             ) { dialog, which ->
-                                viewModel.setCoinche(Coinche.values()[which])
+                                viewModel.setCoinche(CoincheValue.values()[which])
                                 dialog.dismiss()
                             }
                             .show()
@@ -148,7 +148,7 @@ class CoincheEditionActivity : EditionActivity() {
         }
     }
 
-    inner class BonusAdapter(val model: List<Pair<String, BeloteBonus>>) : AdaptableLinearLayoutAdapter {
+    inner class BonusAdapter(val model: List<Pair<String, BeloteBonusValue>>) : AdaptableLinearLayoutAdapter {
 
         @SuppressLint("SetTextI18n")
         override fun getView(position: Int, parent: ViewGroup): View {

@@ -18,10 +18,10 @@ package com.sbgapps.scoreit.app.ui.history.adapter
 
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ListItemLapBeloteCoincheBinding
-import com.sbgapps.scoreit.app.model.CoincheLap
+import com.sbgapps.scoreit.app.model.CoincheLapRow
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
 
-class CoincheLapAdapter(private val model: CoincheLap) : BaseLapAdapter(R.layout.list_item_lap_belote_coinche) {
+class CoincheLapAdapter(private val model: CoincheLapRow) : BaseLapAdapter(R.layout.list_item_lap_belote_coinche) {
 
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         super.onBindViewHolder(viewHolder)

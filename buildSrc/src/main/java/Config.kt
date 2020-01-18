@@ -14,44 +14,54 @@
  * limitations under the License.
  */
 
-import org.gradle.api.JavaVersion
-
-object Versions {
-    val java = JavaVersion.VERSION_1_8
-    const val androidGradle = "3.6.0-rc01"
-    const val kotlin = "1.3.61"
-    const val coroutines = "1.2.2"
-    const val appCompat = "1.1.0"
-    const val recyclerView = "1.0.0"
-    const val material = "1.2.0-alpha03"
-    const val constraintLayout = "1.1.3"
-    const val lifecyleViewmodel = "2.1.0"
-    const val coreKtx = "1.1.0"
-    const val fragmentKtx = "1.1.0"
-    const val navigation = "2.1.0"
-    const val preferences = "1.1.0"
-    const val moshi = "1.9.2"
-    const val timber = "4.7.1"
-    const val koinAndroidX = "2.0.1"
-    const val uniflowAndroidX = "0.9.4"
-    const val storage = "2.1.0"
-    const val jsr310 = "1.2.2"
-}
-
 object Build {
-    val androidGradle = "com.android.tools.build:gradle:${Versions.androidGradle}"
+
+    object Versions {
+        const val kotlin = "1.3.61"
+        const val androidGradle = "3.6.0-rc01"
+    }
+
+    const val androidGradle = "com.android.tools.build:gradle:${Versions.androidGradle}"
 }
 
 object Android {
     const val minSdkVersion = 21
     const val targetSdkVersion = 29
     const val compileSdkVersion = 29
-    const val buildToolsVersion = "29.0.2"
 }
 
 object Libs {
-    const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-    const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+
+    private object Versions {
+        const val material = "1.2.0-alpha03"
+        const val timber = "4.7.1"
+        const val koinAndroidX = "2.0.1"
+        const val uniflowAndroidX = "0.9.4"
+        const val storage = "2.1.0"
+        const val jsr310 = "1.2.2"
+    }
+
+    const val material = "com.google.android.material:material:${Versions.material}"
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+    const val koinAndroidX = "org.koin:koin-androidx-viewmodel:${Versions.koinAndroidX}"
+    const val uniflowAndroidX = "io.uniflow:uniflow-androidx:${Versions.uniflowAndroidX}"
+    const val storage = "com.snatik:storage:${Versions.storage}"
+    const val jsr310 = "com.jakewharton.threetenabp:threetenabp:${Versions.jsr310}"
+}
+
+object AndroidX {
+
+    private object Versions {
+        const val appCompat = "1.1.0"
+        const val recyclerView = "1.1.0"
+        const val constraintLayout = "1.1.3"
+        const val lifecyleViewmodel = "2.1.0"
+        const val coreKtx = "1.1.0"
+        const val fragmentKtx = "1.1.0"
+        const val navigation = "2.1.0"
+        const val preferences = "1.1.0"
+        const val annotation = "1.1.0"
+    }
 
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
@@ -62,15 +72,33 @@ object Libs {
     const val navFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
     const val navUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     const val preferences = "androidx.preference:preference-ktx:${Versions.preferences}"
+    const val annotation = "androidx.annotation:annotation:${Versions.annotation}"
+}
 
-    const val material = "com.google.android.material:material:${Versions.material}"
+object Moshi {
 
-    const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
-    const val moshiAdapters = "com.squareup.moshi:moshi-adapters:${Versions.moshi}"
-    const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
-    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
-    const val koinAndroidX = "org.koin:koin-androidx-viewmodel:${Versions.koinAndroidX}"
-    const val uniflowAndroidX = "io.uniflow:uniflow-androidx:${Versions.uniflowAndroidX}"
-    const val storage = "com.snatik:storage:${Versions.storage}"
-    const val jsr310 = "com.jakewharton.threetenabp:threetenabp:${Versions.jsr310}"
+    private const val version = "1.9.2"
+
+    const val kotlin = "com.squareup.moshi:moshi-kotlin:$version"
+    const val adapters = "com.squareup.moshi:moshi-adapters:$version"
+    const val codegen = "com.squareup.moshi:moshi-kotlin-codegen:$version"
+}
+
+object Coroutines {
+
+    private const val version = "1.3.3"
+
+    const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
+    const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
+}
+
+object Tests {
+
+    private object Version {
+        const val junit = "4.12"
+        const val mockk = "1.9"
+    }
+
+    const val junit = "junit:junit:${Version.junit}"
+    const val mockk = "io.mockk:mockk:${Version.mockk}"
 }

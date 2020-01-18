@@ -16,6 +16,9 @@
 
 package com.sbgapps.scoreit.data.model
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = false)
 enum class PlayerPosition {
     NONE,
     ONE,

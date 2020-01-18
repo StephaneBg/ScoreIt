@@ -16,14 +16,26 @@
 
 package com.sbgapps.scoreit.app.model
 
-import android.graphics.Color
-import com.sbgapps.scoreit.data.model.PlayerData
+import com.sbgapps.scoreit.core.utils.string.StringFactory
 
-data class Player(
-    val name: String = "",
-    val color: Int = Color.BLACK
-) {
-    constructor(player: PlayerData) : this(player.name, player.color)
+sealed class LapRow
 
-    fun toData(): PlayerData = PlayerData(name, color)
-}
+data class UniversalLapRow(
+    val results: List<Int>
+) : LapRow()
+
+data class BeloteLapRow(
+    val results: List<String>,
+    val isWon: Boolean = true
+) : LapRow()
+
+data class CoincheLapRow(
+    val results: List<String>,
+    val isWon: Boolean
+) : LapRow()
+
+data class TarotLapRow(
+    val results: List<String>,
+    val info: StringFactory,
+    val isWon: Boolean
+) : LapRow()

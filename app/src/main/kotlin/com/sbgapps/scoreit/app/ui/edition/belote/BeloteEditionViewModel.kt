@@ -17,15 +17,15 @@
 package com.sbgapps.scoreit.app.ui.edition.belote
 
 import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.model.Player
 import com.sbgapps.scoreit.app.ui.edition.Step
 import com.sbgapps.scoreit.core.ui.BaseViewModel
 import com.sbgapps.scoreit.core.utils.string.StringFactory
 import com.sbgapps.scoreit.core.utils.string.fromResources
 import com.sbgapps.scoreit.data.interactor.GameUseCase
 import com.sbgapps.scoreit.data.model.BeloteBonus
-import com.sbgapps.scoreit.data.model.BeloteBonusData
-import com.sbgapps.scoreit.data.model.BeloteLapData
+import com.sbgapps.scoreit.data.model.BeloteBonusValue
+import com.sbgapps.scoreit.data.model.BeloteLap
+import com.sbgapps.scoreit.data.model.Player
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.solver.BeloteSolver
 import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_TOTAL
@@ -39,7 +39,7 @@ class BeloteEditionViewModel(
 ) : BaseViewModel() {
 
     private val editedLap
-        get() = useCase.getEditedLap() as BeloteLapData
+        get() = useCase.getEditedLap() as BeloteLap
 
     fun loadContent() {
         setState { getContent() }
@@ -65,10 +65,10 @@ class BeloteEditionViewModel(
         }
     }
 
-    fun addBonus(bonus: Pair<PlayerPosition, BeloteBonus>) {
+    fun addBonus(bonus: Pair<PlayerPosition, BeloteBonusValue>) {
         setState {
             val bonuses = editedLap.bonuses.toMutableList()
-            bonuses += BeloteBonusData(bonus.first, bonus.second)
+            bonuses += BeloteBonus(bonus.first, bonus.second)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
             getContent()
         }
@@ -99,7 +99,7 @@ class BeloteEditionViewModel(
 
     private fun getContent(): BeloteEditionState.Content =
         BeloteEditionState.Content(
-            useCase.getPlayers().map { Player(it) },
+            useCase.getPlayers(),
             editedLap.taker,
             getInfo(editedLap),
             getResults(editedLap),
@@ -109,7 +109,7 @@ class BeloteEditionViewModel(
             canStepPointsByTen(editedLap)
         )
 
-    private fun getInfo(lap: BeloteLapData): StringFactory {
+    private fun getInfo(lap: BeloteLap): StringFactory {
         val (results, isWon) = solver.getResults(lap)
         return if (isWon) {
             when {
@@ -125,24 +125,24 @@ class BeloteEditionViewModel(
         }
     }
 
-    private fun canStepPointsByOne(lap: BeloteLapData): Step =
+    private fun canStepPointsByOne(lap: BeloteLap): Step =
         Step((lap.points < POINTS_TOTAL), (lap.points > 2))
 
-    private fun canStepPointsByTen(lap: BeloteLapData): Step =
+    private fun canStepPointsByTen(lap: BeloteLap): Step =
         Step((lap.points < POINTS_TOTAL), (lap.points > 2))
 
-    private fun getResults(lap: BeloteLapData): Pair<String, String> =
+    private fun getResults(lap: BeloteLap): Pair<String, String> =
         lap.points.toString() to lap.counterPoints().toString()
 
-    private fun getAvailableBonuses(lap: BeloteLapData): List<BeloteBonus> {
+    private fun getAvailableBonuses(lap: BeloteLap): List<BeloteBonusValue> {
         val currentBonuses = lap.bonuses.map { it.bonus }
         return listOfNotNull(
-            BeloteBonus.BELOTE.takeUnless { currentBonuses.contains(BeloteBonus.BELOTE) },
-            BeloteBonus.RUN_3,
-            BeloteBonus.RUN_5,
-            BeloteBonus.FOUR_NORMAL,
-            BeloteBonus.FOUR_NINE.takeUnless { currentBonuses.contains(BeloteBonus.FOUR_NINE) },
-            BeloteBonus.FOUR_JACK.takeUnless { currentBonuses.contains(BeloteBonus.FOUR_JACK) }
+            BeloteBonusValue.BELOTE.takeUnless { currentBonuses.contains(BeloteBonusValue.BELOTE) },
+            BeloteBonusValue.RUN_3,
+            BeloteBonusValue.RUN_5,
+            BeloteBonusValue.FOUR_NORMAL,
+            BeloteBonusValue.FOUR_NINE.takeUnless { currentBonuses.contains(BeloteBonusValue.FOUR_NINE) },
+            BeloteBonusValue.FOUR_JACK.takeUnless { currentBonuses.contains(BeloteBonusValue.FOUR_JACK) }
         )
     }
 }
@@ -153,8 +153,8 @@ sealed class BeloteEditionState : UIState() {
         val taker: PlayerPosition,
         val lapInfo: StringFactory,
         val results: Pair<String, String>,
-        val selectedBonuses: List<Pair<PlayerPosition, BeloteBonus>>,
-        val availableBonuses: List<BeloteBonus>,
+        val selectedBonuses: List<Pair<PlayerPosition, BeloteBonusValue>>,
+        val availableBonuses: List<BeloteBonusValue>,
         val stepPointsByOne: Step,
         val stepPointsByTen: Step
     ) : BeloteEditionState()

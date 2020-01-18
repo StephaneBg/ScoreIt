@@ -17,11 +17,11 @@
 package com.sbgapps.scoreit.data.solver
 
 import com.sbgapps.scoreit.data.model.PlayerPosition
-import com.sbgapps.scoreit.data.model.TarotBid
+import com.sbgapps.scoreit.data.model.TarotBidValue
 import com.sbgapps.scoreit.data.model.TarotBonus
-import com.sbgapps.scoreit.data.model.TarotBonusData
-import com.sbgapps.scoreit.data.model.TarotLapData
-import com.sbgapps.scoreit.data.model.TarotOudler
+import com.sbgapps.scoreit.data.model.TarotBonusValue
+import com.sbgapps.scoreit.data.model.TarotLap
+import com.sbgapps.scoreit.data.model.TarotOudlerValue
 import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.POINTS_CONTRACT
 import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.POINTS_TOTAL
 import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.POINTS_WITH_NO_OUDLER
@@ -70,11 +70,11 @@ class TarotSolverTest {
     @Test
     fun `trois joueurs - joueur un fait une prise et remporte le contrat avec aucun bout`() {
         val points = 58
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.ONE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.SMALL,
+            bid = TarotBidValue.SMALL,
             oudlers = emptyList(),
             points = points
         )
@@ -93,11 +93,11 @@ class TarotSolverTest {
     @Test
     fun `trois joueurs - joueur un fait une prise et chute le contrat avec aucun bout`() {
         val points = 50
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.ONE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.SMALL,
+            bid = TarotBidValue.SMALL,
             oudlers = emptyList(),
             points = points
         )
@@ -116,12 +116,12 @@ class TarotSolverTest {
     @Test
     fun `trois joueurs - joueur un fait une garde et remporte le contrat avec un bout`() {
         val points = 58
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.ONE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD,
-            oudlers = listOf(TarotOudler.TWENTY_ONE),
+            bid = TarotBidValue.GUARD,
+            oudlers = listOf(TarotOudlerValue.TWENTY_ONE),
             points = points
         )
 
@@ -139,12 +139,12 @@ class TarotSolverTest {
     @Test
     fun `trois joueurs - joueur deux fait une garde sans et remporte le contrat avec deux bouts`() {
         val points = 56
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.TWO,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD_WITHOUT_KITTY,
-            oudlers = listOf(TarotOudler.PETIT, TarotOudler.EXCUSE),
+            bid = TarotBidValue.GUARD_WITHOUT_KITTY,
+            oudlers = listOf(TarotOudlerValue.PETIT, TarotOudlerValue.EXCUSE),
             points = 56
         )
 
@@ -162,12 +162,12 @@ class TarotSolverTest {
     @Test
     fun `trois joueurs - joueur trois fait une garde contre et remporte le contrat avec trois bouts`() {
         val points = 64
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.THREE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD_AGAINST_KITTY,
-            oudlers = listOf(TarotOudler.EXCUSE, TarotOudler.TWENTY_ONE, TarotOudler.PETIT),
+            bid = TarotBidValue.GUARD_AGAINST_KITTY,
+            oudlers = listOf(TarotOudlerValue.EXCUSE, TarotOudlerValue.TWENTY_ONE, TarotOudlerValue.PETIT),
             points = points
         )
 
@@ -186,11 +186,11 @@ class TarotSolverTest {
     @Test
     fun `quatre joueurs - joueur un fait une prise et remporte le contrat avec aucun bout`() {
         val points = 62
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 4,
             taker = PlayerPosition.ONE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.SMALL,
+            bid = TarotBidValue.SMALL,
             oudlers = emptyList(),
             points = points
         )
@@ -210,12 +210,12 @@ class TarotSolverTest {
     @Test
     fun `quatre joueurs - joueur deux fait une prise et chute le contrat avec deux bouts`() {
         val points = 38
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 4,
             taker = PlayerPosition.TWO,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.SMALL,
-            oudlers = listOf(TarotOudler.TWENTY_ONE, TarotOudler.EXCUSE),
+            bid = TarotBidValue.SMALL,
+            oudlers = listOf(TarotOudlerValue.TWENTY_ONE, TarotOudlerValue.EXCUSE),
             points = points
         )
 
@@ -234,12 +234,12 @@ class TarotSolverTest {
     @Test
     fun `quatre joueurs - joueur deux fait une garde et remporte le contrat avec un bout`() {
         val points = 57
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 4,
             taker = PlayerPosition.TWO,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD,
-            oudlers = listOf(TarotOudler.PETIT),
+            bid = TarotBidValue.GUARD,
+            oudlers = listOf(TarotOudlerValue.PETIT),
             points = points
         )
 
@@ -258,12 +258,12 @@ class TarotSolverTest {
     @Test
     fun `quatre joueurs - joueur trois fait une garde sans et remporte le contrat avec deux bouts`() {
         val points = 56
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 4,
             taker = PlayerPosition.THREE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD_WITHOUT_KITTY,
-            oudlers = listOf(TarotOudler.PETIT, TarotOudler.TWENTY_ONE),
+            bid = TarotBidValue.GUARD_WITHOUT_KITTY,
+            oudlers = listOf(TarotOudlerValue.PETIT, TarotOudlerValue.TWENTY_ONE),
             points = points
         )
 
@@ -282,12 +282,12 @@ class TarotSolverTest {
     @Test
     fun `quatre joueurs - joueur quatre fait une garde contre et remporte le contrat avec trois bouts`() {
         val points = 66
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 4,
             taker = PlayerPosition.FOUR,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD_AGAINST_KITTY,
-            oudlers = listOf(TarotOudler.EXCUSE, TarotOudler.TWENTY_ONE, TarotOudler.PETIT),
+            bid = TarotBidValue.GUARD_AGAINST_KITTY,
+            oudlers = listOf(TarotOudlerValue.EXCUSE, TarotOudlerValue.TWENTY_ONE, TarotOudlerValue.PETIT),
             points = points
         )
 
@@ -307,11 +307,11 @@ class TarotSolverTest {
     @Test
     fun `cinq joueurs - joueur un fait une prise avec joueur deux et remporte le contrat avec aucun bout`() {
         val points = 59
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 5,
             taker = PlayerPosition.ONE,
             partner = PlayerPosition.TWO,
-            bid = TarotBid.SMALL,
+            bid = TarotBidValue.SMALL,
             oudlers = emptyList(),
             points = points
         )
@@ -332,12 +332,12 @@ class TarotSolverTest {
     @Test
     fun `cinq joueurs - joueur trois fait une garde avec joueur quatre et chute le contrat avec un bout`() {
         val points = 46
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 5,
             taker = PlayerPosition.THREE,
             partner = PlayerPosition.FOUR,
-            bid = TarotBid.GUARD,
-            oudlers = listOf(TarotOudler.TWENTY_ONE),
+            bid = TarotBidValue.GUARD,
+            oudlers = listOf(TarotOudlerValue.TWENTY_ONE),
             points = points
         )
 
@@ -357,12 +357,12 @@ class TarotSolverTest {
     @Test
     fun `cinq joueurs - joueur cinq fait une prise seul quatre et remporte le contrat avec deux bouts`() {
         val points = 46
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 5,
             taker = PlayerPosition.THREE,
             partner = PlayerPosition.THREE,
-            bid = TarotBid.SMALL,
-            oudlers = listOf(TarotOudler.TWENTY_ONE, TarotOudler.PETIT),
+            bid = TarotBidValue.SMALL,
+            oudlers = listOf(TarotOudlerValue.TWENTY_ONE, TarotOudlerValue.PETIT),
             points = points
         )
 
@@ -386,27 +386,27 @@ class TarotSolverTest {
 
     @Test
     fun `le petit au bout vaut 10 points`() {
-        Assert.assertEquals(10, TarotBonus.PETIT_AU_BOUT.points)
+        Assert.assertEquals(10, TarotBonusValue.PETIT_AU_BOUT.points)
     }
 
     @Test
     fun `joueur un fait une garde et remporte le contrat avec le petit au bout`() {
         val points = 58
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.ONE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD,
-            oudlers = listOf(TarotOudler.PETIT),
+            bid = TarotBidValue.GUARD,
+            oudlers = listOf(TarotOudlerValue.PETIT),
             points = points,
-            bonuses = listOf(TarotBonusData(PlayerPosition.ONE, TarotBonus.PETIT_AU_BOUT))
+            bonuses = listOf(TarotBonus(PlayerPosition.ONE, TarotBonusValue.PETIT_AU_BOUT))
         )
 
         val (_, isWon) = solver.getDisplayResults(lap)
         val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
-        val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT + TarotBonus.PETIT_AU_BOUT.points) *
+        val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT + TarotBonusValue.PETIT_AU_BOUT.points) *
                 lap.bid.coefficient
         Assert.assertEquals(score * 2, results[PlayerPosition.ONE.index])
         Assert.assertEquals(-score, results[PlayerPosition.TWO.index])
@@ -417,21 +417,21 @@ class TarotSolverTest {
     @Test
     fun `joueur un fait une prise, remporte le contrat avec aucun bout et perd le petit au bout`() {
         val points = 60
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.ONE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.SMALL,
+            bid = TarotBidValue.SMALL,
             oudlers = emptyList(),
             points = points,
-            bonuses = listOf(TarotBonusData(PlayerPosition.TWO, TarotBonus.PETIT_AU_BOUT))
+            bonuses = listOf(TarotBonus(PlayerPosition.TWO, TarotBonusValue.PETIT_AU_BOUT))
         )
 
         val (_, isWon) = solver.getDisplayResults(lap)
         val results = solver.getResults(lap)
 
         Assert.assertTrue(isWon)
-        val score = (abs(points - POINTS_WITH_NO_OUDLER) + POINTS_CONTRACT - TarotBonus.PETIT_AU_BOUT.points) *
+        val score = (abs(points - POINTS_WITH_NO_OUDLER) + POINTS_CONTRACT - TarotBonusValue.PETIT_AU_BOUT.points) *
                 lap.bid.coefficient
         Assert.assertEquals(score * 2, results[PlayerPosition.ONE.index])
         Assert.assertEquals(-score, results[PlayerPosition.TWO.index])
@@ -442,21 +442,21 @@ class TarotSolverTest {
     @Test
     fun `joueur deux fait une garde, chute le contrat avec un bout et perd le petit au bout`() {
         val points = 48
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.TWO,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD,
-            oudlers = listOf(TarotOudler.EXCUSE),
+            bid = TarotBidValue.GUARD,
+            oudlers = listOf(TarotOudlerValue.EXCUSE),
             points = points,
-            bonuses = listOf(TarotBonusData(PlayerPosition.THREE, TarotBonus.PETIT_AU_BOUT))
+            bonuses = listOf(TarotBonus(PlayerPosition.THREE, TarotBonusValue.PETIT_AU_BOUT))
         )
 
         val (_, isWon) = solver.getDisplayResults(lap)
         val results = solver.getResults(lap)
 
         Assert.assertFalse(isWon)
-        val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT + TarotBonus.PETIT_AU_BOUT.points) *
+        val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT + TarotBonusValue.PETIT_AU_BOUT.points) *
                 lap.bid.coefficient
         Assert.assertEquals(score, results[PlayerPosition.ONE.index])
         Assert.assertEquals(-score * 2, results[PlayerPosition.TWO.index])
@@ -481,30 +481,30 @@ class TarotSolverTest {
 
     @Test
     fun `la poignée simple vaut 20 points`() {
-        Assert.assertEquals(20, TarotBonus.POIGNEE_SIMPLE.points)
+        Assert.assertEquals(20, TarotBonusValue.POIGNEE_SIMPLE.points)
     }
 
     @Test
     fun `la poignée double vaut 30 points`() {
-        Assert.assertEquals(30, TarotBonus.POIGNEE_DOUBLE.points)
+        Assert.assertEquals(30, TarotBonusValue.POIGNEE_DOUBLE.points)
     }
 
     @Test
     fun `la poignée triple vaut 40 points`() {
-        Assert.assertEquals(40, TarotBonus.POIGNEE_TRIPLE.points)
+        Assert.assertEquals(40, TarotBonusValue.POIGNEE_TRIPLE.points)
     }
 
     @Test
     fun `joueur un fait une garde, remporte le contrat avec un bout et une poignée simple annoncée par l'attaque`() {
         val points = 54
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.ONE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD,
-            oudlers = listOf(TarotOudler.TWENTY_ONE),
+            bid = TarotBidValue.GUARD,
+            oudlers = listOf(TarotOudlerValue.TWENTY_ONE),
             points = points,
-            bonuses = listOf(TarotBonusData(PlayerPosition.ONE, TarotBonus.POIGNEE_SIMPLE))
+            bonuses = listOf(TarotBonus(PlayerPosition.ONE, TarotBonusValue.POIGNEE_SIMPLE))
         )
 
         val (_, isWon) = solver.getDisplayResults(lap)
@@ -512,7 +512,7 @@ class TarotSolverTest {
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient +
-                TarotBonus.POIGNEE_SIMPLE.points
+                TarotBonusValue.POIGNEE_SIMPLE.points
         Assert.assertEquals(score * 2, results[PlayerPosition.ONE.index])
         Assert.assertEquals(-score, results[PlayerPosition.TWO.index])
         Assert.assertEquals(-score, results[PlayerPosition.THREE.index])
@@ -522,14 +522,14 @@ class TarotSolverTest {
     @Test
     fun `joueur deux fait une prise, remporte le contrat avec un bout et une poignée double annoncée par l'attaque`() {
         val points = 57
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.TWO,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.SMALL,
-            oudlers = listOf(TarotOudler.PETIT),
+            bid = TarotBidValue.SMALL,
+            oudlers = listOf(TarotOudlerValue.PETIT),
             points = points,
-            bonuses = listOf(TarotBonusData(PlayerPosition.TWO, TarotBonus.POIGNEE_DOUBLE))
+            bonuses = listOf(TarotBonus(PlayerPosition.TWO, TarotBonusValue.POIGNEE_DOUBLE))
         )
 
         val (_, isWon) = solver.getDisplayResults(lap)
@@ -537,7 +537,7 @@ class TarotSolverTest {
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient +
-                TarotBonus.POIGNEE_DOUBLE.points
+                TarotBonusValue.POIGNEE_DOUBLE.points
         Assert.assertEquals(-score, results[PlayerPosition.ONE.index])
         Assert.assertEquals(score * 2, results[PlayerPosition.TWO.index])
         Assert.assertEquals(-score, results[PlayerPosition.THREE.index])
@@ -547,14 +547,14 @@ class TarotSolverTest {
     @Test
     fun `joueur trois fait une garde sans, remporte le contrat avec deux bouts et une poignée double annoncée par l'attaque`() {
         val points = 48
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.THREE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD_WITHOUT_KITTY,
-            oudlers = listOf(TarotOudler.PETIT, TarotOudler.TWENTY_ONE),
+            bid = TarotBidValue.GUARD_WITHOUT_KITTY,
+            oudlers = listOf(TarotOudlerValue.PETIT, TarotOudlerValue.TWENTY_ONE),
             points = points,
-            bonuses = listOf(TarotBonusData(PlayerPosition.THREE, TarotBonus.POIGNEE_TRIPLE))
+            bonuses = listOf(TarotBonus(PlayerPosition.THREE, TarotBonusValue.POIGNEE_TRIPLE))
         )
 
         val (_, isWon) = solver.getDisplayResults(lap)
@@ -562,7 +562,7 @@ class TarotSolverTest {
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient +
-                TarotBonus.POIGNEE_TRIPLE.points
+                TarotBonusValue.POIGNEE_TRIPLE.points
         Assert.assertEquals(-score, results[PlayerPosition.ONE.index])
         Assert.assertEquals(-score, results[PlayerPosition.TWO.index])
         Assert.assertEquals(score * 2, results[PlayerPosition.THREE.index])
@@ -572,14 +572,14 @@ class TarotSolverTest {
     @Test
     fun `joueur trois fait une garde sans, remporte le contrat avec deux bouts et une poignée double annoncée par la défense`() {
         val points = 48
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.THREE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD_WITHOUT_KITTY,
-            oudlers = listOf(TarotOudler.PETIT, TarotOudler.TWENTY_ONE),
+            bid = TarotBidValue.GUARD_WITHOUT_KITTY,
+            oudlers = listOf(TarotOudlerValue.PETIT, TarotOudlerValue.TWENTY_ONE),
             points = points,
-            bonuses = listOf(TarotBonusData(PlayerPosition.ONE, TarotBonus.POIGNEE_TRIPLE))
+            bonuses = listOf(TarotBonus(PlayerPosition.ONE, TarotBonusValue.POIGNEE_TRIPLE))
         )
 
         val (_, isWon) = solver.getDisplayResults(lap)
@@ -587,7 +587,7 @@ class TarotSolverTest {
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient +
-                TarotBonus.POIGNEE_TRIPLE.points
+                TarotBonusValue.POIGNEE_TRIPLE.points
         Assert.assertEquals(-score, results[PlayerPosition.ONE.index])
         Assert.assertEquals(-score, results[PlayerPosition.TWO.index])
         Assert.assertEquals(score * 2, results[PlayerPosition.THREE.index])
@@ -597,14 +597,14 @@ class TarotSolverTest {
     @Test
     fun `joueur un fait une garde, chute le contrat avec un bout et une poignée simple annoncée par l'attaque`() {
         val points = 47
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.ONE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD,
-            oudlers = listOf(TarotOudler.TWENTY_ONE),
+            bid = TarotBidValue.GUARD,
+            oudlers = listOf(TarotOudlerValue.TWENTY_ONE),
             points = points,
-            bonuses = listOf(TarotBonusData(PlayerPosition.ONE, TarotBonus.POIGNEE_SIMPLE))
+            bonuses = listOf(TarotBonus(PlayerPosition.ONE, TarotBonusValue.POIGNEE_SIMPLE))
         )
 
         val (_, isWon) = solver.getDisplayResults(lap)
@@ -612,7 +612,7 @@ class TarotSolverTest {
 
         Assert.assertFalse(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient +
-                TarotBonus.POIGNEE_SIMPLE.points
+                TarotBonusValue.POIGNEE_SIMPLE.points
         Assert.assertEquals(-score * 2, results[PlayerPosition.ONE.index])
         Assert.assertEquals(score, results[PlayerPosition.TWO.index])
         Assert.assertEquals(score, results[PlayerPosition.THREE.index])
@@ -622,14 +622,14 @@ class TarotSolverTest {
     @Test
     fun `joueur un fait une garde, chute le contrat avec un bout et une poignée simple annoncée par la défense`() {
         val points = 47
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.ONE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD,
-            oudlers = listOf(TarotOudler.TWENTY_ONE),
+            bid = TarotBidValue.GUARD,
+            oudlers = listOf(TarotOudlerValue.TWENTY_ONE),
             points = points,
-            bonuses = listOf(TarotBonusData(PlayerPosition.TWO, TarotBonus.POIGNEE_SIMPLE))
+            bonuses = listOf(TarotBonus(PlayerPosition.TWO, TarotBonusValue.POIGNEE_SIMPLE))
         )
 
         val (_, isWon) = solver.getDisplayResults(lap)
@@ -637,7 +637,7 @@ class TarotSolverTest {
 
         Assert.assertFalse(isWon)
         val score = (abs(points - POINTS_WITH_ONE_OUDLER) + POINTS_CONTRACT) * lap.bid.coefficient +
-                TarotBonus.POIGNEE_SIMPLE.points
+                TarotBonusValue.POIGNEE_SIMPLE.points
         Assert.assertEquals(-score * 2, results[PlayerPosition.ONE.index])
         Assert.assertEquals(score, results[PlayerPosition.TWO.index])
         Assert.assertEquals(score, results[PlayerPosition.THREE.index])
@@ -664,30 +664,30 @@ class TarotSolverTest {
 
     @Test
     fun `le chelem annoncé et réalisé vaut 400 points`() {
-        Assert.assertEquals(400, TarotBonus.CHELEM_ANNONCE_REALISE.points)
+        Assert.assertEquals(400, TarotBonusValue.CHELEM_ANNONCE_REALISE.points)
     }
 
     @Test
     fun `le chelem non annoncé mais réalisé vaut 200 points`() {
-        Assert.assertEquals(200, TarotBonus.CHELEM_NON_ANNONCE.points)
+        Assert.assertEquals(200, TarotBonusValue.CHELEM_NON_ANNONCE.points)
     }
 
     @Test
     fun `le chelem annoncé mais non réalisé vaut -200 points`() {
-        Assert.assertEquals(-200, TarotBonus.CHELEM_ANNONCE_NON_REALISE.points)
+        Assert.assertEquals(-200, TarotBonusValue.CHELEM_ANNONCE_NON_REALISE.points)
     }
 
     @Test
     fun `joueur trois fait une garde sans, annonce un chelem et remporte le contrat avec deux bouts`() {
         val points = 58
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.THREE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD_WITHOUT_KITTY,
-            oudlers = listOf(TarotOudler.PETIT, TarotOudler.TWENTY_ONE),
+            bid = TarotBidValue.GUARD_WITHOUT_KITTY,
+            oudlers = listOf(TarotOudlerValue.PETIT, TarotOudlerValue.TWENTY_ONE),
             points = points,
-            bonuses = listOf(TarotBonusData(PlayerPosition.THREE, TarotBonus.CHELEM_ANNONCE_REALISE))
+            bonuses = listOf(TarotBonus(PlayerPosition.THREE, TarotBonusValue.CHELEM_ANNONCE_REALISE))
         )
 
         val (_, isWon) = solver.getDisplayResults(lap)
@@ -695,7 +695,7 @@ class TarotSolverTest {
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient +
-                TarotBonus.CHELEM_ANNONCE_REALISE.points
+                TarotBonusValue.CHELEM_ANNONCE_REALISE.points
         Assert.assertEquals(-score, results[PlayerPosition.ONE.index])
         Assert.assertEquals(-score, results[PlayerPosition.TWO.index])
         Assert.assertEquals(score * 2, results[PlayerPosition.THREE.index])
@@ -705,14 +705,14 @@ class TarotSolverTest {
     @Test
     fun `joueur trois fait une garde sans et remporte le contrat avec un chelem non annoncé avec deux bouts`() {
         val points = 62
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.THREE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD_WITHOUT_KITTY,
-            oudlers = listOf(TarotOudler.PETIT, TarotOudler.TWENTY_ONE),
+            bid = TarotBidValue.GUARD_WITHOUT_KITTY,
+            oudlers = listOf(TarotOudlerValue.PETIT, TarotOudlerValue.TWENTY_ONE),
             points = points,
-            bonuses = listOf(TarotBonusData(PlayerPosition.THREE, TarotBonus.CHELEM_NON_ANNONCE))
+            bonuses = listOf(TarotBonus(PlayerPosition.THREE, TarotBonusValue.CHELEM_NON_ANNONCE))
         )
 
         val (_, isWon) = solver.getDisplayResults(lap)
@@ -720,7 +720,7 @@ class TarotSolverTest {
 
         Assert.assertTrue(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient +
-                TarotBonus.CHELEM_NON_ANNONCE.points
+                TarotBonusValue.CHELEM_NON_ANNONCE.points
         Assert.assertEquals(-score, results[PlayerPosition.ONE.index])
         Assert.assertEquals(-score, results[PlayerPosition.TWO.index])
         Assert.assertEquals(score * 2, results[PlayerPosition.THREE.index])
@@ -730,14 +730,14 @@ class TarotSolverTest {
     @Test
     fun `joueur trois fait une garde sans et remporte le contrat avec un chelem annoncé mais non réalisé avec deux bouts`() {
         val points = 61
-        val lap = TarotLapData(
+        val lap = TarotLap(
             playerCount = 3,
             taker = PlayerPosition.THREE,
             partner = PlayerPosition.NONE,
-            bid = TarotBid.GUARD_WITHOUT_KITTY,
-            oudlers = listOf(TarotOudler.PETIT, TarotOudler.TWENTY_ONE),
+            bid = TarotBidValue.GUARD_WITHOUT_KITTY,
+            oudlers = listOf(TarotOudlerValue.PETIT, TarotOudlerValue.TWENTY_ONE),
             points = points,
-            bonuses = listOf(TarotBonusData(PlayerPosition.THREE, TarotBonus.CHELEM_ANNONCE_NON_REALISE))
+            bonuses = listOf(TarotBonus(PlayerPosition.THREE, TarotBonusValue.CHELEM_ANNONCE_NON_REALISE))
         )
 
         val (_, isWon) = solver.getDisplayResults(lap)
@@ -745,7 +745,7 @@ class TarotSolverTest {
 
         Assert.assertFalse(isWon)
         val score = (abs(points - POINTS_WITH_TWO_OUDLERS) + POINTS_CONTRACT) * lap.bid.coefficient +
-                TarotBonus.CHELEM_ANNONCE_NON_REALISE.points
+                TarotBonusValue.CHELEM_ANNONCE_NON_REALISE.points
         Assert.assertEquals(-score, results[PlayerPosition.ONE.index])
         Assert.assertEquals(-score, results[PlayerPosition.TWO.index])
         Assert.assertEquals(score * 2, results[PlayerPosition.THREE.index])

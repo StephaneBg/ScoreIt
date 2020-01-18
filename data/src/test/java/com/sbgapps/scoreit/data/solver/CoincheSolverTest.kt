@@ -17,9 +17,9 @@
 package com.sbgapps.scoreit.data.solver
 
 import com.sbgapps.scoreit.data.model.BeloteBonus
-import com.sbgapps.scoreit.data.model.BeloteBonusData
-import com.sbgapps.scoreit.data.model.Coinche
-import com.sbgapps.scoreit.data.model.CoincheLapData
+import com.sbgapps.scoreit.data.model.BeloteBonusValue
+import com.sbgapps.scoreit.data.model.CoincheLap
+import com.sbgapps.scoreit.data.model.CoincheValue
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.POINTS_CAPOT
 import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.POINTS_TOTAL
@@ -53,10 +53,10 @@ class CoincheSolverTest {
     fun `équipe une enchérit 120, réalise 130 points et remporte son contrat`() {
         val bid = 120
         val points = 130
-        val lap = CoincheLapData(
+        val lap = CoincheLap(
             taker = PlayerPosition.ONE,
             bid = bid,
-            coinche = Coinche.NONE,
+            coinche = CoincheValue.NONE,
             points = points,
             bonuses = emptyList()
         )
@@ -72,10 +72,10 @@ class CoincheSolverTest {
     fun `équipe deux enchérit 100, réalise 120 points et remporte son contrat`() {
         val bid = 100
         val points = 120
-        val lap = CoincheLapData(
+        val lap = CoincheLap(
             taker = PlayerPosition.TWO,
             bid = bid,
-            coinche = Coinche.NONE,
+            coinche = CoincheValue.NONE,
             points = points,
             bonuses = emptyList()
         )
@@ -91,29 +91,29 @@ class CoincheSolverTest {
     fun `équipe deux enchérit 120, réalise 110 points, annonce la belote et remporte son contrat`() {
         val bid = 120
         val points = 110
-        val lap = CoincheLapData(
+        val lap = CoincheLap(
             taker = PlayerPosition.TWO,
             bid = bid,
-            coinche = Coinche.NONE,
+            coinche = CoincheValue.NONE,
             points = points,
-            bonuses = listOf(BeloteBonusData(PlayerPosition.TWO, BeloteBonus.BELOTE))
+            bonuses = listOf(BeloteBonus(PlayerPosition.TWO, BeloteBonusValue.BELOTE))
         )
 
         val (results, isWon) = solver.getResults(lap)
 
         assertTrue(isWon)
         assertEquals(POINTS_TOTAL - points, results[PlayerPosition.ONE.index])
-        assertEquals(bid + points + BeloteBonus.BELOTE.points, results[PlayerPosition.TWO.index])
+        assertEquals(bid + points + BeloteBonusValue.BELOTE.points, results[PlayerPosition.TWO.index])
     }
 
     @Test
     fun `équipe une enchérit 120, réalise 110 points et chute son contrat`() {
         val bid = 120
         val points = 110
-        val lap = CoincheLapData(
+        val lap = CoincheLap(
             taker = PlayerPosition.ONE,
             bid = bid,
-            coinche = Coinche.NONE,
+            coinche = CoincheValue.NONE,
             points = points,
             bonuses = emptyList()
         )
@@ -130,18 +130,18 @@ class CoincheSolverTest {
     fun `équipe une enchérit 140, réalise 110 points, annonce la belote et chute son contrat`() {
         val bid = 140
         val points = 110
-        val lap = CoincheLapData(
+        val lap = CoincheLap(
             taker = PlayerPosition.ONE,
             bid = bid,
-            coinche = Coinche.NONE,
+            coinche = CoincheValue.NONE,
             points = points,
-            bonuses = listOf(BeloteBonusData(PlayerPosition.ONE, BeloteBonus.BELOTE))
+            bonuses = listOf(BeloteBonus(PlayerPosition.ONE, BeloteBonusValue.BELOTE))
         )
 
         val (results, isWon) = solver.getResults(lap)
 
         assertFalse(isWon)
-        assertEquals(BeloteBonus.BELOTE.points, results[PlayerPosition.ONE.index])
+        assertEquals(BeloteBonusValue.BELOTE.points, results[PlayerPosition.ONE.index])
         assertEquals(POINTS_TOTAL + bid, results[PlayerPosition.TWO.index])
     }
 
@@ -149,10 +149,10 @@ class CoincheSolverTest {
     fun `équipe deux enchérit 130, réalise 100 points et chute son contrat`() {
         val bid = 130
         val points = 100
-        val lap = CoincheLapData(
+        val lap = CoincheLap(
             taker = PlayerPosition.TWO,
             bid = bid,
-            coinche = Coinche.NONE,
+            coinche = CoincheValue.NONE,
             points = points,
             bonuses = emptyList()
         )
@@ -168,10 +168,10 @@ class CoincheSolverTest {
     fun `équipe une enchérit 140, réalise un capot et remporte son contrat`() {
         val bid = 140
         val points = POINTS_TOTAL
-        val lap = CoincheLapData(
+        val lap = CoincheLap(
             taker = PlayerPosition.ONE,
             bid = bid,
-            coinche = Coinche.NONE,
+            coinche = CoincheValue.NONE,
             points = points,
             bonuses = emptyList()
         )
@@ -187,10 +187,10 @@ class CoincheSolverTest {
     fun `équipe deux enchérit 130, réalise un capot et remporte son contrat`() {
         val bid = 130
         val points = POINTS_TOTAL
-        val lap = CoincheLapData(
+        val lap = CoincheLap(
             taker = PlayerPosition.TWO,
             bid = bid,
-            coinche = Coinche.NONE,
+            coinche = CoincheValue.NONE,
             points = points,
             bonuses = emptyList()
         )
@@ -204,22 +204,22 @@ class CoincheSolverTest {
 
     @Test
     fun `Le coefficient de la coinche est de 2`() {
-        assertEquals(2, Coinche.COINCHE.coefficient)
+        assertEquals(2, CoincheValue.COINCHE.coefficient)
     }
 
     @Test
     fun `Le coefficient de la surcoinche est de 4`() {
-        assertEquals(4, Coinche.SURCOINCHE.coefficient)
+        assertEquals(4, CoincheValue.SURCOINCHE.coefficient)
     }
 
     @Test
     fun `équipe une enchérit 120, réalise 130 points et remporte son contrat alors qu'elle est coinchée`() {
         val bid = 120
         val points = 130
-        val lap = CoincheLapData(
+        val lap = CoincheLap(
             taker = PlayerPosition.ONE,
             bid = bid,
-            coinche = Coinche.COINCHE,
+            coinche = CoincheValue.COINCHE,
             points = points,
             bonuses = emptyList()
         )
@@ -227,7 +227,7 @@ class CoincheSolverTest {
         val (results, isWon) = solver.getResults(lap)
 
         assertTrue(isWon)
-        assertEquals((bid + points) * Coinche.COINCHE.coefficient, results[PlayerPosition.ONE.index])
+        assertEquals((bid + points) * CoincheValue.COINCHE.coefficient, results[PlayerPosition.ONE.index])
         assertEquals(POINTS_TOTAL - points, results[PlayerPosition.TWO.index])
     }
 
@@ -235,10 +235,10 @@ class CoincheSolverTest {
     fun `équipe une enchérit 120, réalise 130 points et remporte son contrat alors qu'elle a surcoinché`() {
         val bid = 120
         val points = 130
-        val lap = CoincheLapData(
+        val lap = CoincheLap(
             taker = PlayerPosition.ONE,
             bid = bid,
-            coinche = Coinche.SURCOINCHE,
+            coinche = CoincheValue.SURCOINCHE,
             points = points,
             bonuses = emptyList()
         )
@@ -246,7 +246,7 @@ class CoincheSolverTest {
         val (results, isWon) = solver.getResults(lap)
 
         assertTrue(isWon)
-        assertEquals((bid + points) * Coinche.SURCOINCHE.coefficient, results[PlayerPosition.ONE.index])
+        assertEquals((bid + points) * CoincheValue.SURCOINCHE.coefficient, results[PlayerPosition.ONE.index])
         assertEquals(POINTS_TOTAL - points, results[PlayerPosition.TWO.index])
     }
 
@@ -254,10 +254,10 @@ class CoincheSolverTest {
     fun `équipe deux enchérit 120, réalise 110 points et chute son contrat alors qu'elle est coinchée`() {
         val bid = 120
         val points = 110
-        val lap = CoincheLapData(
+        val lap = CoincheLap(
             taker = PlayerPosition.TWO,
             bid = bid,
-            coinche = Coinche.COINCHE,
+            coinche = CoincheValue.COINCHE,
             points = points,
             bonuses = emptyList()
         )
@@ -265,7 +265,7 @@ class CoincheSolverTest {
         val (results, isWon) = solver.getResults(lap)
 
         assertFalse(isWon)
-        assertEquals((POINTS_TOTAL + bid) * Coinche.COINCHE.coefficient, results[PlayerPosition.ONE.index])
+        assertEquals((POINTS_TOTAL + bid) * CoincheValue.COINCHE.coefficient, results[PlayerPosition.ONE.index])
         assertEquals(0, results[PlayerPosition.TWO.index])
     }
 
@@ -273,10 +273,10 @@ class CoincheSolverTest {
     fun `équipe deux enchérit 120, réalise 110 points et chute son contrat alors qu'elle a surcoinché`() {
         val bid = 120
         val points = 110
-        val lap = CoincheLapData(
+        val lap = CoincheLap(
             taker = PlayerPosition.TWO,
             bid = bid,
-            coinche = Coinche.SURCOINCHE,
+            coinche = CoincheValue.SURCOINCHE,
             points = points,
             bonuses = emptyList()
         )
@@ -284,7 +284,7 @@ class CoincheSolverTest {
         val (results, isWon) = solver.getResults(lap)
 
         assertFalse(isWon)
-        assertEquals((POINTS_TOTAL + bid) * Coinche.SURCOINCHE.coefficient, results[PlayerPosition.ONE.index])
+        assertEquals((POINTS_TOTAL + bid) * CoincheValue.SURCOINCHE.coefficient, results[PlayerPosition.ONE.index])
         assertEquals(0, results[PlayerPosition.TWO.index])
     }
 

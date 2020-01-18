@@ -27,11 +27,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.DialogPlayerNameBinding
 import com.sbgapps.scoreit.app.databinding.FragmentHistoryBinding
-import com.sbgapps.scoreit.app.model.BeloteLap
-import com.sbgapps.scoreit.app.model.CoincheLap
-import com.sbgapps.scoreit.app.model.Lap
-import com.sbgapps.scoreit.app.model.TarotLap
-import com.sbgapps.scoreit.app.model.UniversalLap
+import com.sbgapps.scoreit.app.model.BeloteLapRow
+import com.sbgapps.scoreit.app.model.CoincheLapRow
+import com.sbgapps.scoreit.app.model.LapRow
+import com.sbgapps.scoreit.app.model.TarotLapRow
+import com.sbgapps.scoreit.app.model.UniversalLapRow
 import com.sbgapps.scoreit.app.ui.Content
 import com.sbgapps.scoreit.app.ui.GameEvent
 import com.sbgapps.scoreit.app.ui.GameViewModel
@@ -120,12 +120,12 @@ class HistoryFragment : BaseFragment() {
         viewModel.loadGame()
     }
 
-    private fun getItems(scores: List<Lap>): List<ItemAdapter> = scores.map { lap ->
+    private fun getItems(scores: List<LapRow>): List<ItemAdapter> = scores.map { lap ->
         when (lap) {
-            is UniversalLap -> UniversalLapAdapter(lap)
-            is BeloteLap -> BeloteLapAdapter(lap)
-            is CoincheLap -> CoincheLapAdapter(lap)
-            is TarotLap -> TarotLapAdapter(lap)
+            is UniversalLapRow -> UniversalLapAdapter(lap)
+            is BeloteLapRow -> BeloteLapAdapter(lap)
+            is CoincheLapRow -> CoincheLapAdapter(lap)
+            is TarotLapRow -> TarotLapAdapter(lap)
         }
     }
 

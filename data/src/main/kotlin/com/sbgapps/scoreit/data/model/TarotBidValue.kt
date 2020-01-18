@@ -18,9 +18,12 @@ package com.sbgapps.scoreit.data.model
 
 import androidx.annotation.StringRes
 import com.sbgapps.scoreit.data.R
+import com.squareup.moshi.JsonClass
 
-enum class Coinche(val coefficient: Int, @StringRes val resId: Int) {
-    NONE(1, R.string.coinche_coinche_none),
-    COINCHE(2, R.string.coinche_coinche_coinche),
-    SURCOINCHE(4, R.string.coinche_coinche_surcoinche);
+@JsonClass(generateAdapter = false)
+enum class TarotBidValue(val coefficient: Int, @StringRes val resId: Int) {
+    SMALL(1, R.string.tarot_bid_take),
+    GUARD(2, R.string.tarot_bid_guard),
+    GUARD_WITHOUT_KITTY(4, R.string.tarot_bid_guard_without_kitty),
+    GUARD_AGAINST_KITTY(6, R.string.tarot_bid_guard_against_kitty)
 }

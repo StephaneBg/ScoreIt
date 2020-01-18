@@ -16,16 +16,16 @@
 
 package com.sbgapps.scoreit.app.ui.edition.tarot
 
-import com.sbgapps.scoreit.app.model.Player
 import com.sbgapps.scoreit.app.ui.edition.Step
 import com.sbgapps.scoreit.core.ui.BaseViewModel
 import com.sbgapps.scoreit.data.interactor.GameUseCase
+import com.sbgapps.scoreit.data.model.Player
 import com.sbgapps.scoreit.data.model.PlayerPosition
-import com.sbgapps.scoreit.data.model.TarotBid
+import com.sbgapps.scoreit.data.model.TarotBidValue
 import com.sbgapps.scoreit.data.model.TarotBonus
-import com.sbgapps.scoreit.data.model.TarotBonusData
-import com.sbgapps.scoreit.data.model.TarotLapData
-import com.sbgapps.scoreit.data.model.TarotOudler
+import com.sbgapps.scoreit.data.model.TarotBonusValue
+import com.sbgapps.scoreit.data.model.TarotLap
+import com.sbgapps.scoreit.data.model.TarotOudlerValue
 import com.sbgapps.scoreit.data.solver.TarotSolver
 import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.POINTS_TOTAL
 import io.uniflow.core.flow.UIState
@@ -33,7 +33,7 @@ import io.uniflow.core.flow.UIState
 class TarotEditionViewModel(private val useCase: GameUseCase, private val solver: TarotSolver) : BaseViewModel() {
 
     private val editedLap
-        get() = useCase.getEditedLap() as TarotLapData
+        get() = useCase.getEditedLap() as TarotLap
 
     fun loadContent() {
         setState { getContent() }
@@ -53,14 +53,14 @@ class TarotEditionViewModel(private val useCase: GameUseCase, private val solver
         }
     }
 
-    fun setBid(bid: TarotBid) {
+    fun setBid(bid: TarotBidValue) {
         setState {
             useCase.updateEdition(editedLap.copy(bid = bid))
             getContent()
         }
     }
 
-    fun setOudlers(oudlers: List<TarotOudler>) {
+    fun setOudlers(oudlers: List<TarotOudlerValue>) {
         setState {
             useCase.updateEdition(editedLap.copy(oudlers = oudlers))
             getContent()
@@ -74,10 +74,10 @@ class TarotEditionViewModel(private val useCase: GameUseCase, private val solver
         }
     }
 
-    fun addBonus(bonus: Pair<PlayerPosition, TarotBonus> /* Player to Bonus */) {
+    fun addBonus(bonus: Pair<PlayerPosition, TarotBonusValue> /* Player to Bonus */) {
         setState {
             val bonuses = editedLap.bonuses.toMutableList()
-            bonuses += TarotBonusData(bonus.first, bonus.second)
+            bonuses += TarotBonus(bonus.first, bonus.second)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
             getContent()
         }
@@ -108,7 +108,7 @@ class TarotEditionViewModel(private val useCase: GameUseCase, private val solver
 
     private fun getContent(): TarotEditionState.Content {
         return TarotEditionState.Content(
-            useCase.getPlayers().map { Player(it) },
+            useCase.getPlayers(),
             editedLap.taker,
             editedLap.partner,
             editedLap.bid,
@@ -121,12 +121,12 @@ class TarotEditionViewModel(private val useCase: GameUseCase, private val solver
         )
     }
 
-    private fun canStepPointsByOne(lap: TarotLapData): Step = Step(
+    private fun canStepPointsByOne(lap: TarotLap): Step = Step(
         (lap.points < POINTS_TOTAL),
         lap.points > 0
     )
 
-    private fun canStepPointsByTen(lap: TarotLapData): Step = Step(
+    private fun canStepPointsByTen(lap: TarotLap): Step = Step(
         lap.points < (POINTS_TOTAL - 10),
         lap.points > 10
     )
@@ -137,11 +137,11 @@ sealed class TarotEditionState : UIState() {
         val players: List<Player>,
         val taker: PlayerPosition,
         val partner: PlayerPosition,
-        val bid: TarotBid,
-        val oudlers: List<TarotOudler>,
+        val bid: TarotBidValue,
+        val oudlers: List<TarotOudlerValue>,
         val points: Int,
-        val selectedBonuses: List<Pair<PlayerPosition, TarotBonus>>,
-        val availableBonuses: List<TarotBonus>,
+        val selectedBonuses: List<Pair<PlayerPosition, TarotBonusValue>>,
+        val availableBonuses: List<TarotBonusValue>,
         val stepPointsByOne: Step,
         val stepPointsByTen: Step
     ) : TarotEditionState()

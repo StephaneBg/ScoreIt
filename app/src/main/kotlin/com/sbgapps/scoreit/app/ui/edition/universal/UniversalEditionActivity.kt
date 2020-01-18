@@ -51,7 +51,7 @@ class UniversalEditionActivity : EditionActivity() {
             when (state) {
                 is UniversalEditionState.Content -> {
                     val adapters = state.players.mapIndexed { index, player ->
-                        UniversalEditionAdapter(player, state.lap.results[index], ::onScoreEdited)
+                        UniversalEditionAdapter(player, state.results[index], ::onScoreEdited)
                     }
                     val diff = DiffUtil.calculateDiff(DiffCallback(lapAdapter.items.asListOfType(), adapters))
                     lapAdapter.updateItems(adapters, diff)

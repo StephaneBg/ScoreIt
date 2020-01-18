@@ -19,12 +19,11 @@ package com.sbgapps.scoreit.app.ui
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.model.BeloteLap
-import com.sbgapps.scoreit.app.model.CoincheLap
-import com.sbgapps.scoreit.app.model.Lap
-import com.sbgapps.scoreit.app.model.Player
-import com.sbgapps.scoreit.app.model.TarotLap
-import com.sbgapps.scoreit.app.model.UniversalLap
+import com.sbgapps.scoreit.app.model.BeloteLapRow
+import com.sbgapps.scoreit.app.model.CoincheLapRow
+import com.sbgapps.scoreit.app.model.LapRow
+import com.sbgapps.scoreit.app.model.TarotLapRow
+import com.sbgapps.scoreit.app.model.UniversalLapRow
 import com.sbgapps.scoreit.app.ui.history.adapter.Header
 import com.sbgapps.scoreit.core.ui.BaseViewModel
 import com.sbgapps.scoreit.core.utils.string.StringFactory
@@ -32,12 +31,13 @@ import com.sbgapps.scoreit.core.utils.string.fromResources
 import com.sbgapps.scoreit.core.utils.string.join
 import com.sbgapps.scoreit.core.utils.string.toStringFactory
 import com.sbgapps.scoreit.data.interactor.GameUseCase
-import com.sbgapps.scoreit.data.model.BeloteGameData
-import com.sbgapps.scoreit.data.model.CoincheGameData
+import com.sbgapps.scoreit.data.model.BeloteGame
+import com.sbgapps.scoreit.data.model.CoincheGame
 import com.sbgapps.scoreit.data.model.GameType
-import com.sbgapps.scoreit.data.model.TarotGameData
-import com.sbgapps.scoreit.data.model.TarotLapData
-import com.sbgapps.scoreit.data.model.UniversalGameData
+import com.sbgapps.scoreit.data.model.Player
+import com.sbgapps.scoreit.data.model.TarotGame
+import com.sbgapps.scoreit.data.model.TarotLap
+import com.sbgapps.scoreit.data.model.UniversalGame
 import io.uniflow.core.flow.UIEvent
 import io.uniflow.core.flow.UIState
 
@@ -125,18 +125,18 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
     private fun getContent(): Content = Content(getHeader(), getLaps())
 
     fun getPlayerCountOptions(): List<Int> = when (useCase.getGame()) {
-        is UniversalGameData -> listOf(2, 3, 4, 5, 6, 7, 8)
-        is TarotGameData -> listOf(3, 4, 5)
+        is UniversalGame -> listOf(2, 3, 4, 5, 6, 7, 8)
+        is TarotGame -> listOf(3, 4, 5)
         else -> error("Not managed for other games")
     }
 
     fun getEnabledMenuItems(): List<Int> {
         val items = when (useCase.getGame()) {
-            is UniversalGameData -> mutableListOf(
+            is UniversalGame -> mutableListOf(
                 R.id.menu_count
             )
-            is BeloteGameData, is CoincheGameData -> mutableListOf()
-            is TarotGameData -> mutableListOf(
+            is BeloteGame, is CoincheGame -> mutableListOf()
+            is TarotGame -> mutableListOf(
                 R.id.menu_count
             )
         }
@@ -155,26 +155,26 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
             Player(player.name, player.color) to score
         }
 
-    private fun getLaps(): List<Lap> = when (val game = useCase.getGame()) {
-        is UniversalGameData -> game.laps.map {
-            UniversalLap(useCase.getResults(it))
+    private fun getLaps(): List<LapRow> = when (val game = useCase.getGame()) {
+        is UniversalGame -> game.laps.map {
+            UniversalLapRow(useCase.getResults(it))
         }
-        is TarotGameData -> game.laps.map {
+        is TarotGame -> game.laps.map {
             val (displayResults, isWon) = useCase.getDisplayResults(it)
-            TarotLap(displayResults, getTarotLapInfo(it), isWon)
+            TarotLapRow(displayResults, getTarotLapInfo(it), isWon)
         }
 
-        is BeloteGameData -> game.laps.map {
+        is BeloteGame -> game.laps.map {
             val (displayResults, isWon) = useCase.getDisplayResults(it)
-            BeloteLap(displayResults, isWon)
+            BeloteLapRow(displayResults, isWon)
         }
-        is CoincheGameData -> game.laps.map {
+        is CoincheGame -> game.laps.map {
             val (displayResults, isWon) = useCase.getDisplayResults(it)
-            CoincheLap(displayResults, isWon)
+            CoincheLapRow(displayResults, isWon)
         }
     }
 
-    private fun getTarotLapInfo(lap: TarotLapData): StringFactory {
+    private fun getTarotLapInfo(lap: TarotLap): StringFactory {
         val players = useCase.getPlayers()
         return when (lap.playerCount) {
             3, 4 -> join(
@@ -194,18 +194,18 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
 
     @IdRes
     private fun getEditionAction(): Int = when (useCase.getGame()) {
-        is UniversalGameData -> R.id.action_historyFragment_to_universalEditionActivity
-        is TarotGameData -> R.id.action_historyFragment_to_tarotEditionActivity
-        is BeloteGameData -> R.id.action_historyFragment_to_beloteEditionActivity
-        is CoincheGameData -> R.id.action_historyFragment_to_coincheEditionActivity
+        is UniversalGame -> R.id.action_historyFragment_to_universalEditionActivity
+        is TarotGame -> R.id.action_historyFragment_to_tarotEditionActivity
+        is BeloteGame -> R.id.action_historyFragment_to_beloteEditionActivity
+        is CoincheGame -> R.id.action_historyFragment_to_coincheEditionActivity
     }
 
     fun getSavedFiles(): List<Pair<String, Long>> = useCase.getSavedFiles()
 }
 
-data class Content(val header: Header, val results: List<Lap>) : UIState()
+data class Content(val header: Header, val results: List<LapRow>) : UIState()
 
 sealed class GameEvent : UIEvent() {
     data class Edition(@IdRes val actionId: Int) : GameEvent()
-    data class Deletion(val position: Int, val results: List<Lap>) : GameEvent()
+    data class Deletion(val position: Int, val results: List<LapRow>) : GameEvent()
 }

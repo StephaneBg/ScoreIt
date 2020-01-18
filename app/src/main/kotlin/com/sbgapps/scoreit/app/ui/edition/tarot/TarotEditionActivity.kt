@@ -31,9 +31,9 @@ import com.sbgapps.scoreit.app.databinding.ListItemEditionBonusBinding
 import com.sbgapps.scoreit.app.ui.edition.EditionActivity
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayoutAdapter
 import com.sbgapps.scoreit.data.model.PlayerPosition
-import com.sbgapps.scoreit.data.model.TarotBid
-import com.sbgapps.scoreit.data.model.TarotBonus
-import com.sbgapps.scoreit.data.model.TarotOudler
+import com.sbgapps.scoreit.data.model.TarotBidValue
+import com.sbgapps.scoreit.data.model.TarotBonusValue
+import com.sbgapps.scoreit.data.model.TarotOudlerValue
 import io.uniflow.androidx.flow.onStates
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -90,7 +90,7 @@ class TarotEditionActivity : EditionActivity() {
                                 R.array.tarot_bids,
                                 state.bid.ordinal
                             ) { dialog, which ->
-                                viewModel.setBid(TarotBid.values()[which])
+                                viewModel.setBid(TarotBidValue.values()[which])
                                 dialog.dismiss()
                             }
                             .show()
@@ -100,9 +100,9 @@ class TarotEditionActivity : EditionActivity() {
                     binding.buttonTwentyOne.text = getString(R.string.tarot_oudler_twentyone)
                     binding.buttonExcuse.text = getString(R.string.tarot_oudler_excuse)
                     binding.oudlersButtonGroup.removeOnButtonCheckedListener(buttonCheckedListener)
-                    if (state.oudlers.contains(TarotOudler.PETIT)) binding.oudlersButtonGroup.check(R.id.buttonPetit)
-                    if (state.oudlers.contains(TarotOudler.TWENTY_ONE)) binding.oudlersButtonGroup.check(R.id.buttonTwentyOne)
-                    if (state.oudlers.contains(TarotOudler.EXCUSE)) binding.oudlersButtonGroup.check(R.id.buttonExcuse)
+                    if (state.oudlers.contains(TarotOudlerValue.PETIT)) binding.oudlersButtonGroup.check(R.id.buttonPetit)
+                    if (state.oudlers.contains(TarotOudlerValue.TWENTY_ONE)) binding.oudlersButtonGroup.check(R.id.buttonTwentyOne)
+                    if (state.oudlers.contains(TarotOudlerValue.EXCUSE)) binding.oudlersButtonGroup.check(R.id.buttonExcuse)
                     binding.oudlersButtonGroup.addOnButtonCheckedListener(buttonCheckedListener)
 
                     binding.points.text = state.points.toString()
@@ -140,12 +140,12 @@ class TarotEditionActivity : EditionActivity() {
     }
 
     private val buttonCheckedListener = MaterialButtonToggleGroup.OnButtonCheckedListener { view, _, _ ->
-        val oudlers = mutableListOf<TarotOudler>()
+        val oudlers = mutableListOf<TarotOudlerValue>()
         view.checkedButtonIds.forEach {
             when (it) {
-                R.id.buttonPetit -> oudlers += TarotOudler.PETIT
-                R.id.buttonTwentyOne -> oudlers += TarotOudler.TWENTY_ONE
-                R.id.buttonExcuse -> oudlers += TarotOudler.EXCUSE
+                R.id.buttonPetit -> oudlers += TarotOudlerValue.PETIT
+                R.id.buttonTwentyOne -> oudlers += TarotOudlerValue.TWENTY_ONE
+                R.id.buttonExcuse -> oudlers += TarotOudlerValue.EXCUSE
             }
         }
         viewModel.setOudlers(oudlers)
@@ -160,7 +160,7 @@ class TarotEditionActivity : EditionActivity() {
         }
     }
 
-    inner class BonusAdapter(val model: List<Pair<String, TarotBonus>>) : AdaptableLinearLayoutAdapter {
+    inner class BonusAdapter(val model: List<Pair<String, TarotBonusValue>>) : AdaptableLinearLayoutAdapter {
 
         @SuppressLint("SetTextI18n")
         override fun getView(position: Int, parent: ViewGroup): View {

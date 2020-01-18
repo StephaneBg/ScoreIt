@@ -18,11 +18,11 @@ package com.sbgapps.scoreit.app.ui.history.adapter
 
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ListItemLapTarotBinding
-import com.sbgapps.scoreit.app.model.TarotLap
+import com.sbgapps.scoreit.app.model.TarotLapRow
 import com.sbgapps.scoreit.core.utils.string.build
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
 
-class TarotLapAdapter(private val model: TarotLap) : BaseLapAdapter(R.layout.list_item_lap_tarot) {
+class TarotLapAdapter(private val model: TarotLapRow) : BaseLapAdapter(R.layout.list_item_lap_tarot) {
 
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         super.onBindViewHolder(viewHolder)
