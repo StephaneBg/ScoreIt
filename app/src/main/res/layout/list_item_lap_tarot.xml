@@ -19,18 +19,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
     >
 
     <TextView
         android:id="@+id/info"
+        style="?textAppearanceCaption"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="?textAppearanceCaption"
+        android:paddingStart="@dimen/margin_padding_size_small"
+        android:paddingTop="@dimen/margin_padding_size_small"
+        android:paddingEnd="@dimen/margin_padding_size_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/done"
-        android:paddingTop="@dimen/margin_padding_size_small"
-        android:paddingStart="@dimen/margin_padding_size_small"
-        android:paddingEnd="@dimen/margin_padding_size_small"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem"
         />
