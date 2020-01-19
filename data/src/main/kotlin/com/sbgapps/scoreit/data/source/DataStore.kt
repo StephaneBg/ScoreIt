@@ -19,6 +19,7 @@ package com.sbgapps.scoreit.data.source
 import com.sbgapps.scoreit.data.model.Game
 import com.sbgapps.scoreit.data.model.GameType
 import com.sbgapps.scoreit.data.model.Player
+import com.sbgapps.scoreit.data.model.SavedGameInfo
 import com.sbgapps.scoreit.data.repository.CacheRepo
 import com.sbgapps.scoreit.data.repository.PreferencesRepo
 
@@ -32,7 +33,7 @@ class DataStore(
     fun getGame(): Game = game ?: cacheRepo.loadGame().also { game = it }
 
     fun createGame(name: String) {
-        game = cacheRepo.createGame(name)
+        game = cacheRepo.createGame(getGame(), name)
     }
 
     fun saveGame(game: Game) {
@@ -74,7 +75,7 @@ class DataStore(
         prefsRepo.setThemeMode(mode)
     }
 
-    fun getSavedFiles(): List<Pair<String, Long>> = cacheRepo.getSavedFiles()
+    fun getSavedFiles(): List<SavedGameInfo> = cacheRepo.getSavedFiles()
 
     fun loadGame(name: String) {
         game = cacheRepo.loadGame(name)

@@ -37,25 +37,48 @@ class ScoreItGameDao(
     private val gameCacheJsonAdapter: JsonAdapter<Game>
 ) {
 
-    fun getCurrentGame(gameType: GameType, playerCount: Int): Game {
+    fun loadGameOrCreate(gameType: GameType, playerCount: Int): Game {
         val directory = getDirectory(gameType, playerCount)
         val fileName = getFileName(gameType, playerCount)
         return try {
-            val json = storage.loadFile(directory, fileName)
-            gameCacheJsonAdapter.fromJson(json) ?: error("Can't parse json")
+            getJson(directory, fileName)
         } catch (e: Exception) {
             createGame(gameType, playerCount, fileName)
         }
     }
 
-    fun createGame(gameType: GameType, playerCount: Int, fileName: String): Game {
-        preferences.edit { putString(getFileNameKey(gameType, playerCount), fileName) }
+    fun loadGame(gameType: GameType, playerCount: Int, fileName: String): Game? {
+        val directory = getDirectory(gameType, playerCount)
+        return try {
+            getJson(directory, fileName)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun getJson(directory: String, fileName: String): Game {
+        val json = storage.loadFile(directory, fileName)
+        return gameCacheJsonAdapter.fromJson(json) ?: error("Can't parse json")
+    }
+
+    private fun createGame(gameType: GameType, playerCount: Int, fileName: String): Game {
         val players = initPlayers(context, gameType, playerCount)
-        return when (gameType) {
+        val newGame = when (gameType) {
             GameType.UNIVERSAL -> UniversalGame(players)
             GameType.TAROT -> TarotGame(players)
             GameType.BELOTE -> BeloteGame(players)
             GameType.COINCHE -> CoincheGame(players)
+        }
+        return createGame(newGame, playerCount, fileName)
+    }
+
+    fun createGame(currentGame: Game, playerCount: Int, fileName: String): Game {
+        preferences.edit { putString(getFileNameKey(currentGame.type, playerCount), fileName) }
+        return when (currentGame) {
+            is UniversalGame -> currentGame.copy(laps = emptyList())
+            is TarotGame -> currentGame.copy(laps = emptyList())
+            is BeloteGame -> currentGame.copy(laps = emptyList())
+            is CoincheGame -> currentGame.copy(laps = emptyList())
         }
     }
 

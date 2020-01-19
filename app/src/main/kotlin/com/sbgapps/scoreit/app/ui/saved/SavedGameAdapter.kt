@@ -24,6 +24,7 @@ import com.sbgapps.scoreit.core.widget.ItemAdapter
 class SavedGameAdapter(
     private val fileName: String,
     private val lastModified: String,
+    private val players: String,
     private val callback: (fileName: String) -> Unit
 ) : ItemAdapter(R.layout.list_item_saved_games) {
 
@@ -32,6 +33,7 @@ class SavedGameAdapter(
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         binding = ListItemSavedGamesBinding.bind(viewHolder.itemView)
         binding.fileName.text = fileName
+        binding.players.text = players
         binding.lastModified.text = lastModified
         binding.root.setOnClickListener { callback(fileName) }
     }

@@ -29,6 +29,7 @@ import com.sbgapps.scoreit.data.model.GameType
 import com.sbgapps.scoreit.data.model.Lap
 import com.sbgapps.scoreit.data.model.Player
 import com.sbgapps.scoreit.data.model.PlayerPosition
+import com.sbgapps.scoreit.data.model.SavedGameInfo
 import com.sbgapps.scoreit.data.model.TarotGame
 import com.sbgapps.scoreit.data.model.TarotLap
 import com.sbgapps.scoreit.data.model.UniversalGame
@@ -228,7 +229,7 @@ class GameUseCase(
         }
     }
 
-    fun getSavedFiles(): List<Pair<String, Long>> = dataStore.getSavedFiles()
+    fun getSavedFiles(): List<SavedGameInfo> = dataStore.getSavedFiles()
 
     fun loadGame(name: String) {
         dataStore.loadGame(name)

@@ -40,14 +40,14 @@ class SavedGamesActivity : BaseActivity() {
         setContentView(binding.root)
         setupActionBar(binding.toolbar)
 
-        val adapters = gameViewModel.getSavedFiles().map {
-            val (name, duration) = it
+        val adapters = gameViewModel.getSavedFiles().map { (name, duration, players) ->
             val lastModified = LocalDateTime.ofEpochSecond(duration / 1000, 0, ZoneOffset.UTC)
                 .format(DateTimeFormatter.ofPattern(getString(R.string.local_date_pattern)))
                 .capitalize()
             SavedGameAdapter(
                 name,
                 lastModified,
+                players,
                 ::onGameSelected
             )
         }
