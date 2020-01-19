@@ -70,5 +70,9 @@
             android:name=".ui.saved.SavedGamesActivity"
             android:label="@string/title_activity_saved_games"
             />
+        <activity
+            android:name=".ui.scoreboard.ScoreboardActivity"
+            android:label="@string/title_game_scoreboard"
+            />
     </application>
 </manifest>

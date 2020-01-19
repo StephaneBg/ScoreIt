@@ -64,4 +64,20 @@
         <item>@color/md_brown_500</item>
         <item>@color/md_blue_grey_500</item>
     </integer-array>
+
+    <array name="scoreboard_autosize_text_sizes">
+        <item>10sp</item>
+        <item>12sp</item>
+        <item>20sp</item>
+        <item>40sp</item>
+        <item>50sp</item>
+        <item>80sp</item>
+        <item>100sp</item>
+        <item>150sp</item>
+        <item>200sp</item>
+        <item>300sp</item>
+        <item>400sp</item>
+        <item>500sp</item>
+        <item>600sp</item>
+    </array>
 </resources>

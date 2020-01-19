@@ -133,13 +133,9 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
 
     fun getEnabledMenuItems(): List<Int> {
         val items = when (useCase.getGame()) {
-            is UniversalGame -> mutableListOf(
-                R.id.menu_count
-            )
+            is UniversalGame -> mutableListOf(R.id.menu_count)
             is BeloteGame, is CoincheGame -> mutableListOf()
-            is TarotGame -> mutableListOf(
-                R.id.menu_count
-            )
+            is TarotGame -> mutableListOf(R.id.menu_count)
         }
         if (useCase.isGameStarted()) {
             items.add(R.id.menu_chart)

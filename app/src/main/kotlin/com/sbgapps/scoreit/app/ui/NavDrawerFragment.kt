@@ -38,6 +38,7 @@ class NavDrawerFragment : BottomSheetDialogFragment() {
         (view as NavigationView).setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.universal -> viewModel.selectGame(GameType.UNIVERSAL)
+                R.id.scoreboard -> findNavController().navigate(R.id.action_navDrawerFragment_to_scoreboardActivity)
                 R.id.tarot -> viewModel.selectGame(GameType.TAROT)
                 R.id.belote -> viewModel.selectGame(GameType.BELOTE)
                 R.id.coinche -> viewModel.selectGame(GameType.COINCHE)

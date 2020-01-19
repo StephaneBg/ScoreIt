@@ -1,0 +1,145 @@
+<!--
+  ~ Copyright 2019 Stéphane Baiget
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/scoreOne"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="end|center_vertical"
+        android:maxLines="1"
+        app:autoSizePresetSizes="@array/scoreboard_autosize_text_sizes"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@id/minusScoreOne"
+        app:layout_constraintEnd_toStartOf="@id/dots"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="12"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/minusScoreOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding_size_medium"
+        android:text="-1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/plusScoreOne"
+        app:layout_constraintStart_toStartOf="@id/scoreOne"
+        tools:ignore="HardcodedText"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/plusScoreOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding_size_medium"
+        android:text="+1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/scoreOne"
+        app:layout_constraintStart_toEndOf="@id/minusScoreOne"
+        tools:ignore="HardcodedText"
+        />
+
+    <TextView
+        android:id="@+id/scoreTwo"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="start|center_vertical"
+        android:maxLines="1"
+        app:autoSizePresetSizes="@array/scoreboard_autosize_text_sizes"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@id/minusScoreTwo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dots"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="12"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/minusScoreTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding_size_medium"
+        android:text="-1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/plusScoreTwo"
+        app:layout_constraintStart_toStartOf="@id/scoreTwo"
+        tools:ignore="HardcodedText"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/plusScoreTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding_size_medium"
+        android:text="+1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/minusScoreTwo"
+        tools:ignore="HardcodedText"
+        />
+
+    <TextView
+        android:id="@+id/dots"
+        style="?textAppearanceHeadline4"
+        android:layout_width="96dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text=":"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@id/scoreOne"
+        app:layout_constraintEnd_toStartOf="@id/scoreTwo"
+        app:layout_constraintStart_toEndOf="@id/scoreOne"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText"
+        />
+
+    <ImageView
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding_size_medium"
+        android:background="?selectableItemBackgroundBorderless"
+        app:layout_constraintBottom_toBottomOf="@id/plusScoreOne"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/plusScoreOne"
+        app:srcCompat="@drawable/ic_refresh_24dp"
+        tools:ignore="ContentDescription"
+        />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding_size_medium"
+        android:background="?selectableItemBackgroundBorderless"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back_24dp"
+        tools:ignore="ContentDescription"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

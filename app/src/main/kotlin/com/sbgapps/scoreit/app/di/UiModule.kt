@@ -23,6 +23,7 @@ import com.sbgapps.scoreit.app.ui.edition.coinche.CoincheEditionViewModel
 import com.sbgapps.scoreit.app.ui.edition.tarot.TarotEditionViewModel
 import com.sbgapps.scoreit.app.ui.edition.universal.UniversalEditionViewModel
 import com.sbgapps.scoreit.app.ui.prefs.PreferencesViewModel
+import com.sbgapps.scoreit.app.ui.scoreboard.ScoreBoardViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -35,4 +36,5 @@ val uiModule = module {
     viewModel { TarotEditionViewModel(get(), get()) }
     viewModel { BeloteEditionViewModel(get(), get()) }
     viewModel { CoincheEditionViewModel(get(), get()) }
+    viewModel { ScoreBoardViewModel() }
 }

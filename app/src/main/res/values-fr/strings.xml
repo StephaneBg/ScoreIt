@@ -21,12 +21,14 @@
     <string name="title_activity_about">À propos</string>
     <string name="title_activity_preferences">Préférences</string>
     <string name="title_game_universal">Universel</string>
+    <string name="title_game_scoreboard">Tableau d\'affichage</string>
     <string name="title_game_tarot">Tarot</string>
     <string name="title_game_belote">Belote</string>
     <string name="title_game_coinche">Coinche</string>
 
     <!-- Navigation drawer -->
     <string name="drawer_game_universal">Universel</string>
+    <string name="drawer_game_scoreboard">Tableau d\'affichage</string>
     <string name="drawer_game_tarot">Tarot</string>
     <string name="drawer_game_belote">Belote</string>
     <string name="drawer_game_coinche">Coinche</string>

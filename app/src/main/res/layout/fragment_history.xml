@@ -67,6 +67,7 @@
         style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:backgroundTint="?colorPrimary"
         app:layout_anchor="@id/bottomAppBar"
         app:srcCompat="@drawable/ic_plus_24dp"
         />
