@@ -32,11 +32,19 @@ class UniversalEditionViewModel(private val useCase: GameUseCase) : BaseViewMode
         setState { getContent() }
     }
 
-    fun increment(position: Int, points: Int) {
+    fun incrementScore(increment: Int, position: Int) {
         setState {
             val oldPoints = editedLap.points
-            val newScore = oldPoints[position] + points
+            val newScore = oldPoints[position] + increment
             val newPoints = oldPoints.replace(position, newScore)
+            useCase.updateEdition(UniversalLap(newPoints))
+            getContent()
+        }
+    }
+
+    fun setScore(position: Int, score: Int) {
+        setState {
+            val newPoints = editedLap.points.replace(position, score)
             useCase.updateEdition(UniversalLap(newPoints))
             getContent()
         }
