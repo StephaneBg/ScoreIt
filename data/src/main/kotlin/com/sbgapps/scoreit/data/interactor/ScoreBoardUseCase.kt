@@ -26,6 +26,7 @@ class ScoreBoardUseCase(private val cacheRepo: CacheRepo) {
     fun getScoreBoard(): ScoreBoard = scoreBoard ?: cacheRepo.loadScoreBoard().also { scoreBoard = it }
 
     fun saveScoreBoard(scoreBoard: ScoreBoard) {
+        this.scoreBoard = scoreBoard
         cacheRepo.saveScoreBoard(scoreBoard)
     }
 
