@@ -21,8 +21,12 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ActivityScoreboardBinding
+import com.sbgapps.scoreit.app.databinding.DialogPlayerNameBinding
 import com.sbgapps.scoreit.app.ui.prefs.PreferencesViewModel
+import com.sbgapps.scoreit.core.ext.onImeActionDone
 import com.sbgapps.scoreit.core.ui.BaseActivity
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import io.uniflow.androidx.flow.onStates
@@ -44,20 +48,46 @@ class ScoreboardActivity : BaseActivity() {
         setContentView(binding.root)
 
         binding.back.setOnClickListener { onBackPressed() }
-        setupButton(binding.minusScoreOne, -1, PlayerPosition.ONE)
-        setupButton(binding.plusScoreOne, +1, PlayerPosition.ONE)
-        setupButton(binding.minusScoreTwo, -1, PlayerPosition.TWO)
-        setupButton(binding.plusScoreTwo, +1, PlayerPosition.TWO)
+        bindButton(binding.minusScoreOne, -1, PlayerPosition.ONE)
+        bindButton(binding.plusScoreOne, +1, PlayerPosition.ONE)
+        bindButton(binding.minusScoreTwo, -1, PlayerPosition.TWO)
+        bindButton(binding.plusScoreTwo, +1, PlayerPosition.TWO)
         binding.reset.setOnClickListener { scoreBoarViewModel.reset() }
+
+        binding.nameOne.setOnClickListener { displayNameDialog(PlayerPosition.ONE) }
+        binding.nameTwo.setOnClickListener { displayNameDialog(PlayerPosition.TWO) }
 
         onStates(scoreBoarViewModel) { state ->
             state as Content
-            binding.scoreOne.text = state.scoreOne.toString()
-            binding.scoreTwo.text = state.scoreTwo.toString()
+            binding.scoreOne.text = state.scoreBoard.scoreOne.toString()
+            binding.scoreTwo.text = state.scoreBoard.scoreTwo.toString()
+            binding.nameOne.text = state.scoreBoard.nameOne
+            binding.nameTwo.text = state.scoreBoard.nameTwo
         }
     }
 
-    private fun setupButton(button: MaterialButton, increment: Int, player: PlayerPosition) {
+    private fun bindButton(button: MaterialButton, increment: Int, player: PlayerPosition) {
         button.setOnClickListener { scoreBoarViewModel.incrementScore(increment, player) }
+    }
+
+    private fun displayNameDialog(position: PlayerPosition) {
+        val action = { name: String ->
+            if (name.isNotEmpty()) scoreBoarViewModel.setPlayerName(name, position)
+        }
+        val view = DialogPlayerNameBinding.inflate(layoutInflater)
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setView(view.root)
+            .setPositiveButton(R.string.button_action_ok) { _, _ ->
+                action(view.playerName.text.toString())
+            }
+            .create()
+        view.playerName.apply {
+            requestFocus()
+            onImeActionDone {
+                action(text.toString())
+                dialog.dismiss()
+            }
+        }
+        dialog.show()
     }
 }

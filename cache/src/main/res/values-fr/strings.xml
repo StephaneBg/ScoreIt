@@ -16,7 +16,14 @@
 
 <resources>
 
+    <!-- UI -->
+    <string name="default_file_name">Ma première partie</string>
+
     <!-- Belote/Coinche -->
     <string name="belote_first_team_default_name">Eux</string>
     <string name="belote_second_team_default_name">Nous</string>
+
+    <!-- Scoreboard -->
+    <string name="scoreboard_default_name_one">Locaux</string>
+    <string name="scoreboard_default_name_two">Visiteurs</string>
 </resources>

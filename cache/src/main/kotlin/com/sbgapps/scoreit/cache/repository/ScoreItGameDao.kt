@@ -26,16 +26,20 @@ import com.sbgapps.scoreit.data.model.CoincheGame
 import com.sbgapps.scoreit.data.model.Game
 import com.sbgapps.scoreit.data.model.GameType
 import com.sbgapps.scoreit.data.model.Player
+import com.sbgapps.scoreit.data.model.ScoreBoard
 import com.sbgapps.scoreit.data.model.TarotGame
 import com.sbgapps.scoreit.data.model.UniversalGame
-import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 
 class ScoreItGameDao(
     private val context: Context,
     private val preferences: SharedPreferences,
     private val storage: FileStorage,
-    private val gameCacheJsonAdapter: JsonAdapter<Game>
+    moshi: Moshi
 ) {
+
+    private val gameCacheJsonAdapter = moshi.adapter(Game::class.java)
+    private val scoreboardJsonAdapter = moshi.adapter(ScoreBoard::class.java)
 
     fun loadGameOrCreate(gameType: GameType, playerCount: Int): Game {
         val directory = getDirectory(gameType, playerCount)
@@ -96,21 +100,21 @@ class ScoreItGameDao(
     }
 
     private fun getFileName(gameType: GameType, playerCount: Int): String =
-        preferences.getString(getFileNameKey(gameType, playerCount), DEFAULT_FILE_NAME) ?: DEFAULT_FILE_NAME
+        preferences.getString(getFileNameKey(gameType, playerCount), getDefaultFileName()) ?: getDefaultFileName()
 
     private fun getFileNameKey(gameType: GameType, playerCount: Int): String = when (gameType) {
-        GameType.UNIVERSAL -> "key_universal_${playerCount}"
-        GameType.TAROT -> "key_belote"
-        GameType.BELOTE -> "key_coinche"
-        GameType.COINCHE -> "key_tarot_${playerCount}"
+        GameType.UNIVERSAL -> "${UNIVERSAL_KEY}_${playerCount}"
+        GameType.TAROT -> "${TAROT_KEY}_${playerCount}"
+        GameType.BELOTE -> BELOTE_KEY
+        GameType.COINCHE -> COINCHE_KEY
     }
 
     private fun getDirectory(gameType: GameType, playerCount: Int): String {
         val directory = when (gameType) {
-            GameType.UNIVERSAL -> "universal/v2/${playerCount}"
-            GameType.TAROT -> "tarot/v2/${playerCount}"
-            GameType.BELOTE -> "belote/v2"
-            GameType.COINCHE -> "coinche/v2"
+            GameType.UNIVERSAL -> "${UNIVERSAL_PATH}/${playerCount}"
+            GameType.TAROT -> "${TAROT_PATH}/${playerCount}"
+            GameType.BELOTE -> BELOTE_PATH
+            GameType.COINCHE -> COINCHE_PATH
         }
         storage.createDirectory(directory)
         return directory
@@ -145,7 +149,36 @@ class ScoreItGameDao(
     fun getSavedFiles(gameType: GameType, playerCount: Int): List<Pair<String, Long>> =
         storage.getSavedFiles(getDirectory(gameType, playerCount))
 
+    fun loadScoreBoard(): ScoreBoard {
+        storage.createDirectory(SCOREBOARD_PATH)
+        return try {
+            val json = storage.loadFile(SCOREBOARD_PATH, SCOREBOARD_FILENAME)
+            scoreboardJsonAdapter.fromJson(json) ?: error("Can't parse json")
+        } catch (exception: Exception) {
+            ScoreBoard(
+                nameOne = context.getString(R.string.scoreboard_default_name_one),
+                nameTwo = context.getString(R.string.scoreboard_default_name_two)
+            )
+        }
+    }
+
+    fun saveScoreBoard(scoreBoard: ScoreBoard) {
+        val json = scoreboardJsonAdapter.toJson(scoreBoard)
+        storage.saveFile(SCOREBOARD_PATH, SCOREBOARD_FILENAME, json)
+    }
+
+    private fun getDefaultFileName(): String = context.getString(R.string.default_file_name)
+
     companion object {
-        const val DEFAULT_FILE_NAME = "ScoreIt"
+        private const val UNIVERSAL_PATH = "universal/v2"
+        private const val UNIVERSAL_KEY = "universal_key"
+        private const val TAROT_PATH = "tarot/v2"
+        private const val TAROT_KEY = "tarot_key"
+        private const val BELOTE_PATH = "belote/v2"
+        private const val BELOTE_KEY = "belote_key"
+        private const val COINCHE_PATH = "coinche/v2"
+        private const val COINCHE_KEY = "coinche_key"
+        private const val SCOREBOARD_PATH = "scoreboard/v1"
+        private const val SCOREBOARD_FILENAME = "data"
     }
 }

@@ -36,5 +36,5 @@ val uiModule = module {
     viewModel { TarotEditionViewModel(get(), get()) }
     viewModel { BeloteEditionViewModel(get(), get()) }
     viewModel { CoincheEditionViewModel(get(), get()) }
-    viewModel { ScoreBoardViewModel() }
+    viewModel { ScoreBoardViewModel(get()) }
 }

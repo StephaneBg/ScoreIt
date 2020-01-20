@@ -13,16 +13,15 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
+
 <resources>
+    <string name="error_no_connectivity">Aucun réseau</string>
+    <string name="error_server">Le serveur ne répond pas</string>
+    <string name="error_general">Une erreur est survenue</string>
+    <string name="error_retry_action">Réessayer</string>
 
-    <!-- UI -->
-    <string name="default_file_name">My first game</string>
-
-    <!-- Belote/Coinche -->
-    <string name="belote_first_team_default_name">Them</string>
-    <string name="belote_second_team_default_name">Us</string>
-
-    <!-- Scoreboard -->
-    <string name="scoreboard_default_name_one">Home</string>
-    <string name="scoreboard_default_name_two">Guest</string>
+    <string name="settings_light_mode">Thème clair</string>
+    <string name="settings_dark_mode">Thème sombre</string>
+    <string name="settings_battery_mode">Thème en fonction de la batterie</string>
+    <string name="settings_system_mode">Thème en fonction du système</string>
 </resources>

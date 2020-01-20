@@ -17,31 +17,47 @@
 package com.sbgapps.scoreit.app.ui.scoreboard
 
 import com.sbgapps.scoreit.core.ui.BaseViewModel
+import com.sbgapps.scoreit.data.interactor.ScoreBoardUseCase
 import com.sbgapps.scoreit.data.model.PlayerPosition
+import com.sbgapps.scoreit.data.model.ScoreBoard
 import io.uniflow.core.flow.UIState
 import io.uniflow.core.flow.getStateAs
 
-class ScoreBoardViewModel : BaseViewModel() {
+class ScoreBoardViewModel(private val useCase: ScoreBoardUseCase) : BaseViewModel() {
 
     init {
-        reset()
+        setState { Content(useCase.getScoreBoard()) }
     }
 
     fun incrementScore(increment: Int, player: PlayerPosition) {
         setState {
-            with(getStateAs<Content>()) {
-                if (PlayerPosition.ONE == player) {
-                    copy(scoreOne = scoreOne + increment)
-                } else {
-                    copy(scoreTwo = scoreTwo + increment)
-                }
+            val currentInfo = getStateAs<Content>().scoreBoard
+            val newInfo = if (PlayerPosition.ONE == player) {
+                currentInfo.copy(scoreOne = currentInfo.scoreOne + increment)
+            } else {
+                currentInfo.copy(scoreTwo = currentInfo.scoreTwo + increment)
             }
+            useCase.saveScoreBoard(newInfo)
+            Content(newInfo)
+        }
+    }
+
+    fun setPlayerName(name: String, player: PlayerPosition) {
+        setState {
+            val currentInfo = getStateAs<Content>().scoreBoard
+            val newInfo = if (PlayerPosition.ONE == player) {
+                currentInfo.copy(nameOne = name)
+            } else {
+                currentInfo.copy(nameTwo = name)
+            }
+            useCase.saveScoreBoard(newInfo)
+            Content(newInfo)
         }
     }
 
     fun reset() {
-        setState { Content() }
+        setState { Content(useCase.reset()) }
     }
 }
 
-data class Content(val scoreOne: Int = 0, val scoreTwo: Int = 0) : UIState()
+data class Content(val scoreBoard: ScoreBoard) : UIState()

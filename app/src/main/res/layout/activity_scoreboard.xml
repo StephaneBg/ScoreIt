@@ -27,14 +27,33 @@
         style="?textAppearanceHeadline5"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="end|center_vertical"
+        android:layout_marginStart="@dimen/margin_padding_size_medium"
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
+        android:gravity="center"
+        android:maxLines="1"
+        app:autoSizePresetSizes="@array/scoreboard_autosize_text_sizes"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@id/nameOne"
+        app:layout_constraintEnd_toStartOf="@id/dots"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="🐼"
+        />
+
+    <TextView
+        android:id="@+id/nameOne"
+        style="?textAppearanceHeadline6"
+        android:layout_width="0dp"
+        android:layout_height="92dp"
+        android:layout_marginStart="@dimen/margin_padding_size_medium"
+        android:gravity="center"
         android:maxLines="1"
         app:autoSizePresetSizes="@array/scoreboard_autosize_text_sizes"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@id/minusScoreOne"
         app:layout_constraintEnd_toStartOf="@id/dots"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scoreOne"
         tools:text="🐼"
         />
 
@@ -46,7 +65,8 @@
         android:text="-1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/plusScoreOne"
-        app:layout_constraintStart_toStartOf="@id/scoreOne"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameOne"
         tools:ignore="HardcodedText"
         />
 
@@ -59,6 +79,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/scoreOne"
         app:layout_constraintStart_toEndOf="@id/minusScoreOne"
+        app:layout_constraintTop_toBottomOf="@id/nameOne"
         tools:ignore="HardcodedText"
         />
 
@@ -67,14 +88,33 @@
         style="?textAppearanceHeadline5"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="start|center_vertical"
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
+        android:layout_marginEnd="@dimen/margin_padding_size_medium"
+        android:gravity="center"
+        android:maxLines="1"
+        app:autoSizePresetSizes="@array/scoreboard_autosize_text_sizes"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@id/nameTwo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dots"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="🐼"
+        />
+
+    <TextView
+        android:id="@+id/nameTwo"
+        style="?textAppearanceHeadline6"
+        android:layout_width="0dp"
+        android:layout_height="92dp"
+        android:layout_marginEnd="@dimen/margin_padding_size_medium"
+        android:gravity="center"
         android:maxLines="1"
         app:autoSizePresetSizes="@array/scoreboard_autosize_text_sizes"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@id/minusScoreTwo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/dots"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scoreTwo"
         tools:text="🐼"
         />
 
@@ -87,6 +127,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/plusScoreTwo"
         app:layout_constraintStart_toStartOf="@id/scoreTwo"
+        app:layout_constraintTop_toBottomOf="@id/nameTwo"
         tools:ignore="HardcodedText"
         />
 
@@ -99,6 +140,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/minusScoreTwo"
+        app:layout_constraintTop_toBottomOf="@id/nameTwo"
         tools:ignore="HardcodedText"
         />
 
@@ -107,6 +149,7 @@
         style="?textAppearanceHeadline4"
         android:layout_width="96dp"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
         android:gravity="center"
         android:text=":"
         app:autoSizeTextType="uniform"
