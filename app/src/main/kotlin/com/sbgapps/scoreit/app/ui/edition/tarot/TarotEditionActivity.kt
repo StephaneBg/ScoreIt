@@ -106,10 +106,10 @@ class TarotEditionActivity : EditionActivity() {
                     binding.oudlersButtonGroup.addOnButtonCheckedListener(buttonCheckedListener)
 
                     binding.points.text = state.points.toString()
-                    setupButton(binding.pointsPlusTen, 10, state.stepPointsByTen.canAdd)
-                    setupButton(binding.pointsMinusTen, -10, state.stepPointsByTen.canSubtract)
-                    setupButton(binding.pointsPlusOne, 1, state.stepPointsByOne.canAdd)
-                    setupButton(binding.pointsMinusOne, -1, state.stepPointsByOne.canSubtract)
+                    bindButton(binding.pointsPlusTen, 10, state.stepPointsByTen.canAdd)
+                    bindButton(binding.pointsMinusTen, -10, state.stepPointsByTen.canSubtract)
+                    bindButton(binding.pointsPlusOne, 1, state.stepPointsByOne.canAdd)
+                    bindButton(binding.pointsMinusOne, -1, state.stepPointsByOne.canSubtract)
 
                     binding.addBonus.isVisible = state.availableBonuses.isNotEmpty()
                     binding.addBonus.setOnClickListener {
@@ -151,7 +151,7 @@ class TarotEditionActivity : EditionActivity() {
         viewModel.setOudlers(oudlers)
     }
 
-    private fun setupButton(button: MaterialButton, increment: Int, enabled: Boolean) {
+    private fun bindButton(button: MaterialButton, increment: Int, enabled: Boolean) {
         button.apply {
             isEnabled = enabled
             setOnClickListener {

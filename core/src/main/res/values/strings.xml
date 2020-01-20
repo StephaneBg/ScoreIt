@@ -15,15 +15,15 @@
   -->
 
 <resources>
-    <string name="error_no_connectivity">Aucun réseau</string>
-    <string name="error_server">Le serveur ne répond pas</string>
-    <string name="error_general">Une erreur est survenue</string>
-    <string name="error_retry_action">Réessayer</string>
+    <string name="error_no_connectivity">No network</string>
+    <string name="error_server">Server doesn\'t answer</string>
+    <string name="error_general">An error occurred</string>
+    <string name="error_retry_action">Retry</string>
 
-    <string name="settings_light_mode">Thème clair</string>
-    <string name="settings_dark_mode">Thème sombre</string>
-    <string name="settings_battery_mode">Thème en fonction de la batterie</string>
-    <string name="settings_system_mode">Thème en fonction du système</string>
+    <string name="settings_light_mode">Light</string>
+    <string name="settings_dark_mode">Dark</string>
+    <string name="settings_battery_mode">Follows battery</string>
+    <string name="settings_system_mode">Follows system</string>
 
     <string-array name="settings_theme_modes">
         <item>@string/settings_light_mode</item>

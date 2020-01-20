@@ -1,0 +1,263 @@
+<!--
+  ~ Copyright 2019 Stéphane Baiget
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="HardcodedText"
+    >
+
+    <TextView
+        android:id="@+id/score"
+        style="?textAppearanceHeadline2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding_size_medium"
+        android:gravity="center"
+        android:maxLines="1"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toStartOf="@id/backspace"
+        app:layout_constraintStart_toEndOf="@id/scoreSpace"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="🐼"
+        />
+
+    <ImageView
+        android:id="@+id/backspace"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_padding_size_medium"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="@dimen/margin_padding_size_medium"
+        app:layout_constraintBottom_toTopOf="@id/key3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_backspace_24dp"
+        tools:ignore="ContentDescription"
+        />
+
+    <ImageView
+        android:id="@+id/scoreSpace"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_padding_size_medium"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="@dimen/margin_padding_size_medium"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/key1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_backspace_24dp"
+        tools:ignore="ContentDescription"
+        />
+
+    <TextView
+        android:id="@+id/key1"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_size_small"
+        android:text="1"
+        app:layout_constraintEnd_toStartOf="@id/key2"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/score"
+        />
+
+    <TextView
+        android:id="@+id/key2"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_size_small"
+        android:text="2"
+        app:layout_constraintEnd_toStartOf="@id/key3"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/key1"
+        app:layout_constraintTop_toBottomOf="@id/score"
+        />
+
+
+    <TextView
+        android:id="@+id/key3"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_size_small"
+        android:text="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/key2"
+        app:layout_constraintTop_toBottomOf="@id/score"
+        />
+
+    <TextView
+        android:id="@+id/key4"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_size_small"
+        android:text="4"
+        app:layout_constraintEnd_toStartOf="@id/key5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/key1"
+        />
+
+    <TextView
+        android:id="@+id/key5"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_size_small"
+        android:text="5"
+        app:layout_constraintEnd_toStartOf="@id/key6"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/key4"
+        app:layout_constraintTop_toBottomOf="@id/key2"
+        />
+
+    <TextView
+        android:id="@+id/key6"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_size_small"
+        android:text="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/key5"
+        app:layout_constraintTop_toBottomOf="@id/key3"
+        />
+
+    <TextView
+        android:id="@+id/key7"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_size_small"
+        android:text="7"
+        app:layout_constraintEnd_toStartOf="@id/key8"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/key4"
+        />
+
+    <TextView
+        android:id="@+id/key8"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_size_small"
+        android:text="8"
+        app:layout_constraintEnd_toStartOf="@id/key9"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/key7"
+        app:layout_constraintTop_toBottomOf="@id/key5"
+        />
+
+    <TextView
+        android:id="@+id/key9"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_size_small"
+        android:text="9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/key8"
+        app:layout_constraintTop_toBottomOf="@id/key6"
+        />
+
+    <TextView
+        android:id="@+id/keySign"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_padding_size_medium"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_size_small"
+        android:text="±"
+        app:layout_constraintBottom_toTopOf="@id/done"
+        app:layout_constraintEnd_toStartOf="@id/key0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/key7"
+        />
+
+    <TextView
+        android:id="@+id/key0"
+        style="?textAppearanceHeadline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_size_small"
+        android:text="0"
+        app:layout_constraintEnd_toStartOf="@id/space"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/keySign"
+        app:layout_constraintTop_toBottomOf="@id/key8"
+        />
+
+    <TextView
+        android:id="@+id/space"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="@id/key0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/key0"
+        app:layout_constraintTop_toBottomOf="@id/key9"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_padding_size_medium"
+        android:layout_marginBottom="@dimen/margin_padding_size_medium"
+        android:text="@string/button_action_ok"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

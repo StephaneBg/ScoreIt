@@ -39,8 +39,7 @@ import org.koin.dsl.module
 val cacheModule = module {
 
     single { PreferenceManager.getDefaultSharedPreferences(androidContext()) }
-    single { createMoshi().adapter(Game::class.java) }
-    single { ScoreItGameDao(androidContext(), get(), get(), get()) }
+    single { ScoreItGameDao(androidContext(), get(), get(), createMoshi()) }
     single<FileStorage> { ScoreItFileStorage(androidContext()) }
     single<CacheRepo> { ScoreItCacheRepo(get(), get()) }
     single<PreferencesRepo> { ScoreItPreferencesRepo(get()) }

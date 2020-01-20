@@ -14,6 +14,21 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.data.repository
+package com.sbgapps.scoreit.data.interactor
 
-interface RemoteRepo
+import com.sbgapps.scoreit.data.model.ScoreBoard
+import com.sbgapps.scoreit.data.repository.CacheRepo
+
+class ScoreBoardUseCase(private val cacheRepo: CacheRepo) {
+
+    private var scoreBoard: ScoreBoard? = null
+
+    fun getScoreBoard(): ScoreBoard = scoreBoard ?: cacheRepo.loadScoreBoard().also { scoreBoard = it }
+
+    fun saveScoreBoard(scoreBoard: ScoreBoard) {
+        this.scoreBoard = scoreBoard
+        cacheRepo.saveScoreBoard(scoreBoard)
+    }
+
+    fun reset(): ScoreBoard = getScoreBoard().copy(scoreOne = 0, scoreTwo = 0)
+}

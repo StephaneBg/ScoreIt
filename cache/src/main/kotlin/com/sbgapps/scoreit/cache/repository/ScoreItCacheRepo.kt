@@ -17,6 +17,8 @@
 package com.sbgapps.scoreit.cache.repository
 
 import com.sbgapps.scoreit.data.model.Game
+import com.sbgapps.scoreit.data.model.SavedGameInfo
+import com.sbgapps.scoreit.data.model.ScoreBoard
 import com.sbgapps.scoreit.data.repository.CacheRepo
 import com.sbgapps.scoreit.data.repository.PreferencesRepo
 
@@ -31,11 +33,11 @@ class ScoreItCacheRepo(
         name?.let {
             gameDao.setFileName(gameType, count, it)
         }
-        return gameDao.getCurrentGame(gameType, count)
+        return gameDao.loadGameOrCreate(gameType, count)
     }
 
-    override fun createGame(name: String): Game = gameDao.createGame(
-        preferencesRepo.getGameType(),
+    override fun createGame(currentGame: Game, name: String): Game = gameDao.createGame(
+        currentGame,
         preferencesRepo.getPlayerCount(),
         name
     )
@@ -44,8 +46,21 @@ class ScoreItCacheRepo(
         gameDao.saveGame(game, preferencesRepo.getPlayerCount())
     }
 
-    override fun getSavedFiles(): List<Pair<String, Long>> = gameDao.getSavedFiles(
-        preferencesRepo.getGameType(),
-        preferencesRepo.getPlayerCount()
-    )
+    override fun getSavedGames(): List<SavedGameInfo> {
+        val gameType = preferencesRepo.getGameType()
+        val playerCount = preferencesRepo.getPlayerCount()
+        val files = gameDao.getSavedFiles(gameType, playerCount)
+        return files.mapNotNull { (fileName, date) ->
+            gameDao.loadGame(gameType, playerCount, fileName)?.let { game ->
+                val players = game.players.joinToString(" - ") { it.name }
+                SavedGameInfo(fileName, date, players)
+            }
+        }
+    }
+
+    override fun loadScoreBoard(): ScoreBoard = gameDao.loadScoreBoard()
+
+    override fun saveScoreBoard(scoreBoard: ScoreBoard) {
+        gameDao.saveScoreBoard(scoreBoard)
+    }
 }

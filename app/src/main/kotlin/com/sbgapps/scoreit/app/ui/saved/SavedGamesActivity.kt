@@ -24,8 +24,9 @@ import com.sbgapps.scoreit.core.ui.BaseActivity
 import com.sbgapps.scoreit.core.widget.DividerItemDecoration
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.ZoneOffset
+import org.threeten.bp.Instant
+import org.threeten.bp.ZoneId
+import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
 class SavedGamesActivity : BaseActivity() {
@@ -40,14 +41,15 @@ class SavedGamesActivity : BaseActivity() {
         setContentView(binding.root)
         setupActionBar(binding.toolbar)
 
-        val adapters = gameViewModel.getSavedFiles().map {
-            val (name, duration) = it
-            val lastModified = LocalDateTime.ofEpochSecond(duration / 1000, 0, ZoneOffset.UTC)
+        val adapters = gameViewModel.getSavedFiles().map { (name, duration, players) ->
+            val instant = Instant.ofEpochMilli(duration)
+            val lastModified = ZonedDateTime.ofInstant(instant, ZoneId.systemDefault())
                 .format(DateTimeFormatter.ofPattern(getString(R.string.local_date_pattern)))
                 .capitalize()
             SavedGameAdapter(
                 name,
                 lastModified,
+                players,
                 ::onGameSelected
             )
         }

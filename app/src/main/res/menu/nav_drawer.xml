@@ -18,7 +18,7 @@
 
     <group
         android:id="@+id/games"
-        android:checkableBehavior="none"
+        android:checkableBehavior="single"
         >
         <item
             android:id="@+id/universal"
@@ -39,6 +39,16 @@
     </group>
 
     <group
+        android:id="@+id/other"
+        android:checkableBehavior="none"
+        >
+        <item
+            android:id="@+id/scoreboard"
+            android:title="@string/drawer_game_scoreboard"
+            />
+    </group>
+
+    <group
         android:id="@+id/app"
         android:checkableBehavior="none"
         >
@@ -50,9 +60,5 @@
             android:id="@+id/about"
             android:title="@string/drawer_about"
             />
-        <!--        <item-->
-        <!--            android:id="@+id/thanks"-->
-        <!--            android:title="@string/drawer_thank"-->
-        <!--            />-->
     </group>
 </menu>

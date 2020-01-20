@@ -51,7 +51,7 @@ class UniversalEditionActivity : EditionActivity() {
             when (state) {
                 is UniversalEditionState.Content -> {
                     val adapters = state.players.mapIndexed { index, player ->
-                        UniversalEditionAdapter(player, state.results[index], ::onScoreEdited)
+                        UniversalEditionAdapter(player, state.results[index], ::onScoreIncremented, ::onScoreEntered)
                     }
                     val diff = DiffUtil.calculateDiff(DiffCallback(lapAdapter.items.asListOfType(), adapters))
                     lapAdapter.updateItems(adapters, diff)
@@ -74,8 +74,12 @@ class UniversalEditionActivity : EditionActivity() {
         else -> super.onOptionsItemSelected(item)
     }
 
-    private fun onScoreEdited(position: Int, increment: Int) {
-        viewModel.increment(position, increment)
+    private fun onScoreIncremented(position: Int, increment: Int) {
+        viewModel.incrementScore(increment, position)
+    }
+
+    private fun onScoreEntered(position: Int) {
+        UniversalInputScore.newInstance(position).show(supportFragmentManager, null)
     }
 
     inner class DiffCallback(

@@ -65,10 +65,10 @@ class BeloteEditionActivity : EditionActivity() {
 
                     binding.lapInfo.text = state.lapInfo.build(this)
 
-                    setupButton(binding.pointsPlusTen, 10, state.stepPointsByTen.canAdd)
-                    setupButton(binding.pointsMinusTen, -10, state.stepPointsByTen.canSubtract)
-                    setupButton(binding.pointsPlusOne, 1, state.stepPointsByOne.canAdd)
-                    setupButton(binding.pointsMinusOne, -1, state.stepPointsByOne.canSubtract)
+                    bindButton(binding.pointsPlusTen, 10, state.stepPointsByTen.canAdd)
+                    bindButton(binding.pointsMinusTen, -10, state.stepPointsByTen.canSubtract)
+                    bindButton(binding.pointsPlusOne, 1, state.stepPointsByOne.canAdd)
+                    bindButton(binding.pointsMinusOne, -1, state.stepPointsByOne.canSubtract)
 
                     Timber.d("Team points are ${state.results}")
                     val (teamOne, teamTwo) = state.results
@@ -115,7 +115,7 @@ class BeloteEditionActivity : EditionActivity() {
         }
     }
 
-    private fun setupButton(button: MaterialButton, increment: Int, enabled: Boolean) {
+    private fun bindButton(button: MaterialButton, increment: Int, enabled: Boolean) {
         button.apply {
             isEnabled = enabled
             setOnClickListener {

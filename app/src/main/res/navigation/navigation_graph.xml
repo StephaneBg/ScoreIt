@@ -62,6 +62,10 @@
             android:id="@+id/action_navDrawerFragment_to_aboutActivity"
             app:destination="@id/aboutActivity"
             />
+        <action
+            android:id="@+id/action_navDrawerFragment_to_scoreboardActivity"
+            app:destination="@id/scoreboardActivity"
+            />
     </dialog>
 
     <dialog
@@ -92,5 +96,9 @@
     <activity
         android:id="@+id/aboutActivity"
         android:name="com.sbgapps.scoreit.app.ui.AboutActivity"
+        />
+    <activity
+        android:id="@+id/scoreboardActivity"
+        android:name="com.sbgapps.scoreit.app.ui.scoreboard.ScoreboardActivity"
         />
 </navigation>

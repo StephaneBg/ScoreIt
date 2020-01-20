@@ -14,19 +14,10 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.data.repository
+package com.sbgapps.scoreit.data.model
 
-import com.sbgapps.scoreit.data.model.Game
-import com.sbgapps.scoreit.data.model.SavedGameInfo
-import com.sbgapps.scoreit.data.model.ScoreBoard
-
-interface CacheRepo {
-
-    fun loadGame(name: String? = null): Game
-    fun saveGame(game: Game)
-    fun createGame(currentGame: Game, name: String): Game
-    fun getSavedGames(): List<SavedGameInfo>
-
-    fun loadScoreBoard(): ScoreBoard
-    fun saveScoreBoard(scoreBoard: ScoreBoard)
-}
+data class SavedGameInfo(
+    val fileName: String,
+    val date: Long,
+    val players: String
+)

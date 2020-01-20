@@ -15,17 +15,13 @@
   -->
 
 <resources>
-    <item name="front" type="id" />
-    <item name="back" type="id" />
+    <string name="error_no_connectivity">Aucun réseau</string>
+    <string name="error_server">Le serveur ne répond pas</string>
+    <string name="error_general">Une erreur est survenue</string>
+    <string name="error_retry_action">Réessayer</string>
 
-    <item name="key0" type="id" />
-    <item name="key1" type="id" />
-    <item name="key2" type="id" />
-    <item name="key3" type="id" />
-    <item name="key4" type="id" />
-    <item name="key5" type="id" />
-    <item name="key6" type="id" />
-    <item name="key7" type="id" />
-    <item name="key8" type="id" />
-    <item name="key9" type="id" />
+    <string name="settings_light_mode">Thème clair</string>
+    <string name="settings_dark_mode">Thème sombre</string>
+    <string name="settings_battery_mode">Thème en fonction de la batterie</string>
+    <string name="settings_system_mode">Thème en fonction du système</string>
 </resources>

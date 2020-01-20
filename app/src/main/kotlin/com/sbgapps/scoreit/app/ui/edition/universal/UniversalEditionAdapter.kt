@@ -26,7 +26,8 @@ import com.sbgapps.scoreit.data.model.Player
 class UniversalEditionAdapter(
     val player: Player,
     val score: Int,
-    private val callback: (Int, Int) -> Unit
+    private val incrementCallback: (Int, Int) -> Unit,
+    private val inputCallback: (Int) -> Unit
 ) : ItemAdapter(R.layout.list_item_edition_universal) {
 
     private lateinit var binding: ListItemEditionUniversalBinding
@@ -37,20 +38,24 @@ class UniversalEditionAdapter(
             text = player.name
             setTextColor(player.color)
         }
-        initButton(binding.pointsPlusOne, viewHolder.adapterPosition, 1)
-        initButton(binding.pointsPlusFive, viewHolder.adapterPosition, 5)
-        initButton(binding.pointsPlusTen, viewHolder.adapterPosition, 10)
-        initButton(binding.pointsPlusHundred, viewHolder.adapterPosition, 100)
-        initButton(binding.pointsMinusOne, viewHolder.adapterPosition, -1)
-        initButton(binding.pointsMinusFive, viewHolder.adapterPosition, -5)
-        initButton(binding.pointsMinusTen, viewHolder.adapterPosition, -10)
-        initButton(binding.pointsMinusHundred, viewHolder.adapterPosition, -100)
-        binding.score.text = score.toString()
+        val position = viewHolder.adapterPosition
+        initButton(binding.pointsPlusOne, position, 1)
+        initButton(binding.pointsPlusFive, position, 5)
+        initButton(binding.pointsPlusTen, position, 10)
+        initButton(binding.pointsPlusHundred, position, 100)
+        initButton(binding.pointsMinusOne, position, -1)
+        initButton(binding.pointsMinusFive, position, -5)
+        initButton(binding.pointsMinusTen, position, -10)
+        initButton(binding.pointsMinusHundred, position, -100)
+        binding.score.apply {
+            text = score.toString()
+            setOnClickListener { inputCallback(position) }
+        }
     }
 
     private fun initButton(button: MaterialButton, position: Int, increment: Int) {
         button.setOnClickListener {
-            callback(position, increment)
+            incrementCallback(position, increment)
         }
     }
 }

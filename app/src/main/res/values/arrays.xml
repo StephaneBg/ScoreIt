@@ -64,4 +64,33 @@
         <item>@color/md_brown_500</item>
         <item>@color/md_blue_grey_500</item>
     </integer-array>
+
+    <array name="scoreboard_autosize_text_sizes">
+        <item>10sp</item>
+        <item>12sp</item>
+        <item>20sp</item>
+        <item>40sp</item>
+        <item>50sp</item>
+        <item>80sp</item>
+        <item>100sp</item>
+        <item>150sp</item>
+        <item>200sp</item>
+        <item>300sp</item>
+        <item>400sp</item>
+        <item>500sp</item>
+        <item>600sp</item>
+    </array>
+
+    <array name="input_score_key_ids">
+        <item>@id/key0</item>
+        <item>@id/key1</item>
+        <item>@id/key2</item>
+        <item>@id/key3</item>
+        <item>@id/key4</item>
+        <item>@id/key5</item>
+        <item>@id/key6</item>
+        <item>@id/key7</item>
+        <item>@id/key8</item>
+        <item>@id/key9</item>
+    </array>
 </resources>

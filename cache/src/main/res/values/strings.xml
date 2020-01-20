@@ -15,7 +15,14 @@
   -->
 <resources>
 
+    <!-- UI -->
+    <string name="default_file_name">My first game</string>
+
     <!-- Belote/Coinche -->
     <string name="belote_first_team_default_name">Them</string>
     <string name="belote_second_team_default_name">Us</string>
+
+    <!-- Scoreboard -->
+    <string name="scoreboard_default_name_one">Home</string>
+    <string name="scoreboard_default_name_two">Guest</string>
 </resources>
