@@ -67,7 +67,7 @@
             android:label="@string/title_activity_about"
             />
         <activity
-            android:name=".ui.saved.SavedGamesActivity"
+            android:name=".ui.saved.SavedGameActivity"
             android:label="@string/title_activity_saved_games"
             />
         <activity

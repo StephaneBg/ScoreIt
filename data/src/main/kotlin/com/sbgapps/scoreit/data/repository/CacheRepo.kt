@@ -29,4 +29,6 @@ interface CacheRepo {
 
     fun loadScoreBoard(): ScoreBoard
     fun saveScoreBoard(scoreBoard: ScoreBoard)
+    fun removeGame(fileName: String)
+    fun renameGame(oldName: String, newName: String)
 }

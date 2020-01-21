@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.data.model
+package com.sbgapps.scoreit.app.model
 
-data class SavedGameInfo(
+data class SavedGame(
     val fileName: String,
     val players: String,
-    val timeStamp: Long
+    val date: String
 )

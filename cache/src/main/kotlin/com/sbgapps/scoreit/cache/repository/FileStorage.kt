@@ -24,26 +24,39 @@ interface FileStorage {
     fun saveFile(directoryName: String, fileName: String, data: String)
     fun createDirectory(directoryName: String)
     fun getSavedFiles(directoryName: String): List<Pair<String, Long>>
+    fun removeFile(directoryName: String, fileName: String)
+    fun renameFile(directoryName: String, oldFileName: String, newFileName: String)
 }
 
 class ScoreItFileStorage(context: Context) : FileStorage {
 
     private val storage: Storage = Storage(context)
-    private val internalStorageDirectory = storage.internalFilesDirectory
+    private val internalDirectory = storage.internalFilesDirectory
 
     override fun loadFile(directoryName: String, fileName: String): String =
-        storage.readTextFile("$internalStorageDirectory/$directoryName/$fileName")
+        storage.readTextFile("$internalDirectory/$directoryName/$fileName")
 
     override fun saveFile(directoryName: String, fileName: String, data: String) {
-        storage.createFile("$internalStorageDirectory/$directoryName/$fileName", data)
+        storage.createFile("$internalDirectory/$directoryName/$fileName", data)
     }
 
     override fun createDirectory(directoryName: String) {
-        storage.createDirectory("$internalStorageDirectory/$directoryName")
+        storage.createDirectory("$internalDirectory/$directoryName")
     }
 
     override fun getSavedFiles(directoryName: String): List<Pair<String, Long>> =
-        storage.getFiles("$internalStorageDirectory/$directoryName").map {
+        storage.getFiles("$internalDirectory/$directoryName").map {
             it.name to it.lastModified()
         }
+
+    override fun removeFile(directoryName: String, fileName: String) {
+        storage.deleteFile("$internalDirectory/$directoryName/$fileName")
+    }
+
+    override fun renameFile(directoryName: String, oldFileName: String, newFileName: String) {
+        storage.rename(
+            "$internalDirectory/$directoryName/$oldFileName",
+            "$internalDirectory/$directoryName/$newFileName"
+        )
+    }
 }

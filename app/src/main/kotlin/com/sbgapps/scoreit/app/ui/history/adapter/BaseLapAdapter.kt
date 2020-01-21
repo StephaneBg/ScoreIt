@@ -16,19 +16,18 @@
 
 package com.sbgapps.scoreit.app.ui.history.adapter
 
-import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
 import com.sbgapps.scoreit.core.widget.ItemAdapter
 
-open class BaseLapAdapter(@LayoutRes layoutId: Int) : ItemAdapter(layoutId) {
+open class BaseLapAdapter(
+    @LayoutRes layoutId: Int,
+    private val clickCallback: () -> Unit
+) : ItemAdapter(layoutId) {
 
     @CallSuper
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
-        viewHolder.itemView.setOnClickListener {
-            Toast.makeText(it.context, R.string.history_lap_click_hint, Toast.LENGTH_SHORT).show()
-        }
+        viewHolder.itemView.setOnClickListener { clickCallback() }
     }
 }
