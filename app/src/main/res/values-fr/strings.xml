@@ -47,6 +47,7 @@
     <string name="tarot_oudler_excuse">Excuse</string>
     <string name="tarot_oudler_petit">Petit</string>
     <string name="tarot_oudler_twentyone">Vingt et un</string>
+    <string name="tarot_header_results">Résultats</string>
 
     <!-- Belote -->
     <string name="belote_header_taker">Preneurs</string>

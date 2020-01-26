@@ -46,88 +46,119 @@
             android:layout_height="wrap_content"
             >
 
-            <TextView
-                android:id="@+id/headerTaker"
-                style="?textAppearanceOverline"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutTaker"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_padding_size_medium"
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
-                android:text="@string/tarot_header_scorer"
+                android:layout_marginEnd="@dimen/margin_padding_size_medium"
+                android:hint="@string/tarot_header_scorer"
+                android:labelFor="@+id/autoCompleteTextViewTaker"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                />
+                >
 
-            <TextView
-                android:id="@+id/taker"
-                style="?textAppearanceHeadline6"
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextViewTaker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutPartner"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_padding_size_medium"
-                android:layout_marginEnd="@dimen/margin_padding_size_medium"
-                android:background="?selectableItemBackground"
-                android:drawableEnd="@drawable/ic_arrow_drop_down_24dp"
-                android:padding="@dimen/margin_padding_size_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/headerTaker"
-                tools:text="Riri"
-                />
-
-            <TextView
-                android:id="@+id/headerPartner"
-                style="?textAppearanceOverline"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_padding_size_medium"
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
-                android:text="@string/tarot_header_partner"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/taker"
-                />
-
-            <TextView
-                android:id="@+id/partner"
-                style="?textAppearanceHeadline6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_padding_size_medium"
                 android:layout_marginEnd="@dimen/margin_padding_size_medium"
-                android:background="?selectableItemBackground"
-                android:drawableEnd="@drawable/ic_arrow_drop_down_24dp"
-                android:padding="@dimen/margin_padding_size_medium"
+                android:hint="@string/tarot_header_partner"
+                android:labelFor="@+id/autoCompleteTextViewPartner"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/headerPartner"
-                tools:text="Fifi"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutTaker"
+                >
 
-            <TextView
-                android:id="@+id/headerBid"
-                style="?textAppearanceOverline"
-                android:layout_width="wrap_content"
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextViewPartner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutBid"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_padding_size_medium"
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
-                android:text="@string/tarot_header_bid"
+                android:layout_marginEnd="@dimen/margin_padding_size_medium"
+                android:hint="@string/tarot_header_bid"
+                android:labelFor="@+id/autoCompleteTextViewBid"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/partner"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPartner"
+                >
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextViewBid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/margin_padding_size_medium"
+                android:layout_marginEnd="@dimen/margin_padding_size_small"
+                android:background="?attr/dividerHorizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/textView"
+                app:layout_constraintEnd_toStartOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView"
                 />
 
             <TextView
-                android:id="@+id/bid"
-                style="?textAppearanceHeadline6"
-                android:layout_width="0dp"
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_padding_size_medium"
+                android:layout_marginTop="@dimen/margin_padding_size_large"
                 android:layout_marginEnd="@dimen/margin_padding_size_medium"
-                android:background="?selectableItemBackground"
-                android:drawableEnd="@drawable/ic_arrow_drop_down_24dp"
-                android:padding="@dimen/margin_padding_size_medium"
+                android:text="@string/tarot_header_results"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/headerBid"
-                tools:text="@string/tarot_bid_take"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBid"
+                />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/margin_padding_size_small"
+                android:layout_marginEnd="@dimen/margin_padding_size_medium"
+                android:background="?attr/dividerHorizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="@+id/textView"
                 />
 
             <TextView
@@ -139,7 +170,7 @@
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
                 android:text="@string/tarot_header_oudlers"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bid"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
                 />
 
             <com.google.android.material.button.MaterialButtonToggleGroup

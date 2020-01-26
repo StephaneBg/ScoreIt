@@ -21,10 +21,11 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ActivityEditionTarotBinding
 import com.sbgapps.scoreit.app.databinding.ListItemEditionBonusBinding
@@ -52,48 +53,35 @@ class TarotEditionActivity : EditionActivity() {
         onStates(viewModel) { state ->
             when (state) {
                 is TarotEditionState.Content -> {
-                    binding.taker.text = state.players[state.taker.index].name
-                    binding.taker.setOnClickListener {
-                        MaterialAlertDialogBuilder(this)
-                            .setSingleChoiceItems(
-                                state.players.map { it.name }.toTypedArray(),
-                                state.taker.index
-                            ) { dialog, which ->
-                                viewModel.setTaker(PlayerPosition.fromIndex(which))
-                                dialog.dismiss()
-                            }
-                            .show()
+
+                    // taker
+                    binding.autoCompleteTextViewTaker.setText(state.players[state.taker.index].name)
+                    setupTextField(binding.autoCompleteTextViewTaker, state.players.map { it.name }.toTypedArray()) {
+                        viewModel.setTaker(PlayerPosition.fromIndex(it))
                     }
 
+                    // partner
                     if (PlayerPosition.NONE == state.partner) {
-                        binding.headerPartner.isVisible = false
-                        binding.partner.isVisible = false
+                        binding.autoCompleteTextViewPartner.isVisible = false
+                        binding.textInputLayoutPartner.isVisible = false
                     } else {
-                        binding.partner.text = state.players[state.partner.index].name
-                        binding.partner.setOnClickListener {
-                            MaterialAlertDialogBuilder(this)
-                                .setSingleChoiceItems(
-                                    state.players.map { it.name }.toTypedArray(),
-                                    state.partner.index
-                                ) { dialog, which ->
-                                    viewModel.setPartner(PlayerPosition.fromIndex(which))
-                                    dialog.dismiss()
-                                }
-                                .show()
+                        binding.autoCompleteTextViewPartner.setText(state.players[state.partner.index].name)
+                        setupTextField(
+                            binding.autoCompleteTextViewPartner,
+                            state.players.map { it.name }.toTypedArray()
+                        ) {
+                            viewModel.setPartner(PlayerPosition.fromIndex(it))
                         }
                     }
 
-                    binding.bid.text = getString(state.bid.resId)
-                    binding.bid.setOnClickListener {
-                        MaterialAlertDialogBuilder(this)
-                            .setSingleChoiceItems(
-                                R.array.tarot_bids,
-                                state.bid.ordinal
-                            ) { dialog, which ->
-                                viewModel.setBid(TarotBidValue.values()[which])
-                                dialog.dismiss()
-                            }
-                            .show()
+                    // bids
+                    val strings = resources.getTextArray(R.array.tarot_bids)
+                    binding.autoCompleteTextViewBid.setText(strings[state.bid.ordinal])
+                    setupTextField(
+                        binding.autoCompleteTextViewBid,
+                        strings
+                    ) {
+                        viewModel.setBid(TarotBidValue.values()[it])
                     }
 
                     binding.buttonPetit.text = getString(R.string.tarot_oudler_petit)
@@ -157,6 +145,23 @@ class TarotEditionActivity : EditionActivity() {
             setOnClickListener {
                 viewModel.incrementScore(increment)
             }
+        }
+    }
+
+    private fun setupTextField(
+        autoCompleteTextView: AutoCompleteTextView,
+        content: Array<CharSequence>,
+        function: (position: Int) -> Unit
+    ) {
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.dropdown_menu_popup_item,
+            content
+        )
+        autoCompleteTextView.setAdapter(adapter)
+
+        binding.autoCompleteTextViewTaker.setOnItemClickListener { _, _, position, _ ->
+            function.invoke(position)
         }
     }
 

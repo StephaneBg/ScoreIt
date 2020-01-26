@@ -17,68 +17,59 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
 
-    <TextView
-        android:id="@+id/headerPlayer"
-        style="?textAppearanceOverline"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/groupPlayer"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_padding_size_medium"
-        android:layout_marginTop="@dimen/margin_padding_size_medium"
-        android:text="@string/tarot_header_player"
+        android:layout_marginTop="@dimen/margin_padding_size_large"
+        android:layout_marginEnd="@dimen/margin_padding_size_medium"
+        android:hint="@string/tarot_header_player"
+        android:labelFor="@+id/player"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        >
 
-    <TextView
-        android:id="@+id/player"
-        style="?textAppearanceHeadline6"
+        <AutoCompleteTextView
+            android:id="@+id/player"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusable="false"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/groupBonus"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding_size_medium"
-        android:layout_marginStart="@dimen/margin_padding_size_large"
-        android:layout_marginEnd="@dimen/margin_padding_size_large"
-        android:background="?selectableItemBackground"
-        android:drawableEnd="@drawable/ic_arrow_drop_down_24dp"
-        android:padding="@dimen/margin_padding_size_medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerPlayer"
-        tools:text="Riri"
-        />
-
-    <TextView
-        android:id="@+id/headerBonus"
-        style="?textAppearanceOverline"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_padding_size_medium"
         android:layout_marginTop="@dimen/margin_padding_size_medium"
-        android:text="@string/belote_header_bonuses"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/player"
-        />
-
-    <TextView
-        android:id="@+id/bonus"
-        style="?textAppearanceHeadline6"
-        android:layout_marginTop="@dimen/margin_padding_size_medium"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_padding_size_large"
-        android:layout_marginEnd="@dimen/margin_padding_size_large"
-        android:background="?selectableItemBackground"
-        android:drawableEnd="@drawable/ic_arrow_drop_down_24dp"
-        android:padding="@dimen/margin_padding_size_medium"
+        android:layout_marginEnd="@dimen/margin_padding_size_medium"
+        android:hint="@string/tarot_header_bonuses"
+        android:labelFor="@+id/bonus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerBonus"
-        tools:text="@string/tarot_bonus_petit_au_bout"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/groupPlayer"
+        >
+
+        <AutoCompleteTextView
+            android:id="@+id/bonus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusable="false"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/addBonus"
@@ -88,6 +79,6 @@
         android:text="@string/button_action_ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bonus"
+        app:layout_constraintTop_toBottomOf="@+id/groupBonus"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

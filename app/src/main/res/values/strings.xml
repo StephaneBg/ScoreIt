@@ -49,6 +49,7 @@
     <string name="tarot_oudler_excuse">Excuse</string>
     <string name="tarot_oudler_petit">Petit</string>
     <string name="tarot_oudler_twentyone">21</string>
+    <string name="tarot_header_results">Results</string>
 
     <!-- Belote -->
     <string name="belote_header_taker">Taker</string>

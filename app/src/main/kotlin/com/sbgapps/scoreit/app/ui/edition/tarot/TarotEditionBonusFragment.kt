@@ -20,8 +20,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.FragmentEditionTarotBonusBinding
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.model.TarotBonusValue
@@ -45,35 +46,32 @@ class TarotEditionBonusFragment : BottomSheetDialogFragment() {
             if (state is TarotEditionState.Content) {
                 if (state.availableBonuses.isEmpty()) return@onStates
 
-                binding.player.text = state.players[player.index].name
-                binding.player.setOnClickListener {
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setSingleChoiceItems(
-                            state.players.map { it.name }.toTypedArray(),
-                            player.index
-                        ) { dialog, which ->
-                            player = PlayerPosition.fromIndex(which)
-                            binding.player.text = state.players[which].name
-                            dialog.dismiss()
-                        }
-                        .show()
+                // player
+                binding.player.setText(state.players[player.index].name)
+                val adapterPlayers = ArrayAdapter(
+                    requireContext(),
+                    R.layout.dropdown_menu_popup_item,
+                    state.players.map { it.name }.toTypedArray()
+                )
+                binding.player.setAdapter(adapterPlayers)
+                binding.player.setOnItemClickListener { _, _, position, _ ->
+                    player = PlayerPosition.fromIndex(position)
                 }
 
+                //bonus
                 tarotBonus = state.availableBonuses.first()
-                binding.bonus.text = getString(tarotBonus.resId)
-                binding.bonus.setOnClickListener {
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setSingleChoiceItems(
-                            state.availableBonuses.map { getString(it.resId) }.toTypedArray(),
-                            state.availableBonuses.indexOf(tarotBonus)
-                        ) { dialog, which ->
-                            tarotBonus = state.availableBonuses[which]
-                            binding.bonus.text = getString(tarotBonus.resId)
-                            dialog.dismiss()
-                        }
-                        .show()
+                binding.bonus.setText(tarotBonus.resId)
+                val adapterBonus = ArrayAdapter(
+                    requireContext(),
+                    R.layout.dropdown_menu_popup_item,
+                    state.availableBonuses.map { getString(it.resId) }.toTypedArray()
+                )
+                binding.bonus.setAdapter(adapterBonus)
+                binding.bonus.setOnItemClickListener { _, _, position, _ ->
+                    tarotBonus = state.availableBonuses[position]
                 }
 
+                // button
                 binding.addBonus.setOnClickListener {
                     viewModel.addBonus(player to tarotBonus)
                     dismiss()
