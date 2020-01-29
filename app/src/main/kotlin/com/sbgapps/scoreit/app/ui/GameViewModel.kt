@@ -35,7 +35,6 @@ import com.sbgapps.scoreit.data.model.BeloteGame
 import com.sbgapps.scoreit.data.model.CoincheGame
 import com.sbgapps.scoreit.data.model.GameType
 import com.sbgapps.scoreit.data.model.Player
-import com.sbgapps.scoreit.data.model.SavedGameInfo
 import com.sbgapps.scoreit.data.model.TarotGame
 import com.sbgapps.scoreit.data.model.TarotLap
 import com.sbgapps.scoreit.data.model.UniversalGame
@@ -141,7 +140,7 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
             items.add(R.id.menu_chart)
             items.add(R.id.menu_clear)
         }
-        if (useCase.getSavedFiles().size > 1) {
+        if (useCase.getSavedFiles().isNotEmpty()) {
             items.add(R.id.menu_save)
         }
         return items
@@ -196,8 +195,6 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
         is BeloteGame -> R.id.action_historyFragment_to_beloteEditionActivity
         is CoincheGame -> R.id.action_historyFragment_to_coincheEditionActivity
     }
-
-    fun getSavedFiles(): List<SavedGameInfo> = useCase.getSavedFiles()
 }
 
 data class Content(val header: Header, val results: List<LapRow>) : UIState()

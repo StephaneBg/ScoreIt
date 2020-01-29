@@ -44,16 +44,13 @@ class UniversalInputScore : BottomSheetDialogFragment() {
         initKeys()
         initBackSpace()
         initSign()
-
-        binding.done.setOnClickListener {
-            viewModel.setScore(playerIndex, Integer.parseInt(binding.score.text.toString()))
-            dismiss()
-        }
+        initDone()
     }
 
     private fun initKeys() {
         val listener = { v: View ->
             val key = v.tag as Int
+            if (binding.score.text.startsWith("0")) binding.score.text = binding.score.text.drop(1)
             val number = "${binding.score.text}$key"
             binding.score.text = number
             onNumberChanged()
@@ -69,16 +66,24 @@ class UniversalInputScore : BottomSheetDialogFragment() {
     }
 
     private fun initBackSpace() {
+        binding.backspace.isEnabled = false
         binding.backspace.setOnClickListener {
-            var number = binding.score.text.subSequence(0, binding.score.text.length - 1)
-            if (1 == number.length && '-' == number[0]) number = ""
-            binding.score.text = number
+            if (binding.score.text.isEmpty()) return@setOnClickListener
+            binding.score.text = binding.score.text.dropLast(1)
             onNumberChanged()
         }
         binding.backspace.setOnLongClickListener {
             binding.score.text = ""
             onNumberChanged()
             true
+        }
+    }
+
+    private fun initDone() {
+        binding.done.isEnabled = false
+        binding.done.setOnClickListener {
+            viewModel.setScore(playerIndex, Integer.parseInt(binding.score.text.toString()))
+            dismiss()
         }
     }
 
@@ -95,7 +100,7 @@ class UniversalInputScore : BottomSheetDialogFragment() {
     private fun onNumberChanged() {
         binding.backspace.isEnabled = binding.score.text.isNotEmpty()
         binding.done.isEnabled = !(1 == binding.score.text.length && '-' == binding.score.text[0]) &&
-                binding.score.text.isNotEmpty()
+            binding.score.text.isNotEmpty()
     }
 
     companion object {

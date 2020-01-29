@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.DialogPlayerNameBinding
+import com.sbgapps.scoreit.app.databinding.DialogEditNameBinding
 import com.sbgapps.scoreit.app.databinding.FragmentHistoryBinding
 import com.sbgapps.scoreit.app.model.BeloteLapRow
 import com.sbgapps.scoreit.app.model.CoincheLapRow
@@ -68,7 +68,7 @@ class HistoryFragment : BaseFragment() {
 
         binding.recyclerView.apply {
             adapter = historyAdapter
-            ItemTouchHelper(SwipeCallback(::onEdit, ::onDelete)).attachToRecyclerView(this)
+            ItemTouchHelper(HistorySwipeCallback(::onEdit, ::onDelete)).attachToRecyclerView(this)
             addItemDecoration(DividerItemDecoration(requireContext()))
         }
         binding.fab.setOnClickListener {
@@ -78,11 +78,7 @@ class HistoryFragment : BaseFragment() {
         onStates(viewModel) { state ->
             when (state) {
                 is Content -> {
-                    binding.header.adapter =
-                        HeaderAdapter(
-                            state.header,
-                            ::displayPlayerEditionOptions
-                        )
+                    binding.header.adapter = HeaderAdapter(state.header, ::displayPlayerEditionOptions)
                     historyAdapter.updateItems(getItems(state.results))
                 }
             }
@@ -105,6 +101,7 @@ class HistoryFragment : BaseFragment() {
                 viewModel.loadGame()
             }
             .addCallback(callback)
+            .setAnchorView(binding.fab)
             .show()
         historyAdapter.updateItems(getItems(data.results))
     }
@@ -122,11 +119,17 @@ class HistoryFragment : BaseFragment() {
 
     private fun getItems(scores: List<LapRow>): List<ItemAdapter> = scores.map { lap ->
         when (lap) {
-            is UniversalLapRow -> UniversalLapAdapter(lap)
-            is BeloteLapRow -> BeloteLapAdapter(lap)
-            is CoincheLapRow -> CoincheLapAdapter(lap)
-            is TarotLapRow -> TarotLapAdapter(lap)
+            is UniversalLapRow -> UniversalLapAdapter(lap, ::onLapClicked)
+            is BeloteLapRow -> BeloteLapAdapter(lap, ::onLapClicked)
+            is CoincheLapRow -> CoincheLapAdapter(lap, ::onLapClicked)
+            is TarotLapRow -> TarotLapAdapter(lap, ::onLapClicked)
         }
+    }
+
+    private fun onLapClicked() {
+        Snackbar.make(binding.mainContainer, R.string.history_lap_click_hint, Snackbar.LENGTH_SHORT)
+            .setAnchorView(binding.fab)
+            .show()
     }
 
     private fun onEdit(position: Int) {
@@ -142,7 +145,7 @@ class HistoryFragment : BaseFragment() {
         MaterialAlertDialogBuilder(requireContext())
             .setItems(R.array.dialog_edit_player_actions) { _, which ->
                 when (which) {
-                    0 -> displayNameDialog(position)
+                    0 -> displayNameEditionDialog(position)
                     1 -> displayColorDialog(position)
                 }
             }
@@ -150,18 +153,18 @@ class HistoryFragment : BaseFragment() {
             .show()
     }
 
-    private fun displayNameDialog(position: Int) {
+    private fun displayNameEditionDialog(position: Int) {
         val action = { name: String ->
             if (name.isNotEmpty()) viewModel.setPlayerName(position, name)
         }
-        val view = DialogPlayerNameBinding.inflate(layoutInflater)
+        val view = DialogEditNameBinding.inflate(layoutInflater)
         val dialog = MaterialAlertDialogBuilder(requireContext())
             .setView(view.root)
             .setPositiveButton(R.string.button_action_ok) { _, _ ->
-                action(view.playerName.text.toString())
+                action(view.name.text.toString())
             }
             .create()
-        view.playerName.apply {
+        view.name.apply {
             requestFocus()
             onImeActionDone {
                 action(text.toString())

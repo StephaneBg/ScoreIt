@@ -28,7 +28,6 @@ import com.sbgapps.scoreit.data.model.Game
 import com.sbgapps.scoreit.data.model.GameType
 import com.sbgapps.scoreit.data.model.Lap
 import com.sbgapps.scoreit.data.model.Player
-import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.model.SavedGameInfo
 import com.sbgapps.scoreit.data.model.TarotGame
 import com.sbgapps.scoreit.data.model.TarotLap
@@ -65,8 +64,6 @@ class GameUseCase(
             game.players
         }
     }
-
-    fun getPlayer(playerPosition: PlayerPosition): Player = getPlayers()[playerPosition.index]
 
     fun getResults(lap: Lap): List<Int> = when (lap) {
         is UniversalLap -> universalSolver.getResults(lap, dataStore.isUniversalTotalDisplayed())
@@ -220,19 +217,25 @@ class GameUseCase(
         return laps
     }
 
-    fun canEditPlayer(position: Int): Boolean {
-        return when (getGame()) {
-            is UniversalGame ->
-                if (dataStore.isUniversalTotalDisplayed()) position != getPlayers().size
-                else true
-            else -> true
-        }
+    fun canEditPlayer(position: Int): Boolean = when (getGame()) {
+        is UniversalGame ->
+            if (dataStore.isUniversalTotalDisplayed()) position != getPlayers().size
+            else true
+        else -> true
     }
 
     fun getSavedFiles(): List<SavedGameInfo> = dataStore.getSavedFiles()
 
     fun loadGame(name: String) {
         dataStore.loadGame(name)
+    }
+
+    fun removeGame(fileName: String) {
+        dataStore.removeGame(fileName)
+    }
+
+    fun renameGame(oldName: String, newName: String) {
+        dataStore.renameGame(oldName, newName)
     }
 }
 

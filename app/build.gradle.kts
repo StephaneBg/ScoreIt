@@ -21,9 +21,11 @@ plugins {
 
 val versionMajor = 5
 val versionMinor = 1
-val versionPatch = 0
+val versionPatch = 1
 
 android {
+    val isReleasable = null != (project.properties["scoreItStoreFile"] as String?)
+
     compileSdkVersion(Android.compileSdkVersion)
 
     defaultConfig {
@@ -35,16 +37,16 @@ android {
         targetSdkVersion(Android.targetSdkVersion)
     }
 
-    signingConfigs {
+    if (isReleasable) signingConfigs {
         create("release") {
             storeFile = file(project.properties["scoreItStoreFile"] as String)
-            storePassword = project.properties["scoreItStorePassword"] as String
-            keyAlias = project.properties["scoreItKeyAlias"] as String
-            keyPassword = project.properties["scoreItKeyPassword"] as String
+            storePassword = project.properties["scoreItStorePassword"] as String?
+            keyAlias = project.properties["scoreItKeyAlias"] as String?
+            keyPassword = project.properties["scoreItKeyPassword"] as String?
         }
     }
 
-    buildTypes {
+    if (isReleasable) buildTypes {
         getByName("release") {
             isShrinkResources = true
             isMinifyEnabled = true

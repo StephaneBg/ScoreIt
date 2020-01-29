@@ -24,7 +24,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ActivityScoreboardBinding
-import com.sbgapps.scoreit.app.databinding.DialogPlayerNameBinding
+import com.sbgapps.scoreit.app.databinding.DialogEditNameBinding
 import com.sbgapps.scoreit.app.ui.prefs.PreferencesViewModel
 import com.sbgapps.scoreit.core.ext.onImeActionDone
 import com.sbgapps.scoreit.core.ui.BaseActivity
@@ -74,14 +74,14 @@ class ScoreboardActivity : BaseActivity() {
         val action = { name: String ->
             if (name.isNotEmpty()) scoreBoarViewModel.setPlayerName(name, position)
         }
-        val view = DialogPlayerNameBinding.inflate(layoutInflater)
+        val view = DialogEditNameBinding.inflate(layoutInflater)
         val dialog = MaterialAlertDialogBuilder(this)
             .setView(view.root)
             .setPositiveButton(R.string.button_action_ok) { _, _ ->
-                action(view.playerName.text.toString())
+                action(view.name.text.toString())
             }
             .create()
-        view.playerName.apply {
+        view.name.apply {
             requestFocus()
             onImeActionDone {
                 action(text.toString())

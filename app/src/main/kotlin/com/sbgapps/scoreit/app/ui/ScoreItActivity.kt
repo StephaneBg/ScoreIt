@@ -26,9 +26,9 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.DialogGameNameBinding
+import com.sbgapps.scoreit.app.databinding.DialogEditNameBinding
 import com.sbgapps.scoreit.app.ui.prefs.PreferencesViewModel
-import com.sbgapps.scoreit.app.ui.saved.SavedGamesActivity
+import com.sbgapps.scoreit.app.ui.saved.SavedGameActivity
 import com.sbgapps.scoreit.core.ext.onImeActionDone
 import com.sbgapps.scoreit.core.ext.start
 import com.sbgapps.scoreit.core.ui.BaseActivity
@@ -98,25 +98,25 @@ class ScoreItActivity : BaseActivity() {
             .setItems(R.array.dialog_clear_actions) { _, which ->
                 when (which) {
                     0 -> gameViewModel.resetGame()
-                    1 -> showGameNameDialog()
+                    1 -> displayNameEditionDialog()
                 }
             }
             .show()
         return true
     }
 
-    private fun showGameNameDialog() {
+    private fun displayNameEditionDialog() {
         val action = { name: String ->
             if (name.isNotEmpty()) gameViewModel.createGame(name)
         }
-        val view = DialogGameNameBinding.inflate(layoutInflater)
+        val view = DialogEditNameBinding.inflate(layoutInflater)
         val dialog = MaterialAlertDialogBuilder(this)
             .setView(view.root)
             .setPositiveButton(R.string.button_action_ok) { _, _ ->
-                action(view.gameName.text.toString())
+                action(view.name.text.toString())
             }
             .create()
-        view.gameName.apply {
+        view.name.apply {
             requestFocus()
             onImeActionDone {
                 action(text.toString())
@@ -132,7 +132,7 @@ class ScoreItActivity : BaseActivity() {
     }
 
     private fun displaySavedGames(): Boolean {
-        start<SavedGamesActivity>()
+        start<SavedGameActivity>()
         return true
     }
 }

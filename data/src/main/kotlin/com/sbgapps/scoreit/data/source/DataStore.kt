@@ -80,4 +80,14 @@ class DataStore(
     fun loadGame(name: String) {
         game = cacheRepo.loadGame(name)
     }
+
+    fun removeGame(fileName: String) {
+        game = null
+        cacheRepo.removeGame(fileName)
+    }
+
+    fun renameGame(oldName: String, newName: String) {
+        game = null
+        cacheRepo.renameGame(oldName, newName)
+    }
 }

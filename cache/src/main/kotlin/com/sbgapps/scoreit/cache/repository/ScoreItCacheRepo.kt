@@ -17,6 +17,7 @@
 package com.sbgapps.scoreit.cache.repository
 
 import com.sbgapps.scoreit.data.model.Game
+import com.sbgapps.scoreit.data.model.GameType
 import com.sbgapps.scoreit.data.model.SavedGameInfo
 import com.sbgapps.scoreit.data.model.ScoreBoard
 import com.sbgapps.scoreit.data.repository.CacheRepo
@@ -27,35 +28,41 @@ class ScoreItCacheRepo(
     private val preferencesRepo: PreferencesRepo
 ) : CacheRepo {
 
+    private val gameType: GameType
+        get() = preferencesRepo.getGameType()
+
+    private val playerCount: Int
+        get() = preferencesRepo.getPlayerCount()
+
     override fun loadGame(name: String?): Game {
-        val gameType = preferencesRepo.getGameType()
-        val count = preferencesRepo.getPlayerCount()
         name?.let {
-            gameDao.setFileName(gameType, count, it)
+            gameDao.setFileName(gameType, playerCount, it)
         }
-        return gameDao.loadGameOrCreate(gameType, count)
+        return gameDao.loadGameOrCreate(gameType, playerCount)
     }
 
-    override fun createGame(currentGame: Game, name: String): Game = gameDao.createGame(
-        currentGame,
-        preferencesRepo.getPlayerCount(),
-        name
-    )
+    override fun createGame(currentGame: Game, name: String): Game = gameDao.createGame(currentGame, playerCount, name)
 
     override fun saveGame(game: Game) {
-        gameDao.saveGame(game, preferencesRepo.getPlayerCount())
+        gameDao.saveGame(game, playerCount)
     }
 
     override fun getSavedGames(): List<SavedGameInfo> {
-        val gameType = preferencesRepo.getGameType()
-        val playerCount = preferencesRepo.getPlayerCount()
         val files = gameDao.getSavedFiles(gameType, playerCount)
-        return files.mapNotNull { (fileName, date) ->
+        return files.mapNotNull { (fileName, timeStamp) ->
             gameDao.loadGame(gameType, playerCount, fileName)?.let { game ->
                 val players = game.players.joinToString(" - ") { it.name }
-                SavedGameInfo(fileName, date, players)
+                SavedGameInfo(fileName, players, timeStamp)
             }
         }
+    }
+
+    override fun removeGame(fileName: String) {
+        gameDao.removeGame(gameType, playerCount, fileName)
+    }
+
+    override fun renameGame(oldName: String, newName: String) {
+        gameDao.renameGame(gameType, playerCount, oldName, newName)
     }
 
     override fun loadScoreBoard(): ScoreBoard = gameDao.loadScoreBoard()

@@ -78,6 +78,7 @@ class ScoreItGameDao(
 
     fun createGame(currentGame: Game, playerCount: Int, fileName: String): Game {
         preferences.edit { putString(getFileNameKey(currentGame.type, playerCount), fileName) }
+        saveGame(currentGame, playerCount)
         return when (currentGame) {
             is UniversalGame -> currentGame.copy(laps = emptyList())
             is TarotGame -> currentGame.copy(laps = emptyList())
@@ -168,6 +169,22 @@ class ScoreItGameDao(
     }
 
     private fun getDefaultFileName(): String = context.getString(R.string.default_file_name)
+
+    fun removeGame(gameType: GameType, playerCount: Int, fileName: String) {
+        val directory = getDirectory(gameType, playerCount)
+        storage.removeFile(directory, fileName)
+        if (fileName == getFileName(gameType, playerCount)) {
+            setFileName(gameType, playerCount, getDefaultFileName())
+        }
+    }
+
+    fun renameGame(gameType: GameType, playerCount: Int, oldName: String, newName: String) {
+        val directory = getDirectory(gameType, playerCount)
+        storage.renameFile(directory, oldName, newName)
+        if (oldName == getFileName(gameType, playerCount)) {
+            setFileName(gameType, playerCount, newName)
+        }
+    }
 
     companion object {
         private const val UNIVERSAL_PATH = "universal/v2"

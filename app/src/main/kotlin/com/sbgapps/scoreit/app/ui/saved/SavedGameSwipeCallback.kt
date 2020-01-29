@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.app.ui.history
+package com.sbgapps.scoreit.app.ui.saved
 
 import android.graphics.Canvas
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -23,8 +23,8 @@ import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.core.ext.colorAttr
 import com.sbgapps.scoreit.core.utils.RecyclerViewSwipeDecorator
 
-class SwipeCallback(
-    private val onEdit: (Int) -> Unit,
+class SavedGameSwipeCallback(
+    private val onEditName: (Int) -> Unit,
     private val onDelete: (Int) -> Unit
 ) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
@@ -37,7 +37,7 @@ class SwipeCallback(
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val position = viewHolder.adapterPosition
         when (direction) {
-            ItemTouchHelper.LEFT -> onEdit(position)
+            ItemTouchHelper.LEFT -> onEditName(position)
             ItemTouchHelper.RIGHT -> onDelete(position)
         }
     }
