@@ -21,7 +21,7 @@ plugins {
 
 val versionMajor = 5
 val versionMinor = 1
-val versionPatch = 0
+val versionPatch = 1
 
 android {
     compileSdkVersion(Android.compileSdkVersion)
