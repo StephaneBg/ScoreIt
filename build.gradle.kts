@@ -35,7 +35,7 @@ allprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-progressive", "-Xuse-experimental=kotlin.Experimental")
-            jvmTarget = "1.8"
+            jvmTarget = Build.Versions.java.toString()
         }
     }
 }
@@ -44,8 +44,8 @@ subprojects {
     afterEvaluate {
         extensions.configure<com.android.build.gradle.BaseExtension> {
             compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_1_8
-                targetCompatibility = JavaVersion.VERSION_1_8
+                sourceCompatibility = Build.Versions.java
+                targetCompatibility = Build.Versions.java
             }
         }
     }

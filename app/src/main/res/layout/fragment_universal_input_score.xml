@@ -35,7 +35,6 @@
         app:layout_constraintEnd_toStartOf="@id/backspace"
         app:layout_constraintStart_toEndOf="@id/scoreSpace"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="🐼"
         />
 
     <ImageView

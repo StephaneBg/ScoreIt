@@ -101,6 +101,7 @@ class HistoryFragment : BaseFragment() {
                 viewModel.loadGame()
             }
             .addCallback(callback)
+            .setAnchorView(binding.fab)
             .show()
         historyAdapter.updateItems(getItems(data.results))
     }
@@ -126,7 +127,9 @@ class HistoryFragment : BaseFragment() {
     }
 
     private fun onLapClicked() {
-        Snackbar.make(binding.root, R.string.history_lap_click_hint, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(binding.mainContainer, R.string.history_lap_click_hint, Snackbar.LENGTH_SHORT)
+            .setAnchorView(binding.fab)
+            .show()
     }
 
     private fun onEdit(position: Int) {

@@ -140,7 +140,7 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
             items.add(R.id.menu_chart)
             items.add(R.id.menu_clear)
         }
-        if (useCase.getSavedFiles().size > 1) {
+        if (useCase.getSavedFiles().isNotEmpty()) {
             items.add(R.id.menu_save)
         }
         return items
