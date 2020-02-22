@@ -47,12 +47,12 @@ class UniversalInputScore : BottomSheetDialogFragment() {
         initDone()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initKeys() {
         val listener = { v: View ->
             val key = v.tag as Int
-            if (binding.score.text.startsWith("0")) binding.score.text = binding.score.text.drop(1)
-            val number = "${binding.score.text}$key"
-            binding.score.text = number
+            val current = with(binding.score.text) { if (startsWith("0")) drop(1) else this }
+            binding.score.text = "$current$key"
             onNumberChanged()
         }
 
@@ -82,7 +82,12 @@ class UniversalInputScore : BottomSheetDialogFragment() {
     private fun initDone() {
         binding.done.isEnabled = false
         binding.done.setOnClickListener {
-            viewModel.setScore(playerIndex, Integer.parseInt(binding.score.text.toString()))
+            val score = try {
+                Integer.parseInt(binding.score.text.toString())
+            } catch (e: Exception) {
+                0
+            }
+            viewModel.setScore(playerIndex, score)
             dismiss()
         }
     }

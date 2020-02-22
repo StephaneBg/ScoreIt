@@ -53,4 +53,14 @@
         android:singleLine="true"
         tools:text="Score"
         />
+
+    <View
+        android:id="@+id/marker"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?colorPrimary"
+        android:alpha="0.5"
+        android:layout_marginStart="@dimen/margin_padding_size_small"
+        android:layout_marginEnd="@dimen/margin_padding_size_small"
+        />
 </LinearLayout>

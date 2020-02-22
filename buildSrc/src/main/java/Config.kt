@@ -52,10 +52,10 @@ object Android {
 object Libs {
 
     private object Versions {
-        const val material = "1.2.0-alpha04"
+        const val material = "1.2.0-alpha05"
         const val timber = "4.7.1"
         const val koinAndroidX = "2.0.1"
-        const val uniflowAndroidX = "0.9.4"
+        const val uniflowAndroidX = "0.9.5"
         const val storage = "2.1.0"
         const val jsr310 = "1.2.2"
     }

@@ -18,10 +18,11 @@ package com.sbgapps.scoreit.app.ui.history.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
 import com.sbgapps.scoreit.app.databinding.ListItemHeaderBinding
+import com.sbgapps.scoreit.app.model.Header
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayoutAdapter
 import com.sbgapps.scoreit.core.ext.layoutInflater
-import com.sbgapps.scoreit.data.model.Player
 
 class HeaderAdapter(
     private val model: Header,
@@ -30,17 +31,16 @@ class HeaderAdapter(
 
     override fun getView(position: Int, parent: ViewGroup): View {
         val binding = ListItemHeaderBinding.inflate(parent.layoutInflater(), parent, false)
-        val (player, score) = model[position]
+        val player = model.players[position]
         binding.player.apply {
             text = player.name
             setTextColor(player.color)
             setOnClickListener { editCallback(position) }
         }
-        binding.score.text = score.toString()
+        binding.score.text = model.scores[position].toString()
+        binding.marker.isInvisible = !model.markers[position]
         return binding.root
     }
 
-    override fun getCount(): Int = model.size
+    override fun getCount(): Int = model.players.size
 }
-
-typealias Header = List<Pair<Player, Int>>
