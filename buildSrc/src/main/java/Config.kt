@@ -36,7 +36,7 @@ object Build {
 
     object Versions {
         const val kotlin = "1.3.61"
-        const val androidGradle = "3.6.0-rc01"
+        const val androidGradle = "3.6.0"
         val java = JavaVersion.VERSION_1_8
     }
 
