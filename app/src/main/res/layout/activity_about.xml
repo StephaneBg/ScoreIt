@@ -43,13 +43,11 @@
         />
 
     <TextView
-        android:id="@+id/author"
-        style="?textAppearanceSubtitle1"
+        android:id="@+id/appVersionName"
+        style="?textAppearanceHeadline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding_size_small"
-        android:text="Stéphane Baiget"
-        tools:ignore="HardcodedText"
+        tools:text="5.0.0"
         />
 
     <LinearLayout
@@ -79,4 +77,14 @@
             tools:ignore="ContentDescription"
             />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/author"
+        style="?textAppearanceSubtitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
+        android:text="Stéphane Baiget"
+        tools:ignore="HardcodedText"
+        />
 </LinearLayout>

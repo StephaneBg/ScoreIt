@@ -23,8 +23,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import com.sbgapps.scoreit.app.BuildConfig
 import com.sbgapps.scoreit.app.databinding.ActivityAboutBinding
 import com.sbgapps.scoreit.core.ui.BaseActivity
+
 
 class AboutActivity : BaseActivity() {
 
@@ -41,6 +43,7 @@ class AboutActivity : BaseActivity() {
                 ObjectAnimator.ofFloat(binding.logo, View.SCALE_X, 0.5f, 1f),
                 ObjectAnimator.ofFloat(binding.logo, View.SCALE_Y, 0.5f, 1f),
                 ObjectAnimator.ofFloat(binding.appName, View.ALPHA, 0f, 1f),
+                ObjectAnimator.ofFloat(binding.appVersionName, View.ALPHA, 0f, 1f),
                 ObjectAnimator.ofFloat(binding.author, View.ALPHA, 0f, 1f),
                 ObjectAnimator.ofFloat(binding.email, View.ALPHA, 0f, 1f),
                 ObjectAnimator.ofFloat(binding.github, View.ALPHA, 0f, 1f)
@@ -49,6 +52,8 @@ class AboutActivity : BaseActivity() {
             duration = 1200
             start()
         }
+
+        binding.appVersionName.text = BuildConfig.VERSION_NAME
 
         binding.email.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
