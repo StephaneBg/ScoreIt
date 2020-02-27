@@ -21,10 +21,10 @@ import androidx.annotation.IdRes
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.model.BeloteLapRow
 import com.sbgapps.scoreit.app.model.CoincheLapRow
+import com.sbgapps.scoreit.app.model.Header
 import com.sbgapps.scoreit.app.model.LapRow
 import com.sbgapps.scoreit.app.model.TarotLapRow
 import com.sbgapps.scoreit.app.model.UniversalLapRow
-import com.sbgapps.scoreit.app.ui.history.adapter.Header
 import com.sbgapps.scoreit.core.ui.BaseViewModel
 import com.sbgapps.scoreit.core.utils.string.StringFactory
 import com.sbgapps.scoreit.core.utils.string.fromResources
@@ -146,10 +146,11 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
         return items
     }
 
-    private fun getHeader(): Header = useCase.getPlayers(true)
-        .zip(useCase.getScores()) { player, score ->
-            Player(player.name, player.color) to score
-        }
+    private fun getHeader(): Header = Header(
+        useCase.getPlayers(true).map { Player(it.name, it.color) },
+        useCase.getScores(),
+        useCase.getMarkers()
+    )
 
     private fun getLaps(): List<LapRow> = when (val game = useCase.getGame()) {
         is UniversalGame -> game.laps.map {

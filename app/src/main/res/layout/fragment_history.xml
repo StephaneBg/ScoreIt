@@ -29,8 +29,6 @@
         style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/margin_padding_size_small"
-        android:paddingBottom="@dimen/margin_padding_size_small"
         >
 
         <com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayout
