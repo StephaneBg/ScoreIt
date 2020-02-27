@@ -22,6 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.android.billingclient.api.SkuDetails
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.sbgapps.scoreit.app.R
@@ -29,6 +30,7 @@ import com.sbgapps.scoreit.app.databinding.DialogEditNameBinding
 import com.sbgapps.scoreit.app.databinding.FragmentHistoryBinding
 import com.sbgapps.scoreit.app.model.BeloteLapRow
 import com.sbgapps.scoreit.app.model.CoincheLapRow
+import com.sbgapps.scoreit.app.model.DonationRow
 import com.sbgapps.scoreit.app.model.LapRow
 import com.sbgapps.scoreit.app.model.TarotLapRow
 import com.sbgapps.scoreit.app.model.UniversalLapRow
@@ -38,6 +40,7 @@ import com.sbgapps.scoreit.app.ui.GameViewModel
 import com.sbgapps.scoreit.app.ui.color.ColorPickerFragment
 import com.sbgapps.scoreit.app.ui.history.adapter.BeloteLapAdapter
 import com.sbgapps.scoreit.app.ui.history.adapter.CoincheLapAdapter
+import com.sbgapps.scoreit.app.ui.history.adapter.DonationAdapter
 import com.sbgapps.scoreit.app.ui.history.adapter.HeaderAdapter
 import com.sbgapps.scoreit.app.ui.history.adapter.TarotLapAdapter
 import com.sbgapps.scoreit.app.ui.history.adapter.UniversalLapAdapter
@@ -46,13 +49,16 @@ import com.sbgapps.scoreit.core.ui.BaseFragment
 import com.sbgapps.scoreit.core.widget.DividerItemDecoration
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
 import com.sbgapps.scoreit.core.widget.ItemAdapter
+import com.sbgapps.scoreit.data.repository.BillingRepo
 import io.uniflow.androidx.flow.onEvents
 import io.uniflow.androidx.flow.onStates
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HistoryFragment : BaseFragment() {
 
     private val viewModel by sharedViewModel<GameViewModel>()
+    private val billingRepository by inject<BillingRepo>()
     private lateinit var binding: FragmentHistoryBinding
     private val historyAdapter = GenericRecyclerViewAdapter()
 
@@ -123,6 +129,7 @@ class HistoryFragment : BaseFragment() {
             is BeloteLapRow -> BeloteLapAdapter(lap, ::onLapClicked)
             is CoincheLapRow -> CoincheLapAdapter(lap, ::onLapClicked)
             is TarotLapRow -> TarotLapAdapter(lap, ::onLapClicked)
+            is DonationRow -> DonationAdapter(lap.skus, ::onDonateClicked)
         }
     }
 
@@ -130,6 +137,10 @@ class HistoryFragment : BaseFragment() {
         Snackbar.make(binding.mainContainer, R.string.history_lap_click_hint, Snackbar.LENGTH_SHORT)
             .setAnchorView(binding.fab)
             .show()
+    }
+
+    private fun onDonateClicked(skuDetails: SkuDetails) {
+        billingRepository.startBillingFlow(requireActivity(), skuDetails) { viewModel.onDonationPerformed() }
     }
 
     private fun onEdit(position: Int) {

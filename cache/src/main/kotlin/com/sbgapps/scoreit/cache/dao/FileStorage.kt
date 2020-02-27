@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.repository
+package com.sbgapps.scoreit.cache.dao
 
 import android.content.Context
 import com.snatik.storage.Storage

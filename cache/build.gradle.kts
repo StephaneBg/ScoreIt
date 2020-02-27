@@ -38,9 +38,10 @@ dependencies {
 
     implementation(kotlin("stdlib", Build.Versions.kotlin))
     implementation(AndroidX.coreKtx)
-    implementation(AndroidX.preferences)
+    implementation(AndroidX.preference)
     implementation(Moshi.kotlin)
     implementation(Moshi.adapters)
+    implementation(Libs.billing)
     implementation(Libs.storage)
     implementation(Libs.koinAndroidX)
     implementation(Libs.timber)

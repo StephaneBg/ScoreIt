@@ -20,7 +20,6 @@ import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.sbgapps.scoreit.app.di.uiModule
 import com.sbgapps.scoreit.cache.di.cacheModule
-import com.sbgapps.scoreit.core.di.coreModule
 import com.sbgapps.scoreit.data.di.dataModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -40,8 +39,7 @@ class ScoreItApp : Application() {
                 listOf(
                     uiModule,
                     dataModule,
-                    cacheModule,
-                    coreModule
+                    cacheModule
                 )
             )
         }

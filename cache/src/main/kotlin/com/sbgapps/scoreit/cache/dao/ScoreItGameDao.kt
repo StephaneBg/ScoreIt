@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.repository
+package com.sbgapps.scoreit.cache.dao
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -112,8 +112,8 @@ class ScoreItGameDao(
 
     private fun getDirectory(gameType: GameType, playerCount: Int): String {
         val directory = when (gameType) {
-            GameType.UNIVERSAL -> "${UNIVERSAL_PATH}/${playerCount}"
-            GameType.TAROT -> "${TAROT_PATH}/${playerCount}"
+            GameType.UNIVERSAL -> "$UNIVERSAL_PATH/${playerCount}"
+            GameType.TAROT -> "$TAROT_PATH/${playerCount}"
             GameType.BELOTE -> BELOTE_PATH
             GameType.COINCHE -> COINCHE_PATH
         }
@@ -153,7 +153,10 @@ class ScoreItGameDao(
     fun loadScoreBoard(): ScoreBoard {
         storage.createDirectory(SCOREBOARD_PATH)
         return try {
-            val json = storage.loadFile(SCOREBOARD_PATH, SCOREBOARD_FILENAME)
+            val json = storage.loadFile(
+                SCOREBOARD_PATH,
+                SCOREBOARD_FILENAME
+            )
             scoreboardJsonAdapter.fromJson(json) ?: error("Can't parse json")
         } catch (exception: Exception) {
             ScoreBoard(
@@ -165,7 +168,10 @@ class ScoreItGameDao(
 
     fun saveScoreBoard(scoreBoard: ScoreBoard) {
         val json = scoreboardJsonAdapter.toJson(scoreBoard)
-        storage.saveFile(SCOREBOARD_PATH, SCOREBOARD_FILENAME, json)
+        storage.saveFile(
+            SCOREBOARD_PATH,
+            SCOREBOARD_FILENAME, json
+        )
     }
 
     private fun getDefaultFileName(): String = context.getString(R.string.default_file_name)

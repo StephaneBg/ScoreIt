@@ -37,23 +37,8 @@ class AboutActivity : BaseActivity() {
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        AnimatorSet().apply {
-            playTogether(
-                ObjectAnimator.ofFloat(binding.logo, View.ALPHA, 0.2f, 1f),
-                ObjectAnimator.ofFloat(binding.logo, View.SCALE_X, 0.5f, 1f),
-                ObjectAnimator.ofFloat(binding.logo, View.SCALE_Y, 0.5f, 1f),
-                ObjectAnimator.ofFloat(binding.appName, View.ALPHA, 0f, 1f),
-                ObjectAnimator.ofFloat(binding.appVersionName, View.ALPHA, 0f, 1f),
-                ObjectAnimator.ofFloat(binding.author, View.ALPHA, 0f, 1f),
-                ObjectAnimator.ofFloat(binding.email, View.ALPHA, 0f, 1f),
-                ObjectAnimator.ofFloat(binding.github, View.ALPHA, 0f, 1f)
-            )
-            interpolator = FastOutSlowInInterpolator()
-            duration = 1200
-            start()
-        }
-
         binding.appVersionName.text = BuildConfig.VERSION_NAME
+        binding.logo.setOnClickListener { animate() }
 
         binding.email.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
@@ -72,6 +57,26 @@ class AboutActivity : BaseActivity() {
             if (intent.resolveActivity(packageManager) != null) {
                 startActivity(intent)
             }
+        }
+
+        animate()
+    }
+
+    private fun animate() {
+        AnimatorSet().apply {
+            playTogether(
+                ObjectAnimator.ofFloat(binding.logo, View.ALPHA, 0.2f, 1f),
+                ObjectAnimator.ofFloat(binding.logo, View.SCALE_X, 0.5f, 1f),
+                ObjectAnimator.ofFloat(binding.logo, View.SCALE_Y, 0.5f, 1f),
+                ObjectAnimator.ofFloat(binding.appName, View.ALPHA, 0f, 1f),
+                ObjectAnimator.ofFloat(binding.appVersionName, View.ALPHA, 0f, 1f),
+                ObjectAnimator.ofFloat(binding.author, View.ALPHA, 0f, 1f),
+                ObjectAnimator.ofFloat(binding.email, View.ALPHA, 0f, 1f),
+                ObjectAnimator.ofFloat(binding.github, View.ALPHA, 0f, 1f)
+            )
+            interpolator = FastOutSlowInInterpolator()
+            duration = 1200
+            start()
         }
     }
 }

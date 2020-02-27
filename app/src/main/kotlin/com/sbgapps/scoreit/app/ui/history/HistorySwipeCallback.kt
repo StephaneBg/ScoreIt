@@ -35,6 +35,7 @@ class HistorySwipeCallback(
     ): Boolean = false
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        if (isDonationRow(viewHolder)) return
         val position = viewHolder.adapterPosition
         when (direction) {
             ItemTouchHelper.LEFT -> onEdit(position)
@@ -51,6 +52,7 @@ class HistorySwipeCallback(
         actionState: Int,
         isCurrentlyActive: Boolean
     ) {
+        if (isDonationRow(viewHolder)) return
         val context = recyclerView.context
         RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, actionState)
             .addSwipeLeftBackgroundColor(context.colorAttr(R.attr.colorPrimary))
@@ -62,4 +64,7 @@ class HistorySwipeCallback(
 
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
+
+    private fun isDonationRow(viewHolder: RecyclerView.ViewHolder): Boolean =
+        viewHolder.itemViewType == R.layout.list_item_lap_donation
 }
