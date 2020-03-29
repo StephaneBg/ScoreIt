@@ -17,7 +17,6 @@
 package com.sbgapps.scoreit.app.ui
 
 import androidx.annotation.ColorInt
-import androidx.annotation.IdRes
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.model.BeloteLapRow
 import com.sbgapps.scoreit.app.model.CoincheLapRow
@@ -85,14 +84,14 @@ class GameViewModel(
 
     fun addLap() {
         setState {
-            sendEvent(GameEvent.Edition(getEditionAction()))
+            sendEvent(getEditionAction())
         }
     }
 
     fun editLap(position: Int) {
         setState {
             useCase.modifyLap(position)
-            sendEvent(GameEvent.Edition(getEditionAction()))
+            sendEvent(getEditionAction())
         }
     }
 
@@ -208,18 +207,12 @@ class GameViewModel(
         }
     }
 
-    @IdRes
-    private fun getEditionAction(): Int = when (useCase.getGame()) {
-        is UniversalGame -> R.id.action_historyFragment_to_universalEditionActivity
-        is TarotGame -> R.id.action_historyFragment_to_tarotEditionActivity
-        is BeloteGame -> R.id.action_historyFragment_to_beloteEditionActivity
-        is CoincheGame -> R.id.action_historyFragment_to_coincheEditionActivity
-    }
+    private fun getEditionAction(): GameEvent.Edition = GameEvent.Edition(useCase.getGame().type)
 }
 
 data class Content(val header: Header, val results: List<LapRow>) : UIState()
 
 sealed class GameEvent : UIEvent() {
-    data class Edition(@IdRes val actionId: Int) : GameEvent()
+    data class Edition(val gameType: GameType) : GameEvent()
     data class Deletion(val position: Int, val results: List<LapRow>) : GameEvent()
 }

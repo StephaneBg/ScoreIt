@@ -80,7 +80,6 @@ object AndroidX {
         const val lifecyleViewmodel = "2.1.0"
         const val coreKtx = "1.1.0"
         const val fragmentKtx = "1.1.0"
-        const val navigation = "2.1.0"
         const val preference = "1.1.0"
         const val annotation = "1.1.0"
     }
@@ -91,8 +90,6 @@ object AndroidX {
     const val lifecyleViewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecyleViewmodel}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtx}"
-    const val navFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
-    const val navUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     const val preference = "androidx.preference:preference-ktx:${Versions.preference}"
     const val annotation = "androidx.annotation:annotation:${Versions.annotation}"
 }

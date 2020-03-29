@@ -99,8 +99,6 @@ dependencies {
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.constraintLayout)
     implementation(AndroidX.recyclerView)
-    implementation(AndroidX.navFragment)
-    implementation(AndroidX.navUi)
     implementation(Libs.material)
     implementation(Libs.billing)
     implementation(Libs.koinAndroidX)
