@@ -35,7 +35,7 @@ import org.gradle.api.JavaVersion
 object Build {
 
     object Versions {
-        const val kotlin = "1.3.61"
+        const val kotlin = "1.3.70"
         const val androidGradle = "3.6.0"
         val java = JavaVersion.VERSION_1_8
     }
@@ -53,14 +53,17 @@ object Libs {
 
     private object Versions {
         const val material = "1.2.0-alpha05"
+        const val billing = "2.1.0"
         const val timber = "4.7.1"
-        const val koinAndroidX = "2.0.1"
+        const val koinAndroidX = "2.1.0"
         const val uniflowAndroidX = "0.9.5"
         const val storage = "2.1.0"
         const val jsr310 = "1.2.2"
     }
 
     const val material = "com.google.android.material:material:${Versions.material}"
+    const val billing = "com.android.billingclient:billing:${Versions.billing}"
+    const val billingKtx = "com.android.billingclient:billing-ktx:${Versions.billing}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     const val koinAndroidX = "org.koin:koin-androidx-viewmodel:${Versions.koinAndroidX}"
     const val uniflowAndroidX = "io.uniflow:uniflow-androidx:${Versions.uniflowAndroidX}"
@@ -77,8 +80,7 @@ object AndroidX {
         const val lifecyleViewmodel = "2.1.0"
         const val coreKtx = "1.1.0"
         const val fragmentKtx = "1.1.0"
-        const val navigation = "2.1.0"
-        const val preferences = "1.1.0"
+        const val preference = "1.1.0"
         const val annotation = "1.1.0"
     }
 
@@ -88,9 +90,7 @@ object AndroidX {
     const val lifecyleViewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecyleViewmodel}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtx}"
-    const val navFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
-    const val navUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
-    const val preferences = "androidx.preference:preference-ktx:${Versions.preferences}"
+    const val preference = "androidx.preference:preference-ktx:${Versions.preference}"
     const val annotation = "androidx.annotation:annotation:${Versions.annotation}"
 }
 

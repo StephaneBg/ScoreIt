@@ -33,7 +33,7 @@
         >
 
         <activity
-            android:name=".ui.ScoreItActivity"
+            android:name=".ui.history.HistoryActivity"
             android:label="@string/app_name"
             >
             <intent-filter>

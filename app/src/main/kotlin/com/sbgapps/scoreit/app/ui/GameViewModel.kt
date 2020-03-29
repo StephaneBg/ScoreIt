@@ -17,10 +17,10 @@
 package com.sbgapps.scoreit.app.ui
 
 import androidx.annotation.ColorInt
-import androidx.annotation.IdRes
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.model.BeloteLapRow
 import com.sbgapps.scoreit.app.model.CoincheLapRow
+import com.sbgapps.scoreit.app.model.DonationRow
 import com.sbgapps.scoreit.app.model.Header
 import com.sbgapps.scoreit.app.model.LapRow
 import com.sbgapps.scoreit.app.model.TarotLapRow
@@ -38,10 +38,14 @@ import com.sbgapps.scoreit.data.model.Player
 import com.sbgapps.scoreit.data.model.TarotGame
 import com.sbgapps.scoreit.data.model.TarotLap
 import com.sbgapps.scoreit.data.model.UniversalGame
+import com.sbgapps.scoreit.data.repository.BillingRepo
 import io.uniflow.core.flow.UIEvent
 import io.uniflow.core.flow.UIState
 
-class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
+class GameViewModel(
+    private val useCase: GameUseCase,
+    private val billingRepository: BillingRepo
+) : BaseViewModel() {
 
     fun loadGame(name: String? = null) {
         setState {
@@ -80,14 +84,14 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
 
     fun addLap() {
         setState {
-            sendEvent(GameEvent.Edition(getEditionAction()))
+            sendEvent(getEditionAction())
         }
     }
 
     fun editLap(position: Int) {
         setState {
             useCase.modifyLap(position)
-            sendEvent(GameEvent.Edition(getEditionAction()))
+            sendEvent(getEditionAction())
         }
     }
 
@@ -122,6 +126,10 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
         }
     }
 
+    fun onDonationPerformed() {
+        setState { getContent() }
+    }
+
     private fun getContent(): Content = Content(getHeader(), getLaps())
 
     fun getPlayerCountOptions(): List<Int> = when (useCase.getGame()) {
@@ -152,22 +160,32 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
         useCase.getMarkers()
     )
 
-    private fun getLaps(): List<LapRow> = when (val game = useCase.getGame()) {
-        is UniversalGame -> game.laps.map {
-            UniversalLapRow(useCase.getResults(it))
-        }
-        is TarotGame -> game.laps.map {
-            val (displayResults, isWon) = useCase.getDisplayResults(it)
-            TarotLapRow(displayResults, getTarotLapInfo(it), isWon)
+    private fun getLaps(): List<LapRow> {
+        val laps = when (val game = useCase.getGame()) {
+            is UniversalGame -> game.laps.map {
+                UniversalLapRow(useCase.getResults(it))
+            }
+            is TarotGame -> game.laps.map {
+                val (displayResults, isWon) = useCase.getDisplayResults(it)
+                TarotLapRow(displayResults, getTarotLapInfo(it), isWon)
+            }
+
+            is BeloteGame -> game.laps.map {
+                val (displayResults, isWon) = useCase.getDisplayResults(it)
+                BeloteLapRow(displayResults, isWon)
+            }
+            is CoincheGame -> game.laps.map {
+                val (displayResults, isWon) = useCase.getDisplayResults(it)
+                CoincheLapRow(displayResults, isWon)
+            }
         }
 
-        is BeloteGame -> game.laps.map {
-            val (displayResults, isWon) = useCase.getDisplayResults(it)
-            BeloteLapRow(displayResults, isWon)
-        }
-        is CoincheGame -> game.laps.map {
-            val (displayResults, isWon) = useCase.getDisplayResults(it)
-            CoincheLapRow(displayResults, isWon)
+        return if (laps.size > 4) {
+            billingRepository.getDonationSkus()?.let {
+                laps.toMutableList().apply { add(DonationRow(it)) }
+            } ?: laps
+        } else {
+            laps
         }
     }
 
@@ -189,18 +207,12 @@ class GameViewModel(private val useCase: GameUseCase) : BaseViewModel() {
         }
     }
 
-    @IdRes
-    private fun getEditionAction(): Int = when (useCase.getGame()) {
-        is UniversalGame -> R.id.action_historyFragment_to_universalEditionActivity
-        is TarotGame -> R.id.action_historyFragment_to_tarotEditionActivity
-        is BeloteGame -> R.id.action_historyFragment_to_beloteEditionActivity
-        is CoincheGame -> R.id.action_historyFragment_to_coincheEditionActivity
-    }
+    private fun getEditionAction(): GameEvent.Edition = GameEvent.Edition(useCase.getGame().type)
 }
 
 data class Content(val header: Header, val results: List<LapRow>) : UIState()
 
 sealed class GameEvent : UIEvent() {
-    data class Edition(@IdRes val actionId: Int) : GameEvent()
+    data class Edition(val gameType: GameType) : GameEvent()
     data class Deletion(val position: Int, val results: List<LapRow>) : GameEvent()
 }

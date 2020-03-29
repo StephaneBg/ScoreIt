@@ -90,8 +90,6 @@ class GameUseCase(
         is TarotGame -> tarotSolver.computeScores(game.laps, getPlayers().size)
     }
 
-    fun getLapCount(): Int = getGame().laps.size
-
     fun isGameStarted(): Boolean = getGame().laps.isNotEmpty()
 
     fun setPlayerCount(count: Int) {
@@ -239,10 +237,15 @@ class GameUseCase(
     }
 
     fun getMarkers(): List<Boolean> {
-        val players = getPlayers(false)
-        val modulo = getLapCount() % players.size
-        return players.mapIndexed { index, _ ->
+        val players = getPlayers()
+        val modulo = getGame().laps.size % players.size
+        val markers = players.mapIndexed { index, _ ->
             if (getGame() is UniversalGame || getGame() is TarotGame) index == modulo else false
+        }
+        return if (getGame() is UniversalGame && dataStore.isUniversalTotalDisplayed()) {
+            markers.toMutableList().apply { add(false) }
+        } else {
+            markers
         }
     }
 }

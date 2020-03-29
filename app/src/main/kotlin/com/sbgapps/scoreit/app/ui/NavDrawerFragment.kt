@@ -20,10 +20,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.navigation.NavigationView
 import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.app.ui.prefs.PreferencesActivity
+import com.sbgapps.scoreit.app.ui.scoreboard.ScoreboardActivity
+import com.sbgapps.scoreit.core.ext.start
 import com.sbgapps.scoreit.data.model.GameType
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -38,13 +40,13 @@ class NavDrawerFragment : BottomSheetDialogFragment() {
         (view as NavigationView).setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.universal -> viewModel.selectGame(GameType.UNIVERSAL)
-                R.id.scoreboard -> findNavController().navigate(R.id.action_navDrawerFragment_to_scoreboardActivity)
+                R.id.scoreboard -> requireContext().start<ScoreboardActivity>()
                 R.id.tarot -> viewModel.selectGame(GameType.TAROT)
                 R.id.belote -> viewModel.selectGame(GameType.BELOTE)
                 R.id.coinche -> viewModel.selectGame(GameType.COINCHE)
 
-                R.id.preferences -> findNavController().navigate(R.id.action_navDrawerFragment_to_preferencesActivity)
-                R.id.about -> findNavController().navigate(R.id.action_navDrawerFragment_to_aboutActivity)
+                R.id.preferences -> requireContext().start<PreferencesActivity>()
+                R.id.about -> requireContext().start<AboutActivity>()
             }
             this@NavDrawerFragment.dismiss()
             true

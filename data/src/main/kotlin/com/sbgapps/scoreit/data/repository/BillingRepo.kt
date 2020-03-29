@@ -14,23 +14,21 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.core.ui
+package com.sbgapps.scoreit.data.repository
 
-interface Action
+import android.app.Activity
+import com.android.billingclient.api.SkuDetails
 
-interface State
+interface BillingRepo {
+    fun getDonationSkus(): List<SkuDetails>?
 
-class SingleEvent<out T>(private val content: T) : State {
+    fun startBillingFlow(activity: Activity, skuDetails: SkuDetails, callback: () -> Unit)
 
-    var hasBeenHandled = false
-        private set
-
-    fun getContent(): T? = if (hasBeenHandled) {
-        null
-    } else {
-        hasBeenHandled = true
-        content
+    companion object {
+        const val COFFEE = "com.sbgapps.scoreit.coffee"
+        const val BEER = "com.sbgapps.scoreit.beer"
     }
-
-    fun peekContent(): T = content
 }
+
+fun List<SkuDetails>.getBeerSku(): SkuDetails? = firstOrNull { it.sku == BillingRepo.BEER }
+fun List<SkuDetails>.getCoffeeSku(): SkuDetails? = firstOrNull { it.sku == BillingRepo.COFFEE }

@@ -20,7 +20,7 @@ plugins {
 }
 
 val versionMajor = 5
-val versionMinor = 2
+val versionMinor = 3
 val versionPatch = 0
 
 android {
@@ -46,14 +46,18 @@ android {
         }
     }
 
-    if (isReleasable) buildTypes {
-        getByName("release") {
+    buildTypes {
+        if (isReleasable) getByName("release") {
             isShrinkResources = true
             isMinifyEnabled = true
             isDebuggable = false
             isJniDebuggable = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard.pro")
             signingConfig = signingConfigs.getByName("release")
+        }
+
+        getByName("debug") {
+            //            applicationIdSuffix = ".debug"
         }
     }
 
@@ -95,9 +99,8 @@ dependencies {
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.constraintLayout)
     implementation(AndroidX.recyclerView)
-    implementation(AndroidX.navFragment)
-    implementation(AndroidX.navUi)
     implementation(Libs.material)
+    implementation(Libs.billing)
     implementation(Libs.koinAndroidX)
     implementation(Libs.uniflowAndroidX)
     implementation(Libs.timber)

@@ -38,7 +38,9 @@ dependencies {
 
     implementation(kotlin("stdlib", Build.Versions.kotlin))
     implementation(AndroidX.annotation)
+    implementation(Libs.billing)
     implementation(Libs.koinAndroidX)
+    implementation(Libs.timber)
     implementation(Moshi.kotlin)
 
     kapt(Moshi.codegen)

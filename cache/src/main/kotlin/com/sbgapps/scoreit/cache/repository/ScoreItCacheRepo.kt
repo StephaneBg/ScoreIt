@@ -16,6 +16,9 @@
 
 package com.sbgapps.scoreit.cache.repository
 
+import com.android.billingclient.api.SkuDetails
+import com.sbgapps.scoreit.cache.dao.ScoreItBillingDao
+import com.sbgapps.scoreit.cache.dao.ScoreItGameDao
 import com.sbgapps.scoreit.data.model.Game
 import com.sbgapps.scoreit.data.model.GameType
 import com.sbgapps.scoreit.data.model.SavedGameInfo
@@ -25,7 +28,8 @@ import com.sbgapps.scoreit.data.repository.PreferencesRepo
 
 class ScoreItCacheRepo(
     private val gameDao: ScoreItGameDao,
-    private val preferencesRepo: PreferencesRepo
+    private val preferencesRepo: PreferencesRepo,
+    private val billingDao: ScoreItBillingDao
 ) : CacheRepo {
 
     private val gameType: GameType
@@ -69,5 +73,11 @@ class ScoreItCacheRepo(
 
     override fun saveScoreBoard(scoreBoard: ScoreBoard) {
         gameDao.saveScoreBoard(scoreBoard)
+    }
+
+    override fun loadSkus(): List<SkuDetails>? = billingDao.loadSkus()
+
+    override fun saveSkus(skus: List<SkuDetails>) {
+        billingDao.saveSkus(skus)
     }
 }

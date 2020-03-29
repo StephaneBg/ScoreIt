@@ -14,11 +14,24 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.core.network
+package com.sbgapps.scoreit.cache.dao
 
-import java.io.IOException
+import android.content.SharedPreferences
+import androidx.core.content.edit
+import com.android.billingclient.api.SkuDetails
 
-class NoConnectivityException : IOException() {
+class ScoreItBillingDao(private val preferences: SharedPreferences) {
 
-    override val message: String = "No connectivity exception"
+    fun loadSkus(): List<SkuDetails>? =
+        preferences.getStringSet(KEY_SKUS, null)?.map { SkuDetails(it) }?.toList()
+
+    fun saveSkus(skus: List<SkuDetails>) {
+        preferences.edit {
+            putStringSet(KEY_SKUS, skus.map { it.originalJson }.toSet())
+        }
+    }
+
+    companion object {
+        private const val KEY_SKUS = "KEY_SKUS"
+    }
 }

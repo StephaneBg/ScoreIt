@@ -16,30 +16,11 @@
 
 package com.sbgapps.scoreit.core.ui
 
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import com.sbgapps.scoreit.core.R
-import com.sbgapps.scoreit.core.network.NoConnectivityException
-import java.net.SocketTimeoutException
 
 open class BaseFragment : Fragment() {
-
-    @StringRes
-    open fun getErrorMessage(throwable: Throwable?): Int = when (throwable) {
-        is NoConnectivityException -> R.string.error_no_connectivity
-        is SocketTimeoutException -> R.string.error_server
-        else -> R.string.error_general
-    }
-
-    @DrawableRes
-    open fun getErrorDrawable(throwable: Throwable?): Int = when (throwable) {
-        is NoConnectivityException ->
-            R.drawable.ic_signal_cellular_connected_no_internet_0_bar_black_24dp
-        is SocketTimeoutException -> R.drawable.ic_error_outline_black_24dp
-        else -> R.drawable.ic_error_outline_black_24dp
-    }
 
     fun setTitle(@StringRes title: Int) {
         setTitle(getString(title))

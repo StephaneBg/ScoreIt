@@ -17,10 +17,12 @@
 package com.sbgapps.scoreit.cache.di
 
 import androidx.preference.PreferenceManager
-import com.sbgapps.scoreit.cache.repository.FileStorage
+import com.sbgapps.scoreit.cache.dao.FileStorage
+import com.sbgapps.scoreit.cache.dao.ScoreItBillingDao
+import com.sbgapps.scoreit.cache.dao.ScoreItFileStorage
+import com.sbgapps.scoreit.cache.dao.ScoreItGameDao
+import com.sbgapps.scoreit.cache.repository.ScoreItBillingRepo
 import com.sbgapps.scoreit.cache.repository.ScoreItCacheRepo
-import com.sbgapps.scoreit.cache.repository.ScoreItFileStorage
-import com.sbgapps.scoreit.cache.repository.ScoreItGameDao
 import com.sbgapps.scoreit.cache.repository.ScoreItPreferencesRepo
 import com.sbgapps.scoreit.data.model.BeloteGame
 import com.sbgapps.scoreit.data.model.CoincheGame
@@ -28,6 +30,7 @@ import com.sbgapps.scoreit.data.model.Game
 import com.sbgapps.scoreit.data.model.GameType
 import com.sbgapps.scoreit.data.model.TarotGame
 import com.sbgapps.scoreit.data.model.UniversalGame
+import com.sbgapps.scoreit.data.repository.BillingRepo
 import com.sbgapps.scoreit.data.repository.CacheRepo
 import com.sbgapps.scoreit.data.repository.PreferencesRepo
 import com.squareup.moshi.Moshi
@@ -39,10 +42,24 @@ import org.koin.dsl.module
 val cacheModule = module {
 
     single { PreferenceManager.getDefaultSharedPreferences(androidContext()) }
-    single { ScoreItGameDao(androidContext(), get(), get(), createMoshi()) }
-    single<FileStorage> { ScoreItFileStorage(androidContext()) }
-    single<CacheRepo> { ScoreItCacheRepo(get(), get()) }
+    single {
+        ScoreItGameDao(
+            androidContext(),
+            get(),
+            get(),
+            createMoshi()
+        )
+    }
+    single<FileStorage> {
+        ScoreItFileStorage(
+            androidContext()
+        )
+    }
+    single { ScoreItBillingDao(get()) }
+
+    single<CacheRepo> { ScoreItCacheRepo(get(), get(), get()) }
     single<PreferencesRepo> { ScoreItPreferencesRepo(get()) }
+    single<BillingRepo> { ScoreItBillingRepo(androidContext(), get()) }
 }
 
 private fun createMoshi(): Moshi = Moshi.Builder()

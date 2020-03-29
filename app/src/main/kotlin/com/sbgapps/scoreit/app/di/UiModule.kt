@@ -30,7 +30,7 @@ import org.koin.dsl.module
 
 val uiModule = module {
 
-    viewModel { GameViewModel(get()) }
+    viewModel { GameViewModel(get(), get()) }
     viewModel { ChartViewModel(get()) }
     viewModel { PreferencesViewModel(get()) }
     viewModel { UniversalEditionViewModel(get()) }
