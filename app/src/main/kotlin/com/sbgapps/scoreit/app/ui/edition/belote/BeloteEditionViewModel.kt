@@ -139,6 +139,7 @@ class BeloteEditionViewModel(
         return listOfNotNull(
             BeloteBonusValue.BELOTE.takeUnless { currentBonuses.contains(BeloteBonusValue.BELOTE) },
             BeloteBonusValue.RUN_3,
+            BeloteBonusValue.RUN_4,
             BeloteBonusValue.RUN_5,
             BeloteBonusValue.FOUR_NORMAL,
             BeloteBonusValue.FOUR_NINE.takeUnless { currentBonuses.contains(BeloteBonusValue.FOUR_NINE) },
