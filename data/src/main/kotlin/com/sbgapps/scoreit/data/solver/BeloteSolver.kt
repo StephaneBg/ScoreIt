@@ -31,7 +31,7 @@ class BeloteSolver(private val dataStore: DataStore) {
         if (!isWon) {
             results[lap.taker.index] = 0
             results[lap.counter().index] = POINTS_TOTAL
-            addBonuses(results, lap.bonuses, true)
+            addBonuses(results, lap.bonuses, lap.counter())
         }
         return results.toList() to isWon
     }
@@ -63,11 +63,15 @@ class BeloteSolver(private val dataStore: DataStore) {
         return results to isWon
     }
 
-    private fun addBonuses(results: IntArray, bonuses: List<BeloteBonus>, toCounter: Boolean = false) {
-        if (toCounter) {
+    private fun addBonuses(
+        results: IntArray,
+        bonuses: List<BeloteBonus>,
+        counter: PlayerPosition = PlayerPosition.NONE
+    ) {
+        if (counter != PlayerPosition.NONE) {
             for ((player, bonus) in bonuses) {
                 if (bonus == BeloteBonusValue.BELOTE) results[player.index] += bonus.points
-                else results[player.counter().index] += bonus.points
+                else results[counter.index] += bonus.points
             }
         } else {
             for ((player, bonus) in bonuses) results[player.index] += bonus.points
