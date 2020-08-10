@@ -21,7 +21,7 @@ import com.sbgapps.scoreit.core.ui.BaseViewModel
 import com.sbgapps.scoreit.data.interactor.GameUseCase
 import com.sbgapps.scoreit.data.model.Player
 import com.sbgapps.scoreit.data.model.UniversalLap
-import io.uniflow.core.flow.UIState
+import io.uniflow.core.flow.data.UIState
 
 class UniversalEditionViewModel(private val useCase: GameUseCase) : BaseViewModel() {
 
@@ -29,46 +29,45 @@ class UniversalEditionViewModel(private val useCase: GameUseCase) : BaseViewMode
         get() = useCase.getEditedLap() as UniversalLap
 
     fun loadContent() {
-        setState { getContent() }
+        action {
+            setState { getContent() }
+        }
     }
 
     fun incrementScore(increment: Int, position: Int) {
-        setState {
+        action {
             val oldPoints = editedLap.points
             val newScore = oldPoints[position] + increment
             val newPoints = oldPoints.replace(position, newScore)
             useCase.updateEdition(UniversalLap(newPoints))
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun setScore(position: Int, score: Int) {
-        setState {
+        action {
             val newPoints = editedLap.points.replace(position, score)
             useCase.updateEdition(UniversalLap(newPoints))
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun cancelEdition() {
-        setState {
+        action {
             useCase.cancelEdition()
-            UniversalEditionState.Completed
+            setState { UniversalEditionState.Completed }
         }
     }
 
     fun completeEdition() {
-        setState {
+        action {
             useCase.completeEdition()
-            UniversalEditionState.Completed
+            setState { UniversalEditionState.Completed }
         }
     }
 
     private fun getContent(): UniversalEditionState.Content =
-        UniversalEditionState.Content(
-            useCase.getPlayers(),
-            editedLap.points
-        )
+        UniversalEditionState.Content(useCase.getPlayers(), editedLap.points)
 }
 
 sealed class UniversalEditionState : UIState() {

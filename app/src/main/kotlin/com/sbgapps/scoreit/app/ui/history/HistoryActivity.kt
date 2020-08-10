@@ -16,7 +16,6 @@
 
 package com.sbgapps.scoreit.app.ui.history
 
-import android.app.ActivityOptions
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -26,7 +25,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.android.billingclient.api.SkuDetails
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.transition.MaterialContainerTransformSharedElementCallback
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ActivityHistoryBinding
 import com.sbgapps.scoreit.app.databinding.DialogEditNameBinding
@@ -76,8 +74,6 @@ class HistoryActivity : BaseActivity() {
     private val historyAdapter = GenericRecyclerViewAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
-        window.sharedElementsUseOverlay = false
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(prefsViewModel.getThemeMode())
 
@@ -112,16 +108,11 @@ class HistoryActivity : BaseActivity() {
     }
 
     private fun startEdition(gameType: GameType) {
-        val bundle = ActivityOptions.makeSceneTransitionAnimation(
-            this,
-            binding.fab,
-            "shared_element_container"
-        ).toBundle()
         when (gameType) {
-            GameType.UNIVERSAL -> start<UniversalEditionActivity>(bundle)
-            GameType.TAROT -> start<TarotEditionActivity>(bundle)
-            GameType.BELOTE -> start<BeloteEditionActivity>(bundle)
-            GameType.COINCHE -> start<CoincheEditionActivity>(bundle)
+            GameType.UNIVERSAL -> start<UniversalEditionActivity>()
+            GameType.TAROT -> start<TarotEditionActivity>()
+            GameType.BELOTE -> start<BeloteEditionActivity>()
+            GameType.COINCHE -> start<CoincheEditionActivity>()
         }
     }
 

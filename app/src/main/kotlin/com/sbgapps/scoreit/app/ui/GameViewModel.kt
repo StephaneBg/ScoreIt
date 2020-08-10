@@ -39,8 +39,8 @@ import com.sbgapps.scoreit.data.model.TarotGame
 import com.sbgapps.scoreit.data.model.TarotLap
 import com.sbgapps.scoreit.data.model.UniversalGame
 import com.sbgapps.scoreit.data.repository.BillingRepo
-import io.uniflow.core.flow.UIEvent
-import io.uniflow.core.flow.UIState
+import io.uniflow.core.flow.data.UIEvent
+import io.uniflow.core.flow.data.UIState
 
 class GameViewModel(
     private val useCase: GameUseCase,
@@ -48,55 +48,55 @@ class GameViewModel(
 ) : BaseViewModel() {
 
     fun loadGame(name: String? = null) {
-        setState {
+        action {
             name?.let { useCase.loadGame(it) }
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun selectGame(gameType: GameType) {
-        setState {
+        action {
             useCase.setGameType(gameType)
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun setPlayerCount(count: Int) {
-        setState {
+        action {
             useCase.setPlayerCount(count)
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun resetGame() {
-        setState {
+        action {
             useCase.reset()
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun createGame(name: String) {
-        setState {
+        action {
             useCase.createGame(name)
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun addLap() {
-        setState {
+        action {
             sendEvent(getEditionAction())
         }
     }
 
     fun editLap(position: Int) {
-        setState {
+        action {
             useCase.modifyLap(position)
             sendEvent(getEditionAction())
         }
     }
 
     fun deleteLap(position: Int) {
-        setState {
+        action {
             val laps = getLaps().toMutableList()
             laps.removeAt(position)
             sendEvent(GameEvent.Deletion(position, laps))
@@ -104,30 +104,32 @@ class GameViewModel(
     }
 
     fun confirmLapDeletion(position: Int) {
-        setState {
+        action {
             useCase.deleteLap(position)
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun canEditPlayer(position: Int): Boolean = useCase.canEditPlayer(position)
 
     fun setPlayerName(position: Int, name: String) {
-        setState {
+        action {
             useCase.editPlayerName(position, name)
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun setPlayerColor(position: Int, @ColorInt color: Int) {
-        setState {
+        action {
             useCase.editPlayerColor(position, color)
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun onDonationPerformed() {
-        setState { getContent() }
+        action {
+            setState { getContent() }
+        }
     }
 
     private fun getContent(): Content = Content(getHeader(), getLaps())

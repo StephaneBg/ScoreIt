@@ -31,7 +31,7 @@ import com.sbgapps.scoreit.data.solver.BeloteSolver
 import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_TOTAL
 import com.sbgapps.scoreit.data.solver.counter
 import com.sbgapps.scoreit.data.solver.counterPoints
-import io.uniflow.core.flow.UIState
+import io.uniflow.core.flow.data.UIState
 
 class BeloteEditionViewModel(
     private val useCase: GameUseCase,
@@ -42,11 +42,13 @@ class BeloteEditionViewModel(
         get() = useCase.getEditedLap() as BeloteLap
 
     fun loadContent() {
-        setState { getContent() }
+        action {
+            setState { getContent() }
+        }
     }
 
     fun incrementScore(increment: Int) {
-        setState {
+        action {
             val result = editedLap.points + increment
             val points = when {
                 result >= POINTS_TOTAL -> POINTS_TOTAL
@@ -54,46 +56,46 @@ class BeloteEditionViewModel(
                 else -> result
             }
             useCase.updateEdition(editedLap.copy(points = points))
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun changeTaker(taker: PlayerPosition) {
-        setState {
+        action {
             useCase.updateEdition(editedLap.copy(taker = taker))
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun addBonus(bonus: Pair<PlayerPosition, BeloteBonusValue>) {
-        setState {
+        action {
             val bonuses = editedLap.bonuses.toMutableList()
             bonuses += BeloteBonus(bonus.first, bonus.second)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun removeBonus(bonusIndex: Int) {
-        setState {
+        action {
             val bonuses = editedLap.bonuses.toMutableList()
             bonuses.removeAt(bonusIndex)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun completeEdition() {
-        setState {
+        action {
             useCase.completeEdition()
-            BeloteEditionState.Completed
+            setState { BeloteEditionState.Completed }
         }
     }
 
     fun cancelEdition() {
-        setState {
+        action {
             useCase.cancelEdition()
-            BeloteEditionState.Completed
+            setState { BeloteEditionState.Completed }
         }
     }
 

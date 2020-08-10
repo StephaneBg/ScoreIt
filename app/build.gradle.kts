@@ -55,13 +55,11 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard.pro")
             signingConfig = signingConfigs.getByName("release")
         }
-
-        getByName("debug") {
-            //            applicationIdSuffix = ".debug"
-        }
     }
 
-    viewBinding { isEnabled = true }
+    buildFeatures {
+        viewBinding = true
+    }
 
     bundle {
         language {

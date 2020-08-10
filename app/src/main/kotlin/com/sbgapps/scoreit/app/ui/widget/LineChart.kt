@@ -48,6 +48,7 @@ class LineChart @JvmOverloads constructor(
     private val axisColor = context.colorAttr(R.attr.colorOnBackground)
     private val paint = Paint()
     private val keySize = context.dip(2).toFloat()
+    private val padding = context.dip(32).toFloat()
 
     private var maxY = 0f
     private var minY = 0f
@@ -59,7 +60,6 @@ class LineChart @JvmOverloads constructor(
     }
 
     public override fun onDraw(canvas: Canvas) {
-        val padding = context.dip(32).toFloat()
         val usableHeight = height - 2 * padding
         val usableWidth = width - 2 * padding
 

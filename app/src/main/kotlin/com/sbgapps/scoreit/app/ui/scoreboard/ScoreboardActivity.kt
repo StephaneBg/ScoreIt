@@ -58,11 +58,14 @@ class ScoreboardActivity : BaseActivity() {
         binding.nameTwo.setOnClickListener { displayNameDialog(PlayerPosition.TWO) }
 
         onStates(scoreBoarViewModel) { state ->
-            state as Content
-            binding.scoreOne.text = state.scoreBoard.scoreOne.toString()
-            binding.scoreTwo.text = state.scoreBoard.scoreTwo.toString()
-            binding.nameOne.text = state.scoreBoard.nameOne
-            binding.nameTwo.text = state.scoreBoard.nameTwo
+            when (state) {
+                is Content -> {
+                    binding.scoreOne.text = state.scoreBoard.scoreOne.toString()
+                    binding.scoreTwo.text = state.scoreBoard.scoreTwo.toString()
+                    binding.nameOne.text = state.scoreBoard.nameOne
+                    binding.nameTwo.text = state.scoreBoard.nameTwo
+                }
+            }
         }
     }
 

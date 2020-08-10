@@ -34,7 +34,7 @@ import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.BID_MIN
 import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.POINTS_TOTAL
 import com.sbgapps.scoreit.data.solver.counter
 import com.sbgapps.scoreit.data.solver.counterPoints
-import io.uniflow.core.flow.UIState
+import io.uniflow.core.flow.data.UIState
 
 class CoincheEditionViewModel(
     private val useCase: GameUseCase,
@@ -46,27 +46,29 @@ class CoincheEditionViewModel(
 
 
     fun loadContent() {
-        setState { getContent() }
+        action {
+            setState { getContent() }
+        }
     }
 
     fun stepBid(increment: Int) {
-        setState {
+        action {
             useCase.updateEdition(
                 editedLap.copy(bid = editedLap.bid + increment)
             )
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun setCoinche(coinche: CoincheValue) {
-        setState {
+        action {
             useCase.updateEdition(editedLap.copy(coinche = coinche))
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun incrementScore(increment: Int) {
-        setState {
+        action {
             val result = editedLap.points + increment
             val points = when {
                 result >= POINTS_TOTAL -> POINTS_TOTAL
@@ -74,46 +76,46 @@ class CoincheEditionViewModel(
                 else -> result
             }
             useCase.updateEdition(editedLap.copy(points = points))
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun changeTaker(taker: PlayerPosition) {
-        setState {
+        action {
             useCase.updateEdition(editedLap.copy(taker = taker))
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun addBonus(bonus: Pair<PlayerPosition, BeloteBonusValue>) {
-        setState {
+        action {
             val bonuses = editedLap.bonuses.toMutableList()
             bonuses += BeloteBonus(bonus.first, bonus.second)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun removeBonus(bonusIndex: Int) {
-        setState {
+        action {
             val bonuses = editedLap.bonuses.toMutableList()
             bonuses.removeAt(bonusIndex)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
-            getContent()
+            setState { getContent() }
         }
     }
 
     fun completeEdition() {
-        setState {
+        action {
             useCase.completeEdition()
-            CoincheEditionState.Completed
+            setState { CoincheEditionState.Completed }
         }
     }
 
     fun cancelEdition() {
-        setState {
+        action {
             useCase.cancelEdition()
-            CoincheEditionState.Completed
+            setState { CoincheEditionState.Completed }
         }
     }
 

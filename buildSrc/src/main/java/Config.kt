@@ -35,8 +35,8 @@ import org.gradle.api.JavaVersion
 object Build {
 
     object Versions {
-        const val kotlin = "1.3.70"
-        const val androidGradle = "3.6.0"
+        const val kotlin = "1.3.72"
+        const val androidGradle = "4.0.1"
         val java = JavaVersion.VERSION_1_8
     }
 
@@ -52,11 +52,11 @@ object Android {
 object Libs {
 
     private object Versions {
-        const val material = "1.2.0-alpha05"
+        const val material = "1.2.0"
         const val billing = "2.1.0"
         const val timber = "4.7.1"
         const val koinAndroidX = "2.1.0"
-        const val uniflowAndroidX = "0.9.5"
+        const val uniflowAndroidX = "0.11.1"
         const val storage = "2.1.0"
         const val jsr310 = "1.2.2"
     }
