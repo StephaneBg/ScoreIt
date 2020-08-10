@@ -53,7 +53,7 @@ object Libs {
 
     private object Versions {
         const val material = "1.2.0"
-        const val billing = "2.1.0"
+        const val billing = "3.0.0"
         const val timber = "4.7.1"
         const val koinAndroidX = "2.1.0"
         const val uniflowAndroidX = "0.11.1"
@@ -62,7 +62,6 @@ object Libs {
     }
 
     const val material = "com.google.android.material:material:${Versions.material}"
-    const val billing = "com.android.billingclient:billing:${Versions.billing}"
     const val billingKtx = "com.android.billingclient:billing-ktx:${Versions.billing}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     const val koinAndroidX = "org.koin:koin-androidx-viewmodel:${Versions.koinAndroidX}"
@@ -74,13 +73,13 @@ object Libs {
 object AndroidX {
 
     private object Versions {
-        const val appCompat = "1.1.0"
+        const val appCompat = "1.2.0"
         const val recyclerView = "1.1.0"
         const val constraintLayout = "1.1.3"
-        const val lifecyleViewmodel = "2.1.0"
-        const val coreKtx = "1.1.0"
-        const val fragmentKtx = "1.1.0"
-        const val preference = "1.1.0"
+        const val lifecyleViewmodel = "2.2.0"
+        const val coreKtx = "1.3.1"
+        const val fragmentKtx = "1.2.5"
+        const val preference = "1.1.1"
         const val annotation = "1.1.0"
     }
 
@@ -96,7 +95,7 @@ object AndroidX {
 
 object Moshi {
 
-    private const val version = "1.9.2"
+    private const val version = "1.9.3"
 
     const val kotlin = "com.squareup.moshi:moshi-kotlin:$version"
     const val adapters = "com.squareup.moshi:moshi-adapters:$version"
@@ -105,7 +104,7 @@ object Moshi {
 
 object Coroutines {
 
-    private const val version = "1.3.3"
+    private const val version = "1.3.8"
 
     const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
     const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"

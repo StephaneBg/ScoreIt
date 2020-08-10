@@ -25,9 +25,9 @@ class ScoreItBillingDao(private val preferences: SharedPreferences) {
     fun loadSkus(): List<SkuDetails>? =
         preferences.getStringSet(KEY_SKUS, null)?.map { SkuDetails(it) }?.toList()
 
-    fun saveSkus(skus: List<SkuDetails>) {
+    fun saveSkus(skus: List<SkuDetails>?) {
         preferences.edit {
-            putStringSet(KEY_SKUS, skus.map { it.originalJson }.toSet())
+            putStringSet(KEY_SKUS, skus?.map { it.originalJson }?.toSet())
         }
     }
 

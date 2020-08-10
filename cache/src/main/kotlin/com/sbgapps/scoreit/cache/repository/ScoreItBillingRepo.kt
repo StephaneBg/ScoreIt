@@ -109,7 +109,7 @@ class ScoreItBillingRepo(
         }
     }
 
-    private fun queryPurchasesAsync(skus: List<SkuDetails>) {
+    private fun queryPurchasesAsync(skus: List<SkuDetails>?) {
         val hasDonated = playStoreBillingClient.queryPurchases(BillingClient.SkuType.INAPP)
             .purchasesList?.isNotEmpty() == true
         Timber.d("User has ${if (!hasDonated) "not" else ""} donated")
