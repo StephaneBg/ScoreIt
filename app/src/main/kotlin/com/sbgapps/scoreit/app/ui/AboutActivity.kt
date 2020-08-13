@@ -22,7 +22,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.sbgapps.scoreit.app.BuildConfig
 import com.sbgapps.scoreit.app.databinding.ActivityAboutBinding
 import com.sbgapps.scoreit.core.ui.BaseActivity
@@ -40,26 +42,37 @@ class AboutActivity : BaseActivity() {
         binding.appVersionName.text = BuildConfig.VERSION_NAME
         binding.logo.setOnClickListener { animate() }
 
+        binding.rate.setOnClickListener {
+            val manager = ReviewManagerFactory.create(this)
+            manager.requestReviewFlow().addOnCompleteListener {
+                if (it.isSuccessful) {
+                    manager.launchReviewFlow(this, it.result)
+                } else {
+                    binding.rate.isVisible = false
+                }
+            }
+        }
+
         binding.email.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:")
-                putExtra(Intent.EXTRA_EMAIL, "stephane@baiget.fr")
+                putExtra(Intent.EXTRA_EMAIL, "stephane" + "@" + "baiget" + ".fr")
                 putExtra(Intent.EXTRA_SUBJECT, "ScoreIt")
             }
-            if (intent.resolveActivity(packageManager) != null) {
-                startActivity(intent)
-            }
+            manageIntent(intent)
         }
 
         binding.github.setOnClickListener {
             val webPage: Uri = Uri.parse("https://github.com/StephaneBg/ScoreIt")
             val intent = Intent(Intent.ACTION_VIEW, webPage)
-            if (intent.resolveActivity(packageManager) != null) {
-                startActivity(intent)
-            }
+            manageIntent(intent)
         }
 
         animate()
+    }
+
+    private fun manageIntent(intent: Intent) {
+        if (intent.resolveActivity(packageManager) != null) startActivity(intent)
     }
 
     private fun animate() {
@@ -72,6 +85,7 @@ class AboutActivity : BaseActivity() {
                 ObjectAnimator.ofFloat(binding.appVersionName, View.ALPHA, 0f, 1f),
                 ObjectAnimator.ofFloat(binding.author, View.ALPHA, 0f, 1f),
                 ObjectAnimator.ofFloat(binding.email, View.ALPHA, 0f, 1f),
+                ObjectAnimator.ofFloat(binding.rate, View.ALPHA, 0f, 1f),
                 ObjectAnimator.ofFloat(binding.github, View.ALPHA, 0f, 1f)
             )
             interpolator = FastOutSlowInInterpolator()

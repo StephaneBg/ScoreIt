@@ -58,6 +58,16 @@
         >
 
         <ImageView
+            android:id="@+id/rate"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="@dimen/margin_padding_size_medium"
+            android:background="?selectableItemBackgroundBorderless"
+            app:srcCompat="@drawable/ic_baseline_rate_review_24dp"
+            tools:ignore="ContentDescription"
+            />
+
+        <ImageView
             android:id="@+id/email"
             android:layout_width="48dp"
             android:layout_height="48dp"

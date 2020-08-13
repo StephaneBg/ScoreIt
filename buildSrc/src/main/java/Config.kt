@@ -53,6 +53,7 @@ object Libs {
 
     private object Versions {
         const val material = "1.2.0"
+        const val playCore = "1.8.1"
         const val billing = "3.0.0"
         const val timber = "4.7.1"
         const val koinAndroidX = "2.1.0"
@@ -62,6 +63,7 @@ object Libs {
     }
 
     const val material = "com.google.android.material:material:${Versions.material}"
+    const val playCore = "com.google.android.play:core-ktx:${Versions.playCore}"
     const val billingKtx = "com.android.billingclient:billing-ktx:${Versions.billing}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     const val koinAndroidX = "org.koin:koin-androidx-viewmodel:${Versions.koinAndroidX}"

@@ -98,6 +98,7 @@ dependencies {
     implementation(AndroidX.constraintLayout)
     implementation(AndroidX.recyclerView)
     implementation(Libs.material)
+    implementation(Libs.playCore)
     implementation(Libs.billingKtx)
     implementation(Libs.koinAndroidX)
     implementation(Libs.uniflowAndroidX)
