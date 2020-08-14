@@ -136,7 +136,8 @@ class GameUseCase(
     fun updateEdition(lap: Lap) {
         when (val state = editionState) {
             is EditionState.Creation -> editionState = EditionState.Creation(lap)
-            is EditionState.Modification -> editionState = EditionState.Modification(state.initialLap, lap)
+            is EditionState.Modification -> editionState =
+                EditionState.Modification(state.initialLap, lap, state.position)
         }
     }
 
@@ -176,8 +177,7 @@ class GameUseCase(
 
     private inline fun <reified T> actualEditLap(game: Game, state: EditionState.Modification): List<T> {
         val laps = game.laps.asListOfType<T>()
-        val index = laps.indexOf(state.initialLap as T)
-        return laps.replace(index, state.modifiedLap as T)
+        return laps.replace(state.position, state.modifiedLap as T)
     }
 
     fun reset() {
@@ -198,7 +198,7 @@ class GameUseCase(
 
     fun modifyLap(position: Int) {
         val lap = getGame().laps[position]
-        editionState = EditionState.Modification(lap, lap)
+        editionState = EditionState.Modification(lap, lap, position)
     }
 
     fun deleteLap(position: Int) {
@@ -252,5 +252,5 @@ class GameUseCase(
 
 sealed class EditionState {
     data class Creation(val createdLap: Lap) : EditionState()
-    data class Modification(val initialLap: Lap, val modifiedLap: Lap) : EditionState()
+    data class Modification(val initialLap: Lap, val modifiedLap: Lap, val position: Int) : EditionState()
 }
