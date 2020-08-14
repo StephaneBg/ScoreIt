@@ -101,15 +101,8 @@ class HistoryActivity : BaseActivity() {
         onStates(gameViewModel) { state ->
             when (state) {
                 is Content -> {
-                    binding.header.adapter =
-                        HeaderAdapter(
-                            state.header,
-                            ::displayPlayerEditionOptions
-                        )
-                    val adapters = getItems(state.results)
-                    val diff =
-                        DiffUtil.calculateDiff(HistoryDiffCallback(historyAdapter.items.asListOfType(), adapters))
-                    historyAdapter.updateItems(adapters, diff)
+                    binding.header.adapter = HeaderAdapter(state.header, ::displayPlayerEditionOptions)
+                    updateHistory(state.results)
                     invalidateOptionsMenu()
                 }
             }
@@ -121,6 +114,12 @@ class HistoryActivity : BaseActivity() {
                 is GameEvent.Deletion -> manageDeletion(data)
             }
         }
+    }
+
+    private fun updateHistory(laps: List<LapRow>) {
+        val adapters = getItems(laps)
+        val diff = DiffUtil.calculateDiff(HistoryDiffCallback(historyAdapter.items.asListOfType(), adapters))
+        historyAdapter.updateItems(adapters, diff)
     }
 
     private fun startEdition(gameType: GameType) {
@@ -218,8 +217,8 @@ class HistoryActivity : BaseActivity() {
         return true
     }
 
-    private fun manageDeletion(data: GameEvent.Deletion) {
-        val callback = DeleteCallback(data.position)
+    private fun manageDeletion(event: GameEvent.Deletion) {
+        val callback = DeleteCallback(event.position)
         val snackbar = Snackbar.make(binding.mainContainer, R.string.snackbar_msg_on_lap_deleted, Snackbar.LENGTH_LONG)
         snackbar
             .setAction(R.string.snackbar_action_on_lap_deleted) {
@@ -229,7 +228,7 @@ class HistoryActivity : BaseActivity() {
             .addCallback(callback)
             .setAnchorView(binding.fab)
             .show()
-        historyAdapter.updateItems(getItems(data.results))
+        updateHistory(event.results)
     }
 
     private inner class DeleteCallback(private val position: Int) : Snackbar.Callback() {
@@ -328,6 +327,6 @@ class HistoryActivity : BaseActivity() {
         override fun getNewListSize(): Int = newEntries.size
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-            oldEntries[oldItemPosition].model == newEntries[newItemPosition].model
+            oldEntries[oldItemPosition].model === newEntries[newItemPosition].model
     }
 }
