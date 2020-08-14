@@ -45,8 +45,8 @@ object Build {
 
 object Android {
     const val minSdkVersion = 21
-    const val targetSdkVersion = 29
-    const val compileSdkVersion = 29
+    const val targetSdkVersion = 30
+    const val compileSdkVersion = 30
 }
 
 object Libs {
