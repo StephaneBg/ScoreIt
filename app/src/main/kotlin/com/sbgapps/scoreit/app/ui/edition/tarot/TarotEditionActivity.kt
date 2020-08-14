@@ -121,7 +121,7 @@ class TarotEditionActivity : EditionActivity() {
                     binding.bonusContainer.adapter = BonusAdapter(model)
                 }
 
-                TarotEditionState.Completed -> finish()
+                TarotEditionState.Completed -> super.onBackPressed()
             }
         }
         viewModel.loadContent()

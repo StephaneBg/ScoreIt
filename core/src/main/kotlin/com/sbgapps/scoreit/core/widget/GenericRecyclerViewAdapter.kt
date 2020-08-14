@@ -33,9 +33,9 @@ class GenericRecyclerViewAdapter(initialItems: List<ItemAdapter> = emptyList()) 
         diffResult?.dispatchUpdatesTo(this) ?: notifyDataSetChanged()
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount(): Int = items.size
 
-    override fun getItemViewType(position: Int) = items[position].layoutId
+    override fun getItemViewType(position: Int): Int = items[position].layoutId
 
     override fun onCreateViewHolder(parent: ViewGroup, @LayoutRes layoutId: Int): BaseViewHolder {
         val itemView = parent.inflate(layoutId)

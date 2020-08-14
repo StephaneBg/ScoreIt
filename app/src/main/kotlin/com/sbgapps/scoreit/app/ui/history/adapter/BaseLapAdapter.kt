@@ -16,17 +16,16 @@
 
 package com.sbgapps.scoreit.app.ui.history.adapter
 
-import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
 import com.sbgapps.scoreit.core.widget.ItemAdapter
 
-open class BaseLapAdapter(
+open class BaseLapAdapter<T>(
+    val model: T,
     @LayoutRes layoutId: Int,
     private val clickCallback: () -> Unit
 ) : ItemAdapter(layoutId) {
 
-    @CallSuper
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         viewHolder.itemView.setOnClickListener { clickCallback() }
     }

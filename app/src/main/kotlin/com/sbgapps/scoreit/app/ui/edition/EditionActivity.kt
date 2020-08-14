@@ -19,7 +19,11 @@ package com.sbgapps.scoreit.app.ui.edition
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
+import android.view.Window
 import androidx.appcompat.app.AppCompatDelegate
+import com.google.android.material.transition.platform.MaterialContainerTransform
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.ui.prefs.PreferencesViewModel
 import com.sbgapps.scoreit.core.ui.BaseActivity
@@ -31,6 +35,18 @@ open class EditionActivity : BaseActivity() {
     private val prefsViewModel by viewModel<PreferencesViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        findViewById<View>(android.R.id.content).transitionName = "shared_element_container"
+        setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+        window.sharedElementEnterTransition = MaterialContainerTransform().apply {
+            addTarget(android.R.id.content)
+            duration = 300L
+        }
+        window.sharedElementReturnTransition = MaterialContainerTransform().apply {
+            addTarget(android.R.id.content)
+            duration = 250L
+        }
+
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(prefsViewModel.getThemeMode())
     }

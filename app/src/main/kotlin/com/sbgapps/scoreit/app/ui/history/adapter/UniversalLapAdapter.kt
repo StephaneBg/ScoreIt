@@ -22,9 +22,9 @@ import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayout
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
 
 class UniversalLapAdapter(
-    private val model: UniversalLapRow,
+    model: UniversalLapRow,
     clickCallback: () -> Unit
-) : BaseLapAdapter(R.layout.list_item_lap_universal, clickCallback) {
+) : BaseLapAdapter<UniversalLapRow>(model, R.layout.list_item_lap_universal, clickCallback) {
 
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         super.onBindViewHolder(viewHolder)

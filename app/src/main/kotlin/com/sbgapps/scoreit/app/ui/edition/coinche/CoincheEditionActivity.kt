@@ -100,7 +100,7 @@ class CoincheEditionActivity : EditionActivity() {
                     binding.bonusContainer.adapter = BonusAdapter(model)
                 }
 
-                is CoincheEditionState.Completed -> finish()
+                is CoincheEditionState.Completed -> super.onBackPressed()
             }
         }
         viewModel.loadContent()

@@ -23,9 +23,9 @@ import com.sbgapps.scoreit.core.utils.string.build
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
 
 class TarotLapAdapter(
-    private val model: TarotLapRow,
+    model: TarotLapRow,
     clickCallback: () -> Unit
-) : BaseLapAdapter(R.layout.list_item_lap_tarot, clickCallback) {
+) : BaseLapAdapter<TarotLapRow>(model, R.layout.list_item_lap_tarot, clickCallback) {
 
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         super.onBindViewHolder(viewHolder)

@@ -22,9 +22,9 @@ import com.sbgapps.scoreit.app.model.BeloteLapRow
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
 
 class BeloteLapAdapter(
-    private val model: BeloteLapRow,
+    model: BeloteLapRow,
     clickCallback: () -> Unit
-) : BaseLapAdapter(R.layout.list_item_lap_belote_coinche, clickCallback) {
+) : BaseLapAdapter<BeloteLapRow>(model, R.layout.list_item_lap_belote_coinche, clickCallback) {
 
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         super.onBindViewHolder(viewHolder)

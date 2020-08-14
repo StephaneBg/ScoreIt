@@ -16,15 +16,19 @@
 
 package com.sbgapps.scoreit.app.ui.history
 
+import android.app.ActivityOptions
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.Window
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.forEach
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.android.billingclient.api.SkuDetails
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ActivityHistoryBinding
 import com.sbgapps.scoreit.app.databinding.DialogEditNameBinding
@@ -44,6 +48,7 @@ import com.sbgapps.scoreit.app.ui.edition.belote.BeloteEditionActivity
 import com.sbgapps.scoreit.app.ui.edition.coinche.CoincheEditionActivity
 import com.sbgapps.scoreit.app.ui.edition.tarot.TarotEditionActivity
 import com.sbgapps.scoreit.app.ui.edition.universal.UniversalEditionActivity
+import com.sbgapps.scoreit.app.ui.history.adapter.BaseLapAdapter
 import com.sbgapps.scoreit.app.ui.history.adapter.BeloteLapAdapter
 import com.sbgapps.scoreit.app.ui.history.adapter.CoincheLapAdapter
 import com.sbgapps.scoreit.app.ui.history.adapter.DonationAdapter
@@ -52,12 +57,12 @@ import com.sbgapps.scoreit.app.ui.history.adapter.TarotLapAdapter
 import com.sbgapps.scoreit.app.ui.history.adapter.UniversalLapAdapter
 import com.sbgapps.scoreit.app.ui.prefs.PreferencesViewModel
 import com.sbgapps.scoreit.app.ui.saved.SavedGameActivity
+import com.sbgapps.scoreit.core.ext.asListOfType
 import com.sbgapps.scoreit.core.ext.onImeActionDone
 import com.sbgapps.scoreit.core.ext.start
 import com.sbgapps.scoreit.core.ui.BaseActivity
 import com.sbgapps.scoreit.core.widget.DividerItemDecoration
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
-import com.sbgapps.scoreit.core.widget.ItemAdapter
 import com.sbgapps.scoreit.data.model.GameType
 import com.sbgapps.scoreit.data.repository.BillingRepo
 import io.uniflow.androidx.flow.onEvents
@@ -74,6 +79,10 @@ class HistoryActivity : BaseActivity() {
     private val historyAdapter = GenericRecyclerViewAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+        window.sharedElementsUseOverlay = false
+
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(prefsViewModel.getThemeMode())
 
@@ -92,8 +101,15 @@ class HistoryActivity : BaseActivity() {
         onStates(gameViewModel) { state ->
             when (state) {
                 is Content -> {
-                    binding.header.adapter = HeaderAdapter(state.header, ::displayPlayerEditionOptions)
-                    historyAdapter.updateItems(getItems(state.results))
+                    binding.header.adapter =
+                        HeaderAdapter(
+                            state.header,
+                            ::displayPlayerEditionOptions
+                        )
+                    val adapters = getItems(state.results)
+                    val diff =
+                        DiffUtil.calculateDiff(HistoryDiffCallback(historyAdapter.items.asListOfType(), adapters))
+                    historyAdapter.updateItems(adapters, diff)
                     invalidateOptionsMenu()
                 }
             }
@@ -108,11 +124,16 @@ class HistoryActivity : BaseActivity() {
     }
 
     private fun startEdition(gameType: GameType) {
+        val bundle = ActivityOptions.makeSceneTransitionAnimation(
+            this,
+            binding.fab,
+            "shared_element_container"
+        ).toBundle()
         when (gameType) {
-            GameType.UNIVERSAL -> start<UniversalEditionActivity>()
-            GameType.TAROT -> start<TarotEditionActivity>()
-            GameType.BELOTE -> start<BeloteEditionActivity>()
-            GameType.COINCHE -> start<CoincheEditionActivity>()
+            GameType.UNIVERSAL -> start<UniversalEditionActivity>(bundle)
+            GameType.TAROT -> start<TarotEditionActivity>(bundle)
+            GameType.BELOTE -> start<BeloteEditionActivity>(bundle)
+            GameType.COINCHE -> start<CoincheEditionActivity>(bundle)
         }
     }
 
@@ -222,13 +243,13 @@ class HistoryActivity : BaseActivity() {
         gameViewModel.loadGame()
     }
 
-    private fun getItems(scores: List<LapRow>): List<ItemAdapter> = scores.map { lap ->
+    private fun getItems(scores: List<LapRow>): List<BaseLapAdapter<out LapRow>> = scores.map { lap ->
         when (lap) {
             is UniversalLapRow -> UniversalLapAdapter(lap, ::onLapClicked)
             is BeloteLapRow -> BeloteLapAdapter(lap, ::onLapClicked)
             is CoincheLapRow -> CoincheLapAdapter(lap, ::onLapClicked)
             is TarotLapRow -> TarotLapAdapter(lap, ::onLapClicked)
-            is DonationRow -> DonationAdapter(lap.skus, ::onDonateClicked)
+            is DonationRow -> DonationAdapter(lap, ::onDonateClicked)
         }
     }
 
@@ -244,6 +265,7 @@ class HistoryActivity : BaseActivity() {
 
     private fun onEdit(position: Int) {
         gameViewModel.editLap(position)
+        historyAdapter.notifyItemChanged(position)
     }
 
     private fun onDelete(position: Int) {
@@ -291,5 +313,21 @@ class HistoryActivity : BaseActivity() {
         ) { color ->
             gameViewModel.setPlayerColor(position, color)
         }
+    }
+
+    private class HistoryDiffCallback(
+        private val oldEntries: List<BaseLapAdapter<out LapRow>>,
+        private val newEntries: List<BaseLapAdapter<out LapRow>>
+    ) : DiffUtil.Callback() {
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            oldEntries[oldItemPosition].model == newEntries[newItemPosition].model
+
+        override fun getOldListSize(): Int = oldEntries.size
+
+        override fun getNewListSize(): Int = newEntries.size
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            oldEntries[oldItemPosition].model == newEntries[newItemPosition].model
     }
 }

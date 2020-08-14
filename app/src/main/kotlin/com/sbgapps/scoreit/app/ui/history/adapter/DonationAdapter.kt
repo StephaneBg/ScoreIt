@@ -21,25 +21,25 @@ import androidx.annotation.CallSuper
 import com.android.billingclient.api.SkuDetails
 import com.sbgapps.scoreit.app.R
 import com.sbgapps.scoreit.app.databinding.ListItemLapDonationBinding
+import com.sbgapps.scoreit.app.model.DonationRow
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
-import com.sbgapps.scoreit.core.widget.ItemAdapter
 import com.sbgapps.scoreit.data.repository.getBeerSku
 import com.sbgapps.scoreit.data.repository.getCoffeeSku
 
 class DonationAdapter(
-    private val skus: List<SkuDetails>,
+    model: DonationRow,
     private val callback: (skuDetails: SkuDetails) -> Unit
-) : ItemAdapter(R.layout.list_item_lap_donation) {
+) : BaseLapAdapter<DonationRow>(model, R.layout.list_item_lap_donation, {}) {
 
     @SuppressLint("SetTextI18n")
     @CallSuper
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         val binding = ListItemLapDonationBinding.bind(viewHolder.itemView)
-        skus.getCoffeeSku()?.let { sku ->
+        model.skus.getCoffeeSku()?.let { sku ->
             binding.coffee.text = "${sku.description}\n${sku.price}"
             binding.coffee.setOnClickListener { callback(sku) }
         }
-        skus.getBeerSku()?.let { sku ->
+        model.skus.getBeerSku()?.let { sku ->
             binding.beer.text = "${sku.description}\n${sku.price}"
             binding.beer.setOnClickListener { callback(sku) }
         }

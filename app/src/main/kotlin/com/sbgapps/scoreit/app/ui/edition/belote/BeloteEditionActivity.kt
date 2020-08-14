@@ -85,7 +85,7 @@ class BeloteEditionActivity : EditionActivity() {
                     binding.bonusContainer.adapter = BonusAdapter(model)
                 }
 
-                is BeloteEditionState.Completed -> finish()
+                is BeloteEditionState.Completed -> super.onBackPressed()
             }
         }
         viewModel.loadContent()

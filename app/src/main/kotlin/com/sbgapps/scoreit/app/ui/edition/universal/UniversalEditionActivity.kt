@@ -56,7 +56,7 @@ class UniversalEditionActivity : EditionActivity() {
                     val diff = DiffUtil.calculateDiff(DiffCallback(lapAdapter.items.asListOfType(), adapters))
                     lapAdapter.updateItems(adapters, diff)
                 }
-                is UniversalEditionState.Completed -> finish()
+                is UniversalEditionState.Completed -> super.onBackPressed()
             }
         }
         viewModel.loadContent()
