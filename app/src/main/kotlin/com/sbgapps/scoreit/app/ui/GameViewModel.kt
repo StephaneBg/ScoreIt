@@ -47,6 +47,9 @@ class GameViewModel(
     private val billingRepository: BillingRepo
 ) : BaseViewModel() {
 
+    private var displayedLaps = emptyList<LapRow>()
+    private var removedPosition = NO_DELETION
+
     fun loadGame(name: String? = null) {
         action {
             name?.let { useCase.loadGame(it) }
@@ -97,15 +100,29 @@ class GameViewModel(
 
     fun deleteLap(position: Int) {
         action {
+            if (removedPosition != NO_DELETION) {
+                useCase.deleteLap(removedPosition)
+                setState { getContent() }
+            }
             val laps = getLaps().toMutableList()
             laps.removeAt(position)
-            sendEvent(GameEvent.Deletion(position, laps))
+            displayedLaps = laps
+            removedPosition = position
+            sendEvent(GameEvent.Deletion(laps))
         }
     }
 
-    fun confirmLapDeletion(position: Int) {
+    fun confirmDeletion() {
         action {
-            useCase.deleteLap(position)
+            useCase.deleteLap(removedPosition)
+            removedPosition = NO_DELETION
+            setState { getContent() }
+        }
+    }
+
+    fun undoDeletion() {
+        action {
+            removedPosition = NO_DELETION
             setState { getContent() }
         }
     }
@@ -164,23 +181,24 @@ class GameViewModel(
 
     private fun getLaps(): List<LapRow> {
         val laps = when (val game = useCase.getGame()) {
-            is UniversalGame -> game.laps.map {
-                UniversalLapRow(useCase.getResults(it))
+            is UniversalGame -> game.laps.mapIndexed { index, lap ->
+                UniversalLapRow(index, useCase.getResults(lap))
             }
-            is TarotGame -> game.laps.map {
-                val (displayResults, isWon) = useCase.getDisplayResults(it)
-                TarotLapRow(displayResults, getTarotLapInfo(it), isWon)
+            is TarotGame -> game.laps.mapIndexed { index, lap ->
+                val (displayResults, isWon) = useCase.getDisplayResults(lap)
+                TarotLapRow(index, displayResults, getTarotLapInfo(lap), isWon)
             }
 
-            is BeloteGame -> game.laps.map {
-                val (displayResults, isWon) = useCase.getDisplayResults(it)
-                BeloteLapRow(displayResults, isWon)
+            is BeloteGame -> game.laps.mapIndexed { index, lap ->
+                val (displayResults, isWon) = useCase.getDisplayResults(lap)
+                BeloteLapRow(index, displayResults, isWon)
             }
-            is CoincheGame -> game.laps.map {
-                val (displayResults, isWon) = useCase.getDisplayResults(it)
-                CoincheLapRow(displayResults, isWon)
+            is CoincheGame -> game.laps.mapIndexed { index, lap ->
+                val (displayResults, isWon) = useCase.getDisplayResults(lap)
+                CoincheLapRow(index, displayResults, isWon)
             }
         }
+        displayedLaps = laps
 
         return if (laps.size > 4) {
             billingRepository.getDonationSkus()?.let {
@@ -210,11 +228,15 @@ class GameViewModel(
     }
 
     private fun getEditionAction(): GameEvent.Edition = GameEvent.Edition(useCase.getGame().type)
+
+    companion object {
+        private const val NO_DELETION = -1
+    }
 }
 
 data class Content(val header: Header, val results: List<LapRow>) : UIState()
 
 sealed class GameEvent : UIEvent() {
     data class Edition(val gameType: GameType) : GameEvent()
-    data class Deletion(val position: Int, val results: List<LapRow>) : GameEvent()
+    data class Deletion(val results: List<LapRow>) : GameEvent()
 }

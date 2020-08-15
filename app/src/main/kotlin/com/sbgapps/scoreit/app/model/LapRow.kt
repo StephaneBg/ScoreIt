@@ -19,28 +19,32 @@ package com.sbgapps.scoreit.app.model
 import com.android.billingclient.api.SkuDetails
 import com.sbgapps.scoreit.core.utils.string.StringFactory
 
-sealed class LapRow
+sealed class LapRow(open val position: Int)
 
 data class UniversalLapRow(
+    override val position: Int,
     val results: List<Int>
-) : LapRow()
+) : LapRow(position)
 
 data class BeloteLapRow(
+    override val position: Int,
     val results: List<String>,
     val isWon: Boolean = true
-) : LapRow()
+) : LapRow(position)
 
 data class CoincheLapRow(
+    override val position: Int,
     val results: List<String>,
     val isWon: Boolean
-) : LapRow()
+) : LapRow(position)
 
 data class TarotLapRow(
+    override val position: Int,
     val results: List<String>,
     val info: StringFactory,
     val isWon: Boolean
-) : LapRow()
+) : LapRow(position)
 
 data class DonationRow(
     val skus: List<SkuDetails>
-) : LapRow()
+) : LapRow(0)

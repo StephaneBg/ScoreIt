@@ -77,6 +77,7 @@ class HistoryActivity : BaseActivity() {
     private val billingRepository by inject<BillingRepo>()
     private lateinit var binding: ActivityHistoryBinding
     private val historyAdapter = GenericRecyclerViewAdapter()
+    private var snackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
@@ -218,28 +219,38 @@ class HistoryActivity : BaseActivity() {
     }
 
     private fun manageDeletion(event: GameEvent.Deletion) {
-        val callback = DeleteCallback(event.position)
-        val snackbar = Snackbar.make(binding.mainContainer, R.string.snackbar_msg_on_lap_deleted, Snackbar.LENGTH_LONG)
-        snackbar
-            .setAction(R.string.snackbar_action_on_lap_deleted) {
-                snackbar.removeCallback(callback)
-                gameViewModel.loadGame()
+        snackbar?.apply {
+            removeCallback(deleteCallback)
+            dismiss()
+        }
+
+        Snackbar.make(binding.mainContainer, R.string.snackbar_msg_on_lap_deleted, Snackbar.LENGTH_LONG).apply {
+            setAction(R.string.snackbar_action_on_lap_deleted) {
+                removeCallback(deleteCallback)
+                gameViewModel.undoDeletion()
             }
-            .addCallback(callback)
-            .setAnchorView(binding.fab)
-            .show()
+            addCallback(deleteCallback)
+            anchorView = binding.fab
+            show()
+        }.also { snackbar = it }
         updateHistory(event.results)
     }
 
-    private inner class DeleteCallback(private val position: Int) : Snackbar.Callback() {
+    private val deleteCallback = object : Snackbar.Callback() {
         override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-            gameViewModel.confirmLapDeletion(position)
+            gameViewModel.confirmDeletion()
+            snackbar = null
         }
     }
 
     override fun onResume() {
         super.onResume()
         gameViewModel.loadGame()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        snackbar?.dismiss()
     }
 
     private fun getItems(scores: List<LapRow>): List<BaseLapAdapter<out LapRow>> = scores.map { lap ->
@@ -327,6 +338,6 @@ class HistoryActivity : BaseActivity() {
         override fun getNewListSize(): Int = newEntries.size
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-            oldEntries[oldItemPosition].model === newEntries[newItemPosition].model
+            areItemsTheSame(oldItemPosition, newItemPosition)
     }
 }
