@@ -20,8 +20,8 @@ plugins {
 }
 
 val versionMajor = 5
-val versionMinor = 3
-val versionPatch = 3
+val versionMinor = 4
+val versionPatch = 0
 
 android {
     val isReleasable = null != (project.properties["scoreItStoreFile"] as String?)
