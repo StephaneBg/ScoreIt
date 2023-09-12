@@ -16,7 +16,7 @@
 
 package com.sbgapps.scoreit.app.ui.history.adapter
 
-import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.model.UniversalLapRow
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayout
 import com.sbgapps.scoreit.core.widget.BaseViewHolder

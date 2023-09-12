@@ -22,10 +22,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.sbgapps.scoreit.app.databinding.FragmentEditionTarotBonusBinding
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.model.TarotBonusValue
-import io.uniflow.androidx.flow.onStates
+import com.sbgapps.scoreit.databinding.FragmentEditionTarotBonusBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class TarotEditionBonusFragment : BottomSheetDialogFragment() {
@@ -35,15 +34,19 @@ class TarotEditionBonusFragment : BottomSheetDialogFragment() {
     private var tarotBonus: TarotBonusValue = TarotBonusValue.PETIT_AU_BOUT
     private var player: PlayerPosition = PlayerPosition.ONE
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentEditionTarotBonusBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        onStates(viewModel) { state ->
+        viewModel.observeStates(this) { state ->
             if (state is TarotEditionState.Content) {
-                if (state.availableBonuses.isEmpty()) return@onStates
+                if (state.availableBonuses.isEmpty()) return@observeStates
 
                 binding.player.text = state.players[player.index].name
                 binding.player.setOnClickListener {

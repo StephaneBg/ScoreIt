@@ -20,14 +20,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ActivityPreferencesBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.ui.history.HistoryActivity
 import com.sbgapps.scoreit.core.ext.start
 import com.sbgapps.scoreit.core.ui.BaseActivity
 import com.sbgapps.scoreit.core.utils.THEME_MODE_AUTO
 import com.sbgapps.scoreit.core.utils.THEME_MODE_DARK
 import com.sbgapps.scoreit.core.utils.THEME_MODE_LIGHT
+import com.sbgapps.scoreit.databinding.ActivityPreferencesBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PreferencesActivity : BaseActivity() {

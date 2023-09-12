@@ -76,3 +76,6 @@
 -keepclassmembers class kotlin.Metadata {
     public <methods>;
 }
+
+-dontwarn kotlin.time.ClockMark
+-dontwarn kotlin.time.MonoClock

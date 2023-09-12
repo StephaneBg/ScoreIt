@@ -16,11 +16,11 @@
 
 package com.sbgapps.scoreit.app.ui.history.adapter
 
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ListItemLapTarotBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.model.TarotLapRow
 import com.sbgapps.scoreit.core.utils.string.build
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
+import com.sbgapps.scoreit.databinding.ListItemLapTarotBinding
 
 class TarotLapAdapter(
     model: TarotLapRow,

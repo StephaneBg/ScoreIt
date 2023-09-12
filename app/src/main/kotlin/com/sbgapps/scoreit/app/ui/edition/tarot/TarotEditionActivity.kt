@@ -25,16 +25,15 @@ import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ActivityEditionTarotBinding
-import com.sbgapps.scoreit.app.databinding.ListItemEditionBonusBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.ui.edition.EditionActivity
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayoutAdapter
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.model.TarotBidValue
 import com.sbgapps.scoreit.data.model.TarotBonusValue
 import com.sbgapps.scoreit.data.model.TarotOudlerValue
-import io.uniflow.androidx.flow.onStates
+import com.sbgapps.scoreit.databinding.ActivityEditionTarotBinding
+import com.sbgapps.scoreit.databinding.ListItemEditionBonusBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TarotEditionActivity : EditionActivity() {
@@ -49,7 +48,7 @@ class TarotEditionActivity : EditionActivity() {
         setContentView(binding.root)
         setupActionBar(binding.toolbar)
 
-        onStates(viewModel) { state ->
+        viewModel.observeStates(this) { state ->
             when (state) {
                 is TarotEditionState.Content -> {
                     binding.taker.text = state.players[state.taker.index].name

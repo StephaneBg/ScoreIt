@@ -15,27 +15,27 @@
  */
 
 buildscript {
+
     repositories {
-        jcenter()
+        mavenCentral()
         google()
     }
 
     dependencies {
-        classpath(kotlin("gradle-plugin", Build.Versions.kotlin))
-        classpath(Build.androidGradle)
+        classpath(libs.kotlin.gradlePlugin)
+        classpath(libs.android.gradlePlugin)
     }
+
+}
+
+plugins {
+    id("com.google.devtools.ksp") version "1.9.10-1.0.13" apply false
 }
 
 allprojects {
-    repositories {
-        jcenter()
-        google()
-    }
-
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
-            freeCompilerArgs = listOf("-progressive", "-Xuse-experimental=kotlin.Experimental")
-            jvmTarget = Build.Versions.java.toString()
+            jvmTarget = "1.8"
         }
     }
 }
@@ -44,9 +44,13 @@ subprojects {
     afterEvaluate {
         extensions.configure<com.android.build.gradle.BaseExtension> {
             compileOptions {
-                sourceCompatibility = Build.Versions.java
-                targetCompatibility = Build.Versions.java
+                sourceCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_1_8
             }
         }
     }
+}
+
+tasks.create<Delete>("clean") {
+    delete(rootProject.buildDir)
 }

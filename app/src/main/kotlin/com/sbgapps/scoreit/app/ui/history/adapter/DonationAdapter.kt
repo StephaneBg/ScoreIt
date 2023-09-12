@@ -18,30 +18,24 @@ package com.sbgapps.scoreit.app.ui.history.adapter
 
 import android.annotation.SuppressLint
 import androidx.annotation.CallSuper
-import com.android.billingclient.api.SkuDetails
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ListItemLapDonationBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.model.DonationRow
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
-import com.sbgapps.scoreit.data.repository.getBeerSku
-import com.sbgapps.scoreit.data.repository.getCoffeeSku
+import com.sbgapps.scoreit.data.repository.Donation
+import com.sbgapps.scoreit.databinding.ListItemLapDonationBinding
 
 class DonationAdapter(
     model: DonationRow,
-    private val callback: (skuDetails: SkuDetails) -> Unit
+    private val callback: (donation: Donation) -> Unit
 ) : BaseLapAdapter<DonationRow>(model, R.layout.list_item_lap_donation, {}) {
 
     @SuppressLint("SetTextI18n")
     @CallSuper
     override fun onBindViewHolder(viewHolder: BaseViewHolder) {
         val binding = ListItemLapDonationBinding.bind(viewHolder.itemView)
-        model.skus.getCoffeeSku()?.let { sku ->
-            binding.coffee.text = "${sku.description}\n${sku.price}"
-            binding.coffee.setOnClickListener { callback(sku) }
-        }
-        model.skus.getBeerSku()?.let { sku ->
-            binding.beer.text = "${sku.description}\n${sku.price}"
-            binding.beer.setOnClickListener { callback(sku) }
-        }
+        binding.coffee.text = Donation.COFFEE.name
+        binding.coffee.setOnClickListener { callback(Donation.COFFEE) }
+        binding.beer.text = Donation.BEER.name
+        binding.beer.setOnClickListener { callback(Donation.BEER) }
     }
 }

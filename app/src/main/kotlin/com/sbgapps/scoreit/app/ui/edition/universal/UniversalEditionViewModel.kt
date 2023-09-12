@@ -18,19 +18,20 @@ package com.sbgapps.scoreit.app.ui.edition.universal
 
 import com.sbgapps.scoreit.core.ext.replace
 import com.sbgapps.scoreit.core.ui.BaseViewModel
+import com.sbgapps.scoreit.core.ui.Empty
+import com.sbgapps.scoreit.core.ui.State
 import com.sbgapps.scoreit.data.interactor.GameUseCase
 import com.sbgapps.scoreit.data.model.Player
 import com.sbgapps.scoreit.data.model.UniversalLap
-import io.uniflow.core.flow.data.UIState
 
-class UniversalEditionViewModel(private val useCase: GameUseCase) : BaseViewModel() {
+class UniversalEditionViewModel(private val useCase: GameUseCase) : BaseViewModel(Empty) {
 
     private val editedLap
         get() = useCase.getEditedLap() as UniversalLap
 
     fun loadContent() {
         action {
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -40,7 +41,7 @@ class UniversalEditionViewModel(private val useCase: GameUseCase) : BaseViewMode
             val newScore = oldPoints[position] + increment
             val newPoints = oldPoints.replace(position, newScore)
             useCase.updateEdition(UniversalLap(newPoints))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -48,21 +49,21 @@ class UniversalEditionViewModel(private val useCase: GameUseCase) : BaseViewMode
         action {
             val newPoints = editedLap.points.replace(position, score)
             useCase.updateEdition(UniversalLap(newPoints))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun cancelEdition() {
         action {
             useCase.cancelEdition()
-            setState { UniversalEditionState.Completed }
+            setState(UniversalEditionState.Completed)
         }
     }
 
     fun completeEdition() {
         action {
             useCase.completeEdition()
-            setState { UniversalEditionState.Completed }
+            setState(UniversalEditionState.Completed)
         }
     }
 
@@ -70,7 +71,7 @@ class UniversalEditionViewModel(private val useCase: GameUseCase) : BaseViewMode
         UniversalEditionState.Content(useCase.getPlayers(), editedLap.points)
 }
 
-sealed class UniversalEditionState : UIState() {
+sealed class UniversalEditionState : State {
     data class Content(val players: List<Player>, val results: List<Int>) : UniversalEditionState()
-    object Completed : UniversalEditionState()
+    data object Completed : UniversalEditionState()
 }

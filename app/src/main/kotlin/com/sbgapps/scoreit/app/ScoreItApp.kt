@@ -17,7 +17,7 @@
 package com.sbgapps.scoreit.app
 
 import android.app.Application
-import com.jakewharton.threetenabp.AndroidThreeTen
+import com.sbgapps.scoreit.BuildConfig
 import com.sbgapps.scoreit.app.di.uiModule
 import com.sbgapps.scoreit.cache.di.cacheModule
 import com.sbgapps.scoreit.data.di.dataModule
@@ -30,7 +30,6 @@ class ScoreItApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        AndroidThreeTen.init(this)
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
 
         startKoin {

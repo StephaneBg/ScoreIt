@@ -16,48 +16,40 @@
 
 plugins {
     id("com.android.application")
-    kotlin("android")
+    id("kotlin-android")
 }
 
 val versionMajor = 5
-val versionMinor = 4
-val versionPatch = 0
+val versionMinor = 5
+val versionPatch = 1
 
 android {
-    val isReleasable = null != (project.properties["scoreItStoreFile"] as String?)
+    namespace = "com.sbgapps.scoreit"
 
-    compileSdkVersion(Android.compileSdkVersion)
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.sbgapps.scoreit"
         versionCode = versionMajor * 100 + versionMinor * 10 + versionPatch
         versionName = "$versionMajor.$versionMinor.$versionPatch"
-        vectorDrawables.useSupportLibrary = true
-        minSdkVersion(Android.minSdkVersion)
-        targetSdkVersion(Android.targetSdkVersion)
-    }
-
-    if (isReleasable) signingConfigs {
-        create("release") {
-            storeFile = file(project.properties["scoreItStoreFile"] as String)
-            storePassword = project.properties["scoreItStorePassword"] as String?
-            keyAlias = project.properties["scoreItKeyAlias"] as String?
-            keyPassword = project.properties["scoreItKeyPassword"] as String?
-        }
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
     }
 
     buildTypes {
-        if (isReleasable) getByName("release") {
+        getByName("release") {
             isShrinkResources = true
             isMinifyEnabled = true
             isDebuggable = false
             isJniDebuggable = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard.pro")
-            signingConfig = signingConfigs.getByName("release")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
     buildFeatures {
+        buildConfig = true
         viewBinding = true
     }
 
@@ -77,13 +69,21 @@ android {
         getByName("main").java.srcDirs("src/main/kotlin")
     }
 
-    packagingOptions {
-        exclude("**/*.kotlin_module")
-        exclude("**/*.version")
-        exclude("**/kotlin/**")
-        exclude("**/*.txt")
-        exclude("**/*.xml")
-        exclude("**/*.properties")
+    packaging {
+        resources {
+            excludes += listOf(
+                "**/*.kotlin_module",
+                "**/*.version",
+                "**/kotlin/**",
+                "**/*.txt",
+                "**/*.xml",
+                "**/*.properties"
+            )
+        }
+    }
+
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
     }
 }
 
@@ -92,16 +92,15 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":cache"))
 
-    implementation(kotlin("stdlib", Build.Versions.kotlin))
-    implementation(AndroidX.appCompat)
-    implementation(AndroidX.coreKtx)
-    implementation(AndroidX.constraintLayout)
-    implementation(AndroidX.recyclerView)
-    implementation(Libs.material)
-    implementation(Libs.playCore)
-    implementation(Libs.billingKtx)
-    implementation(Libs.koinAndroidX)
-    implementation(Libs.uniflowAndroidX)
-    implementation(Libs.timber)
-    implementation(Libs.jsr310)
+    implementation(libs.androidx.appCompat)
+    implementation(libs.androidx.coreKtx)
+    implementation(libs.androidx.constraintLayout)
+    implementation(libs.androidx.recyclerView)
+    implementation(libs.material)
+    implementation(libs.playCore)
+    implementation(libs.billingKtx)
+    implementation(libs.koinAndroidX)
+    implementation(libs.timber)
+
+    coreLibraryDesugaring(libs.desugaring)
 }

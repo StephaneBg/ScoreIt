@@ -16,19 +16,23 @@
 
 plugins {
     id("com.android.library")
-    kotlin("android")
+    id("kotlin-android")
 }
 
 android {
-    compileSdkVersion(Android.compileSdkVersion)
+    namespace = "com.sbgapps.scoreit.cache"
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdkVersion(Android.minSdkVersion)
-        targetSdkVersion(Android.targetSdkVersion)
+        minSdk = libs.versions.minSdk.get().toInt()
     }
 
     sourceSets {
         getByName("main").java.srcDirs("src/main/kotlin")
+    }
+
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
     }
 }
 
@@ -36,13 +40,14 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":core"))
 
-    implementation(kotlin("stdlib", Build.Versions.kotlin))
-    implementation(AndroidX.coreKtx)
-    implementation(AndroidX.preference)
-    implementation(Moshi.kotlin)
-    implementation(Moshi.adapters)
-    implementation(Libs.billingKtx)
-    implementation(Libs.storage)
-    implementation(Libs.koinAndroidX)
-    implementation(Libs.timber)
+    implementation(libs.androidx.coreKtx)
+    implementation(libs.androidx.preference)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.moshi.adapters)
+    implementation(libs.billingKtx)
+    implementation(libs.storage)
+    implementation(libs.koinAndroidX)
+    implementation(libs.timber)
+
+    coreLibraryDesugaring(libs.desugaring)
 }

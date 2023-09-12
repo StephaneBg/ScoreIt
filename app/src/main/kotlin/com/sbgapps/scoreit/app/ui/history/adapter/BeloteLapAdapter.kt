@@ -16,10 +16,10 @@
 
 package com.sbgapps.scoreit.app.ui.history.adapter
 
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ListItemLapBeloteCoincheBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.model.BeloteLapRow
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
+import com.sbgapps.scoreit.databinding.ListItemLapBeloteCoincheBinding
 
 class BeloteLapAdapter(
     model: BeloteLapRow,

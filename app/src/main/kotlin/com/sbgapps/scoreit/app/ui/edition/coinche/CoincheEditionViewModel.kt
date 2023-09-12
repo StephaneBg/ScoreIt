@@ -16,9 +16,11 @@
 
 package com.sbgapps.scoreit.app.ui.edition.coinche
 
-import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.ui.edition.Step
 import com.sbgapps.scoreit.core.ui.BaseViewModel
+import com.sbgapps.scoreit.core.ui.Empty
+import com.sbgapps.scoreit.core.ui.State
 import com.sbgapps.scoreit.core.utils.string.StringFactory
 import com.sbgapps.scoreit.core.utils.string.fromResources
 import com.sbgapps.scoreit.data.interactor.GameUseCase
@@ -34,12 +36,11 @@ import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.BID_MIN
 import com.sbgapps.scoreit.data.solver.CoincheSolver.Companion.POINTS_TOTAL
 import com.sbgapps.scoreit.data.solver.counter
 import com.sbgapps.scoreit.data.solver.counterPoints
-import io.uniflow.core.flow.data.UIState
 
 class CoincheEditionViewModel(
     private val useCase: GameUseCase,
     private val solver: CoincheSolver
-) : BaseViewModel() {
+) : BaseViewModel(Empty) {
 
     private val editedLap
         get() = useCase.getEditedLap() as CoincheLap
@@ -47,7 +48,7 @@ class CoincheEditionViewModel(
 
     fun loadContent() {
         action {
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -56,14 +57,14 @@ class CoincheEditionViewModel(
             useCase.updateEdition(
                 editedLap.copy(bid = editedLap.bid + increment)
             )
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun setCoinche(coinche: CoincheValue) {
         action {
             useCase.updateEdition(editedLap.copy(coinche = coinche))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -76,14 +77,14 @@ class CoincheEditionViewModel(
                 else -> result
             }
             useCase.updateEdition(editedLap.copy(points = points))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun changeTaker(taker: PlayerPosition) {
         action {
             useCase.updateEdition(editedLap.copy(taker = taker))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -92,7 +93,7 @@ class CoincheEditionViewModel(
             val bonuses = editedLap.bonuses.toMutableList()
             bonuses += BeloteBonus(bonus.first, bonus.second)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -101,21 +102,21 @@ class CoincheEditionViewModel(
             val bonuses = editedLap.bonuses.toMutableList()
             bonuses.removeAt(bonusIndex)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun completeEdition() {
         action {
             useCase.completeEdition()
-            setState { CoincheEditionState.Completed }
+            setState(CoincheEditionState.Completed)
         }
     }
 
     fun cancelEdition() {
         action {
             useCase.cancelEdition()
-            setState { CoincheEditionState.Completed }
+            setState(CoincheEditionState.Completed)
         }
     }
 
@@ -169,7 +170,7 @@ class CoincheEditionViewModel(
         lap.points.toString() to lap.counterPoints().toString()
 }
 
-sealed class CoincheEditionState : UIState() {
+sealed class CoincheEditionState : State {
     data class Content(
         val players: List<Player>,
         val taker: PlayerPosition,
@@ -184,5 +185,5 @@ sealed class CoincheEditionState : UIState() {
         val stepPointsByTen: Step
     ) : CoincheEditionState()
 
-    object Completed : CoincheEditionState()
+    data object Completed : CoincheEditionState()
 }

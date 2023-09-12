@@ -24,7 +24,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorInt
-import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.core.ext.colorAttr
 import com.sbgapps.scoreit.core.ext.dip
 
@@ -37,10 +37,10 @@ class LineChart @JvmOverloads constructor(
     @Suppress("MemberVisibilityCanBePrivate")
     var lines = emptyList<LineSet>()
         set(value) {
-            maxY = value.map { it.getMaxY() }.max() ?: 0f
-            minY = value.map { it.getMinY() }.min() ?: 0f
-            maxX = value.map { it.getMaxX() }.max() ?: 0f
-            minX = value.map { it.getMinX() }.min() ?: 0f
+            maxY = value.maxOfOrNull { it.getMaxY() } ?: 0f
+            minY = value.minOfOrNull { it.getMinY() } ?: 0f
+            maxX = value.maxOfOrNull { it.getMaxX() } ?: 0f
+            minX = value.minOfOrNull { it.getMinX() } ?: 0f
             field = value
             postInvalidate()
         }
@@ -65,11 +65,10 @@ class LineChart @JvmOverloads constructor(
 
         // Draw x-axis line
         updatePaint(axisColor, keySize / 2)
-        val height: Float
-        height = if (minY < 0) {
-            getHeight().toFloat() - padding - usableHeight * (-minY / (maxY - minY))
+        val height: Float = if (minY < 0) {
+            height.toFloat() - padding - usableHeight * (-minY / (maxY - minY))
         } else {
-            getHeight() - padding
+            height - padding
         }
 
         canvas.drawLine(
@@ -159,11 +158,11 @@ data class LineSet(
     val size: Int
         get() = points.size
 
-    fun getMinX(): Float = points.map { it.x }.min() ?: 0f
+    fun getMinX(): Float = points.minOfOrNull { it.x } ?: 0f
 
-    fun getMinY(): Float = points.map { it.y }.min() ?: 0f
+    fun getMinY(): Float = points.minOfOrNull { it.y } ?: 0f
 
-    fun getMaxX(): Float = points.map { it.x }.max() ?: 0f
+    fun getMaxX(): Float = points.maxOfOrNull { it.x } ?: 0f
 
-    fun getMaxY(): Float = points.map { it.y }.max() ?: 0f
+    fun getMaxY(): Float = points.maxOfOrNull { it.y } ?: 0f
 }

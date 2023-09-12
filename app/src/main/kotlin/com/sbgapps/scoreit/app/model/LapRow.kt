@@ -16,7 +16,6 @@
 
 package com.sbgapps.scoreit.app.model
 
-import com.android.billingclient.api.SkuDetails
 import com.sbgapps.scoreit.core.utils.string.StringFactory
 
 sealed class LapRow(open val position: Int)
@@ -45,6 +44,4 @@ data class TarotLapRow(
     val isWon: Boolean
 ) : LapRow(position)
 
-data class DonationRow(
-    val skus: List<SkuDetails>
-) : LapRow(0)
+data object DonationRow : LapRow(0)

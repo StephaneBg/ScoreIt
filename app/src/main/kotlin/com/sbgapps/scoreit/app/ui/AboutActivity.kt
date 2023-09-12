@@ -25,9 +25,9 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.google.android.play.core.review.ReviewManagerFactory
-import com.sbgapps.scoreit.app.BuildConfig
-import com.sbgapps.scoreit.app.databinding.ActivityAboutBinding
+import com.sbgapps.scoreit.BuildConfig
 import com.sbgapps.scoreit.core.ui.BaseActivity
+import com.sbgapps.scoreit.databinding.ActivityAboutBinding
 
 
 class AboutActivity : BaseActivity() {

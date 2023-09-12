@@ -16,9 +16,11 @@
 
 package com.sbgapps.scoreit.app.ui.edition.belote
 
-import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.ui.edition.Step
 import com.sbgapps.scoreit.core.ui.BaseViewModel
+import com.sbgapps.scoreit.core.ui.Empty
+import com.sbgapps.scoreit.core.ui.State
 import com.sbgapps.scoreit.core.utils.string.StringFactory
 import com.sbgapps.scoreit.core.utils.string.fromResources
 import com.sbgapps.scoreit.data.interactor.GameUseCase
@@ -31,19 +33,18 @@ import com.sbgapps.scoreit.data.solver.BeloteSolver
 import com.sbgapps.scoreit.data.solver.BeloteSolver.Companion.POINTS_TOTAL
 import com.sbgapps.scoreit.data.solver.counter
 import com.sbgapps.scoreit.data.solver.counterPoints
-import io.uniflow.core.flow.data.UIState
 
 class BeloteEditionViewModel(
     private val useCase: GameUseCase,
     private val solver: BeloteSolver
-) : BaseViewModel() {
+) : BaseViewModel(Empty) {
 
     private val editedLap
         get() = useCase.getEditedLap() as BeloteLap
 
     fun loadContent() {
         action {
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -56,14 +57,14 @@ class BeloteEditionViewModel(
                 else -> result
             }
             useCase.updateEdition(editedLap.copy(points = points))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun changeTaker(taker: PlayerPosition) {
         action {
             useCase.updateEdition(editedLap.copy(taker = taker))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -72,7 +73,7 @@ class BeloteEditionViewModel(
             val bonuses = editedLap.bonuses.toMutableList()
             bonuses += BeloteBonus(bonus.first, bonus.second)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -81,21 +82,21 @@ class BeloteEditionViewModel(
             val bonuses = editedLap.bonuses.toMutableList()
             bonuses.removeAt(bonusIndex)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun completeEdition() {
         action {
             useCase.completeEdition()
-            setState { BeloteEditionState.Completed }
+            setState(BeloteEditionState.Completed)
         }
     }
 
     fun cancelEdition() {
         action {
             useCase.cancelEdition()
-            setState { BeloteEditionState.Completed }
+            setState(BeloteEditionState.Completed)
         }
     }
 
@@ -119,6 +120,7 @@ class BeloteEditionViewModel(
                     R.string.belote_info_capot,
                     results[lap.taker.index].toString()
                 )
+
                 solver.isLitigation(results.toList()) -> fromResources(R.string.belote_info_litigation)
                 else -> fromResources(R.string.belote_info_win, results[lap.taker.index].toString())
             }
@@ -150,7 +152,7 @@ class BeloteEditionViewModel(
     }
 }
 
-sealed class BeloteEditionState : UIState() {
+sealed class BeloteEditionState : State {
     data class Content(
         val players: List<Player>,
         val taker: PlayerPosition,
@@ -162,5 +164,5 @@ sealed class BeloteEditionState : UIState() {
         val stepPointsByTen: Step
     ) : BeloteEditionState()
 
-    object Completed : BeloteEditionState()
+    data object Completed : BeloteEditionState()
 }

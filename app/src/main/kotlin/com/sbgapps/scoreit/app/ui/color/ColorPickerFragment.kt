@@ -22,8 +22,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.sbgapps.scoreit.app.databinding.FragmentColorPickerBinding
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
+import com.sbgapps.scoreit.databinding.FragmentColorPickerBinding
 
 class ColorPickerFragment : BottomSheetDialogFragment() {
 
@@ -31,7 +31,11 @@ class ColorPickerFragment : BottomSheetDialogFragment() {
     private lateinit var adapters: List<ColorAdapter>
     private lateinit var listener: ((color: Int) -> Unit)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentColorPickerBinding.inflate(inflater)
         return binding.root
     }

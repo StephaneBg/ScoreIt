@@ -14,24 +14,16 @@
  * limitations under the License.
  */
 
-package com.sbgapps.scoreit.cache.dao
-
-import android.content.SharedPreferences
-import androidx.core.content.edit
-import com.android.billingclient.api.SkuDetails
-
-class ScoreItBillingDao(private val preferences: SharedPreferences) {
-
-    fun loadSkus(): List<SkuDetails>? =
-        preferences.getStringSet(KEY_SKUS, null)?.map { SkuDetails(it) }?.toList()
-
-    fun saveSkus(skus: List<SkuDetails>?) {
-        preferences.edit {
-            putStringSet(KEY_SKUS, skus?.map { it.originalJson }?.toSet())
-        }
-    }
-
-    companion object {
-        private const val KEY_SKUS = "KEY_SKUS"
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        google()
     }
 }
+
+include(
+    ":app",
+    ":data",
+    ":cache",
+    ":core"
+)

@@ -17,50 +17,55 @@
 package com.sbgapps.scoreit.app.ui.scoreboard
 
 import com.sbgapps.scoreit.core.ui.BaseViewModel
+import com.sbgapps.scoreit.core.ui.Empty
+import com.sbgapps.scoreit.core.ui.State
 import com.sbgapps.scoreit.data.interactor.ScoreBoardUseCase
 import com.sbgapps.scoreit.data.model.PlayerPosition
 import com.sbgapps.scoreit.data.model.ScoreBoard
-import io.uniflow.core.flow.data.UIState
 
-class ScoreBoardViewModel(private val useCase: ScoreBoardUseCase) : BaseViewModel() {
+class ScoreBoardViewModel(private val useCase: ScoreBoardUseCase) : BaseViewModel(Empty) {
 
     init {
         action {
-            setState { Content(useCase.getScoreBoard()) }
+            setState(Content(useCase.getScoreBoard()))
         }
     }
 
     fun incrementScore(increment: Int, player: PlayerPosition) {
-        action {
-            val currentInfo = getCurrentStateOrNull(Content::class)!!.scoreBoard
-            val newInfo = if (PlayerPosition.ONE == player) {
-                currentInfo.copy(scoreOne = currentInfo.scoreOne + increment)
-            } else {
-                currentInfo.copy(scoreTwo = currentInfo.scoreTwo + increment)
+        action { state ->
+            if (state is Content) {
+                val currentInfo = state.scoreBoard
+                val newInfo = if (PlayerPosition.ONE == player) {
+                    currentInfo.copy(scoreOne = currentInfo.scoreOne + increment)
+                } else {
+                    currentInfo.copy(scoreTwo = currentInfo.scoreTwo + increment)
+                }
+                useCase.saveScoreBoard(newInfo)
+                setState(Content(newInfo))
             }
-            useCase.saveScoreBoard(newInfo)
-            setState { Content(newInfo) }
         }
     }
 
     fun setPlayerName(name: String, player: PlayerPosition) {
-        action {
-            val currentInfo = getCurrentStateOrNull(Content::class)!!.scoreBoard
-            val newInfo = if (PlayerPosition.ONE == player) {
-                currentInfo.copy(nameOne = name)
-            } else {
-                currentInfo.copy(nameTwo = name)
+        action { state ->
+            if (state is Content) {
+                val currentInfo = state.scoreBoard
+                val newInfo = if (PlayerPosition.ONE == player) {
+                    currentInfo.copy(nameOne = name)
+                } else {
+                    currentInfo.copy(nameTwo = name)
+                }
+                useCase.saveScoreBoard(newInfo)
+                setState(Content(newInfo))
             }
-            useCase.saveScoreBoard(newInfo)
-            setState { Content(newInfo) }
         }
     }
 
     fun reset() {
         action {
-            setState { Content(useCase.reset()) }
+            setState(Content(useCase.reset()))
         }
     }
 }
 
-data class Content(val scoreBoard: ScoreBoard) : UIState()
+data class Content(val scoreBoard: ScoreBoard) : State

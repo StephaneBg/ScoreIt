@@ -17,10 +17,10 @@
 package com.sbgapps.scoreit.app.ui.color
 
 import android.content.res.ColorStateList
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ListItemColorBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
 import com.sbgapps.scoreit.core.widget.ItemAdapter
+import com.sbgapps.scoreit.databinding.ListItemColorBinding
 
 class ColorAdapter(
     private val color: Int,

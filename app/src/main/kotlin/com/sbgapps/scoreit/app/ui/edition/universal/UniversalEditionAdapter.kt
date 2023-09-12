@@ -17,11 +17,11 @@
 package com.sbgapps.scoreit.app.ui.edition.universal
 
 import com.google.android.material.button.MaterialButton
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ListItemEditionUniversalBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
 import com.sbgapps.scoreit.core.widget.ItemAdapter
 import com.sbgapps.scoreit.data.model.Player
+import com.sbgapps.scoreit.databinding.ListItemEditionUniversalBinding
 
 class UniversalEditionAdapter(
     val player: Player,
@@ -38,7 +38,7 @@ class UniversalEditionAdapter(
             text = player.name
             setTextColor(player.color)
         }
-        val position = viewHolder.adapterPosition
+        val position = viewHolder.layoutPosition
         initButton(binding.pointsPlusOne, position, 1)
         initButton(binding.pointsPlusFive, position, 5)
         initButton(binding.pointsPlusTen, position, 10)

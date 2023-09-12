@@ -22,7 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.navigation.NavigationView
-import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.ui.prefs.PreferencesActivity
 import com.sbgapps.scoreit.app.ui.scoreboard.ScoreboardActivity
 import com.sbgapps.scoreit.core.ext.start

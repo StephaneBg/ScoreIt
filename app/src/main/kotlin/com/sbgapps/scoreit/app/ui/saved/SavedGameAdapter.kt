@@ -16,10 +16,10 @@
 
 package com.sbgapps.scoreit.app.ui.saved
 
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ListItemSavedGamesBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.core.widget.BaseViewHolder
 import com.sbgapps.scoreit.core.widget.ItemAdapter
+import com.sbgapps.scoreit.databinding.ListItemSavedGamesBinding
 
 class SavedGameAdapter(
     private val fileName: String,

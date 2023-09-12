@@ -25,13 +25,10 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.forEach
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.android.billingclient.api.SkuDetails
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ActivityHistoryBinding
-import com.sbgapps.scoreit.app.databinding.DialogEditNameBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.model.BeloteLapRow
 import com.sbgapps.scoreit.app.model.CoincheLapRow
 import com.sbgapps.scoreit.app.model.DonationRow
@@ -65,8 +62,9 @@ import com.sbgapps.scoreit.core.widget.DividerItemDecoration
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
 import com.sbgapps.scoreit.data.model.GameType
 import com.sbgapps.scoreit.data.repository.BillingRepo
-import io.uniflow.androidx.flow.onEvents
-import io.uniflow.androidx.flow.onStates
+import com.sbgapps.scoreit.data.repository.Donation
+import com.sbgapps.scoreit.databinding.ActivityHistoryBinding
+import com.sbgapps.scoreit.databinding.DialogEditNameBinding
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -99,20 +97,21 @@ class HistoryActivity : BaseActivity() {
             gameViewModel.addLap()
         }
 
-        onStates(gameViewModel) { state ->
+        gameViewModel.observeStates(this) { state ->
             when (state) {
                 is Content -> {
-                    binding.header.adapter = HeaderAdapter(state.header, ::displayPlayerEditionOptions)
+                    binding.header.adapter =
+                        HeaderAdapter(state.header, ::displayPlayerEditionOptions)
                     updateHistory(state.results)
                     invalidateOptionsMenu()
                 }
             }
         }
 
-        onEvents(gameViewModel) { event ->
-            when (val data = event.take()) {
-                is GameEvent.Edition -> startEdition(data.gameType)
-                is GameEvent.Deletion -> manageDeletion(data)
+        gameViewModel.observeEffects(this) { event ->
+            when (event) {
+                is GameEvent.Edition -> startEdition(event.gameType)
+                is GameEvent.Deletion -> manageDeletion(event)
             }
         }
     }
@@ -269,8 +268,8 @@ class HistoryActivity : BaseActivity() {
             .show()
     }
 
-    private fun onDonateClicked(skuDetails: SkuDetails) {
-        billingRepository.startBillingFlow(this, skuDetails) { gameViewModel.onDonationPerformed() }
+    private fun onDonateClicked(donation: Donation) {
+        billingRepository.startBillingFlow(this, donation) { gameViewModel.onDonationPerformed() }
     }
 
     private fun onEdit(position: Int) {

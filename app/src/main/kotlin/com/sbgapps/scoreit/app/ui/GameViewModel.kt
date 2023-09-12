@@ -17,7 +17,7 @@
 package com.sbgapps.scoreit.app.ui
 
 import androidx.annotation.ColorInt
-import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.model.BeloteLapRow
 import com.sbgapps.scoreit.app.model.CoincheLapRow
 import com.sbgapps.scoreit.app.model.DonationRow
@@ -26,6 +26,9 @@ import com.sbgapps.scoreit.app.model.LapRow
 import com.sbgapps.scoreit.app.model.TarotLapRow
 import com.sbgapps.scoreit.app.model.UniversalLapRow
 import com.sbgapps.scoreit.core.ui.BaseViewModel
+import com.sbgapps.scoreit.core.ui.Effect
+import com.sbgapps.scoreit.core.ui.Empty
+import com.sbgapps.scoreit.core.ui.State
 import com.sbgapps.scoreit.core.utils.string.StringFactory
 import com.sbgapps.scoreit.core.utils.string.fromResources
 import com.sbgapps.scoreit.core.utils.string.join
@@ -39,13 +42,11 @@ import com.sbgapps.scoreit.data.model.TarotGame
 import com.sbgapps.scoreit.data.model.TarotLap
 import com.sbgapps.scoreit.data.model.UniversalGame
 import com.sbgapps.scoreit.data.repository.BillingRepo
-import io.uniflow.core.flow.data.UIEvent
-import io.uniflow.core.flow.data.UIState
 
 class GameViewModel(
     private val useCase: GameUseCase,
     private val billingRepository: BillingRepo
-) : BaseViewModel() {
+) : BaseViewModel(Empty) {
 
     private var displayedLaps = emptyList<LapRow>()
     private var removedPosition = NO_DELETION
@@ -53,48 +54,48 @@ class GameViewModel(
     fun loadGame(name: String? = null) {
         action {
             name?.let { useCase.loadGame(it) }
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun selectGame(gameType: GameType) {
         action {
             useCase.setGameType(gameType)
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun setPlayerCount(count: Int) {
         action {
             useCase.setPlayerCount(count)
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun resetGame() {
         action {
             useCase.reset()
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun createGame(name: String) {
         action {
             useCase.createGame(name)
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun addLap() {
         action {
-            sendEvent(getEditionAction())
+            sendEffect(getEditionAction())
         }
     }
 
     fun editLap(position: Int) {
         action {
             useCase.modifyLap(position)
-            sendEvent(getEditionAction())
+            sendEffect(getEditionAction())
         }
     }
 
@@ -102,13 +103,13 @@ class GameViewModel(
         action {
             if (removedPosition != NO_DELETION) {
                 useCase.deleteLap(removedPosition)
-                setState { getContent() }
+                setState(getContent())
             }
             val laps = getLaps().toMutableList()
             laps.removeAt(position)
             displayedLaps = laps
             removedPosition = position
-            sendEvent(GameEvent.Deletion(laps))
+            sendEffect(GameEvent.Deletion(laps))
         }
     }
 
@@ -116,14 +117,14 @@ class GameViewModel(
         action {
             useCase.deleteLap(removedPosition)
             removedPosition = NO_DELETION
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun undoDeletion() {
         action {
             removedPosition = NO_DELETION
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -132,20 +133,20 @@ class GameViewModel(
     fun setPlayerName(position: Int, name: String) {
         action {
             useCase.editPlayerName(position, name)
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun setPlayerColor(position: Int, @ColorInt color: Int) {
         action {
             useCase.editPlayerColor(position, color)
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun onDonationPerformed() {
         action {
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -184,6 +185,7 @@ class GameViewModel(
             is UniversalGame -> game.laps.mapIndexed { index, lap ->
                 UniversalLapRow(index, useCase.getResults(lap))
             }
+
             is TarotGame -> game.laps.mapIndexed { index, lap ->
                 val (displayResults, isWon) = useCase.getDisplayResults(lap)
                 TarotLapRow(index, displayResults, getTarotLapInfo(lap), isWon)
@@ -193,6 +195,7 @@ class GameViewModel(
                 val (displayResults, isWon) = useCase.getDisplayResults(lap)
                 BeloteLapRow(index, displayResults, isWon)
             }
+
             is CoincheGame -> game.laps.mapIndexed { index, lap ->
                 val (displayResults, isWon) = useCase.getDisplayResults(lap)
                 CoincheLapRow(index, displayResults, isWon)
@@ -202,7 +205,7 @@ class GameViewModel(
 
         return if (laps.size > 4) {
             billingRepository.getDonationSkus()?.let {
-                laps.toMutableList().apply { add(DonationRow(it)) }
+                laps.toMutableList().apply { add(DonationRow) }
             } ?: laps
         } else {
             laps
@@ -217,12 +220,14 @@ class GameViewModel(
                 players[lap.taker.index].name.toStringFactory(),
                 fromResources(lap.bid.resId)
             )
+
             5 -> join(
                 " • ",
                 (if (lap.taker == lap.partner) players[lap.taker.index].name
                 else "${players[lap.taker.index].name} & ${players[lap.partner.index].name}").toStringFactory(),
                 fromResources(lap.bid.resId)
             )
+
             else -> error("Can't play Tarot with another player count")
         }
     }
@@ -234,9 +239,9 @@ class GameViewModel(
     }
 }
 
-data class Content(val header: Header, val results: List<LapRow>) : UIState()
+data class Content(val header: Header, val results: List<LapRow>) : State
 
-sealed class GameEvent : UIEvent() {
+sealed class GameEvent : Effect {
     data class Edition(val gameType: GameType) : GameEvent()
     data class Deletion(val results: List<LapRow>) : GameEvent()
 }

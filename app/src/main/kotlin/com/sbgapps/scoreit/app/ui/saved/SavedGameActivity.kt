@@ -19,14 +19,13 @@ package com.sbgapps.scoreit.app.ui.saved
 import android.os.Bundle
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ActivitySavedGamesBinding
-import com.sbgapps.scoreit.app.databinding.DialogEditNameBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.core.ext.onImeActionDone
 import com.sbgapps.scoreit.core.ui.BaseActivity
 import com.sbgapps.scoreit.core.widget.DividerItemDecoration
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
-import io.uniflow.androidx.flow.onStates
+import com.sbgapps.scoreit.databinding.ActivitySavedGamesBinding
+import com.sbgapps.scoreit.databinding.DialogEditNameBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -49,7 +48,7 @@ class SavedGameActivity : BaseActivity() {
             addItemDecoration(DividerItemDecoration(this@SavedGameActivity))
         }
 
-        onStates(viewModel) { state ->
+        viewModel.observeStates(this) { state ->
             when (state) {
                 is SavedAction.Content -> {
                     val adapters = state.games.map { (name, players, date) ->
@@ -57,6 +56,7 @@ class SavedGameActivity : BaseActivity() {
                     }
                     savedGamesAdapter.updateItems(adapters)
                 }
+
                 is SavedAction.Complete -> finish()
             }
         }

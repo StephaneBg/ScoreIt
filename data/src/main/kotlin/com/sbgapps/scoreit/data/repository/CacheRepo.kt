@@ -16,7 +16,6 @@
 
 package com.sbgapps.scoreit.data.repository
 
-import com.android.billingclient.api.SkuDetails
 import com.sbgapps.scoreit.data.model.Game
 import com.sbgapps.scoreit.data.model.SavedGameInfo
 import com.sbgapps.scoreit.data.model.ScoreBoard
@@ -32,7 +31,4 @@ interface CacheRepo {
     fun saveScoreBoard(scoreBoard: ScoreBoard)
     fun removeGame(fileName: String)
     fun renameGame(oldName: String, newName: String)
-
-    fun loadSkus(): List<SkuDetails>?
-    fun saveSkus(skus: List<SkuDetails>)
 }

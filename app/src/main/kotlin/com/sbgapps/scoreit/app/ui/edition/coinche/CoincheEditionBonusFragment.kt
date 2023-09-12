@@ -22,11 +22,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.FragmentEditionCoincheBonusBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.data.model.BeloteBonusValue
 import com.sbgapps.scoreit.data.model.PlayerPosition
-import io.uniflow.androidx.flow.onStates
+import com.sbgapps.scoreit.databinding.FragmentEditionCoincheBonusBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CoincheEditionBonusFragment : BottomSheetDialogFragment() {
@@ -35,13 +34,17 @@ class CoincheEditionBonusFragment : BottomSheetDialogFragment() {
     private var beloteBonus: BeloteBonusValue = BeloteBonusValue.BELOTE
     private lateinit var binding: FragmentEditionCoincheBonusBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentEditionCoincheBonusBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        onStates(viewModel) { state ->
+        viewModel.observeStates(this) { state ->
             if (state is CoincheEditionState.Content) {
                 binding.teamOne.text = state.players[PlayerPosition.ONE.index].name
                 binding.teamTwo.text = state.players[PlayerPosition.TWO.index].name

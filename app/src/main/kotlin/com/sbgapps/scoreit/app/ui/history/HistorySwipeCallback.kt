@@ -19,7 +19,7 @@ package com.sbgapps.scoreit.app.ui.history
 import android.graphics.Canvas
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.core.ext.colorAttr
 import com.sbgapps.scoreit.core.utils.RecyclerViewSwipeDecorator
 
@@ -36,7 +36,7 @@ class HistorySwipeCallback(
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         if (isDonationRow(viewHolder)) return
-        val position = viewHolder.adapterPosition
+        val position = viewHolder.bindingAdapterPosition
         when (direction) {
             ItemTouchHelper.LEFT -> onEdit(position)
             ItemTouchHelper.RIGHT -> onDelete(position)

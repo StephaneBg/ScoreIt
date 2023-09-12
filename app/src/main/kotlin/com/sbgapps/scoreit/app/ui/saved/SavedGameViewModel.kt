@@ -19,25 +19,30 @@ package com.sbgapps.scoreit.app.ui.saved
 import android.annotation.SuppressLint
 import com.sbgapps.scoreit.app.model.SavedGame
 import com.sbgapps.scoreit.core.ui.BaseViewModel
+import com.sbgapps.scoreit.core.ui.Empty
+import com.sbgapps.scoreit.core.ui.State
 import com.sbgapps.scoreit.data.interactor.GameUseCase
-import io.uniflow.core.flow.data.UIState
-import org.threeten.bp.Instant
-import org.threeten.bp.ZoneId
-import org.threeten.bp.ZonedDateTime
-import org.threeten.bp.format.DateTimeFormatter
+import java.time.Instant
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
-class SavedGameViewModel(private val useCase: GameUseCase, private val datePattern: String) : BaseViewModel() {
+class SavedGameViewModel(
+    private val useCase: GameUseCase,
+    private val datePattern: String
+) : BaseViewModel(Empty) {
 
     fun loadGame(name: String) {
         action {
             useCase.loadGame(name)
-            setState { SavedAction.Complete }
+            setState(SavedAction.Complete)
         }
     }
 
     fun getSavedFiles() {
         action {
-            setState { SavedAction.Content(getSavedGames()) }
+            setState(SavedAction.Content(getSavedGames()))
         }
     }
 
@@ -45,7 +50,7 @@ class SavedGameViewModel(private val useCase: GameUseCase, private val datePatte
         action {
             val savedGames = getSavedGames().toMutableList()
             useCase.renameGame(savedGames[position].fileName, newName)
-            setState { SavedAction.Content(getSavedGames()) }
+            setState(SavedAction.Content(getSavedGames()))
         }
     }
 
@@ -53,7 +58,7 @@ class SavedGameViewModel(private val useCase: GameUseCase, private val datePatte
         action {
             val savedGames = getSavedGames()
             useCase.removeGame(savedGames[position].fileName)
-            setState { SavedAction.Content(getSavedGames()) }
+            setState(SavedAction.Content(getSavedGames()))
         }
     }
 
@@ -63,12 +68,12 @@ class SavedGameViewModel(private val useCase: GameUseCase, private val datePatte
             val instant = Instant.ofEpochMilli(timeStamp)
             val lastModified = ZonedDateTime.ofInstant(instant, ZoneId.systemDefault())
                 .format(DateTimeFormatter.ofPattern(datePattern))
-                .capitalize()
+                .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
             SavedGame(name, players, lastModified)
         }
 }
 
-sealed class SavedAction : UIState() {
+sealed class SavedAction : State {
     data class Content(val games: List<SavedGame>) : SavedAction()
-    object Complete : SavedAction()
+    data object Complete : SavedAction()
 }

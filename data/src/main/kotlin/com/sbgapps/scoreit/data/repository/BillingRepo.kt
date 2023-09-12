@@ -17,18 +17,15 @@
 package com.sbgapps.scoreit.data.repository
 
 import android.app.Activity
-import com.android.billingclient.api.SkuDetails
 
 interface BillingRepo {
-    fun getDonationSkus(): List<SkuDetails>?
 
-    fun startBillingFlow(activity: Activity, skuDetails: SkuDetails, callback: () -> Unit)
+    fun getDonationSkus(): List<Donation>?
 
-    companion object {
-        const val COFFEE = "com.sbgapps.scoreit.coffee"
-        const val BEER = "com.sbgapps.scoreit.beer"
-    }
+    fun startBillingFlow(activity: Activity, donation: Donation, callback: () -> Unit)
 }
 
-fun List<SkuDetails>.getBeerSku(): SkuDetails? = firstOrNull { it.sku == BillingRepo.BEER }
-fun List<SkuDetails>.getCoffeeSku(): SkuDetails? = firstOrNull { it.sku == BillingRepo.COFFEE }
+enum class Donation(name: String) {
+    COFFEE("com.sbgapps.scoreit.coffee"),
+    BEER("com.sbgapps.scoreit.beer"),
+}

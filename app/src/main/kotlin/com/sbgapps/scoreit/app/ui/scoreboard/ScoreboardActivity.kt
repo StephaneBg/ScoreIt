@@ -22,14 +22,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ActivityScoreboardBinding
-import com.sbgapps.scoreit.app.databinding.DialogEditNameBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.ui.prefs.PreferencesViewModel
 import com.sbgapps.scoreit.core.ext.onImeActionDone
 import com.sbgapps.scoreit.core.ui.BaseActivity
 import com.sbgapps.scoreit.data.model.PlayerPosition
-import io.uniflow.androidx.flow.onStates
+import com.sbgapps.scoreit.databinding.ActivityScoreboardBinding
+import com.sbgapps.scoreit.databinding.DialogEditNameBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScoreboardActivity : BaseActivity() {
@@ -57,7 +56,7 @@ class ScoreboardActivity : BaseActivity() {
         binding.nameOne.setOnClickListener { displayNameDialog(PlayerPosition.ONE) }
         binding.nameTwo.setOnClickListener { displayNameDialog(PlayerPosition.TWO) }
 
-        onStates(scoreBoarViewModel) { state ->
+        scoreBoarViewModel.observeStates(this) { state ->
             when (state) {
                 is Content -> {
                     binding.scoreOne.text = state.scoreBoard.scoreOne.toString()

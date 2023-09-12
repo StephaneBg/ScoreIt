@@ -16,21 +16,6 @@
 
 package com.sbgapps.scoreit.core.ui
 
-import androidx.annotation.StringRes
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 
-open class BaseFragment : Fragment() {
-
-    fun setTitle(@StringRes title: Int) {
-        setTitle(getString(title))
-    }
-
-    fun setTitle(title: String?) {
-        (requireActivity() as BaseActivity).supportActionBar?.title = title
-    }
-
-    fun setToolbar(toolbar: Toolbar?) {
-        (requireActivity() as BaseActivity).setSupportActionBar(toolbar)
-    }
-}
+open class BaseFragment : Fragment()

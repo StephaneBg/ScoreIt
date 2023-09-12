@@ -19,13 +19,12 @@ package com.sbgapps.scoreit.app.ui.edition.universal
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.recyclerview.widget.DiffUtil
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ActivityEditionUniversalBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.ui.edition.EditionActivity
 import com.sbgapps.scoreit.core.ext.asListOfType
 import com.sbgapps.scoreit.core.widget.DividerItemDecoration
 import com.sbgapps.scoreit.core.widget.GenericRecyclerViewAdapter
-import io.uniflow.androidx.flow.onStates
+import com.sbgapps.scoreit.databinding.ActivityEditionUniversalBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UniversalEditionActivity : EditionActivity() {
@@ -47,15 +46,26 @@ class UniversalEditionActivity : EditionActivity() {
             addItemDecoration(DividerItemDecoration(this@UniversalEditionActivity))
         }
 
-        onStates(viewModel) { state ->
+        viewModel.observeStates(this) { state ->
             when (state) {
                 is UniversalEditionState.Content -> {
                     val adapters = state.players.mapIndexed { index, player ->
-                        UniversalEditionAdapter(player, state.results[index], ::onScoreIncremented, ::onScoreEntered)
+                        UniversalEditionAdapter(
+                            player,
+                            state.results[index],
+                            ::onScoreIncremented,
+                            ::onScoreEntered
+                        )
                     }
-                    val diff = DiffUtil.calculateDiff(DiffCallback(lapAdapter.items.asListOfType(), adapters))
+                    val diff = DiffUtil.calculateDiff(
+                        DiffCallback(
+                            lapAdapter.items.asListOfType(),
+                            adapters
+                        )
+                    )
                     lapAdapter.updateItems(adapters, diff)
                 }
+
                 is UniversalEditionState.Completed -> super.onBackPressed()
             }
         }

@@ -21,7 +21,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.core.ext.inflate
 
 class AdaptableLinearLayout @JvmOverloads constructor(

@@ -16,6 +16,89 @@
 
 package com.sbgapps.scoreit.core.ui
 
-import io.uniflow.androidx.flow.AndroidDataFlow
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.buffer
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import timber.log.Timber
 
-open class BaseViewModel : AndroidDataFlow()
+open class BaseViewModel(defaultState: State) : ViewModel() {
+
+    private var currentState: State
+
+    private val innerStates: MutableStateFlow<State> = MutableStateFlow(defaultState).apply {
+        buffer(0, BufferOverflow.DROP_OLDEST)
+    }
+    private val innerEffects: MutableSharedFlow<Effect> = MutableSharedFlow<Effect>().apply {
+        buffer(0, BufferOverflow.SUSPEND)
+    }
+
+    private val states: Flow<State> by ::innerStates
+    private val effects: Flow<Effect> by ::innerEffects
+
+    private val stateWithLifeCycleLiveData: LiveData<State> =
+        states.asLiveData(viewModelScope.coroutineContext)
+    private val effectsWithLifeCycleLiveData: LiveData<Effect> =
+        effects.asLiveData(viewModelScope.coroutineContext)
+
+    init {
+        currentState = defaultState
+    }
+
+    fun observeStates(owner: LifecycleOwner, block: (State) -> Unit) {
+        stateWithLifeCycleLiveData.removeObservers(owner)
+        stateWithLifeCycleLiveData.observe(owner, block)
+    }
+
+    fun observeEffects(owner: LifecycleOwner, block: (Effect) -> Unit) {
+        effectsWithLifeCycleLiveData.removeObservers(owner)
+        effectsWithLifeCycleLiveData.observe(owner, block)
+    }
+
+    protected fun action(
+        block: suspend (State) -> Unit
+    ): Job = action(
+        block = block,
+        onError = { Timber.e(it) }
+    )
+
+    protected fun action(
+        block: suspend (State) -> Unit,
+        onError: suspend (Throwable?) -> Unit
+    ): Job = viewModelScope.launch {
+        try {
+            withContext(Dispatchers.IO) {
+                block(currentState)
+            }
+        } catch (e: Exception) {
+            onError(e)
+        }
+    }
+
+    protected suspend fun setState(state: State) {
+        Timber.d("Set state: $state")
+        currentState = state
+        innerStates.emit(state)
+    }
+
+    protected suspend fun sendEffect(effect: Effect) {
+        Timber.d("Send effect: $effect")
+        innerEffects.emit(effect)
+    }
+}
+
+interface Event
+interface State : Event
+interface Effect : Event
+
+data object Empty : State

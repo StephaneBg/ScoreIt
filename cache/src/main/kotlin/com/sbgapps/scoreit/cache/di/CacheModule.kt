@@ -18,7 +18,6 @@ package com.sbgapps.scoreit.cache.di
 
 import androidx.preference.PreferenceManager
 import com.sbgapps.scoreit.cache.dao.FileStorage
-import com.sbgapps.scoreit.cache.dao.ScoreItBillingDao
 import com.sbgapps.scoreit.cache.dao.ScoreItFileStorage
 import com.sbgapps.scoreit.cache.dao.ScoreItGameDao
 import com.sbgapps.scoreit.cache.repository.ScoreItBillingRepo
@@ -55,11 +54,9 @@ val cacheModule = module {
             androidContext()
         )
     }
-    single { ScoreItBillingDao(get()) }
-
-    single<CacheRepo> { ScoreItCacheRepo(get(), get(), get()) }
+    single<CacheRepo> { ScoreItCacheRepo(get(), get()) }
     single<PreferencesRepo> { ScoreItPreferencesRepo(get()) }
-    single<BillingRepo> { ScoreItBillingRepo(androidContext(), get()) }
+    single<BillingRepo> { ScoreItBillingRepo() }
 }
 
 private fun createMoshi(): Moshi = Moshi.Builder()

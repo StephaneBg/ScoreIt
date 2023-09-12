@@ -25,16 +25,15 @@ import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.ActivityEditionCoincheBinding
-import com.sbgapps.scoreit.app.databinding.ListItemEditionBonusBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.ui.edition.EditionActivity
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayoutAdapter
 import com.sbgapps.scoreit.core.utils.string.build
 import com.sbgapps.scoreit.data.model.BeloteBonusValue
 import com.sbgapps.scoreit.data.model.CoincheValue
 import com.sbgapps.scoreit.data.model.PlayerPosition
-import io.uniflow.androidx.flow.onStates
+import com.sbgapps.scoreit.databinding.ActivityEditionCoincheBinding
+import com.sbgapps.scoreit.databinding.ListItemEditionBonusBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CoincheEditionActivity : EditionActivity() {
@@ -50,7 +49,7 @@ class CoincheEditionActivity : EditionActivity() {
         setContentView(binding.root)
         setupActionBar(binding.toolbar)
 
-        onStates(viewModel) { state ->
+        viewModel.observeStates(this) { state ->
             when (state) {
                 is CoincheEditionState.Content -> {
                     binding.buttonTeamOne.text = state.players[PlayerPosition.ONE.index].name

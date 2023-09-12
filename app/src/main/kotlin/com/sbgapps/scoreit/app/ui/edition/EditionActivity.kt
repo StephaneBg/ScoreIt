@@ -24,7 +24,7 @@ import android.view.Window
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
-import com.sbgapps.scoreit.app.R
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.ui.prefs.PreferencesViewModel
 import com.sbgapps.scoreit.core.ui.BaseActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel

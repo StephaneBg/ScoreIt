@@ -19,10 +19,10 @@ package com.sbgapps.scoreit.app.ui.history.adapter
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isInvisible
-import com.sbgapps.scoreit.app.databinding.ListItemHeaderBinding
 import com.sbgapps.scoreit.app.model.Header
 import com.sbgapps.scoreit.app.ui.widget.AdaptableLinearLayoutAdapter
 import com.sbgapps.scoreit.core.ext.layoutInflater
+import com.sbgapps.scoreit.databinding.ListItemHeaderBinding
 
 class HeaderAdapter(
     private val model: Header,

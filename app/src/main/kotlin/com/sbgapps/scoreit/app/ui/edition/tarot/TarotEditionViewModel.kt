@@ -18,6 +18,8 @@ package com.sbgapps.scoreit.app.ui.edition.tarot
 
 import com.sbgapps.scoreit.app.ui.edition.Step
 import com.sbgapps.scoreit.core.ui.BaseViewModel
+import com.sbgapps.scoreit.core.ui.Empty
+import com.sbgapps.scoreit.core.ui.State
 import com.sbgapps.scoreit.data.interactor.GameUseCase
 import com.sbgapps.scoreit.data.model.Player
 import com.sbgapps.scoreit.data.model.PlayerPosition
@@ -28,51 +30,53 @@ import com.sbgapps.scoreit.data.model.TarotLap
 import com.sbgapps.scoreit.data.model.TarotOudlerValue
 import com.sbgapps.scoreit.data.solver.TarotSolver
 import com.sbgapps.scoreit.data.solver.TarotSolver.Companion.POINTS_TOTAL
-import io.uniflow.core.flow.data.UIState
 
-class TarotEditionViewModel(private val useCase: GameUseCase, private val solver: TarotSolver) : BaseViewModel() {
+class TarotEditionViewModel(
+    private val useCase: GameUseCase,
+    private val solver: TarotSolver
+) : BaseViewModel(Empty) {
 
     private val editedLap
         get() = useCase.getEditedLap() as TarotLap
 
     fun loadContent() {
         action {
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun setTaker(taker: PlayerPosition) {
         action {
             useCase.updateEdition(editedLap.copy(taker = taker))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun setPartner(partner: PlayerPosition) {
         action {
             useCase.updateEdition(editedLap.copy(partner = partner))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun setBid(bid: TarotBidValue) {
         action {
             useCase.updateEdition(editedLap.copy(bid = bid))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun setOudlers(oudlers: List<TarotOudlerValue>) {
         action {
             useCase.updateEdition(editedLap.copy(oudlers = oudlers))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun incrementScore(increment: Int) {
         action {
             useCase.updateEdition(editedLap.copy(points = editedLap.points + increment))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -81,7 +85,7 @@ class TarotEditionViewModel(private val useCase: GameUseCase, private val solver
             val bonuses = editedLap.bonuses.toMutableList()
             bonuses += TarotBonus(bonus.first, bonus.second)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
@@ -90,21 +94,21 @@ class TarotEditionViewModel(private val useCase: GameUseCase, private val solver
             val bonuses = editedLap.bonuses.toMutableList()
             bonuses.removeAt(bonusIndex)
             useCase.updateEdition(editedLap.copy(bonuses = bonuses))
-            setState { getContent() }
+            setState(getContent())
         }
     }
 
     fun completeEdition() {
         action {
             useCase.completeEdition()
-            setState { TarotEditionState.Completed }
+            setState(TarotEditionState.Completed)
         }
     }
 
     fun cancelEdition() {
         action {
             useCase.cancelEdition()
-            setState { TarotEditionState.Completed }
+            setState(TarotEditionState.Completed)
         }
     }
 
@@ -133,7 +137,7 @@ class TarotEditionViewModel(private val useCase: GameUseCase, private val solver
     )
 }
 
-sealed class TarotEditionState : UIState() {
+sealed class TarotEditionState : State {
     data class Content(
         val players: List<Player>,
         val taker: PlayerPosition,
@@ -147,5 +151,5 @@ sealed class TarotEditionState : UIState() {
         val stepPointsByTen: Step
     ) : TarotEditionState()
 
-    object Completed : TarotEditionState()
+    data object Completed : TarotEditionState()
 }

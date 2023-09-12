@@ -24,8 +24,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.FragmentUniversalInputScoreBinding
+import com.sbgapps.scoreit.R
+import com.sbgapps.scoreit.databinding.FragmentUniversalInputScoreBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class UniversalInputScore : BottomSheetDialogFragment() {
@@ -35,7 +35,11 @@ class UniversalInputScore : BottomSheetDialogFragment() {
     private val playerIndex: Int
         get() = arguments?.getInt(ARG_PLAYER_POSITION) ?: error("Use newInstance")
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentUniversalInputScoreBinding.inflate(inflater)
         return binding.root
     }

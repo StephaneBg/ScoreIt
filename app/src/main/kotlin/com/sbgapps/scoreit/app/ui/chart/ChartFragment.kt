@@ -22,11 +22,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updateLayoutParams
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.sbgapps.scoreit.app.R
-import com.sbgapps.scoreit.app.databinding.FragmentChartBinding
+import com.sbgapps.scoreit.R
 import com.sbgapps.scoreit.app.ui.widget.LineChart
 import com.sbgapps.scoreit.core.ext.dip
 import com.sbgapps.scoreit.core.ext.observe
+import com.sbgapps.scoreit.databinding.FragmentChartBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChartFragment : BottomSheetDialogFragment() {
@@ -34,7 +34,11 @@ class ChartFragment : BottomSheetDialogFragment() {
     private val viewModel by viewModel<ChartViewModel>()
     private lateinit var binding: FragmentChartBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentChartBinding.inflate(inflater)
         return binding.root
     }

@@ -136,8 +136,8 @@ class GameUseCase(
     fun updateEdition(lap: Lap) {
         when (val state = editionState) {
             is EditionState.Creation -> editionState = EditionState.Creation(lap)
-            is EditionState.Modification -> editionState =
-                EditionState.Modification(state.initialLap, lap, state.position)
+            is EditionState.Modification -> editionState = EditionState.Modification(state.initialLap, lap, state.position)
+            else -> Unit
         }
     }
 
