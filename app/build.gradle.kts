@@ -21,7 +21,7 @@ plugins {
 
 val versionMajor = 5
 val versionMinor = 5
-val versionPatch = 1
+val versionPatch = 2
 
 android {
     namespace = "com.sbgapps.scoreit"
